@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>🏆 Predictor Mundial 2026 | Modelo Estadístico de Simulación</title>
+  <meta name="description" content="Simula partidos del Mundial 2026 usando un modelo estadístico avanzado de regresión de Poisson (Dixon-Coles) y simulaciones de Monte Carlo.">
+  <meta name="keywords" content="Mundial 2026, predicciones de fútbol, simulación de partidos, elo rating, poisson, dixon-coles, monte carlo">
+  <meta name="author" content="Antigravity Prediction Engine">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  
+  <div class="glass-bg-radial"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <span class="trophy-emoji">🏆</span>
+        <div>
+          <h1>PREDICTOR MUNDIAL 2026</h1>
+          <p class="subtitle">Modelo de Regresión Dixon-Coles & Simulación de Monte Carlo</p>
+        </div>
+      </div>
+      <div class="header-status">
+        <span class="status-dot animate-pulse"></span>
+        <span id="calibration-status">Cargando modelo...</span>
+      </div>
+    </header>
+
+    <!-- Main Grid Layout -->
+    <main class="dashboard-grid">
+      
+      <!-- Panel Izquierdo: Configuración e Inputs -->
+      <section class="panel glass-panel" aria-label="Configuración de Predicción">
+        <div class="panel-header">
+          <h2>Configuración del Partido</h2>
+          <p>Selecciona los contendientes y personaliza el modelo</p>
+        </div>
+        
+        <div class="panel-body">
+          <!-- Selectores de Equipo -->
+          <div class="form-group">
+            <label for="select-team-a">Selección A</label>
+            <select id="select-team-a" class="custom-select"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="select-team-b">Selección B</label>
+            <select id="select-team-b" class="custom-select"></select>
+          </div>
+
+          <hr class="panel-divider">
+
+          <!-- Parametrización del Modelo (Ajustes de usuario) -->
+          <h3>Ajustes Estadísticos</h3>
+          
+          <!-- FIFA Ranking inputs -->
+          <div class="param-row">
+            <span class="param-label">FIFA Rank – Selección A</span>
+            <input type="number" id="input-rank-a" min="1" max="211" value="16" class="param-input">
+          </div>
+
+          <div class="param-row">
+            <span class="param-label">FIFA Rank – Selección B</span>
+            <input type="number" id="input-rank-b" min="1" max="211" value="61" class="param-input">
+          </div>
+
+          <!-- Weight inputs -->
+          <div class="param-row">
+            <span class="param-label">Ponderación FIFA Ranking (%)</span>
+            <input type="number" id="input-weight-fifa" min="0" max="100" value="30" class="param-input">
+          </div>
+          <p class="slider-desc">Peso del ranking FIFA oficial sobre la fuerza del equipo.</p>
+
+          <div class="param-row">
+            <span class="param-label">Influencia Histórica H2H (%)</span>
+            <input type="number" id="input-weight-h2h" min="0" max="100" value="20" class="param-input">
+          </div>
+          <p class="slider-desc">Bonificación por historial de enfrentamientos directos.</p>
+
+          <div class="param-row">
+            <span class="param-label">Decaimiento Temporal (meses)</span>
+            <input type="number" id="input-decay" min="3" max="60" value="18" class="param-input">
+          </div>
+          <p class="slider-desc">Vida media de forma: menor = más peso a lo reciente.</p>
+
+          <div class="param-row">
+            <span class="param-label">Simulaciones Monte Carlo</span>
+            <input type="number" id="input-sims" min="1000" max="100000" step="1000" value="100000" class="param-input">
+          </div>
+
+          <hr class="panel-divider">
+          <h3>Cuotas de Apuestas</h3>
+          <p class="slider-desc" style="margin-bottom: 6px;">Compara la probabilidad simulada con cuotas reales para detectar valor esperado (+EV).</p>
+
+          <div class="odds-inputs-grid">
+            <div class="odds-input-group">
+              <label id="odds-label-a">Victoria A</label>
+              <input type="number" id="input-odds-a" step="0.01" min="1.01" class="odds-input-field" placeholder="2.10">
+            </div>
+            <div class="odds-input-group">
+              <label>Empate</label>
+              <input type="number" id="input-odds-draw" step="0.01" min="1.01" class="odds-input-field" placeholder="3.20">
+            </div>
+            <div class="odds-input-group">
+              <label id="odds-label-b">Victoria B</label>
+              <input type="number" id="input-odds-b" step="0.01" min="1.01" class="odds-input-field" placeholder="4.50">
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- Panel Central: Simulación y Probabilidades -->
+      <section class="panel main-simulation-panel" aria-label="Pantalla de Simulación">
+        <!-- Match Header Visuals -->
+        <div class="match-vs-header glass-card">
+          <div class="team-vs-card" id="card-team-a">
+            <div class="team-flag-placeholder" id="flag-a">🇺🇾</div>
+            <h2 id="name-a" class="team-display-name">Uruguay</h2>
+            <div class="team-stat-badges">
+              <span class="badge badge-elo" id="elo-display-a">Elo 1875</span>
+              <span class="badge badge-fifa" id="fifa-display-a">FIFA #16</span>
+            </div>
+          </div>
+          
+          <div class="vs-divider">
+            <span class="vs-text">VS</span>
+            <span class="venue-badge">Neutral</span>
+          </div>
+
+          <div class="team-vs-card" id="card-team-b">
+            <div class="team-flag-placeholder" id="flag-b">🇸🇦</div>
+            <h2 id="name-b" class="team-display-name">Arabia Saudita</h2>
+            <div class="team-stat-badges">
+              <span class="badge badge-elo" id="elo-display-b">Elo 1640</span>
+              <span class="badge badge-fifa" id="fifa-display-b">FIFA #61</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="action-container">
+          <button id="btn-simulate" class="btn btn-primary btn-glow">
+            <span class="btn-text">🚀 SIMULAR 100,000 PARTIDOS</span>
+            <div class="spinner hidden" id="sim-spinner"></div>
+          </button>
+        </div>
+
+        <!-- simulation Results -->
+        <div class="simulation-results-section glass-card">
+          <h3>Probabilidad General del Partido</h3>
+          
+          <div class="probability-bars-container">
+            <!-- Team A Win probability -->
+            <div class="prob-row">
+              <div class="prob-info">
+                <span id="label-win-a" class="prob-team-name">Victoria Uruguay</span>
+                <span id="pct-win-a" class="prob-percentage">46.2%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div id="bar-win-a" class="progress-bar-fill fill-team-a" style="width: 46.2%"></div>
+              </div>
+            </div>
+
+            <!-- Draw probability -->
+            <div class="prob-row">
+              <div class="prob-info">
+                <span class="prob-team-name">Empate</span>
+                <span id="pct-draw" class="prob-percentage">36.0%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div id="bar-draw" class="progress-bar-fill fill-draw" style="width: 36.0%"></div>
+              </div>
+            </div>
+
+            <!-- Team B Win probability -->
+            <div class="prob-row">
+              <div class="prob-info">
+                <span id="label-win-b" class="prob-team-name">Victoria Arabia Saudita</span>
+                <span id="pct-win-b" class="prob-percentage">17.8%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div id="bar-win-b" class="progress-bar-fill fill-team-b" style="width: 17.8%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="xg-display-container">
+            <div class="xg-box">
+              <span class="xg-title">Expectativa de Goles (xG)</span>
+              <div class="xg-values">
+                <span id="xg-val-a" class="xg-number text-team-a">1.09</span>
+                <span class="xg-separator">–</span>
+                <span id="xg-val-b" class="xg-number text-team-b">0.58</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exact Scores -->
+        <div class="exact-scores-section glass-card">
+          <h3>Marcadores Exactos Más Probables</h3>
+          <ol class="score-list" id="score-list-container">
+            <li class="score-item">
+              <span class="score-rank">#1</span>
+              <span class="score-numbers badge">0 - 0</span>
+              <span class="score-type">(Empate)</span>
+              <span class="score-prob" style="flex-grow: 1; text-align: right; font-weight: 700;">20.0%</span>
+            </li>
+            <li class="score-item">
+              <span class="score-rank">#2</span>
+              <span class="score-numbers badge">1 - 0</span>
+              <span class="score-type">(A favor de Uruguay)</span>
+              <span class="score-prob" style="flex-grow: 1; text-align: right; font-weight: 700;">19.0%</span>
+            </li>
+            <li class="score-item">
+              <span class="score-rank">#3</span>
+              <span class="score-numbers badge">1 - 1</span>
+              <span class="score-type">(Empate)</span>
+              <span class="score-prob" style="flex-grow: 1; text-align: right; font-weight: 700;">13.0%</span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Betting Value (+EV) Analysis Section -->
+        <div class="betting-edge-section glass-card" id="betting-edge-card">
+          <h3>Análisis de Valor de Apuestas (+EV)</h3>
+          <p class="slider-desc" style="margin-bottom: 12px;">Comparamos la probabilidad de la simulación con las cuotas ingresadas para calcular el valor esperado matemático.</p>
+          
+          <div class="no-odds-message" id="odds-helper-text">
+            Introduce las cuotas en el panel izquierdo para calcular el valor esperado (+EV) de las apuestas.
+          </div>
+          
+          <div class="h2h-summary-card hidden" id="odds-analysis-container" style="background: none; border: none; padding: 0; box-shadow: none;">
+            <div class="h2h-stats-row">
+              <div class="h2h-stat" id="ev-stat-a">
+                <span class="h2h-stat-num" id="ev-pct-a">+0.0%</span>
+                <span class="h2h-stat-label" id="ev-label-a">Uru EV%</span>
+              </div>
+              <div class="h2h-stat" id="ev-stat-draw">
+                <span class="h2h-stat-num" id="ev-pct-draw">+0.0%</span>
+                <span class="h2h-stat-label">Empate EV%</span>
+              </div>
+              <div class="h2h-stat" id="ev-stat-b">
+                <span class="h2h-stat-num" id="ev-pct-b">+0.0%</span>
+                <span class="h2h-stat-label" id="ev-label-b">KSA EV%</span>
+              </div>
+            </div>
+            
+            <div id="odds-alert-message" class="badge" style="width: 100%; margin-top: 15px; padding: 8px; font-weight: 600; text-align: center; display: block; border-radius: var(--border-radius-md);">
+              No se detectan apuestas de valor positivo.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel Derecho: Historial y H2H -->
+      <section class="panel glass-panel" aria-label="Estadísticas de Formas e Historial">
+        <div class="tab-header">
+          <button id="tab-btn-history" class="tab-btn active">📈 Historial Reciente</button>
+          <button id="tab-btn-h2h" class="tab-btn">⚔️ Historial Directo (H2H)</button>
+        </div>
+
+        <div class="tab-content" id="tab-history">
+          <!-- Team A History -->
+          <div class="team-history-container">
+            <h3 id="history-title-a">Partidos de Uruguay</h3>
+            <div class="match-list" id="match-list-a">
+              <div class="loading-placeholder">Cargando partidos...</div>
+            </div>
+          </div>
+
+          <hr class="panel-divider">
+
+          <!-- Team B History -->
+          <div class="team-history-container">
+            <h3 id="history-title-b">Partidos de Arabia Saudita</h3>
+            <div class="match-list" id="match-list-b">
+              <div class="loading-placeholder">Cargando partidos...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content hidden" id="tab-h2h">
+          <div class="h2h-summary-card glass-card">
+            <h4>Resumen del Cara a Cara</h4>
+            <div class="h2h-stats-row">
+              <div class="h2h-stat">
+                <span class="h2h-stat-num" id="h2h-wins-a">0</span>
+                <span class="h2h-stat-label" id="h2h-label-a">Uru victorias</span>
+              </div>
+              <div class="h2h-stat">
+                <span class="h2h-stat-num" id="h2h-draws">0</span>
+                <span class="h2h-stat-label">Empates</span>
+              </div>
+              <div class="h2h-stat">
+                <span class="h2h-stat-num" id="h2h-wins-b">0</span>
+                <span class="h2h-stat-label" id="h2h-label-b">KSA victorias</span>
+              </div>
+            </div>
+            <div class="h2h-modifier-display">
+              <span>Ajuste xG por H2H: </span>
+              <span id="h2h-modifier-val" class="badge">1.00x</span>
+            </div>
+          </div>
+          
+          <div class="h2h-matches-list-container">
+            <h4>Encuentros Históricos Oficiales</h4>
+            <div class="match-list" id="h2h-match-list">
+              <div class="no-matches-message">No se registran enfrentamientos previos en la base de datos.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Diseño premium desarrollado para el análisis estadístico del Mundial 2026. Los cálculos de probabilidad de goles se basan en el método Dixon-Coles (1997).</p>
+    </footer>
+  </div>
+
+  <!-- Javascript Logic -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
