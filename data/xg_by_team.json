@@ -1,1005 +1,2693 @@
 {
-  "last_updated": "2026-06-18T05:59:54.650338",
+  "last_updated": "2026-06-18T06:27:46.200088",
   "methodology": "Weighted average of goals scored, adjusted by opponent Elo and recency",
   "teams": {
     "scotland": {
-      "xg_home": 0.695,
-      "xg_away": 0.34,
-      "xg_overall": 1.368,
-      "xga_overall": 1.391,
-      "matches_played": 87,
+      "xg_home": 0.582,
+      "xg_away": 0.475,
+      "xg_overall": 1.708,
+      "xga_overall": 1.232,
+      "matches_played": 852,
       "source": "Historical results weighted by opponent quality"
     },
     "england": {
-      "xg_home": 0.725,
-      "xg_away": 0.523,
-      "xg_overall": 1.737,
-      "xga_overall": 1.289,
-      "matches_played": 114,
+      "xg_home": 0.702,
+      "xg_away": 0.641,
+      "xg_overall": 2.184,
+      "xga_overall": 0.955,
+      "matches_played": 1090,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "wales": {
+      "xg_home": 0.459,
+      "xg_away": 0.323,
+      "xg_overall": 1.253,
+      "xga_overall": 1.598,
+      "matches_played": 726,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "northern-ireland": {
+      "xg_home": 0.391,
+      "xg_away": 0.264,
+      "xg_overall": 1.048,
+      "xga_overall": 1.833,
+      "matches_played": 707,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "usa": {
+      "xg_home": 0.568,
+      "xg_away": 0.328,
+      "xg_overall": 1.522,
+      "xga_overall": 1.326,
+      "matches_played": 791,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "canada": {
+      "xg_home": 0.485,
+      "xg_away": 0.336,
+      "xg_overall": 1.296,
+      "xga_overall": 1.304,
+      "matches_played": 470,
       "source": "Historical results weighted by opponent quality"
     },
     "uruguay": {
-      "xg_home": 0.735,
-      "xg_away": 0.462,
-      "xg_overall": 1.708,
-      "xga_overall": 1.315,
-      "matches_played": 89,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "brazil": {
-      "xg_home": 0.736,
-      "xg_away": 0.52,
-      "xg_overall": 1.83,
-      "xga_overall": 1.266,
-      "matches_played": 94,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "germany": {
-      "xg_home": 0.773,
-      "xg_away": 0.587,
-      "xg_overall": 1.807,
-      "xga_overall": 1.17,
-      "matches_played": 88,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "hungary": {
-      "xg_home": 0.745,
-      "xg_away": 0.438,
-      "xg_overall": 1.528,
-      "xga_overall": 1.542,
-      "matches_played": 72,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "italy": {
-      "xg_home": 0.861,
-      "xg_away": 0.453,
-      "xg_overall": 1.72,
-      "xga_overall": 1.146,
-      "matches_played": 82,
+      "xg_home": 0.572,
+      "xg_away": 0.448,
+      "xg_overall": 1.581,
+      "xga_overall": 1.214,
+      "matches_played": 971,
       "source": "Historical results weighted by opponent quality"
     },
     "argentina": {
-      "xg_home": 0.843,
-      "xg_away": 0.564,
-      "xg_overall": 1.862,
-      "xga_overall": 1.17,
-      "matches_played": 94,
+      "xg_home": 0.707,
+      "xg_away": 0.454,
+      "xg_overall": 1.898,
+      "xga_overall": 1.005,
+      "matches_played": 1070,
       "source": "Historical results weighted by opponent quality"
     },
-    "france": {
-      "xg_home": 0.816,
-      "xg_away": 0.488,
-      "xg_overall": 1.856,
-      "xga_overall": 1.156,
-      "matches_played": 90,
+    "austria": {
+      "xg_home": 0.632,
+      "xg_away": 0.478,
+      "xg_overall": 1.793,
+      "xga_overall": 1.528,
+      "matches_played": 861,
       "source": "Historical results weighted by opponent quality"
     },
-    "spain": {
-      "xg_home": 0.809,
-      "xg_away": 0.538,
-      "xg_overall": 1.833,
-      "xga_overall": 1.125,
-      "matches_played": 96,
+    "hungary": {
+      "xg_home": 0.704,
+      "xg_away": 0.532,
+      "xg_overall": 1.999,
+      "xga_overall": 1.474,
+      "matches_played": 1006,
       "source": "Historical results weighted by opponent quality"
     },
-    "netherlands": {
-      "xg_home": 0.76,
-      "xg_away": 0.425,
-      "xg_overall": 1.702,
-      "xga_overall": 1.119,
-      "matches_played": 84,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "croatia": {
-      "xg_home": 0.662,
-      "xg_away": 0.436,
-      "xg_overall": 1.597,
-      "xga_overall": 1.182,
-      "matches_played": 77,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "oman": {
-      "xg_home": 0.648,
-      "xg_away": 0.34,
-      "xg_overall": 1.225,
-      "xga_overall": 1.587,
-      "matches_played": 80,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "denmark": {
-      "xg_home": 0.718,
-      "xg_away": 0.337,
-      "xg_overall": 1.409,
-      "xga_overall": 1.295,
-      "matches_played": 88,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "norway": {
-      "xg_home": 0.609,
-      "xg_away": 0.471,
-      "xg_overall": 1.646,
-      "xga_overall": 1.24,
-      "matches_played": 96,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "honduras": {
-      "xg_home": 0.512,
-      "xg_away": 0.362,
-      "xg_overall": 1.26,
-      "xga_overall": 1.3,
-      "matches_played": 100,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "georgia": {
-      "xg_home": 0.659,
-      "xg_away": 0.513,
-      "xg_overall": 1.518,
-      "xga_overall": 1.675,
-      "matches_played": 83,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "slovenia": {
-      "xg_home": 0.602,
-      "xg_away": 0.578,
-      "xg_overall": 1.589,
-      "xga_overall": 1.575,
-      "matches_played": 73,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "zimbabwe": {
-      "xg_home": 0.626,
-      "xg_away": 0.373,
-      "xg_overall": 1.304,
-      "xga_overall": 1.667,
-      "matches_played": 69,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "mali": {
-      "xg_home": 0.688,
-      "xg_away": 0.435,
-      "xg_overall": 1.375,
-      "xga_overall": 1.337,
-      "matches_played": 80,
+    "czechoslovakia": {
+      "xg_home": 0.746,
+      "xg_away": 0.428,
+      "xg_overall": 1.892,
+      "xga_overall": 1.387,
+      "matches_played": 520,
       "source": "Historical results weighted by opponent quality"
     },
     "belgium": {
-      "xg_home": 0.754,
-      "xg_away": 0.429,
-      "xg_overall": 1.538,
-      "xga_overall": 1.029,
-      "matches_played": 104,
+      "xg_home": 0.668,
+      "xg_away": 0.487,
+      "xg_overall": 1.816,
+      "xga_overall": 1.512,
+      "matches_played": 854,
       "source": "Historical results weighted by opponent quality"
     },
-    "bangladesh": {
-      "xg_home": 0.371,
-      "xg_away": 0.32,
-      "xg_overall": 1.039,
-      "xga_overall": 1.675,
-      "matches_played": 77,
+    "france": {
+      "xg_home": 0.651,
+      "xg_away": 0.488,
+      "xg_overall": 1.835,
+      "xga_overall": 1.293,
+      "matches_played": 936,
       "source": "Historical results weighted by opponent quality"
     },
-    "czech-republic": {
-      "xg_home": 0.728,
+    "switzerland": {
+      "xg_home": 0.559,
+      "xg_away": 0.388,
+      "xg_overall": 1.493,
+      "xga_overall": 1.634,
+      "matches_played": 885,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guernsey": {
+      "xg_home": 0.787,
+      "xg_away": 0.593,
+      "xg_overall": 2.567,
+      "xga_overall": 1.304,
+      "matches_played": 240,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "alderney": {
+      "xg_home": 0.114,
+      "xg_away": 0.166,
+      "xg_overall": 0.541,
+      "xga_overall": 4.593,
+      "matches_played": 135,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "jersey": {
+      "xg_home": 0.839,
+      "xg_away": 0.657,
+      "xg_overall": 2.745,
+      "xga_overall": 1.213,
+      "matches_played": 235,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "netherlands": {
+      "xg_home": 0.759,
+      "xg_away": 0.548,
+      "xg_overall": 2.094,
+      "xga_overall": 1.225,
+      "matches_played": 880,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guyana": {
+      "xg_home": 0.5,
+      "xg_away": 0.326,
+      "xg_overall": 1.367,
+      "xga_overall": 1.757,
+      "matches_played": 313,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "trinidad-and-tobago": {
+      "xg_home": 0.607,
+      "xg_away": 0.396,
+      "xg_overall": 1.684,
+      "xga_overall": 1.337,
+      "matches_played": 753,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "south-africa": {
+      "xg_home": 0.436,
+      "xg_away": 0.392,
+      "xg_overall": 1.351,
+      "xga_overall": 0.948,
+      "matches_played": 481,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "germany": {
+      "xg_home": 0.791,
+      "xg_away": 0.61,
+      "xg_overall": 2.255,
+      "xga_overall": 1.162,
+      "matches_played": 1032,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sweden": {
+      "xg_home": 0.723,
+      "xg_away": 0.5,
+      "xg_overall": 1.975,
+      "xga_overall": 1.29,
+      "matches_played": 1102,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "norway": {
+      "xg_home": 0.539,
       "xg_away": 0.438,
-      "xg_overall": 1.586,
-      "xga_overall": 1.229,
-      "matches_played": 70,
+      "xg_overall": 1.552,
+      "xga_overall": 1.623,
+      "matches_played": 873,
       "source": "Historical results weighted by opponent quality"
     },
-    "ghana": {
-      "xg_home": 0.617,
-      "xg_away": 0.345,
-      "xg_overall": 1.287,
-      "xga_overall": 1.368,
-      "matches_played": 87,
+    "denmark": {
+      "xg_home": 0.672,
+      "xg_away": 0.459,
+      "xg_overall": 1.816,
+      "xga_overall": 1.342,
+      "matches_played": 874,
       "source": "Historical results weighted by opponent quality"
     },
-    "libya": {
-      "xg_home": 0.629,
-      "xg_away": 0.314,
-      "xg_overall": 1.263,
-      "xga_overall": 1.8,
-      "matches_played": 95,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "yemen": {
-      "xg_home": 0.596,
-      "xg_away": 0.275,
-      "xg_overall": 1.186,
-      "xga_overall": 1.407,
-      "matches_played": 59,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "saudi-arabia": {
-      "xg_home": 0.811,
-      "xg_away": 0.327,
-      "xg_overall": 1.494,
-      "xga_overall": 1.329,
-      "matches_played": 85,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "azerbaijan": {
-      "xg_home": 0.598,
+    "italy": {
+      "xg_home": 0.644,
       "xg_away": 0.437,
-      "xg_overall": 1.532,
-      "xga_overall": 1.544,
-      "matches_played": 79,
+      "xg_overall": 1.753,
+      "xga_overall": 0.981,
+      "matches_played": 893,
       "source": "Historical results weighted by opponent quality"
     },
-    "venezuela": {
-      "xg_home": 0.605,
-      "xg_away": 0.519,
-      "xg_overall": 1.5,
-      "xga_overall": 1.387,
-      "matches_played": 62,
+    "chile": {
+      "xg_home": 0.572,
+      "xg_away": 0.307,
+      "xg_overall": 1.41,
+      "xga_overall": 1.422,
+      "matches_played": 835,
       "source": "Historical results weighted by opponent quality"
     },
-    "guinea": {
-      "xg_home": 0.609,
-      "xg_away": 0.39,
-      "xg_overall": 1.458,
-      "xga_overall": 1.729,
-      "matches_played": 96,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "nepal": {
-      "xg_home": 0.726,
-      "xg_away": 0.212,
-      "xg_overall": 1.174,
-      "xga_overall": 1.449,
-      "matches_played": 69,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "burkina-faso": {
-      "xg_home": 0.595,
-      "xg_away": 0.363,
-      "xg_overall": 1.307,
-      "xga_overall": 1.455,
-      "matches_played": 88,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "malaysia": {
-      "xg_home": 0.677,
-      "xg_away": 0.34,
-      "xg_overall": 1.368,
-      "xga_overall": 1.579,
-      "matches_played": 76,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "senegal": {
-      "xg_home": 0.712,
-      "xg_away": 0.46,
-      "xg_overall": 1.596,
-      "xga_overall": 1.404,
-      "matches_played": 89,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "palestine": {
-      "xg_home": 0.569,
-      "xg_away": 0.439,
-      "xg_overall": 1.378,
-      "xga_overall": 1.554,
-      "matches_played": 74,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "japan": {
-      "xg_home": 0.767,
-      "xg_away": 0.436,
-      "xg_overall": 1.54,
-      "xga_overall": 1.356,
-      "matches_played": 87,
+    "russia": {
+      "xg_home": 0.644,
+      "xg_away": 0.452,
+      "xg_overall": 1.737,
+      "xga_overall": 0.981,
+      "matches_played": 749,
       "source": "Historical results weighted by opponent quality"
     },
     "finland": {
+      "xg_home": 0.44,
+      "xg_away": 0.292,
+      "xg_overall": 1.174,
+      "xga_overall": 2.048,
+      "matches_played": 818,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "luxembourg": {
+      "xg_home": 0.214,
+      "xg_away": 0.169,
+      "xg_overall": 0.634,
+      "xga_overall": 2.578,
+      "matches_played": 467,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "catalonia": {
+      "xg_home": 0.515,
+      "xg_away": 0.242,
+      "xg_overall": 1.562,
+      "xga_overall": 1.75,
+      "matches_played": 48,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "philippines": {
+      "xg_home": 0.525,
+      "xg_away": 0.277,
+      "xg_overall": 1.208,
+      "xga_overall": 2.278,
+      "matches_played": 342,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "china": {
+      "xg_home": 0.621,
+      "xg_away": 0.411,
+      "xg_overall": 1.83,
+      "xga_overall": 1.094,
+      "matches_played": 702,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "brazil": {
+      "xg_home": 0.773,
+      "xg_away": 0.559,
+      "xg_overall": 2.175,
+      "xga_overall": 0.904,
+      "matches_played": 1060,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "basque-country": {
+      "xg_home": 0.783,
+      "xg_away": 0.775,
+      "xg_overall": 2.562,
+      "xga_overall": 1.391,
+      "matches_played": 64,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "japan": {
+      "xg_home": 0.587,
+      "xg_away": 0.486,
+      "xg_overall": 1.827,
+      "xga_overall": 1.153,
+      "matches_played": 791,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "paraguay": {
+      "xg_home": 0.489,
+      "xg_away": 0.359,
+      "xg_overall": 1.281,
+      "xga_overall": 1.425,
+      "matches_played": 784,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "romania": {
+      "xg_home": 0.591,
+      "xg_away": 0.401,
+      "xg_overall": 1.617,
+      "xga_overall": 1.275,
+      "matches_played": 766,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "greece": {
+      "xg_home": 0.458,
+      "xg_away": 0.312,
+      "xg_overall": 1.254,
+      "xga_overall": 1.387,
+      "matches_played": 633,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "yugoslavia": {
+      "xg_home": 0.699,
+      "xg_away": 0.52,
+      "xg_overall": 1.95,
+      "xga_overall": 1.565,
+      "matches_played": 483,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "spain": {
+      "xg_home": 0.75,
+      "xg_away": 0.533,
+      "xg_overall": 2.043,
+      "xga_overall": 0.897,
+      "matches_played": 784,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "egypt": {
+      "xg_home": 0.601,
+      "xg_away": 0.324,
+      "xg_overall": 1.62,
+      "xga_overall": 1.013,
+      "matches_played": 757,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "estonia": {
+      "xg_home": 0.336,
+      "xg_away": 0.257,
+      "xg_overall": 0.989,
+      "xga_overall": 1.771,
+      "matches_played": 550,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "suriname": {
+      "xg_home": 0.693,
+      "xg_away": 0.428,
+      "xg_overall": 1.88,
+      "xga_overall": 1.416,
+      "matches_played": 399,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "provence": {
+      "xg_home": 0.932,
+      "xg_away": 0.793,
+      "xg_overall": 3.174,
+      "xga_overall": 2.565,
+      "matches_played": 23,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "costa-rica": {
+      "xg_home": 0.662,
+      "xg_away": 0.373,
+      "xg_overall": 1.71,
+      "xga_overall": 1.185,
+      "matches_played": 724,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "el-salvador": {
+      "xg_home": 0.463,
+      "xg_away": 0.248,
+      "xg_overall": 1.248,
+      "xga_overall": 1.52,
+      "matches_played": 614,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guatemala": {
+      "xg_home": 0.519,
+      "xg_away": 0.316,
+      "xg_overall": 1.397,
+      "xga_overall": 1.377,
+      "matches_played": 554,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "poland": {
+      "xg_home": 0.59,
+      "xg_away": 0.439,
+      "xg_overall": 1.68,
+      "xga_overall": 1.346,
+      "matches_played": 892,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "portugal": {
+      "xg_home": 0.668,
+      "xg_away": 0.431,
+      "xg_overall": 1.765,
+      "xga_overall": 1.119,
+      "matches_played": 695,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "brittany": {
+      "xg_home": 0.416,
+      "xg_away": 0.477,
+      "xg_overall": 1.5,
+      "xga_overall": 1.25,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "new-zealand": {
+      "xg_home": 0.739,
+      "xg_away": 0.379,
+      "xg_overall": 1.753,
+      "xga_overall": 1.501,
+      "matches_played": 417,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "australia": {
+      "xg_home": 0.696,
+      "xg_away": 0.485,
+      "xg_overall": 2.009,
+      "xga_overall": 1.064,
+      "matches_played": 582,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "latvia": {
+      "xg_home": 0.366,
+      "xg_away": 0.314,
+      "xg_overall": 1.174,
+      "xga_overall": 1.657,
+      "matches_played": 461,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "galicia": {
+      "xg_home": 0.484,
+      "xg_away": 0.545,
+      "xg_overall": 1.75,
+      "xga_overall": 1.917,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "central-spain": {
+      "xg_home": 0.273,
+      "xg_away": 0.273,
+      "xg_overall": 1.0,
+      "xga_overall": 2.0,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mexico": {
+      "xg_home": 0.623,
+      "xg_away": 0.421,
+      "xg_overall": 1.762,
+      "xga_overall": 1.05,
+      "matches_played": 1004,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "andalusia": {
+      "xg_home": 0.563,
+      "xg_away": 0.545,
+      "xg_overall": 1.923,
+      "xga_overall": 1.077,
+      "matches_played": 13,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "asturias": {
+      "xg_home": null,
+      "xg_away": 0.818,
+      "xg_overall": 3.0,
+      "xga_overall": 1.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "lithuania": {
+      "xg_home": 0.334,
+      "xg_away": 0.262,
+      "xg_overall": 0.995,
+      "xga_overall": 1.815,
+      "matches_played": 433,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "turkey": {
+      "xg_home": 0.489,
+      "xg_away": 0.394,
+      "xg_overall": 1.398,
+      "xga_overall": 1.409,
+      "matches_played": 643,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "aruba": {
+      "xg_home": 0.509,
+      "xg_away": 0.323,
+      "xg_overall": 1.309,
+      "xga_overall": 2.349,
+      "matches_played": 152,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "curaçao": {
+      "xg_home": 0.604,
+      "xg_away": 0.42,
+      "xg_overall": 1.648,
+      "xga_overall": 1.593,
+      "matches_played": 386,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bulgaria": {
+      "xg_home": 0.518,
+      "xg_away": 0.35,
+      "xg_overall": 1.38,
+      "xga_overall": 1.501,
+      "matches_played": 736,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ireland": {
+      "xg_home": 0.482,
+      "xg_away": 0.355,
+      "xg_overall": 1.355,
+      "xga_overall": 1.215,
+      "matches_played": 633,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "haiti": {
+      "xg_home": 0.545,
+      "xg_away": 0.445,
+      "xg_overall": 1.64,
+      "xga_overall": 1.344,
+      "matches_played": 511,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "jamaica": {
+      "xg_home": 0.478,
+      "xg_away": 0.32,
+      "xg_overall": 1.33,
+      "xga_overall": 1.318,
+      "matches_played": 663,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kenya": {
+      "xg_home": 0.464,
+      "xg_away": 0.315,
+      "xg_overall": 1.385,
+      "xga_overall": 1.357,
+      "matches_played": 706,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "uganda": {
+      "xg_home": 0.552,
+      "xg_away": 0.328,
+      "xg_overall": 1.504,
+      "xga_overall": 1.181,
+      "matches_played": 685,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bolivia": {
+      "xg_home": 0.446,
+      "xg_away": 0.199,
+      "xg_overall": 1.021,
+      "xga_overall": 1.968,
+      "matches_played": 534,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "peru": {
+      "xg_home": 0.445,
+      "xg_away": 0.32,
+      "xg_overall": 1.203,
+      "xga_overall": 1.398,
+      "matches_played": 714,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "honduras": {
+      "xg_home": 0.509,
+      "xg_away": 0.372,
+      "xg_overall": 1.466,
+      "xga_overall": 1.287,
+      "matches_played": 620,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "belarus": {
+      "xg_home": 0.409,
+      "xg_away": 0.34,
+      "xg_overall": 1.152,
+      "xga_overall": 1.473,
+      "matches_played": 315,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ukraine": {
+      "xg_home": 0.47,
+      "xg_away": 0.428,
+      "xg_overall": 1.405,
+      "xga_overall": 1.059,
+      "matches_played": 338,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "barbados": {
+      "xg_home": 0.422,
+      "xg_away": 0.336,
+      "xg_overall": 1.301,
+      "xga_overall": 1.745,
+      "matches_played": 302,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "nicaragua": {
+      "xg_home": 0.453,
+      "xg_away": 0.245,
+      "xg_overall": 1.054,
+      "xga_overall": 2.405,
+      "matches_played": 222,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cuba": {
+      "xg_home": 0.542,
+      "xg_away": 0.294,
+      "xg_overall": 1.34,
+      "xga_overall": 1.524,
+      "matches_played": 397,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "martinique": {
+      "xg_home": 0.612,
+      "xg_away": 0.385,
+      "xg_overall": 1.77,
+      "xga_overall": 1.302,
+      "matches_played": 331,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "dominica": {
+      "xg_home": 0.388,
+      "xg_away": 0.271,
+      "xg_overall": 1.163,
+      "xga_overall": 2.028,
+      "matches_played": 215,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "silesia": {
+      "xg_home": 0.863,
+      "xg_away": null,
+      "xg_overall": 3.0,
+      "xga_overall": 2.125,
+      "matches_played": 8,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guadeloupe": {
+      "xg_home": 0.548,
+      "xg_away": 0.418,
+      "xg_overall": 1.708,
+      "xga_overall": 1.439,
+      "matches_played": 271,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "israel": {
+      "xg_home": 0.511,
+      "xg_away": 0.396,
+      "xg_overall": 1.506,
+      "xga_overall": 1.48,
+      "matches_played": 498,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "indonesia": {
+      "xg_home": 0.574,
+      "xg_away": 0.348,
+      "xg_overall": 1.666,
+      "xga_overall": 1.615,
+      "matches_played": 728,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "french-guiana": {
       "xg_home": 0.51,
-      "xg_away": 0.331,
-      "xg_overall": 1.212,
-      "xga_overall": 1.424,
-      "matches_played": 85,
+      "xg_away": 0.359,
+      "xg_overall": 1.492,
+      "xga_overall": 1.709,
+      "matches_played": 179,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saint-lucia": {
+      "xg_home": 0.495,
+      "xg_away": 0.324,
+      "xg_overall": 1.422,
+      "xga_overall": 1.904,
+      "matches_played": 230,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "colombia": {
+      "xg_home": 0.486,
+      "xg_away": 0.357,
+      "xg_overall": 1.29,
+      "xga_overall": 1.154,
+      "matches_played": 638,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "panama": {
+      "xg_home": 0.492,
+      "xg_away": 0.312,
+      "xg_overall": 1.26,
+      "xga_overall": 1.525,
+      "matches_played": 539,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "venezuela": {
+      "xg_home": 0.428,
+      "xg_away": 0.268,
+      "xg_overall": 1.05,
+      "xga_overall": 1.861,
+      "matches_played": 460,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ecuador": {
+      "xg_home": 0.494,
+      "xg_away": 0.287,
+      "xg_overall": 1.211,
+      "xga_overall": 1.527,
+      "matches_played": 592,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saint-kitts-and-nevis": {
+      "xg_home": 0.617,
+      "xg_away": 0.392,
+      "xg_overall": 1.712,
+      "xga_overall": 1.646,
+      "matches_played": 226,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "grenada": {
+      "xg_home": 0.591,
+      "xg_away": 0.361,
+      "xg_overall": 1.623,
+      "xga_overall": 1.862,
+      "matches_played": 260,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "india": {
+      "xg_home": 0.407,
+      "xg_away": 0.365,
+      "xg_overall": 1.367,
+      "xga_overall": 1.614,
+      "matches_played": 534,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "slovakia": {
+      "xg_home": 0.536,
+      "xg_away": 0.365,
+      "xg_overall": 1.411,
+      "xga_overall": 1.248,
+      "matches_played": 367,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "manchukuo": {
+      "xg_home": null,
+      "xg_away": null,
+      "xg_overall": null,
+      "xga_overall": 5.333,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "croatia": {
+      "xg_home": 0.644,
+      "xg_away": 0.473,
+      "xg_overall": 1.737,
+      "xga_overall": 1.01,
+      "matches_played": 396,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "lebanon": {
+      "xg_home": 0.44,
+      "xg_away": 0.267,
+      "xg_overall": 1.156,
+      "xga_overall": 1.408,
+      "matches_played": 333,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "puerto-rico": {
+      "xg_home": 0.601,
+      "xg_away": 0.212,
+      "xg_overall": 1.258,
+      "xga_overall": 2.344,
+      "matches_played": 163,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "afghanistan": {
+      "xg_home": 0.317,
+      "xg_away": 0.258,
+      "xg_overall": 0.966,
+      "xga_overall": 1.993,
+      "matches_played": 147,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "iran": {
+      "xg_home": 0.622,
+      "xg_away": 0.482,
+      "xg_overall": 1.887,
+      "xga_overall": 0.791,
+      "matches_played": 613,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mongolia": {
+      "xg_home": 0.457,
+      "xg_away": 0.24,
+      "xg_overall": 1.136,
+      "xga_overall": 3.068,
+      "matches_played": 103,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tanzania": {
+      "xg_home": 0.374,
+      "xg_away": 0.268,
+      "xg_overall": 1.102,
+      "xga_overall": 1.489,
+      "matches_played": 599,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "zimbabwe": {
+      "xg_home": 0.464,
+      "xg_away": 0.34,
+      "xg_overall": 1.331,
+      "xga_overall": 1.192,
+      "matches_played": 496,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "zambia": {
+      "xg_home": 0.535,
+      "xg_away": 0.378,
+      "xg_overall": 1.556,
+      "xga_overall": 1.073,
+      "matches_played": 793,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "iceland": {
+      "xg_home": 0.421,
+      "xg_away": 0.337,
+      "xg_overall": 1.211,
+      "xga_overall": 1.678,
+      "matches_played": 522,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "albania": {
+      "xg_home": 0.345,
+      "xg_away": 0.232,
+      "xg_overall": 0.947,
+      "xga_overall": 1.48,
+      "matches_played": 398,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "montenegro": {
+      "xg_home": 0.475,
+      "xg_away": 0.31,
+      "xg_overall": 1.182,
+      "xga_overall": 1.371,
+      "matches_played": 170,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "madagascar": {
+      "xg_home": 0.465,
+      "xg_away": 0.346,
+      "xg_overall": 1.356,
+      "xga_overall": 1.512,
+      "matches_played": 320,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mauritius": {
+      "xg_home": 0.463,
+      "xg_away": 0.258,
+      "xg_overall": 1.268,
+      "xga_overall": 1.609,
+      "matches_played": 325,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "réunion": {
+      "xg_home": 0.526,
+      "xg_away": 0.43,
+      "xg_overall": 1.766,
+      "xga_overall": 1.774,
+      "matches_played": 124,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "zanzibar": {
+      "xg_home": 0.312,
+      "xg_away": 0.233,
+      "xg_overall": 0.914,
+      "xga_overall": 2.086,
+      "matches_played": 209,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "djibouti": {
+      "xg_home": 0.216,
+      "xg_away": 0.178,
+      "xg_overall": 0.667,
+      "xga_overall": 3.613,
+      "matches_played": 111,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ethiopia": {
+      "xg_home": 0.451,
+      "xg_away": 0.292,
+      "xg_overall": 1.342,
+      "xga_overall": 1.455,
+      "matches_played": 409,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "dr-congo": {
+      "xg_home": 0.529,
+      "xg_away": 0.386,
+      "xg_overall": 1.487,
+      "xga_overall": 1.197,
+      "matches_played": 524,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "south-korea": {
+      "xg_home": 0.602,
+      "xg_away": 0.443,
+      "xg_overall": 1.78,
+      "xga_overall": 0.908,
+      "matches_played": 1008,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "vietnam": {
+      "xg_home": 0.585,
+      "xg_away": 0.383,
+      "xg_overall": 1.646,
+      "xga_overall": 1.367,
+      "matches_played": 297,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "macau": {
+      "xg_home": 0.268,
+      "xg_away": 0.175,
+      "xg_overall": 0.77,
+      "xga_overall": 3.095,
+      "matches_played": 148,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "dominican-republic": {
+      "xg_home": 0.63,
+      "xg_away": 0.428,
+      "xg_overall": 1.673,
+      "xga_overall": 1.597,
+      "matches_played": 159,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cyprus": {
+      "xg_home": 0.333,
+      "xg_away": 0.214,
+      "xg_overall": 0.88,
+      "xga_overall": 2.176,
+      "matches_played": 426,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sierra-leone": {
+      "xg_home": 0.379,
+      "xg_away": 0.236,
+      "xg_overall": 0.963,
+      "xga_overall": 1.379,
+      "matches_played": 301,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "nigeria": {
+      "xg_home": 0.605,
+      "xg_away": 0.361,
+      "xg_overall": 1.525,
+      "xga_overall": 1.002,
+      "matches_played": 661,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "syria": {
+      "xg_home": 0.569,
+      "xg_away": 0.345,
+      "xg_overall": 1.43,
+      "xga_overall": 1.318,
+      "matches_played": 484,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "serbia": {
+      "xg_home": 0.57,
+      "xg_away": 0.406,
+      "xg_overall": 1.526,
+      "xga_overall": 1.098,
+      "matches_played": 348,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "taiwan": {
+      "xg_home": 0.421,
+      "xg_away": 0.358,
+      "xg_overall": 1.306,
+      "xga_overall": 2.506,
+      "matches_played": 245,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ghana": {
+      "xg_home": 0.565,
+      "xg_away": 0.385,
+      "xg_overall": 1.568,
+      "xga_overall": 1.043,
+      "matches_played": 671,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "myanmar": {
+      "xg_home": 0.571,
+      "xg_away": 0.313,
+      "xg_overall": 1.604,
+      "xga_overall": 1.652,
+      "matches_played": 512,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "new-caledonia": {
+      "xg_home": 0.805,
+      "xg_away": 0.645,
+      "xg_overall": 2.634,
+      "xga_overall": 1.392,
+      "matches_played": 265,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "vanuatu": {
+      "xg_home": 0.571,
+      "xg_away": 0.522,
+      "xg_overall": 1.883,
+      "xga_overall": 2.15,
+      "matches_played": 214,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "fiji": {
+      "xg_home": 0.771,
+      "xg_away": 0.421,
+      "xg_overall": 2.269,
+      "xga_overall": 1.638,
+      "matches_played": 268,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "pakistan": {
+      "xg_home": 0.354,
+      "xg_away": 0.237,
+      "xg_overall": 0.94,
+      "xga_overall": 2.299,
+      "matches_played": 251,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sri-lanka": {
+      "xg_home": 0.384,
+      "xg_away": 0.184,
+      "xg_overall": 0.944,
+      "xga_overall": 2.295,
+      "matches_played": 251,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "german-dr": {
+      "xg_home": 0.576,
+      "xg_away": 0.454,
+      "xg_overall": 1.698,
+      "xga_overall": 1.211,
+      "matches_played": 298,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tahiti": {
+      "xg_home": 0.853,
+      "xg_away": 0.652,
+      "xg_overall": 2.715,
+      "xga_overall": 1.533,
+      "matches_played": 242,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "gambia": {
+      "xg_home": 0.37,
+      "xg_away": 0.305,
+      "xg_overall": 1.049,
+      "xga_overall": 1.391,
+      "matches_played": 266,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "hong-kong": {
+      "xg_home": 0.487,
+      "xg_away": 0.347,
+      "xg_overall": 1.45,
+      "xga_overall": 1.638,
+      "matches_played": 447,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "singapore": {
+      "xg_home": 0.506,
+      "xg_away": 0.27,
+      "xg_overall": 1.348,
+      "xga_overall": 1.823,
+      "matches_played": 696,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "malaysia": {
+      "xg_home": 0.595,
+      "xg_away": 0.303,
+      "xg_overall": 1.632,
+      "xga_overall": 1.45,
+      "matches_played": 835,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guinea-bissau": {
+      "xg_home": 0.37,
+      "xg_away": 0.225,
+      "xg_overall": 0.995,
+      "xga_overall": 1.474,
+      "matches_played": 190,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saarland": {
+      "xg_home": 0.259,
+      "xg_away": 0.531,
+      "xg_overall": 1.111,
+      "xga_overall": 2.889,
+      "matches_played": 9,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "burundi": {
+      "xg_home": 0.356,
+      "xg_away": 0.281,
+      "xg_overall": 1.087,
+      "xga_overall": 1.353,
+      "matches_played": 218,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cameroon": {
+      "xg_home": 0.508,
+      "xg_away": 0.342,
+      "xg_overall": 1.406,
+      "xga_overall": 1.039,
+      "matches_played": 616,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kernow": {
+      "xg_home": 0.593,
+      "xg_away": 1.182,
+      "xg_overall": 2.667,
+      "xga_overall": 1.583,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cambodia": {
+      "xg_home": 0.442,
+      "xg_away": 0.22,
+      "xg_overall": 1.119,
+      "xga_overall": 2.576,
+      "matches_played": 295,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "thailand": {
+      "xg_home": 0.555,
+      "xg_away": 0.382,
+      "xg_overall": 1.607,
+      "xga_overall": 1.481,
+      "matches_played": 865,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "vietnam-republic": {
+      "xg_home": 0.649,
+      "xg_away": 0.473,
+      "xg_overall": 1.867,
+      "xga_overall": 1.6,
+      "matches_played": 195,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kyrgyzstan": {
+      "xg_home": 0.423,
+      "xg_away": 0.284,
+      "xg_overall": 1.152,
+      "xga_overall": 1.681,
+      "matches_played": 191,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "moldova": {
+      "xg_home": 0.299,
+      "xg_away": 0.222,
+      "xg_overall": 0.813,
+      "xga_overall": 1.746,
+      "matches_played": 299,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "north-vietnam": {
+      "xg_home": 1.032,
+      "xg_away": 0.457,
+      "xg_overall": 2.042,
+      "xga_overall": 2.167,
+      "matches_played": 24,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "togo": {
+      "xg_home": 0.436,
+      "xg_away": 0.264,
+      "xg_overall": 1.101,
+      "xga_overall": 1.387,
+      "matches_played": 447,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "north-korea": {
+      "xg_home": 0.612,
+      "xg_away": 0.371,
+      "xg_overall": 1.61,
+      "xga_overall": 1.115,
+      "matches_played": 390,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sudan": {
+      "xg_home": 0.398,
+      "xg_away": 0.251,
+      "xg_overall": 1.083,
+      "xga_overall": 1.352,
+      "matches_played": 469,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "malta": {
+      "xg_home": 0.251,
+      "xg_away": 0.144,
+      "xg_overall": 0.651,
+      "xga_overall": 2.242,
+      "matches_played": 458,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tunisia": {
+      "xg_home": 0.53,
+      "xg_away": 0.343,
+      "xg_overall": 1.436,
+      "xga_overall": 1.024,
+      "matches_played": 679,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "libya": {
+      "xg_home": 0.524,
+      "xg_away": 0.233,
+      "xg_overall": 1.302,
+      "xga_overall": 1.214,
+      "matches_played": 384,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "malawi": {
+      "xg_home": 0.391,
+      "xg_away": 0.263,
+      "xg_overall": 1.169,
+      "xga_overall": 1.292,
+      "matches_played": 644,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "morocco": {
+      "xg_home": 0.607,
+      "xg_away": 0.329,
+      "xg_overall": 1.484,
+      "xga_overall": 0.801,
+      "matches_played": 618,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "benin": {
+      "xg_home": 0.415,
+      "xg_away": 0.256,
+      "xg_overall": 1.083,
+      "xga_overall": 1.726,
+      "matches_played": 325,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cape-verde": {
+      "xg_home": 0.425,
+      "xg_away": 0.286,
+      "xg_overall": 1.093,
+      "xga_overall": 1.123,
+      "matches_played": 236,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ivory-coast": {
+      "xg_home": 0.619,
+      "xg_away": 0.384,
+      "xg_overall": 1.637,
+      "xga_overall": 0.995,
+      "matches_played": 637,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "burkina-faso": {
+      "xg_home": 0.512,
+      "xg_away": 0.298,
+      "xg_overall": 1.25,
+      "xga_overall": 1.33,
+      "matches_played": 464,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "gabon": {
+      "xg_home": 0.421,
+      "xg_away": 0.311,
+      "xg_overall": 1.178,
+      "xga_overall": 1.195,
+      "matches_played": 405,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "congo": {
+      "xg_home": 0.452,
+      "xg_away": 0.29,
+      "xg_overall": 1.288,
+      "xga_overall": 1.473,
+      "matches_played": 406,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mali": {
+      "xg_home": 0.513,
+      "xg_away": 0.295,
+      "xg_overall": 1.311,
+      "xga_overall": 1.1,
+      "matches_played": 569,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "central-african-republic": {
+      "xg_home": 0.395,
+      "xg_away": 0.257,
+      "xg_overall": 1.058,
+      "xga_overall": 1.906,
+      "matches_played": 138,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "iraq": {
+      "xg_home": 0.557,
+      "xg_away": 0.354,
+      "xg_overall": 1.534,
+      "xga_overall": 0.934,
+      "matches_played": 656,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saint-vincent-and-the-grenadines": {
+      "xg_home": 0.58,
+      "xg_away": 0.42,
+      "xg_overall": 1.576,
+      "xga_overall": 1.873,
+      "matches_played": 236,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "senegal": {
+      "xg_home": 0.516,
+      "xg_away": 0.369,
+      "xg_overall": 1.382,
+      "xga_overall": 0.942,
+      "matches_played": 639,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "laos": {
+      "xg_home": 0.373,
+      "xg_away": 0.235,
+      "xg_overall": 1.013,
+      "xga_overall": 3.129,
+      "matches_played": 224,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mauritania": {
+      "xg_home": 0.265,
+      "xg_away": 0.193,
+      "xg_overall": 0.725,
+      "xga_overall": 1.59,
+      "matches_played": 273,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "liberia": {
+      "xg_home": 0.364,
+      "xg_away": 0.188,
+      "xg_overall": 0.894,
+      "xga_overall": 1.474,
+      "matches_played": 302,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "chad": {
+      "xg_home": 0.335,
+      "xg_away": 0.193,
+      "xg_overall": 0.848,
+      "xga_overall": 1.725,
+      "matches_played": 138,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "niger": {
+      "xg_home": 0.421,
+      "xg_away": 0.224,
+      "xg_overall": 0.985,
+      "xga_overall": 1.627,
+      "matches_played": 260,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guinea": {
+      "xg_home": 0.528,
+      "xg_away": 0.313,
+      "xg_overall": 1.354,
+      "xga_overall": 1.224,
+      "matches_played": 539,
       "source": "Historical results weighted by opponent quality"
     },
     "algeria": {
-      "xg_home": 0.717,
-      "xg_away": 0.431,
-      "xg_overall": 1.582,
-      "xga_overall": 1.429,
+      "xg_home": 0.598,
+      "xg_away": 0.349,
+      "xg_overall": 1.542,
+      "xga_overall": 0.997,
+      "matches_played": 618,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kuwait": {
+      "xg_home": 0.501,
+      "xg_away": 0.404,
+      "xg_overall": 1.56,
+      "xga_overall": 1.126,
+      "matches_played": 684,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "jordan": {
+      "xg_home": 0.451,
+      "xg_away": 0.357,
+      "xg_overall": 1.276,
+      "xga_overall": 1.119,
+      "matches_played": 486,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "papua-new-guinea": {
+      "xg_home": 0.542,
+      "xg_away": 0.692,
+      "xg_overall": 2.168,
+      "xga_overall": 2.013,
+      "matches_played": 155,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "solomon-islands": {
+      "xg_home": 0.792,
+      "xg_away": 0.453,
+      "xg_overall": 2.159,
+      "xga_overall": 1.967,
+      "matches_played": 214,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "somalia": {
+      "xg_home": 0.15,
+      "xg_away": 0.147,
+      "xg_overall": 0.5,
+      "xga_overall": 2.661,
+      "matches_played": 124,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saudi-arabia": {
+      "xg_home": 0.515,
+      "xg_away": 0.389,
+      "xg_overall": 1.535,
+      "xga_overall": 1.049,
+      "matches_played": 742,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bermuda": {
+      "xg_home": 0.565,
+      "xg_away": 0.433,
+      "xg_overall": 1.657,
+      "xga_overall": 1.763,
+      "matches_played": 198,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "palestine": {
+      "xg_home": 0.597,
+      "xg_away": 0.275,
+      "xg_overall": 1.333,
+      "xga_overall": 1.39,
+      "matches_played": 249,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "yemen": {
+      "xg_home": 0.421,
+      "xg_away": 0.227,
+      "xg_overall": 0.974,
+      "xga_overall": 2.169,
+      "matches_played": 266,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bahrain": {
+      "xg_home": 0.42,
+      "xg_away": 0.289,
+      "xg_overall": 1.241,
+      "xga_overall": 1.295,
+      "matches_played": 584,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "oman": {
+      "xg_home": 0.426,
+      "xg_away": 0.32,
+      "xg_overall": 1.291,
+      "xga_overall": 1.258,
+      "matches_played": 543,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "wallis-islands-and-futuna": {
+      "xg_home": 0.727,
+      "xg_away": 0.195,
+      "xg_overall": 0.958,
+      "xga_overall": 4.542,
+      "matches_played": 24,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "corsica": {
+      "xg_home": 0.284,
+      "xg_away": 0.664,
+      "xg_overall": 1.111,
+      "xga_overall": 0.556,
+      "matches_played": 9,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "western-australia": {
+      "xg_home": 0.818,
+      "xg_away": 0.545,
+      "xg_overall": 1.969,
+      "xga_overall": 2.344,
+      "matches_played": 32,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "eswatini": {
+      "xg_home": 0.273,
+      "xg_away": 0.215,
+      "xg_overall": 0.843,
+      "xga_overall": 1.661,
+      "matches_played": 274,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "botswana": {
+      "xg_home": 0.271,
+      "xg_away": 0.196,
+      "xg_overall": 0.807,
+      "xga_overall": 1.283,
+      "matches_played": 332,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "qatar": {
+      "xg_home": 0.485,
+      "xg_away": 0.318,
+      "xg_overall": 1.409,
+      "xga_overall": 1.208,
+      "matches_played": 636,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "lesotho": {
+      "xg_home": 0.251,
+      "xg_away": 0.207,
+      "xg_overall": 0.777,
+      "xga_overall": 1.574,
+      "matches_played": 296,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bahamas": {
+      "xg_home": 0.417,
+      "xg_away": 0.261,
+      "xg_overall": 1.119,
+      "xga_overall": 3.179,
+      "matches_played": 67,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "brunei": {
+      "xg_home": 0.291,
+      "xg_away": 0.188,
+      "xg_overall": 0.781,
+      "xga_overall": 3.277,
+      "matches_played": 137,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cook-islands": {
+      "xg_home": 0.305,
+      "xg_away": 0.172,
+      "xg_overall": 0.811,
+      "xga_overall": 4.981,
+      "matches_played": 53,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "yemen-dpr": {
+      "xg_home": 0.428,
+      "xg_away": 0.275,
+      "xg_overall": 1.0,
+      "xga_overall": 2.76,
+      "matches_played": 25,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "uae": {
+      "xg_home": 0.504,
+      "xg_away": 0.318,
+      "xg_overall": 1.417,
+      "xga_overall": 1.242,
+      "matches_played": 612,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "faroe-islands": {
+      "xg_home": 0.339,
+      "xg_away": 0.191,
+      "xg_overall": 0.836,
+      "xga_overall": 2.244,
+      "matches_played": 287,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "nepal": {
+      "xg_home": 0.332,
+      "xg_away": 0.163,
+      "xg_overall": 0.854,
+      "xga_overall": 2.246,
+      "matches_played": 268,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "antigua-and-barbuda": {
+      "xg_home": 0.407,
+      "xg_away": 0.321,
+      "xg_overall": 1.325,
+      "xga_overall": 1.831,
+      "matches_played": 231,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bangladesh": {
+      "xg_home": 0.339,
+      "xg_away": 0.193,
+      "xg_overall": 0.905,
+      "xga_overall": 1.823,
+      "matches_played": 305,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "seychelles": {
+      "xg_home": 0.279,
+      "xg_away": 0.154,
+      "xg_overall": 0.767,
+      "xga_overall": 2.261,
+      "matches_played": 176,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "equatorial-guinea": {
+      "xg_home": 0.342,
+      "xg_away": 0.217,
+      "xg_overall": 0.872,
+      "xga_overall": 1.464,
+      "matches_played": 179,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mozambique": {
+      "xg_home": 0.388,
+      "xg_away": 0.239,
+      "xg_overall": 1.032,
+      "xga_overall": 1.293,
+      "matches_played": 375,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guam": {
+      "xg_home": 0.392,
+      "xg_away": 0.326,
+      "xg_overall": 1.138,
+      "xga_overall": 4.902,
+      "matches_played": 123,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "angola": {
+      "xg_home": 0.442,
+      "xg_away": 0.247,
+      "xg_overall": 1.133,
+      "xga_overall": 1.031,
+      "matches_played": 415,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "são-tomé-and-príncipe": {
+      "xg_home": 0.272,
+      "xg_away": 0.2,
+      "xg_overall": 0.746,
+      "xga_overall": 2.563,
+      "matches_played": 71,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "rwanda": {
+      "xg_home": 0.378,
+      "xg_away": 0.227,
+      "xg_overall": 1.032,
+      "xga_overall": 1.2,
+      "matches_played": 280,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "northern-cyprus": {
+      "xg_home": 0.93,
+      "xg_away": 0.523,
+      "xg_overall": 2.882,
+      "xga_overall": 0.912,
+      "matches_played": 34,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "armenia": {
+      "xg_home": 0.352,
+      "xg_away": 0.279,
+      "xg_overall": 1.007,
+      "xga_overall": 1.835,
+      "matches_played": 272,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "georgia": {
+      "xg_home": 0.487,
+      "xg_away": 0.318,
+      "xg_overall": 1.248,
+      "xga_overall": 1.404,
+      "matches_played": 307,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "azerbaijan": {
+      "xg_home": 0.315,
+      "xg_away": 0.181,
+      "xg_overall": 0.768,
+      "xga_overall": 1.677,
+      "matches_played": 310,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kazakhstan": {
+      "xg_home": 0.43,
+      "xg_away": 0.289,
+      "xg_overall": 1.149,
+      "xga_overall": 1.651,
+      "matches_played": 269,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "comoros": {
+      "xg_home": 0.381,
+      "xg_away": 0.255,
+      "xg_overall": 0.887,
+      "xga_overall": 1.616,
+      "matches_played": 151,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "maldives": {
+      "xg_home": 0.453,
+      "xg_away": 0.246,
+      "xg_overall": 1.189,
+      "xga_overall": 2.258,
+      "matches_played": 233,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tonga": {
+      "xg_home": 0.35,
+      "xg_away": 0.322,
+      "xg_overall": 1.191,
+      "xga_overall": 3.721,
+      "matches_played": 68,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kiribati": {
+      "xg_home": 0.273,
+      "xg_away": 0.091,
+      "xg_overall": 0.636,
+      "xga_overall": 11.455,
+      "matches_played": 11,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tuvalu": {
+      "xg_home": 0.378,
+      "xg_away": 0.285,
+      "xg_overall": 1.154,
+      "xga_overall": 5.333,
+      "matches_played": 39,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "samoa": {
+      "xg_home": 0.529,
+      "xg_away": 0.235,
+      "xg_overall": 1.394,
+      "xga_overall": 3.507,
+      "matches_played": 71,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "greenland": {
+      "xg_home": 0.656,
+      "xg_away": 0.413,
+      "xg_overall": 1.883,
+      "xga_overall": 2.065,
+      "matches_played": 77,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "liechtenstein": {
+      "xg_home": 0.121,
+      "xg_away": 0.128,
+      "xg_overall": 0.405,
+      "xga_overall": 2.803,
+      "matches_played": 259,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bhutan": {
+      "xg_home": 0.268,
+      "xg_away": 0.11,
+      "xg_overall": 0.555,
+      "xga_overall": 3.655,
+      "matches_played": 110,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "south-yemen": {
+      "xg_home": null,
+      "xg_away": 0.105,
+      "xg_overall": 0.333,
+      "xga_overall": 2.667,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "niue": {
+      "xg_home": null,
+      "xg_away": null,
+      "xg_overall": null,
+      "xga_overall": 16.5,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "american-samoa": {
+      "xg_home": 0.197,
+      "xg_away": 0.173,
+      "xg_overall": 0.6,
+      "xga_overall": 6.491,
+      "matches_played": 55,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "belize": {
+      "xg_home": 0.413,
+      "xg_away": 0.318,
+      "xg_overall": 1.099,
+      "xga_overall": 1.926,
+      "matches_played": 121,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cayman-islands": {
+      "xg_home": 0.37,
+      "xg_away": 0.23,
+      "xg_overall": 0.983,
+      "xga_overall": 2.45,
+      "matches_played": 120,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "anguilla": {
+      "xg_home": 0.173,
+      "xg_away": 0.204,
+      "xg_overall": 0.571,
+      "xga_overall": 3.835,
       "matches_played": 91,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "british-virgin-islands": {
+      "xg_home": 0.418,
+      "xg_away": 0.252,
+      "xg_overall": 0.927,
+      "xga_overall": 2.943,
+      "matches_played": 123,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "palau": {
+      "xg_home": 0.545,
+      "xg_away": null,
+      "xg_overall": 2.0,
+      "xga_overall": 10.5,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sint-maarten": {
+      "xg_home": 0.591,
+      "xg_away": 0.363,
+      "xg_overall": 1.467,
+      "xga_overall": 2.55,
+      "matches_played": 60,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "namibia": {
+      "xg_home": 0.352,
+      "xg_away": 0.227,
+      "xg_overall": 0.978,
+      "xga_overall": 1.423,
+      "matches_played": 279,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ynys-môn": {
+      "xg_home": 0.572,
+      "xg_away": 0.469,
+      "xg_overall": 1.866,
+      "xga_overall": 1.433,
+      "matches_played": 67,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "shetland": {
+      "xg_home": 0.523,
+      "xg_away": 0.479,
+      "xg_overall": 1.741,
+      "xga_overall": 1.948,
+      "matches_played": 58,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "åland-islands": {
+      "xg_home": 0.44,
+      "xg_away": 0.368,
+      "xg_overall": 1.51,
+      "xga_overall": 1.686,
+      "matches_played": 51,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saint-martin": {
+      "xg_home": 0.524,
+      "xg_away": 0.468,
+      "xg_overall": 1.485,
+      "xga_overall": 2.456,
+      "matches_played": 68,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "san-marino": {
+      "xg_home": 0.083,
+      "xg_away": 0.065,
+      "xg_overall": 0.196,
+      "xga_overall": 3.956,
+      "matches_played": 225,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "montserrat": {
+      "xg_home": 0.413,
+      "xg_away": 0.244,
+      "xg_overall": 1.091,
+      "xga_overall": 2.955,
+      "matches_played": 66,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "slovenia": {
+      "xg_home": 0.445,
+      "xg_away": 0.326,
+      "xg_overall": 1.237,
+      "xga_overall": 1.174,
+      "matches_played": 317,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "isle-of-wight": {
+      "xg_home": 0.636,
+      "xg_away": 0.649,
+      "xg_overall": 2.354,
+      "xga_overall": 1.25,
+      "matches_played": 48,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "turkmenistan": {
+      "xg_home": 0.573,
+      "xg_away": 0.364,
+      "xg_overall": 1.514,
+      "xga_overall": 1.52,
+      "matches_played": 175,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tajikistan": {
+      "xg_home": 0.601,
+      "xg_away": 0.362,
+      "xg_overall": 1.488,
+      "xga_overall": 1.383,
+      "matches_played": 201,
       "source": "Historical results weighted by opponent quality"
     },
     "uzbekistan": {
       "xg_home": 0.614,
-      "xg_away": 0.44,
-      "xg_overall": 1.477,
-      "xga_overall": 1.33,
-      "matches_played": 88,
+      "xg_away": 0.432,
+      "xg_overall": 1.732,
+      "xga_overall": 1.113,
+      "matches_played": 354,
       "source": "Historical results weighted by opponent quality"
     },
-    "ecuador": {
-      "xg_home": 0.729,
-      "xg_away": 0.446,
-      "xg_overall": 1.582,
-      "xga_overall": 1.214,
-      "matches_played": 98,
+    "eritrea": {
+      "xg_home": 0.17,
+      "xg_away": 0.198,
+      "xg_overall": 0.676,
+      "xga_overall": 1.704,
+      "matches_played": 71,
       "source": "Historical results weighted by opponent quality"
     },
-    "iran": {
-      "xg_home": 0.596,
-      "xg_away": 0.373,
-      "xg_overall": 1.263,
-      "xga_overall": 1.184,
-      "matches_played": 76,
+    "gibraltar": {
+      "xg_home": 0.455,
+      "xg_away": 0.257,
+      "xg_overall": 1.131,
+      "xga_overall": 2.475,
+      "matches_played": 160,
       "source": "Historical results weighted by opponent quality"
     },
-    "guatemala": {
-      "xg_home": 0.601,
-      "xg_away": 0.376,
-      "xg_overall": 1.403,
-      "xga_overall": 1.688,
-      "matches_played": 77,
+    "isle-of-man": {
+      "xg_home": 1.083,
+      "xg_away": 0.93,
+      "xg_overall": 3.207,
+      "xga_overall": 1.5,
+      "matches_played": 58,
       "source": "Historical results weighted by opponent quality"
     },
     "north-macedonia": {
-      "xg_home": 0.566,
-      "xg_away": 0.43,
-      "xg_overall": 1.369,
-      "xga_overall": 1.512,
-      "matches_played": 84,
+      "xg_home": 0.418,
+      "xg_away": 0.316,
+      "xg_overall": 1.193,
+      "xga_overall": 1.346,
+      "matches_played": 306,
       "source": "Historical results weighted by opponent quality"
     },
-    "thailand": {
-      "xg_home": 0.59,
-      "xg_away": 0.392,
-      "xg_overall": 1.364,
-      "xga_overall": 1.792,
-      "matches_played": 77,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "singapore": {
-      "xg_home": 0.614,
-      "xg_away": 0.164,
-      "xg_overall": 1.131,
-      "xga_overall": 1.475,
-      "matches_played": 61,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "kosovo": {
-      "xg_home": 0.586,
-      "xg_away": 0.36,
-      "xg_overall": 1.316,
-      "xga_overall": 1.408,
-      "matches_played": 76,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "romania": {
-      "xg_home": 0.618,
-      "xg_away": 0.401,
-      "xg_overall": 1.25,
-      "xga_overall": 1.25,
-      "matches_played": 52,
+    "czech-republic": {
+      "xg_home": 0.685,
+      "xg_away": 0.462,
+      "xg_overall": 1.784,
+      "xga_overall": 1.025,
+      "matches_played": 361,
       "source": "Historical results weighted by opponent quality"
     },
     "bosnia-and-herzegovina": {
-      "xg_home": 0.586,
-      "xg_away": 0.467,
-      "xg_overall": 1.5,
-      "xga_overall": 1.435,
-      "matches_played": 92,
+      "xg_home": 0.47,
+      "xg_away": 0.413,
+      "xg_overall": 1.37,
+      "xga_overall": 1.37,
+      "matches_played": 284,
       "source": "Historical results weighted by opponent quality"
     },
-    "comoros": {
-      "xg_home": 0.633,
-      "xg_away": 0.315,
-      "xg_overall": 1.195,
-      "xga_overall": 1.724,
-      "matches_played": 87,
+    "canary-islands": {
+      "xg_home": 0.78,
+      "xg_away": null,
+      "xg_overall": 2.75,
+      "xga_overall": 0.75,
+      "matches_played": 4,
       "source": "Historical results weighted by opponent quality"
     },
-    "hong-kong": {
-      "xg_home": 0.446,
-      "xg_away": 0.273,
-      "xg_overall": 0.966,
-      "xga_overall": 1.525,
-      "matches_played": 59,
+    "andorra": {
+      "xg_home": 0.127,
+      "xg_away": 0.084,
+      "xg_overall": 0.328,
+      "xga_overall": 2.371,
+      "matches_played": 229,
       "source": "Historical results weighted by opponent quality"
     },
-    "northern-ireland": {
-      "xg_home": 0.658,
-      "xg_away": 0.41,
-      "xg_overall": 1.473,
-      "xga_overall": 1.297,
-      "matches_played": 74,
+    "frøya": {
+      "xg_home": 0.636,
+      "xg_away": 0.324,
+      "xg_overall": 1.622,
+      "xga_overall": 3.946,
+      "matches_played": 37,
       "source": "Historical results weighted by opponent quality"
     },
-    "colombia": {
-      "xg_home": 0.697,
-      "xg_away": 0.508,
-      "xg_overall": 1.443,
-      "xga_overall": 1.266,
-      "matches_played": 79,
+    "hitra": {
+      "xg_home": 0.624,
+      "xg_away": 0.616,
+      "xg_overall": 1.609,
+      "xga_overall": 4.0,
+      "matches_played": 23,
       "source": "Historical results weighted by opponent quality"
     },
-    "mauritania": {
-      "xg_home": 0.678,
-      "xg_away": 0.337,
-      "xg_overall": 1.284,
-      "xga_overall": 1.703,
-      "matches_played": 74,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "bolivia": {
-      "xg_home": 0.645,
-      "xg_away": 0.424,
-      "xg_overall": 1.384,
-      "xga_overall": 1.36,
-      "matches_played": 86,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "armenia": {
-      "xg_home": 0.727,
-      "xg_away": 0.373,
-      "xg_overall": 1.33,
-      "xga_overall": 1.745,
-      "matches_played": 94,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "gabon": {
-      "xg_home": 0.708,
-      "xg_away": 0.435,
-      "xg_overall": 1.461,
-      "xga_overall": 1.605,
-      "matches_played": 76,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "qatar": {
-      "xg_home": 0.731,
-      "xg_away": 0.442,
-      "xg_overall": 1.479,
-      "xga_overall": 1.452,
-      "matches_played": 73,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "austria": {
-      "xg_home": 0.652,
-      "xg_away": 0.548,
-      "xg_overall": 1.587,
-      "xga_overall": 1.462,
-      "matches_played": 80,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "indonesia": {
-      "xg_home": 0.693,
-      "xg_away": 0.295,
-      "xg_overall": 1.388,
-      "xga_overall": 1.403,
-      "matches_played": 67,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "haiti": {
-      "xg_home": 0.515,
-      "xg_away": 0.421,
-      "xg_overall": 1.314,
-      "xga_overall": 1.5,
-      "matches_played": 86,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "sri-lanka": {
-      "xg_home": 0.495,
-      "xg_away": 0.313,
-      "xg_overall": 1.163,
-      "xga_overall": 1.587,
-      "matches_played": 80,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "ireland": {
-      "xg_home": 0.744,
-      "xg_away": 0.501,
-      "xg_overall": 1.5,
-      "xga_overall": 1.286,
-      "matches_played": 70,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "slovakia": {
-      "xg_home": 0.668,
-      "xg_away": 0.466,
-      "xg_overall": 1.342,
-      "xga_overall": 1.411,
-      "matches_played": 73,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "dr-congo": {
-      "xg_home": 0.649,
-      "xg_away": 0.356,
-      "xg_overall": 1.288,
-      "xga_overall": 1.545,
-      "matches_played": 66,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "costa-rica": {
-      "xg_home": 0.694,
-      "xg_away": 0.435,
-      "xg_overall": 1.556,
-      "xga_overall": 1.444,
-      "matches_played": 81,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "iraq": {
-      "xg_home": 0.584,
-      "xg_away": 0.428,
-      "xg_overall": 1.226,
-      "xga_overall": 1.5,
-      "matches_played": 84,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "israel": {
-      "xg_home": 0.632,
-      "xg_away": 0.365,
-      "xg_overall": 1.34,
-      "xga_overall": 1.381,
-      "matches_played": 97,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "russia": {
-      "xg_home": 0.622,
-      "xg_away": 0.495,
-      "xg_overall": 1.506,
-      "xga_overall": 1.299,
-      "matches_played": 77,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "panama": {
-      "xg_home": 0.576,
-      "xg_away": 0.332,
-      "xg_overall": 1.202,
-      "xga_overall": 1.44,
-      "matches_played": 84,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "nigeria": {
-      "xg_home": 0.638,
-      "xg_away": 0.445,
-      "xg_overall": 1.623,
-      "xga_overall": 1.377,
-      "matches_played": 69,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "suriname": {
-      "xg_home": 0.538,
-      "xg_away": 0.424,
-      "xg_overall": 1.464,
-      "xga_overall": 1.488,
-      "matches_played": 84,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "ivory-coast": {
-      "xg_home": 0.855,
-      "xg_away": 0.498,
-      "xg_overall": 1.685,
-      "xga_overall": 1.457,
-      "matches_played": 92,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "china": {
-      "xg_home": 0.601,
-      "xg_away": 0.336,
-      "xg_overall": 1.313,
-      "xga_overall": 1.47,
-      "matches_played": 83,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "kenya": {
-      "xg_home": 0.512,
-      "xg_away": 0.339,
-      "xg_overall": 1.092,
-      "xga_overall": 1.566,
-      "matches_played": 76,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "syria": {
-      "xg_home": 0.89,
-      "xg_away": 0.397,
-      "xg_overall": 1.648,
-      "xga_overall": 1.761,
-      "matches_played": 71,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "albania": {
-      "xg_home": 0.545,
-      "xg_away": 0.326,
-      "xg_overall": 1.226,
-      "xga_overall": 1.369,
-      "matches_played": 84,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "egypt": {
-      "xg_home": 0.631,
-      "xg_away": 0.423,
-      "xg_overall": 1.552,
-      "xga_overall": 1.292,
-      "matches_played": 96,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "canada": {
-      "xg_home": 0.691,
-      "xg_away": 0.44,
-      "xg_overall": 1.5,
-      "xga_overall": 1.429,
-      "matches_played": 70,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "paraguay": {
-      "xg_home": 0.707,
-      "xg_away": 0.52,
-      "xg_overall": 1.49,
-      "xga_overall": 1.427,
-      "matches_played": 96,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "kuwait": {
-      "xg_home": 0.809,
-      "xg_away": 0.346,
-      "xg_overall": 1.435,
-      "xga_overall": 1.536,
-      "matches_played": 69,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "serbia": {
-      "xg_home": 0.687,
-      "xg_away": 0.419,
-      "xg_overall": 1.619,
-      "xga_overall": 1.298,
-      "matches_played": 84,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "ukraine": {
-      "xg_home": 0.803,
-      "xg_away": 0.493,
-      "xg_overall": 1.556,
-      "xga_overall": 1.361,
-      "matches_played": 72,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "madagascar": {
-      "xg_home": 0.494,
-      "xg_away": 0.383,
-      "xg_overall": 1.177,
-      "xga_overall": 1.646,
-      "matches_played": 79,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "philippines": {
-      "xg_home": 0.683,
-      "xg_away": 0.354,
-      "xg_overall": 1.383,
-      "xga_overall": 1.704,
-      "matches_played": 81,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "mexico": {
-      "xg_home": 0.747,
-      "xg_away": 0.514,
-      "xg_overall": 1.63,
-      "xga_overall": 1.148,
-      "matches_played": 81,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "south-korea": {
-      "xg_home": 0.587,
-      "xg_away": 0.469,
-      "xg_overall": 1.493,
-      "xga_overall": 1.387,
-      "matches_played": 75,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "pakistan": {
-      "xg_home": 0.407,
-      "xg_away": 0.352,
-      "xg_overall": 1.123,
-      "xga_overall": 1.397,
-      "matches_played": 73,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "cape-verde": {
-      "xg_home": 0.566,
-      "xg_away": 0.477,
-      "xg_overall": 1.4,
-      "xga_overall": 1.714,
-      "matches_played": 70,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "cuba": {
-      "xg_home": 0.623,
-      "xg_away": 0.356,
-      "xg_overall": 1.403,
-      "xga_overall": 1.486,
-      "matches_played": 72,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "mongolia": {
-      "xg_home": 0.554,
-      "xg_away": 0.307,
-      "xg_overall": 1.222,
-      "xga_overall": 1.617,
-      "matches_played": 81,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "rwanda": {
-      "xg_home": 0.478,
-      "xg_away": 0.478,
-      "xg_overall": 1.195,
-      "xga_overall": 1.532,
-      "matches_played": 77,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "portugal": {
-      "xg_home": 0.725,
-      "xg_away": 0.626,
-      "xg_overall": 1.709,
-      "xga_overall": 1.19,
-      "matches_played": 79,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "poland": {
-      "xg_home": 0.7,
-      "xg_away": 0.43,
-      "xg_overall": 1.479,
-      "xga_overall": 1.169,
-      "matches_played": 71,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "jamaica": {
-      "xg_home": 0.703,
-      "xg_away": 0.463,
-      "xg_overall": 1.419,
-      "xga_overall": 1.468,
-      "matches_played": 62,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "jordan": {
-      "xg_home": 0.612,
-      "xg_away": 0.503,
-      "xg_overall": 1.522,
-      "xga_overall": 1.761,
-      "matches_played": 67,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "kazakhstan": {
-      "xg_home": 0.664,
-      "xg_away": 0.347,
-      "xg_overall": 1.458,
-      "xga_overall": 1.578,
-      "matches_played": 83,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "zambia": {
-      "xg_home": 0.558,
-      "xg_away": 0.52,
-      "xg_overall": 1.371,
-      "xga_overall": 1.557,
-      "matches_played": 70,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "turkey": {
-      "xg_home": 0.657,
-      "xg_away": 0.658,
-      "xg_overall": 1.719,
-      "xga_overall": 1.458,
-      "matches_played": 96,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "chile": {
-      "xg_home": 0.58,
-      "xg_away": 0.463,
-      "xg_overall": 1.377,
-      "xga_overall": 1.247,
-      "matches_played": 77,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "vietnam": {
-      "xg_home": 0.589,
-      "xg_away": 0.37,
-      "xg_overall": 1.315,
-      "xga_overall": 1.507,
-      "matches_played": 73,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "peru": {
-      "xg_home": 0.625,
-      "xg_away": 0.533,
-      "xg_overall": 1.543,
-      "xga_overall": 1.383,
-      "matches_played": 81,
-      "source": "Historical results weighted by opponent quality"
-    },
-    "india": {
-      "xg_home": 0.519,
-      "xg_away": 0.388,
-      "xg_overall": 1.346,
-      "xga_overall": 1.41,
+    "united-states-virgin-islands": {
+      "xg_home": 0.328,
+      "xg_away": 0.197,
+      "xg_overall": 0.692,
+      "xga_overall": 3.782,
       "matches_played": 78,
       "source": "Historical results weighted by opponent quality"
     },
-    "sweden": {
-      "xg_home": 0.771,
-      "xg_away": 0.597,
-      "xg_overall": 1.789,
-      "xga_overall": 1.237,
-      "matches_played": 76,
+    "northern-mariana-islands": {
+      "xg_home": 0.381,
+      "xg_away": 0.127,
+      "xg_overall": 0.9,
+      "xga_overall": 4.3,
+      "matches_played": 30,
       "source": "Historical results weighted by opponent quality"
     },
-    "el-salvador": {
-      "xg_home": 0.543,
-      "xg_away": 0.407,
-      "xg_overall": 1.325,
-      "xga_overall": 1.364,
-      "matches_played": 77,
+    "turks-and-caicos-islands": {
+      "xg_home": 0.36,
+      "xg_away": 0.266,
+      "xg_overall": 1.0,
+      "xga_overall": 3.596,
+      "matches_played": 52,
       "source": "Historical results weighted by opponent quality"
     },
-    "guyana": {
-      "xg_home": 0.612,
-      "xg_away": 0.408,
-      "xg_overall": 1.507,
-      "xga_overall": 1.841,
-      "matches_played": 69,
+    "micronesia": {
+      "xg_home": 0.955,
+      "xg_away": 0.055,
+      "xg_overall": 1.143,
+      "xga_overall": 8.429,
+      "matches_played": 7,
       "source": "Historical results weighted by opponent quality"
     },
-    "dominican-republic": {
-      "xg_home": 0.657,
-      "xg_away": 0.532,
-      "xg_overall": 1.507,
-      "xga_overall": 1.612,
-      "matches_played": 67,
+    "gotland": {
+      "xg_home": 0.914,
+      "xg_away": 0.382,
+      "xg_overall": 2.7,
+      "xga_overall": 1.9,
+      "matches_played": 30,
       "source": "Historical results weighted by opponent quality"
     },
-    "tunisia": {
-      "xg_home": 0.677,
-      "xg_away": 0.426,
-      "xg_overall": 1.573,
-      "xga_overall": 1.415,
-      "matches_played": 82,
+    "saare-county": {
+      "xg_home": 0.4,
+      "xg_away": 0.259,
+      "xg_overall": 1.171,
+      "xga_overall": 2.543,
+      "matches_played": 35,
       "source": "Historical results weighted by opponent quality"
     },
-    "trinidad-and-tobago": {
-      "xg_home": 0.706,
-      "xg_away": 0.449,
-      "xg_overall": 1.57,
-      "xga_overall": 1.477,
+    "rhodes": {
+      "xg_home": 0.521,
+      "xg_away": 0.312,
+      "xg_overall": 1.611,
+      "xga_overall": 1.056,
+      "matches_played": 18,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "monaco": {
+      "xg_home": 0.788,
+      "xg_away": 0.274,
+      "xg_overall": 1.708,
+      "xga_overall": 3.667,
+      "matches_played": 24,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "western-sahara": {
+      "xg_home": 0.584,
+      "xg_away": 0.136,
+      "xg_overall": 1.778,
+      "xga_overall": 4.222,
+      "matches_played": 9,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tibet": {
+      "xg_home": 0.525,
+      "xg_away": 0.418,
+      "xg_overall": 1.429,
+      "xga_overall": 5.762,
+      "matches_played": 21,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "orkney": {
+      "xg_home": 0.587,
+      "xg_away": 0.3,
+      "xg_overall": 1.357,
+      "xga_overall": 3.0,
+      "matches_played": 28,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "falkland-islands": {
+      "xg_home": 0.336,
+      "xg_away": 0.205,
+      "xg_overall": 0.939,
+      "xga_overall": 3.667,
+      "matches_played": 33,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mayotte": {
+      "xg_home": 0.568,
+      "xg_away": 0.283,
+      "xg_overall": 1.342,
+      "xga_overall": 1.474,
+      "matches_played": 38,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "vatican-city": {
+      "xg_home": 0.182,
+      "xg_away": 0.219,
+      "xg_overall": 0.75,
+      "xga_overall": 2.625,
+      "matches_played": 8,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "timor-leste": {
+      "xg_home": 0.32,
+      "xg_away": 0.225,
+      "xg_overall": 0.826,
+      "xga_overall": 3.302,
       "matches_played": 86,
       "source": "Historical results weighted by opponent quality"
     },
-    "greece": {
-      "xg_home": 0.739,
-      "xg_away": 0.511,
-      "xg_overall": 1.747,
-      "xga_overall": 1.747,
-      "matches_played": 87,
+    "sark": {
+      "xg_home": null,
+      "xg_away": null,
+      "xg_overall": null,
+      "xga_overall": 17.5,
+      "matches_played": 4,
       "source": "Historical results weighted by opponent quality"
     },
-    "south-africa": {
-      "xg_home": 0.547,
+    "sealand": {
+      "xg_home": 0.506,
+      "xg_away": 0.764,
+      "xg_overall": 2.25,
+      "xga_overall": 2.5,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "occitania": {
+      "xg_home": 0.914,
+      "xg_away": 0.755,
+      "xg_overall": 3.121,
+      "xga_overall": 1.152,
+      "matches_played": 33,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "chechnya": {
+      "xg_home": 0.545,
+      "xg_away": 0.136,
+      "xg_overall": 1.0,
+      "xga_overall": 9.667,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ambazonia": {
+      "xg_home": null,
+      "xg_away": 0.136,
+      "xg_overall": 0.5,
+      "xga_overall": 2.833,
+      "matches_played": 6,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "western-isles": {
+      "xg_home": 0.608,
+      "xg_away": 0.332,
+      "xg_overall": 1.5,
+      "xga_overall": 2.265,
+      "matches_played": 34,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kosovo": {
+      "xg_home": 0.578,
+      "xg_away": 0.501,
+      "xg_overall": 1.462,
+      "xga_overall": 1.337,
+      "matches_played": 104,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "republic-of-st-pauli": {
+      "xg_home": 0.682,
+      "xg_away": null,
+      "xg_overall": 2.5,
+      "xga_overall": 1.25,
+      "matches_played": 4,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "găgăuzia": {
+      "xg_home": 0.182,
+      "xg_away": null,
+      "xg_overall": 0.667,
+      "xga_overall": 3.0,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "crimea": {
+      "xg_home": null,
+      "xg_away": 0.382,
+      "xg_overall": 1.4,
+      "xga_overall": 2.2,
+      "matches_played": 5,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sápmi": {
+      "xg_home": 1.033,
+      "xg_away": 0.491,
+      "xg_overall": 3.103,
+      "xga_overall": 1.862,
+      "matches_played": 29,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "romani-people": {
+      "xg_home": 0.364,
+      "xg_away": 0.614,
+      "xg_overall": 1.857,
+      "xga_overall": 3.714,
+      "matches_played": 7,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "menorca": {
+      "xg_home": 0.776,
+      "xg_away": 0.432,
+      "xg_overall": 2.24,
+      "xga_overall": 1.28,
+      "matches_played": 25,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "iraqi-kurdistan": {
+      "xg_home": 0.545,
+      "xg_away": 0.682,
+      "xg_overall": 2.259,
+      "xga_overall": 1.0,
+      "matches_played": 27,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "padania": {
+      "xg_home": 0.63,
+      "xg_away": 0.92,
+      "xg_overall": 2.689,
+      "xga_overall": 0.8,
+      "matches_played": 45,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "arameans-suryoye": {
+      "xg_home": 0.545,
       "xg_away": 0.39,
-      "xg_overall": 1.29,
-      "xga_overall": 1.613,
-      "matches_played": 62,
+      "xg_overall": 1.6,
+      "xga_overall": 1.2,
+      "matches_played": 10,
       "source": "Historical results weighted by opponent quality"
     },
-    "australia": {
-      "xg_home": 0.631,
-      "xg_away": 0.437,
-      "xg_overall": 1.48,
-      "xga_overall": 1.373,
-      "matches_played": 75,
+    "gozo": {
+      "xg_home": 1.151,
+      "xg_away": 0.195,
+      "xg_overall": 2.214,
+      "xga_overall": 2.0,
+      "matches_played": 14,
       "source": "Historical results weighted by opponent quality"
     },
-    "bahrain": {
-      "xg_home": 0.543,
-      "xg_away": 0.366,
-      "xg_overall": 1.182,
-      "xga_overall": 1.591,
-      "matches_played": 66,
+    "two-sicilies": {
+      "xg_home": null,
+      "xg_away": 0.136,
+      "xg_overall": 0.5,
+      "xga_overall": 3.0,
+      "matches_played": 6,
       "source": "Historical results weighted by opponent quality"
     },
-    "uae": {
-      "xg_home": 0.588,
-      "xg_away": 0.377,
-      "xg_overall": 1.342,
-      "xga_overall": 1.507,
-      "matches_played": 73,
+    "saint-barthélemy": {
+      "xg_home": 0.857,
+      "xg_away": 0.273,
+      "xg_overall": 2.5,
+      "xga_overall": 3.0,
+      "matches_played": 10,
       "source": "Historical results weighted by opponent quality"
     },
-    "new-zealand": {
-      "xg_home": 0.66,
-      "xg_away": 0.41,
-      "xg_overall": 1.439,
-      "xga_overall": 1.585,
-      "matches_played": 82,
+    "saint-pierre-and-miquelon": {
+      "xg_home": 0.273,
+      "xg_away": 0.045,
+      "xg_overall": 0.286,
+      "xga_overall": 11.143,
+      "matches_played": 7,
       "source": "Historical results weighted by opponent quality"
     },
-    "angola": {
-      "xg_home": 0.563,
-      "xg_away": 0.441,
-      "xg_overall": 1.394,
-      "xga_overall": 1.352,
-      "matches_played": 71,
+    "bonaire": {
+      "xg_home": 0.435,
+      "xg_away": 0.507,
+      "xg_overall": 1.432,
+      "xga_overall": 2.477,
+      "matches_played": 44,
       "source": "Historical results weighted by opponent quality"
     },
-    "wales": {
-      "xg_home": 0.639,
-      "xg_away": 0.458,
-      "xg_overall": 1.386,
-      "xga_overall": 1.636,
-      "matches_played": 88,
+    "chagos-islands": {
+      "xg_home": 0.545,
+      "xg_away": 0.436,
+      "xg_overall": 1.75,
+      "xga_overall": 4.75,
+      "matches_played": 16,
       "source": "Historical results weighted by opponent quality"
     },
-    "switzerland": {
-      "xg_home": 0.574,
-      "xg_away": 0.576,
-      "xg_overall": 1.562,
-      "xga_overall": 1.236,
-      "matches_played": 89,
+    "raetia": {
+      "xg_home": 0.6,
+      "xg_away": 0.358,
+      "xg_overall": 1.654,
+      "xga_overall": 3.962,
+      "matches_played": 26,
       "source": "Historical results weighted by opponent quality"
     },
-    "iceland": {
-      "xg_home": 0.59,
-      "xg_away": 0.366,
-      "xg_overall": 1.226,
-      "xga_overall": 1.476,
-      "matches_played": 84,
+    "cilento": {
+      "xg_home": null,
+      "xg_away": null,
+      "xg_overall": null,
+      "xga_overall": 2.0,
+      "matches_played": 1,
       "source": "Historical results weighted by opponent quality"
     },
-    "cameroon": {
-      "xg_home": 0.645,
-      "xg_away": 0.41,
-      "xg_overall": 1.357,
-      "xga_overall": 1.529,
-      "matches_played": 70,
+    "kurdistan": {
+      "xg_home": 0.843,
+      "xg_away": 0.62,
+      "xg_overall": 2.4,
+      "xga_overall": 0.4,
+      "matches_played": 5,
       "source": "Historical results weighted by opponent quality"
     },
-    "morocco": {
-      "xg_home": 0.715,
-      "xg_away": 0.606,
-      "xg_overall": 1.778,
-      "xga_overall": 1.247,
-      "matches_played": 81,
+    "darfur": {
+      "xg_home": null,
+      "xg_away": 0.091,
+      "xg_overall": 0.143,
+      "xga_overall": 14.143,
+      "matches_played": 7,
       "source": "Historical results weighted by opponent quality"
     },
-    "usa": {
-      "xg_home": 0.647,
-      "xg_away": 0.478,
-      "xg_overall": 1.514,
-      "xga_overall": 1.514,
-      "matches_played": 70,
+    "tamil-eelam": {
+      "xg_home": 0.991,
+      "xg_away": 0.629,
+      "xg_overall": 2.571,
+      "xga_overall": 2.179,
+      "matches_played": 28,
       "source": "Historical results weighted by opponent quality"
     },
-    "afghanistan": {
-      "xg_home": 0.541,
-      "xg_away": 0.319,
-      "xg_overall": 1.189,
-      "xga_overall": 1.689,
-      "matches_played": 74,
+    "south-sudan": {
+      "xg_home": 0.292,
+      "xg_away": 0.117,
+      "xg_overall": 0.641,
+      "xga_overall": 1.821,
+      "matches_played": 78,
       "source": "Historical results weighted by opponent quality"
     },
-    "myanmar": {
-      "xg_home": 0.678,
-      "xg_away": 0.304,
-      "xg_overall": 1.227,
-      "xga_overall": 1.84,
-      "matches_played": 75,
+    "abkhazia": {
+      "xg_home": 0.498,
+      "xg_away": 0.327,
+      "xg_overall": 1.636,
+      "xga_overall": 0.788,
+      "matches_played": 33,
       "source": "Historical results weighted by opponent quality"
     },
-    "lebanon": {
-      "xg_home": 0.599,
-      "xg_away": 0.439,
-      "xg_overall": 1.319,
-      "xga_overall": 1.565,
-      "matches_played": 69,
+    "artsakh": {
+      "xg_home": 0.468,
+      "xg_away": 1.364,
+      "xg_overall": 2.909,
+      "xga_overall": 1.273,
+      "matches_played": 11,
       "source": "Historical results weighted by opponent quality"
     },
-    "nicaragua": {
-      "xg_home": 0.492,
-      "xg_away": 0.371,
-      "xg_overall": 1.181,
-      "xga_overall": 1.694,
-      "matches_played": 72,
+    "madrid": {
+      "xg_home": 0.273,
+      "xg_away": null,
+      "xg_overall": 1.0,
+      "xga_overall": 2.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "quebec": {
+      "xg_home": 2.864,
+      "xg_away": 0.818,
+      "xg_overall": 8.0,
+      "xga_overall": 0.667,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saugeais": {
+      "xg_home": 0.273,
+      "xg_away": null,
+      "xg_overall": 1.0,
+      "xga_overall": 1.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "south-ossetia": {
+      "xg_home": 0.307,
+      "xg_away": 0.788,
+      "xg_overall": 2.059,
+      "xga_overall": 2.176,
+      "matches_played": 17,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ellan-vannin": {
+      "xg_home": 0.932,
+      "xg_away": 0.355,
+      "xg_overall": 2.455,
+      "xga_overall": 1.455,
+      "matches_played": 22,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "somaliland": {
+      "xg_home": 0.818,
+      "xg_away": 0.455,
+      "xg_overall": 2.333,
+      "xga_overall": 3.333,
+      "matches_played": 6,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "franconia": {
+      "xg_home": 1.091,
+      "xg_away": 0.545,
+      "xg_overall": 2.667,
+      "xga_overall": 3.667,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "county-of-nice": {
+      "xg_home": 0.477,
+      "xg_away": 0.655,
+      "xg_overall": 2.111,
+      "xga_overall": 1.444,
+      "matches_played": 9,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "seborga": {
+      "xg_home": 0.545,
+      "xg_away": null,
+      "xg_overall": 2.0,
+      "xga_overall": 3.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "székely-land": {
+      "xg_home": 0.864,
+      "xg_away": 0.327,
+      "xg_overall": 2.074,
+      "xga_overall": 2.074,
+      "matches_played": 27,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "luhansk-pr": {
+      "xg_home": 0.955,
+      "xg_away": 0.136,
+      "xg_overall": 1.5,
+      "xga_overall": 2.0,
+      "matches_played": 6,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "donetsk-pr": {
+      "xg_home": 0.682,
+      "xg_away": 0.205,
+      "xg_overall": 1.333,
+      "xga_overall": 1.167,
+      "matches_played": 6,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "felvidék": {
+      "xg_home": 0.273,
+      "xg_away": 0.333,
+      "xg_overall": 1.167,
+      "xga_overall": 1.667,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "panjab": {
+      "xg_home": 0.974,
+      "xg_away": 0.659,
+      "xg_overall": 2.842,
+      "xga_overall": 1.579,
+      "matches_played": 19,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "western-armenia": {
+      "xg_home": 0.382,
+      "xg_away": 0.669,
+      "xg_overall": 2.125,
+      "xga_overall": 1.25,
+      "matches_played": 16,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "united-koreans-in-japan": {
+      "xg_home": 0.307,
+      "xg_away": 0.75,
+      "xg_overall": 1.667,
+      "xga_overall": 0.917,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kárpátalja": {
+      "xg_home": 0.927,
+      "xg_away": 0.364,
+      "xg_overall": 2.273,
+      "xga_overall": 1.182,
+      "matches_played": 11,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "délvidék": {
+      "xg_home": 0.545,
+      "xg_away": null,
+      "xg_overall": 2.0,
+      "xga_overall": 1.5,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "barawa": {
+      "xg_home": 0.397,
+      "xg_away": null,
+      "xg_overall": 1.333,
+      "xga_overall": 3.833,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ryūkyū": {
+      "xg_home": null,
+      "xg_away": null,
+      "xg_overall": null,
+      "xga_overall": 9.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "yorkshire": {
+      "xg_home": 1.036,
+      "xg_away": 1.091,
+      "xg_overall": 3.857,
+      "xga_overall": 1.571,
+      "matches_played": 7,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "surrey": {
+      "xg_home": null,
+      "xg_away": 0.818,
+      "xg_overall": 3.0,
+      "xga_overall": 1.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cascadia": {
+      "xg_home": 1.364,
+      "xg_away": 0.709,
+      "xg_overall": 3.286,
+      "xga_overall": 2.0,
+      "matches_played": 7,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "matabeleland": {
+      "xg_home": 0.136,
+      "xg_away": 0.273,
+      "xg_overall": 0.875,
+      "xga_overall": 1.75,
+      "matches_played": 8,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kabylia": {
+      "xg_home": null,
+      "xg_away": 0.436,
+      "xg_overall": 1.333,
+      "xga_overall": 2.5,
+      "matches_played": 6,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "parishes-of-jersey": {
+      "xg_home": 1.5,
+      "xg_away": null,
+      "xg_overall": 3.667,
+      "xga_overall": 1.333,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "chameria": {
+      "xg_home": 0.955,
+      "xg_away": 0.382,
+      "xg_overall": 2.0,
+      "xga_overall": 1.143,
+      "matches_played": 7,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saint-helena": {
+      "xg_home": 0.136,
+      "xg_away": 0.227,
+      "xg_overall": 0.75,
+      "xga_overall": 5.125,
+      "matches_played": 8,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "west-papua": {
+      "xg_home": 0.409,
+      "xg_away": null,
+      "xg_overall": 1.5,
+      "xga_overall": 4.5,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "east-turkestan": {
+      "xg_home": null,
+      "xg_away": 1.253,
+      "xg_overall": 3.0,
+      "xga_overall": 3.2,
+      "matches_played": 5,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "elba-island": {
+      "xg_home": 1.227,
+      "xg_away": null,
+      "xg_overall": 4.5,
+      "xga_overall": 1.0,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "yoruba-nation": {
+      "xg_home": 0.136,
+      "xg_away": null,
+      "xg_overall": 0.5,
+      "xga_overall": 1.0,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "biafra": {
+      "xg_home": 0.136,
+      "xg_away": 0.273,
+      "xg_overall": 0.667,
+      "xga_overall": 0.333,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mapuche": {
+      "xg_home": 0.409,
+      "xg_away": null,
+      "xg_overall": 1.5,
+      "xga_overall": 1.0,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "maule-sur": {
+      "xg_home": null,
+      "xg_away": 0.273,
+      "xg_overall": 1.0,
+      "xga_overall": null,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "aymara": {
+      "xg_home": null,
+      "xg_away": 0.273,
+      "xg_overall": 0.5,
+      "xga_overall": 2.0,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ticino": {
+      "xg_home": 0.273,
+      "xg_away": 0.273,
+      "xg_overall": 1.0,
+      "xga_overall": 6.5,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "hmong": {
+      "xg_home": 1.364,
+      "xg_away": 0.136,
+      "xg_overall": 2.0,
+      "xga_overall": 3.333,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "marshall-islands": {
+      "xg_home": null,
+      "xg_away": 1.234,
+      "xg_overall": 1.0,
+      "xga_overall": 3.5,
+      "matches_played": 2,
       "source": "Historical results weighted by opponent quality"
     }
   }

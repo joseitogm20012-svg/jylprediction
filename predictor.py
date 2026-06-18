@@ -392,6 +392,85 @@ def get_h2h_stats(team_a, team_b, matches):
         "matches": matches_list
     }
 
+def estimate_rho_from_data(matches, ratings, sample_size=2000):
+    """
+    Mejora 3: Estima el parámetro rho de Dixon-Coles desde los datos históricos.
+    
+    El parámetro rho captura la correlación entre goles de ambos equipos:
+    - rho < 0: Los equipos tienden a no marcar simultáneamente (correlación negativa)
+    - rho > 0: Los equipos tienden a marcar juntos (partidos abiertos)
+    
+    Para fútbol internacional, típicamente rho ≈ -0.13
+    """
+    if len(matches) < 100:
+        return DC_RHO  # Valor por defecto si no hay suficientes datos
+    
+    # Muestrear partidos recientes (sin recalcular history)
+    recent_matches = [m for m in matches if m.get('ts', 0) > 0]
+    recent_matches.sort(key=lambda x: x['ts'], reverse=True)
+    
+    sample = recent_matches[:min(sample_size, len(recent_matches))]
+    
+    # Calcular frecuencias observadas de resultados
+    obs_00 = sum(1 for m in sample if m['hg'] == 0 and m['ag'] == 0)
+    obs_01 = sum(1 for m in sample if m['hg'] == 0 and m['ag'] == 1)
+    obs_10 = sum(1 for m in sample if m['hg'] == 1 and m['ag'] == 0)
+    obs_11 = sum(1 for m in sample if m['hg'] == 1 and m['ag'] == 1)
+    
+    n = len(sample)
+    if n == 0 or obs_00 == 0:
+        return DC_RHO
+    
+    # Frecuencias observadas
+    p_00 = obs_00 / n
+    p_01 = obs_01 / n
+    p_10 = obs_10 / n
+    p_11 = obs_11 / n
+    
+    # Calcular lambdas promedio usando solo goles directos (más rápido)
+    total_hg = sum(m['hg'] for m in sample)
+    total_ag = sum(m['ag'] for m in sample)
+    avg_lambda_h = total_hg / n if n > 0 else 1.4
+    avg_lambda_a = total_ag / n if n > 0 else 1.4
+    
+    # Probabilidades Poisson esperadas sin corrección
+    pois_00 = math.exp(-avg_lambda_h) * math.exp(-avg_lambda_a)
+    pois_01 = math.exp(-avg_lambda_h) * (avg_lambda_a ** 1 * math.exp(-avg_lambda_a))
+    pois_10 = (avg_lambda_h ** 1 * math.exp(-avg_lambda_h)) * math.exp(-avg_lambda_a)
+    pois_11 = (avg_lambda_h ** 1 * math.exp(-avg_lambda_h)) * (avg_lambda_a ** 1 * math.exp(-avg_lambda_a))
+    
+    # Estimar rho usando método de momentos
+    rho_estimates = []
+    
+    if pois_00 > 0 and avg_lambda_h * avg_lambda_a > 0:
+        rho_00 = (1 - p_00 / pois_00) / (avg_lambda_h * avg_lambda_a)
+        rho_estimates.append(rho_00)
+    
+    if pois_01 > 0 and avg_lambda_h > 0:
+        rho_01 = (p_01 / pois_01 - 1) / avg_lambda_h
+        rho_estimates.append(rho_01)
+    
+    if pois_10 > 0 and avg_lambda_a > 0:
+        rho_10 = (p_10 / pois_10 - 1) / avg_lambda_a
+        rho_estimates.append(rho_10)
+    
+    if pois_11 > 0:
+        rho_11 = (1 - p_11 / pois_11)
+        rho_estimates.append(rho_11)
+    
+    if not rho_estimates:
+        return DC_RHO
+    
+    # Promediar estimaciones y aplicar clamp al rango válido [-0.5, 0.5]
+    rho_hat = sum(rho_estimates) / len(rho_estimates)
+    rho_hat = max(-0.5, min(0.5, rho_hat))
+    
+    # Suavizar hacia el valor teórico (-0.13)
+    rho_final = 0.7 * rho_hat + 0.3 * DC_RHO
+    
+    return round(rho_final, 4)
+
+
 def calculate_xg(team_a, team_b, rank_a, rank_b, fifa_weight, h2h_weight, half_life_months, matches, ratings):
     # Cargar datos de xG histórico real
     xg_data = load_xg_data()
