@@ -422,6 +422,28 @@ function bindListeners() {
       scoreHeatmapContainer.classList.remove("hidden");
     });
   }
+
+  // Theme Toggle (Light / Dark mode)
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+      try {
+        console.log("Theme toggle button clicked.");
+        document.body.classList.toggle("light-theme");
+        
+        const isLight = document.body.classList.contains("light-theme");
+        console.log("Toggled light-theme class. Active:", isLight);
+        
+        // Save setting
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+        
+        // Update Chart colors reactively
+        refreshChartColors();
+      } catch (err) {
+        console.error("Error in theme toggle click handler:", err);
+      }
+    });
+  }
 }
 
 function updateMatchCard(fullReload = true) {
@@ -693,9 +715,88 @@ function updateSideBySideBar(metricValA, metricValB, idValA, idBarA, idValB, idB
   }
 }
 
+function refreshChartColors() {
+  const isLight = document.body.classList.contains("light-theme");
+  const textColor = isLight ? "#1f2937" : "#ffffff";
+  const mutedColor = isLight ? "#4b5563" : "#9ca3af";
+  const gridColor = isLight ? "rgba(0, 0, 0, 0.06)" : "rgba(255, 255, 255, 0.05)";
+  const gridColorRadar = isLight ? "rgba(0, 0, 0, 0.06)" : "rgba(255, 255, 255, 0.08)";
+  const tickColorRadar = isLight ? "#4b5563" : "#6b7280";
+
+  try {
+    if (goalsChart && goalsChart.options) {
+      if (!goalsChart.options.plugins) goalsChart.options.plugins = {};
+      if (!goalsChart.options.plugins.legend) goalsChart.options.plugins.legend = {};
+      if (!goalsChart.options.plugins.legend.labels) goalsChart.options.plugins.legend.labels = {};
+      goalsChart.options.plugins.legend.labels.color = textColor;
+      
+      if (goalsChart.options.scales) {
+        if (goalsChart.options.scales.x) {
+          if (!goalsChart.options.scales.x.grid) goalsChart.options.scales.x.grid = {};
+          if (!goalsChart.options.scales.x.ticks) goalsChart.options.scales.x.ticks = {};
+          goalsChart.options.scales.x.grid.color = gridColor;
+          goalsChart.options.scales.x.ticks.color = mutedColor;
+        }
+        if (goalsChart.options.scales.y) {
+          if (!goalsChart.options.scales.y.grid) goalsChart.options.scales.y.grid = {};
+          if (!goalsChart.options.scales.y.ticks) goalsChart.options.scales.y.ticks = {};
+          goalsChart.options.scales.y.grid.color = gridColor;
+          goalsChart.options.scales.y.ticks.color = mutedColor;
+        }
+      }
+      goalsChart.update();
+    }
+  } catch (e) {
+    console.error("Error updating goalsChart colors:", e);
+  }
+
+  try {
+    if (outcomeChart && outcomeChart.options) {
+      if (!outcomeChart.options.plugins) outcomeChart.options.plugins = {};
+      if (!outcomeChart.options.plugins.legend) outcomeChart.options.plugins.legend = {};
+      if (!outcomeChart.options.plugins.legend.labels) outcomeChart.options.plugins.legend.labels = {};
+      outcomeChart.options.plugins.legend.labels.color = textColor;
+      outcomeChart.update();
+    }
+  } catch (e) {
+    console.error("Error updating outcomeChart colors:", e);
+  }
+
+  try {
+    if (radarChart && radarChart.options) {
+      if (!radarChart.options.plugins) radarChart.options.plugins = {};
+      if (!radarChart.options.plugins.legend) radarChart.options.plugins.legend = {};
+      if (!radarChart.options.plugins.legend.labels) radarChart.options.plugins.legend.labels = {};
+      radarChart.options.plugins.legend.labels.color = textColor;
+
+      if (radarChart.options.scales && radarChart.options.scales.r) {
+        const r = radarChart.options.scales.r;
+        if (!r.angleLines) r.angleLines = {};
+        if (!r.grid) r.grid = {};
+        if (!r.pointLabels) r.pointLabels = {};
+        if (!r.ticks) r.ticks = {};
+        r.angleLines.color = gridColorRadar;
+        r.grid.color = gridColorRadar;
+        r.pointLabels.color = mutedColor;
+        r.ticks.color = tickColorRadar;
+      }
+      radarChart.update();
+    }
+  } catch (e) {
+    console.error("Error updating radarChart colors:", e);
+  }
+}
+
 function updateCharts(nameAVal, nameBVal, xgAVal, xgBVal, winA, draw, winB, fullData = null) {
   const distA = getPoissonDistribution(xgAVal);
   const distB = getPoissonDistribution(xgBVal);
+
+  const isLight = document.body.classList.contains("light-theme");
+  const textColor = isLight ? "#1f2937" : "#ffffff";
+  const mutedColor = isLight ? "#4b5563" : "#9ca3af";
+  const gridColor = isLight ? "rgba(0, 0, 0, 0.06)" : "rgba(255, 255, 255, 0.05)";
+  const gridColorRadar = isLight ? "rgba(0, 0, 0, 0.06)" : "rgba(255, 255, 255, 0.08)";
+  const tickColorRadar = isLight ? "#4b5563" : "#6b7280";
 
   if (goalsChart) {
     goalsChart.data.datasets[0].label = nameAVal;
@@ -735,7 +836,7 @@ function updateCharts(nameAVal, nameBVal, xgAVal, xgBVal, winA, draw, winB, full
           plugins: {
             legend: {
               labels: {
-                color: '#fff',
+                color: textColor,
                 boxWidth: 12,
                 padding: 10,
                 font: { family: 'Inter', size: 10 }
@@ -756,13 +857,13 @@ function updateCharts(nameAVal, nameBVal, xgAVal, xgBVal, winA, draw, winB, full
           },
           scales: {
             x: {
-              grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: { color: '#9ca3af', font: { family: 'Inter', size: 10 } }
+              grid: { color: gridColor },
+              ticks: { color: mutedColor, font: { family: 'Inter', size: 10 } }
             },
             y: {
-              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              grid: { color: gridColor },
               ticks: {
-                color: '#9ca3af',
+                color: mutedColor,
                 font: { family: 'Inter', size: 10 },
                 callback: function(value) { return (value * 100).toFixed(0) + '%'; }
               }
@@ -808,7 +909,7 @@ function updateCharts(nameAVal, nameBVal, xgAVal, xgBVal, winA, draw, winB, full
             legend: {
               position: 'bottom',
               labels: {
-                color: '#fff',
+                color: textColor,
                 boxWidth: 12,
                 padding: 8,
                 font: { family: 'Inter', size: 10 }
@@ -922,7 +1023,7 @@ function updateCharts(nameAVal, nameBVal, xgAVal, xgBVal, winA, draw, winB, full
             plugins: {
               legend: {
                 labels: {
-                  color: '#fff',
+                  color: textColor,
                   font: { family: 'Inter', size: 10 }
                 }
               },
@@ -942,17 +1043,17 @@ function updateCharts(nameAVal, nameBVal, xgAVal, xgBVal, winA, draw, winB, full
             scales: {
               r: {
                 angleLines: {
-                  color: 'rgba(255, 255, 255, 0.08)'
+                  color: gridColorRadar
                 },
                 grid: {
-                  color: 'rgba(255, 255, 255, 0.08)'
+                  color: gridColorRadar
                 },
                 pointLabels: {
-                  color: '#9ca3af',
+                  color: mutedColor,
                   font: { family: 'Outfit', size: 9, weight: '600' }
                 },
                 ticks: {
-                  color: '#6b7280',
+                  color: tickColorRadar,
                   backdropColor: 'transparent',
                   font: { size: 8 },
                   stepSize: 20

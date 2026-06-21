@@ -220,6 +220,8 @@ body.light-theme .app-header {
   transition: var(--transition-fast);
   outline: none;
   padding: 0;
+  position: relative;
+  z-index: 10;
 }
 
 .theme-toggle-btn:hover {
@@ -245,6 +247,7 @@ body.light-theme .theme-toggle-btn:hover {
   width: 18px;
   height: 18px;
   stroke-width: 2.2px;
+  pointer-events: none;
 }
 
 /* Toggle icon visibility */
