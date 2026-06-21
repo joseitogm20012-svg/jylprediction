@@ -1238,38 +1238,11 @@ async function runPredictionFlow() {
         if (inA) inA.dataset.prob = ahData.teamA;
         if (inB) inB.dataset.prob = ahData.teamB;
 
-        const value = line.replace("-", "").replace("+", "");
-        let labelA = "";
-        let labelB = "";
-        if (line === "-1.5") {
-          labelA = `-1.5`;
-          labelB = `+1.5`;
-        } else if (line === "-0.5") {
-          labelA = `-0.5`;
-          labelB = `+0.5`;
-        } else if (line === "+0.5") {
-          labelA = `+0.5`;
-          labelB = `-0.5`;
-        } else if (line === "+1.5") {
-          labelA = `+1.5`;
-          labelB = `-1.5`;
-        }
-
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td><strong>AH ${value}</strong></td>
-          <td style="font-weight: 700;">
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-              <span style="font-family: var(--font-family-mono); background: rgba(59, 130, 246, 0.1); color: var(--color-team-a); padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">${labelA}</span>
-              <span style="color: var(--color-team-a);">${(ahData.teamA * 100).toFixed(1)}% <span id="ev-ah-${tStr}-a" class="ev-mini"></span></span>
-            </div>
-          </td>
-          <td style="font-weight: 700;">
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-              <span style="font-family: var(--font-family-mono); background: rgba(16, 185, 129, 0.1); color: var(--color-team-b); padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">${labelB}</span>
-              <span style="color: var(--color-team-b);">${(ahData.teamB * 100).toFixed(1)}% <span id="ev-ah-${tStr}-b" class="ev-mini"></span></span>
-            </div>
-          </td>
+          <td><strong>AH ${line}</strong></td>
+          <td style="color: var(--color-team-a); font-weight: 700;">${nameAVal}: ${(ahData.teamA * 100).toFixed(1)}% <span id="ev-ah-${tStr}-a" class="ev-mini"></span></td>
+          <td style="color: var(--color-team-b); font-weight: 700;">${nameBVal}: ${(ahData.teamB * 100).toFixed(1)}% <span id="ev-ah-${tStr}-b" class="ev-mini"></span></td>
         `;
         ahTbody.appendChild(tr);
       });
