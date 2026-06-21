@@ -1,0 +1,20 @@
+
+--- Emojis in C:/Users/Equipo/Desktop/predecirv2/app.js ---
+Line 1300: ⚠ (U+26A0) -> let alertMsg = "⚠️ No se detectan apuestas de valor positivo.";
+Line 1309: 🔥 (U+1F525) -> alertMsg = `🔥 VALOR DETECTADO EN: ${valMatches.join(" / ").toUpperCase()}`;
+Line 1368: 🚀 (U+1F680) -> btnSimulate.querySelector(".btn-text").textContent = `🚀 SIMULAR ${numSimsFormatted} PARTIDOS`;
+Line 1404: 🚀 (U+1F680) -> btnRunBacktest.querySelector(".btn-text").textContent = "🚀 EJECUTAR BACKTEST (Tarda ~5s)";
+Line 1446: 🚀 (U+1F680) -> alert("Primero debes realizar una simulación ejecutando el botón 🚀 SIMULAR.");
+Line 1475: ✅ (U+2705) -> alert("✅ Pick guardado exitosamente en el historial.");
+Line 1485: 📥 (U+1F4E5) -> btnLogPick.querySelector(".btn-text").textContent = "📥 GUARDAR PICK";
+Line 1520: 🔄 (U+1F504) -> btnUpdateLogged.querySelector(".btn-text").textContent = "🔄 ACTUALIZAR RESULTADOS";
+Line 1560: 🏳 (U+1F3F3) -> const metaA = TEAM_METADATA[p.teamA] || { name: p.teamA.toUpperCase(), flag: "🏳️" };
+Line 1561: 🏳 (U+1F3F3) -> const metaB = TEAM_METADATA[p.teamB] || { name: p.teamB.toUpperCase(), flag: "🏳️" };
+Line 1571: ✅ (U+2705) -> statusText = `${p.isCorrect ? '✅ Acierto' : '❌ Fallo'} (Pick: ${p.pick === 'A' ? metaA.name.slice(0,6) : p.pick === 'B' ? metaB.name.slice(0,6) : 'Emp.'} / Real: ${p.actualScore})`;
+Line 1588: ✅ (U+2705) -> <button class="btn btn-resolve-win" data-id="${p.id}" style="padding: 4px 10px; font-size: 0.75rem; background: #059669; border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: 600; transition: opacity 0.2s;">✅ GANADO</button>
+Line 1589: ❌ (U+274C) -> <button class="btn btn-resolve-loss" data-id="${p.id}" style="padding: 4px 10px; font-size: 0.75rem; background: #dc2626; border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: 600; transition: opacity 0.2s;">❌ PERDIDO</button>
+Line 1605: 🏔 (U+1F3D4) -> ${p.altitude > 0 ? `<span style="font-size: 0.75rem; color: #a5b4fc;">🏔️ ${p.altitude}m</span>` : ''}
+
+--- Emojis in C:/Users/Equipo/Desktop/predecirv2/index.html ---
+Line 504: 🚩 (U+1F6A9) -> <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Mercados de Córners (🚩)</h3>
+Line 569: 💡 (U+1F4A1) -> <p><strong>💡 Detalle del Hexágono:</strong> Pasa el cursor sobre los vértices para visualizar de qué datos se alimenta y cómo calcula el modelo estadístico cada métrica.</p>
