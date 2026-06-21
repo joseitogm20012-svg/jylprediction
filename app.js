@@ -1220,29 +1220,61 @@ async function runPredictionFlow() {
     });
 
     if (data.goalsMarkets.asianHandicap) {
-      thAhA.textContent = nameAVal;
-      thAhB.textContent = nameBVal;
+      thAhA.textContent = "Sí (%)";
+      thAhB.textContent = "No (%)";
       ahTbody.innerHTML = "";
-      
-      const ahLines = ["-1.5", "-0.5", "+0.5", "+1.5"];
-      ahLines.forEach(line => {
-        const ahData = data.goalsMarkets.asianHandicap[line];
-        const tStr = line.replace('-', 'm').replace('+', 'p').replace('.', '');
-        
-        const idA = `in-ah-${tStr}-a`;
-        const idB = `in-ah-${tStr}-b`;
-        
-        const inA = document.getElementById(idA);
-        const inB = document.getElementById(idB);
-        
-        if (inA) inA.dataset.prob = ahData.teamA;
-        if (inB) inB.dataset.prob = ahData.teamB;
+
+      const ahLinesData = [
+        {
+          label: `${nameAVal} -1.5`,
+          probYes: data.goalsMarkets.asianHandicap["-1.5"].teamA,
+          probNo: data.goalsMarkets.asianHandicap["-1.5"].teamB,
+          tStrYes: "m15-a",
+          tStrNo: "m15-b",
+          idYes: "in-ah-m15-a",
+          idNo: "in-ah-m15-b"
+        },
+        {
+          label: `${nameBVal} -1.5`,
+          probYes: data.goalsMarkets.asianHandicap["+1.5"].teamB,
+          probNo: data.goalsMarkets.asianHandicap["+1.5"].teamA,
+          tStrYes: "p15-b",
+          tStrNo: "p15-a",
+          idYes: "in-ah-p15-b",
+          idNo: "in-ah-p15-a"
+        },
+        {
+          label: `${nameAVal} -0.5`,
+          probYes: data.goalsMarkets.asianHandicap["-0.5"].teamA,
+          probNo: data.goalsMarkets.asianHandicap["-0.5"].teamB,
+          tStrYes: "m05-a",
+          tStrNo: "m05-b",
+          idYes: "in-ah-m05-a",
+          idNo: "in-ah-m05-b"
+        },
+        {
+          label: `${nameBVal} -0.5`,
+          probYes: data.goalsMarkets.asianHandicap["+0.5"].teamB,
+          probNo: data.goalsMarkets.asianHandicap["+0.5"].teamA,
+          tStrYes: "p05-b",
+          tStrNo: "p05-a",
+          idYes: "in-ah-p05-b",
+          idNo: "in-ah-p05-a"
+        }
+      ];
+
+      ahLinesData.forEach(row => {
+        // Update dataset prob on the input elements dynamically
+        const inYes = document.getElementById(row.idYes);
+        const inNo = document.getElementById(row.idNo);
+        if (inYes) inYes.dataset.prob = row.probYes;
+        if (inNo) inNo.dataset.prob = row.probNo;
 
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td><strong>AH ${line}</strong></td>
-          <td style="color: var(--color-team-a); font-weight: 700;">${nameAVal}: ${(ahData.teamA * 100).toFixed(1)}% <span id="ev-ah-${tStr}-a" class="ev-mini"></span></td>
-          <td style="color: var(--color-team-b); font-weight: 700;">${nameBVal}: ${(ahData.teamB * 100).toFixed(1)}% <span id="ev-ah-${tStr}-b" class="ev-mini"></span></td>
+          <td><strong>${row.label}</strong></td>
+          <td style="color: var(--color-team-b); font-weight: 700;">${(row.probYes * 100).toFixed(1)}% <span id="ev-ah-${row.tStrYes}" class="ev-mini"></span></td>
+          <td style="color: rgba(244, 63, 94, 0.8); font-weight: 700;">${(row.probNo * 100).toFixed(1)}% <span id="ev-ah-${row.tStrNo}" class="ev-mini"></span></td>
         `;
         ahTbody.appendChild(tr);
       });
