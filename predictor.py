@@ -620,8 +620,9 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
     
     # Calculate expected goals
     xg_data = load_xg_data()
-    xg_a, xg_b, h2h_mult_a, h2h_mult_b, xg_source_a, xg_source_b = calculate_xg(
-        team_a, team_b, rank_a, rank_b, fifa_weight, h2h_weight, half_life_months, matches, ratings, xg_data
+    raw_data = load_match_raw_data(team_a, team_b, half_life_months, matches, ratings, xg_data)
+    xg_a, xg_b, h2h_mult_a, h2h_mult_b, xg_source_a, xg_source_b = compute_xg_from_raw_data(
+        raw_data, rank_a, rank_b, fifa_weight, h2h_weight
     )
     
     # Altitude adjustments (Fase 5)
@@ -908,6 +909,45 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
         betting_analysis["valuableDraw"] = edge_draw > 0.0
         betting_analysis["valuableB"] = edge_b > 0.0
         
+    # Generate 5x5 score heatmap
+    score_heatmap = []
+    for a in range(5):
+        row = []
+        pa = poisson_pmf(a, xg_a)
+        for b in range(5):
+            tau = dc_tau(a, b, xg_a, xg_b, DC_RHO)
+            p = max(0.0, pa * poisson_pmf(b, xg_b) * tau)
+            if total_prob > 0:
+                p /= total_prob
+            row.append(round(p, 4))
+        score_heatmap.append(row)
+
+    # Generate comparison stats for radar chart
+    comparison_stats = {
+        "teamA": {
+            "xg_overall": float(entry_a.get("xg_overall") or 1.35) if entry_a else 1.35,
+            "xga_overall": float(entry_a.get("xga_overall") or 1.35) if entry_a else 1.35,
+            "form_gs": float(raw_data["gs_a"]),
+            "form_gc": float(raw_data["gc_a"]),
+            "rank": int(rank_a),
+            "elo": float(raw_data["elo_a"]),
+            "match_xg": float(xg_a),
+            "shots_per_90": float(sh_a),
+            "crosses_per_90": float(crs_a)
+        },
+        "teamB": {
+            "xg_overall": float(entry_b.get("xg_overall") or 1.35) if entry_b else 1.35,
+            "xga_overall": float(entry_b.get("xga_overall") or 1.35) if entry_b else 1.35,
+            "form_gs": float(raw_data["gs_b"]),
+            "form_gc": float(raw_data["gc_b"]),
+            "rank": int(rank_b),
+            "elo": float(raw_data["elo_b"]),
+            "match_xg": float(xg_b),
+            "shots_per_90": float(sh_b),
+            "crosses_per_90": float(crs_b)
+        }
+    }
+
     return {
         "xgA": xg_a,
         "xgB": xg_b,
@@ -920,5 +960,7 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
         "goalsMarkets": goals_markets,
         "cornersPrediction": corners_prediction,
         "bettingAnalysis": betting_analysis,
-        "dcRho": DC_RHO
+        "dcRho": DC_RHO,
+        "scoreHeatmap": score_heatmap,
+        "comparisonStats": comparison_stats
     }

@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- SEO Meta Tags -->
-  <title>🏆 Predictor Mundial 2026 | Modelo Estadístico de Simulación</title>
-  <meta name="description" content="Simula partidos del Mundial 2026 usando un modelo estadístico avanzado de regresión de Poisson (Dixon-Coles) y simulaciones de Monte Carlo.">
-  <meta name="keywords" content="Mundial 2026, predicciones de fútbol, simulación de partidos, elo rating, poisson, dixon-coles, monte carlo">
-  <meta name="author" content="Antigravity Prediction Engine">
+  <title>JLY Predictor | Modelo Estadístico de Simulación</title>
+  <meta name="description" content="Simula partidos usando un modelo estadístico avanzado de regresión de Poisson (Dixon-Coles) y simulaciones de Monte Carlo.">
+  <meta name="keywords" content="JLY Predictor, predicciones de fútbol, simulación de partidos, elo rating, poisson, dixon-coles, monte carlo">
+  <meta name="author" content="JLY Engine">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="index.css">
@@ -26,6 +26,14 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+      }
+    })();
+  </script>
   
   <div class="glass-bg-radial"></div>
 
@@ -33,656 +41,764 @@
     <!-- Header -->
     <header class="app-header">
       <div class="header-logo">
-        <span class="trophy-emoji">🏆</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="1312.0 496.0 1473.0 891.0" class="jly-logo-icon">
+          <defs>
+            <linearGradient id="jlyGoldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f0b310" />
+              <stop offset="100%" stop-color="#d18a00" />
+            </linearGradient>
+          </defs>
+          <path d="M1975.00,668.00 L1972.00,668.00 L1971.00,666.00 L1964.00,664.00 L1961.00,660.00 L1958.00,660.00 L1953.00,656.00 L1948.00,656.00 L1943.00,652.00 L1938.00,652.00 L1937.00,650.00 L1932.00,650.00 L1931.00,648.00 L1924.00,648.00 L1923.00,646.00 L1916.00,646.00 L1915.00,644.00 L1904.00,644.00 L1903.00,642.00 L1610.00,642.00 L1609.00,644.00 L1600.00,644.00 L1599.00,646.00 L1594.00,646.00 L1593.00,648.00 L1588.00,648.00 L1587.00,650.00 L1582.00,650.00 L1581.00,652.00 L1574.00,654.00 L1571.00,658.00 L1568.00,658.00 L1561.00,666.00 L1558.00,666.00 L1550.00,674.00 L1550.00,677.00 L1544.00,682.00 L1544.00,685.00 L1540.00,688.00 L1540.00,691.00 L1538.00,692.00 L1538.00,695.00 L1534.00,700.00 L1534.00,705.00 L1530.00,710.00 L1530.00,717.00 L1528.00,718.00 L1528.00,781.00 L1700.00,782.00 L1700.00,1115.00 L1698.00,1116.00 L1698.00,1125.00 L1696.00,1126.00 L1696.00,1133.00 L1694.00,1134.00 L1694.00,1139.00 L1692.00,1140.00 L1692.00,1143.00 L1690.00,1144.00 L1690.00,1147.00 L1688.00,1148.00 L1688.00,1151.00 L1686.00,1152.00 L1684.00,1159.00 L1676.00,1166.00 L1676.00,1169.00 L1671.00,1174.00 L1668.00,1174.00 L1661.00,1182.00 L1658.00,1182.00 L1655.00,1186.00 L1652.00,1186.00 L1651.00,1188.00 L1646.00,1188.00 L1641.00,1192.00 L1636.00,1192.00 L1635.00,1194.00 L1628.00,1194.00 L1627.00,1196.00 L1584.00,1196.00 L1583.00,1194.00 L1576.00,1194.00 L1575.00,1192.00 L1570.00,1192.00 L1569.00,1190.00 L1564.00,1190.00 L1563.00,1188.00 L1556.00,1186.00 L1553.00,1182.00 L1550.00,1182.00 L1547.00,1178.00 L1544.00,1178.00 L1531.00,1165.00 L1531.00,1162.00 L1525.00,1157.00 L1525.00,1154.00 L1523.00,1153.00 L1523.00,1150.00 L1521.00,1149.00 L1521.00,1146.00 L1519.00,1145.00 L1519.00,1142.00 L1515.00,1137.00 L1513.00,1126.00 L1511.00,1125.00 L1511.00,1116.00 L1509.00,1115.00 L1509.00,1098.00 L1507.00,1097.00 L1507.00,1092.00 L1509.00,1091.00 L1509.00,1088.00 L1507.00,1086.00 L1362.00,1086.00 L1362.00,1129.00 L1364.00,1130.00 L1364.00,1143.00 L1366.00,1144.00 L1366.00,1153.00 L1368.00,1154.00 L1370.00,1169.00 L1372.00,1170.00 L1372.00,1175.00 L1374.00,1176.00 L1374.00,1181.00 L1376.00,1182.00 L1378.00,1193.00 L1380.00,1194.00 L1380.00,1197.00 L1384.00,1202.00 L1384.00,1207.00 L1386.00,1208.00 L1386.00,1211.00 L1388.00,1212.00 L1390.00,1219.00 L1394.00,1222.00 L1396.00,1229.00 L1400.00,1232.00 L1400.00,1235.00 L1404.00,1238.00 L1404.00,1241.00 L1408.00,1244.00 L1408.00,1247.00 L1414.00,1252.00 L1414.00,1255.00 L1444.00,1285.00 L1447.00,1285.00 L1452.00,1291.00 L1455.00,1291.00 L1460.00,1297.00 L1463.00,1297.00 L1466.00,1301.00 L1473.00,1303.00 L1476.00,1307.00 L1479.00,1307.00 L1480.00,1309.00 L1483.00,1309.00 L1484.00,1311.00 L1487.00,1311.00 L1488.00,1313.00 L1491.00,1313.00 L1496.00,1317.00 L1501.00,1317.00 L1506.00,1321.00 L1511.00,1321.00 L1512.00,1323.00 L1517.00,1323.00 L1518.00,1325.00 L1523.00,1325.00 L1524.00,1327.00 L1529.00,1327.00 L1530.00,1329.00 L1537.00,1329.00 L1538.00,1331.00 L1547.00,1331.00 L1548.00,1333.00 L1557.00,1333.00 L1558.00,1335.00 L1573.00,1335.00 L1574.00,1337.00 L1635.00,1337.00 L1636.00,1335.00 L1651.00,1335.00 L1652.00,1333.00 L1661.00,1333.00 L1662.00,1331.00 L1671.00,1331.00 L1672.00,1329.00 L1679.00,1329.00 L1680.00,1327.00 L1685.00,1327.00 L1686.00,1325.00 L1691.00,1325.00 L1692.00,1323.00 L1703.00,1321.00 L1708.00,1317.00 L1713.00,1317.00 L1714.00,1315.00 L1717.00,1315.00 L1718.00,1313.00 L1721.00,1313.00 L1722.00,1311.00 L1725.00,1311.00 L1726.00,1309.00 L1733.00,1307.00 L1736.00,1303.00 L1743.00,1301.00 L1746.00,1297.00 L1749.00,1297.00 L1752.00,1293.00 L1755.00,1293.00 L1760.00,1287.00 L1763.00,1287.00 L1778.00,1271.00 L1781.00,1271.00 L1783.00,1269.00 L1783.00,1266.00 L1797.00,1253.00 L1797.00,1250.00 L1803.00,1245.00 L1803.00,1242.00 L1809.00,1237.00 L1811.00,1230.00 L1815.00,1227.00 L1815.00,1224.00 L1817.00,1223.00 L1817.00,1220.00 L1819.00,1219.00 L1819.00,1216.00 L1821.00,1215.00 L1821.00,1212.00 L1823.00,1211.00 L1823.00,1208.00 L1825.00,1207.00 L1825.00,1204.00 L1829.00,1199.00 L1829.00,1194.00 L1831.00,1193.00 L1831.00,1188.00 L1835.00,1183.00 L1835.00,1176.00 L1837.00,1175.00 L1837.00,1170.00 L1839.00,1169.00 L1839.00,1162.00 L1841.00,1161.00 L1841.00,1154.00 L1843.00,1153.00 L1843.00,1142.00 L1845.00,1141.00 L1845.00,1128.00 L1847.00,1127.00 L1847.00,782.00 L1905.00,781.00 L1906.00,783.00 L1915.00,783.00 L1916.00,785.00 L1931.00,787.00 L1932.00,789.00 L1943.00,791.00 L1944.00,793.00 L1947.00,793.00 L1952.00,797.00 L1957.00,797.00 L1958.00,799.00 L1961.00,799.00 L1962.00,801.00 L1969.00,803.00 L1972.00,807.00 L1975.00,807.00 L1984.00,815.00 L1987.00,815.00 L1998.00,827.00 L2001.00,827.00 L2004.00,830.00 L2004.00,833.00 L2016.00,844.00 L2016.00,847.00 L2022.00,852.00 L2022.00,855.00 L2030.00,864.00 L2030.00,867.00 L2032.00,868.00 L2032.00,871.00 L2036.00,876.00 L2036.00,881.00 L2040.00,886.00 L2040.00,891.00 L2044.00,896.00 L2044.00,901.00 L2046.00,902.00 L2046.00,909.00 L2048.00,910.00 L2049.00,917.00 L2049.00,792.00 L2047.00,791.00 L2047.00,780.00 L2045.00,779.00 L2045.00,770.00 L2043.00,769.00 L2043.00,762.00 L2041.00,761.00 L2041.00,756.00 L2039.00,755.00 L2037.00,744.00 L2035.00,743.00 L2035.00,740.00 L2033.00,739.00 L2033.00,736.00 L2031.00,735.00 L2031.00,732.00 L2029.00,731.00 L2029.00,728.00 L2027.00,727.00 L2025.00,720.00 L2017.00,711.00 L2017.00,708.00 L2011.00,703.00 L2011.00,700.00 L1991.00,680.00 L1998.00,827.00 L2001.00,827.00 L2004.00,830.00 L2004.00,833.00 L2016.00,844.00 L2016.00,847.00 L2022.00,852.00 L2022.00,855.00 L2030.00,864.00 L2030.00,867.00 L2032.00,868.00 L2032.00,871.00 L2036.00,876.00 L2036.00,881.00 L2040.00,886.00 L2040.00,891.00 L2044.00,896.00 L2044.00,901.00 L2046.00,902.00 L2046.00,909.00 L2048.00,910.00 L2049.00,917.00 L2049.00,792.00 L2047.00,791.00 L2047.00,780.00 L2045.00,779.00 L2045.00,770.00 L2043.00,769.00 L2043.00,762.00 L2041.00,761.00 L2041.00,756.00 L2039.00,755.00 L2037.00,744.00 L2035.00,743.00 L2035.00,740.00 L2033.00,739.00 L2033.00,736.00 L2031.00,735.00 L2031.00,732.00 L2029.00,731.00 L2029.00,728.00 L2027.00,727.00 L2025.00,720.00 L2017.00,711.00 L2017.00,708.00 L2011.00,703.00 L2011.00,700.00 L1991.00,680.00 L1988.00,680.00 L1981.00,672.00 L1978.00,672.00 L1975.00,668.00 Z" class="logo-base-letters" />
+          <path d="M1902.00,822.00 L1902.00,1129.00 L1900.00,1130.00 L1900.00,1147.00 L1898.00,1148.00 L1896.00,1171.00 L1894.00,1172.00 L1892.00,1187.00 L1890.00,1188.00 L1890.00,1193.00 L1888.00,1194.00 L1888.00,1199.00 L1886.00,1200.00 L1884.00,1211.00 L1880.00,1216.00 L1880.00,1221.00 L1878.00,1222.00 L1878.00,1225.00 L1876.00,1226.00 L1876.00,1229.00 L1874.00,1230.00 L1874.00,1233.00 L1872.00,1234.00 L1872.00,1237.00 L1870.00,1238.00 L1870.00,1241.00 L1868.00,1242.00 L1868.00,1245.00 L1866.00,1246.00 L1864.00,1253.00 L1860.00,1256.00 L1858.00,1263.00 L1854.00,1266.00 L1854.00,1269.00 L1848.00,1274.00 L1848.00,1277.00 L1840.00,1284.00 L1840.00,1287.00 L1815.00,1312.00 L1812.00,1312.00 L1803.00,1322.00 L1800.00,1322.00 L1793.00,1330.00 L1790.00,1330.00 L1790.00,1333.00 L2183.00,1333.00 L2184.00,1331.00 L2199.00,1331.00 L2200.00,1329.00 L2209.00,1329.00 L2214.00,1325.00 L2219.00,1325.00 L2220.00,1323.00 L2227.00,1321.00 L2230.00,1317.00 L2233.00,1317.00 L2236.00,1313.00 L2239.00,1313.00 L2251.00,1301.00 L2251.00,1298.00 L2259.00,1289.00 L2259.00,1286.00 L2261.00,1285.00 L2261.00,1282.00 L2263.00,1281.00 L2263.00,1278.00 L2267.00,1273.00 L2267.00,1268.00 L2269.00,1267.00 L2269.00,1258.00 L2271.00,1257.00 L2271.00,1246.00 L2273.00,1245.00 L2273.00,1194.00 L2052.00,1194.00 L2049.00,1191.00 L2049.00,968.00 L2047.00,967.00 L2047.00,956.00 L2045.00,955.00 L2045.00,948.00 L2043.00,947.00 L2043.00,942.00 L2041.00,941.00 L2041.00,936.00 L2039.00,935.00 L2039.00,928.00 L2037.00,927.00 L2037.00,924.00 L2033.00,919.00 L2033.00,914.00 L2031.00,913.00 L2031.00,910.00 L2029.00,909.00 L2027.00,902.00 L2023.00,899.00 L2023.00,896.00 L2019.00,893.00 L2019.00,890.00 L2015.00,887.00 L2015.00,884.00 L2007.00,877.00 L2007.00,874.00 L1993.00,860.00 L1990.00,860.00 L1983.00,852.00 L1980.00,852.00 L1971.00,844.00 L1964.00,842.00 L1961.00,838.00 L1958.00,838.00 L1957.00,836.00 L1952.00,836.00 L1951.00,834.00 L1948.00,834.00 L1943.00,830.00 L1938.00,830.00 L1937.00,828.00 L1932.00,828.00 L1931.00,826.00 L1924.00,826.00 L1923.00,824.00 L1914.00,824.00 L1913.00,822.00 L1902.00,822.00 Z" class="logo-branch-left" />
+          <path d="M2022.00,642.00 L2026.00,645.00 L2029.00,645.00 L2030.00,647.00 L2033.00,647.00 L2042.00,655.00 L2045.00,655.00 L2050.00,661.00 L2053.00,661.00 L2070.00,678.00 L2070.00,681.00 L2076.00,686.00 L2076.00,689.00 L2082.00,694.00 L2084.00,701.00 L2088.00,704.00 L2088.00,707.00 L2094.00,712.00 L2094.00,715.00 L2102.00,724.00 L2104.00,731.00 L2110.00,736.00 L2110.00,739.00 L2114.00,742.00 L2116.00,749.00 L2120.00,752.00 L2120.00,755.00 L2124.00,758.00 L2124.00,761.00 L2128.00,764.00 L2128.00,767.00 L2132.00,770.00 L2132.00,773.00 L2136.00,776.00 L2136.00,779.00 L2140.00,782.00 L2140.00,785.00 L2144.00,788.00 L2144.00,791.00 L2148.00,794.00 L2148.00,797.00 L2154.00,802.00 L2154.00,805.00 L2162.00,814.00 L2164.00,821.00 L2168.00,824.00 L2168.00,827.00 L2174.00,832.00 L2176.00,839.00 L2180.00,842.00 L2180.00,845.00 L2186.00,850.00 L2186.00,853.00 L2194.00,862.00 L2196.00,869.00 L2200.00,872.00 L2200.00,875.00 L2204.00,878.00 L2204.00,881.00 L2210.00,886.00 L2212.00,893.00 L2218.00,898.00 L2218.00,901.00 L2222.00,904.00 L2222.00,907.00 L2226.00,910.00 L2226.00,913.00 L2230.00,916.00 L2230.00,919.00 L2234.00,922.00 L2234.00,925.00 L2238.00,928.00 L2238.00,931.00 L2242.00,934.00 L2242.00,937.00 L2246.00,940.00 L2246.00,943.00 L2250.00,946.00 L2250.00,949.00 L2254.00,952.00 L2254.00,955.00 L2258.00,958.00 L2258.00,961.00 L2262.00,964.00 L2262.00,967.00 L2266.00,970.00 L2266.00,973.00 L2270.00,976.00 L2270.00,979.00 L2274.00,982.00 L2274.00,985.00 L2278.00,988.00 L2278.00,991.00 L2282.00,994.00 L2282.00,997.00 L2286.00,1000.00 L2286.00,1003.00 L2290.00,1006.00 L2290.00,1009.00 L2294.00,1012.00 L2294.00,1015.00 L2298.00,1018.00 L2298.00,1021.00 L2302.00,1024.00 L2302.00,1027.00 L2306.00,1030.00 L2306.00,1033.00 L2310.00,1036.00 L2310.00,1039.00 L2314.00,1042.00 L2314.00,1045.00 L2318.00,1048.00 L2318.00,1051.00 L2322.00,1054.00 L2322.00,1057.00 L2327.00,1061.00 L2327.00,1058.00 L2329.00,1057.00 L2329.00,1048.00 L2331.00,1047.00 L2331.00,1040.00 L2333.00,1039.00 L2333.00,1034.00 L2335.00,1033.00 L2335.00,1028.00 L2337.00,1027.00 L2337.00,1022.00 L2339.00,1021.00 L2341.00,1010.00 L2343.00,1009.00 L2343.00,1006.00 L2345.00,1005.00 L2345.00,1002.00 L2349.00,997.00 L2349.00,992.00 L2351.00,991.00 L2351.00,988.00 L2355.00,985.00 L2355.00,982.00 L2357.00,981.00 L2357.00,978.00 L2359.00,977.00 L2361.00,970.00 L2365.00,967.00 L2367.00,960.00 L2375.00,951.00 L2377.00,944.00 L2381.00,941.00 L2381.00,938.00 L2385.00,935.00 L2385.00,932.00 L2389.00,929.00 L2389.00,926.00 L2397.00,917.00 L2399.00,910.00 L2397.00,909.00 L2397.00,906.00 L2393.00,903.00 L2393.00,900.00 L2389.00,897.00 L2389.00,894.00 L2385.00,891.00 L2385.00,888.00 L2381.00,885.00 L2381.00,882.00 L2379.00,881.00 L2379.00,878.00 L2375.00,875.00 L2375.00,872.00 L2369.00,867.00 L2369.00,864.00 L2365.00,861.00 L2365.00,858.00 L2361.00,855.00 L2361.00,852.00 L2357.00,849.00 L2357.00,846.00 L2349.00,837.00 L2347.00,830.00 L2343.00,827.00 L2343.00,824.00 L2339.00,821.00 L2339.00,818.00 L2335.00,815.00 L2335.00,812.00 L2331.00,809.00 L2331.00,806.00 L2327.00,803.00 L2327.00,800.00 L2323.00,797.00 L2323.00,794.00 L2319.00,791.00 L2319.00,788.00 L2315.00,785.00 L2315.00,782.00 L2311.00,779.00 L2311.00,776.00 L2307.00,773.00 L2307.00,770.00 L2303.00,767.00 L2303.00,764.00 L2299.00,761.00 L2299.00,758.00 L2295.00,755.00 L2295.00,752.00 L2291.00,749.00 L2289.00,742.00 L2285.00,739.00 L2285.00,736.00 L2281.00,733.00 L2281.00,730.00 L2277.00,727.00 L2277.00,724.00 L2273.00,721.00 L2273.00,718.00 L2265.00,709.00 L2265.00,706.00 L2263.00,705.00 L2263.00,702.00 L2259.00,699.00 L2259.00,696.00 L2253.00,691.00 L2253.00,688.00 L2235.00,670.00 L2232.00,670.00 L2227.00,664.00 L2220.00,662.00 L2217.00,658.00 L2214.00,658.00 L2209.00,654.00 L2204.00,654.00 L2203.00,652.00 L2200.00,652.00 L2199.00,650.00 L2194.00,650.00 L2193.00,648.00 L2178.00,646.00 L2177.00,644.00 L2166.00,644.00 L2165.00,642.00 L2022.00,642.00 Z" class="logo-star-swoosh" fill="url(#jlyGoldGradient)" />
+          <path d="M2735.00,546.00 L2730.00,550.00 L2730.00,553.00 L2726.00,556.00 L2724.00,563.00 L2720.00,566.00 L2720.00,569.00 L2716.00,572.00 L2716.00,575.00 L2712.00,578.00 L2712.00,581.00 L2706.00,586.00 L2706.00,589.00 L2702.00,592.00 L2702.00,595.00 L2698.00,598.00 L2698.00,601.00 L2694.00,604.00 L2694.00,607.00 L2690.00,610.00 L2690.00,613.00 L2686.00,616.00 L2686.00,619.00 L2682.00,622.00 L2682.00,625.00 L2678.00,628.00 L2678.00,631.00 L2674.00,634.00 L2674.00,637.00 L2670.00,640.00 L2670.00,643.00 L2664.00,648.00 L2662.00,655.00 L2658.00,658.00 L2658.00,661.00 L2652.00,666.00 L2652.00,669.00 L2648.00,672.00 L2648.00,675.00 L2644.00,678.00 L2644.00,681.00 L2640.00,684.00 L2640.00,687.00 L2636.00,690.00 L2636.00,693.00 L2632.00,696.00 L2632.00,699.00 L2628.00,702.00 L2628.00,705.00 L2624.00,708.00 L2624.00,711.00 L2620.00,714.00 L2620.00,717.00 L2616.00,720.00 L2616.00,723.00 L2610.00,728.00 L2610.00,731.00 L2606.00,734.00 L2604.00,741.00 L2598.00,746.00 L2598.00,749.00 L2594.00,752.00 L2594.00,755.00 L2590.00,758.00 L2590.00,761.00 L2586.00,764.00 L2586.00,767.00 L2582.00,770.00 L2582.00,773.00 L2578.00,776.00 L2578.00,779.00 L2574.00,782.00 L2574.00,785.00 L2570.00,788.00 L2570.00,791.00 L2566.00,794.00 L2566.00,797.00 L2562.00,800.00 L2562.00,803.00 L2558.00,806.00 L2558.00,809.00 L2554.00,812.00 L2554.00,815.00 L2550.00,818.00 L2550.00,821.00 L2546.00,824.00 L2546.00,827.00 L2540.00,832.00 L2540.00,835.00 L2536.00,838.00 L2536.00,841.00 L2532.00,844.00 L2532.00,847.00 L2528.00,850.00 L2528.00,853.00 L2522.00,858.00 L2522.00,861.00 L2516.00,866.00 L2516.00,869.00 L2510.00,874.00 L2510.00,877.00 L2504.00,882.00 L2504.00,885.00 L2498.00,890.00 L2498.00,893.00 L2492.00,898.00 L2492.00,901.00 L2478.00,914.00 L2478.00,917.00 L2453.00,942.00 L2450.00,942.00 L2431.00,962.00 L2428.00,962.00 L2415.00,976.00 L2412.00,976.00 L2396.00,992.00 L2396.00,995.00 L2380.00,1010.00 L2380.00,1013.00 L2374.00,1018.00 L2374.00,1021.00 L2368.00,1026.00 L2368.00,1029.00 L2364.00,1032.00 L2364.00,1035.00 L2356.00,1044.00 L2356.00,1047.00 L2354.00,1048.00 L2352.00,1055.00 L2348.00,1058.00 L2348.00,1063.00 L2346.00,1064.00 L2346.00,1067.00 L2344.00,1068.00 L2344.00,1071.00 L2340.00,1076.00 L2340.00,1081.00 L2338.00,1082.00 L2338.00,1087.00 L2336.00,1088.00 L2336.00,1093.00 L2334.00,1094.00 L2334.00,1101.00 L2332.00,1102.00 L2332.00,1111.00 L2330.00,1112.00 L2330.00,1121.00 L2328.00,1122.00 L2328.00,1133.00 L2326.00,1134.00 L2326.00,1243.00 L2324.00,1244.00 L2324.00,1257.00 L2322.00,1258.00 L2322.00,1267.00 L2320.00,1268.00 L2320.00,1275.00 L2318.00,1276.00 L2316.00,1287.00 L2314.00,1288.00 L2314.00,1291.00 L2312.00,1292.00 L2312.00,1295.00 L2310.00,1296.00 L2310.00,1299.00 L2308.00,1300.00 L2306.00,1307.00 L2302.00,1310.00 L2302.00,1313.00 L2296.00,1318.00 L2296.00,1321.00 L2287.00,1330.00 L2284.00,1330.00 L2284.00,1333.00 L2337.00,1333.00 L2338.00,1331.00 L2357.00,1331.00 L2358.00,1329.00 L2367.00,1329.00 L2368.00,1327.00 L2375.00,1327.00 L2376.00,1325.00 L2387.00,1323.00 L2388.00,1321.00 L2391.00,1321.00 L2392.00,1319.00 L2395.00,1319.00 L2396.00,1317.00 L2399.00,1317.00 L2400.00,1315.00 L2407.00,1313.00 L2416.00,1305.00 L2419.00,1305.00 L2426.00,1297.00 L2429.00,1297.00 L2439.00,1287.00 L2439.00,1284.00 L2447.00,1277.00 L2447.00,1274.00 L2451.00,1271.00 L2451.00,1268.00 L2453.00,1267.00 L2455.00,1260.00 L2459.00,1257.00 L2459.00,1252.00 L2461.00,1251.00 L2461.00,1248.00 L2465.00,1243.00 L2465.00,1238.00 L2467.00,1237.00 L2467.00,1232.00 L2469.00,1231.00 L2469.00,1224.00 L2471.00,1223.00 L2471.00,1214.00 L2473.00,1213.00 L2473.00,1194.00 L2475.00,1193.00 L2475.00,1060.00 L2477.00,1059.00 L2477.00,1056.00 L2481.00,1053.00 L2481.00,1050.00 L2485.00,1047.00 L2485.00,1044.00 L2489.00,1041.00 L2489.00,1038.00 L2493.00,1035.00 L2493.00,1032.00 L2497.00,1029.00 L2497.00,1026.00 L2501.00,1023.00 L2501.00,1020.00 L2505.00,1017.00 L2505.00,1014.00 L2509.00,1011.00 L2509.00,1008.00 L2513.00,1005.00 L2513.00,1002.00 L2517.00,999.00 L2517.00,996.00 L2521.00,993.00 L2521.00,990.00 L2525.00,987.00 L2525.00,984.00 L2529.00,981.00 L2529.00,978.00 L2533.00,975.00 L2533.00,972.00 L2537.00,969.00 L2537.00,966.00 L2541.00,963.00 L2541.00,960.00 L2545.00,957.00 L2545.00,954.00 L2549.00,951.00 L2549.00,948.00 L2553.00,945.00 L2553.00,942.00 L2557.00,939.00 L2557.00,936.00 L2563.00,931.00 L2563.00,928.00 L2571.00,919.00 L2573.00,912.00 L2577.00,909.00 L2577.00,906.00 L2581.00,903.00 L2581.00,900.00 L2585.00,897.00 L2585.00,894.00 L2589.00,891.00 L2589.00,888.00 L2593.00,885.00 L2593.00,882.00 L2597.00,879.00 L2597.00,876.00 L2601.00,873.00 L2601.00,870.00 L2607.00,865.00 L2607.00,862.00 L2611.00,859.00 L2611.00,856.00 L2619.00,847.00 L2619.00,847.00 L2619.00,847.00 L2621.00,840.00 L2625.00,837.00 L2625.00,834.00 L2631.00,829.00 L2631.00,826.00 L2635.00,823.00 L2635.00,820.00 L2639.00,817.00 L2639.00,814.00 L2643.00,811.00 L2643.00,808.00 L2647.00,805.00 L2647.00,802.00 L2651.00,799.00 L2651.00,796.00 L2655.00,793.00 L2655.00,790.00 L2659.00,787.00 L2659.00,784.00 L2665.00,779.00 L2670.00,785.00 L2673.00,785.00 L2684.00,797.00 L2687.00,797.00 L2696.00,807.00 L2699.00,807.00 L2708.00,817.00 L2711.00,817.00 L2722.00,829.00 L2725.00,829.00 L2735.00,839.00 L2735.00,546.00 Z" class="logo-arrow" fill="url(#jlyGoldGradient)" />
+        </svg>
         <div>
-          <h1>PREDICTOR MUNDIAL 2026</h1>
-          <p class="subtitle">Modelo de Regresión Dixon-Coles & Simulación de Monte Carlo</p>
+          <h1>JLY PREDICTOR</h1>
+          <p class="subtitle">Modelo de Regresión Dixon-Coles &amp; Simulación de Monte Carlo</p>
         </div>
       </div>
-      <div class="header-status">
-        <span class="status-dot animate-pulse"></span>
-        <span id="calibration-status">Cargando modelo...</span>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="header-status">
+          <span class="status-dot animate-pulse"></span>
+          <span id="calibration-status">Cargando modelo...</span>
+        </div>
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+          <!-- Sun Icon (visible in dark theme) -->
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <!-- Moon Icon (visible in light theme) -->
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
       </div>
     </header>
 
-    <!-- Main Grid Layout -->
-    <main class="dashboard-grid">
-      
-      <!-- Panel Izquierdo: Configuración e Inputs -->
-      <section class="panel glass-panel" aria-label="Configuración de Predicción">
-        <div class="panel-header">
-          <h2>Configuración del Partido</h2>
-          <p>Selecciona los contendientes y personaliza el modelo</p>
-        </div>
-        
-        <div class="panel-body">
-          <!-- Selectores de Equipo -->
-          <div class="form-group">
+    <main class="app-main">
+      <!-- Row 1: Compact Configuration Bar -->
+    <!-- Row 1: Compact Configuration Bar -->
+    <section class="config-bar glass-panel" aria-label="Ajustes de simulación" style="margin-bottom: 16px;">
+      <!-- Grupo 1: Equipos y Rankings -->
+      <div class="config-group group-teams">
+        <div class="config-group-title">Equipos y Ranking</div>
+        <div class="config-group-fields">
+          <div class="config-item flex-field">
             <label for="select-team-a">Selección A</label>
             <select id="select-team-a" class="custom-select"></select>
           </div>
-
-          <div class="form-group">
+          <div class="config-item compact-field" style="width: 65px;">
+            <label for="input-rank-a">Rank A</label>
+            <input type="number" id="input-rank-a" min="1" max="211" value="16" class="param-input" style="width: 100%;">
+          </div>
+          <div class="config-item flex-field">
             <label for="select-team-b">Selección B</label>
             <select id="select-team-b" class="custom-select"></select>
           </div>
-
-          <hr class="panel-divider">
-
-          <!-- Parametrización del Modelo (Ajustes de usuario) -->
-          <h3>Ajustes Estadísticos</h3>
-          
-          <!-- FIFA Ranking inputs -->
-          <div class="param-row">
-            <span class="param-label">FIFA Rank – Selección A</span>
-            <input type="number" id="input-rank-a" min="1" max="211" value="16" class="param-input">
-          </div>
-
-          <div class="param-row">
-            <span class="param-label">FIFA Rank – Selección B</span>
-            <input type="number" id="input-rank-b" min="1" max="211" value="61" class="param-input">
-          </div>
-
-          <!-- Weight inputs -->
-          <div class="param-row">
-            <span class="param-label">Ponderación FIFA Ranking (%)</span>
-            <input type="number" id="input-weight-fifa" min="0" max="100" value="30" class="param-input">
-          </div>
-          <p class="slider-desc">Peso del ranking FIFA oficial sobre la fuerza del equipo.</p>
-
-          <div class="param-row">
-            <span class="param-label">Influencia Histórica H2H (%)</span>
-            <input type="number" id="input-weight-h2h" min="0" max="100" value="20" class="param-input">
-          </div>
-          <p class="slider-desc">Bonificación por historial de enfrentamientos directos.</p>
-
-          <div class="param-row">
-            <span class="param-label">Decaimiento Temporal (meses)</span>
-            <input type="number" id="input-decay" min="3" max="60" value="18" class="param-input">
-          </div>
-          <p class="slider-desc">Vida media de forma: menor = más peso a lo reciente.</p>
-
-          <div class="param-row">
-            <span class="param-label">Simulaciones Monte Carlo</span>
-            <input type="number" id="input-sims" min="1000" max="100000" step="1000" value="100000" class="param-input">
-          </div>
-
-          <!-- Overrides and Altitude (Fases 4 & 5) -->
-          <div class="param-row">
-            <span class="param-label">Fuerza Override – Selección A</span>
-            <input type="number" id="input-override-a" min="0.1" max="2.0" step="0.05" value="1.0" class="param-input">
-          </div>
-          <p class="slider-desc">Ajuste manual para Selección A (ej. 0.85 por bajas/lesiones).</p>
-
-          <div class="param-row">
-            <span class="param-label">Fuerza Override – Selección B</span>
-            <input type="number" id="input-override-b" min="0.1" max="2.0" step="0.05" value="1.0" class="param-input">
-          </div>
-          <p class="slider-desc">Ajuste manual para Selección B (ej. 0.85 por bajas/lesiones).</p>
-
-          <div class="param-row">
-            <span class="param-label">Altitud del Estadio (m)</span>
-            <input type="number" id="input-altitude" min="0" max="4000" step="100" value="0" class="param-input">
-          </div>
-          <p class="slider-desc">Altitud del partido. Penaliza a equipos no aclimatados (>1500m).</p>
-
-          <hr class="panel-divider">
-          <h3>Cuotas de Apuestas</h3>
-          <p class="slider-desc" style="margin-bottom: 6px;">Compara la probabilidad simulada con cuotas reales para detectar valor esperado (+EV).</p>
-
-          <div class="odds-inputs-grid">
-            <div class="odds-input-group">
-              <label id="odds-label-a">Victoria A</label>
-              <input type="number" id="input-odds-a" step="0.01" min="1.01" class="odds-input-field" placeholder="2.10">
-            </div>
-            <div class="odds-input-group">
-              <label>Empate</label>
-              <input type="number" id="input-odds-draw" step="0.01" min="1.01" class="odds-input-field" placeholder="3.20">
-            </div>
-            <div class="odds-input-group">
-              <label id="odds-label-b">Victoria B</label>
-              <input type="number" id="input-odds-b" step="0.01" min="1.01" class="odds-input-field" placeholder="4.50">
-            </div>
-          </div>
-
-          <!-- Otros Mercados -->
-          <div class="form-group" style="margin-top: 15px;">
-            <label>Ambos Anotan (BTTS)</label>
-            <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
-              <input type="number" id="in-btts-yes" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-btts-yes" placeholder="Sí">
-              <input type="number" id="in-btts-no" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-btts-no" placeholder="No">
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: 10px;">
-            <label>Doble Oportunidad</label>
-            <div class="odds-inputs-grid">
-              <input type="number" id="in-dc-1X" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dc-1X" placeholder="1X">
-              <input type="number" id="in-dc-12" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dc-12" placeholder="12">
-              <input type="number" id="in-dc-X2" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dc-X2" placeholder="X2">
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: 10px;">
-            <label>Empate No Válido (DNB)</label>
-            <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
-              <input type="number" id="in-dnb-1" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dnb-1" placeholder="Eq. A">
-              <input type="number" id="in-dnb-2" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dnb-2" placeholder="Eq. B">
-            </div>
-          </div>
-          
-          <div class="form-group" style="margin-top: 10px;">
-            <label>Más Córners (1X2)</label>
-            <div class="odds-inputs-grid">
-              <input type="number" id="in-most-corners-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-most-corners-a" placeholder="1">
-              <input type="number" id="in-most-corners-draw" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-most-corners-draw" placeholder="X">
-              <input type="number" id="in-most-corners-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-most-corners-b" placeholder="2">
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: 10px;">
-            <label>Over/Under Goles (0.5 - 3.5)</label>
-            <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
-              <input type="number" id="in-ou-goles-05-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-05-over" placeholder="Over 0.5">
-              <input type="number" id="in-ou-goles-05-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-05-under" placeholder="Under 0.5">
-              
-              <input type="number" id="in-ou-goles-15-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-15-over" placeholder="Over 1.5">
-              <input type="number" id="in-ou-goles-15-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-15-under" placeholder="Under 1.5">
-              
-              <input type="number" id="in-ou-goles-25-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-25-over" placeholder="Over 2.5">
-              <input type="number" id="in-ou-goles-25-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-25-under" placeholder="Under 2.5">
-              
-              <input type="number" id="in-ou-goles-35-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-35-over" placeholder="Over 3.5">
-              <input type="number" id="in-ou-goles-35-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-35-under" placeholder="Under 3.5">
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: 10px;">
-            <label>Hándicap Asiático (AH)</label>
-            <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
-              <input type="number" id="in-ah-m15-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m15-a" placeholder="A -1.5">
-              <input type="number" id="in-ah-m15-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m15-b" placeholder="B +1.5">
-              
-              <input type="number" id="in-ah-m05-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m05-a" placeholder="A -0.5">
-              <input type="number" id="in-ah-m05-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m05-b" placeholder="B +0.5">
-              
-              <input type="number" id="in-ah-p05-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p05-a" placeholder="A +0.5">
-              <input type="number" id="in-ah-p05-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p05-b" placeholder="B -0.5">
-              
-              <input type="number" id="in-ah-p15-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p15-a" placeholder="A +1.5">
-              <input type="number" id="in-ah-p15-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p15-b" placeholder="B -1.5">
-            </div>
-          </div>
-          
-          <div class="form-group" style="margin-top: 10px;">
-            <label>Over/Under Córners</label>
-            <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
-              <input type="number" id="in-ou-corn-75-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-75-over" placeholder="Over 7.5">
-              <input type="number" id="in-ou-corn-75-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-75-under" placeholder="Under 7.5">
-              
-              <input type="number" id="in-ou-corn-85-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-85-over" placeholder="Over 8.5">
-              <input type="number" id="in-ou-corn-85-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-85-under" placeholder="Under 8.5">
-              
-              <input type="number" id="in-ou-corn-95-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-95-over" placeholder="Over 9.5">
-              <input type="number" id="in-ou-corn-95-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-95-under" placeholder="Under 9.5">
-              
-              <input type="number" id="in-ou-corn-105-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-105-over" placeholder="Over 10.5">
-              <input type="number" id="in-ou-corn-105-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-105-under" placeholder="Under 10.5">
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-
-      <!-- Panel Central: Simulación y Probabilidades -->
-      <section class="panel main-simulation-panel" aria-label="Pantalla de Simulación">
-        <!-- Match Header Visuals -->
-        <div class="match-vs-header glass-card">
-          <div class="team-vs-card" id="card-team-a">
-            <div class="team-flag-placeholder" id="flag-a">🇺🇾</div>
-            <h2 id="name-a" class="team-display-name">Uruguay</h2>
-            <div class="team-stat-badges">
-              <span class="badge badge-elo" id="elo-display-a">Elo 1875</span>
-              <span class="badge badge-fifa" id="fifa-display-a">FIFA #16</span>
-            </div>
-          </div>
-          
-          <div class="vs-divider">
-            <span class="vs-text">VS</span>
-            <span class="venue-badge">Neutral</span>
-          </div>
-
-          <div class="team-vs-card" id="card-team-b">
-            <div class="team-flag-placeholder" id="flag-b">🇸🇦</div>
-            <h2 id="name-b" class="team-display-name">Arabia Saudita</h2>
-            <div class="team-stat-badges">
-              <span class="badge badge-elo" id="elo-display-b">Elo 1640</span>
-              <span class="badge badge-fifa" id="fifa-display-b">FIFA #61</span>
-            </div>
+          <div class="config-item compact-field" style="width: 65px;">
+            <label for="input-rank-b">Rank B</label>
+            <input type="number" id="input-rank-b" min="1" max="211" value="61" class="param-input" style="width: 100%;">
           </div>
         </div>
+      </div>
 
-        <!-- Action Button -->
-        <div class="action-container" style="display: flex; gap: 15px; justify-content: center; width: 100%;">
-          <button id="btn-simulate" class="btn btn-primary btn-glow" style="flex: 2;">
-            <span class="btn-text">🚀 SIMULAR 100,000 PARTIDOS</span>
-            <div class="spinner hidden" id="sim-spinner"></div>
-          </button>
-          <button id="btn-log-pick" class="btn btn-secondary btn-glow" style="flex: 1; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-color: rgba(16, 185, 129, 0.3);">
-            <span class="btn-text">📥 GUARDAR PICK</span>
-            <div class="spinner hidden" id="log-pick-spinner"></div>
-          </button>
+      <!-- Grupo 2: Pesos del Modelo -->
+      <div class="config-group group-weights">
+        <div class="config-group-title">Ponderación y Decaimiento</div>
+        <div class="config-group-fields">
+          <div class="config-item compact-field" style="width: 85px;">
+            <label for="input-weight-fifa">Pond. FIFA (%)</label>
+            <input type="number" id="input-weight-fifa" min="0" max="100" value="30" class="param-input" style="width: 100%;">
+          </div>
+          <div class="config-item compact-field" style="width: 85px;">
+            <label for="input-weight-h2h">Pond. H2H (%)</label>
+            <input type="number" id="input-weight-h2h" min="0" max="100" value="20" class="param-input" style="width: 100%;">
+          </div>
+          <div class="config-item compact-field" style="width: 75px;">
+            <label for="input-decay">Decay (m)</label>
+            <input type="number" id="input-decay" min="3" max="60" value="18" class="param-input" style="width: 100%;">
+          </div>
+          <div class="config-item compact-field" style="width: 95px;">
+            <label for="input-sims">Simulaciones</label>
+            <input type="number" id="input-sims" min="1000" max="100000" step="1000" value="100000" class="param-input" style="width: 100%;">
+          </div>
         </div>
+      </div>
 
-        <!-- simulation Results -->
-        <div class="simulation-results-section glass-card">
-          <h3>Probabilidad General del Partido</h3>
+      <!-- Grupo 3: Parámetros Extra -->
+      <div class="config-group group-extras">
+        <div class="config-group-title">Ajustes Especiales</div>
+        <div class="config-group-fields">
+          <div class="config-item compact-field" style="width: 75px;">
+            <label for="input-override-a">Override A</label>
+            <input type="number" id="input-override-a" min="0.1" max="2.0" step="0.05" value="1.0" class="param-input" style="width: 100%;">
+          </div>
+          <div class="config-item compact-field" style="width: 75px;">
+            <label for="input-override-b">Override B</label>
+            <input type="number" id="input-override-b" min="0.1" max="2.0" step="0.05" value="1.0" class="param-input" style="width: 100%;">
+          </div>
+          <div class="config-item compact-field" style="width: 80px;">
+            <label for="input-altitude">Altitud (m)</label>
+            <input type="number" id="input-altitude" min="0" max="4000" step="100" value="0" class="param-input" style="width: 100%;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collapsible Parameter Guide Panel -->
+    <div class="config-guide-container" style="margin-bottom: 24px;">
+      <button id="btn-toggle-guide" class="btn-guide-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="guide-icon"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Ver Guía Explicativa de Parámetros</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="guide-arrow" style="margin-left: 6px;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      
+      <div id="config-guide-content" class="config-guide-content">
+        <div class="guide-grid">
+          <!-- Item 1 -->
+          <div class="guide-card">
+            <div class="guide-card-header">
+              <span class="guide-card-badge">Rank FIFA</span>
+              <h4>Rank A / B</h4>
+            </div>
+            <p><strong>Qué hace:</strong> Posición en el ranking oficial de la FIFA. Se usa para estimar la fuerza base si la selección no tiene datos de goles esperados (xG).</p>
+            <p class="guide-recommend"><strong>Recomendación:</strong> Dejar el real. Si quieres dar ventaja artificial a un equipo, disminuye su ranking (ej. de 50 a 15).</p>
+          </div>
+          <!-- Item 2 -->
+          <div class="guide-card">
+            <div class="guide-card-header">
+              <span class="guide-card-badge">Ponderación</span>
+              <h4>Pond. FIFA (%)</h4>
+            </div>
+            <p><strong>Qué hace:</strong> Peso asignado al ranking oficial FIFA frente al historial de partidos jugados para calcular la fuerza de ataque y defensa base.</p>
+            <p class="guide-recommend"><strong>Recomendación:</strong> 30% por defecto. Súbelo para dar mayor peso a la jerarquía oficial global; bájalo para priorizar la racha y resultados reales.</p>
+          </div>
+          <!-- Item 3 -->
+          <div class="guide-card">
+            <div class="guide-card-header">
+              <span class="guide-card-badge">Ponderación</span>
+              <h4>Pond. H2H (%)</h4>
+            </div>
+            <p><strong>Qué hace:</strong> Peso que se otorga al historial de enfrentamientos cara a cara directos. Modifica el xG basándose en la "paternidad" histórica.</p>
+            <p class="guide-recommend"><strong>Recomendación:</strong> 20% por defecto. Súbelo (ej. a 40%) si hay una rivalidad histórica y de larga data que crees que afectará el resultado.</p>
+          </div>
+          <!-- Item 4 -->
+          <div class="guide-card">
+            <div class="guide-card-header">
+              <span class="guide-card-badge">Tiempo</span>
+              <h4>Decay (meses)</h4>
+            </div>
+            <p><strong>Qué hace:</strong> Controla el decaimiento de partidos en el tiempo. Los partidos más antiguos pierden importancia de manera exponencial.</p>
+            <p class="guide-recommend"><strong>Recomendación:</strong> 18 meses. Bájalo a 12 para enfocarte en el estado de forma del último año; súbelo a 24 para promedios históricos estables.</p>
+          </div>
+          <!-- Item 5 -->
+          <div class="guide-card">
+            <div class="guide-card-header">
+              <span class="guide-card-badge">Algoritmo</span>
+              <h4>Simulaciones</h4>
+            </div>
+            <p><strong>Qué hace:</strong> Número de partidos virtuales corridos en la simulación Monte Carlo para calcular las probabilidades de victoria y marcadores exactos.</p>
+            <p class="guide-recommend"><strong>Recomendación:</strong> 100,000. Asegura estabilidad estadística perfecta en marcadores y cuotas finas sin variaciones entre clics.</p>
+          </div>
+          <!-- Item 6 -->
+          <div class="guide-card">
+            <div class="guide-card-header">
+              <span class="guide-card-badge">Ajustes</span>
+              <h4>Override A / B</h4>
+            </div>
+            <p><strong>Qué hace:</strong> Multiplicador manual de goles esperados de cada selección. Ideal para ingresar información sobre suspensiones, lesionados o vestuario.</p>
+            <p class="guide-recommend"><strong>Recomendación:</strong> 1.0. Si el equipo tiene bajas claves, bájalo a 0.8. Si llega en una racha goleadora extraordinaria o plantilla completa, súbelo a 1.2.</p>
+          </div>
+          <!-- Item 7 -->
+          <div class="guide-card">
+            <div class="guide-card-header">
+              <span class="guide-card-badge">Ambiente</span>
+              <h4>Altitud (metros)</h4>
+            </div>
+            <p><strong>Qué hace:</strong> Simula la fatiga de jugar en altura para selecciones no adaptadas, reduciendo su fuerza de forma proporcional.</p>
+            <p class="guide-recommend"><strong>Recomendación:</strong> 0. Ajústalo si se juega en ciudades elevadas (ej. La Paz 3600m, CDMX 2240m) y un equipo no está aclimatado.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Persistent Match VS Header -->
+    <div class="match-vs-header glass-card" style="margin-bottom: 24px;">
+      <div class="team-vs-card" id="card-team-a">
+        <div class="team-flag-placeholder" id="flag-a">URU</div>
+        <h2 id="name-a" class="team-display-name">Uruguay</h2>
+        <div class="team-stat-badges">
+          <span class="badge badge-elo" id="elo-display-a">Elo 1875</span>
+          <span class="badge badge-fifa" id="fifa-display-a">FIFA #16</span>
+        </div>
+      </div>
+      
+      <div class="vs-divider">
+        <span class="vs-text">VS</span>
+        <span class="venue-badge">Neutral</span>
+        <button id="btn-simulate" class="btn btn-primary btn-glow">
+          <span class="btn-text">SIMULAR PARTIDO</span>
+          <div class="spinner hidden" id="sim-spinner"></div>
+        </button>
+      </div>
+
+      <div class="team-vs-card" id="card-team-b">
+        <div class="team-flag-placeholder" id="flag-b">KSA</div>
+        <h2 id="name-b" class="team-display-name">Arabia Saudita</h2>
+        <div class="team-stat-badges">
+          <span class="badge badge-elo" id="elo-display-b">Elo 1640</span>
+          <span class="badge badge-fifa" id="fifa-display-b">FIFA #61</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: Full-width Results Tabs Panel -->
+    <section class="panel glass-panel results-tabs-panel" aria-label="Panel de Resultados Analíticos" style="margin-bottom: 24px;">
+      <div id="results-tab-header" class="tab-header hidden" style="flex-wrap: wrap; background: rgba(255,255,255,0.01); border-bottom: 1px solid var(--panel-border);">
+        <button id="tab-btn-analysis" class="tab-btn active">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-tab-icon" style="margin-right: 6px; vertical-align: middle;"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Análisis
+        </button>
+        <button id="tab-btn-markets" class="tab-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-tab-icon" style="margin-right: 6px; vertical-align: middle;"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Mercados &amp; Cuotas
+        </button>
+        <button id="tab-btn-comparison" class="tab-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-tab-icon" style="margin-right: 6px; vertical-align: middle;"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Comparativa
+        </button>
+        <button id="tab-btn-history" class="tab-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-tab-icon" style="margin-right: 6px; vertical-align: middle;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Historial &amp; H2H
+        </button>
+      </div>
+
+      <!-- FIRST TIME ANALYSIS PLACEHOLDER BANNER -->
+      <div id="first-time-placeholder" class="glass-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 8px; opacity: 0.85;">
+          <line x1="18" y1="20" x2="18" y2="10"/>
+          <line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="14"/>
+        </svg>
+        <h2>¡Analiza el partido de hoy!</h2>
+        <p>
+          Configura los equipos y los parámetros en la barra superior, luego haz clic en <strong>SIMULAR PARTIDO</strong> en el centro de la cabecera para iniciar la simulación Dixon-Coles y el análisis estadístico detallado.
+        </p>
+      </div>
+
+      <!-- TAB 1: ANÁLISIS -->
+      <div class="tab-content hidden" id="tab-analysis" style="padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+        <!-- Probability Gauges -->
+        <div class="probability-gauges-container glass-card" style="padding: 24px;">
+          <h3 style="margin-bottom: 20px; border-left: 3px solid var(--color-primary); padding-left: 12px;">Probabilidad de Victoria (Simulación)</h3>
           
-          <div class="probability-bars-container">
-            <!-- Team A Win probability -->
-            <div class="prob-row">
-              <div class="prob-info">
-                <span id="label-win-a" class="prob-team-name">Victoria Uruguay</span>
-                <span id="pct-win-a" class="prob-percentage">46.2%</span>
+          <div class="probability-gauges">
+            <div class="gauge-card team-a-gauge">
+              <div class="gauge-circle">
+                <svg viewBox="0 0 36 36" class="circular-chart blue">
+                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path id="gauge-path-a" class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <text id="gauge-text-a" x="18" y="20.35" class="percentage">--%</text>
+                </svg>
               </div>
-              <div class="progress-bar-bg">
-                <div id="bar-win-a" class="progress-bar-fill fill-team-a" style="width: 46.2%"></div>
+              <span id="gauge-label-a" class="gauge-label">Victoria Uruguay</span>
+            </div>
+            
+            <div class="gauge-card draw-gauge">
+              <div class="gauge-circle">
+                <svg viewBox="0 0 36 36" class="circular-chart grey">
+                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path id="gauge-path-draw" class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <text id="gauge-text-draw" x="18" y="20.35" class="percentage">--%</text>
+                </svg>
               </div>
+              <span class="gauge-label">Empate</span>
             </div>
 
-            <!-- Draw probability -->
-            <div class="prob-row">
-              <div class="prob-info">
-                <span class="prob-team-name">Empate</span>
-                <span id="pct-draw" class="prob-percentage">36.0%</span>
+            <div class="gauge-card team-b-gauge">
+              <div class="gauge-circle">
+                <svg viewBox="0 0 36 36" class="circular-chart green">
+                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path id="gauge-path-b" class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <text id="gauge-text-b" x="18" y="20.35" class="percentage">--%</text>
+                </svg>
               </div>
-              <div class="progress-bar-bg">
-                <div id="bar-draw" class="progress-bar-fill fill-draw" style="width: 36.0%"></div>
-              </div>
-            </div>
-
-            <!-- Team B Win probability -->
-            <div class="prob-row">
-              <div class="prob-info">
-                <span id="label-win-b" class="prob-team-name">Victoria Arabia Saudita</span>
-                <span id="pct-win-b" class="prob-percentage">17.8%</span>
-              </div>
-              <div class="progress-bar-bg">
-                <div id="bar-win-b" class="progress-bar-fill fill-team-b" style="width: 17.8%"></div>
-              </div>
+              <span id="gauge-label-b" class="gauge-label">Victoria Arabia Saudita</span>
             </div>
           </div>
 
-          <div class="xg-display-container">
-            <div class="xg-box">
+          <div style="display: flex; gap: 20px; justify-content: space-between; align-items: center; margin-top: 24px; border-top: 1px solid var(--panel-border); padding-top: 15px; flex-wrap: wrap;">
+            <div class="xg-box" style="padding: 10px 20px; background: rgba(255,255,255,0.01); border: 1px solid var(--card-border-inner);">
               <span class="xg-title">Expectativa de Goles (xG)</span>
               <div class="xg-values">
-                <span id="xg-val-a" class="xg-number text-team-a">1.09</span>
+                <span id="xg-val-a" class="xg-number text-team-a" style="font-family: var(--font-family-mono);">--</span>
                 <span class="xg-separator">–</span>
-                <span id="xg-val-b" class="xg-number text-team-b">0.58</span>
+                <span id="xg-val-b" class="xg-number text-team-b" style="font-family: var(--font-family-mono);">--</span>
               </div>
-              <div class="xg-sources" style="margin-top: 4px; font-size: 0.75rem; color: var(--text-muted);">
-                <span id="xg-source-a" class="xg-source-badge">Estimado</span>
-                <span style="margin: 0 6px;">|</span>
-                <span id="xg-source-b" class="xg-source-badge">Estimado</span>
+              <div class="xg-sources" style="margin-top: 4px; font-size: 0.72rem; color: var(--color-text-secondary);">
+                <span id="xg-source-a" class="xg-source-badge">--</span>
+                <span style="margin: 0 4px;">|</span>
+                <span id="xg-source-b" class="xg-source-badge">--</span>
               </div>
+            </div>
+
+            <div class="dc-correlation-display" style="padding: 10px 15px; border-radius: var(--border-radius-md); background: rgba(255, 255, 255, 0.01); border: 1px solid var(--card-border-inner);">
+              <span style="font-size: 0.78rem; color: var(--color-text-secondary);">Correlación de goles (Dixon-Coles ρ):</span>
+              <span id="dc-rho-value" style="font-weight: 700; color: var(--color-primary); margin-left: 6px; font-family: var(--font-family-mono);">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exact Scores / Heatmap -->
+        <div class="exact-scores-section glass-card" style="padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 12px;">
+            <h3 style="margin-bottom: 0; border-left: 3px solid var(--color-primary); padding-left: 12px;">Marcadores Exactos Más Probables</h3>
+            <div class="heatmap-toggle-container" style="display: flex; gap: 4px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--panel-border); padding: 2px; border-radius: 6px;">
+              <button id="btn-show-list" class="tab-btn active" style="padding: 4px 10px; font-size: 0.72rem; border-radius: 4px; margin: 0; min-height: unset; height: unset; border: none; background: none; color: var(--color-text-secondary); cursor: pointer; transition: all 0.2s;">Lista</button>
+              <button id="btn-show-heatmap" class="tab-btn" style="padding: 4px 10px; font-size: 0.72rem; border-radius: 4px; margin: 0; min-height: unset; height: unset; border: none; background: none; color: var(--color-text-secondary); cursor: pointer; transition: all 0.2s;">Matriz 5x5</button>
             </div>
           </div>
           
-          <div class="dc-correlation-display" style="margin-top: 12px; padding: 8px 12px; background: rgba(13, 18, 30, 0.5); border-radius: var(--border-radius-md);">
-            <span style="font-size: 0.8rem; color: var(--text-muted);">Correlación de goles (Dixon-Coles ρ):</span>
-            <span id="dc-rho-value" style="font-weight: 600; color: var(--accent-primary); margin-left: 6px;">-0.13</span>
+          <!-- List View -->
+          <ol class="score-list" id="score-list-container">
+            <div class="loading-placeholder">No hay simulación ejecutada.</div>
+          </ol>
+          
+          <!-- Heatmap View -->
+          <div id="score-heatmap-container" class="hidden" style="margin-top: 15px;">
+            <div class="heatmap-grid-wrapper" style="overflow-x: auto; width: 100%;">
+              <table class="heatmap-table" style="width: 100%; border-collapse: collapse; text-align: center; font-family: var(--font-family-title); font-size: 0.82rem;">
+                <thead>
+                  <!-- Dinámico -->
+                </thead>
+                <tbody id="heatmap-tbody">
+                  <!-- Dinámico -->
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top: 10px; font-size: 0.7rem; color: var(--color-text-secondary); display: flex; align-items: center; gap: 10px; justify-content: flex-end; flex-wrap: wrap;">
+              <span>Probabilidad:</span>
+              <span style="display: flex; align-items: center; gap: 4px;"><span style="display: inline-block; width: 10px; height: 10px; background: rgba(240, 179, 16, 0.12); border-radius: 2px; border: 1px solid rgba(240, 179, 16, 0.2);"></span> 0% - 3%</span>
+              <span style="display: flex; align-items: center; gap: 4px;"><span style="display: inline-block; width: 10px; height: 10px; background: rgba(240, 179, 16, 0.45); border-radius: 2px; border: 1px solid rgba(240, 179, 16, 0.5);"></span> 3% - 8%</span>
+              <span style="display: flex; align-items: center; gap: 4px;"><span style="display: inline-block; width: 10px; height: 10px; background: rgba(240, 179, 16, 0.85); border-radius: 2px; border: 1px solid rgba(240, 179, 16, 0.95);"></span> 8%+</span>
+            </div>
           </div>
         </div>
 
-        <!-- Exact Scores -->
-        <div class="exact-scores-section glass-card">
-          <h3>Marcadores Exactos Más Probables</h3>
-          <ol class="score-list" id="score-list-container">
-            <li class="score-item">
-              <span class="score-rank">#1</span>
-              <span class="score-numbers badge">0 - 0</span>
-              <span class="score-type">(Empate)</span>
-              <span class="score-prob" style="flex-grow: 1; text-align: right; font-weight: 700;">20.0%</span>
-            </li>
-            <li class="score-item">
-              <span class="score-rank">#2</span>
-              <span class="score-numbers badge">1 - 0</span>
-              <span class="score-type">(A favor de Uruguay)</span>
-              <span class="score-prob" style="flex-grow: 1; text-align: right; font-weight: 700;">19.0%</span>
-            </li>
-            <li class="score-item">
-              <span class="score-rank">#3</span>
-              <span class="score-numbers badge">1 - 1</span>
-              <span class="score-type">(Empate)</span>
-              <span class="score-prob" style="flex-grow: 1; text-align: right; font-weight: 700;">13.0%</span>
-            </li>
-          </ol>
-        </div>
-
-        <!-- Visualización Analítica (Gráficos) -->
-        <div class="analytics-charts-section glass-card">
-          <h3>Visualización Analítica</h3>
+        <!-- Charts Grid -->
+        <div class="analytics-charts-section glass-card" style="padding: 24px;">
+          <h3 style="margin-bottom: 15px; border-left: 3px solid var(--color-primary); padding-left: 12px;">Distribuciones Analíticas</h3>
           <div class="analytics-grid">
             <div class="analytics-chart-box">
-              <h4>Distribución de Goles (Poisson)</h4>
-              <div class="chart-canvas-wrapper">
+              <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 8px;">Distribución de Goles (Curva Poisson Doble)</h4>
+              <div class="chart-canvas-wrapper" style="height: 250px; position: relative;">
                 <canvas id="goalsDistributionChart"></canvas>
               </div>
             </div>
             <div class="analytics-chart-box">
-              <h4>Probabilidad de Resultado</h4>
-              <div class="chart-canvas-wrapper">
+              <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 8px;">Probabilidad de Resultado (Rosca)</h4>
+              <div class="chart-canvas-wrapper" style="height: 250px; position: relative;">
                 <canvas id="outcomeDonutChart"></canvas>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Nuevos Mercados de Goles -->
-        <div class="goals-markets-section glass-card hidden" id="goals-markets-card">
-          <h3>Otros Mercados de Goles</h3>
-          <div class="markets-grid">
-            <div class="market-box">
-              <h4>Ambos Equipos Anotan (BTTS)</h4>
-              <div class="market-odds-row">
-                <div><span>Sí: </span><strong id="market-btts-yes">--</strong><span id="ev-btts-yes" class="ev-mini"></span></div>
-                <div><span>No: </span><strong id="market-btts-no">--</strong><span id="ev-btts-no" class="ev-mini"></span></div>
+      <!-- TAB 2: MERCADOS & CUOTAS -->
+      <div class="tab-content hidden" id="tab-markets" style="padding: 24px;">
+        <div class="responsive-grid grid-340-1fr">
+          <!-- Left Col: Real odds inputs -->
+          <div class="glass-card" style="padding: 20px;">
+            <h3 style="margin-bottom: 12px; font-size: 0.95rem; border-left: 3px solid var(--color-primary); padding-left: 12px;">Ingreso de Cuotas</h3>
+            <p class="slider-desc" style="margin-bottom: 15px;">Introduce las cuotas reales para evaluar automáticamente el valor esperado (+EV) con formato monospace.</p>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label>1X2 Principal</label>
+              <div class="odds-inputs-grid">
+                <div class="odds-input-group">
+                  <label id="odds-label-a">Victoria A</label>
+                  <input type="number" id="input-odds-a" step="0.01" min="1.01" class="odds-input-field" placeholder="2.10">
+                </div>
+                <div class="odds-input-group">
+                  <label>Empate</label>
+                  <input type="number" id="input-odds-draw" step="0.01" min="1.01" class="odds-input-field" placeholder="3.20">
+                </div>
+                <div class="odds-input-group">
+                  <label id="odds-label-b">Victoria B</label>
+                  <input type="number" id="input-odds-b" step="0.01" min="1.01" class="odds-input-field" placeholder="4.50">
+                </div>
               </div>
             </div>
-            <div class="market-box">
-              <h4>Doble Oportunidad</h4>
-              <div class="market-odds-row">
-                <div><span>1X: </span><strong id="market-dc-1X">--</strong><span id="ev-dc-1X" class="ev-mini"></span></div>
-                <div><span>12: </span><strong id="market-dc-12">--</strong><span id="ev-dc-12" class="ev-mini"></span></div>
-                <div><span>X2: </span><strong id="market-dc-X2">--</strong><span id="ev-dc-X2" class="ev-mini"></span></div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label>Ambos Anotan (BTTS)</label>
+              <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
+                <input type="number" id="in-btts-yes" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-btts-yes" placeholder="Sí">
+                <input type="number" id="in-btts-no" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-btts-no" placeholder="No">
               </div>
             </div>
-            <div class="market-box">
-              <h4>Empate No Válido (DNB)</h4>
-              <div class="market-odds-row">
-                <div><span id="label-dnb-1">DNB 1: </span><strong id="market-dnb-1">--</strong><span id="ev-dnb-1" class="ev-mini"></span></div>
-                <div><span id="label-dnb-2">DNB 2: </span><strong id="market-dnb-2">--</strong><span id="ev-dnb-2" class="ev-mini"></span></div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label>Doble Oportunidad</label>
+              <div class="odds-inputs-grid">
+                <input type="number" id="in-dc-1X" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dc-1X" placeholder="1X">
+                <input type="number" id="in-dc-12" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dc-12" placeholder="12">
+                <input type="number" id="in-dc-X2" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dc-X2" placeholder="X2">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label>Empate No Válido (DNB)</label>
+              <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
+                <input type="number" id="in-dnb-1" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dnb-1" placeholder="Eq. A">
+                <input type="number" id="in-dnb-2" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dnb-2" placeholder="Eq. B">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label>Over/Under Goles</label>
+              <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
+                <input type="number" id="in-ou-goles-05-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-05-over" placeholder="Over 0.5">
+                <input type="number" id="in-ou-goles-05-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-05-under" placeholder="Under 0.5">
+                
+                <input type="number" id="in-ou-goles-15-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-15-over" placeholder="Over 1.5">
+                <input type="number" id="in-ou-goles-15-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-15-under" placeholder="Under 1.5">
+                
+                <input type="number" id="in-ou-goles-25-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-25-over" placeholder="Over 2.5">
+                <input type="number" id="in-ou-goles-25-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-25-under" placeholder="Under 2.5">
+                
+                <input type="number" id="in-ou-goles-35-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-35-over" placeholder="Over 3.5">
+                <input type="number" id="in-ou-goles-35-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-35-under" placeholder="Under 3.5">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label>Hándicap Asiático</label>
+              <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
+                <input type="number" id="in-ah-m15-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m15-a" placeholder="AH -1.5">
+                <input type="number" id="in-ah-m15-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m15-b" placeholder="AH +1.5">
+                
+                <input type="number" id="in-ah-m05-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m05-a" placeholder="AH -0.5">
+                <input type="number" id="in-ah-m05-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m05-b" placeholder="AH +0.5">
+                
+                <input type="number" id="in-ah-p05-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p05-a" placeholder="AH +0.5">
+                <input type="number" id="in-ah-p05-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p05-b" placeholder="AH -0.5">
+                
+                <input type="number" id="in-ah-p15-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p15-a" placeholder="AH +1.5">
+                <input type="number" id="in-ah-p15-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p15-b" placeholder="AH -1.5">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Córners (Más / OU)</label>
+              <div class="odds-inputs-grid">
+                <input type="number" id="in-most-corners-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-most-corners-a" placeholder="Most A">
+                <input type="number" id="in-most-corners-draw" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-most-corners-draw" placeholder="Most X">
+                <input type="number" id="in-most-corners-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-most-corners-b" placeholder="Most B">
+              </div>
+              <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr; margin-top: 6px;">
+                <input type="number" id="in-ou-corn-75-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-75-over" placeholder="Over 7.5">
+                <input type="number" id="in-ou-corn-75-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-75-under" placeholder="Under 7.5">
+                
+                <input type="number" id="in-ou-corn-85-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-85-over" placeholder="Over 8.5">
+                <input type="number" id="in-ou-corn-85-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-85-under" placeholder="Under 8.5">
+                
+                <input type="number" id="in-ou-corn-95-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-95-over" placeholder="Over 9.5">
+                <input type="number" id="in-ou-corn-95-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-95-under" placeholder="Under 9.5">
+                
+                <input type="number" id="in-ou-corn-105-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-105-over" placeholder="Over 10.5">
+                <input type="number" id="in-ou-corn-105-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-105-under" placeholder="Under 10.5">
               </div>
             </div>
           </div>
-          
-          <h4 style="margin-top: 15px; margin-bottom: 8px;">Líneas de Over/Under Goles</h4>
-          <div class="ou-table-container">
-            <table class="ou-table">
-              <thead>
-                <tr>
-                  <th>Línea</th>
-                  <th>Over (%)</th>
-                  <th>Under (%)</th>
-                </tr>
-              </thead>
-              <tbody id="ou-goals-tbody">
-                <!-- Dinámico -->
-              </tbody>
-            </table>
-          </div>
 
-          <h4 style="margin-top: 15px; margin-bottom: 8px;">Hándicap Asiático (AH)</h4>
-          <div class="ou-table-container">
-            <table class="ou-table">
-              <thead>
-                <tr>
-                  <th>Línea</th>
-                  <th id="th-ah-a">Eq. A (%)</th>
-                  <th id="th-ah-b">Eq. B (%)</th>
-                </tr>
-              </thead>
-              <tbody id="ah-tbody">
-                <!-- Dinámico -->
-              </tbody>
-            </table>
+          <!-- Right Col: EV display and markets breakdown -->
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <!-- EV Banner Card -->
+            <div class="betting-edge-section glass-card" id="betting-edge-card">
+              <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Análisis de Valor de Apuestas (+EV)</h3>
+              <p class="slider-desc" style="margin-bottom: 12px;">Comparamos la probabilidad del simulador con las cuotas reales para detectar ventaja matemática.</p>
+              
+              <div class="no-odds-message" id="odds-helper-text">
+                Introduce las cuotas de 1X2 a la izquierda para evaluar el valor esperado.
+              </div>
+              
+              <div class="h2h-summary-card hidden" id="odds-analysis-container" style="background: none; border: none; padding: 0; box-shadow: none;">
+                <div class="h2h-stats-row">
+                  <div class="h2h-stat" id="ev-stat-a" style="border: 1px solid var(--card-border-inner); padding: 12px; border-radius: 8px;">
+                    <span class="h2h-stat-num" id="ev-pct-a" style="font-family: var(--font-family-mono);">+0.0%</span>
+                    <span class="h2h-stat-label" id="ev-label-a">A EV%</span>
+                  </div>
+                  <div class="h2h-stat" id="ev-stat-draw" style="border: 1px solid var(--card-border-inner); padding: 12px; border-radius: 8px;">
+                    <span class="h2h-stat-num" id="ev-pct-draw" style="font-family: var(--font-family-mono);">+0.0%</span>
+                    <span class="h2h-stat-label">Empate EV%</span>
+                  </div>
+                  <div class="h2h-stat" id="ev-stat-b" style="border: 1px solid var(--card-border-inner); padding: 12px; border-radius: 8px;">
+                    <span class="h2h-stat-num" id="ev-pct-b" style="font-family: var(--font-family-mono);">+0.0%</span>
+                    <span class="h2h-stat-label" id="ev-label-b">B EV%</span>
+                  </div>
+                </div>
+                
+                <div id="odds-alert-message" class="badge" style="width: 100%; margin-top: 15px; padding: 8px; font-weight: 600; text-align: center; display: block; border-radius: var(--border-radius-md);">
+                  No se detectan apuestas de valor positivo.
+                </div>
+              </div>
+            </div>
+
+            <!-- Goles Markets Card -->
+            <div class="goals-markets-section glass-card hidden" id="goals-markets-card">
+              <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Mercados de Goles &amp; Hándicaps</h3>
+              <div class="markets-grid" style="margin-bottom: 20px;">
+                <div class="market-box" style="padding: 10px; border: 1px solid var(--card-border-inner); border-radius: 8px;">
+                  <h4 style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase; margin-bottom: 4px;">Ambos Anotan</h4>
+                  <div class="market-odds-row" style="font-size: 0.85rem;">
+                    <div><span>Sí: </span><strong id="market-btts-yes" style="font-family: var(--font-family-mono);">--</strong><span id="ev-btts-yes" class="ev-mini"></span></div>
+                    <div><span>No: </span><strong id="market-btts-no" style="font-family: var(--font-family-mono);">--</strong><span id="ev-btts-no" class="ev-mini"></span></div>
+                  </div>
+                </div>
+                <div class="market-box" style="padding: 10px; border: 1px solid var(--card-border-inner); border-radius: 8px;">
+                  <h4 style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase; margin-bottom: 4px;">Doble Oportunidad</h4>
+                  <div class="market-odds-row" style="font-size: 0.85rem;">
+                    <div><span>1X: </span><strong id="market-dc-1X" style="font-family: var(--font-family-mono);">--</strong><span id="ev-dc-1X" class="ev-mini"></span></div>
+                    <div><span>12: </span><strong id="market-dc-12" style="font-family: var(--font-family-mono);">--</strong><span id="ev-dc-12" class="ev-mini"></span></div>
+                    <div><span>X2: </span><strong id="market-dc-X2" style="font-family: var(--font-family-mono);">--</strong><span id="ev-dc-X2" class="ev-mini"></span></div>
+                  </div>
+                </div>
+                <div class="market-box" style="padding: 10px; border: 1px solid var(--card-border-inner); border-radius: 8px;">
+                  <h4 style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase; margin-bottom: 4px;">DNB</h4>
+                  <div class="market-odds-row" style="font-size: 0.85rem;">
+                    <div><span id="label-dnb-1">1: </span><strong id="market-dnb-1" style="font-family: var(--font-family-mono);">--</strong><span id="ev-dnb-1" class="ev-mini"></span></div>
+                    <div><span id="label-dnb-2">2: </span><strong id="market-dnb-2" style="font-family: var(--font-family-mono);">--</strong><span id="ev-dnb-2" class="ev-mini"></span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="responsive-grid grid-1fr-1fr" style="gap: 20px;">
+                <div>
+                  <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Over/Under Goles</h4>
+                  <table class="ou-table">
+                    <thead>
+                      <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
+                    </thead>
+                    <tbody id="ou-goals-tbody"></tbody>
+                  </table>
+                </div>
+                <div>
+                  <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Hándicap Asiático</h4>
+                  <table class="ou-table">
+                    <thead>
+                      <tr><th>Línea</th><th id="th-ah-a">Eq. A (%)</th><th id="th-ah-b">Eq. B (%)</th></tr>
+                    </thead>
+                    <tbody id="ah-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Córners Prediction Card -->
+            <div class="corners-prediction-section glass-card hidden" id="corners-prediction-card">
+              <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Mercados de Córners</h3>
+              <div class="corners-expected-row" style="margin-bottom: 15px;">
+                <div class="expected-corners-box">
+                  <span id="expected-corners-label-a" style="font-size: 0.72rem;">Córners A</span>
+                  <strong id="expected-corners-val-a" style="font-family: var(--font-family-mono);">--</strong>
+                </div>
+                <div class="expected-corners-divider">
+                  <span style="font-size: 0.72rem;">Total Esperado</span>
+                  <strong id="expected-corners-total" style="font-family: var(--font-family-mono);">--</strong>
+                </div>
+                <div class="expected-corners-box">
+                  <span id="expected-corners-label-b" style="font-size: 0.72rem;">Córners B</span>
+                  <strong id="expected-corners-val-b" style="font-family: var(--font-family-mono);">--</strong>
+                </div>
+              </div>
+
+              <div class="responsive-grid grid-1fr-1fr" style="gap: 20px;">
+                <div>
+                  <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Over/Under Córners</h4>
+                  <table class="ou-table">
+                    <thead>
+                      <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
+                    </thead>
+                    <tbody id="ou-corners-tbody"></tbody>
+                  </table>
+                </div>
+                <div>
+                  <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Más Córners (1X2)</h4>
+                  <table class="ou-table">
+                    <thead>
+                      <tr><th>Opción</th><th>Probabilidad</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td id="label-most-corners-a">Equipo A</td>
+                        <td style="font-weight:700;"><span id="prob-most-corners-a" style="font-family: var(--font-family-mono);">--</span> <span id="ev-most-corners-a" class="ev-mini"></span></td>
+                      </tr>
+                      <tr>
+                        <td>Empate</td>
+                        <td style="font-weight:700;"><span id="prob-most-corners-draw" style="font-family: var(--font-family-mono);">--</span> <span id="ev-most-corners-draw" class="ev-mini"></span></td>
+                      </tr>
+                      <tr>
+                        <td id="label-most-corners-b">Equipo B</td>
+                        <td style="font-weight:700;"><span id="prob-most-corners-b" style="font-family: var(--font-family-mono);">--</span> <span id="ev-most-corners-b" class="ev-mini"></span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Predicción de Córners -->
-        <div class="corners-prediction-section glass-card hidden" id="corners-prediction-card">
-          <h3>Predicción de Córners (🚩)</h3>
-          <div class="corners-expected-row">
-            <div class="expected-corners-box">
-              <span id="expected-corners-label-a">Córners Uruguay</span>
-              <strong id="expected-corners-val-a">--</strong>
+      <!-- TAB 3: COMPARATIVA -->
+      <div class="tab-content hidden" id="tab-comparison" style="padding: 24px;">
+        <div class="responsive-grid grid-1fr-1fr">
+          <!-- Radar Hexagonal -->
+          <div class="glass-card" style="padding: 24px;">
+            <h3 style="margin-bottom: 8px; border-left: 3px solid var(--color-primary); padding-left: 12px;">Comparativa Radar Hexagonal</h3>
+            <p class="slider-desc" style="margin-bottom: 15px;">Análisis de 6 dimensiones estadísticas clave normalizadas (0-100) para ambas selecciones.</p>
+            <div class="chart-canvas-wrapper" style="height: 320px; position: relative;">
+              <canvas id="radarComparisonChart"></canvas>
             </div>
-            <div class="expected-corners-divider">
-              <span>Total Esperado</span>
-              <strong id="expected-corners-total">--</strong>
-            </div>
-            <div class="expected-corners-box">
-              <span id="expected-corners-label-b">Córners Arabia Saudita</span>
-              <strong id="expected-corners-val-b">--</strong>
+            <div class="radar-legend-details" style="margin-top: 15px; font-size: 0.75rem; line-height: 1.4; color: var(--color-text-secondary);">
+              <p><strong>Detalle del Hexágono:</strong> Pasa el cursor sobre los vértices para visualizar de qué datos se alimenta y cómo calcula el modelo estadístico cada métrica.</p>
             </div>
           </div>
 
-          <h4 style="margin-top: 15px; margin-bottom: 8px;">Líneas de Over/Under Córners</h4>
-          <div class="ou-table-container">
-            <table class="ou-table">
-              <thead>
-                <tr>
-                  <th>Línea</th>
-                  <th>Over (%)</th>
-                  <th>Under (%)</th>
-                </tr>
-              </thead>
-              <tbody id="ou-corners-tbody">
-                <!-- Dinámico -->
-              </tbody>
-            </table>
-          </div>
-          
-          <h4 style="margin-top: 15px; margin-bottom: 8px;">Más Córners (1X2)</h4>
-          <div class="market-odds-row">
-            <div><span id="label-most-corners-a">Uruguay: </span><strong id="prob-most-corners-a">--</strong><span id="ev-most-corners-a" class="ev-mini"></span></div>
-            <div><span>Empate: </span><strong id="prob-most-corners-draw">--</strong><span id="ev-most-corners-draw" class="ev-mini"></span></div>
-            <div><span id="label-most-corners-b">Arabia Saudita: </span><strong id="prob-most-corners-b">--</strong><span id="ev-most-corners-b" class="ev-mini"></span></div>
-          </div>
-        </div>
-
-        <!-- Betting Value (+EV) Analysis Section -->
-        <div class="betting-edge-section glass-card" id="betting-edge-card">
-          <h3>Análisis de Valor de Apuestas (+EV)</h3>
-          <p class="slider-desc" style="margin-bottom: 12px;">Comparamos la probabilidad de la simulación con las cuotas ingresadas para calcular el valor esperado matemático.</p>
-          
-          <div class="no-odds-message" id="odds-helper-text">
-            Introduce las cuotas en el panel izquierdo para calcular el valor esperado (+EV) de las apuestas.
-          </div>
-          
-          <div class="h2h-summary-card hidden" id="odds-analysis-container" style="background: none; border: none; padding: 0; box-shadow: none;">
-            <div class="h2h-stats-row">
-              <div class="h2h-stat" id="ev-stat-a">
-                <span class="h2h-stat-num" id="ev-pct-a">+0.0%</span>
-                <span class="h2h-stat-label" id="ev-label-a">Uru EV%</span>
+          <!-- Barras Comparativas Horizontales -->
+          <div class="glass-card" style="padding: 24px;">
+            <h3 style="margin-bottom: 8px; border-left: 3px solid var(--color-primary); padding-left: 12px;">Métricas Cara a Cara Lado a Lado</h3>
+            <p class="slider-desc" style="margin-bottom: 20px;">Estadísticas estimadas y reales proyectadas a 90 minutos.</p>
+            
+            <div class="comparative-bars-container" id="side-by-side-bars-container" style="margin-top: 10px;">
+              <!-- xG Match -->
+              <div class="comparative-bar-row">
+                <div class="comp-val-left" id="comp-val-a-xg">--</div>
+                <div class="comp-bar-wrapper-left">
+                  <div class="comp-bar-fill-left" id="comp-bar-fill-a-xg" style="width: 0%;"></div>
+                </div>
+                <div class="comp-label">xG de Partido</div>
+                <div class="comp-bar-wrapper-right">
+                  <div class="comp-bar-fill-right" id="comp-bar-fill-b-xg" style="width: 0%;"></div>
+                </div>
+                <div class="comp-val-right" id="comp-val-b-xg">--</div>
               </div>
-              <div class="h2h-stat" id="ev-stat-draw">
-                <span class="h2h-stat-num" id="ev-pct-draw">+0.0%</span>
-                <span class="h2h-stat-label">Empate EV%</span>
+
+              <!-- xG Histórico -->
+              <div class="comparative-bar-row">
+                <div class="comp-val-left" id="comp-val-a-xghist">--</div>
+                <div class="comp-bar-wrapper-left">
+                  <div class="comp-bar-fill-left" id="comp-bar-fill-a-xghist" style="width: 0%;"></div>
+                </div>
+                <div class="comp-label">xG Histórico</div>
+                <div class="comp-bar-wrapper-right">
+                  <div class="comp-bar-fill-right" id="comp-bar-fill-b-xghist" style="width: 0%;"></div>
+                </div>
+                <div class="comp-val-right" id="comp-val-b-xghist">--</div>
               </div>
-              <div class="h2h-stat" id="ev-stat-b">
-                <span class="h2h-stat-num" id="ev-pct-b">+0.0%</span>
-                <span class="h2h-stat-label" id="ev-label-b">KSA EV%</span>
+
+              <!-- Disparos -->
+              <div class="comparative-bar-row">
+                <div class="comp-val-left" id="comp-val-a-shots">--</div>
+                <div class="comp-bar-wrapper-left">
+                  <div class="comp-bar-fill-left" id="comp-bar-fill-a-shots" style="width: 0%;"></div>
+                </div>
+                <div class="comp-label">Tiros por 90'</div>
+                <div class="comp-bar-wrapper-right">
+                  <div class="comp-bar-fill-right" id="comp-bar-fill-b-shots" style="width: 0%;"></div>
+                </div>
+                <div class="comp-val-right" id="comp-val-b-shots">--</div>
+              </div>
+
+              <!-- Centros -->
+              <div class="comparative-bar-row">
+                <div class="comp-val-left" id="comp-val-a-crosses">--</div>
+                <div class="comp-bar-wrapper-left">
+                  <div class="comp-bar-fill-left" id="comp-bar-fill-a-crosses" style="width: 0%;"></div>
+                </div>
+                <div class="comp-label">Centros por 90'</div>
+                <div class="comp-bar-wrapper-right">
+                  <div class="comp-bar-fill-right" id="comp-bar-fill-b-crosses" style="width: 0%;"></div>
+                </div>
+                <div class="comp-val-right" id="comp-val-b-crosses">--</div>
+              </div>
+
+              <!-- Corners -->
+              <div class="comparative-bar-row">
+                <div class="comp-val-left" id="comp-val-a-corners">--</div>
+                <div class="comp-bar-wrapper-left">
+                  <div class="comp-bar-fill-left" id="comp-bar-fill-a-corners" style="width: 0%;"></div>
+                </div>
+                <div class="comp-label">Córners Proyectados</div>
+                <div class="comp-bar-wrapper-right">
+                  <div class="comp-bar-fill-right" id="comp-bar-fill-b-corners" style="width: 0%;"></div>
+                </div>
+                <div class="comp-val-right" id="comp-val-b-corners">--</div>
               </div>
             </div>
             
-            <div id="odds-alert-message" class="badge" style="width: 100%; margin-top: 15px; padding: 8px; font-weight: 600; text-align: center; display: block; border-radius: var(--border-radius-md);">
-              No se detectan apuestas de valor positivo.
+            <div class="radar-legend-details" style="margin-top: 24px; border-top: 1px solid var(--panel-border); padding-top: 15px; color: var(--color-text-secondary); font-size: 0.75rem;">
+              <p>Las métricas de tiros, centros y córners corresponden a los promedios registrados en las bases de datos de FBref de Copas del Mundo recientes, o estimaciones basadas en fuerza ofensiva Dixon-Coles en caso de debutantes.</p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Panel Derecho: Historial y H2H -->
-      <section class="panel glass-panel" aria-label="Estadísticas de Formas e Historial">
-        <div class="tab-header" style="flex-wrap: wrap;">
-          <button id="tab-btn-history" class="tab-btn active">📈 Historial</button>
-          <button id="tab-btn-h2h" class="tab-btn">⚔️ H2H</button>
-          <button id="tab-btn-backtest" class="tab-btn">💰 Backtest</button>
-          <button id="tab-btn-logged" class="tab-btn">📥 Mis Picks</button>
-        </div>
-
-        <div class="tab-content" id="tab-history">
-          <!-- Team A History -->
-          <div class="team-history-container">
-            <h3 id="history-title-a">Partidos de Uruguay</h3>
-            <div class="match-list" id="match-list-a">
-              <div class="loading-placeholder">Cargando partidos...</div>
-            </div>
-          </div>
-
-          <hr class="panel-divider">
-
-          <!-- Team B History -->
-          <div class="team-history-container">
-            <h3 id="history-title-b">Partidos de Arabia Saudita</h3>
-            <div class="match-list" id="match-list-b">
-              <div class="loading-placeholder">Cargando partidos...</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-content hidden" id="tab-h2h">
-          <div class="h2h-summary-card glass-card">
-            <h4>Resumen del Cara a Cara</h4>
-            <div class="h2h-stats-row">
-              <div class="h2h-stat">
-                <span class="h2h-stat-num" id="h2h-wins-a">0</span>
-                <span class="h2h-stat-label" id="h2h-label-a">Uru victorias</span>
-              </div>
-              <div class="h2h-stat">
-                <span class="h2h-stat-num" id="h2h-draws">0</span>
-                <span class="h2h-stat-label">Empates</span>
-              </div>
-              <div class="h2h-stat">
-                <span class="h2h-stat-num" id="h2h-wins-b">0</span>
-                <span class="h2h-stat-label" id="h2h-label-b">KSA victorias</span>
-              </div>
-            </div>
-            <div class="h2h-modifier-display">
-              <span>Ajuste xG por H2H: </span>
-              <span id="h2h-modifier-val" class="badge">1.00x</span>
-            </div>
-          </div>
-          
-          <div class="h2h-matches-list-container">
-            <h4>Encuentros Históricos Oficiales</h4>
-            <div class="match-list" id="h2h-match-list">
-              <div class="no-matches-message">No se registran enfrentamientos previos en la base de datos.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-content hidden" id="tab-backtest">
-          <div class="glass-card" style="margin-bottom: 15px;">
-            <h3 style="margin-bottom: 8px;">Rendimiento del Modelo (Backtest)</h3>
-            <p class="slider-desc" style="margin-bottom: 15px;">Evaluación sobre más de 49,000 partidos históricos enfrentando al modelo contra un Bookmaker Simulado (Margen 5%).</p>
-            
-            <button id="btn-run-backtest" class="btn btn-primary" style="width: 100%; padding: 12px;">
-              <span class="btn-text">🚀 EJECUTAR BACKTEST (Tarda ~5s)</span>
-              <div class="spinner hidden" id="backtest-spinner"></div>
-            </button>
-          </div>
-
-          <div id="backtest-results-container" class="hidden">
-            <div class="h2h-summary-card glass-card" style="margin-bottom: 15px;">
-              <h4 style="margin-bottom: 10px; color: var(--accent-primary);">Métricas Financieras (Apuestas +EV)</h4>
-              <div class="h2h-stats-row" style="margin-bottom: 10px;">
-                <div class="h2h-stat">
-                  <span class="h2h-stat-num" id="bt-roi" style="color: #10B981;">--%</span>
-                  <span class="h2h-stat-label">Yield (ROI)</span>
-                </div>
-                <div class="h2h-stat">
-                  <span class="h2h-stat-num" id="bt-profit" style="color: #10B981;">--</span>
-                  <span class="h2h-stat-label">Beneficio (Unidades)</span>
-                </div>
-              </div>
+      <!-- TAB 4: HISTORIAL & H2H -->
+      <div class="tab-content hidden" id="tab-history" style="padding: 24px;">
+        <div class="responsive-grid grid-1fr-1fr">
+          <!-- H2H stats -->
+          <div class="glass-card" style="padding: 24px;">
+            <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px;">Enfrentamientos Directos (Cara a Cara)</h3>
+            <div class="h2h-summary-card glass-card" style="margin-bottom: 20px; background: rgba(255,255,255,0.01); border-color: var(--card-border-inner);">
+              <h4>Resumen H2H Oficial</h4>
               <div class="h2h-stats-row">
                 <div class="h2h-stat">
-                  <span class="h2h-stat-num" id="bt-bets" style="font-size: 1.2rem;">--</span>
-                  <span class="h2h-stat-label">Apuestas Realizadas</span>
+                  <span class="h2h-stat-num" id="h2h-wins-a" style="font-family: var(--font-family-mono);">0</span>
+                  <span class="h2h-stat-label" id="h2h-label-a">Uru victorias</span>
                 </div>
                 <div class="h2h-stat">
-                  <span class="h2h-stat-num" id="bt-hitrate" style="font-size: 1.2rem;">--%</span>
-                  <span class="h2h-stat-label">Hit Rate (Acierto)</span>
+                  <span class="h2h-stat-num" id="h2h-draws" style="font-family: var(--font-family-mono);">0</span>
+                  <span class="h2h-stat-label">Empates</span>
+                </div>
+                <div class="h2h-stat">
+                  <span class="h2h-stat-num" id="h2h-wins-b" style="font-family: var(--font-family-mono);">0</span>
+                  <span class="h2h-stat-label" id="h2h-label-b">KSA victorias</span>
                 </div>
               </div>
-            </div>
-
-            <div class="h2h-summary-card glass-card">
-              <h4 style="margin-bottom: 10px;">Precisión Predictiva</h4>
-              <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
-                <li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                  <span style="color: var(--text-muted);">Acierto del Favorito:</span>
-                  <strong id="bt-fav-acc">--%</strong>
-                </li>
-                <li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                  <span style="color: var(--text-muted);">Brier Score (↓):</span>
-                  <strong id="bt-brier">--</strong>
-                </li>
-                <li style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                  <span style="color: var(--text-muted);">Log Loss (↓):</span>
-                  <strong id="bt-logloss">--</strong>
-                </li>
-                <li style="display: flex; justify-content: space-between; padding: 4px 0;">
-                  <span style="color: var(--text-muted);">Partidos Evaluados:</span>
-                  <strong id="bt-matches">--</strong>
-                </li>
-              </ul>
-              <div style="margin-top: 10px; font-size: 0.75rem; color: var(--text-muted); text-align: right;">
-                Última ejecución: <span id="bt-date">--</span>
+              <div class="h2h-modifier-display" style="margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 10px;">
+                <span>Ajuste xG por H2H: </span>
+                <span id="h2h-modifier-val" class="badge">1.00x</span>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="tab-content hidden" id="tab-logged">
-          <div class="glass-card" style="margin-bottom: 15px;">
-            <h3 style="margin-bottom: 8px;">Mis Picks Guardados</h3>
-            <p class="slider-desc" style="margin-bottom: 15px;">Listado de predicciones registradas. Puedes contrastar tus predicciones con los resultados reales cuando se actualicen los partidos.</p>
             
-            <button id="btn-update-logged" class="btn btn-primary" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-              <span class="btn-text">🔄 ACTUALIZAR RESULTADOS</span>
-              <div class="spinner hidden" id="logged-update-spinner"></div>
-            </button>
-          </div>
-
-          <div id="logged-summary-container" class="h2h-summary-card glass-card hidden" style="margin-bottom: 15px;">
-            <h4 style="margin-bottom: 10px; color: var(--accent-primary);">Estadísticas de Mis Picks</h4>
-            <div class="h2h-stats-row" style="margin-bottom: 10px;">
-              <div class="h2h-stat">
-                <span class="h2h-stat-num" id="logged-accuracy" style="color: #10B981;">--%</span>
-                <span class="h2h-stat-label">Acierto</span>
-              </div>
-              <div class="h2h-stat">
-                <span class="h2h-stat-num" id="logged-rps" style="color: #10B981;">--</span>
-                <span class="h2h-stat-label">Avg RPS</span>
-              </div>
-            </div>
-            <div class="h2h-stats-row">
-              <div class="h2h-stat">
-                <span class="h2h-stat-num" id="logged-total-count" style="font-size: 1.2rem;">--</span>
-                <span class="h2h-stat-label">Registrados</span>
-              </div>
-              <div class="h2h-stat">
-                <span class="h2h-stat-num" id="logged-completed-count" style="font-size: 1.2rem;">--</span>
-                <span class="h2h-stat-label">Completados</span>
+            <div class="h2h-matches-list-container">
+              <h4>Historial de Enfrentamientos en Competición</h4>
+              <div class="match-list" id="h2h-match-list">
+                <div class="no-matches-message">No se registran enfrentamientos previos en la base de datos.</div>
               </div>
             </div>
           </div>
 
-          <div class="logged-list-container">
-            <h4>Registro de Picks</h4>
-            <div class="match-list" id="logged-match-list" style="max-height: 400px; overflow-y: auto;">
-              <div class="loading-placeholder">No hay picks registrados aún. Guarda un pick usando el botón "Guardar Pick" en el panel de simulación.</div>
+          <!-- Recent matches history -->
+          <div class="glass-card" style="padding: 24px;">
+            <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px;">Historial de Partidos Recientes</h3>
+            
+            <div class="team-history-container">
+              <h4 id="history-title-a" style="font-size: 0.85rem; color: var(--color-primary); text-transform: uppercase; margin-bottom: 8px;">Partidos de Uruguay</h4>
+              <div class="match-list" id="match-list-a">
+                <div class="loading-placeholder">Cargando partidos...</div>
+              </div>
+            </div>
+
+            <hr class="panel-divider" style="margin: 20px 0;">
+
+            <div class="team-history-container">
+              <h4 id="history-title-b" style="font-size: 0.85rem; color: var(--color-primary); text-transform: uppercase; margin-bottom: 8px;">Partidos de Arabia Saudita</h4>
+              <div class="match-list" id="match-list-b">
+                <div class="loading-placeholder">Cargando partidos...</div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-
-    </main>
+      </div>
+    </section>
+  </main>
     
     <!-- Footer -->
     <footer class="app-footer">
