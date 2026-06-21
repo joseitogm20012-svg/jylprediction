@@ -114,15 +114,15 @@ const flagB = document.getElementById("flag-b");
 const nameA = document.getElementById("name-a");
 const nameB = document.getElementById("name-b");
 
-// Result display elements
-const pctWinA = document.getElementById("pct-win-a");
-const pctDraw = document.getElementById("pct-draw");
-const pctWinB = document.getElementById("pct-win-b");
-const barWinA = document.getElementById("bar-win-a");
-const barDraw = document.getElementById("bar-draw");
-const barWinB = document.getElementById("bar-win-b");
-const labelWinA = document.getElementById("label-win-a");
-const labelWinB = document.getElementById("label-win-b");
+// Result display elements (Circular Gauges)
+const gaugePathA = document.getElementById("gauge-path-a");
+const gaugePathDraw = document.getElementById("gauge-path-draw");
+const gaugePathB = document.getElementById("gauge-path-b");
+const gaugeTextA = document.getElementById("gauge-text-a");
+const gaugeTextDraw = document.getElementById("gauge-text-draw");
+const gaugeTextB = document.getElementById("gauge-text-b");
+const gaugeLabelA = document.getElementById("gauge-label-a");
+const gaugeLabelB = document.getElementById("gauge-label-b");
 
 const xgValA = document.getElementById("xg-val-a");
 const xgValB = document.getElementById("xg-val-b");
@@ -172,15 +172,7 @@ const probMostCornersB = document.getElementById("prob-most-corners-b");
 const labelMostCornersA = document.getElementById("label-most-corners-a");
 const labelMostCornersB = document.getElementById("label-most-corners-b");
 
-// Tabs Elements
-const tabHistoryBtn = document.getElementById("tab-btn-history");
-const tabH2hBtn = document.getElementById("tab-btn-h2h");
-const tabBacktestBtn = document.getElementById("tab-btn-backtest");
-const tabLoggedBtn = document.getElementById("tab-btn-logged");
-const tabHistoryContent = document.getElementById("tab-history");
-const tabH2hContent = document.getElementById("tab-h2h");
-const tabBacktestContent = document.getElementById("tab-backtest");
-const tabLoggedContent = document.getElementById("tab-logged");
+// Tabs switching will be handled dynamically in bindListeners
 
 // Logged Picks Elements (Fase 6)
 const btnUpdateLogged = document.getElementById("btn-update-logged");
@@ -262,8 +254,7 @@ async function initializeApp() {
     // 5. Update UI for the initial match
     updateMatchCard();
 
-    // 6. Run initial simulation
-    runPredictionFlow();
+    // 6. Ready (Wait for manual simulation)
 
   } catch (error) {
     console.error("Initialization error:", error);
@@ -300,14 +291,12 @@ function bindListeners() {
     selectedTeamA = e.target.value;
     rankSliderA.value = TEAM_METADATA[selectedTeamA].rank;
     updateMatchCard();
-    runPredictionFlow();
   });
 
   selectB.addEventListener("change", (e) => {
     selectedTeamB = e.target.value;
     rankSliderB.value = TEAM_METADATA[selectedTeamB].rank;
     updateMatchCard();
-    runPredictionFlow();
   });
 
   rankSliderA.addEventListener("input", (e) => {
@@ -326,68 +315,69 @@ function bindListeners() {
     runPredictionFlow();
   });
 
-  // Tab switching
-  tabHistoryBtn.addEventListener("click", () => {
-    tabHistoryBtn.classList.add("active");
-    tabH2hBtn.classList.remove("active");
-    tabBacktestBtn.classList.remove("active");
-    tabLoggedBtn.classList.remove("active");
-    tabHistoryContent.classList.remove("hidden");
-    tabH2hContent.classList.add("hidden");
-    tabBacktestContent.classList.add("hidden");
-    tabLoggedContent.classList.add("hidden");
-  });
+  // Tab switching logic for the results panel (Dynamic based on index.html)
+  const resultsTabHeader = document.getElementById("results-tab-header");
+  if (resultsTabHeader) {
+    const tabButtons = resultsTabHeader.querySelectorAll(".tab-btn");
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        // Remove active class from all buttons in the header
+        tabButtons.forEach(b => b.classList.remove("active"));
+        // Add active class to clicked button
+        btn.classList.add("active");
+        
+        // Hide all tab contents in the results section
+        const tabContents = document.querySelectorAll(".results-tabs-panel .tab-content");
+        tabContents.forEach(tc => tc.classList.add("hidden"));
+        
+        // Show targeted tab content
+        const targetId = btn.id.replace("tab-btn-", "tab-");
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) {
+          targetContent.classList.remove("hidden");
+        }
+      });
+    });
+  }
 
-  tabH2hBtn.addEventListener("click", () => {
-    tabH2hBtn.classList.add("active");
-    tabHistoryBtn.classList.remove("active");
-    tabBacktestBtn.classList.remove("active");
-    tabLoggedBtn.classList.remove("active");
-    tabH2hContent.classList.remove("hidden");
-    tabHistoryContent.classList.add("hidden");
-    tabBacktestContent.classList.add("hidden");
-    tabLoggedContent.classList.add("hidden");
-  });
+  // Defensively bind optional/deleted UI elements to prevent TypeErrors
+  if (btnRunBacktest) {
+    btnRunBacktest.addEventListener("click", () => {
+      runBacktestFlow();
+    });
+  }
 
-  tabBacktestBtn.addEventListener("click", () => {
-    tabBacktestBtn.classList.add("active");
-    tabHistoryBtn.classList.remove("active");
-    tabH2hBtn.classList.remove("active");
-    tabLoggedBtn.classList.remove("active");
-    tabBacktestContent.classList.remove("hidden");
-    tabHistoryContent.classList.add("hidden");
-    tabH2hContent.classList.add("hidden");
-    tabLoggedContent.classList.add("hidden");
-  });
+  if (btnLogPick) {
+    btnLogPick.addEventListener("click", () => {
+      logCurrentPick();
+    });
+  }
 
-  tabLoggedBtn.addEventListener("click", () => {
-    tabLoggedBtn.classList.add("active");
-    tabHistoryBtn.classList.remove("active");
-    tabH2hBtn.classList.remove("active");
-    tabBacktestBtn.classList.remove("active");
-    tabLoggedContent.classList.remove("hidden");
-    tabHistoryContent.classList.add("hidden");
-    tabH2hContent.classList.add("hidden");
-    tabBacktestContent.classList.add("hidden");
-    loadLoggedPicks();
-  });
+  if (btnUpdateLogged) {
+    btnUpdateLogged.addEventListener("click", () => {
+      updateLoggedPicksResults();
+    });
+  }
 
-  btnRunBacktest.addEventListener("click", () => {
-    runBacktestFlow();
+  // Dynamic refresh on overrides/altitude change (only if simulation was already run once)
+  inputOverrideA.addEventListener("change", () => {
+    const resultsTabHeader = document.getElementById("results-tab-header");
+    if (resultsTabHeader && !resultsTabHeader.classList.contains("hidden")) {
+      runPredictionFlow();
+    }
   });
-
-  btnLogPick.addEventListener("click", () => {
-    logCurrentPick();
+  inputOverrideB.addEventListener("change", () => {
+    const resultsTabHeader = document.getElementById("results-tab-header");
+    if (resultsTabHeader && !resultsTabHeader.classList.contains("hidden")) {
+      runPredictionFlow();
+    }
   });
-
-  btnUpdateLogged.addEventListener("click", () => {
-    updateLoggedPicksResults();
+  inputAltitude.addEventListener("change", () => {
+    const resultsTabHeader = document.getElementById("results-tab-header");
+    if (resultsTabHeader && !resultsTabHeader.classList.contains("hidden")) {
+      runPredictionFlow();
+    }
   });
-
-  // Dynamic refresh on overrides/altitude change
-  inputOverrideA.addEventListener("change", () => { runPredictionFlow(); });
-  inputOverrideB.addEventListener("change", () => { runPredictionFlow(); });
-  inputAltitude.addEventListener("change", () => { runPredictionFlow(); });
 }
 
 function updateMatchCard(fullReload = true) {
@@ -409,8 +399,8 @@ function updateMatchCard(fullReload = true) {
   fifaDisplayA.textContent = `FIFA #${rankSliderA.value}`;
   fifaDisplayB.textContent = `FIFA #${rankSliderB.value}`;
 
-  labelWinA.textContent = `Victoria ${metaA.name}`;
-  labelWinB.textContent = `Victoria ${metaB.name}`;
+  if (gaugeLabelA) gaugeLabelA.textContent = `Victoria ${metaA.name}`;
+  if (gaugeLabelB) gaugeLabelB.textContent = `Victoria ${metaB.name}`;
   
   oddsLabelA.textContent = `Cuota ${metaA.name.slice(0, 5)}.`;
   oddsLabelB.textContent = `Cuota ${metaB.name.slice(0, 5)}.`;
@@ -744,18 +734,36 @@ async function runPredictionFlow() {
     const data = await res.json();
     lastSimulationResult = data; // Save globally for logging (Fase 6)
 
-    // Render results
+    // Render results (Circular Gauges)
     const pctA = (data.probWinA * 100).toFixed(1);
     const pctD = (data.probDraw * 100).toFixed(1);
     const pctB = (data.probWinB * 100).toFixed(1);
 
-    pctWinA.textContent = `${pctA}%`;
-    pctDraw.textContent = `${pctD}%`;
-    pctWinB.textContent = `${pctB}%`;
+    if (gaugeTextA) gaugeTextA.textContent = `${pctA}%`;
+    if (gaugeTextDraw) gaugeTextDraw.textContent = `${pctD}%`;
+    if (gaugeTextB) gaugeTextB.textContent = `${pctB}%`;
 
-    barWinA.style.width = `${pctA}%`;
-    barDraw.style.width = `${pctD}%`;
-    barWinB.style.width = `${pctB}%`;
+    if (gaugePathA) gaugePathA.setAttribute("stroke-dasharray", `${pctA}, 100`);
+    if (gaugePathDraw) gaugePathDraw.setAttribute("stroke-dasharray", `${pctD}, 100`);
+    if (gaugePathB) gaugePathB.setAttribute("stroke-dasharray", `${pctB}, 100`);
+
+    // Hide first-time placeholder banner and reveal results tab header/active tab
+    const firstTimePlaceholder = document.getElementById("first-time-placeholder");
+    const resultsTabHeader = document.getElementById("results-tab-header");
+    if (firstTimePlaceholder && !firstTimePlaceholder.classList.contains("hidden")) {
+      firstTimePlaceholder.classList.add("hidden");
+    }
+    if (resultsTabHeader && resultsTabHeader.classList.contains("hidden")) {
+      resultsTabHeader.classList.remove("hidden");
+      
+      // Also show the default active tab content (Análisis)
+      const activeTabBtn = resultsTabHeader.querySelector(".tab-btn.active");
+      if (activeTabBtn) {
+        const tabId = activeTabBtn.id.replace("tab-btn-", "tab-");
+        const tabContent = document.getElementById(tabId);
+        if (tabContent) tabContent.classList.remove("hidden");
+      }
+    }
 
     xgValA.textContent = data.xgA.toFixed(2);
     xgValB.textContent = data.xgB.toFixed(2);
@@ -1018,34 +1026,40 @@ async function runBacktestFlow() {
 }
 
 function renderBacktestMetrics(data) {
-  backtestResultsContainer.classList.remove("hidden");
+  if (backtestResultsContainer) backtestResultsContainer.classList.remove("hidden");
   
   if (data.financials) {
-    btRoi.textContent = `${data.financials.roiPercent > 0 ? '+' : ''}${data.financials.roiPercent}%`;
-    btRoi.style.color = data.financials.roiPercent >= 0 ? '#10B981' : '#EF4444';
+    if (btRoi) {
+      btRoi.textContent = `${data.financials.roiPercent > 0 ? '+' : ''}${data.financials.roiPercent}%`;
+      btRoi.style.color = data.financials.roiPercent >= 0 ? '#10B981' : '#EF4444';
+    }
+    if (btProfit) {
+      btProfit.textContent = `${data.financials.profitUnits > 0 ? '+' : ''}${data.financials.profitUnits}`;
+      btProfit.style.color = data.financials.profitUnits >= 0 ? '#10B981' : '#EF4444';
+    }
+    if (btBets) btBets.textContent = data.financials.betsPlaced.toLocaleString();
     
-    btProfit.textContent = `${data.financials.profitUnits > 0 ? '+' : ''}${data.financials.profitUnits}`;
-    btProfit.style.color = data.financials.profitUnits >= 0 ? '#10B981' : '#EF4444';
-    
-    btBets.textContent = data.financials.betsPlaced.toLocaleString();
-    
-    if (data.financials.betsPlaced > 0) {
-      btHitrate.textContent = `${((data.financials.betsWon / data.financials.betsPlaced) * 100).toFixed(1)}%`;
-    } else {
-      btHitrate.textContent = "--%";
+    if (btHitrate) {
+      if (data.financials.betsPlaced > 0) {
+        btHitrate.textContent = `${((data.financials.betsWon / data.financials.betsPlaced) * 100).toFixed(1)}%`;
+      } else {
+        btHitrate.textContent = "--%";
+      }
     }
   }
   
   if (data.model) {
-    btFavAcc.textContent = `${(data.model.favouriteAccuracy * 100).toFixed(1)}%`;
-    btBrier.textContent = data.model.brier.toFixed(3);
-    btLogloss.textContent = data.model.logloss.toFixed(3);
+    if (btFavAcc) btFavAcc.textContent = `${(data.model.favouriteAccuracy * 100).toFixed(1)}%`;
+    if (btBrier) btBrier.textContent = data.model.brier.toFixed(3);
+    if (btLogloss) btLogloss.textContent = data.model.logloss.toFixed(3);
   }
   
-  btMatches.textContent = data.evaluated.toLocaleString();
+  if (btMatches) btMatches.textContent = data.evaluated.toLocaleString();
   
-  const d = new Date(data.generatedAt);
-  btDate.textContent = d.toLocaleString();
+  if (btDate) {
+    const d = new Date(data.generatedAt);
+    btDate.textContent = d.toLocaleString();
+  }
 }
 
 
