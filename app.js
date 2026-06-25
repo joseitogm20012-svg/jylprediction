@@ -92,6 +92,7 @@ const simsSlider = document.getElementById("input-sims");
 const inputOverrideA = document.getElementById("input-override-a");
 const inputOverrideB = document.getElementById("input-override-b");
 const inputAltitude = document.getElementById("input-altitude");
+const inputHostCountry = document.getElementById("input-host-country");
 
 const btnSimulate = document.getElementById("btn-simulate");
 const simSpinner = document.getElementById("sim-spinner");
@@ -239,6 +240,16 @@ async function initializeApp() {
           create: false,
           sortField: { field: "text", direction: "asc" }
         });
+
+        new TomSelect("#ai-team-a", {
+          create: false,
+          sortField: { field: "text", direction: "asc" }
+        });
+
+        new TomSelect("#ai-team-b", {
+          create: false,
+          sortField: { field: "text", direction: "asc" }
+        });
       } else {
         console.warn("TomSelect no está definido. Cargando selectores normales.");
       }
@@ -269,6 +280,9 @@ function populateSelects() {
     TEAM_METADATA[a].name.localeCompare(TEAM_METADATA[b].name)
   );
 
+  const aiTeamA = document.getElementById("ai-team-a");
+  const aiTeamB = document.getElementById("ai-team-b");
+
   slugs.forEach(slug => {
     const optA = document.createElement("option");
     optA.value = slug;
@@ -281,6 +295,18 @@ function populateSelects() {
     optB.textContent = `${TEAM_METADATA[slug].flag} ${TEAM_METADATA[slug].name}`;
     if (slug === selectedTeamB) optB.selected = true;
     selectB.appendChild(optB);
+
+    if (aiTeamA && aiTeamB) {
+      const optAiA = document.createElement("option");
+      optAiA.value = slug;
+      optAiA.textContent = `${TEAM_METADATA[slug].flag} ${TEAM_METADATA[slug].name}`;
+      aiTeamA.appendChild(optAiA);
+
+      const optAiB = document.createElement("option");
+      optAiB.value = slug;
+      optAiB.textContent = `${TEAM_METADATA[slug].flag} ${TEAM_METADATA[slug].name}`;
+      aiTeamB.appendChild(optAiB);
+    }
   });
 }
 
@@ -333,6 +359,11 @@ function bindListeners() {
         
         // Show targeted tab content
         const targetId = btn.id.replace("tab-btn-", "tab-");
+        if (targetId === "tab-ai-crud") {
+          checkAIAdminStatus();
+        } else if (targetId === "tab-analysis") {
+          fetchAITacticalAnalysis(selectedTeamA, selectedTeamB);
+        }
         const targetContent = document.getElementById(targetId);
         if (targetContent) {
           targetContent.classList.remove("hidden");
@@ -379,6 +410,14 @@ function bindListeners() {
       runPredictionFlow();
     }
   });
+  if (inputHostCountry) {
+    inputHostCountry.addEventListener("change", () => {
+      const resultsTabHeader = document.getElementById("results-tab-header");
+      if (resultsTabHeader && !resultsTabHeader.classList.contains("hidden")) {
+        runPredictionFlow();
+      }
+    });
+  }
 
   // Collapsible Parameter Guide Panel Toggle
   const btnToggleGuide = document.getElementById("btn-toggle-guide");
@@ -444,6 +483,9 @@ function bindListeners() {
       }
     });
   }
+  
+  // Initialize AI CRUD/Admin bindings (Login, Prefill, Forms)
+  initAIAdminListeners();
 }
 
 function updateMatchCard(fullReload = true) {
@@ -503,6 +545,9 @@ function updateMatchCard(fullReload = true) {
     loadRecentMatches(selectedTeamA, matchListA, historyTitleA, "Uruguay");
     loadRecentMatches(selectedTeamB, matchListB, historyTitleB, "Arabia Saudita");
     loadH2HData();
+    
+    // Check and load AI analysis if it was already saved for this match
+    fetchAITacticalAnalysis(selectedTeamA, selectedTeamB);
   }
 }
 
@@ -1114,7 +1159,8 @@ async function runPredictionFlow() {
     oddsB: inputOddsB.value ? parseFloat(inputOddsB.value) : null,
     strengthOverrideA: inputOverrideA.value ? parseFloat(inputOverrideA.value) : 1.0,
     strengthOverrideB: inputOverrideB.value ? parseFloat(inputOverrideB.value) : 1.0,
-    altitude: inputAltitude.value ? parseInt(inputAltitude.value) : 0
+    altitude: inputAltitude.value ? parseInt(inputAltitude.value) : 0,
+    hostCountry: inputHostCountry.value || null
   };
 
   try {
@@ -1175,6 +1221,12 @@ async function runPredictionFlow() {
     if (dcRhoValue && data.dcRho !== undefined) {
         dcRhoValue.textContent = data.dcRho.toFixed(2);
     }
+
+    // Render match summary (narrative description)
+    renderMatchSummary(data, selectedTeamA, selectedTeamB);
+
+    // Fetch AI tactical analysis if available
+    fetchAITacticalAnalysis(selectedTeamA, selectedTeamB);
 
     // Render top scores
     scoreListContainer.innerHTML = "";
@@ -1781,3 +1833,662 @@ document.addEventListener('input', function(e) {
     });
   }
 });
+
+/* ==========================================================================
+   MATCH SUMMARY - Descripción narrativa del pronóstico
+   ========================================================================== */
+function renderMatchSummary(data, slugA, slugB) {
+  const card = document.getElementById('match-summary-card');
+  if (!card) return;
+
+  const metaA = TEAM_METADATA[slugA] || { name: slugA, flag: '' };
+  const metaB = TEAM_METADATA[slugB] || { name: slugB, flag: '' };
+  const nameA = metaA.name;
+  const nameB = metaB.name;
+  const flagA = metaA.flag;
+  const flagB = metaB.flag;
+
+  const pA = data.probWinA;
+  const pD = data.probDraw;
+  const pB = data.probWinB;
+  const xgA = data.xgA;
+  const xgB = data.xgB;
+  const cp = data.cornersPrediction;
+  const gm = data.goalsMarkets;
+  const topScore = data.topScores?.[0];
+
+  // ---- Determinar favorito y nivel de confianza ----
+  let favorito, pFav, pOther, nameFav, nameOther, flagFav, flagOther;
+  if (pA >= pB && pA >= pD) {
+    favorito = 'A'; pFav = pA; pOther = pB;
+    nameFav = nameA; nameOther = nameB; flagFav = flagA; flagOther = flagB;
+  } else if (pB >= pA && pB >= pD) {
+    favorito = 'B'; pFav = pB; pOther = pA;
+    nameFav = nameB; nameOther = nameA; flagFav = flagB; flagOther = flagA;
+  } else {
+    favorito = 'DRAW';
+  }
+
+  const gap = favorito !== 'DRAW' ? Math.abs(pFav - pOther) : 0;
+
+  // Badge y color de confianza
+  let confidenceLabel, badgeColor, badgeBg;
+  if (favorito === 'DRAW') {
+    confidenceLabel = '⚖️ Muy Equilibrado';
+    badgeColor = '#9ca3af'; badgeBg = 'rgba(156,163,175,0.12)';
+  } else if (gap >= 0.40) {
+    confidenceLabel = '🔥 Alta Confianza';
+    badgeColor = '#34d399'; badgeBg = 'rgba(52,211,153,0.12)';
+  } else if (gap >= 0.20) {
+    confidenceLabel = '✅ Favorable';
+    badgeColor = '#f0b310'; badgeBg = 'rgba(240,179,16,0.12)';
+  } else {
+    confidenceLabel = '⚠️ Incierto';
+    badgeColor = '#f87171'; badgeBg = 'rgba(248,113,113,0.12)';
+  }
+
+  const badge = document.getElementById('summary-confidence-badge');
+  badge.textContent = confidenceLabel;
+  badge.style.color = badgeColor;
+  badge.style.background = badgeBg;
+  badge.style.borderColor = badgeColor + '40';
+
+  // ---- Veredicto narrativo ----
+  const over25Prob = gm?.overUnder?.find(o => o.threshold === 2.5)?.over || 0;
+  const btts = gm?.btts?.yes || 0;
+  let verdict = '';
+
+  if (favorito === 'DRAW') {
+    verdict = `El modelo estadístico encuentra un <strong>equilibrio total</strong> entre ${flagA} <strong>${nameA}</strong> y ${flagB} <strong>${nameB}</strong>. ` +
+      `Las probabilidades de victoria son casi idénticas (${(pA*100).toFixed(1)}% vs ${(pB*100).toFixed(1)}%), ` +
+      `con un ${(pD*100).toFixed(1)}% de empate. El partido presenta un xG muy parejo de <strong>${xgA.toFixed(2)}</strong> vs <strong>${xgB.toFixed(2)}</strong>. ` +
+      `Dado el equilibrio, los mercados de doble oportunidad y goles ofrecen mejor valor que el 1X2 directo.`;
+  } else {
+    const pFavPct = (pFav * 100).toFixed(1);
+    const pOtherPct = (pOther * 100).toFixed(1);
+    const xgFav = favorito === 'A' ? xgA : xgB;
+    const xgOther = favorito === 'A' ? xgB : xgA;
+
+    let openerPhrase;
+    if (gap >= 0.40) {
+      openerPhrase = `El modelo muestra una clara ventaja para ${flagFav} <strong>${nameFav}</strong>`;
+    } else if (gap >= 0.20) {
+      openerPhrase = `El modelo favorece levemente a ${flagFav} <strong>${nameFav}</strong>`;
+    } else {
+      openerPhrase = `El modelo apunta tímidamente hacia ${flagFav} <strong>${nameFav}</strong>`;
+    }
+
+    const goalsNote = over25Prob >= 0.55
+      ? `El partido apunta a ser <strong>goleador</strong> (Over 2.5 al ${(over25Prob*100).toFixed(1)}%).`
+      : over25Prob >= 0.40
+        ? `Se espera un partido de <strong>goles moderados</strong> (Over 2.5 al ${(over25Prob*100).toFixed(1)}%).`
+        : `Se espera un partido <strong>cerrado y con pocos goles</strong> (Over 2.5 solo al ${(over25Prob*100).toFixed(1)}%).`;
+
+    const bttsNote = btts >= 0.55
+      ? `Ambos equipos tienen alta probabilidad de marcar (BTTS ${(btts*100).toFixed(1)}%).`
+      : btts >= 0.40
+        ? `Existe una probabilidad moderada de que ambos anoten (BTTS ${(btts*100).toFixed(1)}%).`
+        : `El modelo anticipa que al menos uno de los equipos se quedará sin marcar (BTTS solo ${(btts*100).toFixed(1)}%).`;
+
+    verdict = `${openerPhrase}, con un ${pFavPct}% de probabilidad de victoria frente al ${pOtherPct}% de ${flagOther} <strong>${nameOther}</strong>. ` +
+      `El xG esperado es de <strong>${xgFav.toFixed(2)}</strong> para ${nameFav} y <strong>${xgOther.toFixed(2)}</strong> para ${nameOther}. ` +
+      `${goalsNote} ${bttsNote}`;
+  }
+
+  document.getElementById('summary-verdict').innerHTML = verdict;
+
+  // ---- Key Data Chips ----
+  document.getElementById('chip-xg-val').textContent = `${xgA.toFixed(2)} / ${xgB.toFixed(2)}`;
+  document.getElementById('chip-corners-val').textContent =
+    `${cp.expectedA.toFixed(1)} / ${cp.expectedB.toFixed(1)} (${cp.expectedTotal.toFixed(1)} tot.)`;
+  document.getElementById('chip-top-score').textContent =
+    topScore ? `${topScore.score} · ${(topScore.probability*100).toFixed(1)}%` : '--';
+  document.getElementById('chip-btts').textContent = `${(btts*100).toFixed(1)}%`;
+  document.getElementById('chip-over25').textContent = `${(over25Prob*100).toFixed(1)}%`;
+
+  // Fuerza ofensiva relativa (shots-based)
+  const shotA = data.comparisonStats?.teamA?.shots_per_90 || xgA * 7;
+  const shotB = data.comparisonStats?.teamB?.shots_per_90 || xgB * 7;
+  document.getElementById('chip-attack').textContent =
+    `${shotA.toFixed(1)} / ${shotB.toFixed(1)} tiros`;
+
+  // ---- Análisis de Mercados ----
+  const marketsList = document.getElementById('summary-markets-list');
+  marketsList.innerHTML = '';
+  const markets = [];
+
+  // 1X2
+  const resultLabel = pA > pB && pA > pD ? `Victoria ${nameA}` :
+                      pB > pA && pB > pD ? `Victoria ${nameB}` : 'Empate';
+  const resultProb = Math.max(pA, pB, pD);
+  markets.push({ label: `Resultado: ${resultLabel}`, value: `${(resultProb*100).toFixed(1)}%`, color: '#f0b310' });
+
+  // BTTS
+  const bttsBest = btts >= 0.5 ? { l: 'Ambos Anotan (Sí)', v: btts } : { l: 'Solo uno anota (No)', v: 1-btts };
+  markets.push({ label: bttsBest.l, value: `${(bttsBest.v*100).toFixed(1)}%`, color: '#818cf8' });
+
+  // O/U 2.5
+  const over25Best = over25Prob >= 0.5 ? { l: 'Over 2.5 Goles', v: over25Prob } : { l: 'Under 2.5 Goles', v: 1-over25Prob };
+  markets.push({ label: over25Best.l, value: `${(over25Best.v*100).toFixed(1)}%`, color: '#34d399' });
+
+  // DNB
+  const dnbFav = pA > pB ? { l: `DNB ${nameA}`, v: gm?.dnb?.['1'] } : { l: `DNB ${nameB}`, v: gm?.dnb?.['2'] };
+  if (dnbFav.v) markets.push({ label: dnbFav.l, value: `${(dnbFav.v*100).toFixed(1)}%`, color: '#f87171' });
+
+  // +EV market if odds available
+  if (data.bettingAnalysis?.hasOdds) {
+    const ba = data.bettingAnalysis;
+    if (ba.valuableA) markets.push({ label: `⚡ Valor: ${nameA}`, value: `+EV ${(ba.edgeA*100).toFixed(1)}%`, color: '#10b981' });
+    if (ba.valuableB) markets.push({ label: `⚡ Valor: ${nameB}`, value: `+EV ${(ba.edgeB*100).toFixed(1)}%`, color: '#10b981' });
+    if (ba.valuableDraw) markets.push({ label: '⚡ Valor: Empate', value: `+EV ${(ba.edgeDraw*100).toFixed(1)}%`, color: '#10b981' });
+  }
+
+  markets.forEach(m => {
+    const li = document.createElement('li');
+    li.className = 'summary-market-item';
+    li.innerHTML = `
+      <span class="summary-market-dot" style="background: ${m.color};"></span>
+      <span class="summary-market-label">${m.label}</span>
+      <span class="summary-market-value" style="color: ${m.color};">${m.value}</span>
+    `;
+    marketsList.appendChild(li);
+  });
+
+  // ---- Análisis de Córneres ----
+  const cornersList = document.getElementById('summary-corners-list');
+  cornersList.innerHTML = '';
+  const cornersItems = [];
+
+  // Quién domina corners
+  const cornersWinner = cp.probMostA > cp.probMostB
+    ? { l: `${nameA} domina el saque`, v: cp.probMostA, c: '#f0b310' }
+    : { l: `${nameB} domina el saque`, v: cp.probMostB, c: '#818cf8' };
+  cornersItems.push({ label: cornersWinner.l, value: `${(cornersWinner.v*100).toFixed(1)}%`, color: cornersWinner.c });
+
+  // Total corners más probable
+  const totalC = cp.expectedTotal;
+  cornersItems.push({ label: `Total esperado: ${totalC.toFixed(1)} córneres`, value: '', color: '#9ca3af' });
+
+  // Over/under lines
+  const ouLines = cp.overUnder || [];
+  ouLines.forEach(ou => {
+    const isOver = ou.over >= 0.5;
+    const pct = (Math.max(ou.over, ou.under) * 100).toFixed(1);
+    const dir = isOver ? 'Over' : 'Under';
+    const color = isOver ? '#34d399' : '#f87171';
+    cornersItems.push({ label: `${dir} ${ou.threshold} córneres`, value: `${pct}%`, color });
+  });
+
+  // Córneres A vs B
+  cornersItems.push({ label: `${nameA}: ${cp.expectedA.toFixed(1)} | ${nameB}: ${cp.expectedB.toFixed(1)}`, value: '', color: '#6b7280' });
+
+  cornersItems.forEach(ci => {
+    const li = document.createElement('li');
+    li.className = 'summary-market-item';
+    li.innerHTML = `
+      <span class="summary-market-dot" style="background: ${ci.color};"></span>
+      <span class="summary-market-label">${ci.label}</span>
+      ${ci.value ? `<span class="summary-market-value" style="color: ${ci.color};">${ci.value}</span>` : ''}
+    `;
+    cornersList.appendChild(li);
+  });
+
+  // ---- Fiabilidad de datos ----
+  const srcA = data.xgSourceA;
+  const srcB = data.xgSourceB;
+  const srcALabel = srcA === 'fbref' ? 'datos reales FBref (Copa del Mundo)' :
+                    srcA === 'real'  ? 'datos reales FBref' : 'estimación histórica';
+  const srcBLabel = srcB === 'fbref' ? 'datos reales FBref (Copa del Mundo)' :
+                    srcB === 'real'  ? 'datos reales FBref' : 'estimación histórica';
+  const bothFbref = (srcA === 'fbref' || srcA === 'real') && (srcB === 'fbref' || srcB === 'real');
+  const noneFbref = srcA === 'modelo' && srcB === 'modelo';
+
+  let reliabilityText;
+  if (bothFbref) {
+    reliabilityText = `<strong>Alta fiabilidad.</strong> Ambos equipos usan ${srcALabel} — las estadísticas de xG y córneres están calibradas con rendimiento real en partidos oficiales internacionales recientes.`;
+  } else if (noneFbref) {
+    reliabilityText = `<strong>Fiabilidad moderada.</strong> Ningún equipo tiene estadísticas avanzadas recientes. El modelo usa historial de resultados ponderado por ELO + ranking FIFA. Las probabilidades son orientativas.`;
+  } else {
+    const withData = srcA !== 'modelo' ? nameA : nameB;
+    const withEst  = srcA === 'modelo' ? nameA : nameB;
+    reliabilityText = `<strong>Fiabilidad mixta.</strong> ${withData} usa ${srcA !== 'modelo' ? srcALabel : srcBLabel}, mientras que ${withEst} se estima por historial y ELO. Las probabilidades de ${withData} son más precisas.`;
+  }
+
+  document.getElementById('summary-reliability-text').innerHTML = reliabilityText;
+
+  // Show the card
+  card.style.display = 'block';
+}
+
+/* ==========================================================================
+   AI CRUD & LOGIN LOGIC (NEW)
+   ========================================================================== */
+let adminPassword = localStorage.getItem("adminPassword") || "";
+let savedAnalyses = [];
+
+function checkAIAdminStatus() {
+  const loginPanel = document.getElementById("ai-crud-login-panel");
+  const adminPanel = document.getElementById("ai-crud-admin-panel");
+  if (!loginPanel || !adminPanel) return;
+  
+  if (adminPassword) {
+    loginPanel.style.display = "none";
+    adminPanel.style.display = "block";
+    loadAIAnalyses();
+  } else {
+    loginPanel.style.display = "block";
+    adminPanel.style.display = "none";
+  }
+}
+
+async function loadAIAnalyses() {
+  const aiAnalysesList = document.getElementById("ai-analyses-list");
+  if (!aiAnalysesList) return;
+  
+  aiAnalysesList.innerHTML = `<div class="loading-placeholder">Cargando análisis...</div>`;
+  try {
+    const res = await fetch("/api/ai-analyses");
+    const json = await res.json();
+    savedAnalyses = json.analyses || [];
+    renderAIAnalysesList();
+  } catch (error) {
+    console.error("Error loading analyses:", error);
+    aiAnalysesList.innerHTML = `<div class="loading-placeholder">Error al cargar la lista.</div>`;
+  }
+}
+
+function renderAIAnalysesList() {
+  const aiAnalysesList = document.getElementById("ai-analyses-list");
+  const aiSearchInput = document.getElementById("ai-search-input");
+  if (!aiAnalysesList) return;
+  
+  aiAnalysesList.innerHTML = "";
+  const query = aiSearchInput ? aiSearchInput.value.toLowerCase().trim() : "";
+  
+  const filtered = savedAnalyses.filter(item => {
+    const nameA = (TEAM_METADATA[item.teamA]?.name || item.teamA).toLowerCase();
+    const nameB = (TEAM_METADATA[item.teamB]?.name || item.teamB).toLowerCase();
+    const model = (item.model_name || "").toLowerCase();
+    return nameA.includes(query) || nameB.includes(query) || model.includes(query);
+  });
+  
+  if (filtered.length === 0) {
+    aiAnalysesList.innerHTML = `<div class="loading-placeholder">No se encontraron análisis.</div>`;
+    return;
+  }
+  
+  filtered.forEach(item => {
+    const metaA = TEAM_METADATA[item.teamA] || { name: item.teamA.toUpperCase(), flag: "🏳️" };
+    const metaB = TEAM_METADATA[item.teamB] || { name: item.teamB.toUpperCase(), flag: "🏳️" };
+    
+    const card = document.createElement("div");
+    card.className = "ai-match-card";
+    
+    card.innerHTML = `
+      <div class="ai-match-card-header">
+        <span>${item.stage || "Fase de Grupos"} · Confianza: <strong>${item.confidence}%</strong></span>
+      </div>
+      <div class="ai-match-card-title">${metaA.flag} ${metaA.name} vs ${metaB.flag} ${metaB.name}</div>
+      <div class="ai-match-card-actions">
+        <button class="btn btn-resolve-loss btn-edit-ai" data-id="${item.id}" style="padding: 4px 10px; font-size: 0.75rem; background: rgba(240,179,16,0.15); border-color: rgba(240,179,16,0.2); color: var(--color-primary); cursor: pointer;">✏️ Editar</button>
+        <button class="btn btn-resolve-loss btn-delete-ai" data-id="${item.id}" style="padding: 4px 10px; font-size: 0.75rem; background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.2); color: #ef4444; cursor: pointer; margin-left: 6px;">🗑️ Borrar</button>
+      </div>
+    `;
+    aiAnalysesList.appendChild(card);
+  });
+}
+
+function clearAIForm() {
+  const aiIdField = document.getElementById("ai-id-field");
+  const aiModel = document.getElementById("ai-model");
+  const aiConfidence = document.getElementById("ai-confidence");
+  const aiPredictedScore = document.getElementById("ai-predicted-score");
+  const aiStage = document.getElementById("ai-stage");
+  const aiKeyPlayers = document.getElementById("ai-key-players");
+  const aiKeyTips = document.getElementById("ai-key-tips");
+  const aiText = document.getElementById("ai-text");
+  const aiTeamA = document.getElementById("ai-team-a");
+  const aiTeamB = document.getElementById("ai-team-b");
+  
+  if (aiIdField) aiIdField.value = "";
+  if (aiModel) aiModel.value = "";
+  if (aiConfidence) aiConfidence.value = "80";
+  if (aiPredictedScore) aiPredictedScore.value = "";
+  if (aiStage) aiStage.value = "Fase de Grupos";
+  if (aiKeyPlayers) aiKeyPlayers.value = "";
+  if (aiKeyTips) aiKeyTips.value = "";
+  if (aiText) aiText.value = "";
+  
+  const formTitle = document.getElementById("crud-form-title");
+  if (formTitle) formTitle.textContent = "Guardar Análisis de IA";
+  
+  if (aiTeamA && aiTeamA.tomselect) aiTeamA.tomselect.setValue("");
+  else if (aiTeamA) aiTeamA.value = "";
+  
+  if (aiTeamB && aiTeamB.tomselect) aiTeamB.tomselect.setValue("");
+  else if (aiTeamB) aiTeamB.value = "";
+}
+
+function initAIAdminListeners() {
+  const aiLoginForm = document.getElementById("ai-login-form");
+  const btnAiLogout = document.getElementById("btn-ai-logout");
+  const aiAnalysisForm = document.getElementById("ai-analysis-form");
+  const btnPrefillAi = document.getElementById("btn-prefill-ai");
+  const btnAiClear = document.getElementById("btn-ai-clear");
+  const aiSearchInput = document.getElementById("ai-search-input");
+  const aiAnalysesList = document.getElementById("ai-analyses-list");
+  
+  if (aiLoginForm) {
+    aiLoginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const pwdInput = document.getElementById("ai-login-password");
+      const errDiv = document.getElementById("ai-login-error");
+      if (!pwdInput || !errDiv) return;
+      
+      errDiv.style.display = "none";
+      const pwd = pwdInput.value;
+      
+      try {
+        const res = await fetch("/api/ai-auth/verify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: pwd })
+        });
+        const json = await res.json();
+        if (res.ok && json.status === "success") {
+          adminPassword = pwd;
+          localStorage.setItem("adminPassword", pwd);
+          pwdInput.value = "";
+          checkAIAdminStatus();
+        } else {
+          errDiv.textContent = json.detail || "Contraseña incorrecta";
+          errDiv.style.display = "block";
+        }
+      } catch (err) {
+        console.error("Auth error:", err);
+        errDiv.textContent = "Error de red al verificar contraseña";
+        errDiv.style.display = "block";
+      }
+    });
+  }
+  
+  if (btnAiLogout) {
+    btnAiLogout.addEventListener("click", () => {
+      adminPassword = "";
+      localStorage.removeItem("adminPassword");
+      checkAIAdminStatus();
+    });
+  }
+  
+  if (btnPrefillAi) {
+    btnPrefillAi.addEventListener("click", () => {
+      if (!lastSimulationResult) {
+        alert("⚠️ Primero debes simular un partido en la pestaña de Análisis.");
+        return;
+      }
+      
+      const aiTeamA = document.getElementById("ai-team-a");
+      const aiTeamB = document.getElementById("ai-team-b");
+      const aiConfidence = document.getElementById("ai-confidence");
+      const aiKeyTips = document.getElementById("ai-key-tips");
+      
+      if (aiTeamA && aiTeamA.tomselect) aiTeamA.tomselect.setValue(selectedTeamA);
+      else if (aiTeamA) aiTeamA.value = selectedTeamA;
+      
+      if (aiTeamB && aiTeamB.tomselect) aiTeamB.tomselect.setValue(selectedTeamB);
+      else if (aiTeamB) aiTeamB.value = selectedTeamB;
+      
+      if (aiConfidence) aiConfidence.value = "85";
+      
+      if (aiKeyTips) {
+        const defaultTips = [];
+        const nameAVal = TEAM_METADATA[selectedTeamA]?.name || selectedTeamA;
+        const nameBVal = TEAM_METADATA[selectedTeamB]?.name || selectedTeamB;
+        if (lastSimulationResult.probWinA > 0.45) {
+          defaultTips.push(`Favorito ${nameAVal}`);
+        } else if (lastSimulationResult.probWinB > 0.45) {
+          defaultTips.push(`Favorito ${nameBVal}`);
+        }
+        
+        if (lastSimulationResult.cornersPrediction) {
+          defaultTips.push(`${lastSimulationResult.cornersPrediction.expectedTotal.toFixed(0)} córneres aprox.`);
+        }
+        aiKeyTips.value = defaultTips.join(", ");
+      }
+      
+      alert("⚡ Datos de simulación actual precargados.");
+    });
+  }
+  
+  if (btnAiClear) {
+    btnAiClear.addEventListener("click", clearAIForm);
+  }
+  
+  if (aiSearchInput) {
+    aiSearchInput.addEventListener("input", renderAIAnalysesList);
+  }
+  
+  if (aiAnalysisForm) {
+    aiAnalysisForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const aiIdField = document.getElementById("ai-id-field");
+      const aiTeamA = document.getElementById("ai-team-a");
+      const aiTeamB = document.getElementById("ai-team-b");
+      const aiConfidence = document.getElementById("ai-confidence");
+      const aiStage = document.getElementById("ai-stage");
+      const aiKeyTips = document.getElementById("ai-key-tips");
+      const aiText = document.getElementById("ai-text");
+      
+      const tipsArr = aiKeyTips.value.split(",")
+        .map(t => t.trim())
+        .filter(t => t.length > 0);
+        
+      const payload = {
+        id: aiIdField.value ? parseInt(aiIdField.value) : null,
+        teamA: aiTeamA.value,
+        teamB: aiTeamB.value,
+        analysisText: aiText.value,
+        keyTips: tipsArr,
+        confidence: parseInt(aiConfidence.value),
+        predictedScore: "null",
+        modelName: "Manual",
+        stage: aiStage.value,
+        keyPlayers: ""
+      };
+      
+      try {
+        const res = await fetch("/api/ai-analyses", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Admin-Password": adminPassword
+          },
+          body: JSON.stringify(payload)
+        });
+        
+        if (res.status === 401) {
+          alert("🔒 Sesión no autorizada o expirada. Por favor, vuelve a iniciar sesión.");
+          adminPassword = "";
+          localStorage.removeItem("adminPassword");
+          checkAIAdminStatus();
+          return;
+        }
+        
+        const json = await res.json();
+        if (res.ok && json.status === "success") {
+          alert("✅ Análisis de IA guardado correctamente.");
+          clearAIForm();
+          loadAIAnalyses();
+          // Reload active match analysis in case they edited/saved the current match
+          fetchAITacticalAnalysis(selectedTeamA, selectedTeamB);
+        } else {
+          alert("Error al guardar: " + (json.detail || "Error desconocido"));
+        }
+      } catch (err) {
+        console.error("Save analysis error:", err);
+        alert("Error de red al guardar análisis.");
+      }
+    });
+  }
+  
+  if (aiAnalysesList) {
+    aiAnalysesList.addEventListener("click", async (e) => {
+      const editBtn = e.target.closest(".btn-edit-ai");
+      const deleteBtn = e.target.closest(".btn-delete-ai");
+      
+      const aiIdField = document.getElementById("ai-id-field");
+      const aiTeamA = document.getElementById("ai-team-a");
+      const aiTeamB = document.getElementById("ai-team-b");
+      const aiModel = document.getElementById("ai-model");
+      const aiConfidence = document.getElementById("ai-confidence");
+      const aiPredictedScore = document.getElementById("ai-predicted-score");
+      const aiStage = document.getElementById("ai-stage");
+      const aiKeyPlayers = document.getElementById("ai-key-players");
+      const aiKeyTips = document.getElementById("ai-key-tips");
+      const aiText = document.getElementById("ai-text");
+      
+      if (editBtn) {
+        const id = parseInt(editBtn.dataset.id);
+        const item = savedAnalyses.find(a => a.id === id);
+        if (item) {
+          aiIdField.value = item.id;
+          
+          if (aiTeamA && aiTeamA.tomselect) aiTeamA.tomselect.setValue(item.teamA);
+          else if (aiTeamA) aiTeamA.value = item.teamA;
+          
+          if (aiTeamB && aiTeamB.tomselect) aiTeamB.tomselect.setValue(item.teamB);
+          else if (aiTeamB) aiTeamB.value = item.teamB;
+          
+          if (aiModel) aiModel.value = item.model_name;
+          if (aiConfidence) aiConfidence.value = item.confidence;
+          if (aiPredictedScore) aiPredictedScore.value = item.predicted_score;
+          if (aiStage) aiStage.value = item.stage || "Fase de Grupos";
+          if (aiKeyPlayers) aiKeyPlayers.value = item.key_players || "";
+          if (aiKeyTips) aiKeyTips.value = (item.key_tips || []).join(", ");
+          if (aiText) aiText.value = item.analysis_text;
+          
+          const formTitle = document.getElementById("crud-form-title");
+          if (formTitle) formTitle.textContent = "✏️ Editar Análisis de IA";
+          
+          const formCard = aiAnalysisForm ? aiAnalysisForm.closest(".glass-card") : null;
+          if (formCard) formCard.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      
+      if (deleteBtn) {
+        if (!confirm("¿Estás seguro de que deseas eliminar este análisis?")) return;
+        const id = parseInt(deleteBtn.dataset.id);
+        
+        try {
+          const res = await fetch(`/api/ai-analyses/${id}`, {
+            method: "DELETE",
+            headers: {
+              "X-Admin-Password": adminPassword
+            }
+          });
+          
+          if (res.status === 401) {
+            alert("🔒 Sesión no autorizada o expirada.");
+            adminPassword = "";
+            localStorage.removeItem("adminPassword");
+            checkAIAdminStatus();
+            return;
+          }
+          
+          const json = await res.json();
+          if (res.ok && json.status === "success") {
+            loadAIAnalyses();
+            // Reload active match analysis in case they deleted the current match
+            fetchAITacticalAnalysis(selectedTeamA, selectedTeamB);
+          } else {
+            alert("Error al borrar: " + (json.detail || "Error desconocido"));
+          }
+        } catch (err) {
+          console.error("Delete analysis error:", err);
+          alert("Error de red al borrar.");
+        }
+      }
+    });
+  }
+}
+
+async function fetchAITacticalAnalysis(teamA, teamB) {
+  const card = document.getElementById("ai-tactical-analysis-card");
+  
+  if (card) card.style.display = "none";
+  
+  try {
+    const res = await fetch(`/api/ai-analyses/${teamA}/${teamB}`);
+    const json = await res.json();
+    
+    if (res.ok && json.status === "success" && json.analysis) {
+      const item = json.analysis;
+      
+      const badgeConf = document.getElementById("ai-confidence-badge");
+      const verdictText = document.getElementById("ai-verdict-text");
+      const tipsContainer = document.getElementById("ai-tips-container");
+      
+      if (badgeConf) badgeConf.textContent = `Confianza: ${item.confidence}%`;
+      if (verdictText) verdictText.innerHTML = formatMarkdownSimple(item.analysis_text);
+      
+      if (tipsContainer) {
+        tipsContainer.innerHTML = "";
+        if (item.key_tips && item.key_tips.length > 0) {
+          item.key_tips.forEach(tip => {
+            const badge = document.createElement("span");
+            badge.className = "ai-tip-badge";
+            badge.textContent = tip;
+            tipsContainer.appendChild(badge);
+          });
+        } else {
+          tipsContainer.innerHTML = `<span style="font-size: 0.8rem; color: var(--color-text-secondary); font-style: italic;">Sin recomendaciones registradas</span>`;
+        }
+      }
+      
+      if (card) card.style.display = "block";
+
+      // Auto-reveal the results tabs and activate the "Análisis" tab if an AI analysis exists
+      const firstTimePlaceholder = document.getElementById("first-time-placeholder");
+      const resultsTabHeader = document.getElementById("results-tab-header");
+      const tabAnalysis = document.getElementById("tab-analysis");
+      
+      if (firstTimePlaceholder && !firstTimePlaceholder.classList.contains("hidden")) {
+        firstTimePlaceholder.classList.add("hidden");
+      }
+      if (resultsTabHeader && resultsTabHeader.classList.contains("hidden")) {
+        resultsTabHeader.classList.remove("hidden");
+        // Ensure "Análisis" tab button is active if no tab is currently selected active
+        const activeTabBtn = resultsTabHeader.querySelector(".tab-btn.active");
+        if (!activeTabBtn) {
+          const tabBtnAnalysis = document.getElementById("tab-btn-analysis");
+          if (tabBtnAnalysis) tabBtnAnalysis.classList.add("active");
+        }
+      }
+      if (tabAnalysis && tabAnalysis.classList.contains("hidden")) {
+        const activeTabBtn = resultsTabHeader ? resultsTabHeader.querySelector(".tab-btn.active") : null;
+        if (activeTabBtn && activeTabBtn.id === "tab-btn-analysis") {
+          tabAnalysis.classList.remove("hidden");
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Error loading match AI analysis:", error);
+  }
+}
+
+function formatMarkdownSimple(text) {
+  if (!text) return "";
+  
+  let formatted = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+    
+  formatted = formatted.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  formatted = formatted.replace(/^\s*-\s+(.*?)$/gm, "<li>$1</li>");
+  formatted = formatted.replace(/(<li>.*?<\/li>)/gs, "<ul>$1</ul>");
+  formatted = formatted.replace(/<\/ul>\s*<ul>/g, "");
+  
+  return formatted;
+}

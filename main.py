@@ -1,9 +1,9 @@
 import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Header
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 import os
 import json
 import subprocess
@@ -42,6 +42,7 @@ class PredictionRequest(BaseModel):
     strengthOverrideA: Optional[float] = 1.0
     strengthOverrideB: Optional[float] = 1.0
     altitude: Optional[int] = 0
+    hostCountry: Optional[str] = None
 
 @app.get("/api/teams")
 def get_teams():
@@ -68,7 +69,8 @@ def predict_match(req: PredictionRequest):
             odds_b=req.oddsB,
             strength_override_a=req.strengthOverrideA if req.strengthOverrideA is not None else 1.0,
             strength_override_b=req.strengthOverrideB if req.strengthOverrideB is not None else 1.0,
-            altitude=req.altitude if req.altitude is not None else 0
+            altitude=req.altitude if req.altitude is not None else 0,
+            host_country=req.hostCountry
         )
         return res
     except Exception as e:
@@ -350,6 +352,148 @@ def update_prediction_results():
             "summary": summary
         }
     except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))# ============================================================
+# CRUD DE ANÁLISIS DE IA
+# ============================================================
+AI_ANALYSES_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "ai_analyses.json")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "torete69")
+
+class VerifyAuthRequest(BaseModel):
+    password: str
+
+class AIAnalysisRequest(BaseModel):
+    id: Optional[int] = None
+    teamA: str
+    teamB: str
+    analysisText: str
+    keyTips: List[str]
+    confidence: int
+    predictedScore: str
+    modelName: str
+    stage: Optional[str] = "Fase de Grupos"
+    keyPlayers: Optional[str] = ""
+
+@app.post("/api/ai-auth/verify")
+def verify_auth(req: VerifyAuthRequest):
+    if req.password == ADMIN_PASSWORD:
+        return {"status": "success", "message": "Authenticated successfully"}
+    raise HTTPException(status_code=401, detail="Contraseña incorrecta")
+
+@app.get("/api/ai-analyses")
+def get_ai_analyses():
+    try:
+        analyses = []
+        if os.path.exists(AI_ANALYSES_PATH):
+            with open(AI_ANALYSES_PATH, "r", encoding="utf-8") as f:
+                analyses = json.load(f)
+        return {"analyses": analyses}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/ai-analyses/{team_a}/{team_b}")
+def get_ai_analysis_for_match(team_a: str, team_b: str):
+    try:
+        analyses = []
+        if os.path.exists(AI_ANALYSES_PATH):
+            with open(AI_ANALYSES_PATH, "r", encoding="utf-8") as f:
+                analyses = json.load(f)
+        
+        match_key = f"{min(team_a, team_b)}-{max(team_a, team_b)}"
+        
+        for item in analyses:
+            if item.get("match_key") == match_key:
+                return {"status": "success", "analysis": item}
+                
+        return {"status": "not_found", "message": "No AI analysis found for this match-up."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/ai-analyses")
+def save_ai_analysis(req: AIAnalysisRequest, x_admin_password: Optional[str] = Header(None)):
+    if not x_admin_password or x_admin_password != ADMIN_PASSWORD:
+        raise HTTPException(status_code=401, detail="Contraseña incorrecta o no autorizada")
+    try:
+        analyses = []
+        if os.path.exists(AI_ANALYSES_PATH):
+            try:
+                with open(AI_ANALYSES_PATH, "r", encoding="utf-8") as f:
+                    analyses = json.load(f)
+            except:
+                analyses = []
+                
+        match_key = f"{min(req.teamA, req.teamB)}-{max(req.teamA, req.teamB)}"
+        
+        existing_item = None
+        if req.id:
+            for item in analyses:
+                if item.get("id") == req.id:
+                    existing_item = item
+                    break
+        else:
+            for item in analyses:
+                if item.get("match_key") == match_key:
+                    existing_item = item
+                    break
+
+        if existing_item:
+            existing_item["teamA"] = req.teamA
+            existing_item["teamB"] = req.teamB
+            existing_item["match_key"] = match_key
+            existing_item["analysis_text"] = req.analysisText
+            existing_item["key_tips"] = req.keyTips
+            existing_item["confidence"] = req.confidence
+            existing_item["predicted_score"] = req.predictedScore
+            existing_item["model_name"] = req.modelName
+            existing_item["stage"] = req.stage if req.stage else "Fase de Grupos"
+            existing_item["key_players"] = req.keyPlayers if req.keyPlayers else ""
+            existing_item["updated_at"] = datetime.now().isoformat()
+            saved_entry = existing_item
+        else:
+            new_entry = {
+                "id": req.id if req.id else int(datetime.now().timestamp() * 1000),
+                "teamA": req.teamA,
+                "teamB": req.teamB,
+                "match_key": match_key,
+                "analysis_text": req.analysisText,
+                "key_tips": req.keyTips,
+                "confidence": req.confidence,
+                "predicted_score": req.predictedScore,
+                "model_name": req.modelName,
+                "stage": req.stage if req.stage else "Fase de Grupos",
+                "key_players": req.keyPlayers if req.keyPlayers else "",
+                "created_at": datetime.now().isoformat()
+            }
+            analyses.insert(0, new_entry)
+            saved_entry = new_entry
+            
+        with open(AI_ANALYSES_PATH, "w", encoding="utf-8") as f:
+            json.dump(analyses, f, indent=2, ensure_ascii=False)
+            
+        return {"status": "success", "analysis": saved_entry}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/api/ai-analyses/{analysis_id}")
+def delete_ai_analysis(analysis_id: int, x_admin_password: Optional[str] = Header(None)):
+    if not x_admin_password or x_admin_password != ADMIN_PASSWORD:
+        raise HTTPException(status_code=401, detail="Contraseña incorrecta o no autorizada")
+    try:
+        analyses = []
+        if os.path.exists(AI_ANALYSES_PATH):
+            with open(AI_ANALYSES_PATH, "r", encoding="utf-8") as f:
+                analyses = json.load(f)
+                
+        initial_len = len(analyses)
+        analyses = [item for item in analyses if item.get("id") != analysis_id]
+        
+        if len(analyses) == initial_len:
+            raise HTTPException(status_code=404, detail="Analysis not found.")
+            
+        with open(AI_ANALYSES_PATH, "w", encoding="utf-8") as f:
+            json.dump(analyses, f, indent=2, ensure_ascii=False)
+            
+        return {"status": "success", "message": "Analysis deleted successfully."}
+    except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 # Mount static files (HTML, CSS, JS) at the end, so it doesn't mask API routes
@@ -357,5 +501,27 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app.mount("/", StaticFiles(directory=BASE_DIR, html=True), name="static")
 
 if __name__ == "__main__":
+    import socket
+    def get_local_ip():
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("8.8.8.8", 80))
+            ip = s.getsockname()[0]
+            s.close()
+            return ip
+        except Exception:
+            return "127.0.0.1"
+
     port = int(os.environ.get("PORT", 3000))
+    local_ip = get_local_ip()
+    
+    print("\n" + "="*65)
+    print("  PREDICTOR MUNDIAL 2026 - SERVIDOR ACTIVO")
+    print(f"  -> En tu computadora, abre: http://localhost:{port}")
+    if local_ip != "127.0.0.1":
+        print(f"  -> En tu teléfono (mismo Wi-Fi): http://{local_ip}:{port}")
+    else:
+        print("  -> Conéctate a una red Wi-Fi para habilitar el acceso móvil.")
+    print("="*65 + "\n")
+    
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)

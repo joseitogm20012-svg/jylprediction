@@ -1,0 +1,272 @@
+﻿diff --git a/index.html b/index.html
+index f4af18e..aff7ae4 100644
+--- a/index.html
++++ b/index.html
+@@ -138,6 +138,15 @@
+             <label for="input-altitude">Altitud (m)</label>
+             <input type="number" id="input-altitude" min="0" max="4000" step="100" value="0" class="param-input" style="width: 100%;">
+           </div>
++          <div class="config-item compact-field" style="width: 105px;">
++            <label for="input-host-country">Sede WC 2026</label>
++            <select id="input-host-country" class="param-input" style="width: 100%; padding: 5px 6px; font-size: 0.78rem;">
++              <option value="">Neutral</option>
++              <option value="usa">­ƒç║­ƒç© Estados Unidos</option>
++              <option value="mexico">­ƒç▓­ƒç¢ M├®xico</option>
++              <option value="canada">­ƒç¿­ƒçª Canad├í</option>
++            </select>
++          </div>
+         </div>
+       </div>
+     </section>
+@@ -215,6 +224,15 @@
+             <p><strong>Qu├® hace:</strong> Simula la fatiga de jugar en altura para selecciones no adaptadas, reduciendo su fuerza de forma proporcional.</p>
+             <p class="guide-recommend"><strong>Recomendaci├│n:</strong> 0. Aj├║stalo si se juega en ciudades elevadas (ej. La Paz 3600m, CDMX 2240m) y un equipo no est├í aclimatado.</p>
+           </div>
++          <!-- Item 8 -->
++          <div class="guide-card">
++            <div class="guide-card-header">
++              <span class="guide-card-badge">WC 2026</span>
++              <h4>Sede del Mundial</h4>
++            </div>
++            <p><strong>Qu├® hace:</strong> Aplica una ventaja de local├¡a real para los equipos CONCACAF que juegan en su propio pa├¡s sede. USA, M├®xico y Canad├í reciben un +8% en xG propio, y un +3% cuando juegan en la sede de otro co-anfitri├│n.</p>
++            <p class="guide-recommend"><strong>Recomendaci├│n:</strong> Neutral por defecto. Selecciona el pa├¡s donde se juega el partido para que el modelo ajuste la ventaja autom├íticamente.</p>
++          </div>
+         </div>
+       </div>
+     </div>
+@@ -264,6 +282,9 @@
+         <button id="tab-btn-history" class="tab-btn">
+           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-tab-icon" style="margin-right: 6px; vertical-align: middle;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Historial &amp; H2H
+         </button>
++        <button id="tab-btn-ai-crud" class="tab-btn">
++          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-tab-icon" style="margin-right: 6px; vertical-align: middle;"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v12"/><path d="M8 10h8"/></svg>An├ílisis IA (Admin)
++        </button>
+       </div>
+ 
+       <!-- FIRST TIME ANALYSIS PLACEHOLDER BANNER -->
+@@ -342,6 +363,101 @@
+           </div>
+         </div>
+ 
++        <!-- Match Summary / Pron├│stico Narrativo -->
++        <div class="match-summary-card glass-card" id="match-summary-card" style="padding: 24px; display: none;">
++          <!-- Header -->
++          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
++            <h3 style="margin: 0; border-left: 3px solid var(--color-primary); padding-left: 12px; display: flex; align-items: center; gap: 10px;">
++              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
++              Resumen del Pron├│stico
++            </h3>
++            <!-- Confidence Badge -->
++            <span id="summary-confidence-badge" style="font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.04em; border: 1px solid;"></span>
++          </div>
++
++          <!-- Veredicto narrativo -->
++          <p id="summary-verdict" style="font-size: 0.95rem; line-height: 1.75; color: var(--color-text-primary); margin-bottom: 20px; padding: 16px; background: rgba(255,255,255,0.02); border-radius: 10px; border-left: 3px solid var(--color-primary);"></p>
++
++          <!-- Key Data Grid -->
++          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 20px;">
++            <div class="summary-stat-chip" id="chip-xg">
++              <span class="chip-label">Goles Esperados</span>
++              <span class="chip-value" id="chip-xg-val">-- / --</span>
++            </div>
++            <div class="summary-stat-chip" id="chip-corners">
++              <span class="chip-label">C├│rneres Esperados</span>
++              <span class="chip-value" id="chip-corners-val">--</span>
++            </div>
++            <div class="summary-stat-chip">
++              <span class="chip-label">Resultado m├ís Probable</span>
++              <span class="chip-value" id="chip-top-score">--</span>
++            </div>
++            <div class="summary-stat-chip">
++              <span class="chip-label">BTTS (Ambos Anotan)</span>
++              <span class="chip-value" id="chip-btts">--%</span>
++            </div>
++            <div class="summary-stat-chip">
++              <span class="chip-label">Goles Over 2.5</span>
++              <span class="chip-value" id="chip-over25">--%</span>
++            </div>
++            <div class="summary-stat-chip">
++              <span class="chip-label">Fuerza Ofensiva</span>
++              <span class="chip-value" id="chip-attack">-- / --</span>
++            </div>
++          </div>
++
++          <!-- Two-column detail -->
++          <div class="summary-details-grid">
++            <!-- An├ílisis de mercados -->
++            <div style="padding: 14px; background: rgba(255,255,255,0.02); border-radius: 10px; border: 1px solid var(--panel-border);">
++              <div style="font-size: 0.72rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;">­ƒôè An├ílisis de Mercados</div>
++              <ul id="summary-markets-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 0.85rem;"></ul>
++            </div>
++            <!-- An├ílisis de corners -->
++            <div style="padding: 14px; background: rgba(255,255,255,0.02); border-radius: 10px; border: 1px solid var(--panel-border);">
++              <div style="font-size: 0.72rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;">­ƒÜ® An├ílisis de C├│rneres</div>
++              <ul id="summary-corners-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 0.85rem;"></ul>
++            </div>
++          </div>
++
++          <!-- Data source and reliability -->
++          <div id="summary-reliability" style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: rgba(255,255,255,0.015); border-radius: 8px; border: 1px solid var(--panel-border); font-size: 0.78rem; color: var(--color-text-secondary);">
++            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
++            <span id="summary-reliability-text">--</span>
++          </div>
++
++          <!-- AI Analysis inside Match Summary Card -->
++          <div id="summary-ai-analysis" style="display: none; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--panel-border);">
++            <div style="font-size: 0.72rem; font-weight: 700; color: #f0b310; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
++              ­ƒºá An├ílisis T├íctico de IA
++            </div>
++            <div id="summary-ai-text" class="ai-verdict-box"></div>
++          </div>
++        </div>
++
++        <!-- AI Tactical Analysis -->
++        <div class="match-summary-card glass-card" id="ai-tactical-analysis-card" style="padding: 24px; margin-top: 24px; display: none; border-color: rgba(240,179,16,0.15);">
++          <!-- Header -->
++          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
++            <h3 style="margin: 0; border-left: 3px solid #f0b310; padding-left: 12px; display: flex; align-items: center; gap: 10px;">
++              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0b310" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10h-10V2z"/><path d="M12 12L2.5 12"/><path d="M12 12l5.3 5.3"/></svg>
++              An├ílisis T├íctico de IA
++            </h3>
++            <div style="display: flex; gap: 8px;">
++              <span id="ai-confidence-badge" style="font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; color: #34d399; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.2);"></span>
++            </div>
++          </div>
++
++          <!-- Narrative description -->
++          <div id="ai-verdict-text" class="ai-verdict-box"></div>
++
++          <!-- Recommended bets chips -->
++          <div>
++            <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 8px; letter-spacing: 0.05em;">Pron├│sticos Recomendados</h4>
++            <div id="ai-tips-container" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
++          </div>
++        </div>
++
+         <!-- Exact Scores / Heatmap -->
+         <div class="exact-scores-section glass-card" style="padding: 24px;">
+           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 12px;">
+@@ -797,6 +913,123 @@
+           </div>
+         </div>
+       </div>
++
++      <!-- TAB 5: CRUD AN├üLISIS IA -->
++      <div class="tab-content hidden" id="tab-ai-crud" style="padding: 24px;">
++        <!-- Panel de Login Oculto -->
++        <div id="ai-crud-login-panel" class="glass-card" style="max-width: 400px; margin: 40px auto; padding: 32px; text-align: center; border-color: rgba(240,179,16,0.15);">
++          <div style="font-size: 3rem; margin-bottom: 12px; filter: drop-shadow(0 0 8px rgba(240, 179, 16, 0.3));">­ƒöÆ</div>
++          <h3 style="margin-bottom: 8px; font-family: var(--font-family-title); font-size: 1.3rem;">Acceso Restringido</h3>
++          <p style="font-size: 0.82rem; color: var(--color-text-secondary); margin-bottom: 24px; line-height: 1.5;">Ingresa la contrase├▒a de administrador para gestionar los an├ílisis de IA.</p>
++          
++          <form id="ai-login-form" style="display: flex; flex-direction: column; gap: 12px;">
++            <input type="password" id="ai-login-password" placeholder="Contrase├▒a de administrador" class="param-input" style="width: 100%; text-align: center; font-size: 0.95rem;" required>
++            <button type="submit" class="btn btn-primary btn-glow" style="width: 100%; height: 42px; margin-top: 4px;">Ingresar al CRUD</button>
++          </form>
++          <div id="ai-login-error" style="color: #ef4444; font-size: 0.78rem; margin-top: 10px; font-weight: 600; display: none;"></div>
++        </div>
++
++        <!-- Panel CRUD de Administraci├│n (Oculto inicialmente) -->
++        <div id="ai-crud-admin-panel" style="display: none;">
++          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--panel-border); padding-bottom: 12px; flex-wrap: wrap; gap: 12px;">
++            <div>
++              <h2 style="margin: 0; font-family: var(--font-family-title); font-size: 1.5rem; background: linear-gradient(135deg, #fff 0%, var(--color-primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Gestor de An├ílisis de IA</h2>
++              <p style="margin: 3px 0 0 0; font-size: 0.8rem; color: var(--color-text-secondary);">Crea, edita y elimina an├ílisis t├ícticos avanzados que ver├ín los usuarios al simular.</p>
++            </div>
++            <button id="btn-ai-logout" class="btn btn-secondary" style="font-size: 0.78rem; padding: 6px 14px; border-radius: 6px; border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">
++              ­ƒÜ¬ Cerrar Sesi├│n
++            </button>
++          </div>
++
++          <div class="responsive-grid grid-1fr-1fr">
++            <!-- Col 1: Formulario de Creaci├│n / Edici├│n -->
++            <div class="glass-card" style="padding: 24px;">
++              <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px;" id="crud-form-title">Guardar An├ílisis de IA</h3>
++              
++              <div style="display: flex; gap: 8px; margin-bottom: 16px;">
++                <button id="btn-prefill-ai" class="btn btn-secondary" type="button" style="font-size: 0.78rem; padding: 6px 12px; border-radius: 6px; width: 100%;">
++                  ÔÜí Pre-cargar simulaci├│n actual
++                </button>
++              </div>
++              
++              <form id="ai-analysis-form" style="display: flex; flex-direction: column; gap: 12px;">
++                <input type="hidden" id="ai-id-field" value="">
++                
++                <div class="form-row-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
++                  <div class="config-item">
++                    <label for="ai-team-a" style="display: block; font-size: 0.75rem; margin-bottom: 4px; color: var(--color-text-secondary);">Selecci├│n A</label>
++                    <select id="ai-team-a" class="custom-select" style="width: 100%;" required></select>
++                  </div>
++                  <div class="config-item">
++                    <label for="ai-team-b" style="display: block; font-size: 0.75rem; margin-bottom: 4px; color: var(--color-text-secondary);">Selecci├│n B</label>
++                    <select id="ai-team-b" class="custom-select" style="width: 100%;" required></select>
++                  </div>
++                </div>
++
++                <div class="form-row-3col" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
++                  <div class="config-item">
++                    <label for="ai-model" style="display: block; font-size: 0.75rem; margin-bottom: 4px; color: var(--color-text-secondary);">Modelo IA</label>
++                    <input type="text" id="ai-model" placeholder="Ej: Claude 3.5" class="param-input" style="width: 100%;" required>
++                  </div>
++                  <div class="config-item">
++                    <label for="ai-confidence" style="display: block; font-size: 0.75rem; margin-bottom: 4px; color: var(--color-text-secondary);">Confianza (%)</label>
++                    <input type="number" id="ai-confidence" min="0" max="100" value="80" class="param-input" style="width: 100%;" required>
++                  </div>
++                  <div class="config-item">
++                    <label for="ai-predicted-score" style="display: block; font-size: 0.75rem; margin-bottom: 4px; color: var(--color-text-secondary);">Marcador IA</label>
++                    <input type="text" id="ai-predicted-score" placeholder="Ej: 2-1" class="param-input" style="width: 100%;" required>
++                  </div>
++                </div>
++
++                <div class="form-row-2col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
++                  <div class="config-item">
++                    <label for="ai-stage" style="display: block; font-size: 0.75rem; margin-bottom: 4px; color: var(--color-text-secondary);">Fase del Torneo</label>
++                    <select id="ai-stage" class="custom-select" style="width: 100%;">
++                      <option value="Fase de Grupos">Fase de Grupos</option>
++                      <option value="Octavos de Final">Octavos de Final</option>
++                      <option value="Cuartos de Final">Cuartos de Final</option>
++                      <option value="Semifinal">Semifinal</option>
++                      <option value="Final">Final</option>
++                    </select>
++                  </div>
++                  <div class="config-item">
++                    <label for="ai-key-players" style="display: block; font-size: 0.75rem; margin-bottom: 4px; color: var(--color-text-secondary);">Ausencias / Notas de Plantilla</label>
++                    <input type="text" id="ai-key-players" placeholder="Ej: Neymar (Lesionado)" class="param-input" style="width: 100%;">
++                  </div>
++                </div>
++
++                <div class="config-item">
++                  <label for="ai-key-tips" style="display: block; font-size: 0.75rem; margin-bottom: 4px; color: var(--color-text-secondary);">Pron├│sticos Clave (Separados por coma)</label>
++                  <input type="text" id="ai-key-tips" placeholder="Ej: Over 2.5 Goles, Argentina gana" class="param-input" style="width: 100%;">
++                </div>
++
++                <div class="config-item">
++                  <label for="ai-text" style="display: block; font-size: 0.75rem; margin-bottom: 4px; color: var(--color-text-secondary);">An├ílisis Narrativo Detallado (Soporta Markdown)</label>
++                  <textarea id="ai-text" placeholder="Escribe aqu├¡ el an├ílisis t├íctico de la IA..." class="param-input" style="width: 100%; height: 160px; font-family: inherit; font-size: 0.85rem; line-height: 1.5; resize: vertical;" required></textarea>
++                </div>
++
++                <div style="display: flex; gap: 8px; margin-top: 10px;">
++                  <button type="button" id="btn-ai-clear" class="btn btn-secondary" style="flex: 1;">Limpiar</button>
++                  <button type="submit" id="btn-ai-submit" class="btn btn-primary btn-glow" style="flex: 2;">Guardar An├ílisis</button>
++                </div>
++              </form>
++            </div>
++
++            <!-- Col 2: Listado de An├ílisis Guardados -->
++            <div class="glass-card" style="padding: 24px; display: flex; flex-direction: column;">
++              <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px;">An├ílisis Guardados</h3>
++              
++              <div style="margin-bottom: 12px;">
++                <input type="text" id="ai-search-input" placeholder="Buscar por selecci├│n..." class="param-input" style="width: 100%; font-size: 0.8rem; padding: 8px 12px;">
++              </div>
++
++              <div id="ai-analyses-list" style="flex-grow: 1; overflow-y: auto; max-height: 520px; display: flex; flex-direction: column; gap: 12px; padding-right: 4px;">
++                <div class="loading-placeholder">Cargando an├ílisis...</div>
++              </div>
++            </div>
++          </div>
++        </div>
++      </div>
+     </section>
+   </main>
+     

@@ -18,6 +18,16 @@ DC_RHO = -0.13
 # Altitude acclimated teams (Fase 5)
 ALTITUDE_ACCLIMATED_TEAMS = {"mexico", "ecuador", "colombia", "bolivia"}
 
+# WC 2026 host countries and their home advantage for CONCACAF teams
+WC2026_HOST_CONCACAF = {
+    "usa":        {"usa": 0.08, "canada": 0.03, "mexico": 0.03},
+    "canada":     {"canada": 0.08, "usa": 0.03, "mexico": 0.03},
+    "mexico":     {"mexico": 0.08, "usa": 0.03, "canada": 0.03},
+}
+CONCACAF_TEAMS = {"usa", "mexico", "canada", "panama", "honduras", "costa-rica",
+                   "jamaica", "haiti", "trinidad-and-tobago", "curacao", "el-salvador",
+                   "guatemala", "nicaragua", "cuba"}
+
 # Load xG data at module initialization
 _cached_xg_data = None
 def load_xg_data():
@@ -546,6 +556,9 @@ def load_match_raw_data(team_a, team_b, half_life_months, matches, ratings, xg_d
 def compute_xg_from_raw_data(raw_data, rank_a, rank_b, fifa_weight, h2h_weight):
     """
     Fase 2: Separación de responsabilidades - Cálculo matemático puro de xG.
+    Para equipos sin estadísticas FBref reales (source != fbref_world_cup),
+    el peso del ranking FIFA se amplifica un 40% para compensar el sesgo
+    del historial histórico antiguo.
     """
     gs_a = raw_data["gs_a"]
     gc_a = raw_data["gc_a"]
@@ -582,11 +595,18 @@ def compute_xg_from_raw_data(raw_data, rank_a, rank_b, fifa_weight, h2h_weight):
         blend_w = 0.70 if source_b_tag == "fbref" else 0.60
         xg_b = blend_w * xg_real_b_away + (1.0 - blend_w) * xg_b
         xg_source_b = source_b_tag
-        
+
     # FIFA Ranking adjust
+    # Si un equipo solo tiene datos históricos (no FBref real), amplificamos
+    # el peso FIFA +40% para que el ranking actual compense el sesgo histórico.
     rank_diff = rank_b - rank_a
-    fifa_mult_a = 1.0 + (rank_diff / 100.0) * fifa_weight
-    fifa_mult_b = 1.0 - (rank_diff / 100.0) * fifa_weight
+    boost_a = 1.4 if source_a_tag == "modelo" else 1.0
+    boost_b = 1.4 if source_b_tag == "modelo" else 1.0
+    effective_fifa_weight = fifa_weight * max(boost_a, boost_b)
+    effective_fifa_weight = min(effective_fifa_weight, 0.50)  # cap at 50%
+    
+    fifa_mult_a = 1.0 + (rank_diff / 100.0) * effective_fifa_weight
+    fifa_mult_b = 1.0 - (rank_diff / 100.0) * effective_fifa_weight
     
     xg_a *= max(0.2, fifa_mult_a)
     xg_b *= max(0.2, fifa_mult_b)
@@ -613,7 +633,7 @@ def calculate_xg(team_a, team_b, rank_a, rank_b, fifa_weight, h2h_weight, half_l
     raw_data = load_match_raw_data(team_a, team_b, half_life_months, matches, ratings, xg_data)
     return compute_xg_from_raw_data(raw_data, rank_a, rank_b, fifa_weight, h2h_weight)
 
-def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weight_pct, half_life_months, num_sims, odds_a=None, odds_draw=None, odds_b=None, strength_override_a=1.0, strength_override_b=1.0, altitude=0):
+def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weight_pct, half_life_months, num_sims, odds_a=None, odds_draw=None, odds_b=None, strength_override_a=1.0, strength_override_b=1.0, altitude=0, host_country=None):
     matches, ratings = load_data()
     
     fifa_weight = fifa_weight_pct / 100.0
@@ -637,6 +657,17 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
             penalty_b = 1.0 - 0.08 * ((altitude - 1500) / 1000.0)
             penalty_b = max(0.70, penalty_b)
             xg_b *= penalty_b
+
+    # WC 2026 Host Country Home Advantage (Componente 3)
+    # CONCACAF teams playing in their own host country receive a boost.
+    if host_country and host_country.lower() in WC2026_HOST_CONCACAF:
+        host_boosts = WC2026_HOST_CONCACAF[host_country.lower()]
+        if team_a in CONCACAF_TEAMS:
+            boost_a = host_boosts.get(team_a, 0.0)
+            xg_a *= (1.0 + boost_a)
+        if team_b in CONCACAF_TEAMS:
+            boost_b = host_boosts.get(team_b, 0.0)
+            xg_b *= (1.0 + boost_b)
 
     # Strength overrides (Fase 4)
     xg_a *= strength_override_a
@@ -826,13 +857,30 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
     else:
         cam_b = 0.4 * (sh_b / 11.5) + 0.6 * (crs_b / 13.0)
 
-    # Concession Multipliers (based on ELO difference)
+    # Concession Multipliers (based on ELO difference and historical corners conceded)
     elo_a = ratings.get(team_a, 1500)
     elo_b = ratings.get(team_b, 1500)
     elo_diff = elo_a - elo_b
 
-    concession_a = max(0.5, min(1.8, 10 ** (-elo_diff / 800.0)))
-    concession_b = max(0.5, min(1.8, 10 ** (elo_diff / 800.0)))
+    concession_a_elo = 10 ** (-elo_diff / 800.0)
+    concession_b_elo = 10 ** (elo_diff / 800.0)
+
+    corners_against_a = entry_a.get("corners_against_per_90")
+    if corners_against_a is not None and corners_against_a > 0:
+        concession_real_a = corners_against_a / 4.5
+        concession_a_mixed = 0.5 * concession_real_a + 0.5 * concession_a_elo
+    else:
+        concession_a_mixed = concession_a_elo
+
+    corners_against_b = entry_b.get("corners_against_per_90")
+    if corners_against_b is not None and corners_against_b > 0:
+        concession_real_b = corners_against_b / 4.5
+        concession_b_mixed = 0.5 * concession_real_b + 0.5 * concession_b_elo
+    else:
+        concession_b_mixed = concession_b_elo
+
+    concession_a = max(0.5, min(1.8, concession_a_mixed))
+    concession_b = max(0.5, min(1.8, concession_b_mixed))
 
     # Expected corners lambda using corners_for_per_90 if available (Fase 1)
     corners_for_a = entry_a.get("corners_for_per_90")

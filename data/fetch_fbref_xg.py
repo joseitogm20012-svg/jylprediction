@@ -405,6 +405,14 @@ def fetch_fbref_wc_stats():
                     blocked_shots_final = sf_blocked
                     # Estimate off target for fallback
                     off_target_final = max(0.0, sf_shots * 0.40)
+
+            # Robust fallbacks if still 0.0 after all scraping attempts
+            if corners_for_final == 0.0:
+                cam = 0.4 * (sh_final / 11.5) + 0.6 * (crs_final / 13.0)
+                corners_for_final = 4.5 * cam
+
+            if corners_against_final == 0.0:
+                corners_against_final = 4.5
             
             sh_blocked_val = round(blocked_shots_final, 3) if blocked_shots_final > 0 else None
             
