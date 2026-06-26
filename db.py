@@ -183,16 +183,6 @@ def init_db():
     )
     """)
     
-    try:
-        migrate_ai_analyses_from_json(cursor)
-    except Exception as e:
-        print("Error executing migrate_ai_analyses_from_json:", str(e))
-        
-    try:
-        migrate_logged_predictions_from_json(cursor)
-    except Exception as e:
-        print("Error executing migrate_logged_predictions_from_json:", str(e))
-        
     conn.commit()
     conn.close()
 
