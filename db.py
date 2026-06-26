@@ -158,10 +158,40 @@ def init_db():
     )
     """)
     
+    # 7. Logged Predictions Table (For tracking predictions and their results)
+    execute_sql(cursor, """
+    CREATE TABLE IF NOT EXISTS logged_predictions (
+        id BIGINT PRIMARY KEY,
+        team_a TEXT NOT NULL,
+        team_b TEXT NOT NULL,
+        prob_win_a REAL NOT NULL,
+        prob_draw REAL NOT NULL,
+        prob_win_b REAL NOT NULL,
+        xg_a REAL NOT NULL,
+        xg_b REAL NOT NULL,
+        strength_override_a REAL NOT NULL,
+        strength_override_b REAL NOT NULL,
+        altitude INTEGER NOT NULL,
+        actual_result TEXT,
+        actual_score TEXT,
+        status TEXT NOT NULL DEFAULT 'pending',
+        is_correct INTEGER,
+        pick TEXT,
+        rps REAL,
+        timestamp TEXT NOT NULL,
+        date TEXT NOT NULL
+    )
+    """)
+    
     try:
         migrate_ai_analyses_from_json(cursor)
     except Exception as e:
         print("Error executing migrate_ai_analyses_from_json:", str(e))
+        
+    try:
+        migrate_logged_predictions_from_json(cursor)
+    except Exception as e:
+        print("Error executing migrate_logged_predictions_from_json:", str(e))
         
     conn.commit()
     conn.close()
@@ -643,6 +673,230 @@ def db_delete_ai_analysis(analysis_id: int) -> bool:
         return False
         
     execute_sql(cursor, "DELETE FROM ai_analyses WHERE id = ?", (analysis_id,))
+    conn.commit()
+    conn.close()
+    return True
+
+# ==========================================
+# LOGGED PREDICTIONS CRUD
+# ==========================================
+def migrate_logged_predictions_from_json(cursor):
+    import json
+    # Check if the table is empty
+    cursor.execute("SELECT COUNT(*) FROM logged_predictions")
+    count = cursor.fetchone()[0]
+    if count > 0:
+        return  # Already migrated
+    
+    json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "logged_predictions.json")
+    if os.path.exists(json_path):
+        try:
+            with open(json_path, "r", encoding="utf-8") as f:
+                predictions = json.load(f)
+            
+            for item in predictions:
+                sql = """
+                INSERT INTO logged_predictions (
+                    id, team_a, team_b, prob_win_a, prob_draw, prob_win_b,
+                    xg_a, xg_b, strength_override_a, strength_override_b,
+                    altitude, actual_result, actual_score, status, is_correct,
+                    pick, rps, timestamp, date
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """
+                if IS_POSTGRES:
+                    sql = sql.replace("?", "%s")
+                
+                cursor.execute(sql, (
+                    item.get("id"),
+                    item.get("teamA"),
+                    item.get("teamB"),
+                    item.get("probWinA"),
+                    item.get("probDraw"),
+                    item.get("probWinB"),
+                    item.get("xgA"),
+                    item.get("xgB"),
+                    item.get("strengthOverrideA"),
+                    item.get("strengthOverrideB"),
+                    item.get("altitude", 0),
+                    item.get("actualResult"),
+                    item.get("actualScore"),
+                    item.get("status", "pending"),
+                    1 if item.get("isCorrect") else 0 if item.get("isCorrect") is not None else None,
+                    item.get("pick"),
+                    item.get("rps"),
+                    item.get("timestamp"),
+                    item.get("date")
+                ))
+            print(f"Successfully migrated {len(predictions)} logged predictions from JSON to database.")
+        except Exception as e:
+            print("Error during migration of logged predictions:", str(e))
+
+def db_get_all_logged_predictions():
+    conn = get_db_connection()
+    cursor = get_cursor(conn)
+    execute_sql(cursor, "SELECT * FROM logged_predictions ORDER BY id DESC")
+    rows = cursor.fetchall()
+    conn.close()
+    
+    results = []
+    for r in rows:
+        item = dict(r)
+        results.append({
+            "id": item["id"],
+            "teamA": item["team_a"],
+            "teamB": item["team_b"],
+            "probWinA": item["prob_win_a"],
+            "probDraw": item["prob_draw"],
+            "probWinB": item["prob_win_b"],
+            "xgA": item["xg_a"],
+            "xgB": item["xg_b"],
+            "strengthOverrideA": item["strength_override_a"],
+            "strengthOverrideB": item["strength_override_b"],
+            "altitude": item["altitude"],
+            "actualResult": item["actual_result"],
+            "actualScore": item["actual_score"],
+            "status": item["status"],
+            "isCorrect": bool(item["is_correct"]) if item["is_correct"] is not None else None,
+            "pick": item["pick"],
+            "rps": item["rps"],
+            "timestamp": item["timestamp"],
+            "date": item["date"]
+        })
+    return results
+
+def db_save_logged_prediction(req_data: dict) -> dict:
+    conn = get_db_connection()
+    cursor = get_cursor(conn)
+    
+    now_str = datetime.now().isoformat()
+    date_str = datetime.now().strftime("%Y-%m-%d")
+    
+    sql = """
+    INSERT INTO logged_predictions (
+        id, team_a, team_b, prob_win_a, prob_draw, prob_win_b,
+        xg_a, xg_b, strength_override_a, strength_override_b,
+        altitude, actual_result, actual_score, status, is_correct,
+        pick, rps, timestamp, date
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """
+    if IS_POSTGRES:
+        sql = sql.replace("?", "%s")
+    
+    pred_id = req_data.get("id", int(datetime.now().timestamp() * 1000))
+    
+    cursor.execute(sql, (
+        pred_id,
+        req_data["teamA"],
+        req_data["teamB"],
+        req_data["probWinA"],
+        req_data["probDraw"],
+        req_data["probWinB"],
+        req_data["xgA"],
+        req_data["xgB"],
+        req_data["strengthOverrideA"],
+        req_data["strengthOverrideB"],
+        req_data.get("altitude", 0),
+        req_data.get("actualResult"),
+        req_data.get("actualScore"),
+        req_data.get("status", "pending"),
+        1 if req_data.get("isCorrect") else 0 if req_data.get("isCorrect") is not None else None,
+        req_data.get("pick"),
+        req_data.get("rps"),
+        req_data.get("timestamp", now_str),
+        req_data.get("date", date_str)
+    ))
+    
+    conn.commit()
+    conn.close()
+    
+    return {
+        "id": pred_id,
+        "teamA": req_data["teamA"],
+        "teamB": req_data["teamB"],
+        "probWinA": req_data["probWinA"],
+        "probDraw": req_data["probDraw"],
+        "probWinB": req_data["probWinB"],
+        "xgA": req_data["xgA"],
+        "xgB": req_data["xgB"],
+        "strengthOverrideA": req_data["strengthOverrideA"],
+        "strengthOverrideB": req_data["strengthOverrideB"],
+        "altitude": req_data.get("altitude", 0),
+        "actualResult": req_data.get("actualResult"),
+        "actualScore": req_data.get("actualScore"),
+        "status": req_data.get("status", "pending"),
+        "isCorrect": req_data.get("isCorrect"),
+        "pick": req_data.get("pick"),
+        "rps": req_data.get("rps"),
+        "timestamp": req_data.get("timestamp", now_str),
+        "date": req_data.get("date", date_str)
+    }
+
+def db_update_logged_prediction(pred_id: int, updates: dict) -> bool:
+    conn = get_db_connection()
+    cursor = get_cursor(conn)
+    
+    # Build dynamic UPDATE statement
+    set_clauses = []
+    params = []
+    
+    for key, value in updates.items():
+        col_name = key
+        if key == "teamA":
+            col_name = "team_a"
+        elif key == "teamB":
+            col_name = "team_b"
+        elif key == "probWinA":
+            col_name = "prob_win_a"
+        elif key == "probDraw":
+            col_name = "prob_draw"
+        elif key == "probWinB":
+            col_name = "prob_win_b"
+        elif key == "xgA":
+            col_name = "xg_a"
+        elif key == "xgB":
+            col_name = "xg_b"
+        elif key == "strengthOverrideA":
+            col_name = "strength_override_a"
+        elif key == "strengthOverrideB":
+            col_name = "strength_override_b"
+        elif key == "actualResult":
+            col_name = "actual_result"
+        elif key == "actualScore":
+            col_name = "actual_score"
+        elif key == "isCorrect":
+            col_name = "is_correct"
+            value = 1 if value else 0 if value is not None else None
+        
+        set_clauses.append(f"{col_name} = ?")
+        params.append(value)
+    
+    if not set_clauses:
+        conn.close()
+        return False
+    
+    params.append(pred_id)
+    
+    sql = f"UPDATE logged_predictions SET {', '.join(set_clauses)} WHERE id = ?"
+    if IS_POSTGRES:
+        sql = sql.replace("?", "%s")
+    
+    cursor.execute(sql, tuple(params))
+    affected = cursor.rowcount
+    conn.commit()
+    conn.close()
+    return affected > 0
+
+def db_delete_logged_prediction(pred_id: int) -> bool:
+    conn = get_db_connection()
+    cursor = get_cursor(conn)
+    
+    execute_sql(cursor, "SELECT id FROM logged_predictions WHERE id = ?", (pred_id,))
+    row = cursor.fetchone()
+    if not row:
+        conn.close()
+        return False
+        
+    execute_sql(cursor, "DELETE FROM logged_predictions WHERE id = ?", (pred_id,))
     conn.commit()
     conn.close()
     return True

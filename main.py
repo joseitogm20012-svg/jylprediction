@@ -157,8 +157,6 @@ def run_backtest_command():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-LOGGED_PREDS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "logged_predictions.json")
-
 class LogPredictionRequest(BaseModel):
     teamA: str
     teamB: str
@@ -174,18 +172,7 @@ class LogPredictionRequest(BaseModel):
 @app.post("/api/log-prediction")
 def log_prediction(req: LogPredictionRequest):
     try:
-        preds = []
-        if os.path.exists(LOGGED_PREDS_PATH):
-            try:
-                with open(LOGGED_PREDS_PATH, "r", encoding="utf-8") as f:
-                    preds = json.load(f)
-            except:
-                preds = []
-                
-        new_entry = {
-            "id": int(datetime.now().timestamp() * 1000),
-            "timestamp": datetime.now().isoformat(),
-            "date": datetime.now().strftime("%Y-%m-%d"),
+        new_entry_data = {
             "teamA": req.teamA,
             "teamB": req.teamB,
             "probWinA": req.probWinA,
@@ -197,25 +184,23 @@ def log_prediction(req: LogPredictionRequest):
             "strengthOverrideB": req.strengthOverrideB,
             "altitude": req.altitude,
             "actualResult": None,
-            "status": "pending"
+            "actualScore": None,
+            "status": "pending",
+            "isCorrect": None,
+            "pick": None,
+            "rps": None
         }
         
-        preds.insert(0, new_entry)
-        
-        with open(LOGGED_PREDS_PATH, "w", encoding="utf-8") as f:
-            json.dump(preds, f, indent=2, ensure_ascii=False)
+        saved_entry = db.db_save_logged_prediction(new_entry_data)
             
-        return {"status": "success", "prediction": new_entry}
+        return {"status": "success", "prediction": saved_entry}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/logged-predictions")
 def get_logged_predictions():
     try:
-        preds = []
-        if os.path.exists(LOGGED_PREDS_PATH):
-            with open(LOGGED_PREDS_PATH, "r", encoding="utf-8") as f:
-                preds = json.load(f)
+        preds = db.db_get_all_logged_predictions()
         return {"predictions": preds}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -228,47 +213,50 @@ class ResolvePredictionRequest(BaseModel):
 @app.post("/api/resolve-prediction")
 def resolve_prediction(req: ResolvePredictionRequest):
     try:
-        if not os.path.exists(LOGGED_PREDS_PATH):
-            raise HTTPException(status_code=404, detail="No logged predictions found.")
-        with open(LOGGED_PREDS_PATH, "r", encoding="utf-8") as f:
-            preds = json.load(f)
+        # Get prediction from database
+        preds = db.db_get_all_logged_predictions()
         
         found = False
+        pred_to_update = None
         for p in preds:
             if p["id"] == req.id:
-                p["status"] = "completed"
-                p["isCorrect"] = req.isCorrect
-                
-                # Determine actual outcome
-                probs = [p["probWinA"], p["probDraw"], p["probWinB"]]
-                max_idx = probs.index(max(probs))
-                pick = "A" if max_idx == 0 else "Draw" if max_idx == 1 else "B"
-                
-                actual_val = req.actualResult
-                if not actual_val:
-                    actual_val = pick if req.isCorrect else ("B" if pick == "A" else "A")
-                
-                p["actualResult"] = actual_val
-                p["actualScore"] = "Manual"
-                p["rps"] = 0.0 if req.isCorrect else 1.0
+                pred_to_update = p
                 found = True
-                
-                # Resolve in user SQLite db
-                db.resolve_user_pronostics(p["teamA"], p["teamB"], actual_val)
                 break
         
         if not found:
             raise HTTPException(status_code=404, detail="Prediction not found.")
-            
-        with open(LOGGED_PREDS_PATH, "w", encoding="utf-8") as f:
-            json.dump(preds, f, indent=2, ensure_ascii=False)
-            
+        
+        # Determine actual outcome
+        probs = [pred_to_update["probWinA"], pred_to_update["probDraw"], pred_to_update["probWinB"]]
+        max_idx = probs.index(max(probs))
+        pick = "A" if max_idx == 0 else "Draw" if max_idx == 1 else "B"
+        
+        actual_val = req.actualResult
+        if not actual_val:
+            actual_val = pick if req.isCorrect else ("B" if pick == "A" else "A")
+        
+        # Update in database
+        updates = {
+            "status": "completed",
+            "isCorrect": req.isCorrect,
+            "actualResult": actual_val,
+            "actualScore": "Manual",
+            "pick": pick,
+            "rps": 0.0 if req.isCorrect else 1.0
+        }
+        
+        db.db_update_logged_prediction(req.id, updates)
+        
+        # Resolve in user SQLite db
+        db.resolve_user_pronostics(pred_to_update["teamA"], pred_to_update["teamB"], actual_val)
+        
         # Recalculate summary
         completed = [x for x in preds if x["status"] == "completed"]
-        correct_count = sum(1 for x in completed if x["isCorrect"])
+        correct_count = sum(1 for x in completed if x.get("isCorrect"))
         total_completed = len(completed)
         accuracy = (correct_count / total_completed * 100.0) if total_completed > 0 else 0.0
-        total_rps = sum(x.get("rps", 0.0) for x in completed)
+        total_rps = sum(x.get("rps", 0.0) or 0.0 for x in completed)
         avg_rps = (total_rps / total_completed) if total_completed > 0 else 0.0
         
         summary = {
@@ -280,9 +268,12 @@ def resolve_prediction(req: ResolvePredictionRequest):
             "avgRps": round(avg_rps, 4)
         }
         
+        # Return updated list
+        updated_preds = db.db_get_all_logged_predictions()
+        
         return {
             "status": "success",
-            "predictions": preds,
+            "predictions": updated_preds,
             "summary": summary
         }
     except Exception as e:
@@ -291,11 +282,8 @@ def resolve_prediction(req: ResolvePredictionRequest):
 @app.post("/api/update-prediction-results")
 def update_prediction_results():
     try:
-        if not os.path.exists(LOGGED_PREDS_PATH):
-            return {"status": "ok", "message": "No logged predictions to update.", "predictions": [], "summary": {}}
-            
-        with open(LOGGED_PREDS_PATH, "r", encoding="utf-8") as f:
-            preds = json.load(f)
+        # Get predictions from database
+        preds = db.db_get_all_logged_predictions()
             
         matches, _ = load_data()
         
@@ -346,9 +334,13 @@ def update_prediction_results():
                         else:
                             actual = "B"
                             
-                        p["actualResult"] = actual
-                        p["actualScore"] = f"{gs_a}-{gs_b}"
-                        p["status"] = "completed"
+                        # Update prediction in database
+                        updates = {
+                            "actualResult": actual,
+                            "actualScore": f"{gs_a}-{gs_b}",
+                            "status": "completed"
+                        }
+                        db.db_update_logged_prediction(p["id"], updates)
                         updated_count += 1
                         
                         # Resolve user official pronostics
@@ -361,42 +353,50 @@ def update_prediction_results():
                 max_idx = probs.index(max(probs))
                 pick = "A" if max_idx == 0 else "Draw" if max_idx == 1 else "B"
                 
-                p["pick"] = pick
-                p["isCorrect"] = pick == p["actualResult"]
-                if p["isCorrect"]:
+                # Update pick if not set
+                if not p.get("pick"):
+                    db.db_update_logged_prediction(p["id"], {"pick": pick})
+                
+                is_correct = pick == p.get("actualResult")
+                if not p.get("isCorrect") or p["isCorrect"] != is_correct:
+                    db.db_update_logged_prediction(p["id"], {"isCorrect": is_correct})
+                
+                if is_correct:
                     correct_count += 1
                     
-                actual_val = p["actualResult"]
-                y = [1.0 if actual_val == "A" else 0.0, 
-                     1.0 if actual_val == "Draw" else 0.0, 
-                     1.0 if actual_val == "B" else 0.0]
-                probs_vec = [p["probWinA"], p["probDraw"], p["probWinB"]]
-                
-                # Calculate RPS
-                rps_val = 0.5 * ((probs_vec[0] - y[0])**2 + (probs_vec[0] + probs_vec[1] - y[0] - y[1])**2)
-                p["rps"] = round(rps_val, 4)
-                total_rps += rps_val
-                
-        if updated_count > 0:
-            with open(LOGGED_PREDS_PATH, "w", encoding="utf-8") as f:
-                json.dump(preds, f, indent=2, ensure_ascii=False)
-                
+                actual_val = p.get("actualResult")
+                if actual_val:
+                    y = [1.0 if actual_val == "A" else 0.0, 
+                         1.0 if actual_val == "Draw" else 0.0, 
+                         1.0 if actual_val == "B" else 0.0]
+                    probs_vec = [p["probWinA"], p["probDraw"], p["probWinB"]]
+                    
+                    # Calculate RPS
+                    rps_val = 0.5 * ((probs_vec[0] - y[0])**2 + (probs_vec[0] + probs_vec[1] - y[0] - y[1])**2)
+                    rps_rounded = round(rps_val, 4)
+                    if not p.get("rps") or p["rps"] != rps_rounded:
+                        db.db_update_logged_prediction(p["id"], {"rps": rps_rounded})
+                    total_rps += rps_val
+        
         accuracy = (correct_count / total_completed * 100.0) if total_completed > 0 else 0.0
         avg_rps = (total_rps / total_completed) if total_completed > 0 else 0.0
         
         summary = {
             "totalLogged": len(preds),
             "totalCompleted": total_completed,
-            "totalPending": len(preds) - total_completed,
+            "totalPending": sum(1 for x in preds if x["status"] == "pending"),
             "correctCount": correct_count,
             "accuracyPercent": round(accuracy, 1),
             "avgRps": round(avg_rps, 4)
         }
         
+        # Return updated list from database
+        updated_preds = db.db_get_all_logged_predictions()
+        
         return {
             "status": "success",
             "message": f"Updated {updated_count} prediction results.",
-            "predictions": preds,
+            "predictions": updated_preds,
             "summary": summary
         }
     except Exception as e:
