@@ -189,7 +189,7 @@
           <!-- Admin Access Link -->
           <div style="margin-top: 24px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
             <a href="/admin.html" id="landing-link-admin" style="font-size: 0.72rem; color: var(--color-text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
-              Acceso Administrador
+              🔧 Acceso Administrador
             </a>
           </div>
         </div>
@@ -219,9 +219,17 @@
         </div>
       </div>
       <div style="display: flex; align-items: center; gap: 12px;">
-        <div class="header-status">
-          <span class="status-dot animate-pulse"></span>
-          <span id="calibration-status">Cargando modelo...</span>
+        <!-- Settings Gear Icon (Light Theme only) -->
+        <button class="theme-light-only" aria-label="Ajustes" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #64748b; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+
+        <div class="header-status" style="display: flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.15); padding: 4px 12px; border-radius: 20px;">
+          <span class="status-dot animate-pulse" style="background: #10b981; width: 8px; height: 8px; border-radius: 50%; display: inline-block;"></span>
+          <span id="calibration-status" style="line-height: 1.2; display: inline-block; font-size: 0.76rem; font-weight: 600; text-align: left; color: var(--color-text-primary);">
+            API Python Activa
+            <span style="display: block; font-size: 0.62rem; color: #10b981; font-weight: normal; margin-top: 1px;">Latency: 12ms</span>
+          </span>
         </div>
         
         <!-- Auth Controls (Supabase) -->
@@ -234,7 +242,7 @@
           <!-- Logged state -->
           <div id="auth-logged-in" style="display: none; align-items: center; gap: 10px;">
             <span id="auth-user-name" style="font-size: 0.78rem; color: var(--color-text-secondary); max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600;"></span>
-            <button id="btn-auth-logout" class="btn btn-secondary" style="font-size: 0.75rem; padding: 6px 12px; border-radius: 6px; height: 32px; min-height: unset; margin: 0; border-color: rgba(239, 68, 68, 0.2); color: #ef4444;">Salir</button>
+            <button id="btn-auth-logout" class="btn btn-secondary" style="font-size: 0.75rem; padding: 6px 12px; border-radius: 6px; height: 32px; min-height: unset; margin: 0; border-color: rgba(239, 68, 68, 0.25); color: #ef4444; font-weight: 600;">Salir</button>
           </div>
         </div>
 
@@ -252,34 +260,105 @@
     <!-- Row 1: Compact Configuration Bar -->
     <section class="config-bar glass-panel" aria-label="Ajustes de simulación" style="margin-bottom: 16px;">
 
-
       <!-- Grupo 1: Equipos y Rankings -->
       <div class="config-group group-teams">
-        <div class="config-group-title">Equipos y Ranking</div>
-        <div class="config-group-fields">
-          <div class="config-item flex-field">
-            <label for="select-team-a">Selección A</label>
-            <select id="select-team-a" class="custom-select"></select>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; width: 100%;">
+          <div class="config-group-title" style="margin: 0;">Equipos y Ranking</div>
+          <button type="button" class="btn-view-team-details" onclick="window.viewTeamDetails()" style="background: transparent; border: none; color: var(--color-primary); cursor: pointer; font-size: 0.78rem; text-decoration: underline; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> View Team Details
+          </button>
+        </div>
+
+        <!-- VISUAL - BANDERAS, SPARKLINES Y FORM -->
+        <div class="bb-visual-teams-grid" style="display: flex; gap: 16px; width: 100%;">
+          <!-- Sub-Card A (Argentina) -->
+          <div class="bb-visual-team-card" style="flex: 1; background: rgba(255,255,255,0.02); border: 1px solid var(--panel-border); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span id="bb-flag-a-large" style="font-size: 2.2rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); line-height: 1;">🇦🇷</span>
+              <span style="font-size: 1.2rem; color: #f59e0b; display: flex; gap: 2px;">⭐⭐</span>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 2px; margin-top: 4px;">
+              <span style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700;">Selección A</span>
+              <select id="select-team-a" class="custom-select" style="width: 100%;"></select>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.15); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--panel-border);">
+              <span style="font-size: 0.78rem; color: var(--color-text-secondary); font-weight: 600;">Rank A RANK</span>
+              <input type="number" id="input-rank-a" min="1" max="211" value="1" class="param-input" style="width: 50px; text-align: center; background: transparent; border: none; font-weight: bold; color: white; font-size: 0.85rem; outline: none; padding: 0;">
+            </div>
+
+            <div style="margin-top: 4px; display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 2px;">Recent Form</span>
+              <div id="bb-form-badges-a" style="display: flex; gap: 4px; justify-content: space-between;">
+                <span class="bb-form-badge win">W</span>
+                <span class="bb-form-badge draw">D</span>
+                <span class="bb-form-badge win">W</span>
+                <span class="bb-form-badge win">W</span>
+                <span class="bb-form-badge loss">L</span>
+              </div>
+              <div style="height: 35px; width: 100%; background: rgba(0,0,0,0.12); border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 2px 4px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.03);">
+                <svg id="bb-sparkline-a" viewBox="0 0 100 40" style="width: 100%; height: 100%;">
+                  <path d="M 10 15 L 30 25 L 50 15 L 70 15 L 90 35" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="10" cy="15" r="3" fill="#10b981"/>
+                  <circle cx="30" cy="25" r="3" fill="#f59e0b"/>
+                  <circle cx="50" cy="15" r="3" fill="#10b981"/>
+                  <circle cx="70" cy="15" r="3" fill="#10b981"/>
+                  <circle cx="90" cy="35" r="3" fill="#ef4444"/>
+                </svg>
+              </div>
+            </div>
+            
+            <button type="button" class="btn btn-secondary" onclick="window.viewTeamDetails()" style="font-size: 0.72rem; min-height: unset; height: 26px; justify-content: center; padding: 0 10px; margin-top: 4px; width: 100%; border-radius: 6px;">View Team Details</button>
           </div>
-          <div class="config-item compact-field" style="width: 65px;">
-            <label for="input-rank-a">Rank A</label>
-            <input type="number" id="input-rank-a" min="1" max="211" value="16" class="param-input" style="width: 100%;">
-          </div>
-          <div class="config-item flex-field">
-            <label for="select-team-b">Selección B</label>
-            <select id="select-team-b" class="custom-select"></select>
-          </div>
-          <div class="config-item compact-field" style="width: 65px;">
-            <label for="input-rank-b">Rank B</label>
-            <input type="number" id="input-rank-b" min="1" max="211" value="61" class="param-input" style="width: 100%;">
+
+          <!-- Sub-Card B (Argelia) -->
+          <div class="bb-visual-team-card" style="flex: 1; background: rgba(255,255,255,0.02); border: 1px solid var(--panel-border); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span id="bb-flag-b-large" style="font-size: 2.2rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15)); line-height: 1;">🇩🇿</span>
+              <span style="font-size: 1.2rem; color: #10b981; display: flex; gap: 2px;">⭐⭐</span>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 2px; margin-top: 4px;">
+              <span style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700;">Selección B</span>
+              <select id="select-team-b" class="custom-select" style="width: 100%;"></select>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.15); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--panel-border);">
+              <span style="font-size: 0.78rem; color: var(--color-text-secondary); font-weight: 600;">Rank B RANK</span>
+              <input type="number" id="input-rank-b" min="1" max="211" value="28" class="param-input" style="width: 50px; text-align: center; background: transparent; border: none; font-weight: bold; color: white; font-size: 0.85rem; outline: none; padding: 0;">
+            </div>
+
+            <div style="margin-top: 4px; display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 2px;">Recent Form</span>
+              <div id="bb-form-badges-b" style="display: flex; gap: 4px; justify-content: space-between;">
+                <span class="bb-form-badge loss">L</span>
+                <span class="bb-form-badge win">W</span>
+                <span class="bb-form-badge draw">D</span>
+                <span class="bb-form-badge win">W</span>
+                <span class="bb-form-badge draw">D</span>
+              </div>
+              <div style="height: 35px; width: 100%; background: rgba(0,0,0,0.12); border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 2px 4px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.03);">
+                <svg id="bb-sparkline-b" viewBox="0 0 100 40" style="width: 100%; height: 100%;">
+                  <path d="M 10 35 L 30 15 L 50 25 L 70 15 L 90 25" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="10" cy="35" r="3" fill="#ef4444"/>
+                  <circle cx="30" cy="15" r="3" fill="#10b981"/>
+                  <circle cx="50" cy="25" r="3" fill="#f59e0b"/>
+                  <circle cx="70" cy="15" r="3" fill="#10b981"/>
+                  <circle cx="90" cy="25" r="3" fill="#f59e0b"/>
+                </svg>
+              </div>
+            </div>
+            
+            <button type="button" class="btn btn-secondary" onclick="window.viewTeamDetails()" style="font-size: 0.72rem; min-height: unset; height: 26px; justify-content: center; padding: 0 10px; margin-top: 4px; width: 100%; border-radius: 6px;">View Team Details</button>
           </div>
         </div>
       </div>
 
       <!-- Grupo 2: Pesos del Modelo -->
       <div class="config-group group-weights">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-          <div class="config-group-title" style="margin-bottom: 0;">Ponderación y Decaimiento</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; width: 100%;">
+          <div class="config-group-title" style="margin: 0;">Ponderación y Decaimiento</div>
           <button type="button" id="btn-save-preset" class="btn" style="padding: 2px 8px; font-size: 0.68rem; min-height: unset; height: 22px; line-height: 1; border-radius: 4px; border: 1px solid var(--color-primary); background: rgba(99,102,241,0.1); color: var(--color-primary); font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px;" disabled>
             💾 Guardar Preset
           </button>
@@ -288,53 +367,106 @@
         <div id="user-presets-row" style="margin-bottom: 8px; display: flex; gap: 4px; flex-wrap: wrap; display: none;">
           <!-- Populated dynamically via JS -->
         </div>
-        <div class="config-group-fields">
-          <div class="config-item compact-field" style="width: 85px;">
-            <label for="input-weight-fifa">Pond. FIFA (%)</label>
-            <input type="number" id="input-weight-fifa" min="0" max="100" value="30" class="param-input" style="width: 100%;">
+
+        <!-- VISUAL - DONUT CHART Y SLIDERS -->
+        <div style="display: flex; gap: 15px; align-items: center; width: 100%; margin-top: 8px;">
+          <div style="width: 85px; height: 85px; position: relative; flex-shrink: 0;">
+            <canvas id="bb-donut-canvas"></canvas>
           </div>
-          <div class="config-item compact-field" style="width: 85px;">
-            <label for="input-weight-h2h">Pond. H2H (%)</label>
-            <input type="number" id="input-weight-h2h" min="0" max="100" value="20" class="param-input" style="width: 100%;">
-          </div>
-          <div class="config-item compact-field" style="width: 75px;">
-            <label for="input-decay">Decay (m)</label>
-            <input type="number" id="input-decay" min="3" max="60" value="18" class="param-input" style="width: 100%;">
-          </div>
-          <div class="config-item compact-field" style="width: 95px;">
-            <label for="input-sims">Simulaciones</label>
-            <input type="number" id="input-sims" min="1000" max="100000" step="1000" value="100000" class="param-input" style="width: 100%;">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; flex-direction: column; gap: 1px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--color-text-secondary); font-weight: 600;">
+                <span>FIFA %</span>
+                <input type="number" id="input-weight-fifa" min="0" max="100" value="30" class="param-input" style="width: 42px; text-align: center; padding: 1px 2px; font-size: 0.7rem; border-radius: 3px; background: rgba(0,0,0,0.25); border: 1px solid var(--panel-border); font-weight: bold; color: white;">
+              </div>
+              <input type="range" id="slider-weight-fifa" min="0" max="100" value="30" style="width: 100%; accent-color: #f59e0b; height: 4px; border-radius: 2px; cursor: pointer;">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--color-text-secondary); font-weight: 600;">
+                <span>H2H %</span>
+                <input type="number" id="input-weight-h2h" min="0" max="100" value="20" class="param-input" style="width: 42px; text-align: center; padding: 1px 2px; font-size: 0.7rem; border-radius: 3px; background: rgba(0,0,0,0.25); border: 1px solid var(--panel-border); font-weight: bold; color: white;">
+              </div>
+              <input type="range" id="slider-weight-h2h" min="0" max="100" value="20" style="width: 100%; accent-color: #991b1b; height: 4px; border-radius: 2px; cursor: pointer;">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--color-text-secondary); font-weight: 600;">
+                <span>Decay (m)</span>
+                <input type="number" id="input-decay" min="3" max="60" value="18" class="param-input" style="width: 42px; text-align: center; padding: 1px 2px; font-size: 0.7rem; border-radius: 3px; background: rgba(0,0,0,0.25); border: 1px solid var(--panel-border); font-weight: bold; color: white;">
+              </div>
+              <input type="range" id="slider-decay" min="3" max="60" value="18" style="width: 100%; accent-color: #64748b; height: 4px; border-radius: 2px; cursor: pointer;">
+            </div>
           </div>
         </div>
-        <div id="weights-formula-preview" style="font-size: 0.72rem; color: var(--color-primary); margin-top: 6px; font-weight: 600; text-align: left; padding: 4px 8px; background: rgba(99,102,241,0.08); border-radius: 4px; border-left: 3px solid var(--color-primary);">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 4px; width: 100%;">
+          <div style="display: flex; gap: 8px; font-size: 0.62rem;">
+            <span style="display: flex; align-items: center; gap: 3px;"><span style="width: 6px; height: 6px; background: #f59e0b; display: inline-block; border-radius: 1px;"></span> FIFA</span>
+            <span style="display: flex; align-items: center; gap: 3px;"><span style="width: 6px; height: 6px; background: #991b1b; display: inline-block; border-radius: 1px;"></span> H2H</span>
+            <span style="display: flex; align-items: center; gap: 3px;"><span style="width: 6px; height: 6px; background: #64748b; display: inline-block; border-radius: 1px;"></span> Forma</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 4px;">
+            <label for="input-sims" style="font-size: 0.65rem; color: var(--color-text-secondary); font-weight: 600; white-space: nowrap;">Sims</label>
+            <input type="number" id="input-sims" min="1000" max="100000" step="1000" value="100000" class="param-input" style="width: 60px; text-align: center; padding: 1px 2px; font-size: 0.68rem; border-radius: 3px; background: rgba(0,0,0,0.25); border: 1px solid var(--panel-border); font-weight: bold; color: white;">
+          </div>
+        </div>
+        
+        <div id="weights-formula-preview" style="font-size: 0.7rem; color: var(--color-primary); margin-top: 6px; font-weight: 600; text-align: left; padding: 4px 8px; background: rgba(99,102,241,0.08); border-radius: 4px; border-left: 3px solid var(--color-primary);">
           Distribución Real: FIFA 30% | H2H 20% | Forma Histórica 50%
         </div>
       </div>
 
       <!-- Grupo 3: Parámetros Extra -->
       <div class="config-group group-extras">
-        <div class="config-group-title" style="margin-bottom: 6px;">Ajustes Especiales</div>
-        <div class="config-group-fields">
-          <div class="config-item compact-field" style="width: 75px;">
-            <label for="input-override-a">Override A</label>
-            <input type="number" id="input-override-a" min="0.1" max="2.0" step="0.05" value="1.0" class="param-input" style="width: 100%;">
-          </div>
-          <div class="config-item compact-field" style="width: 75px;">
-            <label for="input-override-b">Override B</label>
-            <input type="number" id="input-override-b" min="0.1" max="2.0" step="0.05" value="1.0" class="param-input" style="width: 100%;">
-          </div>
+        <div class="config-group-title" style="margin-bottom: 6px; width: 100%;">Ajustes Especiales</div>
+        
+        <div class="config-group-fields" style="display: flex; gap: 8px; width: 100%;">
+          <!-- Override A -->
           <div class="config-item compact-field" style="width: 80px;">
-            <label for="input-altitude">Altitud (m)</label>
-            <input type="number" id="input-altitude" min="0" max="4000" step="100" value="0" class="param-input" style="width: 100%;">
+            <label for="input-override-a">Override A</label>
+            <div style="position: relative; width: 100%;">
+              <input type="number" id="input-override-a" min="0.1" max="2.0" step="0.05" value="1.0" class="param-input" style="width: 100%; padding-right: 22px;">
+              <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--color-primary); display: flex; align-items: center; opacity: 0.65;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+            </div>
           </div>
-          <div class="config-item compact-field" style="width: 105px;">
-            <label for="input-host-country">Sede WC 2026</label>
-            <select id="input-host-country" class="param-input" style="width: 100%; padding: 5px 6px; font-size: 0.78rem;">
-              <option value="">Neutral</option>
-              <option value="usa">Estados Unidos</option>
-              <option value="mexico">México</option>
-              <option value="canada">Canadá</option>
-            </select>
+          
+          <!-- Override B -->
+          <div class="config-item compact-field" style="width: 80px;">
+            <label for="input-override-b">Override B</label>
+            <div style="position: relative; width: 100%;">
+              <input type="number" id="input-override-b" min="0.1" max="2.0" step="0.05" value="1.0" class="param-input" style="width: 100%; padding-right: 22px;">
+              <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--color-primary); display: flex; align-items: center; opacity: 0.65;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+            </div>
+          </div>
+          
+          <!-- Altitud -->
+          <div class="config-item compact-field" style="width: 85px;">
+            <label for="input-altitude">Altitud (m)</label>
+            <div style="position: relative; width: 100%;">
+              <input type="number" id="input-altitude" min="0" max="4000" step="100" value="0" class="param-input" style="width: 100%; padding-right: 22px;">
+              <span style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--color-primary); display: flex; align-items: center; opacity: 0.65;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+              </span>
+            </div>
+          </div>
+          
+          <!-- Sede WC -->
+          <div class="config-item compact-field" style="width: 115px;">
+            <label for="input-host-country">SEDE WC 2026</label>
+            <div style="position: relative; width: 100%;">
+              <select id="input-host-country" class="param-input" style="width: 100%; padding: 5px 6px; font-size: 0.78rem; padding-left: 22px;">
+                <option value="">Neutral</option>
+                <option value="usa">Estados Unidos</option>
+                <option value="mexico">México</option>
+                <option value="canada">Canadá</option>
+              </select>
+              <span style="position: absolute; left: 6px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--color-primary); display: flex; align-items: center; opacity: 0.65;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -474,6 +606,9 @@
         <button id="tab-btn-favorites" class="tab-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-tab-icon" style="margin-right: 6px; vertical-align: middle;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Favoritos &amp; Presets
         </button>
+        <button id="tab-btn-betbuilder" class="tab-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-tab-icon" style="margin-right: 6px; vertical-align: middle;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>Bet Builder
+        </button>
         <button id="tab-btn-leaderboard" class="tab-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-tab-icon" style="margin-right: 6px; vertical-align: middle;"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>Ranking &amp; Comunidad
         </button>
@@ -612,7 +747,7 @@
               <!-- Pronóstico Oficial Leaderboard -->
               <div style="display: flex; gap: 8px; align-items: stretch;">
                 <button id="btn-submit-pronostic" class="btn btn-glow" style="width: 100%; min-height: unset; height: 38px; font-weight: 600; font-size: 0.8rem; background: var(--color-primary); border: none; border-radius: var(--border-radius-md); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;" disabled>
-                  Guardar Pronóstico Oficial (Leaderboard)
+                  🎯 Guardar Pronóstico Oficial (Leaderboard)
                 </button>
               </div>
             </div>
@@ -1109,64 +1244,300 @@
         </div>
       </div>
 
-      <!-- TAB 4: HISTORIAL & H2H -->
+      <!-- TAB 4: HISTORIAL & H2H - Advanced Center -->
       <div class="tab-content hidden" id="tab-history" style="padding: 24px;">
-        <div class="responsive-grid grid-1fr-1fr">
-          <!-- H2H stats -->
-          <div class="glass-card" style="padding: 24px;">
-            <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px;">Enfrentamientos Directos (Cara a Cara)</h3>
-            <div class="h2h-summary-card glass-card" style="margin-bottom: 20px; background: rgba(255,255,255,0.01); border-color: var(--card-border-inner);">
-              <h4>Resumen H2H Oficial</h4>
-              <div class="h2h-stats-row">
-                <div class="h2h-stat">
-                  <span class="h2h-stat-num" id="h2h-wins-a" style="font-family: var(--font-family-mono);">0</span>
-                  <span class="h2h-stat-label" id="h2h-label-a">Uru victorias</span>
-                </div>
-                <div class="h2h-stat">
-                  <span class="h2h-stat-num" id="h2h-draws" style="font-family: var(--font-family-mono);">0</span>
-                  <span class="h2h-stat-label">Empates</span>
-                </div>
-                <div class="h2h-stat">
-                  <span class="h2h-stat-num" id="h2h-wins-b" style="font-family: var(--font-family-mono);">0</span>
-                  <span class="h2h-stat-label" id="h2h-label-b">KSA victorias</span>
-                </div>
-              </div>
-              <div class="h2h-modifier-display" style="margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 10px;">
-                <span>Ajuste xG por H2H: </span>
-                <span id="h2h-modifier-val" class="badge">1.00x</span>
-              </div>
-            </div>
-            
-            <div class="h2h-matches-list-container">
-              <h4>Historial de Enfrentamientos en Competición</h4>
-              <div class="match-list" id="h2h-match-list">
-                <div class="no-matches-message">No se registran enfrentamientos previos en la base de datos.</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recent matches history -->
-          <div class="glass-card" style="padding: 24px;">
-            <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px;">Historial de Partidos Recientes</h3>
-            
-            <div class="team-history-container">
-              <h4 id="history-title-a" style="font-size: 0.85rem; color: var(--color-primary); text-transform: uppercase; margin-bottom: 8px;">Partidos de Uruguay</h4>
-              <div class="match-list" id="match-list-a">
-                <div class="loading-placeholder">Cargando partidos...</div>
-              </div>
-            </div>
-
-            <hr class="panel-divider" style="margin: 20px 0;">
-
-            <div class="team-history-container">
-              <h4 id="history-title-b" style="font-size: 0.85rem; color: var(--color-primary); text-transform: uppercase; margin-bottom: 8px;">Partidos de Arabia Saudita</h4>
-              <div class="match-list" id="match-list-b">
-                <div class="loading-placeholder">Cargando partidos...</div>
-              </div>
-            </div>
-          </div>
+        
+        <!-- Loading state -->
+        <div id="h2h-center-loading" class="h2h-center-loading">
+          <div class="h2h-center-loading-spinner"></div>
+          <span>Cargando datos históricos avanzados...</span>
         </div>
+
+        <!-- Advanced H2H Center content (shown when loaded) -->
+        <div id="h2h-center-content" style="display: none;">
+          
+          <!-- Header: Teams vs Teams -->
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span id="h2h-center-flag-a" style="font-size: 2rem;">🏳️</span>
+              <span id="h2h-center-name-a" style="font-size: 1rem; font-weight: 700; color: var(--color-text-primary);">Equipo A</span>
+              <span style="padding: 3px 10px; background: var(--card-bg-inner); border: 1px solid var(--panel-border); border-radius: 20px; font-size: 0.65rem; font-weight: 700; color: var(--color-primary); letter-spacing: 0.08em;">VS</span>
+              <span id="h2h-center-name-b" style="font-size: 1rem; font-weight: 700; color: var(--color-text-primary);">Equipo B</span>
+              <span id="h2h-center-flag-b" style="font-size: 2rem;">🏳️</span>
+            </div>
+            <div id="h2h-center-last-badge" style="padding: 5px 14px; background: rgba(240,179,16,0.1); border: 1px solid rgba(240,179,16,0.25); border-radius: 20px; font-size: 0.72rem; color: var(--color-primary); font-weight: 600;">—</div>
+          </div>
+
+          <!-- Sub-tab navigation -->
+          <div class="h2h-center-tabs" role="tablist">
+            <button class="h2h-subtab-btn active" id="h2hst-btn-stats" onclick="switchH2HSubTab('stats')">📊 H2H Stats</button>
+            <button class="h2h-subtab-btn" id="h2hst-btn-scorers" onclick="switchH2HSubTab('scorers')">⚽ Goleadores</button>
+            <button class="h2h-subtab-btn" id="h2hst-btn-form" onclick="switchH2HSubTab('form')">📈 Forma Reciente</button>
+            <button class="h2h-subtab-btn" id="h2hst-btn-insights" onclick="switchH2HSubTab('insights')">💡 Insights</button>
+            <button class="h2h-subtab-btn" id="h2hst-btn-charts" onclick="switchH2HSubTab('charts')">📉 Gráficos</button>
+          </div>
+
+          <!-- ════ SUB-TAB: H2H STATS ════ -->
+          <div class="h2h-subtab-content active" id="h2hst-stats">
+            <!-- Advanced stats row -->
+            <div class="h2h-advanced-stats-grid" id="h2h-adv-stats-grid">
+              <!-- dynamically filled -->
+            </div>
+
+            <!-- Win dominance bar -->
+            <div class="h2h-win-bar-container">
+              <div class="h2h-win-bar-header">
+                <span class="h2h-win-bar-label">Dominio Histórico</span>
+                <span id="h2h-winbar-sample" style="font-size: 0.68rem; color: var(--color-text-muted); font-weight: 500;">0 partidos</span>
+              </div>
+              <div class="h2h-win-bar">
+                <div class="h2h-win-bar-a" id="h2h-bar-a" style="width: 33%"></div>
+                <div class="h2h-win-bar-draw" id="h2h-bar-draw" style="width: 34%"></div>
+                <div class="h2h-win-bar-b" id="h2h-bar-b" style="width: 33%"></div>
+              </div>
+              <div class="h2h-win-bar-legend">
+                <span class="h2h-win-bar-legend-item">
+                  <span class="h2h-win-bar-legend-dot" style="background: var(--color-team-a);"></span>
+                  <span id="h2h-bar-legend-a">A: 0V</span>
+                </span>
+                <span class="h2h-win-bar-legend-item">
+                  <span class="h2h-win-bar-legend-dot" style="background: #6b7280;"></span>
+                  <span id="h2h-bar-legend-d">0E</span>
+                </span>
+                <span class="h2h-win-bar-legend-item">
+                  <span class="h2h-win-bar-legend-dot" style="background: var(--color-team-b);"></span>
+                  <span id="h2h-bar-legend-b">B: 0V</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Patterns -->
+            <div class="h2h-section-header">⚡ Patrones de Goles</div>
+            <div class="h2h-patterns-grid">
+              <div class="h2h-pattern-card">
+                <span class="h2h-pattern-pct" id="h2h-btts-pct" style="color: #10b981;">0%</span>
+                <span class="h2h-pattern-label">BTTS (Ambos Anotan)</span>
+              </div>
+              <div class="h2h-pattern-card">
+                <span class="h2h-pattern-pct" id="h2h-o25-pct" style="color: #3b82f6;">0%</span>
+                <span class="h2h-pattern-label">Over 2.5 Goles</span>
+              </div>
+              <div class="h2h-pattern-card">
+                <span class="h2h-pattern-pct" id="h2h-csa-pct" style="color: var(--color-primary);">0%</span>
+                <span class="h2h-pattern-label" id="h2h-csa-lbl">CS Equipo A</span>
+              </div>
+              <div class="h2h-pattern-card">
+                <span class="h2h-pattern-pct" id="h2h-csb-pct" style="color: #f59e0b;">0%</span>
+                <span class="h2h-pattern-label" id="h2h-csb-lbl">CS Equipo B</span>
+              </div>
+            </div>
+
+            <!-- Conditions -->
+            <div class="h2h-section-header">🏟️ Por Condición</div>
+            <div class="h2h-conditions-grid">
+              <div class="h2h-condition-card">
+                <span class="h2h-condition-icon">🏠</span>
+                <span class="h2h-condition-rec" id="h2h-cond-home">0V-0E-0D</span>
+                <span class="h2h-condition-label" id="h2h-cond-home-lbl">A de Local</span>
+              </div>
+              <div class="h2h-condition-card">
+                <span class="h2h-condition-icon">✈️</span>
+                <span class="h2h-condition-rec" id="h2h-cond-away">0V-0E-0D</span>
+                <span class="h2h-condition-label" id="h2h-cond-away-lbl">A de Visitante</span>
+              </div>
+              <div class="h2h-condition-card">
+                <span class="h2h-condition-icon">⚖️</span>
+                <span class="h2h-condition-rec" id="h2h-cond-neutral">0V-0E-0D</span>
+                <span class="h2h-condition-label">Campo Neutral</span>
+              </div>
+            </div>
+
+            <!-- Two-column: Scores + Competitions -->
+            <div class="responsive-grid grid-1fr-1fr" style="gap: 16px; margin-bottom: 16px;">
+              <!-- Frequent Scores -->
+              <div>
+                <div class="h2h-section-header">🎯 Marcadores Más Frecuentes</div>
+                <table class="h2h-score-table" id="h2h-scores-table">
+                  <thead>
+                    <tr>
+                      <th>Marcador</th>
+                      <th>Veces</th>
+                      <th>Frec.</th>
+                    </tr>
+                  </thead>
+                  <tbody id="h2h-scores-tbody">
+                    <tr><td colspan="3" style="text-align:center; padding: 20px; color: var(--color-text-muted);">Sin datos</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- Competition breakdown -->
+              <div>
+                <div class="h2h-section-header">🏆 Por Competencia</div>
+                <div style="max-height: 220px; overflow-y: auto;">
+                  <table class="h2h-comp-table" id="h2h-comp-table">
+                    <thead>
+                      <tr>
+                        <th>Competencia</th>
+                        <th>PJ</th>
+                        <th>A</th>
+                        <th>E</th>
+                        <th>B</th>
+                      </tr>
+                    </thead>
+                    <tbody id="h2h-comp-tbody">
+                      <tr><td colspan="5" style="text-align:center; padding: 20px; color: var(--color-text-muted);">Sin datos</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline of all matches -->
+            <div class="h2h-section-header">🕐 Todos los Enfrentamientos</div>
+            <div class="h2h-timeline" id="h2h-timeline-list">
+              <div style="text-align: center; padding: 20px; color: var(--color-text-muted); font-size: 0.82rem;">Sin partidos registrados</div>
+            </div>
+          </div>
+
+          <!-- ════ SUB-TAB: GOLEADORES ════ -->
+          <div class="h2h-subtab-content" id="h2hst-scorers">
+            <!-- Top scorers -->
+            <div class="h2h-section-header">🥇 Goleadores Históricos en H2H</div>
+            <div class="h2h-scorers-grid" id="h2h-scorers-grid">
+              <div style="grid-column: 1/-1; text-align: center; padding: 20px; color: var(--color-text-muted); font-size: 0.82rem;">Sin datos de goleadores</div>
+            </div>
+
+            <!-- Stats extra: penalties, own goals, avg minute -->
+            <div class="h2h-advanced-stats-grid" style="margin-bottom: 20px;" id="h2h-scorer-extra-grid">
+              <!-- dynamically filled -->
+            </div>
+
+            <!-- Period distribution heatmap -->
+            <div class="h2h-section-header">⏱️ Distribución de Goles por Período</div>
+            <div class="h2h-period-grid" id="h2h-period-grid">
+              <!-- dynamically filled -->
+            </div>
+          </div>
+
+          <!-- ════ SUB-TAB: FORMA RECIENTE ════ -->
+          <div class="h2h-subtab-content" id="h2hst-form">
+            <div class="h2h-form-comparison" id="h2h-form-comparison-grid">
+              <!-- Team A card -->
+              <div class="h2h-form-team-card">
+                <div class="h2h-form-team-header">
+                  <span id="h2h-form-flag-a" style="font-size: 1.3rem;">🏳️</span>
+                  <span class="h2h-form-team-name" id="h2h-form-name-a">Equipo A</span>
+                  <span class="h2h-form-record" id="h2h-form-record-a">—</span>
+                </div>
+                <div class="h2h-form-stats-list" id="h2h-form-stats-a">
+                  <!-- dynamically filled -->
+                </div>
+                <div class="h2h-section-header" style="margin-top: 14px;">Rachas Actuales</div>
+                <div class="h2h-streak-grid" id="h2h-streaks-a">
+                  <!-- dynamically filled -->
+                </div>
+                <div class="h2h-section-header" style="margin-top: 14px;">vs Nivel de Rival</div>
+                <div class="h2h-rival-grid" id="h2h-rival-a">
+                  <!-- dynamically filled -->
+                </div>
+              </div>
+              <!-- Team B card -->
+              <div class="h2h-form-team-card">
+                <div class="h2h-form-team-header">
+                  <span id="h2h-form-flag-b" style="font-size: 1.3rem;">🏳️</span>
+                  <span class="h2h-form-team-name" id="h2h-form-name-b">Equipo B</span>
+                  <span class="h2h-form-record" id="h2h-form-record-b">—</span>
+                </div>
+                <div class="h2h-form-stats-list" id="h2h-form-stats-b">
+                  <!-- dynamically filled -->
+                </div>
+                <div class="h2h-section-header" style="margin-top: 14px;">Rachas Actuales</div>
+                <div class="h2h-streak-grid" id="h2h-streaks-b">
+                  <!-- dynamically filled -->
+                </div>
+                <div class="h2h-section-header" style="margin-top: 14px;">vs Nivel de Rival</div>
+                <div class="h2h-rival-grid" id="h2h-rival-b">
+                  <!-- dynamically filled -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ SUB-TAB: INSIGHTS ════ -->
+          <div class="h2h-subtab-content" id="h2hst-insights">
+            <!-- Detected patterns -->
+            <div class="h2h-section-header">🔍 Patrones Detectados</div>
+            <div class="h2h-insights-list" id="h2h-insights-list">
+              <div style="text-align: center; padding: 20px; color: var(--color-text-muted); font-size: 0.82rem;">Sin insights disponibles</div>
+            </div>
+
+            <!-- Comparative matrix -->
+            <div class="h2h-section-header" style="margin-top: 20px;">📋 Matriz Comparativa</div>
+            <div style="overflow-x: auto; margin-bottom: 20px;">
+              <table class="h2h-matrix-table">
+                <thead>
+                  <tr>
+                    <th style="text-align: left;">Métrica</th>
+                    <th>H2H</th>
+                    <th id="h2h-matrix-head-a">Equipo A</th>
+                    <th id="h2h-matrix-head-b">Equipo B</th>
+                  </tr>
+                </thead>
+                <tbody id="h2h-matrix-tbody">
+                  <tr><td colspan="4" style="text-align: center; padding: 20px; color: var(--color-text-muted);">Sin datos</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Historical prediction -->
+            <div class="h2h-section-header">🔮 Predicción Basada en Historial</div>
+            <div class="h2h-historical-prediction" id="h2h-hist-pred">
+              <span class="h2h-pred-icon">🔮</span>
+              <div>
+                <div class="h2h-pred-outcome" id="h2h-pred-outcome">—</div>
+                <div class="h2h-pred-meta" id="h2h-pred-meta">
+                  <span>⚽ Goles esp.: <strong id="h2h-pred-goals">—</strong></span>
+                  <span>🎯 Marcador frec.: <strong id="h2h-pred-score">—</strong></span>
+                  <span>📊 Muestra: <strong id="h2h-pred-sample">—</strong> partidos</span>
+                </div>
+              </div>
+              <div class="h2h-pred-confidence">
+                <span class="h2h-pred-conf-num" id="h2h-pred-prob">—</span>
+                <span class="h2h-pred-conf-lbl" id="h2h-pred-conf">CONFIANZA</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ════ SUB-TAB: GRÁFICOS ════ -->
+          <div class="h2h-subtab-content" id="h2hst-charts">
+            <div class="h2h-charts-grid">
+              <!-- Radar comparison chart -->
+              <div class="h2h-chart-card">
+                <div class="h2h-chart-title">📡 Radar Comparativo</div>
+                <div class="h2h-chart-canvas-wrap">
+                  <canvas id="h2h-radar-chart"></canvas>
+                </div>
+              </div>
+              <!-- Doughnut H2H -->
+              <div class="h2h-chart-card">
+                <div class="h2h-chart-title">🍩 Distribución Resultados H2H</div>
+                <div class="h2h-chart-canvas-wrap">
+                  <canvas id="h2h-doughnut-chart"></canvas>
+                </div>
+              </div>
+              <!-- Goals per period bar chart (full width) -->
+              <div class="h2h-chart-card" style="grid-column: 1 / -1;">
+                <div class="h2h-chart-title">📊 Goles por Período de Juego</div>
+                <div class="h2h-chart-canvas-wrap" style="height: 180px;">
+                  <canvas id="h2h-period-chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end h2h-center-content -->
       </div>
+
 
       <!-- TAB 5: FAVORITOS & PRESETS -->
       <div class="tab-content hidden" id="tab-favorites" style="padding: 24px;">
@@ -1198,7 +1569,7 @@
         <div class="responsive-grid grid-1fr-1fr" style="gap: 24px;">
           <!-- Leaderboard Ranking Table -->
           <div class="glass-card" style="padding: 24px;">
-            <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px;">Clasificación de Pronosticadores</h3>
+            <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px;">🏆 Clasificación de Pronosticadores</h3>
             <div style="overflow-x: auto;">
               <table class="admin-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem;">
                 <thead>
@@ -1222,7 +1593,7 @@
           
           <!-- Comunidad Pronósticos Info -->
           <div class="glass-card" style="padding: 24px;">
-            <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px;">Reglas del Torneo de Pronósticos</h3>
+            <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px;">🎯 Reglas del Torneo de Pronósticos</h3>
             <div style="color: var(--color-text-secondary); line-height: 1.6; font-size: 0.88rem; display: flex; flex-direction: column; gap: 12px;">
               <p>Participa en el ranking de pronosticadores y compite con otros usuarios para ver quién acierta más resultados del Mundial 2026:</p>
               <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 6px;">
@@ -1231,10 +1602,648 @@
                 <li><strong>Actualizaciones:</strong> El ranking se actualiza automáticamente en cuanto el administrador ingresa o actualiza el resultado de un partido.</li>
               </ul>
               <div style="background: rgba(99,102,241,0.05); border-radius: 8px; padding: 15px; border: 1px solid rgba(99,102,241,0.15); margin-top: 10px; text-align: center;">
+                <span style="font-size: 1.5rem; display: block; margin-bottom: 5px;">🔥</span>
                 ¿Serás capaz de ganarle a las predicciones Dixon-Coles y a los análisis de IA? ¡Demuestra tus conocimientos futbolísticos!
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- TAB: BET BUILDER -->
+      <div class="tab-content hidden" id="tab-betbuilder" style="padding: 24px;">
+        <!-- Top Title & Instructions -->
+        <div class="glass-card" style="padding: 20px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+          <div>
+            <h2 style="border-left: 4px solid var(--color-primary); padding-left: 12px; margin-bottom: 5px; font-size: 1.5rem;">🚀 Bet Builder - Creador de Apuestas Correlacionadas</h2>
+            <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0;">Selecciona múltiples mercados y calcula la probabilidad real combinada usando simulación Monte Carlo de 100,000 iteraciones con ajuste Dixon-Coles.</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button id="btn-save-bb-favorite" class="tab-btn" style="background: rgba(240, 179, 16, 0.15); border: 1px solid var(--color-primary); color: var(--color-primary); padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+              ⭐ Guardar Combinación
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra de navegación de pestañas en móvil/tablet -->
+        <div class="bb-mobile-nav">
+          <button id="bb-nav-btn-markets" class="bb-mobile-nav-btn active" onclick="window.switchBetBuilderTab('markets')">🎯 Selección</button>
+          <button id="bb-nav-btn-summary" class="bb-mobile-nav-btn" onclick="window.switchBetBuilderTab('summary')">📊 Panel Analítico</button>
+        </div>
+
+        <div class="bb-grid-layout">
+          
+          <!-- COLUMNA 1: SELECCIÓN DE MERCADOS (Pestaña 1 en Móvil) -->
+          <div id="bb-col-markets" class="bb-col-markets bb-card-markets" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+            
+            <!-- Favoritos Combinadas Quick List -->
+            <div class="glass-card" style="padding: 20px; border-color: rgba(240, 179, 16, 0.25);">
+              <h3 style="font-size: 1rem; margin-bottom: 12px; border-bottom: 1px solid var(--panel-border); padding-bottom: 8px;">⭐ Combinaciones Guardadas</h3>
+              <div id="bb-favorites-container" style="display: flex; flex-direction: column; gap: 10px; max-height: 250px; overflow-y: auto;">
+                <div style="text-align: center; color: var(--color-text-muted); font-size: 0.8rem; padding: 10px;">No hay combinaciones guardadas.</div>
+              </div>
+            </div>
+
+            <!-- Market Selector Panel -->
+            <div class="glass-card" style="padding: 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--panel-border); padding-bottom: 8px; margin-bottom: 12px;">
+                <h3 style="font-size: 1.1rem; margin: 0; display: flex; align-items: center; gap: 6px;">📊 Seleccionar Logros <span id="bb-selected-count" style="font-size: 0.85rem; color: var(--color-primary); font-weight: bold; background: rgba(245, 158, 11, 0.15); padding: 2px 8px; border-radius: 12px;">(0)</span></h3>
+                <button onclick="window.clearAllBBLegs()" style="background: transparent; border: none; color: var(--color-text-secondary); cursor: pointer; font-size: 0.75rem; text-decoration: underline; padding: 2px 6px; font-weight: 500; hover: { color: white }">Limpiar todo</button>
+              </div>
+
+              <!-- BUSCADOR RÁPIDO DE MERCADOS -->
+              <div style="position: relative; margin-bottom: 15px;">
+                <input type="text" id="bb-market-search" placeholder="🔍 Buscar mercado..." oninput="window.filterBBMarkets()" style="width: 100%; padding: 10px 10px 10px 12px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; color: white; font-size: 0.85rem; box-sizing: border-box; outline: none; transition: all 0.2s;">
+              </div>
+
+              <div id="bb-market-selectors" style="display: flex; flex-direction: column; gap: 8px;">
+                
+                <!-- Accordion 1: Resultado Final -->
+                <div class="bb-accordion-item expanded" data-category="outcome" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
+                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
+                    <span style="display: flex; align-items: center; gap: 8px;">⚽ Resultado Final</span>
+                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▼</span>
+                  </button>
+                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px;">
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="win_a" class="custom-checkbox bb-checkbox"> <span class="bb-lbl-a">Victoria Local</span></label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="draw" class="custom-checkbox bb-checkbox"> Empate</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="win_b" class="custom-checkbox bb-checkbox"> <span class="bb-lbl-b">Victoria Visitante</span></label>
+                  </div>
+                </div>
+
+                <!-- Accordion 2: Ambos Anotan -->
+                <div class="bb-accordion-item" data-category="btts" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
+                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
+                    <span style="display: flex; align-items: center; gap: 8px;">🧤 Ambos Anotan</span>
+                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▶</span>
+                  </button>
+                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: none; flex-direction: column; gap: 8px;">
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="btts_yes" class="custom-checkbox bb-checkbox"> Sí (BTTS)</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="btts_no" class="custom-checkbox bb-checkbox"> No (BTTS)</label>
+                  </div>
+                </div>
+
+                <!-- Accordion 3: Doble Oportunidad -->
+                <div class="bb-accordion-item" data-category="doublechance" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
+                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
+                    <span style="display: flex; align-items: center; gap: 8px;">🛡️ Doble Oportunidad</span>
+                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▶</span>
+                  </button>
+                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: none; flex-direction: column; gap: 8px;">
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="double_chance_1X" class="custom-checkbox bb-checkbox"> 1X (Local o Empate)</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="double_chance_12" class="custom-checkbox bb-checkbox"> 12 (Cualquiera Gana)</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="double_chance_X2" class="custom-checkbox bb-checkbox"> X2 (Visitante o Empate)</label>
+                  </div>
+                </div>
+
+                <!-- Accordion 4: Goles Over/Under -->
+                <div class="bb-accordion-item" data-category="goals" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
+                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
+                    <span style="display: flex; align-items: center; gap: 8px;">🥅 Goles Over/Under</span>
+                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▶</span>
+                  </button>
+                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: none; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="over_0_5_goals" class="custom-checkbox bb-checkbox"> Over 0.5</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="under_0_5_goals" class="custom-checkbox bb-checkbox"> Under 0.5</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="over_1_5_goals" class="custom-checkbox bb-checkbox"> Over 1.5</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="under_1_5_goals" class="custom-checkbox bb-checkbox"> Under 1.5</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="over_2_5_goals" class="custom-checkbox bb-checkbox"> Over 2.5</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="under_2_5_goals" class="custom-checkbox bb-checkbox"> Under 2.5</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="over_3_5_goals" class="custom-checkbox bb-checkbox"> Over 3.5</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="under_3_5_goals" class="custom-checkbox bb-checkbox"> Under 3.5</label>
+                  </div>
+                </div>
+
+                <!-- Accordion 5: Córners -->
+                <div class="bb-accordion-item" data-category="corners" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
+                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
+                    <span style="display: flex; align-items: center; gap: 8px;">🚩 Córners</span>
+                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▶</span>
+                  </button>
+                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: none; flex-direction: column; gap: 8px;">
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px;">
+                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_win_a" class="custom-checkbox bb-checkbox"> Más Córners Local</label>
+                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_draw" class="custom-checkbox bb-checkbox"> Empate Córners</label>
+                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_win_b" class="custom-checkbox bb-checkbox"> Más Córners Visitante</label>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 8px;">
+                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_over_7_5" class="custom-checkbox bb-checkbox"> Over 7.5</label>
+                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_under_7_5" class="custom-checkbox bb-checkbox"> Under 7.5</label>
+                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_over_8_5" class="custom-checkbox bb-checkbox"> Over 8.5</label>
+                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_under_8_5" class="custom-checkbox bb-checkbox"> Under 8.5</label>
+                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_over_9_5" class="custom-checkbox bb-checkbox"> Over 9.5</label>
+                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_under_9_5" class="custom-checkbox bb-checkbox"> Under 9.5</label>
+                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_over_10_5" class="custom-checkbox bb-checkbox"> Over 10.5</label>
+                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_under_10_5" class="custom-checkbox bb-checkbox"> Under 10.5</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Accordion 6: Handicaps -->
+                <div class="bb-accordion-item" data-category="handicap" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
+                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
+                    <span style="display: flex; align-items: center; gap: 8px;">📐 Handicaps</span>
+                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▶</span>
+                  </button>
+                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: none; flex-direction: column; gap: 8px;">
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="handicap_minus_1_5_a" class="custom-checkbox bb-checkbox"> Local Handicap -1.5</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="handicap_plus_1_5_a" class="custom-checkbox bb-checkbox"> Local Handicap +1.5</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="handicap_minus_1_5_b" class="custom-checkbox bb-checkbox"> Visitante Handicap -1.5</label>
+                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="handicap_plus_1_5_b" class="custom-checkbox bb-checkbox"> Visitante Handicap +1.5</label>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+          <!-- COLUMNA 2 Y 3: PANEL ANALÍTICO COMBINADO (Pestaña 2 en Móvil) -->
+          <div id="bb-col-results" class="bb-col-results bb-card-summary bb-tab-hidden" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+            
+            <!-- SEGMENTED NAVIGATION BAR -->
+            <div class="bb-segment-nav" style="display: flex; gap: 10px; margin-bottom: 5px; overflow-x: auto; padding-bottom: 8px; border-bottom: 1px solid var(--panel-border);">
+              <button class="bb-segment-btn active" data-segment="summary" onclick="window.switchBBSegment('summary')" style="background: rgba(30, 41, 59, 0.7); color: var(--color-text-secondary); border: 1px solid #334155; padding: 10px 18px; border-radius: 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.2s;">
+                📊 Resumen Principal
+              </button>
+              <button class="bb-segment-btn" data-segment="goals" onclick="window.switchBBSegment('goals')" style="background: rgba(30, 41, 59, 0.7); color: var(--color-text-secondary); border: 1px solid #334155; padding: 10px 18px; border-radius: 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.2s;">
+                ⚽ Goles y Tiempos
+              </button>
+              <button class="bb-segment-btn" data-segment="markets" onclick="window.switchBBSegment('markets')" style="background: rgba(30, 41, 59, 0.7); color: var(--color-text-secondary); border: 1px solid #334155; padding: 10px 18px; border-radius: 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.2s;">
+                🏆 Mercados Pro
+              </button>
+              <button class="bb-segment-btn" data-segment="validation" onclick="window.switchBBSegment('validation')" style="background: rgba(30, 41, 59, 0.7); color: var(--color-text-secondary); border: 1px solid #334155; padding: 10px 18px; border-radius: 20px; font-size: 0.88rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.2s;">
+                🕒 Validación results.csv
+              </button>
+            </div>
+
+            <!-- RESULTS GRID (2 COLUMNS IN DESKTOP) -->
+            <div class="bb-results-grid">
+
+              <!-- ==================== SEGMENT: SUMMARY ==================== -->
+
+              <!-- 1. Probabilidades Principales Row -->
+              <div id="bb-container-summary-row1" class="bb-seg-summary" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
+                <!-- Probabilidad combinada real -->
+                <div class="glass-card" style="padding: 24px; text-align: center; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  <div style="position: absolute; width: 150px; height: 150px; background: var(--color-primary-glow); border-radius: 50%; filter: blur(50px); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;"></div>
+                  <div style="position: relative; z-index: 2; width: 100%;">
+                    <h3 style="font-size: 1.1rem; color: var(--color-text-secondary); font-weight: 500; margin-bottom: 12px;">Probabilidad Combinada</h3>
+                    <div id="bb-combined-prob-circle" class="bb-prob-glow" style="font-size: 4.5rem; font-weight: 800; font-family: var(--font-family-title); color: var(--color-primary); margin: 10px 0;">
+                      0.0%
+                    </div>
+                    <p style="font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 15px;">Calculado en tiempo real con 100k simulaciones Dixon-Coles</p>
+                    <button onclick="window.exportBetBuilderPDF()" class="bb-btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                      📥 Exportar a PDF
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Cuota Justa & Calculador de Edge -->
+                <div class="glass-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: center; gap: 12px;">
+                  <div>
+                    <h3 style="font-size: 1rem; color: var(--color-text-secondary); font-weight: 500; margin-bottom: 4px;">Cuota Justa Calculada</h3>
+                    <div id="bb-fair-odds" style="font-size: 2.5rem; font-weight: 700; font-family: var(--font-family-title); color: #ffffff;">
+                      1.00
+                    </div>
+                  </div>
+                  
+                  <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+                    <label style="font-size: 0.8rem; color: var(--color-text-secondary); display: flex; flex-direction: column; gap: 4px;">
+                      Cuota del Mercado:
+                      <input type="number" id="bb-market-odds" step="0.01" min="1.01" placeholder="Ej. 2.10" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 10px; border-radius: 6px; font-size: 0.85rem;" oninput="window.updateBetBuilderEdge()">
+                    </label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.8rem;">
+                      <div>
+                        <span style="color: var(--color-text-secondary);">Edge (Ventaja):</span>
+                        <div id="bb-edge-value" style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">0.0%</div>
+                      </div>
+                      <div>
+                        <span style="color: var(--color-text-secondary);">Stake (Kelly):</span>
+                        <div id="bb-kelly-stake" style="font-size: 1.1rem; font-weight: 700; color: #ffffff;">0.0%</div>
+                      </div>
+                    </div>
+                    <div id="bb-value-badge" style="display: none; padding: 6px; border-radius: 6px; background: rgba(16, 185, 129, 0.15); color: #10b981; font-weight: bold; font-size: 0.75rem; text-align: center; text-transform: uppercase;">
+                      ⚡ Value Bet Detectada
+                    </div>
+                    <div style="font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                      <span style="color: var(--color-text-secondary);">Nivel de Riesgo:</span>
+                      <span id="bb-risk-level" style="font-weight: 700; text-transform: uppercase; color: #10b981;">Bajo</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Radar de rendimiento -->
+              <div id="bb-container-radar" class="glass-card bb-seg-summary" style="padding: 24px;">
+                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px; font-size: 1.1rem;">📊 Radar de Rendimiento Comparativo</h3>
+                <div style="height: 250px; position: relative; width: 100%; display: flex; justify-content: center; align-items: center;">
+                  <canvas id="bb-radar-canvas"></canvas>
+                </div>
+              </div>
+
+              <!-- 3. Tabla comparativa pro -->
+              <div id="bb-container-comparison" class="glass-card bb-seg-summary" style="padding: 24px;">
+                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px; font-size: 1.1rem;">📊 Tabla Comparativa Profesional</h3>
+                <div style="overflow-x: auto;">
+                  <table style="width: 100%; text-align: left; font-size: 0.85rem; border-collapse: collapse;">
+                    <thead>
+                      <tr style="background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--panel-border);">
+                        <th style="padding: 10px; font-weight: 600; color: var(--color-text-secondary);">Métrica</th>
+                        <th id="bb-comp-header-a" style="padding: 10px; font-weight: 600; text-align: center; color: var(--color-primary);">Local</th>
+                        <th id="bb-comp-header-b" style="padding: 10px; font-weight: 600; text-align: center; color: #cbd5e1;">Visitante</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style="border-bottom: 1px solid rgba(255,255,255,0.02); transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.02)'" onmouseout="this.style.backgroundColor='transparent'">
+                        <td style="padding: 10px; color: var(--color-text-muted);">xG Modelo (Goles Proyectados)</td>
+                        <td id="bb-comp-xg-a" style="padding: 10px; text-align: center; font-weight: bold; color: #ffffff;">0.00</td>
+                        <td id="bb-comp-xg-b" style="padding: 10px; text-align: center; font-weight: bold; color: #ffffff;">0.00</td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid rgba(255,255,255,0.02); transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.02)'" onmouseout="this.style.backgroundColor='transparent'">
+                        <td style="padding: 10px; color: var(--color-text-muted);">Tiros Esperados / 90 min</td>
+                        <td id="bb-comp-shots-a" style="padding: 10px; text-align: center; font-weight: bold; color: #ffffff;">0.0</td>
+                        <td id="bb-comp-shots-b" style="padding: 10px; text-align: center; font-weight: bold; color: #ffffff;">0.0</td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid rgba(255,255,255,0.02); transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.02)'" onmouseout="this.style.backgroundColor='transparent'">
+                        <td style="padding: 10px; color: var(--color-text-muted);">Córners Esperados / 90 min</td>
+                        <td id="bb-comp-corners-a" style="padding: 10px; text-align: center; font-weight: bold; color: #ffffff;">0.0</td>
+                        <td id="bb-comp-corners-b" style="padding: 10px; text-align: center; font-weight: bold; color: #ffffff;">0.0</td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid rgba(255,255,255,0.02); transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.02)'" onmouseout="this.style.backgroundColor='transparent'">
+                        <td style="padding: 10px; color: var(--color-text-muted);">Posesión del Balón (Proyección Elo)</td>
+                        <td id="bb-comp-poss-a" style="padding: 10px; text-align: center; font-weight: bold; color: #ffffff;">0.0%</td>
+                        <td id="bb-comp-poss-b" style="padding: 10px; text-align: center; font-weight: bold; color: #ffffff;">0.0%</td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid rgba(255,255,255,0.02); transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.02)'" onmouseout="this.style.backgroundColor='transparent'">
+                        <td style="padding: 10px; color: var(--color-text-muted);">Arco en Cero (Clean Sheet)</td>
+                        <td id="bb-comp-cs-a" style="padding: 10px; text-align: center; font-weight: bold; color: #ffffff;">0.0%</td>
+                        <td id="bb-comp-cs-b" style="padding: 10px; text-align: center; font-weight: bold; color: #ffffff;">0.0%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+
+              <!-- ==================== SEGMENT: GOALS ==================== -->
+
+              <!-- 4. Heatmap Dixon-Coles -->
+              <div id="bb-container-heatmap" class="glass-card bb-seg-goals" style="padding: 24px;">
+                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px; font-size: 1.1rem;">🔥 Heatmap Dixon-Coles (Goles)</h3>
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                  <div style="overflow-x: auto; max-width: 100%; width: 100%;">
+                    <table id="bb-heatmap-table" style="border-collapse: separate; border-spacing: 4px; font-size: 0.75rem; text-align: center; width: 100%;">
+                      <!-- Generated Dynamically -->
+                    </table>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; width: 100%; max-width: 250px; font-size: 0.75rem; color: var(--color-text-muted); margin-top: 10px;">
+                    <span>Baja Probabilidad</span>
+                    <span>Alta Probabilidad</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5. Mitad/Final y Banda de goles -->
+              <div id="bb-container-htft-bands" class="glass-card bb-seg-goals" style="padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+                <!-- HT/FT Matrix -->
+                <div>
+                  <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px; font-size: 1.1rem;"> Mitad/Final (HT/FT)</h3>
+                  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; text-align: center; font-size: 0.75rem;">
+                    <div style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; border: 1px solid var(--panel-border);">
+                      <div style="color: var(--color-text-secondary); margin-bottom: 4px;">Loc/Loc</div>
+                      <strong id="bb-htft-aa" style="color: #ffffff; font-size: 0.9rem;">0.0%</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; border: 1px solid var(--panel-border);">
+                      <div style="color: var(--color-text-secondary); margin-bottom: 4px;">Emp/Loc</div>
+                      <strong id="bb-htft-da" style="color: #ffffff; font-size: 0.9rem;">0.0%</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; border: 1px solid var(--panel-border);">
+                      <div style="color: var(--color-text-secondary); margin-bottom: 4px;">Vis/Loc</div>
+                      <strong id="bb-htft-ba" style="color: #ffffff; font-size: 0.9rem;">0.0%</strong>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; border: 1px solid var(--panel-border);">
+                      <div style="color: var(--color-text-secondary); margin-bottom: 4px;">Loc/Emp</div>
+                      <strong id="bb-htft-ad" style="color: #ffffff; font-size: 0.9rem;">0.0%</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; border: 1px solid var(--panel-border);">
+                      <div style="color: var(--color-text-secondary); margin-bottom: 4px;">Emp/Emp</div>
+                      <strong id="bb-htft-dd" style="color: #ffffff; font-size: 0.9rem;">0.0%</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; border: 1px solid var(--panel-border);">
+                      <div style="color: var(--color-text-secondary); margin-bottom: 4px;">Vis/Emp</div>
+                      <strong id="bb-htft-bd" style="color: #ffffff; font-size: 0.9rem;">0.0%</strong>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; border: 1px solid var(--panel-border);">
+                      <div style="color: var(--color-text-secondary); margin-bottom: 4px;">Loc/Vis</div>
+                      <strong id="bb-htft-ab" style="color: #ffffff; font-size: 0.9rem;">0.0%</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; border: 1px solid var(--panel-border);">
+                      <div style="color: var(--color-text-secondary); margin-bottom: 4px;">Emp/Vis</div>
+                      <strong id="bb-htft-db" style="color: #ffffff; font-size: 0.9rem;">0.0%</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; border: 1px solid var(--panel-border);">
+                      <div style="color: var(--color-text-secondary); margin-bottom: 4px;">Vis/Vis</div>
+                      <strong id="bb-htft-bb" style="color: #ffffff; font-size: 0.9rem;">0.0%</strong>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Goal Bands -->
+                <div>
+                  <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px; font-size: 1.1rem;">⚽ Banda de Goles</h3>
+                  <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.8rem;">
+                    <div>
+                      <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+                        <span>0-1 goles</span>
+                        <strong id="bb-band-0-1-pct">0.0%</strong>
+                      </div>
+                      <div style="background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow: hidden;">
+                        <div id="bb-band-0-1-bar" style="width: 0%; background: #94a3b8; height: 100%; transition: width 0.5s ease-out;"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+                        <span style="color: var(--color-primary);">2-3 goles (Recomendado)</span>
+                        <strong id="bb-band-2-3-pct" style="color: var(--color-primary);">0.0%</strong>
+                      </div>
+                      <div style="background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow: hidden;">
+                        <div id="bb-band-2-3-bar" style="width: 0%; background: var(--color-primary); height: 100%; transition: width 0.5s ease-out;"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+                        <span>4-5 goles</span>
+                        <strong id="bb-band-4-5-pct">0.0%</strong>
+                      </div>
+                      <div style="background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow: hidden;">
+                        <div id="bb-band-4-5-bar" style="width: 0%; background: #3b82f6; height: 100%; transition: width 0.5s ease-out;"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+                        <span>6+ goles</span>
+                        <strong id="bb-band-6-pct">0.0%</strong>
+                      </div>
+                      <div style="background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow: hidden;">
+                        <div id="bb-band-6-bar" style="width: 0%; background: #ef4444; height: 100%; transition: width 0.5s ease-out;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6. Minuto de goles -->
+              <div id="bb-container-timing" class="glass-card bb-seg-goals" style="padding: 24px;">
+                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px; font-size: 1.1rem;">⏱️ Distribución Temporal de Goles (Intervalos 15 Min)</h3>
+                <div style="height: 200px; position: relative; width: 100%;">
+                  <canvas id="bb-timing-canvas"></canvas>
+                </div>
+              </div>
+
+
+              <!-- ==================== SEGMENT: MARKETS ==================== -->
+
+              <!-- 7. Logros avanzados pro -->
+              <div id="bb-container-metrics" class="glass-card bb-seg-markets" style="padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; font-size: 1.1rem; margin-bottom: 5px;">🏆 Métricas Avanzadas Pro</h3>
+                
+                <!-- Expected Points & Clean Sheet comparative bars -->
+                <div style="display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid var(--panel-border); padding-bottom: 16px;">
+                  <div class="probability-bar-container">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px;">
+                      <span class="bb-lbl-a font-semibold" style="font-weight: 600;">Local</span>
+                      <span style="color: var(--color-text-secondary);">Puntos Esperados (xPTS)</span>
+                      <span class="bb-lbl-b font-semibold" style="font-weight: 600;">Visitante</span>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between; font-size: 0.9rem;">
+                      <div id="bb-xpts-a" style="font-weight: bold; color: var(--color-primary);">0.00</div>
+                      <div style="flex-grow: 1; background: rgba(255,255,255,0.05); height: 8px; border-radius: 4px; overflow: hidden; display: flex;">
+                        <div id="bb-xpts-bar-a" style="width: 50%; background: var(--color-primary); height: 100%; transition: width 0.5s ease-out;"></div>
+                        <div id="bb-xpts-bar-b" style="width: 50%; background: var(--color-text-secondary); height: 100%; transition: width 0.5s ease-out;"></div>
+                      </div>
+                      <div id="bb-xpts-b" style="font-weight: bold; color: #cbd5e1;">0.00</div>
+                    </div>
+                  </div>
+
+                  <!-- Clean Sheet Bars -->
+                  <div class="probability-bar-container" style="margin-top: 8px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px;">
+                      <span id="bb-cs-pct-a" style="font-weight: 600; color: #10b981;">0.0%</span>
+                      <span style="color: var(--color-text-secondary);">🧤 Arco en Cero (Clean Sheet)</span>
+                      <span id="bb-cs-pct-b" style="font-weight: 600; color: #10b981;">0.0%</span>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between;">
+                      <div style="flex-grow: 1; background: rgba(255,255,255,0.05); height: 8px; border-radius: 4px; overflow: hidden; display: flex;">
+                        <div id="bb-cs-bar-a" style="width: 50%; background: #10b981; height: 100%; transition: width 0.5s ease-out; margin-right: 2px;"></div>
+                        <div id="bb-cs-bar-b" style="width: 50%; background: #10b981; height: 100%; transition: width 0.5s ease-out; margin-left: 2px;"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Win to Nil (Victoria sin recibir goles) -->
+                  <div class="probability-bar-container" style="margin-top: 8px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px;">
+                      <span id="bb-w2n-pct-a" style="font-weight: 600; color: #3b82f6;">0.0%</span>
+                      <span style="color: var(--color-text-secondary);">🏆 Ganar sin Recibir (Win to Nil)</span>
+                      <span id="bb-w2n-pct-b" style="font-weight: 600; color: #3b82f6;">0.0%</span>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between;">
+                      <div style="flex-grow: 1; background: rgba(255,255,255,0.05); height: 8px; border-radius: 4px; overflow: hidden; display: flex;">
+                        <div id="bb-w2n-bar-a" style="width: 50%; background: #3b82f6; height: 100%; transition: width 0.5s ease-out; margin-right: 2px;"></div>
+                        <div id="bb-w2n-bar-b" style="width: 50%; background: #3b82f6; height: 100%; transition: width 0.5s ease-out; margin-left: 2px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Asian Handicap Probabilities -->
+                <div>
+                  <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary); margin-bottom: 10px; font-weight: 600;">Hándicap Asiático Real</h4>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.8rem;">
+                    <div style="background: rgba(0,0,0,0.15); padding: 10px; border-radius: 6px; border: 1px solid var(--panel-border); display: flex; justify-content: space-between;">
+                      <span style="color: var(--color-text-secondary);"><span class="bb-lbl-a">Local</span> -1.5:</span>
+                      <span id="bb-ah-a1" style="font-weight: bold; color: #ffffff;">0.0%</span>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.15); padding: 10px; border-radius: 6px; border: 1px solid var(--panel-border); display: flex; justify-content: space-between;">
+                      <span style="color: var(--color-text-secondary);"><span class="bb-lbl-a">Local</span> -1.0:</span>
+                      <span id="bb-ah-a2" style="font-weight: bold; color: #ffffff;">0.0%</span>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.15); padding: 10px; border-radius: 6px; border: 1px solid var(--panel-border); display: flex; justify-content: space-between;">
+                      <span style="color: var(--color-text-secondary);"><span class="bb-lbl-b">Visitante</span> +0.5:</span>
+                      <span id="bb-ah-b1" style="font-weight: bold; color: #ffffff;">0.0%</span>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.15); padding: 10px; border-radius: 6px; border: 1px solid var(--panel-border); display: flex; justify-content: space-between;">
+                      <span style="color: var(--color-text-secondary);"><span class="bb-lbl-b">Visitante</span> +1.5:</span>
+                      <span id="bb-ah-b2" style="font-weight: bold; color: #ffffff;">0.0%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 8. Coeficientes de correlacion -->
+              <div id="bb-container-correlations" class="glass-card bb-seg-markets" style="padding: 24px;">
+                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px; font-size: 1.1rem;">🔗 Coeficientes de Correlación</h3>
+                <div style="overflow-x: auto; max-height: 280px;">
+                  <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem;">
+                    <thead>
+                      <tr style="border-bottom: 1px solid var(--panel-border); color: var(--color-text-secondary); font-weight: 600;">
+                        <th style="padding: 8px 4px;">Selección A</th>
+                        <th style="padding: 8px 4px;">Selección B</th>
+                        <th style="padding: 8px 4px; text-align: right;">Coef. Pearson</th>
+                      </tr>
+                    </thead>
+                    <tbody id="bb-correlations-tbody">
+                      <tr>
+                        <td colspan="3" style="text-align: center; padding: 24px; color: var(--color-text-muted);">
+                          Selecciona 2 o más logros para ver correlaciones.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- 9. Comparador de cuotas -->
+              <div id="bb-container-comparer" class="glass-card bb-seg-markets" style="padding: 24px; display: flex; flex-direction: column; gap: 15px;">
+                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 5px; font-size: 1.1rem;">💰 Comparador de Cuotas Premium</h3>
+                <p style="color: var(--color-text-secondary); font-size: 0.8rem; margin: 0;">Ingresa cuotas para comparar el edge y ganancia potencial (base $100 USD).</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem;">
+                  <label style="display: flex; flex-direction: column; gap: 4px; color: var(--color-text-secondary);">Bet365<input type="number" id="odds-bet365" step="0.01" min="1.01" class="odds-compare-input" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 6px; border-radius: 6px;" oninput="window.updateOddsComparison()"></label>
+                  <label style="display: flex; flex-direction: column; gap: 4px; color: var(--color-text-secondary);">1xBet<input type="number" id="odds-1xbet" step="0.01" min="1.01" class="odds-compare-input" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 6px; border-radius: 6px;" oninput="window.updateOddsComparison()"></label>
+                  <label style="display: flex; flex-direction: column; gap: 4px; color: var(--color-text-secondary);">Pinnacle<input type="number" id="odds-pinnacle" step="0.01" min="1.01" class="odds-compare-input" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 6px; border-radius: 6px;" oninput="window.updateOddsComparison()"></label>
+                  <label style="display: flex; flex-direction: column; gap: 4px; color: var(--color-text-secondary);">Betfair<input type="number" id="odds-betfair" step="0.01" min="1.01" class="odds-compare-input" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 6px; border-radius: 6px;" oninput="window.updateOddsComparison()"></label>
+                </div>
+                <div style="overflow-x: auto; margin-top: 10px;">
+                  <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8rem;">
+                    <thead>
+                      <tr style="border-bottom: 1px solid var(--panel-border); color: var(--color-text-secondary);">
+                        <th style="padding: 6px 2px;">Casa</th>
+                        <th style="padding: 6px 2px; text-align: center;">Cuota</th>
+                        <th style="padding: 6px 2px; text-align: center;">Edge</th>
+                        <th style="padding: 6px 2px; text-align: right;">Retorno</th>
+                      </tr>
+                    </thead>
+                    <tbody id="odds-compare-tbody">
+                      <tr><td colspan="4" style="text-align: center; padding: 15px; color: var(--color-text-muted);">Ingresa una cuota arriba para comparar.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- 10. Cobertura y Alertas -->
+              <div id="bb-container-hedging-alerts" class="bb-seg-markets" style="display: flex; flex-direction: column; gap: 24px; width: 100%;">
+                <!-- Modo Inverso (Hedging) -->
+                <div class="glass-card" style="padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin: 0; font-size: 1.05rem;">🔄 Probabilidad Inversa (Cobertura)</h3>
+                    <button id="btn-toggle-inverse" onclick="window.toggleInverseMode()" style="background: rgba(240,179,16,0.15); border: 1px solid var(--color-primary); color: var(--color-primary); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; cursor: pointer; font-weight: bold; transition: all 0.2s;">
+                      Activar Inverso
+                    </button>
+                  </div>
+                  <div id="inverse-metrics-panel" style="display: none; background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; font-size: 0.8rem; flex-direction: column; gap: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <span style="color: var(--color-text-secondary);">Probabilidad Inversa (NO se cumple):</span>
+                      <span id="bb-inverse-prob" style="font-weight: 700; color: var(--color-primary);">0.0%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <span style="color: var(--color-text-secondary);">Cuota Justa Inversa:</span>
+                      <span id="bb-inverse-odds" style="font-weight: 700; color: #ffffff;">1.00</span>
+                    </div>
+                    <p style="color: var(--color-text-muted); font-size: 0.72rem; margin: 5px 0 0 0;">
+                      💡 Esta opción calcula la probabilidad complementaria para hedging o coberturas en vivo.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Alertas de Value Bets -->
+                <div class="glass-card" style="padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+                  <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin: 0; font-size: 1.05rem;">🔔 Alertas de Value Bets</h3>
+                  <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.8rem;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--color-text-secondary);">
+                      <input type="checkbox" id="alert-enable" onchange="window.toggleAlertsState()">
+                      Activar alertas en tiempo real
+                    </label>
+                    <div id="alerts-config-fields" style="display: none; flex-direction: column; gap: 10px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 10px;">
+                      <label style="display: flex; justify-content: space-between; align-items: center; color: var(--color-text-secondary);">
+                        Edge Mínimo para Alertas:
+                        <select id="alert-min-edge" style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 4px; border-radius: 4px;">
+                          <option value="0.05">5%</option>
+                          <option value="0.10" selected>10%</option>
+                          <option value="0.15">15%</option>
+                          <option value="0.20">20%</option>
+                        </select>
+                      </label>
+                      <label style="display: flex; flex-direction: column; gap: 4px; color: var(--color-text-secondary);">
+                        Correo Electrónico:
+                        <input type="email" id="alert-email" placeholder="tu@correo.com" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 6px; border-radius: 6px;">
+                      </label>
+                    </div>
+                    <!-- Alertas de value bets log -->
+                    <div style="border-top: 1px solid rgba(255,255,255,0.04); padding-top: 10px;">
+                      <div style="font-weight: 600; font-size: 0.75rem; color: var(--color-text-secondary); margin-bottom: 5px; text-transform: uppercase;">Última Alerta Detectada:</div>
+                      <div id="alert-history-log" style="font-size: 0.75rem; color: var(--color-text-muted); background: rgba(0,0,0,0.2); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.03);">
+                        No hay alertas registradas aún.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- ==================== SEGMENT: VALIDATION ==================== -->
+
+              <!-- 11. Validación Histórica -->
+              <div id="bb-container-validation" class="glass-card bb-seg-validation" style="padding: 24px;">
+                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 15px; font-size: 1.1rem;">🕒 Validación Histórica (results.csv)</h3>
+                
+                <div class="bb-validation-grid-adaptive" style="display: grid; gap: 20px; width: 100%;">
+                  <!-- H2H Matches -->
+                  <div>
+                    <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary); margin-bottom: 8px; font-weight: 600;">H2H Directos Históricos</h4>
+                    <div style="overflow-x: auto; max-height: 250px;">
+                      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8rem;">
+                        <thead>
+                          <tr style="border-bottom: 1px solid var(--panel-border); color: var(--color-text-secondary);">
+                            <th style="padding: 6px 4px;">Fecha</th>
+                            <th style="padding: 6px 4px;">Partido</th>
+                            <th style="padding: 6px 4px; text-align: center;">Score</th>
+                            <th style="padding: 6px 4px; text-align: center;">Combinada</th>
+                          </tr>
+                        </thead>
+                        <tbody id="bb-h2h-tbody">
+                          <tr><td colspan="4" style="text-align: center; padding: 15px; color: var(--color-text-muted);">Sin partidos seleccionados o no hay historial.</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <!-- Similar Profile Matches -->
+                  <div>
+                    <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary); margin-bottom: 8px; font-weight: 600;">Partidos con Perfil ELO Similar</h4>
+                    <div style="overflow-x: auto; max-height: 250px;">
+                      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8rem;">
+                        <thead>
+                          <tr style="border-bottom: 1px solid var(--panel-border); color: var(--color-text-secondary);">
+                            <th style="padding: 6px 4px;">Fecha</th>
+                            <th style="padding: 6px 4px;">Partido</th>
+                            <th style="padding: 6px 4px; text-align: center;">Score</th>
+                            <th style="padding: 6px 4px; text-align: center;">Simil.</th>
+                            <th style="padding: 6px 4px; text-align: center;">Combinada</th>
+                          </tr>
+                        </thead>
+                        <tbody id="bb-similar-tbody">
+                          <tr><td colspan="5" style="text-align: center; padding: 15px; color: var(--color-text-muted);">Sin partidos seleccionados o no hay historial.</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -1247,6 +2256,20 @@
       <p>Diseño premium desarrollado para el análisis estadístico del Mundial 2026. Los cálculos de probabilidad de goles se basan en el método Dixon-Coles (1997).</p>
     </footer>
   </div>
+
+  <!-- Modal para Guardar Combinación Favorita -->
+  <dialog id="bb-save-dialog" style="border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-radius: 12px; padding: 24px; color: white; width: 90%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);">
+    <h3 style="margin-top: 0; font-family: var(--font-family-title); border-left: 3px solid var(--color-primary); padding-left: 10px; margin-bottom: 15px;">💾 Guardar Combinación</h3>
+    <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 15px;">Asigna un nombre descriptivo para identificar tu combinación de Bet Builder.</p>
+    <input type="text" id="bb-save-name-input" placeholder="Ej. Combo Goles Argentina" style="width: 100%; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: white; font-size: 0.9rem; margin-bottom: 20px; box-sizing: border-box;">
+    <div style="display: flex; justify-content: flex-end; gap: 10px;">
+      <button onclick="document.getElementById('bb-save-dialog').close()" style="background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">Cancelar</button>
+      <button id="bb-confirm-save-btn" style="background: var(--color-primary); color: black; font-weight: bold; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">Guardar</button>
+    </div>
+  </dialog>
+
+  <!-- HTML2PDF CDN Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <!-- SUPABASE CDN LIBRARY -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

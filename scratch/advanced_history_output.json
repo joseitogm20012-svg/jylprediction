@@ -1,0 +1,203 @@
+{
+  "h2h": {
+    "count": 4,
+    "winsA": 1,
+    "winsB": 1,
+    "draws": 2,
+    "goalsA": 5,
+    "goalsB": 5,
+    "avgGoals": 2.5,
+    "biggestWin": "Saudi Arabia 3-2 Uruguay (2002)",
+    "patterns": {
+      "btts": 75,
+      "over25": 25,
+      "csA": 25,
+      "csB": 0
+    },
+    "byCondition": {
+      "homeA": "0V-0E-0D",
+      "awayA": "0V-1E-1D",
+      "neutral": "1V-1E-0D"
+    },
+    "byCompetition": [
+      {
+        "competition": "Friendly",
+        "pj": 2,
+        "winsA": 0,
+        "draws": 1,
+        "winsB": 1
+      },
+      {
+        "competition": "FIFA World Cup",
+        "pj": 2,
+        "winsA": 1,
+        "draws": 1,
+        "winsB": 0
+      }
+    ],
+    "mostFrequentScores": [
+      {
+        "score": "1-1",
+        "count": 2
+      },
+      {
+        "score": "2-3",
+        "count": 1
+      },
+      {
+        "score": "1-0",
+        "count": 1
+      }
+    ],
+    "lastWinner": "\ud83d\udd25 Uruguay no le gana a Saudi Arabia desde 2018",
+    "timeline": [
+      {
+        "date": "2002-03-27",
+        "homeName": "Saudi Arabia",
+        "awayName": "Uruguay",
+        "hg": 3,
+        "ag": 2,
+        "tournament": "Friendly",
+        "winner": "B"
+      },
+      {
+        "date": "2014-10-10",
+        "homeName": "Saudi Arabia",
+        "awayName": "Uruguay",
+        "hg": 1,
+        "ag": 1,
+        "tournament": "Friendly",
+        "winner": "Draw"
+      },
+      {
+        "date": "2018-06-20",
+        "homeName": "Uruguay",
+        "awayName": "Saudi Arabia",
+        "hg": 1,
+        "ag": 0,
+        "tournament": "FIFA World Cup",
+        "winner": "A"
+      },
+      {
+        "date": "2026-06-15",
+        "homeName": "Saudi Arabia",
+        "awayName": "Uruguay",
+        "hg": 1,
+        "ag": 1,
+        "tournament": "FIFA World Cup",
+        "winner": "Draw"
+      }
+    ]
+  },
+  "scorers": {
+    "topScorers": [
+      {
+        "name": "Luis Su\u00e1rez",
+        "goals": 1,
+        "team": "URU",
+        "active": true
+      },
+      {
+        "name": "Abdulelah Al-Amri",
+        "goals": 1,
+        "team": "SAU",
+        "active": true
+      },
+      {
+        "name": "Maximiliano Ara\u00fajo",
+        "goals": 1,
+        "team": "URU",
+        "active": true
+      }
+    ],
+    "avgGoalMinute": 48,
+    "periodDistribution": {
+      "0-15": 0,
+      "16-30": 33,
+      "31-45": 33,
+      "46-60": 0,
+      "61-75": 0,
+      "76-90": 33
+    },
+    "penaltiesCount": 0,
+    "ownGoalsCount": 0
+  },
+  "form": {
+    "teamA": {
+      "record": "3V - 6E - 1D",
+      "avg_gf": 1.1,
+      "avg_gc": 1.0,
+      "clean_sheets": 50,
+      "btts": 50,
+      "over25": 40,
+      "streaks": {
+        "unbeaten": 4,
+        "losing": 0,
+        "scoring": 2,
+        "clean_sheet": 0
+      },
+      "by_rival": {
+        "top": "0V-3E-1D",
+        "high": "2V-3E-0D",
+        "medium": "1V-0E-0D"
+      }
+    },
+    "teamB": {
+      "record": "2V - 2E - 6D",
+      "avg_gf": 0.8,
+      "avg_gc": 1.6,
+      "clean_sheets": 20,
+      "btts": 40,
+      "over25": 60,
+      "streaks": {
+        "unbeaten": 0,
+        "losing": 1,
+        "scoring": 0,
+        "clean_sheet": 0
+      },
+      "by_rival": {
+        "top": "0V-2E-4D",
+        "high": "0V-0E-2D",
+        "medium": "2V-0E-0D"
+      }
+    }
+  },
+  "insights": {
+    "detectedPatterns": [
+      "\u2705 En 75% de los H2H, ambos equipos anotan.",
+      "\u26a0\ufe0f Saudi Arabia no gana como visitante en H2H (0D-1E-1D).",
+      "\ud83d\udca1 El promedio de goles es 2.5/partido.",
+      "\ud83d\udd25 Uruguay: 4 partidos sin perder."
+    ],
+    "comparativeMatrix": {
+      "avg_goals": {
+        "h2h": "2.5",
+        "team_a": "2.1",
+        "team_b": "2.4"
+      },
+      "btts": {
+        "h2h": "75%",
+        "team_a": "50%",
+        "team_b": "40%"
+      },
+      "over25": {
+        "h2h": "25%",
+        "team_a": "40%",
+        "team_b": "60%"
+      },
+      "clean_sheets": {
+        "h2h": "25% (A) / 0% (B)",
+        "team_a": "50%",
+        "team_b": "20%"
+      }
+    },
+    "historicalPrediction": {
+      "outcome": "Empate",
+      "probability": 50,
+      "freq_score": "1-1",
+      "exp_goals": 2.5,
+      "confidence": "MEDIA",
+      "sample_size": 4
+    }
+  }
+}
