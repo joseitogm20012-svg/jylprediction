@@ -8,6 +8,7 @@ import os
 import json
 import subprocess
 from datetime import datetime
+import pandas as pd
 
 # Cargar variables de entorno desde el archivo .env si existe (útil para desarrollo local)
 if os.path.exists(".env"):
@@ -22,6 +23,7 @@ from predictor import load_data, run_prediction_sim, get_team_history, get_h2h_s
 import db
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
 
 # Configuración desde variables de entorno (ver .env.example)
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
@@ -869,28 +871,48 @@ def get_leaderboard():
 def get_team_details(team_name: str):
     """Get detailed team statistics for modal display"""
     import urllib.parse
+    import logging
+    
+    # Configure logging
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+    
     team_name = urllib.parse.unquote(team_name)
+    logger.info(f"Getting details for team: {team_name}")
     
     # Get recent matches from results.csv
-    df = pd.read_csv(os.path.join(DATA_DIR, 'results.csv'))
-    df['Date'] = pd.to_datetime(df['Date'])
-    df = df.sort_values('Date', ascending=False)
+    try:
+        df = pd.read_csv(os.path.join(DATA_DIR, 'results.csv'))
+    except Exception as e:
+        logger.error(f"Error reading results.csv: {e}")
+        raise HTTPException(status_code=500, detail=f"Error reading results data: {str(e)}")
     
-    # Filter matches for the team (home or away)
-    team_matches = df[(df['Home'] == team_name) | (df['Away'] == team_name)].head(10)
+    # Normalize column names (lowercase)
+    df.columns = [col.lower().strip() for col in df.columns]
+    
+    df['date'] = pd.to_datetime(df['date'], errors='coerce')
+    df = df.sort_values('date', ascending=False)
+    
+    # Filter matches for the team (home or away) - case insensitive
+    team_matches = df[
+        (df['home_team'].str.lower() == team_name.lower()) | 
+        (df['away_team'].str.lower() == team_name.lower())
+    ].head(10)
+    
+    logger.info(f"Found {len(team_matches)} matches for {team_name}")
     
     if len(team_matches) == 0:
         return {
             "error": f"No matches found for {team_name}",
             "fifaRank": 1,
             "eloRating": 1800,
-            "wins": 5, "draws": 3, "losses": 2,
-            "formResults": ['W', 'D', 'W', 'W', 'L', 'D', 'W', 'L', 'W', 'D'],
-            "formGoals": [2, 1, 3, 2, 0, 1, 2, 0, 1, 1],
-            "goalsFor": 15, "gfAvg": 1.5, "cleanSheets": 40,
-            "goalsAgainst": 8, "gcAvg": 0.8, "btts": 50,
-            "topScorers": [{"name": "Jugador Desconocido", "goals": 3, "active": True}],
-            "competitionStats": {"Desconocida": "0V-0E-0D"}
+            "wins": 0, "draws": 0, "losses": 0,
+            "formResults": [],
+            "formGoals": [],
+            "goalsFor": 0, "gfAvg": 0, "cleanSheets": 0,
+            "goalsAgainst": 0, "gcAvg": 0, "btts": 0,
+            "topScorers": [{"name": "Datos no disponibles", "goals": 0, "active": True}],
+            "competitionStats": {"Sin datos": "0V-0E-0D"}
         }
     
     # Calculate stats
@@ -906,9 +928,9 @@ def get_team_details(team_name: str):
     competitions = {}
     
     for _, match in team_matches.iterrows():
-        is_home = match['Home'] == team_name
-        team_goals = match['HomeGoals'] if is_home else match['AwayGoals']
-        opp_goals = match['AwayGoals'] if is_home else match['HomeGoals']
+        is_home = str(match['home_team']).lower() == team_name.lower()
+        team_goals = int(match['home_score']) if is_home else int(match['away_score'])
+        opp_goals = int(match['away_score']) if is_home else int(match['home_score'])
         
         form_goals.append(team_goals)
         
@@ -925,15 +947,13 @@ def get_team_details(team_name: str):
         goals_for += team_goals
         goals_against += opp_goals
         
-        if team_goals == 0:
-            pass  # No clean sheet
-        elif opp_goals == 0:
+        if opp_goals == 0 and team_goals > 0:
             clean_sheets += 1
         
         if team_goals > 0 and opp_goals > 0:
             btts_count += 1
         
-        comp = match['Competition']
+        comp = str(match.get('tournament', 'Unknown'))
         if comp not in competitions:
             competitions[comp] = {'W': 0, 'E': 0, 'D': 0}
         if team_goals > opp_goals:
@@ -947,32 +967,55 @@ def get_team_details(team_name: str):
     try:
         with open(os.path.join(DATA_DIR, 'elo-calibrated.json'), 'r') as f:
             elo_data = json.load(f)
-            elo_rating = elo_data.get(team_name, {}).get('elo', 1600)
-    except:
+            # Try exact match first, then case-insensitive
+            elo_rating = elo_data.get(team_name, {}).get('elo', None)
+            if elo_rating is None:
+                for key, val in elo_data.items():
+                    if key.lower() == team_name.lower():
+                        elo_rating = val.get('elo', 1600)
+                        break
+            if elo_rating is None:
+                elo_rating = 1600
+    except Exception as e:
+        logger.warning(f"Error reading Elo data: {e}")
         elo_rating = 1600
     
     # Get FIFA rank (approximate based on Elo)
-    fifa_rank = max(1, min(50, int((2000 - elo_rating) / 15) + 1))
+    fifa_rank = max(1, min(211, int((2000 - elo_rating) / 10) + 1))
     
     # Get top scorers from goalscorers.csv
+    top_scorers = []
     try:
         scorers_df = pd.read_csv(os.path.join(DATA_DIR, 'goalscorers.csv'))
-        team_scorers = scorers_df[scorers_df['Team'] == team_name].groupby('Scorer')['Scorer'].count().reset_index(name='goals')
-        team_scorers = team_scorers.sort_values('goals', ascending=False).head(5)
-        top_scorers = [
-            {"name": row['Scorer'], "goals": int(row['goals']), "active": True}
-            for _, row in team_scorers.iterrows()
-        ]
+        # Normalize column names
+        scorers_df.columns = [col.lower().strip() for col in scorers_df.columns]
+        
+        # Filter by team (case insensitive)
+        team_scorers = scorers_df[scorers_df['team'].str.lower() == team_name.lower()]
+        
+        if len(team_scorers) > 0:
+            # Group by scorer and count goals
+            scorer_counts = team_scorers.groupby('scorer').size().reset_index(name='goals')
+            scorer_counts = scorer_counts.sort_values('goals', ascending=False).head(5)
+            
+            top_scorers = [
+                {"name": row['scorer'], "goals": int(row['goals']), "active": True}
+                for _, row in scorer_counts.iterrows()
+            ]
+        
         if not top_scorers:
-            top_scorers = [{"name": "Sin datos", "goals": 0, "active": True}]
-    except:
-        top_scorers = [{"name": "Sin datos", "goals": 0, "active": True}]
+            top_scorers = [{"name": "Sin datos de goleadores", "goals": 0, "active": True}]
+            
+        logger.info(f"Found {len(top_scorers)} top scorers for {team_name}")
+    except Exception as e:
+        logger.error(f"Error reading goalscorers.csv: {e}")
+        top_scorers = [{"name": "Error cargando datos", "goals": 0, "active": True}]
     
     # Format competition stats
     comp_stats = {comp: f"{data['W']}V-{data['E']}E-{data['D']}D" for comp, data in competitions.items()}
     
     n_matches = len(team_matches)
-    return {
+    result = {
         "fifaRank": fifa_rank,
         "eloRating": elo_rating,
         "wins": wins,
@@ -989,6 +1032,9 @@ def get_team_details(team_name: str):
         "topScorers": top_scorers,
         "competitionStats": comp_stats
     }
+    
+    logger.info(f"Returning stats for {team_name}: W={wins}, D={draws}, L={losses}, GF={goals_for}")
+    return result
 
 # Mount static files (HTML, CSS, JS) at the end, so it doesn't mask API routes
 app.mount("/", StaticFiles(directory=BASE_DIR, html=True), name="static")
