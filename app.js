@@ -1018,7 +1018,7 @@ async function loadH2HData() {
 // ===== ADVANCED H2H CENTER =====
 let h2hAdvancedCharts = { radar: null, doughnut: null, period: null };
 
-function switchH2HSubTab(name) {
+window.switchH2HSubTab = function(name) {
   document.querySelectorAll('.h2h-subtab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.h2h-subtab-content').forEach(c => c.classList.remove('active'));
   const btn = document.getElementById(`h2hst-btn-${name}`);

@@ -3820,7 +3820,7 @@ body:not(.light-theme) .theme-light-only {
   animation: fadeInUp 0.25s ease;
 }
 .h2h-subtab-content.active {
-  display: block;
+  display: grid;
 }
 
 @keyframes fadeInUp {
