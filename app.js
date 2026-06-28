@@ -1,15 +1,5 @@
-// Interceptor global de fetch para redireccionar al backend local si se abre como archivo local o puerto distinto
-const originalFetch = window.fetch;
-window.fetch = function(input, init) {
-  if (typeof input === 'string' && input.startsWith('/api')) {
-    const isLocalFile = window.location.protocol === 'file:';
-    const isDifferentPort = window.location.port !== '3000' && window.location.port !== '';
-    if (isLocalFile || isDifferentPort) {
-      input = 'http://localhost:3000' + input;
-    }
-  }
-  return originalFetch(input, init);
-};
+// Predictor Mundial 2026 - Frontend Client Logic
+// Communicates with the FastAPI Python Backend for all computations, simulations, and betting odds analysis.
 
 // Supabase Configuration — loaded from /api/config (env vars on server)
 let supabaseUrl = "";
@@ -276,22 +266,22 @@ async function initializeApp() {
     // Initialize TomSelect for searchable dropdowns
     try {
       if (typeof TomSelect !== 'undefined') {
-        window.tsSelectA = new TomSelect("#select-team-a", {
+        new TomSelect("#select-team-a", {
           create: false,
           sortField: { field: "text", direction: "asc" }
         });
         
-        window.tsSelectB = new TomSelect("#select-team-b", {
+        new TomSelect("#select-team-b", {
           create: false,
           sortField: { field: "text", direction: "asc" }
         });
 
-        window.tsAiTeamA = new TomSelect("#ai-team-a", {
+        new TomSelect("#ai-team-a", {
           create: false,
           sortField: { field: "text", direction: "asc" }
         });
 
-        window.tsAiTeamB = new TomSelect("#ai-team-b", {
+        new TomSelect("#ai-team-b", {
           create: false,
           sortField: { field: "text", direction: "asc" }
         });
@@ -315,8 +305,15 @@ async function initializeApp() {
     // 5. Update UI for the initial match
     updateMatchCard();
 
-    // 6. Ready (Wait for manual simulation)
-    initBetBuilder();
+    // 6. Init bet builder segments (hide non-summary)
+    document.querySelectorAll('#bb-col-results [id^="bb-container-"]').forEach(el => {
+      if (!el.classList.contains('bb-seg-summary')) el.style.display = 'none';
+    });
+
+    // 6.1. Initial segment button state
+    document.querySelectorAll('.bb-segment-btn').forEach(b => b.classList.toggle('active', b.dataset.segment === 'summary'));
+
+    // 7. Ready (Wait for manual simulation)
 
   } catch (error) {
     console.error("Initialization error:", error);
@@ -330,19 +327,21 @@ function populateSelects() {
     TEAM_METADATA[a].name.localeCompare(TEAM_METADATA[b].name)
   );
 
-  slugs.forEach(slug => {
-    const textContent = `${TEAM_METADATA[slug].flag} ${TEAM_METADATA[slug].name}`;
+  const aiTeamA = document.getElementById("ai-team-a");
+  const aiTeamB = document.getElementById("ai-team-b");
 
+  slugs.forEach(slug => {
     const optA = document.createElement("option");
     optA.value = slug;
-    optA.textContent = textContent;
+    optA.textContent = `${TEAM_METADATA[slug].flag} ${TEAM_METADATA[slug].name}`;
     if (slug === selectedTeamA) optA.selected = true;
     selectA.appendChild(optA);
 
     const optB = document.createElement("option");
     optB.value = slug;
-    optB.textContent = textContent;
+    optB.textContent = `${TEAM_METADATA[slug].flag} ${TEAM_METADATA[slug].name}`;
     if (slug === selectedTeamB) optB.selected = true;
+    selectB.appendChild(optB);
     selectB.appendChild(optB);
   });
 }
@@ -353,15 +352,13 @@ function populateSelects() {
 function bindListeners() {
   selectA.addEventListener("change", (e) => {
     selectedTeamA = e.target.value;
-    const rank = TEAM_METADATA[selectedTeamA].rank;
-    rankSliderA.value = rank;
+    rankSliderA.value = TEAM_METADATA[selectedTeamA].rank;
     updateMatchCard();
   });
 
   selectB.addEventListener("change", (e) => {
     selectedTeamB = e.target.value;
-    const rank = TEAM_METADATA[selectedTeamB].rank;
-    rankSliderB.value = rank;
+    rankSliderB.value = TEAM_METADATA[selectedTeamB].rank;
     updateMatchCard();
   });
 
@@ -373,41 +370,8 @@ function bindListeners() {
     fifaDisplayB.textContent = `FIFA #${e.target.value}`;
   });
 
-  // Sync Sliders and Numeric Fields from Card 2
-  const sliderFifa = document.getElementById("slider-weight-fifa");
-  if (sliderFifa) {
-    sliderFifa.addEventListener("input", (e) => {
-      weightFifaSlider.value = e.target.value;
-      updateWeightsPreview();
-    });
-  }
-  weightFifaSlider.addEventListener("input", (e) => {
-    if (sliderFifa) sliderFifa.value = e.target.value;
-    updateWeightsPreview();
-  });
-
-  const sliderH2h = document.getElementById("slider-weight-h2h");
-  if (sliderH2h) {
-    sliderH2h.addEventListener("input", (e) => {
-      weightH2hSlider.value = e.target.value;
-      updateWeightsPreview();
-    });
-  }
-  weightH2hSlider.addEventListener("input", (e) => {
-    if (sliderH2h) sliderH2h.value = e.target.value;
-    updateWeightsPreview();
-  });
-
-  const sliderDecay = document.getElementById("slider-decay");
-  if (sliderDecay) {
-    sliderDecay.addEventListener("input", (e) => {
-      decaySlider.value = e.target.value;
-      updateMatchCard(true);
-    });
-  }
-  decaySlider.addEventListener("input", (e) => {
-    if (sliderDecay) sliderDecay.value = e.target.value;
-    updateMatchCard(true);
+  decaySlider.addEventListener("input", () => {
+    updateMatchCard(true); // reload history lists when decay changes
   });
 
   btnSimulate.addEventListener("click", () => {
@@ -433,6 +397,9 @@ function bindListeners() {
         const targetId = btn.id.replace("tab-btn-", "tab-");
         if (targetId === "tab-analysis") {
           fetchAITacticalAnalysis(selectedTeamA, selectedTeamB);
+        } else if (targetId === "tab-history") {
+          loadAdvancedH2HData();
+          loadH2HData();
         } else if (targetId === "tab-favorites") {
           loadUserFavorites();
           loadUserPresets();
@@ -777,19 +744,6 @@ function updateMatchCard(fullReload = true) {
   flagA.textContent = metaA.flag;
   flagB.textContent = metaB.flag;
 
-  const largeFlagA = document.getElementById("bb-flag-a-large");
-  const largeFlagB = document.getElementById("bb-flag-b-large");
-  if (largeFlagA) largeFlagA.textContent = metaA.flag;
-  if (largeFlagB) largeFlagB.textContent = metaB.flag;
-
-  // Make sure Select dropdowns are in sync
-  if (window.tsSelectA && window.tsSelectA.getValue() !== selectedTeamA) {
-    window.tsSelectA.setValue(selectedTeamA, true);
-  }
-  if (window.tsSelectB && window.tsSelectB.getValue() !== selectedTeamB) {
-    window.tsSelectB.setValue(selectedTeamB, true);
-  }
-
   const eloA = ratingsData[selectedTeamA] || 1500;
   const eloB = ratingsData[selectedTeamB] || 1500;
 
@@ -837,7 +791,6 @@ function updateMatchCard(fullReload = true) {
     loadRecentMatches(selectedTeamA, matchListA, historyTitleA, "Uruguay");
     loadRecentMatches(selectedTeamB, matchListB, historyTitleB, "Arabia Saudita");
     loadH2HData();
-    loadAdvancedH2HData();
     
     // Check and load AI analysis if it was already saved for this match
     fetchAITacticalAnalysis(selectedTeamA, selectedTeamB);
@@ -846,196 +799,151 @@ function updateMatchCard(fullReload = true) {
     loadPollData();
     loadUserPronosticStatus();
   }
-
-  if (typeof updateBetBuilderLabels === 'function') {
-    updateBetBuilderLabels();
-  }
-  if (typeof runBetBuilderSimulation === 'function') {
-    runBetBuilderSimulation();
-  }
 }
 
 /* ==========================================================================
    API DATA CALLS (HISTORY, H2H, PREDICT)
    ========================================================================== */
-function updateRecentFormAndSparkline(teamSlug, dataHistory, prefix) {
-  const badgeContainer = document.getElementById(`bb-form-badges-${prefix}`);
-  const svgElement = document.getElementById(`bb-sparkline-${prefix}`);
-  if (!badgeContainer || !svgElement) return;
-
-  badgeContainer.innerHTML = "";
-  
-  const matches = dataHistory.slice(0, 5);
-  if (matches.length === 0) {
-    badgeContainer.innerHTML = `<span style="font-size:0.72rem; color:var(--color-text-secondary);">Sin partidos</span>`;
-    svgElement.innerHTML = "";
-    return;
-  }
-
-  const outcomes = [];
-  const points = [];
-  
-  matches.forEach((m, idx) => {
-    let outcome = "D";
-    let y = 25;
-    let badgeClass = "draw";
-    if (m.goalsScored > m.goalsConceded) {
-      outcome = "W";
-      y = 10;
-      badgeClass = "win";
-    } else if (m.goalsScored < m.goalsConceded) {
-      outcome = "L";
-      y = 30;
-      badgeClass = "loss";
-    }
-    outcomes.push({ outcome, badgeClass });
-    points.push({ x: 10 + idx * 20, y });
-  });
-
-  outcomes.forEach(o => {
-    const badge = document.createElement("span");
-    badge.className = `bb-form-badge ${o.badgeClass}`;
-    badge.textContent = o.outcome;
-    badgeContainer.appendChild(badge);
-  });
-
-  let pathD = `M ${points[0].x} ${points[0].y}`;
-  let circlesHtml = `<circle cx="${points[0].x}" cy="${points[0].y}" r="3" fill="${getOutcomeColor(outcomes[0].badgeClass)}" />`;
-  
-  for (let i = 1; i < points.length; i++) {
-    pathD += ` L ${points[i].x} ${points[i].y}`;
-    circlesHtml += `<circle cx="${points[i].x}" cy="${points[i].y}" r="3" fill="${getOutcomeColor(outcomes[i].badgeClass)}" />`;
-  }
-
-  svgElement.innerHTML = `
-    <path d="${pathD}" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    ${circlesHtml}
-  `;
-}
-
-function getOutcomeColor(badgeClass) {
-  if (badgeClass === "win") return "#10b981";
-  if (badgeClass === "draw") return "#f59e0b";
-  return "#ef4444";
-}
-
 async function loadRecentMatches(teamSlug, listElement, titleElement, defaultName) {
   const meta = TEAM_METADATA[teamSlug] || { name: defaultName, flag: "" };
-  if (titleElement) titleElement.textContent = `Partidos de ${meta.name}`;
-  if (listElement) listElement.innerHTML = `<div class="loading-placeholder">Cargando partidos...</div>`;
+  titleElement.textContent = `Partidos de ${meta.name}`;
+  listElement.innerHTML = `<div class="loading-placeholder">Cargando partidos...</div>`;
 
   try {
     const decay = parseInt(decaySlider.value);
     const res = await fetch(`/api/history/${teamSlug}?decay_months=${decay}`);
     const data = await res.json();
     
-    // Update visual Recent Form badges and sparkline chart
-    if (teamSlug === selectedTeamA) {
-      updateRecentFormAndSparkline(teamSlug, data.history, "a");
-    } else if (teamSlug === selectedTeamB) {
-      updateRecentFormAndSparkline(teamSlug, data.history, "b");
+    listElement.innerHTML = "";
+
+    if (!data.history.length) {
+      listElement.innerHTML = `<div class="loading-placeholder">No hay historial de partidos recientes.</div>`;
+      return;
     }
-    
-    if (listElement) {
-      listElement.innerHTML = "";
 
-      if (!data.history.length) {
-        listElement.innerHTML = `<div class="loading-placeholder">No hay historial de partidos recientes.</div>`;
-        return;
+    // Mostrar primeros 8 partidos y ocultar el resto tras un botón
+    data.history.forEach((m, index) => {
+      const goalsScored = m.goalsScored;
+      const goalsConceded = m.goalsConceded;
+      
+      let outcomeClass = "match-outcome-draw";
+      if (goalsScored > goalsConceded) outcomeClass = "match-outcome-win";
+      else if (goalsScored < goalsConceded) outcomeClass = "match-outcome-loss";
+
+      let badgeHtml = "";
+      if (m.opponentLevel !== "Normal") {
+        const style = m.opponentLevel === "Top Nivel" 
+          ? "background: rgba(244, 63, 94, 0.12); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.2);"
+          : "background: rgba(99,102,241,0.1); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.2);";
+        badgeHtml = `<span class="difficulty-badge" style="${style}">${m.opponentLevel}</span>`;
       }
 
-      // Mostrar primeros 8 partidos y ocultar el resto tras un botón
-      data.history.forEach((m, index) => {
-        const goalsScored = m.goalsScored;
-        const goalsConceded = m.goalsConceded;
-        
-        let outcomeClass = "match-outcome-draw";
-        if (goalsScored > goalsConceded) outcomeClass = "match-outcome-win";
-        else if (goalsScored < goalsConceded) outcomeClass = "match-outcome-loss";
+      const isHiddenClass = index >= 8 ? "hidden-match" : "";
+      const card = document.createElement("div");
+      card.className = `match-card ${outcomeClass} ${isHiddenClass}`;
+      card.style.opacity = Math.max(0.35, m.weight).toFixed(2);
 
-        let badgeHtml = "";
-        if (m.opponentLevel !== "Normal") {
-          const style = m.opponentLevel === "Top Nivel" 
-            ? "background: rgba(244, 63, 94, 0.12); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.2);"
-            : "background: rgba(99,102,241,0.1); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.2);";
-          badgeHtml = `<span class="difficulty-badge" style="${style}">${m.opponentLevel}</span>`;
-        }
+      card.innerHTML = `
+        <span class="match-date">${m.date}</span>
+        <span class="match-opp" style="display: flex; align-items: center; gap: 6px;">${m.opponentName} ${badgeHtml}</span>
+        <span class="match-score">${goalsScored} - ${goalsConceded}</span>
+      `;
 
-        const isHiddenClass = index >= 8 ? "hidden-match" : "";
-        const card = document.createElement("div");
-        card.className = `match-card ${outcomeClass} ${isHiddenClass}`;
-        card.style.opacity = Math.max(0.35, m.weight).toFixed(2);
+      listElement.appendChild(card);
+    });
 
-        card.innerHTML = `
-          <span class="match-date">${m.date}</span>
-          <span class="match-opp" style="display: flex; align-items: center; gap: 6px;">${m.opponentName} ${badgeHtml}</span>
-          <span class="match-score">${goalsScored} - ${goalsConceded}</span>
-        `;
-
-        listElement.appendChild(card);
-      });
-
-      if (data.history.length > 8) {
-        const btnMore = document.createElement("button");
-        btnMore.className = "btn-view-more";
-        btnMore.textContent = `Ver los ${data.history.length - 8} partidos anteriores`;
-        btnMore.onclick = () => {
-          const hiddenMatches = listElement.querySelectorAll('.hidden-match');
-          hiddenMatches.forEach(el => el.classList.remove('hidden-match'));
-          btnMore.remove();
-        };
-        listElement.appendChild(btnMore);
-      }
+    if (data.history.length > 8) {
+      const btnMore = document.createElement("button");
+      btnMore.className = "btn-view-more";
+      btnMore.textContent = `Ver los ${data.history.length - 8} partidos anteriores`;
+      btnMore.onclick = () => {
+        const hiddenMatches = listElement.querySelectorAll('.hidden-match');
+        hiddenMatches.forEach(el => el.classList.remove('hidden-match'));
+        btnMore.remove();
+      };
+      listElement.appendChild(btnMore);
     }
 
   } catch (error) {
     console.error("Error loading recent matches:", error);
-    if (listElement) {
-      listElement.innerHTML = `<div class="loading-placeholder">Error al cargar partidos de la API.</div>`;
-    }
+    listElement.innerHTML = `<div class="loading-placeholder">Error al cargar partidos de la API.</div>`;
   }
 }
 
 async function loadH2HData() {
-  // Keep the old H2H modifier for backward compatibility with predict calculation
+  h2hMatchList.innerHTML = `<div class="loading-placeholder">Cargando cara a cara...</div>`;
+  
   try {
     const res = await fetch(`/api/h2h/${selectedTeamA}/${selectedTeamB}`);
     const data = await res.json();
-    // Update old H2H modifier display in analysis tab
-    const h2hModifierValEl = document.getElementById('h2h-modifier-val');
-    if (h2hModifierValEl) {
-      const avgGd = data.avgGd;
-      const h2hWeight = parseInt(weightH2hSlider.value) / 100.0;
-      const h2hMultA = 1.0 + (avgGd / 4.0) * h2hWeight;
-      const h2hMultB = 1.0 - (avgGd / 4.0) * h2hWeight;
-      h2hModifierValEl.textContent = `${h2hMultA.toFixed(2)}x / ${h2hMultB.toFixed(2)}x`;
+    
+    h2hWinsA.textContent = data.winsA;
+    h2hWinsB.textContent = data.winsB;
+    h2hDraws.textContent = data.draws;
+    
+    const metaA = TEAM_METADATA[selectedTeamA];
+    const metaB = TEAM_METADATA[selectedTeamB];
+    h2hLabelA.textContent = `${metaA.name.slice(0, 8)}. victorias`;
+    h2hLabelB.textContent = `${metaB.name.slice(0, 8)}. victorias`;
+
+    h2hMatchList.innerHTML = "";
+
+    if (!data.matches.length) {
+      h2hMatchList.innerHTML = `<div class="no-matches-message">No se registran enfrentamientos previos oficiales recientes.</div>`;
+      h2hModifierVal.textContent = "1.00x";
+      return;
     }
-    // Old h2h elements (if still referenced in analyze tab)
-    if (h2hWinsA) h2hWinsA.textContent = data.winsA;
-    if (h2hWinsB) h2hWinsB.textContent = data.winsB;
-    if (h2hDraws) h2hDraws.textContent = data.draws;
-  } catch(e) {
-    console.warn('Error loading basic H2H for modifier:', e);
+
+    data.matches.forEach(m => {
+      let outcomeClass = "match-outcome-draw";
+      // determine from perspective of selectedTeamA
+      const isAHome = m.homeName === metaA.name || m.homeName.includes(metaA.name) || metaA.name.includes(m.homeName);
+      const gsA = isAHome ? m.hg : m.ag;
+      const gsB = isAHome ? m.ag : m.hg;
+
+      if (gsA > gsB) outcomeClass = "match-outcome-win";
+      else if (gsA < gsB) outcomeClass = "match-outcome-loss";
+
+      const card = document.createElement("div");
+      card.className = `match-card ${outcomeClass}`;
+      card.innerHTML = `
+        <span class="match-date">${m.date}</span>
+        <span class="match-opp">${m.homeName} vs ${m.awayName}</span>
+        <span class="match-score">${m.hg} - ${m.ag}</span>
+      `;
+      h2hMatchList.appendChild(card);
+    });
+
+    // We will let the predict calculation return H2H modifier val on the actual run, or set it statically here
+    const avgGd = data.avgGd;
+    const h2hWeight = parseInt(weightH2hSlider.value) / 100.0;
+    const h2hMultA = 1.0 + (avgGd / 4.0) * h2hWeight;
+    const h2hMultB = 1.0 - (avgGd / 4.0) * h2hWeight;
+    h2hModifierVal.textContent = `${h2hMultA.toFixed(2)}x / ${h2hMultB.toFixed(2)}x`;
+
+  } catch (error) {
+    console.error("Error loading H2H data:", error);
+    h2hMatchList.innerHTML = `<div class="loading-placeholder">Error al cargar H2H de la API.</div>`;
   }
 }
 
 // ===== ADVANCED H2H CENTER =====
 let h2hAdvancedCharts = { radar: null, doughnut: null, period: null };
 
-function switchH2HSubTab(name) {
+window.switchH2HSubTab = function(name) {
   document.querySelectorAll('.h2h-subtab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.h2h-subtab-content').forEach(c => c.classList.remove('active'));
   const btn = document.getElementById(`h2hst-btn-${name}`);
   const content = document.getElementById(`h2hst-${name}`);
   if (btn) btn.classList.add('active');
   if (content) content.classList.add('active');
-  // Trigger chart resize when switching to charts tab
+
   if (name === 'charts') {
     setTimeout(() => {
       Object.values(h2hAdvancedCharts).forEach(ch => { if (ch) ch.resize(); });
     }, 50);
   }
-}
+};
 
 async function loadAdvancedH2HData() {
   const loadingEl = document.getElementById('h2h-center-loading');
@@ -1053,7 +961,6 @@ async function loadAdvancedH2HData() {
     const metaA = TEAM_METADATA[selectedTeamA] || { name: selectedTeamA, flag: '🏳️' };
     const metaB = TEAM_METADATA[selectedTeamB] || { name: selectedTeamB, flag: '🏳️' };
 
-    // ── Header
     document.getElementById('h2h-center-flag-a').textContent = metaA.flag || '🏳️';
     document.getElementById('h2h-center-flag-b').textContent = metaB.flag || '🏳️';
     document.getElementById('h2h-center-name-a').textContent = metaA.name;
@@ -1066,7 +973,6 @@ async function loadAdvancedH2HData() {
     const insights = data.insights;
     const count = h2h.count;
 
-    // ── Advanced Stats Grid
     const advGrid = document.getElementById('h2h-adv-stats-grid');
     if (advGrid) {
       advGrid.innerHTML = `
@@ -1081,36 +987,44 @@ async function loadAdvancedH2HData() {
       `;
     }
 
-    // ── Win dominance bar
     if (count > 0) {
       const pA = Math.round(h2h.winsA / count * 100);
       const pD = Math.round(h2h.draws / count * 100);
       const pB = 100 - pA - pD;
-      document.getElementById('h2h-bar-a').style.width = pA + '%';
-      document.getElementById('h2h-bar-draw').style.width = pD + '%';
-      document.getElementById('h2h-bar-b').style.width = Math.max(0, pB) + '%';
-      document.getElementById('h2h-winbar-sample').textContent = `${count} partidos`;
-      document.getElementById('h2h-bar-legend-a').textContent = `${metaA.name.slice(0,8)}: ${h2h.winsA}V (${pA}%)`;
-      document.getElementById('h2h-bar-legend-d').textContent = `${h2h.draws}E (${pD}%)`;
-      document.getElementById('h2h-bar-legend-b').textContent = `${metaB.name.slice(0,8)}: ${h2h.winsB}V (${Math.max(0,pB)}%)`;
+      const barA = document.getElementById('h2h-bar-a');
+      const barDraw = document.getElementById('h2h-bar-draw');
+      const barB = document.getElementById('h2h-bar-b');
+      if (barA) barA.style.width = pA + '%';
+      if (barDraw) barDraw.style.width = pD + '%';
+      if (barB) barB.style.width = Math.max(0, pB) + '%';
+      const winSample = document.getElementById('h2h-winbar-sample');
+      if (winSample) winSample.textContent = `${count} partidos`;
+      const legA = document.getElementById('h2h-bar-legend-a');
+      const legD = document.getElementById('h2h-bar-legend-d');
+      const legB = document.getElementById('h2h-bar-legend-b');
+      if (legA) legA.textContent = `${metaA.name.slice(0,8)}: ${h2h.winsA}V (${pA}%)`;
+      if (legD) legD.textContent = `${h2h.draws}E (${pD}%)`;
+      if (legB) legB.textContent = `${metaB.name.slice(0,8)}: ${h2h.winsB}V (${Math.max(0,pB)}%)`;
     }
 
-    // ── Patterns
-    document.getElementById('h2h-btts-pct').textContent = h2h.patterns.btts + '%';
-    document.getElementById('h2h-o25-pct').textContent = h2h.patterns.over25 + '%';
-    document.getElementById('h2h-csa-pct').textContent = h2h.patterns.csA + '%';
-    document.getElementById('h2h-csb-pct').textContent = h2h.patterns.csB + '%';
-    document.getElementById('h2h-csa-lbl').textContent = `CS ${metaA.name.slice(0,8)}`;
-    document.getElementById('h2h-csb-lbl').textContent = `CS ${metaB.name.slice(0,8)}`;
+    [['h2h-btts-pct','btts'],['h2h-o25-pct','over25'],['h2h-csa-pct','csA'],['h2h-csb-pct','csB']].forEach(([id,k]) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = h2h.patterns[k] + '%';
+    });
+    const csaLbl = document.getElementById('h2h-csa-lbl');
+    const csbLbl = document.getElementById('h2h-csb-lbl');
+    if (csaLbl) csaLbl.textContent = `CS ${metaA.name.slice(0,8)}`;
+    if (csbLbl) csbLbl.textContent = `CS ${metaB.name.slice(0,8)}`;
 
-    // ── Conditions
-    document.getElementById('h2h-cond-home').textContent = h2h.byCondition.homeA;
-    document.getElementById('h2h-cond-away').textContent = h2h.byCondition.awayA;
-    document.getElementById('h2h-cond-neutral').textContent = h2h.byCondition.neutral;
-    document.getElementById('h2h-cond-home-lbl').textContent = `${metaA.name.slice(0,8)} de Local`;
-    document.getElementById('h2h-cond-away-lbl').textContent = `${metaA.name.slice(0,8)} de Visit.`;
+    [['h2h-cond-home','homeA'],['h2h-cond-away','awayA'],['h2h-cond-neutral','neutral']].forEach(([id,k]) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = h2h.byCondition[k];
+    });
+    const condHomeLbl = document.getElementById('h2h-cond-home-lbl');
+    const condAwayLbl = document.getElementById('h2h-cond-away-lbl');
+    if (condHomeLbl) condHomeLbl.textContent = `${metaA.name.slice(0,8)} de Local`;
+    if (condAwayLbl) condAwayLbl.textContent = `${metaA.name.slice(0,8)} de Visit.`;
 
-    // ── Most frequent scores
     const scoresTbody = document.getElementById('h2h-scores-tbody');
     if (scoresTbody) {
       if (h2h.mostFrequentScores.length === 0) {
@@ -1120,41 +1034,24 @@ async function loadAdvancedH2HData() {
         scoresTbody.innerHTML = h2h.mostFrequentScores.map(s => {
           const barW = Math.round(s.count / maxCount * 100);
           const freq = count > 0 ? Math.round(s.count / count * 100) : 0;
-          return `<tr>
-            <td><span class="h2h-score-badge">${s.score}</span></td>
-            <td style="font-family: var(--font-family-mono); font-weight: 700;">${s.count}x</td>
-            <td style="min-width: 80px;">
-              <div style="display: flex; align-items: center; gap: 6px;">
-                <div class="h2h-score-bar-mini" style="width: ${barW}px; max-width: 80px;"></div>
-                <span style="font-size: 0.7rem; color: var(--color-text-muted);">${freq}%</span>
-              </div>
-            </td>
-          </tr>`;
+          return `<tr><td><span class="h2h-score-badge">${s.score}</span></td><td style="font-family: var(--font-family-mono); font-weight: 700;">${s.count}x</td><td style="min-width: 80px;"><div style="display: flex; align-items: center; gap: 6px;"><div class="h2h-score-bar-mini" style="width: ${barW}px; max-width: 80px;"></div><span style="font-size: 0.7rem; color: var(--color-text-muted);">${freq}%</span></div></td></tr>`;
         }).join('');
       }
     }
 
-    // ── Competition breakdown
     const compTbody = document.getElementById('h2h-comp-tbody');
     if (compTbody) {
       if (!h2h.byCompetition.length) {
         compTbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px; color: var(--color-text-muted);">Sin datos</td></tr>`;
       } else {
         const sorted = [...h2h.byCompetition].sort((a, b) => b.pj - a.pj);
-        compTbody.innerHTML = sorted.map(c => `<tr>
-          <td style="max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.76rem;">${c.competition}</td>
-          <td style="text-align: center; font-family: var(--font-family-mono); font-weight: 700;">${c.pj}</td>
-          <td style="text-align: center; color: var(--color-team-a); font-weight: 700;">${c.winsA}</td>
-          <td style="text-align: center; color: #6b7280; font-weight: 700;">${c.draws}</td>
-          <td style="text-align: center; color: var(--color-team-b); font-weight: 700;">${c.winsB}</td>
-        </tr>`).join('');
+        compTbody.innerHTML = sorted.map(c => `<tr><td style="max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.76rem;">${c.competition}</td><td style="text-align: center; font-family: var(--font-family-mono); font-weight: 700;">${c.pj}</td><td style="text-align: center; color: var(--color-team-a); font-weight: 700;">${c.winsA}</td><td style="text-align: center; color: #6b7280; font-weight: 700;">${c.draws}</td><td style="text-align: center; color: var(--color-team-b); font-weight: 700;">${c.winsB}</td></tr>`).join('');
       }
     }
 
-    // ── Timeline
     const timelineEl = document.getElementById('h2h-timeline-list');
     if (timelineEl) {
-      const timeline = [...(h2h.timeline || [])].reverse(); // newest first
+      const timeline = [...(h2h.timeline || [])].reverse();
       if (!timeline.length) {
         timelineEl.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--color-text-muted); font-size: 0.82rem;">Sin partidos registrados</div>`;
       } else {
@@ -1163,17 +1060,11 @@ async function loadAdvancedH2HData() {
           const gsA = isAHome ? m.hg : m.ag;
           const gsB = isAHome ? m.ag : m.hg;
           const winClass = gsA > gsB ? 'win-a' : (gsA < gsB ? 'win-b' : 'draw');
-          return `<div class="h2h-timeline-match ${winClass}">
-            <span class="h2h-timeline-date">${m.date}</span>
-            <span class="h2h-timeline-teams">${m.homeName} vs ${m.awayName}</span>
-            <span class="h2h-timeline-score">${m.hg} – ${m.ag}</span>
-            <span class="h2h-timeline-comp">${m.tournament || ''}</span>
-          </div>`;
+          return `<div class="h2h-timeline-match ${winClass}"><span class="h2h-timeline-date">${m.date}</span><span class="h2h-timeline-teams">${m.homeName} vs ${m.awayName}</span><span class="h2h-timeline-score">${m.hg} – ${m.ag}</span><span class="h2h-timeline-comp">${m.tournament || ''}</span></div>`;
         }).join('');
       }
     }
 
-    // ══ SCORERS TAB ══
     const scorersGrid = document.getElementById('h2h-scorers-grid');
     if (scorersGrid) {
       if (!scorers.topScorers.length) {
@@ -1181,31 +1072,17 @@ async function loadAdvancedH2HData() {
       } else {
         const rankLabels = ['top1', 'top2', 'top3', '', ''];
         scorersGrid.innerHTML = scorers.topScorers.map((s, i) => {
-          const statusDot = s.active
-            ? `<span class="h2h-scorer-status-active" title="Activo"></span>`
-            : `<span class="h2h-scorer-status-retired" title="Retirado"></span>`;
-          return `<div class="h2h-scorer-card">
-            <span class="h2h-scorer-rank ${rankLabels[i] || ''}">#${i + 1}</span>
-            <div class="h2h-scorer-info">
-              <div class="h2h-scorer-name">${s.name} ${statusDot}</div>
-              <div class="h2h-scorer-team">${s.team}</div>
-            </div>
-            <span class="h2h-scorer-goals">⚽ ${s.goals}</span>
-          </div>`;
+          const statusDot = s.active ? `<span class="h2h-scorer-status-active" title="Activo"></span>` : `<span class="h2h-scorer-status-retired" title="Retirado"></span>`;
+          return `<div class="h2h-scorer-card"><span class="h2h-scorer-rank ${rankLabels[i] || ''}">#${i + 1}</span><div class="h2h-scorer-info"><div class="h2h-scorer-name">${s.name} ${statusDot}</div><div class="h2h-scorer-team">${s.team}</div></div><span class="h2h-scorer-goals">⚽ ${s.goals}</span></div>`;
         }).join('');
       }
     }
 
     const scorerExtraGrid = document.getElementById('h2h-scorer-extra-grid');
     if (scorerExtraGrid) {
-      scorerExtraGrid.innerHTML = `
-        <div class="h2h-adv-stat"><span class="h2h-adv-stat-num">${scorers.avgGoalMinute || 0}'</span><span class="h2h-adv-stat-label">Min. Promedio de Gol</span></div>
-        <div class="h2h-adv-stat"><span class="h2h-adv-stat-num">${scorers.penaltiesCount}</span><span class="h2h-adv-stat-label">Penaltis Marcados</span></div>
-        <div class="h2h-adv-stat"><span class="h2h-adv-stat-num">${scorers.ownGoalsCount}</span><span class="h2h-adv-stat-label">Autogoles</span></div>
-      `;
+      scorerExtraGrid.innerHTML = `<div class="h2h-adv-stat"><span class="h2h-adv-stat-num">${scorers.avgGoalMinute || 0}'</span><span class="h2h-adv-stat-label">Min. Promedio de Gol</span></div><div class="h2h-adv-stat"><span class="h2h-adv-stat-num">${scorers.penaltiesCount}</span><span class="h2h-adv-stat-label">Penaltis Marcados</span></div><div class="h2h-adv-stat"><span class="h2h-adv-stat-num">${scorers.ownGoalsCount}</span><span class="h2h-adv-stat-label">Autogoles</span></div>`;
     }
 
-    // Period distribution
     const periodGrid = document.getElementById('h2h-period-grid');
     if (periodGrid) {
       const periods = ['0-15', '16-30', '31-45', '46-60', '61-75', '76-90'];
@@ -1214,17 +1091,10 @@ async function loadAdvancedH2HData() {
       periodGrid.innerHTML = periods.map(p => {
         const pct = pcts[p] || 0;
         const barH = Math.round((pct / maxPct) * 32);
-        return `<div class="h2h-period-cell">
-          <div class="h2h-period-bar-wrap">
-            <div class="h2h-period-bar" style="height: ${barH}px;"></div>
-          </div>
-          <span class="h2h-period-pct">${pct}%</span>
-          <span class="h2h-period-label">${p}'</span>
-        </div>`;
+        return `<div class="h2h-period-cell"><div class="h2h-period-bar-wrap"><div class="h2h-period-bar" style="height: ${barH}px;"></div></div><span class="h2h-period-pct">${pct}%</span><span class="h2h-period-label">${p}'</span></div>`;
       }).join('');
     }
 
-    // ══ FORMA TAB ══
     function renderFormCard(formData, teamName, teamFlag, suffix) {
       const nameEl = document.getElementById(`h2h-form-name-${suffix}`);
       const flagEl = document.getElementById(`h2h-form-flag-${suffix}`);
@@ -1238,47 +1108,17 @@ async function loadAdvancedH2HData() {
       if (recordEl) recordEl.textContent = formData.record;
 
       if (statsEl) {
-        statsEl.innerHTML = `
-          <div class="h2h-form-stat-row">
-            <span class="h2h-form-stat-key">Goles marcados/partido</span>
-            <span class="h2h-form-stat-val">${formData.avg_gf}</span>
-          </div>
-          <div class="h2h-form-stat-row">
-            <span class="h2h-form-stat-key">Goles recibidos/partido</span>
-            <span class="h2h-form-stat-val">${formData.avg_gc}</span>
-          </div>
-          <div class="h2h-form-stat-row">
-            <span class="h2h-form-stat-key">Portería a cero</span>
-            <span class="h2h-form-stat-val">${formData.clean_sheets}%</span>
-          </div>
-          <div class="h2h-form-stat-row">
-            <span class="h2h-form-stat-key">BTTS</span>
-            <span class="h2h-form-stat-val">${formData.btts}%</span>
-          </div>
-          <div class="h2h-form-stat-row">
-            <span class="h2h-form-stat-key">Over 2.5</span>
-            <span class="h2h-form-stat-val">${formData.over25}%</span>
-          </div>
-        `;
+        statsEl.innerHTML = `<div class="h2h-form-stat-row"><span class="h2h-form-stat-key">Goles marcados/partido</span><span class="h2h-form-stat-val">${formData.avg_gf}</span></div><div class="h2h-form-stat-row"><span class="h2h-form-stat-key">Goles recibidos/partido</span><span class="h2h-form-stat-val">${formData.avg_gc}</span></div><div class="h2h-form-stat-row"><span class="h2h-form-stat-key">Portería a cero</span><span class="h2h-form-stat-val">${formData.clean_sheets}%</span></div><div class="h2h-form-stat-row"><span class="h2h-form-stat-key">BTTS</span><span class="h2h-form-stat-val">${formData.btts}%</span></div><div class="h2h-form-stat-row"><span class="h2h-form-stat-key">Over 2.5</span><span class="h2h-form-stat-val">${formData.over25}%</span></div>`;
       }
 
       if (streaksEl) {
         const s = formData.streaks;
-        streaksEl.innerHTML = `
-          <div class="h2h-streak-badge"><span class="h2h-streak-num">${s.unbeaten}</span><span class="h2h-streak-lbl">Sin perder</span></div>
-          <div class="h2h-streak-badge"><span class="h2h-streak-num">${s.losing}</span><span class="h2h-streak-lbl">Derrotas consec.</span></div>
-          <div class="h2h-streak-badge"><span class="h2h-streak-num">${s.scoring}</span><span class="h2h-streak-lbl">Marcando</span></div>
-          <div class="h2h-streak-badge"><span class="h2h-streak-num">${s.clean_sheet}</span><span class="h2h-streak-lbl">Portería a 0</span></div>
-        `;
+        streaksEl.innerHTML = `<div class="h2h-streak-badge"><span class="h2h-streak-num">${s.unbeaten}</span><span class="h2h-streak-lbl">Sin perder</span></div><div class="h2h-streak-badge"><span class="h2h-streak-num">${s.losing}</span><span class="h2h-streak-lbl">Derrotas consec.</span></div><div class="h2h-streak-badge"><span class="h2h-streak-num">${s.scoring}</span><span class="h2h-streak-lbl">Marcando</span></div><div class="h2h-streak-badge"><span class="h2h-streak-num">${s.clean_sheet}</span><span class="h2h-streak-lbl">Portería a 0</span></div>`;
       }
 
       if (rivalEl) {
         const r = formData.by_rival;
-        rivalEl.innerHTML = `
-          <div class="h2h-rival-cell"><div class="h2h-rival-level">🔴 Top Nivel</div><div class="h2h-rival-rec">${r.top}</div></div>
-          <div class="h2h-rival-cell"><div class="h2h-rival-level">🟡 Nivel Alto</div><div class="h2h-rival-rec">${r.high}</div></div>
-          <div class="h2h-rival-cell"><div class="h2h-rival-level">🟢 Normal</div><div class="h2h-rival-rec">${r.medium}</div></div>
-        `;
+        rivalEl.innerHTML = `<div class="h2h-rival-cell"><div class="h2h-rival-level">🔴 Top Nivel</div><div class="h2h-rival-rec">${r.top}</div></div><div class="h2h-rival-cell"><div class="h2h-rival-level">🟡 Nivel Alto</div><div class="h2h-rival-rec">${r.high}</div></div><div class="h2h-rival-cell"><div class="h2h-rival-level">🟢 Nivel Medio</div><div class="h2h-rival-rec">${r.mid}</div></div><div class="h2h-rival-cell"><div class="h2h-rival-level">⚪ Nivel Bajo</div><div class="h2h-rival-rec">${r.low}</div></div>`;
       }
     }
 
@@ -1288,7 +1128,7 @@ async function loadAdvancedH2HData() {
     // ══ INSIGHTS TAB ══
     const insightsList = document.getElementById('h2h-insights-list');
     if (insightsList) {
-      if (!insights.detectedPatterns.length) {
+      if (!insights.detectedPatterns || !insights.detectedPatterns.length) {
         insightsList.innerHTML = `<div style="text-align:center; padding: 20px; color: var(--color-text-muted); font-size: 0.82rem;">Sin insights disponibles</div>`;
       } else {
         insightsList.innerHTML = insights.detectedPatterns.map(p =>
@@ -1297,7 +1137,6 @@ async function loadAdvancedH2HData() {
       }
     }
 
-    // Matrix headers
     const matrixHeadA = document.getElementById('h2h-matrix-head-a');
     const matrixHeadB = document.getElementById('h2h-matrix-head-b');
     if (matrixHeadA) matrixHeadA.textContent = metaA.name.slice(0, 10);
@@ -1314,7 +1153,6 @@ async function loadAdvancedH2HData() {
       `;
     }
 
-    // Historical prediction
     const pred = insights.historicalPrediction;
     const predOutcomeEl = document.getElementById('h2h-pred-outcome');
     const predProbEl = document.getElementById('h2h-pred-prob');
@@ -1330,13 +1168,20 @@ async function loadAdvancedH2HData() {
     if (predSampleEl) predSampleEl.textContent = pred.sample_size;
 
     // ══ CHARTS TAB ══
-    const isDark = !document.body.classList.contains('light-theme');
-    const textCol = isDark ? 'rgba(255,255,255,0.6)' : 'rgba(18,42,82,0.6)';
-    const gridCol = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(18,42,82,0.06)';
+    const isLight = document.body.classList.contains('light-theme');
+    const textCol = isLight ? 'rgba(15, 23, 42, 0.6)' : 'rgba(255,255,255,0.6)';
+    const gridCol = isLight ? 'rgba(15, 23, 42, 0.06)' : 'rgba(255,255,255,0.06)';
     const primaryCol = '#f0b310';
 
-    // Destroy old charts
-    Object.values(h2hAdvancedCharts).forEach(ch => { if (ch) { ch.destroy(); } });
+    // Destroy old charts dynamically using Chart.getChart
+    ['h2h-radar-chart', 'h2h-doughnut-chart', 'h2h-period-chart'].forEach(id => {
+      const cv = document.getElementById(id);
+      if (cv) {
+        const ec = Chart.getChart(cv);
+        if (ec) ec.destroy();
+      }
+    });
+
     h2hAdvancedCharts = { radar: null, doughnut: null, period: null };
 
     // Radar chart
@@ -1410,7 +1255,7 @@ async function loadAdvancedH2HData() {
           datasets: [{
             data: [h2h.winsA, h2h.draws, h2h.winsB],
             backgroundColor: ['rgba(59,130,246,0.8)', 'rgba(107,114,128,0.8)', 'rgba(16,185,129,0.8)'],
-            borderColor: [isDark ? '#1a2035' : '#fff', isDark ? '#1a2035' : '#fff', isDark ? '#1a2035' : '#fff'],
+            borderColor: [isLight ? '#fff' : '#1a2035', isLight ? '#fff' : '#1a2035', isLight ? '#fff' : '#1a2035'],
             borderWidth: 2,
           }]
         },
@@ -1455,19 +1300,13 @@ async function loadAdvancedH2HData() {
       });
     }
 
-    // Show content
     loadingEl.style.display = 'none';
     contentEl.style.display = 'block';
-
-  } catch (err) {
-    console.error('Error loading advanced H2H data:', err);
-    loadingEl.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--color-text-muted);">
-      <div style="font-size: 1.5rem; margin-bottom: 8px;">⚠️</div>
-      Error al cargar datos H2H avanzados. Verifica que el servidor esté corriendo.
-    </div>`;
+  } catch(e) {
+    console.error('Error loading advanced H2H:', e);
+    loadingEl.innerHTML = '<div style="text-align:center;padding:40px;color:#ef4444;">Error al cargar datos avanzados de H2H</div>';
   }
 }
-
 
 function poissonProbability(k, lambda) {
   if (lambda <= 0) return k === 0 ? 1.0 : 0.0;
@@ -1816,9 +1655,9 @@ function updateCharts(nameAVal, nameBVal, xgAVal, xgBVal, winA, draw, winB, full
     const formB = Math.min(100, Math.max(0, (formDiffB + 2.0) * 25));
 
     // 4. H2H (Direct matchup win rate)
-    const wA = parseInt(h2hWinsA.textContent) || 0;
-    const wB = parseInt(h2hWinsB.textContent) || 0;
-    const dr = parseInt(h2hDraws.textContent) || 0;
+    const wA = h2hWinsA ? parseInt(h2hWinsA.textContent) || 0 : 0;
+    const wB = h2hWinsB ? parseInt(h2hWinsB.textContent) || 0 : 0;
+    const dr = h2hDraws ? parseInt(h2hDraws.textContent) || 0 : 0;
     const totalMatches = wA + wB + dr;
     let h2hA = 50;
     let h2hB = 50;
@@ -1928,6 +1767,307 @@ function updateCharts(nameAVal, nameBVal, xgAVal, xgBVal, winA, draw, winB, full
         });
       }
     }
+  }
+}
+
+// ── Update Bet Builder Analytics (radar, comparison table, HT/FT, goal bands, timings) ──
+function updateBetBuilderAnalytics(data) {
+  if (!data) return;
+
+  const metaA = TEAM_METADATA[selectedTeamA] || { name: "Local", flag: "🏳️" };
+  const metaB = TEAM_METADATA[selectedTeamB] || { name: "Visitante", flag: "🏳️" };
+
+  // 1. Update Comparison Table Headers and Cells
+  const headA = document.getElementById("bb-comp-header-a");
+  const headB = document.getElementById("bb-comp-header-b");
+  if (headA) headA.textContent = metaA.name.slice(0, 10);
+  if (headB) headB.textContent = metaB.name.slice(0, 10);
+
+  const statsA = data.comparisonStats.teamA;
+  const statsB = data.comparisonStats.teamB;
+
+  if (statsA && statsB) {
+    // xG
+    const xgAEl = document.getElementById("bb-comp-xg-a");
+    const xgBEl = document.getElementById("bb-comp-xg-b");
+    if (xgAEl) xgAEl.textContent = data.xgA.toFixed(2);
+    if (xgBEl) xgBEl.textContent = data.xgB.toFixed(2);
+
+    // Shots
+    const shAEl = document.getElementById("bb-comp-shots-a");
+    const shBEl = document.getElementById("bb-comp-shots-b");
+    if (shAEl) shAEl.textContent = statsA.shots_per_90.toFixed(1);
+    if (shBEl) shBEl.textContent = statsB.shots_per_90.toFixed(1);
+
+    // Corners
+    const crnAEl = document.getElementById("bb-comp-corners-a");
+    const crnBEl = document.getElementById("bb-comp-corners-b");
+    if (crnAEl) crnAEl.textContent = data.cornersPrediction.expectedA.toFixed(1);
+    if (crnBEl) crnBEl.textContent = data.cornersPrediction.expectedB.toFixed(1);
+
+    // Ball Possession (Elo projection)
+    const eloDiff = statsA.elo - statsB.elo;
+    const possA = Math.max(35, Math.min(65, 50 + eloDiff / 20));
+    const possB = 100 - possA;
+    const possAEl = document.getElementById("bb-comp-poss-a");
+    const possBEl = document.getElementById("bb-comp-poss-b");
+    if (possAEl) possAEl.textContent = possA.toFixed(1) + "%";
+    if (possBEl) possBEl.textContent = possB.toFixed(1) + "%";
+
+    // Clean Sheet
+    const csA = Math.exp(-data.xgB) * 100;
+    const csB = Math.exp(-data.xgA) * 100;
+    const csAEl = document.getElementById("bb-comp-cs-a");
+    const csBEl = document.getElementById("bb-comp-cs-b");
+    if (csAEl) csAEl.textContent = csA.toFixed(1) + "%";
+    if (csBEl) csBEl.textContent = csB.toFixed(1) + "%";
+    
+    // xPTS
+    const xptsAEl = document.getElementById("bb-xpts-a");
+    const xptsBEl = document.getElementById("bb-xpts-b");
+    const xptsBarA = document.getElementById("bb-xpts-bar-a");
+    const xptsBarB = document.getElementById("bb-xpts-bar-b");
+    
+    const xptsA = data.probWinA * 3 + data.probDraw * 1;
+    const xptsB = data.probWinB * 3 + data.probDraw * 1;
+    if (xptsAEl) xptsAEl.textContent = xptsA.toFixed(2);
+    if (xptsBEl) xptsBEl.textContent = xptsB.toFixed(2);
+    
+    const xptsTotal = xptsA + xptsB || 1;
+    if (xptsBarA) xptsBarA.style.width = (xptsA / xptsTotal * 100).toFixed(1) + "%";
+    if (xptsBarB) xptsBarB.style.width = (xptsB / xptsTotal * 100).toFixed(1) + "%";
+    
+    // Clean Sheet Bars (for pro segment)
+    const csAProEl = document.getElementById("bb-cs-a");
+    const csBProEl = document.getElementById("bb-cs-b");
+    const csBarA = document.getElementById("bb-cs-bar-a");
+    const csBarB = document.getElementById("bb-cs-bar-b");
+    if (csAProEl) csAProEl.textContent = csA.toFixed(1) + "%";
+    if (csBProEl) csBProEl.textContent = csB.toFixed(1) + "%";
+    const csTotal = csA + csB || 1;
+    if (csBarA) csBarA.style.width = (csA / csTotal * 100).toFixed(1) + "%";
+    if (csBarB) csBarB.style.width = (csB / csTotal * 100).toFixed(1) + "%";
+  }
+
+  // 2. Render Radar Chart
+  const radarCanvas = document.getElementById("bb-radar-canvas");
+  if (radarCanvas && statsA && statsB) {
+    const existingRadar = Chart.getChart(radarCanvas);
+    if (existingRadar) existingRadar.destroy();
+
+    const isLight = document.body.classList.contains("light-theme");
+    const textCol = isLight ? "rgba(15, 23, 42, 0.6)" : "rgba(255, 255, 255, 0.6)";
+    const gridCol = isLight ? "rgba(15, 23, 42, 0.06)" : "rgba(255, 255, 255, 0.06)";
+
+    const attackA = Math.min(100, Math.max(0, (statsA.xg_overall / 3.0) * 100));
+    const attackB = Math.min(100, Math.max(0, (statsB.xg_overall / 3.0) * 100));
+    const defenseA = Math.min(100, Math.max(0, ((3.0 - statsA.xga_overall) / 3.0) * 100));
+    const defenseB = Math.min(100, Math.max(0, ((3.0 - statsB.xga_overall) / 3.0) * 100));
+    const formDiffA = statsA.form_gs - statsA.form_gc;
+    const formDiffB = statsB.form_gs - statsB.form_gc;
+    const formA = Math.min(100, Math.max(0, (formDiffA + 2.0) * 25));
+    const formB = Math.min(100, Math.max(0, (formDiffB + 2.0) * 25));
+    const eloScoreA = Math.min(100, Math.max(0, ((statsA.elo - 1300) / 900) * 100));
+    const eloScoreB = Math.min(100, Math.max(0, ((statsB.elo - 1300) / 900) * 100));
+    const matchXgScoreA = Math.min(100, Math.max(0, (statsA.match_xg / 3.0) * 100));
+    const matchXgScoreB = Math.min(100, Math.max(0, (statsB.match_xg / 3.0) * 100));
+
+    new Chart(radarCanvas, {
+      type: 'radar',
+      data: {
+        labels: ['Ataque', 'Defensa', 'Forma', 'Prestigio', 'xG Proyectado'],
+        datasets: [
+          {
+            label: metaA.name.slice(0, 10),
+            data: [attackA, defenseA, formA, eloScoreA, matchXgScoreA],
+            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+            borderColor: '#3b82f6',
+            borderWidth: 2,
+            pointBackgroundColor: '#3b82f6',
+            pointRadius: 2
+          },
+          {
+            label: metaB.name.slice(0, 10),
+            data: [attackB, defenseB, formB, eloScoreB, matchXgScoreB],
+            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+            borderColor: '#10b981',
+            borderWidth: 2,
+            pointBackgroundColor: '#10b981',
+            pointRadius: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: textCol, font: { size: 9 } } } },
+        scales: {
+          r: {
+            min: 0, max: 100,
+            ticks: { color: textCol, font: { size: 8 }, stepSize: 25, backdropColor: 'transparent' },
+            grid: { color: gridCol },
+            pointLabels: { color: textCol, font: { size: 8 } },
+            angleLines: { color: gridCol }
+          }
+        }
+      }
+    });
+  }
+
+  // 3. Render score heatmap table
+  const heatmapTable = document.getElementById("bb-heatmap-table");
+  if (heatmapTable && data.scoreHeatmap) {
+    const m = data.scoreHeatmap;
+    let tableHtml = `
+      <thead>
+        <tr style="border-bottom: 1px solid var(--panel-border);">
+          <th style="padding: 4px; color: var(--color-text-secondary); font-size: 0.7rem;">${metaA.name.slice(0,3)} \\ ${metaB.name.slice(0,3)}</th>
+          <th style="padding: 4px; font-weight: bold; color: var(--color-team-b);">0</th>
+          <th style="padding: 4px; font-weight: bold; color: var(--color-team-b);">1</th>
+          <th style="padding: 4px; font-weight: bold; color: var(--color-team-b);">2</th>
+          <th style="padding: 4px; font-weight: bold; color: var(--color-team-b);">3</th>
+          <th style="padding: 4px; font-weight: bold; color: var(--color-team-b);">4</th>
+        </tr>
+      </thead>
+      <tbody>
+    `;
+    for (let a = 0; a < 5; a++) {
+      tableHtml += `<tr style="border-bottom: 1px solid rgba(255,255,255,0.01);">
+        <td style="padding: 4px; font-weight: bold; color: var(--color-team-a); border-right: 1px solid var(--panel-border);">${a}</td>
+      `;
+      for (let b = 0; b < 5; b++) {
+        const prob = m[a][b];
+        const probPct = (prob * 100).toFixed(1);
+        const opacity = Math.min(0.85, prob * 5).toFixed(2);
+        const bg = `rgba(245, 158, 11, ${opacity})`;
+        const text = prob > 0.08 ? '#000000' : '#ffffff';
+        tableHtml += `<td style="padding: 6px 4px; background: ${bg}; color: ${text}; font-weight: bold; font-family: monospace; border-radius: 2px;" title="${metaA.name} ${a} - ${b} ${metaB.name}: ${probPct}%">
+          ${probPct}%
+        </td>`;
+      }
+      tableHtml += `</tr>`;
+    }
+    tableHtml += `</tbody>`;
+    heatmapTable.innerHTML = tableHtml;
+  }
+
+  // 4. Update Mitad/Final (HT/FT) Matrix
+  const htftAA = document.getElementById("bb-htft-aa");
+  const htftDA = document.getElementById("bb-htft-da");
+  const htftBA = document.getElementById("bb-htft-ba");
+  const htftAD = document.getElementById("bb-htft-ad");
+  const htftDD = document.getElementById("bb-htft-dd");
+  const htftBD = document.getElementById("bb-htft-bd");
+  const htftAB = document.getElementById("bb-htft-ab");
+  const htftDB = document.getElementById("bb-htft-db");
+  const htftBB = document.getElementById("bb-htft-bb");
+
+  if (htftAA) {
+    const wA = data.probWinA;
+    const wD = data.probDraw;
+    const wB = data.probWinB;
+
+    let aa = wA * (0.6 + 0.1 * wA);
+    let da = wA * (0.3 - 0.05 * wA);
+    let ba = wA * 0.04;
+    let ad = wD * 0.2;
+    let dd = wD * (0.6 + 0.1 * wD);
+    let bd = wD * 0.2;
+    let ab = wB * 0.04;
+    let db = wB * (0.3 - 0.05 * wB);
+    let bb = wB * (0.6 + 0.1 * wB);
+
+    const sum = aa + da + ba + ad + dd + bd + ab + db + bb || 1;
+    const toPct = val => ((val / sum) * 100).toFixed(1) + "%";
+
+    htftAA.textContent = toPct(aa);
+    htftDA.textContent = toPct(da);
+    htftBA.textContent = toPct(ba);
+    htftAD.textContent = toPct(ad);
+    htftDD.textContent = toPct(dd);
+    htftBD.textContent = toPct(bd);
+    htftAB.textContent = toPct(ab);
+    htftDB.textContent = toPct(db);
+    htftBB.textContent = toPct(bb);
+  }
+
+  // 5. Update Goal Bands
+  if (data.scoreHeatmap) {
+    const m = data.scoreHeatmap;
+    let p0_1 = 0, p2_3 = 0, p4_5 = 0;
+    for (let a = 0; a < 5; a++) {
+      for (let b = 0; b < 5; b++) {
+        const sum = a + b;
+        const p = m[a][b];
+        if (sum <= 1) p0_1 += p;
+        else if (sum <= 3) p2_3 += p;
+        else if (sum <= 5) p4_5 += p;
+      }
+    }
+    const p6plus = Math.max(0, 1.0 - p0_1 - p2_3 - p4_5);
+
+    const pct0_1 = (p0_1 * 100).toFixed(1) + "%";
+    const pct2_3 = (p2_3 * 100).toFixed(1) + "%";
+    const pct4_5 = (p4_5 * 100).toFixed(1) + "%";
+    const pct6plus = (p6plus * 100).toFixed(1) + "%";
+
+    const el0_1_pct = document.getElementById("bb-band-0-1-pct");
+    const el0_1_bar = document.getElementById("bb-band-0-1-bar");
+    if (el0_1_pct) el0_1_pct.textContent = pct0_1;
+    if (el0_1_bar) el0_1_bar.style.width = pct0_1;
+
+    const el2_3_pct = document.getElementById("bb-band-2-3-pct");
+    const el2_3_bar = document.getElementById("bb-band-2-3-bar");
+    if (el2_3_pct) el2_3_pct.textContent = pct2_3;
+    if (el2_3_bar) el2_3_bar.style.width = pct2_3;
+
+    const el4_5_pct = document.getElementById("bb-band-4-5-pct");
+    const el4_5_bar = document.getElementById("bb-band-4-5-bar");
+    if (el4_5_pct) el4_5_pct.textContent = pct4_5;
+    if (el4_5_bar) el4_5_bar.style.width = pct4_5;
+
+    const el6_pct = document.getElementById("bb-band-6-pct");
+    const el6_bar = document.getElementById("bb-band-6-bar");
+    if (el6_pct) el6_pct.textContent = pct6plus;
+    if (el6_bar) el6_bar.style.width = pct6plus;
+  }
+
+  // 6. Render Timing Canvas
+  const timingCanvas = document.getElementById("bb-timing-canvas");
+  if (timingCanvas) {
+    const existingTiming = Chart.getChart(timingCanvas);
+    if (existingTiming) existingTiming.destroy();
+
+    const isLight = document.body.classList.contains("light-theme");
+    const textCol = isLight ? "rgba(15, 23, 42, 0.6)" : "rgba(255, 255, 255, 0.6)";
+    const gridCol = isLight ? "rgba(15, 23, 42, 0.06)" : "rgba(255, 255, 255, 0.06)";
+
+    const periods = ['0-15', '16-30', '31-45', '46-60', '61-75', '76-90'];
+    const defaultDistribution = [12, 15, 18, 16, 18, 21];
+
+    new Chart(timingCanvas, {
+      type: 'bar',
+      data: {
+        labels: periods.map(p => p + "'"),
+        datasets: [{
+          label: '% de goles',
+          data: defaultDistribution,
+          backgroundColor: 'rgba(240, 179, 16, 0.65)',
+          borderColor: '#f0b310',
+          borderWidth: 1,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: textCol, font: { size: 9 } }, grid: { color: gridCol } },
+          y: { ticks: { color: textCol, font: { size: 9 }, callback: v => v + '%' }, grid: { color: gridCol }, beginAtZero: true }
+        }
+      }
+    });
   }
 }
 
@@ -2302,6 +2442,15 @@ async function runPredictionFlow() {
     // Update analytical charts (including the radar chart)
     updateCharts(nameAVal, nameBVal, data.xgA, data.xgB, data.probWinA, data.probDraw, data.probWinB, data);
 
+    if (typeof window.runBetBuilderSimulation === 'function') {
+      window.runBetBuilderSimulation();
+    }
+    if (typeof window.updateBetBuilderLabels === 'function') {
+      window.updateBetBuilderLabels();
+    }
+    if (typeof updateBetBuilderAnalytics === 'function') {
+      updateBetBuilderAnalytics(data);
+    }
   } catch (error) {
     console.error("Prediction API error:", error);
   } finally {
@@ -2947,53 +3096,8 @@ function initPresets() {
   });
 }
 
-let bbDonutChart = null;
-function updateDonutChart(fifa, h2h, historic) {
-  const ctx = document.getElementById('bb-donut-canvas');
-  if (!ctx) return;
-  
-  const data = [fifa, h2h, historic];
-  
-  if (bbDonutChart) {
-    bbDonutChart.data.datasets[0].data = data;
-    bbDonutChart.update();
-  } else {
-    try {
-      bbDonutChart = new Chart(ctx.getContext('2d'), {
-        type: 'doughnut',
-        data: {
-          labels: ['FIFA', 'H2H', 'Forma Histórica'],
-          datasets: [{
-            data: data,
-            backgroundColor: ['#f59e0b', '#991b1b', '#64748b'],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
-            },
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  return ` ${context.label}: ${context.raw}%`;
-                }
-              }
-            }
-          },
-          cutout: '65%'
-        }
-      });
-    } catch (err) {
-      console.error("Error creating donut chart:", err);
-    }
-  }
-}
-
 function updateWeightsPreview() {
+  renderWeightDonut();
   const wFifaInput = document.getElementById("input-weight-fifa");
   const wH2hInput = document.getElementById("input-weight-h2h");
   const previewDiv = document.getElementById("weights-formula-preview");
@@ -3015,9 +3119,6 @@ function updateWeightsPreview() {
   }
 
   previewDiv.innerHTML = `Distribución Real: FIFA <strong>${realFifa}%</strong> | H2H <strong>${realH2h}%</strong> | Forma Histórica <strong>${realForm}%</strong>`;
-  
-  // Update donut chart
-  updateDonutChart(realFifa, realH2h, realForm);
 }
 
 async function fetchAITacticalAnalysis(teamA, teamB) {
@@ -3873,255 +3974,750 @@ function renderLeaderboard(rankings) {
   });
 }
 
-/* ==========================================================================
-   BET BUILDER SYSTEM
-   ========================================================================== */
-let bbChart = null;
-let bbRadarChart = null;
-let bbTimingChart = null;
-let bbFavorites = [];
+// ── View Team Details Modal ──
+window.viewTeamDetails = async function(teamKey) {
+  const teamSlug = teamKey === 'A' ? selectedTeamA : selectedTeamB;
+  const meta = TEAM_METADATA[teamSlug];
+  if (!meta) return;
+  const teamName = meta.name || teamSlug;
+  const flag = meta.flag || '🏳️';
+  const rank = meta.rank || '—';
+  const elo = Math.round(ratingsData[teamSlug] || 1500);
 
-window.initBetBuilder = function() {
-  const checkboxes = document.querySelectorAll('input[name="bb-leg"]');
-  checkboxes.forEach(cb => {
-    cb.addEventListener('change', () => {
-      window.updateBBSelectedCount();
-      runBetBuilderSimulation();
+  const uid = 'td' + Date.now();
+  const overlay = document.createElement('div');
+  overlay.className = 'td-overlay';
+  overlay.innerHTML = `
+    <div class="td-modal">
+      <div class="td-header">
+        <div class="td-h-left">
+          <span class="td-flag">${flag}</span>
+          <div class="td-name-group">
+            <div class="td-name">${teamName}</div>
+            <div class="td-badges">
+              <span class="td-badge fifa">FIFA #${rank}</span>
+              <span class="td-badge elo">ELO ${elo}</span>
+            </div>
+          </div>
+        </div>
+        <button class="td-close" onclick="this.closest('.td-overlay').remove()">✕</button>
+      </div>
+      <div class="td-tabs" id="${uid}-tabs"></div>
+      <div class="td-body" id="${uid}-body"><div class="td-empty">Cargando estadísticas...</div></div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+
+  const tabsEl = document.getElementById(`${uid}-tabs`);
+  const bodyEl = document.getElementById(`${uid}-body`);
+  if (!tabsEl || !bodyEl) return;
+
+  try {
+    const [historyRes, scorersRes] = await Promise.all([
+      fetch(`/api/history/${teamSlug}`),
+      fetch(`/data/team_scorers_processed.json`)
+    ]);
+    const histData = historyRes.ok ? await historyRes.json() : { history: [] };
+    const allScorers = scorersRes.ok ? await scorersRes.json() : {};
+    const teamScorers = (allScorers[teamSlug] || []).slice(0, 10);
+    const matches = histData.history || [];
+    const recent = matches.slice(0, 10);
+
+    const wins = recent.filter(m => m.goalsScored > m.goalsConceded).length;
+    const draws = recent.filter(m => m.goalsScored === m.goalsConceded).length;
+    const losses = recent.filter(m => m.goalsScored < m.goalsConceded).length;
+    const totalGf = recent.reduce((s, m) => s + m.goalsScored, 0);
+    const totalGc = recent.reduce((s, m) => s + m.goalsConceded, 0);
+    const avgGf = recent.length ? (totalGf / recent.length).toFixed(1) : '0.0';
+    const avgGc = recent.length ? (totalGc / recent.length).toFixed(1) : '0.0';
+    const cs = recent.filter(m => m.goalsConceded === 0).length;
+    const btts = recent.filter(m => m.goalsScored > 0 && m.goalsConceded > 0).length;
+    const over25 = recent.filter(m => (m.goalsScored + m.goalsConceded) > 2.5).length;
+
+    const tabs = [
+      { id: 'stats',    label: '📊 Stats' },
+      { id: 'matches',  label: '⚽ Partidos' },
+      { id: 'scorers',  label: '🥅 Goleadores' },
+      { id: 'trend',    label: '📈 Tendencia' },
+    ];
+    let activeTab = 'stats';
+
+    function switchTD(tabId) {
+      activeTab = tabId;
+      tabsEl.querySelectorAll('.td-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+      bodyEl.querySelectorAll('.td-tab-content').forEach(c => c.classList.toggle('active', c.id === `${uid}-tc-${tabId}`));
+      if (tabId === 'trend') renderTrendChart();
+    }
+
+    tabsEl.innerHTML = tabs.map(t =>
+      `<button class="td-tab${t.id === activeTab ? ' active' : ''}" data-tab="${t.id}">${t.label}</button>`
+    ).join('');
+
+    tabsEl.addEventListener('click', e => {
+      const btn = e.target.closest('.td-tab');
+      if (!btn) return;
+      const tabId = btn.dataset.tab;
+      switchTD(tabId);
     });
-  });
 
-  const btnSave = document.getElementById('btn-save-bb-favorite');
-  if (btnSave) {
-    btnSave.addEventListener('click', saveBetBuilderFavorite);
+    function statCard(val, label, colorClass) {
+      return `<div class="td-stat-card"><div class="td-stat-val ${colorClass}">${val}</div><div class="td-stat-label">${label}</div></div>`;
+    }
+    function streakBadge(num, label, color) {
+      return `<div style="flex:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:10px;text-align:center;min-width:80px"><div style="font-size:1.2rem;font-weight:800;color:${color}">${num}</div><div style="font-size:0.62rem;color:#64748B;text-transform:uppercase;font-weight:600;margin-top:2px">${label}</div></div>`;
+    }
+
+    const formBars = recent.map(m => {
+      const cls = m.goalsScored > m.goalsConceded ? 'win' : m.goalsScored === m.goalsConceded ? 'draw' : 'loss';
+      const lbl = cls === 'win' ? 'W' : cls === 'draw' ? 'D' : 'L';
+      return `<div class="td-form-bar ${cls}" title="${m.opponentName || ''}">${lbl}</div>`;
+    }).join('');
+
+    let statsHtml = `<div class="td-tab-content active" id="${uid}-tc-stats">`;
+    statsHtml += `<div class="td-section-title">📊 Estadísticas generales (últimos 10 PJ)</div>`;
+    statsHtml += `<div class="td-stats-grid">`;
+    statsHtml += statCard(`${wins}V / ${draws}E / ${losses}D`, 'Record', '');
+    statsHtml += statCard(avgGf, 'Goles a favor', 'green');
+    statsHtml += statCard(avgGc, 'Goles en contra', 'red');
+    statsHtml += statCard(cs, 'Clean sheets', 'green');
+    statsHtml += statCard(btts, 'BTTS', 'amber');
+    statsHtml += statCard(over25, 'Over 2.5', 'blue');
+    statsHtml += statCard(`${totalGf} - ${totalGc}`, 'Dif. de goles', wins >= draws ? 'green' : 'red');
+    statsHtml += statCard(elo.toString(), 'Rating Elo', 'purple');
+    statsHtml += `</div>`;
+    statsHtml += `<div style="margin-top:16px"><div class="td-section-title">📈 Forma reciente</div><div class="td-form-wrap">`;
+    statsHtml += `<div class="td-form-label"><span>${wins}V ${draws}E ${losses}D</span><span>${recent.length} partidos</span></div>`;
+    statsHtml += `<div class="td-form-row">${formBars}</div></div></div></div>`;
+
+    let matchHtml = `<div class="td-tab-content" id="${uid}-tc-matches">`;
+    matchHtml += `<div class="td-section-title">⚽ Últimos ${recent.length} partidos</div>`;
+    matchHtml += `<div class="td-match-list">`;
+    if (!recent.length) {
+      matchHtml += `<div class="td-empty">No hay partidos registrados</div>`;
+    } else {
+      for (const m of recent) {
+        const cls = m.goalsScored > m.goalsConceded ? 'win' : m.goalsScored === m.goalsConceded ? 'draw' : 'loss';
+        const opp = m.opponentName || m.opponentSlug || '—';
+        const tourn = m.opponentLevel ? `<span class="td-m-tourn">${m.opponentLevel}</span>` : '';
+        matchHtml += `<div class="td-match-row"><span class="td-m-date">${m.date || '—'}</span><span class="td-m-opp">vs ${opp}</span>${tourn}<span class="td-m-score ${cls}">${m.goalsScored}-${m.goalsConceded}</span></div>`;
+      }
+    }
+    matchHtml += `</div></div>`;
+
+    let scorersHtml = `<div class="td-tab-content" id="${uid}-tc-scorers">`;
+    scorersHtml += `<div class="td-section-title">🥅 Goleadores históricos</div>`;
+    scorersHtml += `<div class="td-scorers-grid">`;
+    if (!teamScorers.length) {
+      scorersHtml += `<div class="td-empty" style="grid-column:1/-1">Sin datos de goleadores</div>`;
+    } else {
+      const maxGoals = Math.max(...teamScorers.map(s => s.goals), 1);
+      const rankLabels = ['top1', 'top2', 'top3', '', '', '', '', '', '', ''];
+      teamScorers.forEach((s, i) => {
+        const dot = s.active ? `<span class="td-scorer-dot active" title="Activo"></span>` : `<span class="td-scorer-dot retired" title="Retirado"></span>`;
+        const barW = Math.round(s.goals / maxGoals * 100);
+        scorersHtml += `<div class="td-scorer"><span class="td-scorer-rank ${rankLabels[i] || ''}">#${i+1}</span><div class="td-scorer-info"><div class="td-scorer-name">${s.name} ${dot}</div><div class="td-scorer-bar-wrap"><div class="td-scorer-bar-fill" style="width:${barW}%"></div></div></div><span class="td-scorer-goals">${s.goals}</span></div>`;
+      });
+    }
+    scorersHtml += `</div></div>`;
+
+    let trendHtml = `<div class="td-tab-content" id="${uid}-tc-trend">`;
+    trendHtml += `<div class="td-section-title">📈 Evolución de goles (últimos partidos)</div>`;
+    trendHtml += `<div class="td-trend-canvas-wrap"><canvas id="${uid}-trend-canvas"></canvas></div>`;
+    if (recent.length) {
+      trendHtml += `<div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">`;
+      trendHtml += streakBadge(wins + draws, 'Sin perder', wins + draws >= 3 ? '#10B981' : '#64748B');
+      trendHtml += streakBadge(losses, 'Derrotas consec.', losses >= 2 ? '#EF4444' : '#64748B');
+      trendHtml += streakBadge(recent.filter(m => m.goalsScored > 0).length, 'Anotando', '#F59E0B');
+      trendHtml += streakBadge(cs, 'Portería a 0', '#60A5FA');
+      trendHtml += `</div>`;
+    }
+    trendHtml += `</div>`;
+
+    bodyEl.innerHTML = statsHtml + matchHtml + scorersHtml + trendHtml;
+
+    let trendChartInstance = null;
+    function renderTrendChart() {
+      const canvas = document.getElementById(`${uid}-trend-canvas`);
+      if (!canvas || !recent.length) return;
+      if (trendChartInstance) { trendChartInstance.destroy(); trendChartInstance = null; }
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      const labels = recent.map((_, i) => `#${recent.length - i}`).reverse();
+      const gf = recent.map(m => m.goalsScored);
+      const gc = recent.map(m => m.goalsConceded);
+      const isDark = !document.body.classList.contains('light-theme');
+      trendChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            { label: 'Goles a favor', data: gf, borderColor: '#10B981', backgroundColor: 'rgba(16,185,129,0.08)', borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#10B981', fill: true, tension: 0.3 },
+            { label: 'Goles en contra', data: gc, borderColor: '#EF4444', backgroundColor: 'rgba(239,68,68,0.08)', borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#EF4444', fill: true, tension: 0.3 },
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: isDark ? '#94A3B8' : '#475569', font: { size: 10 }, boxWidth: 12, padding: 8 } },
+            tooltip: { backgroundColor: isDark ? '#1E293B' : '#F8FAFC', titleColor: isDark ? '#F8FAFC' : '#0F172A', bodyColor: isDark ? '#CBD5E1' : '#334155', borderColor: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)', borderWidth: 1 }
+          },
+          scales: {
+            x: { ticks: { color: isDark ? '#64748B' : '#64748B', font: { size: 9 } }, grid: { color: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)' } },
+            y: { ticks: { color: isDark ? '#64748B' : '#64748B', font: { size: 9 }, stepSize: 1 }, grid: { color: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)' }, beginAtZero: true }
+          }
+        }
+      });
+    }
+  } catch(e) {
+    bodyEl.innerHTML = '<div class="td-empty">Error al cargar estadísticas</div>';
   }
-
-  loadBetBuilderFavorites();
-  updateBetBuilderLabels();
-  switchBBSegment('summary');
-  window.updateBBSelectedCount();
 };
 
-window.toggleBBAccordion = function(headerBtn) {
-  const item = headerBtn.closest('.bb-accordion-item');
-  if (!item) return;
-  const content = item.querySelector('.bb-accordion-content');
-  const arrow = headerBtn.querySelector('.bb-accordion-arrow');
-  
-  const isExpanded = item.classList.contains('expanded');
-  
-  if (isExpanded) {
-    item.classList.remove('expanded');
-    content.style.display = 'none';
-    if (arrow) {
-      arrow.textContent = '▶';
-      arrow.style.transform = 'none';
+// ── Comparar Equipos Modal ──
+window.compareTeams = async function() {
+  if (!selectedTeamA || !selectedTeamB) return;
+  const metaA = TEAM_METADATA[selectedTeamA] || { name: selectedTeamA, flag: '🏳️', rank: '—' };
+  const metaB = TEAM_METADATA[selectedTeamB] || { name: selectedTeamB, flag: '🏳️', rank: '—' };
+  const eloA = Math.round(ratingsData[selectedTeamA] || 1500);
+  const eloB = Math.round(ratingsData[selectedTeamB] || 1500);
+
+  const uid = 'cmp' + Date.now();
+  const overlay = document.createElement('div');
+  overlay.className = 'cmp-overlay';
+  overlay.innerHTML = `
+    <div class="cmp-modal">
+      <div class="cmp-header">
+        <div class="cmp-h-left">
+          <span class="cmp-flag">${metaA.flag}</span>
+          <span class="cmp-vs">vs</span>
+          <span class="cmp-flag">${metaB.flag}</span>
+          <div class="cmp-name-group">
+            <div class="cmp-name">${metaA.name}</div>
+            <div class="cmp-name-sep">—</div>
+            <div class="cmp-name">${metaB.name}</div>
+          </div>
+        </div>
+        <button class="cmp-close" onclick="this.closest('.cmp-overlay').remove()">✕</button>
+      </div>
+      <div class="cmp-body" id="${uid}-body"><div class="cmp-loading">Cargando comparación...</div></div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  const bodyEl = document.getElementById(`${uid}-body`);
+
+  try {
+    const [advRes, histARes, histBRes] = await Promise.all([
+      fetch(`/api/history/advanced/${selectedTeamA}/${selectedTeamB}`),
+      fetch(`/api/history/${selectedTeamA}`),
+      fetch(`/api/history/${selectedTeamB}`)
+    ]);
+    const adv = advRes.ok ? await advRes.json() : null;
+    const histA = histARes.ok ? await histARes.json() : { history: [] };
+    const histB = histBRes.ok ? await histBRes.json() : { history: [] };
+
+    const matchesA = (histA.history || []).slice(0, 10);
+    const matchesB = (histB.history || []).slice(0, 10);
+
+    function calcStats(matches) {
+      const n = matches.length;
+      const wins = matches.filter(m => m.goalsScored > m.goalsConceded).length;
+      const draws = matches.filter(m => m.goalsScored === m.goalsConceded).length;
+      const losses = matches.filter(m => m.goalsScored < m.goalsConceded).length;
+      const gf = matches.reduce((s, m) => s + m.goalsScored, 0);
+      const gc = matches.reduce((s, m) => s + m.goalsConceded, 0);
+      return { n, wins, draws, losses, gf, gc,
+        avgGf: n ? (gf / n).toFixed(1) : '0.0',
+        avgGc: n ? (gc / n).toFixed(1) : '0.0',
+        cs: n ? matches.filter(m => m.goalsConceded === 0).length : 0,
+        csPct: n ? Math.round(matches.filter(m => m.goalsConceded === 0).length / n * 100) : 0,
+        btts: n ? matches.filter(m => m.goalsScored > 0 && m.goalsConceded > 0).length : 0,
+        bttsPct: n ? Math.round(matches.filter(m => m.goalsScored > 0 && m.goalsConceded > 0).length / n * 100) : 0,
+        over25: n ? matches.filter(m => (m.goalsScored + m.goalsConceded) > 2.5).length : 0,
+        over25Pct: n ? Math.round(matches.filter(m => (m.goalsScored + m.goalsConceded) > 2.5).length / n * 100) : 0,
+      };
     }
+    const sA = calcStats(matchesA);
+    const sB = calcStats(matchesB);
+
+    const h2h = adv?.h2h || { winsA: 0, winsB: 0, draws: 0, count: 0, avgGoals: 0, goalsA: 0, goalsB: 0 };
+    const formA = adv?.form?.teamA || { avg_gf: '—', avg_gc: '—', clean_sheets: '—', btts: '—', over25: '—', record: '—', streaks: {}, by_rival: {} };
+    const formB = adv?.form?.teamB || { avg_gf: '—', avg_gc: '—', clean_sheets: '—', btts: '—', over25: '—', record: '—', streaks: {}, by_rival: {} };
+
+    const advantages = [];
+    if (parseFloat(sA.avgGc) < parseFloat(sB.avgGc)) advantages.push(`${metaA.name}: Mejor defensa (${sA.avgGc} goles/partido)`);
+    else if (parseFloat(sB.avgGc) < parseFloat(sA.avgGc)) advantages.push(`${metaB.name}: Mejor defensa (${sB.avgGc} goles/partido)`);
+    if (parseFloat(sA.avgGf) > parseFloat(sB.avgGf)) advantages.push(`${metaA.name}: Mejor ataque (${sA.avgGf} goles/partido)`);
+    else if (parseFloat(sB.avgGf) > parseFloat(sA.avgGf)) advantages.push(`${metaB.name}: Mejor ataque (${sB.avgGf} goles/partido)`);
+    if (sA.wins > sB.wins) advantages.push(`${metaA.name}: Más victorias recientes (${sA.wins}/${sA.n})`);
+    else if (sB.wins > sA.wins) advantages.push(`${metaB.name}: Más victorias recientes (${sB.wins}/${sB.n})`);
+    if (sA.csPct > sB.csPct) advantages.push(`${metaA.name}: Mejor % portería a cero (${sA.csPct}%)`);
+    else if (sB.csPct > sA.csPct) advantages.push(`${metaB.name}: Mejor % portería a cero (${sB.csPct}%)`);
+    if (eloA > eloB) advantages.push(`${metaA.name}: Mejor rating Elo (${eloA})`);
+    else if (eloB > eloA) advantages.push(`${metaB.name}: Mejor rating Elo (${eloB})`);
+    if (h2h.count > 0) {
+      if (h2h.winsA > h2h.winsB) advantages.push(`${metaA.name}: Domina el H2H (${h2h.winsA}V ${h2h.draws}E ${h2h.winsB}D)`);
+      else if (h2h.winsB > h2h.winsA) advantages.push(`${metaB.name}: Domina el H2H (${h2h.winsB}V ${h2h.draws}E ${h2h.winsA}D)`);
+    }
+
+    function better(a, b, higher) {
+      if (a === b) return ['', ''];
+      if (higher) return a > b ? ['cmp-cell-better', 'cmp-cell-worse'] : ['cmp-cell-worse', 'cmp-cell-better'];
+      return a < b ? ['cmp-cell-better', 'cmp-cell-worse'] : ['cmp-cell-worse', 'cmp-cell-better'];
+    }
+    const aCls = (vA, vB, higher) => better(vA, vB, higher)[0];
+    const bCls = (vA, vB, higher) => better(vA, vB, higher)[1];
+
+    function insightLine(teamName, formData) {
+      const parts = [];
+      if (formData.clean_sheets !== '—') parts.push(`Portería a cero: ${formData.clean_sheets}%`);
+      if (formData.btts !== '—') parts.push(`BTTS: ${formData.btts}%`);
+      if (formData.over25 !== '—') parts.push(`Over 2.5: ${formData.over25}%`);
+      if (formData.avg_gf !== '—') parts.push(`G/P: ${formData.avg_gf}`);
+      const streak = formData.streaks || {};
+      if (streak.unbeaten > 1) parts.push(`Racha sin perder: ${streak.unbeaten}`);
+      return parts.join(' | ');
+    }
+
+    bodyEl.innerHTML = `
+      <div class="cmp-grid">
+        <div class="cmp-section">
+          <div class="cmp-section-title">🏆 Ranking y Elo</div>
+          <div class="cmp-compact-table">
+            <div class="cmp-row">
+              <span class="cmp-label">Ranking FIFA</span>
+              <span class="cmp-val ${aCls(metaA.rank, metaB.rank, false)}">#${metaA.rank}</span>
+              <span class="cmp-val ${bCls(metaA.rank, metaB.rank, false)}">#${metaB.rank}</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Rating Elo</span>
+              <span class="cmp-val ${aCls(eloA, eloB, true)}">${eloA}</span>
+              <span class="cmp-val ${bCls(eloA, eloB, true)}">${eloB}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cmp-section">
+          <div class="cmp-section-title">⚡ Forma reciente (últimos ${sA.n} PJ)</div>
+          <div class="cmp-compact-table">
+            <div class="cmp-row">
+              <span class="cmp-label">Record</span>
+              <span class="cmp-val">${sA.wins}V / ${sA.draws}E / ${sA.losses}D</span>
+              <span class="cmp-val">${sB.wins}V / ${sB.draws}E / ${sB.losses}D</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Goles a favor (prom.)</span>
+              <span class="cmp-val ${aCls(sA.avgGf, sB.avgGf, true)}">${sA.avgGf}</span>
+              <span class="cmp-val ${bCls(sA.avgGf, sB.avgGf, true)}">${sB.avgGf}</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Goles en contra (prom.)</span>
+              <span class="cmp-val ${aCls(sA.avgGc, sB.avgGc, false)}">${sA.avgGc}</span>
+              <span class="cmp-val ${bCls(sA.avgGc, sB.avgGc, false)}">${sB.avgGc}</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Clean sheets</span>
+              <span class="cmp-val ${aCls(sA.csPct, sB.csPct, true)}">${sA.csPct}%</span>
+              <span class="cmp-val ${bCls(sA.csPct, sB.csPct, true)}">${sB.csPct}%</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">BTTS</span>
+              <span class="cmp-val ${aCls(sA.bttsPct, sB.bttsPct, true)}">${sA.bttsPct}%</span>
+              <span class="cmp-val ${bCls(sA.bttsPct, sB.bttsPct, true)}">${sB.bttsPct}%</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Over 2.5</span>
+              <span class="cmp-val ${aCls(sA.over25Pct, sB.over25Pct, true)}">${sA.over25Pct}%</span>
+              <span class="cmp-val ${bCls(sA.over25Pct, sB.over25Pct, true)}">${sB.over25Pct}%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cmp-section">
+          <div class="cmp-section-title">🤝 Historial (H2H)</div>
+          ${h2h.count > 0 ? `
+          <div class="cmp-h2h-bar-wrap">
+            <div class="cmp-h2h-bar">
+              <div class="cmp-h2h-bar-a" style="width:${Math.round(h2h.winsA/h2h.count*100)}%"></div>
+              <div class="cmp-h2h-bar-draw" style="width:${Math.round(h2h.draws/h2h.count*100)}%"></div>
+              <div class="cmp-h2h-bar-b" style="width:${Math.round(h2h.winsB/h2h.count*100)}%"></div>
+            </div>
+          </div>
+          <div class="cmp-compact-table" style="margin-top:8px">
+            <div class="cmp-row"><span class="cmp-label">Partidos</span><span class="cmp-val" style="grid-column:span 2">${h2h.count}</span></div>
+            <div class="cmp-row">
+              <span class="cmp-label">Victorias</span>
+              <span class="cmp-val cmp-cell-better">${metaA.name.slice(0,10)}: ${h2h.winsA}</span>
+              <span class="cmp-val ${h2h.winsB > h2h.winsA ? 'cmp-cell-better' : ''}">${metaB.name.slice(0,10)}: ${h2h.winsB}</span>
+            </div>
+            <div class="cmp-row"><span class="cmp-label">Empates</span><span class="cmp-val" style="grid-column:span 2">${h2h.draws}</span></div>
+            <div class="cmp-row"><span class="cmp-label">Goles/Partido</span><span class="cmp-val" style="grid-column:span 2">${h2h.avgGoals.toFixed(1)}</span></div>
+          </div>
+          ` : `<div class="cmp-empty">Sin enfrentamientos directos registrados</div>`}
+        </div>
+
+        <div class="cmp-full-width">
+          <div class="cmp-section-title">🔑 Ventajas clave</div>
+          <div class="cmp-adv-grid">
+            ${advantages.length ? advantages.map(a => `<div class="cmp-adv-chip">${a}</div>`).join('') : '<div class="cmp-empty">Datos insuficientes para determinar ventajas</div>'}
+          </div>
+        </div>
+
+        <div class="cmp-full-width">
+          <div class="cmp-section-title">📊 Rendimiento por nivel de rival</div>
+          <div class="cmp-compact-table">
+            <div class="cmp-row cmp-row-header">
+              <span class="cmp-label">Nivel</span>
+              <span class="cmp-val">${metaA.name.slice(0,10)}</span>
+              <span class="cmp-val">${metaB.name.slice(0,10)}</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">🔴 Top</span>
+              <span class="cmp-val">${formA.by_rival?.top || '—'}</span>
+              <span class="cmp-val">${formB.by_rival?.top || '—'}</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">🟡 Alto</span>
+              <span class="cmp-val">${formA.by_rival?.high || '—'}</span>
+              <span class="cmp-val">${formB.by_rival?.high || '—'}</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">🟢 Medio</span>
+              <span class="cmp-val">${formA.by_rival?.mid || '—'}</span>
+              <span class="cmp-val">${formB.by_rival?.mid || '—'}</span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">⚪ Bajo</span>
+              <span class="cmp-val">${formA.by_rival?.low || '—'}</span>
+              <span class="cmp-val">${formB.by_rival?.low || '—'}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cmp-full-width">
+          <div class="cmp-section-title">💡 Insights</div>
+          <div class="cmp-insights-grid">
+            <div class="cmp-insight-card">
+              <div class="cmp-insight-flag">${metaA.flag}</div>
+              <div class="cmp-insight-name">${metaA.name}</div>
+              <div class="cmp-insight-text">${insightLine(metaA.name, formA)}</div>
+            </div>
+            <div class="cmp-insight-card">
+              <div class="cmp-insight-flag">${metaB.flag}</div>
+              <div class="cmp-insight-name">${metaB.name}</div>
+              <div class="cmp-insight-text">${insightLine(metaB.name, formB)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  } catch(e) {
+    bodyEl.innerHTML = '<div class="cmp-empty">Error al cargar datos de comparación</div>';
+  }
+};
+
+// ═══ BET BUILDER FUNCTIONS ═══
+
+// ── Donut chart de ponderación ──
+function renderWeightDonut() {
+  const canvas = document.getElementById('bb-donut-canvas');
+  if (!canvas) return;
+
+  // Destroy existing chart on this canvas to prevent overlap/flicker
+  const existingChart = Chart.getChart(canvas);
+  if (existingChart) {
+    existingChart.destroy();
+  }
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const wFifa = parseFloat(document.getElementById('input-weight-fifa')?.value) || 0;
+  const wH2h = parseFloat(document.getElementById('input-weight-h2h')?.value) || 0;
+  const total = wFifa + wH2h;
+  let fifaW, h2hW, formW;
+  if (total > 100) {
+    fifaW = Math.round((wFifa / total) * 100);
+    h2hW = Math.round((wH2h / total) * 100);
+    formW = 0;
   } else {
-    item.classList.add('expanded');
-    const cat = item.getAttribute('data-category');
-    content.style.display = (cat === 'goals') ? 'grid' : 'flex';
-    if (arrow) {
-      arrow.textContent = '▼';
-    }
+    fifaW = wFifa;
+    h2hW = wH2h;
+    formW = 100 - fifaW - h2hW;
   }
-};
 
-window.filterBBMarkets = function() {
-  const query = document.getElementById('bb-market-search').value.toLowerCase().trim();
-  const items = document.querySelectorAll('.bb-accordion-item');
-  
-  items.forEach(item => {
-    const content = item.querySelector('.bb-accordion-content');
-    const header = item.querySelector('.bb-accordion-header');
-    const arrow = header.querySelector('.bb-accordion-arrow');
-    const labels = content.querySelectorAll('.bb-checkbox-label');
-    
-    let matchedAny = false;
-    labels.forEach(lbl => {
-      const text = lbl.textContent.toLowerCase();
-      if (text.includes(query)) {
-        lbl.style.display = 'flex';
-        matchedAny = true;
-      } else {
-        lbl.style.display = 'none';
-      }
-    });
-    
-    if (query === '') {
-      item.style.display = 'block';
-      labels.forEach(lbl => lbl.style.display = 'flex');
-      
-      const cat = item.getAttribute('data-category');
-      if (cat === 'outcome') {
-        item.classList.add('expanded');
-        content.style.display = 'flex';
-        if (arrow) arrow.textContent = '▼';
-      } else {
-        item.classList.remove('expanded');
-        content.style.display = 'none';
-        if (arrow) arrow.textContent = '▶';
-      }
-    } else {
-      if (matchedAny) {
-        item.style.display = 'block';
-        item.classList.add('expanded');
-        const cat = item.getAttribute('data-category');
-        content.style.display = (cat === 'goals') ? 'grid' : 'flex';
-        if (arrow) arrow.textContent = '▼';
-      } else {
-        item.style.display = 'none';
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['FIFA', 'H2H', 'Forma'],
+      datasets: [{
+        data: [fifaW, h2hW, formW],
+        backgroundColor: ['#F59E0B', '#EF4444', '#10B981'],
+        borderWidth: 0,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      cutout: '70%',
+      layout: {
+        padding: 5
+      },
+      legend: {
+        display: false
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: 'rgba(15, 22, 42, 0.9)',
+          titleColor: '#fff',
+          bodyColor: '#fff',
+          borderColor: 'rgba(255, 255, 255, 0.1)',
+          borderWidth: 1,
+          padding: 4,
+          caretSize: 4,
+          bodyFont: { size: 9 },
+          titleFont: { size: 9 },
+          callbacks: {
+            label: function(context) {
+              return ` ${context.label}: ${context.raw}%`;
+            }
+          }
+        }
       }
     }
   });
-};
-
-window.clearAllBBLegs = function() {
-  const checkboxes = document.querySelectorAll('input[name="bb-leg"]');
-  checkboxes.forEach(cb => cb.checked = false);
-  window.updateBBSelectedCount();
-  runBetBuilderSimulation();
-};
-
-window.updateBBSelectedCount = function() {
-  const checked = document.querySelectorAll('input[name="bb-leg"]:checked');
-  const countSpan = document.getElementById('bb-selected-count');
-  if (countSpan) {
-    countSpan.textContent = `(${checked.length})`;
-  }
-};
-
-window.switchBBSegment = function(segmentName) {
-  const buttons = document.querySelectorAll('.bb-segment-btn');
-  buttons.forEach(btn => {
-    if (btn.getAttribute('data-segment') === segmentName) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-    }
-  });
-
-  const allSegments = ['summary', 'goals', 'markets', 'validation'];
-  allSegments.forEach(seg => {
-    const cards = document.querySelectorAll('.bb-seg-' + seg);
-    cards.forEach(card => {
-      if (seg === segmentName) {
-        card.classList.remove('bb-seg-hidden');
-      } else {
-        card.classList.add('bb-seg-hidden');
-      }
-    });
-  });
-};
-
-window.updateBetBuilderLabels = function() {
-  const nameA = TEAM_METADATA[selectedTeamA]?.name || "Local";
-  const nameB = TEAM_METADATA[selectedTeamB]?.name || "Visitante";
-  
-  document.querySelectorAll('.bb-lbl-a').forEach(el => el.textContent = `Victoria ${nameA}`);
-  document.querySelectorAll('.bb-lbl-b').forEach(el => el.textContent = `Victoria ${nameB}`);
-};
-
-// Evaluador de logros de goles a nivel de marcador exacto para el Heatmap y Validaciones
-function evaluateScoreLeg(leg, a, b) {
-  if (leg === "win_a") return a > b;
-  if (leg === "draw") return a === b;
-  if (leg === "win_b") return b > a;
-  if (leg === "btts_yes") return a > 0 && b > 0;
-  if (leg === "btts_no") return a === 0 || b === 0;
-  if (leg === "double_chance_1X") return a >= b;
-  if (leg === "double_chance_12") return a !== b;
-  if (leg === "double_chance_X2") return b >= a;
-  if (leg.startsWith("over_")) {
-    const val = parseFloat(leg.split("_")[1]);
-    return (a + b) > val;
-  }
-  if (leg.startsWith("under_")) {
-    const val = parseFloat(leg.split("_")[1]);
-    return (a + b) < val;
-  }
-  if (leg === "handicap_minus_1_5_a") return (a - b) > 1.5;
-  if (leg === "handicap_plus_1_5_a") return (a - b) > -1.5;
-  if (leg === "handicap_minus_1_5_b") return (b - a) > 1.5;
-  if (leg === "handicap_plus_1_5_b") return (b - a) > -1.5;
-  
-  // Para córners u otros logros, retornamos true en la matriz de goles
-  return true;
 }
 
-// Variable global para almacenar el último resultado de la probabilidad combinada
-let lastCombinedProb = 0.0;
+// ── Toggle accordion ──
+window.toggleBBAccordion = function(btn) {
+  const item = btn.closest('.bb-accordion-item');
+  if (!item) return;
+  const content = item.querySelector('.bb-accordion-content');
+  const arrow = btn.querySelector('.bb-accordion-arrow');
+  if (!content || !arrow) return;
+  const isExpanded = item.classList.toggle('expanded');
+  if (isExpanded) {
+    content.style.display = 'flex';
+    const cat = item.dataset.category;
+    if (cat === 'goals') content.style.display = 'grid';
+  } else {
+    content.style.display = 'none';
+  }
+  arrow.textContent = isExpanded ? '▼' : '▶';
+};
 
+// ── Clear all bet builder legs ──
+window.clearAllBBLegs = function() {
+  document.querySelectorAll('input[name="bb-leg"]').forEach(cb => cb.checked = false);
+  updateBBLegsCount();
+  window.runBetBuilderSimulation();
+};
+
+// ── Toggle alerts config fields ──
+window.toggleAlertsState = function() {
+  const cb = document.getElementById('alert-enable');
+  const fields = document.getElementById('alerts-config-fields');
+  if (fields) fields.style.display = cb?.checked ? 'flex' : 'none';
+};
+
+// ── Update legs counter ──
+function updateBBLegsCount() {
+  const count = document.querySelectorAll('input[name="bb-leg"]:checked').length;
+  const el = document.getElementById('bb-selected-count');
+  if (el) el.textContent = `(${count})`;
+}
+
+// ── Filter markets by search ──
+window.filterBBMarkets = function() {
+  const q = (document.getElementById('bb-market-search')?.value || '').toLowerCase().trim();
+  document.querySelectorAll('.bb-accordion-item').forEach(item => {
+    const text = item.textContent.toLowerCase();
+    item.style.display = (!q || text.includes(q)) ? '' : 'none';
+  });
+};
+
+// ── Switch bet builder segment (summary/goals/markets/validation) ──
+window.switchBBSegment = function(name) {
+  document.querySelectorAll('.bb-segment-btn').forEach(b => b.classList.toggle('active', b.dataset.segment === name));
+  document.querySelectorAll('#bb-col-results [id^="bb-container-"]').forEach(el => {
+    el.style.display = el.classList.contains(`bb-seg-${name}`) ? '' : 'none';
+  });
+
+  setTimeout(() => {
+    const radarCv = document.getElementById("bb-radar-canvas");
+    const timingCv = document.getElementById("bb-timing-canvas");
+    if (radarCv) {
+      const radar = Chart.getChart(radarCv);
+      if (radar) radar.resize();
+    }
+    if (timingCv) {
+      const timing = Chart.getChart(timingCv);
+      if (timing) timing.resize();
+    }
+  }, 50);
+};
+
+// ── Switch mobile nav tab ──
+window.switchBetBuilderTab = function(name) {
+  document.querySelectorAll('.bb-mobile-nav-btn').forEach(b => b.classList.toggle('active', b.id === `bb-nav-btn-${name}`));
+  const colMarkets = document.getElementById('bb-col-markets');
+  const colResults = document.getElementById('bb-col-results');
+  if (colMarkets) colMarkets.classList.toggle('bb-tab-hidden', name !== 'markets');
+  if (colResults) colResults.classList.toggle('bb-tab-hidden', name !== 'summary');
+  if (name === 'summary' && !window._bbSegInit) { window._bbSegInit = true; switchBBSegment('summary'); }
+
+  setTimeout(() => {
+    const radarCv = document.getElementById("bb-radar-canvas");
+    const timingCv = document.getElementById("bb-timing-canvas");
+    if (radarCv) {
+      const radar = Chart.getChart(radarCv);
+      if (radar) radar.resize();
+    }
+    if (timingCv) {
+      const timing = Chart.getChart(timingCv);
+      if (timing) timing.resize();
+    }
+  }, 50);
+};
+
+// ── Update edge calculation ──
 window.updateBetBuilderEdge = function() {
-  const inputOdds = parseFloat(document.getElementById('bb-market-odds').value);
-  const edgeEl = document.getElementById('bb-edge-value');
-  const kellyEl = document.getElementById('bb-kelly-stake');
-  const badgeEl = document.getElementById('bb-value-badge');
-  
-  if (isNaN(inputOdds) || inputOdds <= 1.0 || lastCombinedProb <= 0) {
-    if (edgeEl) edgeEl.textContent = '0.0%';
-    if (kellyEl) kellyEl.textContent = '0.0%';
-    if (badgeEl) badgeEl.style.display = 'none';
+  const combinedProbText = document.getElementById('bb-combined-prob-circle')?.textContent || '0.0%';
+  const marketOdds = parseFloat(document.getElementById('bb-market-odds')?.value) || 0;
+  const combinedProb = parseFloat(combinedProbText) / 100;
+  if (!marketOdds || !combinedProb) {
+    ['bb-edge-value', 'bb-kelly-stake', 'bb-risk-level'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = id === 'bb-risk-level' ? 'Bajo' : '0.0%';
+    });
+    const badge = document.getElementById('bb-value-badge');
+    if (badge) badge.style.display = 'none';
     return;
   }
-  
-  const edge = (lastCombinedProb * inputOdds) - 1.0;
-  const edgePct = (edge * 100).toFixed(1);
-  if (edgeEl) {
-    edgeEl.textContent = `${edgePct}%`;
-    edgeEl.style.color = edge > 0.05 ? '#10b981' : '#ffffff';
+  const fairOdds = 1 / combinedProb;
+  const edge = (marketOdds - fairOdds) / fairOdds * 100;
+  const kelly = ((combinedProb * marketOdds - 1) / (marketOdds - 1)) * 100;
+  const edgeEl = document.getElementById('bb-edge-value');
+  const kellyEl = document.getElementById('bb-kelly-stake');
+  const riskEl = document.getElementById('bb-risk-level');
+  const badge = document.getElementById('bb-value-badge');
+  if (edgeEl) edgeEl.textContent = edge.toFixed(1) + '%';
+  if (kellyEl) kellyEl.textContent = Math.max(0, kelly).toFixed(1) + '%';
+  if (riskEl) {
+    const risk = Math.abs(kelly);
+    riskEl.textContent = risk < 5 ? 'Bajo' : risk < 15 ? 'Medio' : 'Alto';
+    riskEl.style.color = risk < 5 ? '#10B981' : risk < 15 ? '#F59E0B' : '#EF4444';
   }
-  
-  // Criterio de Kelly (Fórmula: f* = (p*o - 1) / (o - 1) = Edge / (Odds - 1))
-  const kelly = edge > 0 ? (edge / (inputOdds - 1.0)) : 0;
-  // Brindar un stake moderado (Kelly fraccionario de 0.25 para evitar sobre-exposición)
-  const recommendedStake = (kelly * 0.25 * 100).toFixed(1);
-  if (kellyEl) {
-    kellyEl.textContent = `${recommendedStake}%`;
-  }
-  
-  if (badgeEl) {
-    badgeEl.style.display = edge > 0.05 ? 'block' : 'none';
+  if (badge) {
+    badge.style.display = edge > 0 ? 'block' : 'none';
+    badge.textContent = edge > 0 ? '⚡ Value Bet Detectada' : '';
   }
 };
 
-window.runBetBuilderSimulation = async function() {
-  updateBetBuilderLabels();
-
-  const checkboxes = document.querySelectorAll('input[name="bb-leg"]:checked');
-  const legs = Array.from(checkboxes).map(cb => cb.value);
-
-  const combinedProbEl = document.getElementById('bb-combined-prob-circle');
-  const fairOddsEl = document.getElementById('bb-fair-odds');
-  const correlationsTbody = document.getElementById('bb-correlations-tbody');
-  const heatmapTable = document.getElementById('bb-heatmap-table');
-  const h2hTbody = document.getElementById('bb-h2h-tbody');
-  const similarTbody = document.getElementById('bb-similar-tbody');
-  const riskLevelEl = document.getElementById('bb-risk-level');
-
-  if (legs.length === 0) {
-    lastCombinedProb = 0.0;
-    if (combinedProbEl) combinedProbEl.textContent = '0.0%';
-    if (fairOddsEl) fairOddsEl.textContent = '1.00';
-    if (correlationsTbody) {
-      correlationsTbody.innerHTML = `<tr><td colspan="3" style="text-align: center; padding: 24px; color: var(--color-text-muted);">Selecciona 1 o más logros para ver correlaciones.</td></tr>`;
-    }
-    if (heatmapTable) heatmapTable.innerHTML = '';
-    if (h2hTbody) {
-      h2hTbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 15px; color: var(--color-text-muted);">Sin enfrentamientos directos registrados.</td></tr>`;
-    }
-    if (similarTbody) {
-      similarTbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 15px; color: var(--color-text-muted);">Sin partidos con perfil similar.</td></tr>`;
-    }
-    if (bbChart) {
-      bbChart.destroy();
-      bbChart = null;
-    }
-    updateBetBuilderEdge();
+// ── Update odds comparison table ──
+window.updateOddsComparison = function() {
+  const probText = document.getElementById('bb-combined-prob-circle')?.textContent || '0.0%';
+  const prob = parseFloat(probText) / 100;
+  const tbody = document.getElementById('odds-compare-tbody');
+  if (!tbody) return;
+  const entries = [];
+  ['bet365', '1xbet', 'pinnacle', 'betfair'].forEach(id => {
+    const input = document.getElementById('odds-' + id);
+    if (!input) return;
+    const odds = parseFloat(input.value);
+    if (!odds || odds <= 0) return;
+    const label = input.closest('label')?.childNodes[0]?.textContent || id;
+    const fairOdds = prob > 0 ? 1 / prob : 0;
+    const edge = fairOdds > 0 ? (odds - fairOdds) / fairOdds * 100 : 0;
+    const ret = 100 * (odds - 1) * prob - 100 * (1 - prob);
+    entries.push({ label, odds, edge, ret });
+  });
+  entries.sort((a, b) => b.edge - a.edge);
+  if (entries.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:15px;color:var(--color-text-muted);">Ingresa una cuota arriba para comparar.</td></tr>';
     return;
   }
+  tbody.innerHTML = entries.map(e => `<tr style="border-bottom:1px solid var(--panel-border);">
+    <td style="padding:6px 2px;font-weight:600;">${e.label}</td>
+    <td style="padding:6px 2px;text-align:center;font-family:monospace;">${e.odds.toFixed(2)}</td>
+    <td style="padding:6px 2px;text-align:center;color:${e.edge > 0 ? '#10B981' : '#EF4444'};font-weight:600;">${e.edge > 0 ? '+' : ''}${e.edge.toFixed(1)}%</td>
+    <td style="padding:6px 2px;text-align:right;font-family:monospace;color:${e.ret > 0 ? '#10B981' : '#EF4444'};">${e.ret > 0 ? '+' : ''}$${e.ret.toFixed(2)}</td>
+  </tr>`).join('');
+};
 
-  if (combinedProbEl) combinedProbEl.textContent = '...';
+// ── Export bet builder as PDF ──
+window.exportBetBuilderPDF = function() {
+  window.print();
+};
 
+// ── Toggle inverse mode ──
+window.toggleInverseMode = function() {
+  const panel = document.getElementById('inverse-metrics-panel');
+  if (!panel) return;
+  const isVisible = panel.style.display !== 'none';
+  panel.style.display = isVisible ? 'none' : 'flex';
+};
+
+// ── Populate Validation Tables ──
+function populateValidationTables(matches, legs) {
+  const h2hTbody = document.getElementById('bb-h2h-tbody');
+  const similarTbody = document.getElementById('bb-similar-tbody');
+  
+  if (h2hTbody) {
+    if (!matches || !matches.directH2H || matches.directH2H.length === 0) {
+      h2hTbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 15px; color: var(--color-text-muted);">Sin partidos seleccionados o no hay historial.</td></tr>';
+    } else {
+      h2hTbody.innerHTML = matches.directH2H.map(m => {
+        const combText = m.fullyMet ? '<span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10B981; padding: 2px 6px; border-radius: 4px; font-weight: bold;">Sí</span>' : '<span class="badge" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; padding: 2px 6px; border-radius: 4px; font-weight: bold;">No</span>';
+        return `<tr style="border-bottom: 1px solid var(--panel-border);">
+          <td style="padding: 8px 4px; color: var(--color-text-muted); font-family: monospace;">${m.date}</td>
+          <td style="padding: 8px 4px; font-weight: 500;">${m.homeName} vs ${m.awayName}</td>
+          <td style="padding: 8px 4px; text-align: center; font-family: monospace; font-weight: 700;">${m.score}</td>
+          <td style="padding: 8px 4px; text-align: center;">${combText}</td>
+        </tr>`;
+      }).join('');
+    }
+  }
+
+  if (similarTbody) {
+    if (!matches || !matches.similarProfile || matches.similarProfile.length === 0) {
+      similarTbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 15px; color: var(--color-text-muted);">Sin partidos seleccionados o no hay historial.</td></tr>';
+    } else {
+      similarTbody.innerHTML = matches.similarProfile.map(m => {
+        const combText = m.fullyMet ? '<span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #10B981; padding: 2px 6px; border-radius: 4px; font-weight: bold;">Sí</span>' : '<span class="badge" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; padding: 2px 6px; border-radius: 4px; font-weight: bold;">No</span>';
+        return `<tr style="border-bottom: 1px solid var(--panel-border);">
+          <td style="padding: 8px 4px; color: var(--color-text-muted); font-family: monospace;">${m.date}</td>
+          <td style="padding: 8px 4px; font-weight: 500;">${m.homeName} vs ${m.awayName}</td>
+          <td style="padding: 8px 4px; text-align: center; font-family: monospace; font-weight: 700;">${m.score}</td>
+          <td style="padding: 8px 4px; text-align: center; font-family: monospace; font-weight: 600; color: var(--color-primary);">${m.similarity}%</td>
+          <td style="padding: 8px 4px; text-align: center;">${combText}</td>
+        </tr>`;
+      }).join('');
+    }
+  }
+}
+
+// ── Run Bet Builder Simulation ──
+window.runBetBuilderSimulation = async function() {
+  const checkedLegs = Array.from(document.querySelectorAll('input[name="bb-leg"]:checked')).map(cb => cb.value);
+  const probCircle = document.getElementById('bb-combined-prob-circle');
+  const fairOddsEl = document.getElementById('bb-fair-odds');
+  
+  if (checkedLegs.length === 0) {
+    if (probCircle) probCircle.textContent = '0.0%';
+    if (fairOddsEl) fairOddsEl.textContent = '1.00';
+    window.updateBetBuilderEdge();
+    window.updateOddsComparison();
+    populateValidationTables({ directH2H: [], similarProfile: [] }, []);
+    return;
+  }
+  
+  if (probCircle) probCircle.textContent = 'Simulando...';
+  
   const payload = {
     teamA: selectedTeamA,
     teamB: selectedTeamB,
@@ -4135,7 +4731,7 @@ window.runBetBuilderSimulation = async function() {
     strengthOverrideB: inputOverrideB.value ? parseFloat(inputOverrideB.value) : 1.0,
     altitude: inputAltitude.value ? parseInt(inputAltitude.value) : 0,
     hostCountry: inputHostCountry.value || null,
-    legs: legs
+    legs: checkedLegs
   };
 
   try {
@@ -4144,1230 +4740,68 @@ window.runBetBuilderSimulation = async function() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
-    if (!res.ok) throw new Error("API simulation error");
-    const data = await res.json();
-
-    const sim = data.simulation;
-    const hist = data.historicalMatches;
-
-    lastCombinedProb = sim.combinedProb;
-    const combPct = (sim.combinedProb * 100).toFixed(1);
-    if (combinedProbEl) combinedProbEl.textContent = `${combPct}%`;
-    if (fairOddsEl) {
-      const oddVal = sim.combinedProb > 0 ? (1.0 / sim.combinedProb).toFixed(2) : "999.00";
-      fairOddsEl.textContent = `${oddVal}`;
-    }
-
-    // Clasificar Nivel de Riesgo
-    if (riskLevelEl) {
-      if (sim.combinedProb > 0.6) {
-        riskLevelEl.textContent = 'Bajo';
-        riskLevelEl.style.color = '#10b981';
-      } else if (sim.combinedProb >= 0.3) {
-        riskLevelEl.textContent = 'Medio';
-        riskLevelEl.style.color = '#f59e0b';
-      } else {
-        riskLevelEl.textContent = 'Alto';
-        riskLevelEl.style.color = '#ef4444';
-      }
-    }
-
-    updateBetBuilderEdge();
-
-    const correlationSummary = document.getElementById('bb-correlation-summary');
-    if (correlationSummary) {
-      if (sim.correlations.length > 0) {
-        let maxCorr = sim.correlations[0];
-        for (let c of sim.correlations) {
-          if (Math.abs(c.coefficient) > Math.abs(maxCorr.coefficient)) {
-            maxCorr = c;
-          }
-        }
-        const strength = Math.abs(maxCorr.coefficient) > 0.4 ? "Fuerte" : Math.abs(maxCorr.coefficient) > 0.15 ? "Moderada" : "Débil";
-        const direction = maxCorr.coefficient > 0 ? "positiva" : "negativa";
-        correlationSummary.innerHTML = `Correlación más destacada: <strong>${translateLeg(maxCorr.legA)}</strong> con <strong>${translateLeg(maxCorr.legB)}</strong> (${strength} ${direction}, r=${maxCorr.coefficient.toFixed(2)})`;
-      } else {
-        correlationSummary.textContent = "Las selecciones correlacionadas ajustan la probabilidad final automáticamente.";
-      }
-    }
-
-    renderBetBuilderChart(legs, sim.individualProbs, sim.combinedProb);
-    
-    const nameA = TEAM_METADATA[selectedTeamA]?.name || "Local";
-    const nameB = TEAM_METADATA[selectedTeamB]?.name || "Visitante";
-    updateBetBuilderAdvancedMetrics(sim, nameA, nameB);
-
-    if (correlationsTbody) {
-      if (sim.correlations.length === 0) {
-        correlationsTbody.innerHTML = `<tr><td colspan="3" style="text-align: center; padding: 24px; color: var(--color-text-muted);">Selecciona 2 o más logros para ver correlaciones.</td></tr>`;
-      } else {
-        correlationsTbody.innerHTML = sim.correlations.map(c => {
-          let colorClass = 'color: var(--color-text-secondary);';
-          let bgClass = '';
-          if (c.coefficient > 0.7) {
-            colorClass = 'color: #047857; font-weight: bold;';
-            bgClass = 'background: rgba(4, 120, 87, 0.1);';
-          } else if (c.coefficient >= 0.3) {
-            colorClass = 'color: #34d399;';
-            bgClass = 'background: rgba(52, 211, 153, 0.05);';
-          } else if (c.coefficient < -0.3) {
-            colorClass = 'color: #f87171;';
-            bgClass = 'background: rgba(248, 113, 113, 0.05);';
-          }
-          return `
-            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03); ${bgClass}" title="El coeficiente de Pearson cuantifica la correlación lineal entre ambos logros.">
-              <td style="padding: 10px 4px; color: #ffffff;">${translateLeg(c.legA)}</td>
-              <td style="padding: 10px 4px; color: #ffffff;">${translateLeg(c.legB)}</td>
-              <td style="padding: 10px 4px; text-align: right; ${colorClass}">${c.coefficient.toFixed(4)}</td>
-            </tr>
-          `;
-        }).join('');
-      }
-    }
-
-    if (heatmapTable) {
-      const nameA = TEAM_METADATA[selectedTeamA]?.name || "Local";
-      const nameB = TEAM_METADATA[selectedTeamB]?.name || "Visitante";
-      
-      // Encontrar los 3 marcadores más probables que CUMPLEN la combinación
-      let validScores = [];
-      for (let a = 0; a < 6; a++) {
-        for (let b = 0; b < 6; b++) {
-          const p = sim.scoreHeatmap[a][b];
-          let meets = true;
-          for (let leg of legs) {
-            if (!evaluateScoreLeg(leg, a, b)) {
-              meets = false;
-              break;
-            }
-          }
-          if (meets) {
-            validScores.push({ a, b, p });
-          }
-        }
-      }
-      validScores.sort((x, y) => y.p - x.p);
-      const top3Keys = validScores.slice(0, 3).map(x => `${x.a}-${x.b}`);
-
-      let html = `<thead><tr style="color: var(--color-text-secondary); font-weight: 600;"><th style="padding: 4px;">${nameA} \\ ${nameB}</th>`;
-      for (let b = 0; b < 6; b++) {
-        html += `<th style="padding: 4px;">${b}</th>`;
-      }
-      html += `</tr></thead><tbody>`;
-
-      for (let a = 0; a < 6; a++) {
-        html += `<tr style="border-bottom: 1px solid rgba(255,255,255,0.02);"><td style="font-weight: 600; color: var(--color-text-secondary); padding: 4px;">${a}</td>`;
-        for (let b = 0; b < 6; b++) {
-          const p = sim.scoreHeatmap[a][b];
-          const pct = (p * 100).toFixed(2);
-          
-          // Evaluar cumplimiento y partialRatio de condiciones de goles
-          let metCount = 0;
-          for (let leg of legs) {
-            if (evaluateScoreLeg(leg, a, b)) metCount++;
-          }
-          const partialRatio = legs.length > 0 ? (metCount / legs.length) : 1.0;
-          const meets = metCount === legs.length;
-
-          // Colores condicionales
-          let bgColor = `rgba(239, 68, 68, ${0.05 + 0.3 * (1.0 - partialRatio)})`; // Rojo si no cumple
-          if (meets) {
-            const density = Math.min(1.0, p / 0.10);
-            bgColor = `rgba(16, 185, 129, ${0.15 + 0.7 * density})`; // Verde si cumple
-          }
-
-          const isTop3 = top3Keys.includes(`${a}-${b}`);
-          const cellBorder = isTop3 ? 'border: 2px solid #fbbf24; font-weight: bold;' : 'border: 1px solid rgba(255,255,255,0.03);';
-          const textPrefix = isTop3 ? '👑 ' : '';
-
-          html += `<td style="padding: 8px 6px; background: ${bgColor}; border-radius: 4px; ${cellBorder} transition: transform 0.15s; cursor: help;" title="Score: ${a}-${b} | Probabilidad: ${pct}% | Cumple: ${metCount}/${legs.length}">${textPrefix}${pct}%</td>`;
-        }
-        html += `</tr>`;
-      }
-      html += `</tbody>`;
-      heatmapTable.innerHTML = html;
-    }
-
-    // Calcular tasa de éxito histórica combinada
-    const calculateSuccessRate = (matchesList) => {
-      if (matchesList.length === 0) return "0.0%";
-      const met = matchesList.filter(m => m.fullyMet).length;
-      return `${((met / matchesList.length) * 100).toFixed(1)}%`;
-    };
-
-    if (h2hTbody) {
-      if (hist.directH2H.length === 0) {
-        h2hTbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 15px; color: var(--color-text-muted);">Sin enfrentamientos directos registrados.</td></tr>`;
-      } else {
-        h2hTbody.innerHTML = hist.directH2H.map(m => {
-          const metStyle = m.fullyMet ? 'background: rgba(16, 185, 129, 0.15); color: #10b981;' : 'background: rgba(239, 68, 68, 0.1); color: #ef4444;';
-          const metText = m.fullyMet ? 'CUMPLIDO' : 'FALLADO';
-          return `
-            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-              <td style="padding: 8px 4px; color: var(--color-text-secondary);">${m.date}</td>
-              <td style="padding: 8px 4px; color: #ffffff;">${m.homeName} vs ${m.awayName}</td>
-              <td style="padding: 8px 4px; text-align: center; font-weight: 600; color: #ffffff;">${m.score}</td>
-              <td style="padding: 8px 4px; text-align: center;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; ${metStyle}">${metText}</span></td>
-            </tr>
-          `;
-        }).join('');
-        // Append success rate row
-        h2hTbody.innerHTML += `
-          <tr style="background: rgba(255,255,255,0.01); font-weight: bold; border-top: 1px solid var(--panel-border);">
-            <td colspan="3" style="padding: 10px 4px; color: var(--color-text-primary);">Tasa de Éxito H2H Histórica:</td>
-            <td style="padding: 10px 4px; text-align: center; color: var(--color-primary);">${calculateSuccessRate(hist.directH2H)}</td>
-          </tr>
-        `;
-      }
-    }
-
-    if (similarTbody) {
-      if (hist.similarProfile.length === 0) {
-        similarTbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 15px; color: var(--color-text-muted);">Sin partidos con perfil similar.</td></tr>`;
-      } else {
-        similarTbody.innerHTML = hist.similarProfile.map(m => {
-          const metStyle = m.fullyMet ? 'background: rgba(16, 185, 129, 0.15); color: #10b981;' : 'background: rgba(239, 68, 68, 0.1); color: #ef4444;';
-          const metText = m.fullyMet ? 'CUMPLIDO' : 'FALLADO';
-          return `
-            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-              <td style="padding: 8px 4px; color: var(--color-text-secondary);">${m.date}</td>
-              <td style="padding: 8px 4px; color: #ffffff;">${m.homeName} vs ${m.awayName}</td>
-              <td style="padding: 8px 4px; text-align: center; font-weight: 600; color: #ffffff;">${m.score}</td>
-              <td style="padding: 8px 4px; text-align: center; color: var(--color-primary); font-weight: 600;">${m.similarity}%</td>
-              <td style="padding: 8px 4px; text-align: center;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; ${metStyle}">${metText}</span></td>
-            </tr>
-          `;
-        }).join('');
-        // Append success rate row
-        similarTbody.innerHTML += `
-          <tr style="background: rgba(255,255,255,0.01); font-weight: bold; border-top: 1px solid var(--panel-border);">
-            <td colspan="4" style="padding: 10px 4px; color: var(--color-text-primary);">Tasa de Éxito Perfil Similar:</td>
-            <td style="padding: 10px 4px; text-align: center; color: var(--color-primary);">${calculateSuccessRate(hist.similarProfile)}</td>
-          </tr>
-        `;
-      }
-    }
-
-  } catch (error) {
-    console.error("Error running bet builder simulation:", error);
-    if (combinedProbEl) combinedProbEl.textContent = 'ERROR';
-  }
-};
-
-window.translateLeg = function(legKey) {
-  if (legKey === "win_a") return "Victoria Local";
-  if (legKey === "draw") return "Empate";
-  if (legKey === "win_b") return "Victoria Visitante";
-  if (legKey === "btts_yes") return "Ambos Anotan: Sí";
-  if (legKey === "btts_no") return "Ambos Anotan: No";
-  if (legKey === "double_chance_1X") return "Doble Oportunidad: 1X";
-  if (legKey === "double_chance_12") return "Doble Oportunidad: 12";
-  if (legKey === "double_chance_X2") return "Doble Oportunidad: X2";
-  if (legKey.startsWith("over_") && legKey.endsWith("_goals")) {
-    const val = legKey.split("_")[1];
-    return `Goles: Over ${val}`;
-  }
-  if (legKey.startsWith("under_") && legKey.endsWith("_goals")) {
-    const val = legKey.split("_")[1];
-    return `Goles: Under ${val}`;
-  }
-  if (legKey === "corners_win_a") return "Más Córners Local";
-  if (legKey === "corners_draw") return "Empate Córners";
-  if (legKey === "corners_win_b") return "Más Córners Visitante";
-  if (legKey.startsWith("corners_over_")) {
-    const val = legKey.split("_")[2] + "." + legKey.split("_")[3];
-    return `Córners: Over ${val}`;
-  }
-  if (legKey.startsWith("corners_under_")) {
-    const val = legKey.split("_")[2] + "." + legKey.split("_")[3];
-    return `Córners: Under ${val}`;
-  }
-  if (legKey.startsWith("handicap_minus_")) {
-    const val = legKey.split("_")[2] + "." + legKey.split("_")[3];
-    const team = legKey.endsWith("_a") ? "Local" : "Visitante";
-    return `Handicap ${team} -${val}`;
-  }
-  if (legKey.startsWith("handicap_plus_")) {
-    const val = legKey.split("_")[2] + "." + legKey.split("_")[3];
-    const team = legKey.endsWith("_a") ? "Local" : "Visitante";
-    return `Handicap ${team} +${val}`;
-  }
-  return legKey;
-};
-
-window.renderBetBuilderChart = function(legs, individualProbs, combinedProb) {
-  const ctx = document.getElementById('bb-chart-canvas');
-  if (!ctx) return;
-
-  const textColor = document.body.classList.contains('light-theme') ? '#122a52' : '#ffffff';
-
-  const labels = legs.map(l => translateLeg(l)).concat(["COMBINADA REAL"]);
-  const dataValues = legs.map(l => (individualProbs[l] * 100).toFixed(1)).concat([(combinedProb * 100).toFixed(1)]);
-  const bgColors = legs.map(() => 'rgba(255, 255, 255, 0.15)').concat(['rgba(240, 179, 16, 0.65)']);
-  const borderColors = legs.map(() => 'rgba(255, 255, 255, 0.3)').concat(['rgba(240, 179, 16, 1)']);
-
-  if (bbChart) {
-    bbChart.data.labels = labels;
-    bbChart.data.datasets[0].data = dataValues;
-    bbChart.data.datasets[0].backgroundColor = bgColors;
-    bbChart.data.datasets[0].borderColor = borderColors;
-    bbChart.update();
-  } else {
-    bbChart = new Chart(ctx.getContext('2d'), {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Probabilidad (%)',
-          data: dataValues,
-          backgroundColor: bgColors,
-          borderColor: borderColors,
-          borderWidth: 1.5,
-          borderRadius: 4
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return `Probabilidad: ${context.parsed.y}%`;
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 100,
-            grid: { color: 'rgba(255, 255, 255, 0.05)' },
-            ticks: { color: textColor }
-          },
-          x: {
-            grid: { display: false },
-            ticks: { color: textColor }
-          }
-        }
-      }
-    });
-  }
-};
-
-window.updateBetBuilderAdvancedMetrics = function(sim, nameA, nameB) {
-  const adv = sim.advanced;
-  if (!adv) return;
-
-  // 1. Expected Points (xPTS)
-  const xptsA = adv.xptsA;
-  const xptsB = adv.xptsB;
-  const xptsElA = document.getElementById("bb-xpts-a");
-  const xptsElB = document.getElementById("bb-xpts-b");
-  const xptsBarA = document.getElementById("bb-xpts-bar-a");
-  const xptsBarB = document.getElementById("bb-xpts-bar-b");
-  
-  if (xptsElA) xptsElA.textContent = xptsA.toFixed(2);
-  if (xptsElB) xptsElB.textContent = xptsB.toFixed(2);
-  if (xptsBarA && xptsBarB) {
-    const total = xptsA + xptsB;
-    const pctA = total > 0 ? (xptsA / total) * 100 : 50;
-    xptsBarA.style.width = `${pctA}%`;
-    xptsBarB.style.width = `${100 - pctA}%`;
-  }
-
-  // 2. Clean Sheet
-  const csElA = document.getElementById("bb-cs-pct-a");
-  const csElB = document.getElementById("bb-cs-pct-b");
-  const csBarA = document.getElementById("bb-cs-bar-a");
-  const csBarB = document.getElementById("bb-cs-bar-b");
-  if (csElA) csElA.textContent = `${(adv.csA * 100).toFixed(1)}%`;
-  if (csElB) csElB.textContent = `${(adv.csB * 100).toFixed(1)}%`;
-  if (csBarA && csBarB) {
-    csBarA.style.width = `${adv.csA * 100}%`;
-    csBarB.style.width = `${adv.csB * 100}%`;
-  }
-
-  // 3. Win to Nil
-  const w2nElA = document.getElementById("bb-w2n-pct-a");
-  const w2nElB = document.getElementById("bb-w2n-pct-b");
-  const w2nBarA = document.getElementById("bb-w2n-bar-a");
-  const w2nBarB = document.getElementById("bb-w2n-bar-b");
-  if (w2nElA) w2nElA.textContent = `${(adv.w2nA * 100).toFixed(1)}%`;
-  if (w2nElB) w2nElB.textContent = `${(adv.w2nB * 100).toFixed(1)}%`;
-  if (w2nBarA && w2nBarB) {
-    w2nBarA.style.width = `${adv.w2nA * 100}%`;
-    w2nBarB.style.width = `${adv.w2nB * 100}%`;
-  }
-
-  // 4. Asian Handicap
-  const ahA1 = document.getElementById("bb-ah-a1");
-  const ahA2 = document.getElementById("bb-ah-a2");
-  const ahB1 = document.getElementById("bb-ah-b1");
-  const ahB2 = document.getElementById("bb-ah-b2");
-  if (ahA1) ahA1.textContent = `${(adv.ahMinus1_5A * 100).toFixed(1)}%`;
-  if (ahA2) ahA2.textContent = `${(adv.ahMinus1_0A * 100).toFixed(1)}%`;
-  if (ahB1) ahB1.textContent = `${(adv.ahPlus0_5B * 100).toFixed(1)}%`;
-  if (ahB2) ahB2.textContent = `${(adv.ahPlus1_5B * 100).toFixed(1)}%`;
-
-  // 5. HT/FT Matrix
-  const htft = adv.htft;
-  if (htft) {
-    const elAA = document.getElementById("bb-htft-aa");
-    const elDA = document.getElementById("bb-htft-da");
-    const elBA = document.getElementById("bb-htft-ba");
-    const elAD = document.getElementById("bb-htft-ad");
-    const elDD = document.getElementById("bb-htft-dd");
-    const elBD = document.getElementById("bb-htft-bd");
-    const elAB = document.getElementById("bb-htft-ab");
-    const elDB = document.getElementById("bb-htft-db");
-    const elBB = document.getElementById("bb-htft-bb");
-
-    if (elAA) elAA.textContent = `${(htft.AA * 100).toFixed(1)}%`;
-    if (elDA) elDA.textContent = `${(htft.DA * 100).toFixed(1)}%`;
-    if (elBA) elBA.textContent = `${(htft.BA * 100).toFixed(1)}%`;
-    if (elAD) elAD.textContent = `${(htft.AD * 100).toFixed(1)}%`;
-    if (elDD) elDD.textContent = `${(htft.DD * 100).toFixed(1)}%`;
-    if (elBD) elBD.textContent = `${(htft.BD * 100).toFixed(1)}%`;
-    if (elAB) elAB.textContent = `${(htft.AB * 100).toFixed(1)}%`;
-    if (elDB) elDB.textContent = `${(htft.DB * 100).toFixed(1)}%`;
-    if (elBB) elBB.textContent = `${(htft.BB * 100).toFixed(1)}%`;
-  }
-
-  // 6. Goal Bands
-  const band01Pct = document.getElementById("bb-band-0-1-pct");
-  const band23Pct = document.getElementById("bb-band-2-3-pct");
-  const band45Pct = document.getElementById("bb-band-4-5-pct");
-  const band6Pct = document.getElementById("bb-band-6-pct");
-  
-  const band01Bar = document.getElementById("bb-band-0-1-bar");
-  const band23Bar = document.getElementById("bb-band-2-3-bar");
-  const band45Bar = document.getElementById("bb-band-4-5-bar");
-  const band6Bar = document.getElementById("bb-band-6-bar");
-
-  if (band01Pct) band01Pct.textContent = `${(adv.band_0_1 * 100).toFixed(1)}%`;
-  if (band23Pct) band23Pct.textContent = `${(adv.band_2_3 * 100).toFixed(1)}%`;
-  if (band45Pct) band45Pct.textContent = `${(adv.band_4_5 * 100).toFixed(1)}%`;
-  if (band6Pct) band6Pct.textContent = `${(adv.band_6_plus * 100).toFixed(1)}%`;
-
-  if (band01Bar) band01Bar.style.width = `${adv.band_0_1 * 100}%`;
-  if (band23Bar) band23Bar.style.width = `${adv.band_2_3 * 100}%`;
-  if (band45Bar) band45Bar.style.width = `${adv.band_4_5 * 100}%`;
-  if (band6Bar) band6Bar.style.width = `${adv.band_6_plus * 100}%`;
-
-  // 7. Comparison Table
-  const compHeaderA = document.getElementById("bb-comp-header-a");
-  const compHeaderB = document.getElementById("bb-comp-header-b");
-  if (compHeaderA) compHeaderA.textContent = nameA;
-  if (compHeaderB) compHeaderB.textContent = nameB;
-
-  const compXgA = document.getElementById("bb-comp-xg-a");
-  const compXgB = document.getElementById("bb-comp-xg-b");
-  if (compXgA) compXgA.textContent = sim.xgA.toFixed(2);
-  if (compXgB) compXgB.textContent = sim.xgB.toFixed(2);
-
-  const compShotsA = document.getElementById("bb-comp-shots-a");
-  const compShotsB = document.getElementById("bb-comp-shots-b");
-  if (compShotsA) compShotsA.textContent = adv.shotsA.toFixed(1);
-  if (compShotsB) compShotsB.textContent = adv.shotsB.toFixed(1);
-
-  const compCornersA = document.getElementById("bb-comp-corners-a");
-  const compCornersB = document.getElementById("bb-comp-corners-b");
-  if (compCornersA) compCornersA.textContent = adv.cornersA.toFixed(1);
-  if (compCornersB) compCornersB.textContent = adv.cornersB.toFixed(1);
-
-  const compPossA = document.getElementById("bb-comp-poss-a");
-  const compPossB = document.getElementById("bb-comp-poss-b");
-  if (compPossA) compPossA.textContent = `${adv.possessionA.toFixed(1)}%`;
-  if (compPossB) compPossB.textContent = `${adv.possessionB.toFixed(1)}%`;
-
-  const compCsA = document.getElementById("bb-comp-cs-a");
-  const compCsB = document.getElementById("bb-comp-cs-b");
-  if (compCsA) compCsA.textContent = `${(adv.csA * 100).toFixed(1)}%`;
-  if (compCsB) compCsB.textContent = `${(adv.csB * 100).toFixed(1)}%`;
-
-  // 8. Confidence Interval
-  const confInterval = (sim.combinedProb > 0) ? (adv.confWinA * 100).toFixed(1) : "0.0";
-  const probCircle = document.getElementById("bb-combined-prob-circle");
-  if (probCircle) {
-    const origText = (sim.combinedProb * 100).toFixed(1) + "%";
-    probCircle.innerHTML = `${origText}<span style="display: block; font-size: 0.85rem; font-weight: normal; color: var(--color-text-muted); margin-top: 4px;">±${confInterval}% (Confianza 95%)</span>`;
-  }
-
-  // 9. Radar Chart
-  renderBetBuilderRadar(adv, nameA, nameB);
-
-  // 10. Timing Chart
-  renderBetBuilderTiming(adv.timingDist);
-};
-
-window.renderBetBuilderRadar = function(adv, nameA, nameB) {
-  const ctx = document.getElementById('bb-radar-canvas');
-  if (!ctx) return;
-
-  const textColor = document.body.classList.contains('light-theme') ? '#122a52' : '#ffffff';
-  
-  const attackA = Math.min(100, Math.max(0, (adv.xgA / 3.0) * 100));
-  const attackB = Math.min(100, Math.max(0, (adv.xgB / 3.0) * 100));
-  
-  const defenseA = adv.csA * 100;
-  const defenseB = adv.csB * 100;
-
-  const formA = adv.formA * 10;
-  const formB = adv.formB * 10;
-
-  const cornersA = Math.min(100, Math.max(0, (adv.cornersA / 10.0) * 100));
-  const cornersB = Math.min(100, Math.max(0, (adv.cornersB / 10.0) * 100));
-
-  const shotsA = Math.min(100, Math.max(0, (adv.shotsA / 20.0) * 100));
-  const shotsB = Math.min(100, Math.max(0, (adv.shotsB / 20.0) * 100));
-
-  const possA = adv.possessionA;
-  const possB = adv.possessionB;
-
-  const dataA = [attackA, defenseA, formA, cornersA, shotsA, possA];
-  const dataB = [attackB, defenseB, formB, cornersB, shotsB, possB];
-
-  if (bbRadarChart) {
-    bbRadarChart.data.datasets[0].label = nameA;
-    bbRadarChart.data.datasets[0].data = dataA;
-    bbRadarChart.data.datasets[0].rawValues = [adv.xgA, adv.csA * 100, adv.formA, adv.cornersA, adv.shotsA, adv.possessionA];
-    
-    bbRadarChart.data.datasets[1].label = nameB;
-    bbRadarChart.data.datasets[1].data = dataB;
-    bbRadarChart.data.datasets[1].rawValues = [adv.xgB, adv.csB * 100, adv.formB, adv.cornersB, adv.shotsB, adv.possessionB];
-    
-    bbRadarChart.options.scales.r.pointLabels.color = textColor;
-    bbRadarChart.options.plugins.legend.labels.color = textColor;
-    bbRadarChart.update();
-  } else {
-    bbRadarChart = new Chart(ctx.getContext('2d'), {
-      type: 'radar',
-      data: {
-        labels: ['Ataque (xG)', 'Defensa (Clean Sheet)', 'Forma Reciente', 'Córners Proyectados', 'Tiros Esperados', 'Posesión Estimada'],
-        datasets: [
-          {
-            label: nameA,
-            data: dataA,
-            rawValues: [adv.xgA, adv.csA * 100, adv.formA, adv.cornersA, adv.shotsA, adv.possessionA],
-            backgroundColor: 'rgba(59, 130, 246, 0.15)',
-            borderColor: 'rgba(59, 130, 246, 0.95)',
-            pointBackgroundColor: '#3b82f6',
-            pointBorderColor: '#0f172a',
-            pointBorderWidth: 2,
-            pointRadius: 4,
-            pointHoverRadius: 6,
-            borderWidth: 2
-          },
-          {
-            label: nameB,
-            data: dataB,
-            rawValues: [adv.xgB, adv.csB * 100, adv.formB, adv.cornersB, adv.shotsB, adv.possessionB],
-            backgroundColor: 'rgba(16, 185, 129, 0.15)',
-            borderColor: 'rgba(16, 185, 129, 0.95)',
-            pointBackgroundColor: '#10b981',
-            pointBorderColor: '#0f172a',
-            pointBorderWidth: 2,
-            pointRadius: 4,
-            pointHoverRadius: 6,
-            borderWidth: 2
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'top',
-            labels: {
-              color: textColor,
-              boxWidth: 10,
-              boxHeight: 10,
-              usePointStyle: true,
-              pointStyle: 'circle',
-              font: {
-                family: "'Inter', sans-serif",
-                size: 11,
-                weight: '600'
-              }
-            }
-          },
-          tooltip: {
-            backgroundColor: '#1e293b',
-            titleColor: '#f8fafc',
-            bodyColor: '#cbd5e1',
-            borderColor: '#475569',
-            borderWidth: 1,
-            padding: 10,
-            cornerRadius: 8,
-            titleFont: {
-              family: "'Inter', sans-serif",
-              size: 12,
-              weight: 'bold'
-            },
-            bodyFont: {
-              family: "'Inter', sans-serif",
-              size: 11
-            },
-            callbacks: {
-              label: function(context) {
-                const dataset = context.dataset;
-                const index = context.dataIndex;
-                const raw = dataset.rawValues[index];
-                
-                if (index === 0) return `${dataset.label} - Proyección xG: ${raw.toFixed(2)}`;
-                if (index === 1) return `${dataset.label} - Arco en Cero (CS): ${raw.toFixed(1)}%`;
-                if (index === 2) return `${dataset.label} - Forma: ${raw.toFixed(1)}/10`;
-                if (index === 3) return `${dataset.label} - Córners Proyectados: ${raw.toFixed(1)}`;
-                if (index === 4) return `${dataset.label} - Tiros Proyectados: ${raw.toFixed(1)}`;
-                if (index === 5) return `${dataset.label} - Posesión: ${raw.toFixed(1)}%`;
-                return `${dataset.label}: ${context.raw.toFixed(1)}`;
-              }
-            }
-          }
-        },
-        scales: {
-          r: {
-            grid: {
-              color: 'rgba(71, 85, 105, 0.35)',
-              circular: true
-            },
-            angleLines: {
-              color: 'rgba(71, 85, 105, 0.4)'
-            },
-            pointLabels: {
-              color: textColor,
-              font: {
-                family: "'Inter', sans-serif",
-                size: 10,
-                weight: '500'
-              }
-            },
-            ticks: {
-              display: false,
-              stepSize: 20
-            },
-            suggestedMin: 0,
-            suggestedMax: 100
-          }
-        }
-      }
-    });
-  }
-};
-
-window.renderBetBuilderTiming = function(timingDist) {
-  const ctx = document.getElementById('bb-timing-canvas');
-  if (!ctx) return;
-
-  const textColor = document.body.classList.contains('light-theme') ? '#122a52' : '#ffffff';
-  const labels = ['0-15 min', '16-30 min', '31-45 min', '46-60 min', '61-75 min', '76-90 min'];
-
-  if (bbTimingChart) {
-    bbTimingChart.data.datasets[0].data = timingDist;
-    bbTimingChart.update();
-  } else {
-    bbTimingChart = new Chart(ctx.getContext('2d'), {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Distribución Temporal Goles (%)',
-          data: timingDist,
-          backgroundColor: 'rgba(245, 158, 11, 0.15)',
-          borderColor: 'rgba(245, 158, 11, 1)',
-          pointBackgroundColor: 'rgba(245, 158, 11, 1)',
-          borderWidth: 2,
-          fill: true,
-          tension: 0.4
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false }
-        },
-        scales: {
-          y: {
-            grid: { color: 'rgba(255, 255, 255, 0.05)' },
-            ticks: { color: textColor, callback: v => `${v}%` }
-          },
-          x: {
-            grid: { display: false },
-            ticks: { color: textColor }
-          }
-        }
-      }
-    });
-  }
-};
-
-window.saveBetBuilderFavorite = function() {
-  const checkboxes = document.querySelectorAll('input[name="bb-leg"]:checked');
-  const legs = Array.from(checkboxes).map(cb => cb.value);
-  if (legs.length === 0) {
-    alert("Selecciona al menos un logro para guardar.");
-    return;
-  }
-
-  const dialog = document.getElementById('bb-save-dialog');
-  const input = document.getElementById('bb-save-name-input');
-  const confirmBtn = document.getElementById('bb-confirm-save-btn');
-  
-  if (!dialog || !input || !confirmBtn) return;
-  
-  // Limpiar valor del input
-  input.value = `Combo ${TEAM_METADATA[selectedTeamA]?.name || selectedTeamA}`;
-  dialog.showModal();
-  
-  confirmBtn.onclick = function() {
-    const customName = input.value.trim() || `Combo JLY`;
-    const nameA = TEAM_METADATA[selectedTeamA]?.name || selectedTeamA;
-    const nameB = TEAM_METADATA[selectedTeamB]?.name || selectedTeamB;
-
-    const newFav = {
-      id: Date.now(),
-      name: customName,
-      teamA: selectedTeamA,
-      teamB: selectedTeamB,
-      teamAName: nameA,
-      teamBName: nameB,
-      legs: legs,
-      createdAt: new Date().toISOString()
-    };
-
-    bbFavorites.push(newFav);
-    localStorage.setItem('bb_favorites', JSON.stringify(bbFavorites));
-    renderBetBuilderFavoritesList();
-    dialog.close();
-  };
-};
-
-window.loadBetBuilderFavorites = function() {
-  try {
-    const raw = localStorage.getItem('bb_favorites');
-    bbFavorites = raw ? JSON.parse(raw) : [];
-  } catch (e) {
-    bbFavorites = [];
-  }
-  renderBetBuilderFavoritesList();
-};
-
-window.renderBetBuilderFavoritesList = function() {
-  const container = document.getElementById('bb-favorites-container');
-  if (!container) return;
-
-  if (bbFavorites.length === 0) {
-    container.innerHTML = `<div style="text-align: center; color: var(--color-text-muted); font-size: 0.8rem; padding: 10px;">No hay combinaciones guardadas.</div>`;
-    return;
-  }
-
-  container.innerHTML = bbFavorites.map(fav => {
-    const legBadges = fav.legs.map(l => `<span style="display: inline-block; font-size: 0.68rem; background: rgba(255,255,255,0.05); color: var(--color-text-secondary); padding: 2px 6px; border-radius: 4px;">${translateLeg(l)}</span>`).join(' ');
-    return `
-      <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border-inner); padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: start; gap: 8px; transition: background 0.2s;">
-        <div style="cursor: pointer; flex: 1;" onclick="applyBetBuilderFavorite(${fav.id})">
-          <div style="font-size: 0.85rem; font-weight: bold; color: var(--color-primary); margin-bottom: 4px;">
-            ${fav.name}
-          </div>
-          <div style="font-size: 0.75rem; color: #a1a1aa; margin-bottom: 6px;">
-            ${TEAM_METADATA[fav.teamA]?.flag || ''} ${fav.teamAName} vs ${fav.teamBName} ${TEAM_METADATA[fav.teamB]?.flag || ''}
-          </div>
-          <div style="display: flex; flex-wrap: wrap; gap: 4px;">
-            ${legBadges}
-          </div>
-        </div>
-        <button style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 0.85rem; padding: 0 4px;" onclick="deleteBetBuilderFavorite(${fav.id}, event)" title="Eliminar combinación">
-          ❌
-        </button>
-      </div>
-    `;
-  }).join('');
-};
-
-window.applyBetBuilderFavorite = function(favId) {
-  const fav = bbFavorites.find(f => f.id === favId);
-  if (!fav) return;
-
-  selectedTeamA = fav.teamA;
-  selectedTeamB = fav.teamB;
-  
-  const selectElA = document.getElementById("select-team-a");
-  const selectElB = document.getElementById("select-team-b");
-  if (selectElA) selectElA.value = fav.teamA;
-  if (selectElB) selectElB.value = fav.teamB;
-  
-  try {
-    if (selectElA && selectElA.tomselect) selectElA.tomselect.setValue(fav.teamA);
-    if (selectElB && selectElB.tomselect) selectElB.tomselect.setValue(fav.teamB);
-  } catch (e) {}
-
-  if (TEAM_METADATA[selectedTeamA]) rankSliderA.value = TEAM_METADATA[selectedTeamA].rank;
-  if (TEAM_METADATA[selectedTeamB]) rankSliderB.value = TEAM_METADATA[selectedTeamB].rank;
-  
-  const fifaDisplayA = document.getElementById("fifa-display-a");
-  const fifaDisplayB = document.getElementById("fifa-display-b");
-  if (fifaDisplayA) fifaDisplayA.textContent = `FIFA #${rankSliderA.value}`;
-  if (fifaDisplayB) fifaDisplayB.textContent = `FIFA #${rankSliderB.value}`;
-
-  updateMatchCard();
-
-  document.querySelectorAll('input[name="bb-leg"]').forEach(cb => {
-    cb.checked = fav.legs.includes(cb.value);
-  });
-
-  runBetBuilderSimulation();
-};
-
-window.deleteBetBuilderFavorite = function(favId, event) {
-  event.stopPropagation();
-  bbFavorites = bbFavorites.filter(f => f.id !== favId);
-  localStorage.setItem('bb_favorites', JSON.stringify(bbFavorites));
-  renderBetBuilderFavoritesList();
-};
-
-// ==========================================================================
-// FASE 2: FUNCIONALIDADES PREMIUM PARA MONETIZACIÓN
-// ==========================================================================
-
-// TAREA 2.1: EXPORTAR ANÁLISIS A PDF
-window.exportBetBuilderPDF = function() {
-  const nameA = TEAM_METADATA[selectedTeamA]?.name || "Local";
-  const nameB = TEAM_METADATA[selectedTeamB]?.name || "Visitante";
-  const checkboxes = document.querySelectorAll('input[name="bb-leg"]:checked');
-  const legs = Array.from(checkboxes).map(cb => translateLeg(cb.value));
-  
-  if (legs.length === 0) {
-    alert("Por favor, selecciona logros para generar un reporte.");
-    return;
-  }
-  
-  const combPct = (lastCombinedProb * 100).toFixed(1);
-  const fairOdds = lastCombinedProb > 0 ? (1.0 / lastCombinedProb).toFixed(2) : "999.00";
-  const dateStr = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-  
-  // Encontrar marcadores más probables que cumplen la combinada
-  let validScores = [];
-  const heatmapTable = document.getElementById('bb-heatmap-table');
-  if (heatmapTable) {
-    for (let a = 0; a < 6; a++) {
-      for (let b = 0; b < 6; b++) {
-        const cell = heatmapTable.querySelector(`tbody tr:nth-child(${a + 1}) td:nth-child(${b + 2})`);
-        if (cell) {
-          const title = cell.getAttribute('title') || '';
-          const meets = cell.style.background.includes("rgba(16, 185, 129");
-          if (meets && title.includes("Probabilidad: ")) {
-            const pStr = title.split("Probabilidad: ")[1].split("%")[0];
-            const p = parseFloat(pStr) / 100;
-            validScores.push({ score: `${a}-${b}`, p });
-          }
-        }
-      }
-    }
-  }
-  validScores.sort((x, y) => y.p - x.p);
-  const topScoresHtml = validScores.slice(0, 5).map((s, idx) => `
-    <li style="font-size: 0.9rem; margin-bottom: 6px; color: #ffffff;">
-      <strong>#${idx + 1} Marcador ${s.score}</strong> — Probabilidad: ${(s.p * 100).toFixed(2)}%
-    </li>
-  `).join('');
-
-  const element = document.createElement('div');
-  element.style.padding = '35px';
-  element.style.background = '#0f172a';
-  element.style.color = '#ffffff';
-  element.style.fontFamily = "'Inter', sans-serif";
-  element.style.borderRadius = '12px';
-  element.style.outline = 'none';
-  element.style.border = 'none';
-  element.style.boxShadow = 'none';
-  element.style.userSelect = 'none';
-  element.style.webkitUserSelect = 'none';
-  element.style.pointerEvents = 'none';
-  // Necesario para que html2canvas pueda renderizar el elemento
-  element.style.position = 'fixed';
-  element.style.top = '-9999px';
-  element.style.left = '-9999px';
-  element.style.width = '794px'; // A4 ancho aprox a 96dpi
-  element.style.zIndex = '-9999';
-  document.body.appendChild(element);
-  
-  element.innerHTML = `
-    <div style="border-bottom: 2px solid #f0b310; padding-bottom: 20px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
-      <div>
-        <h1 style="color: #f0b310; margin: 0; font-family: 'Outfit', sans-serif; font-size: 1.8rem;">JLYPREDICTION</h1>
-        <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Reporte de Análisis Estadístico Pro</span>
-      </div>
-      <div style="text-align: right; font-size: 0.75rem; color: #94a3b8;">
-        Fecha: ${dateStr}
-      </div>
-    </div>
-    
-    <h2 style="font-size: 1.4rem; font-family: 'Outfit', sans-serif; margin-bottom: 10px; color: #ffffff;">
-      Partido: ${nameA} vs ${nameB}
-    </h2>
-    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0; margin-bottom: 20px;">
-      Simulación Monte Carlo realizada sobre 100,000 iteraciones en base al modelo bivariado Dixon-Coles.
-    </p>
-    
-    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 18px; border-radius: 8px; margin-bottom: 25px;">
-      <h3 style="margin-top: 0; font-size: 1rem; color: #f0b310; text-transform: uppercase;">Logros Combinados (Bet Builder)</h3>
-      <ul style="padding-left: 20px; font-size: 0.9rem; line-height: 1.5; color: #cbd5e1;">
-        ${legs.map(l => `<li>${l}</li>`).join('')}
-      </ul>
-    </div>
-    
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
-      <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.15); padding: 15px; border-radius: 8px; text-align: center;">
-        <span style="font-size: 0.8rem; color: #a7f3d0; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 5px;">Probabilidad Real</span>
-        <div style="font-size: 2.2rem; font-weight: 800; color: #10b981;">${combPct}%</div>
-      </div>
-      <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; text-align: center;">
-        <span style="font-size: 0.8rem; color: #cbd5e1; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 5px;">Cuota Justa</span>
-        <div style="font-size: 2.2rem; font-weight: 800; color: #ffffff;">${fairOdds}</div>
-      </div>
-    </div>
-    
-    <div style="margin-bottom: 30px;">
-      <h3 style="border-left: 3px solid #f0b310; padding-left: 10px; font-size: 1.05rem; margin-bottom: 15px;">👑 Marcadores Más Probables que Cumplen</h3>
-      <ul style="padding-left: 0; list-style: none;">
-        ${topScoresHtml || '<li style="color: #94a3b8; font-size: 0.85rem;">Ningún marcador compatible entre las opciones simuladas.</li>'}
-      </ul>
-    </div>
-    
-    <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; font-size: 0.75rem; color: #64748b; text-align: center; margin-top: 40px;">
-      © JLYPrediction Engine. Todos los derechos reservados. Las apuestas deportivas conllevan riesgos de pérdida.
-    </div>
-  `;
-  
-  const options = {
-    margin: 10,
-    filename: `JLYPrediction_${nameA.replace(/\s+/g, '_')}_vs_${nameB.replace(/\s+/g, '_')}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      backgroundColor: '#0f172a',
-      useCORS: true,
-      logging: false,
-      windowWidth: 794
-    },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  };
-
-  html2pdf().from(element).set(options).save().then(() => {
-    document.body.removeChild(element);
-  }).catch(() => {
-    if (document.body.contains(element)) document.body.removeChild(element);
-  });
-};
-
-// TAREA 2.2: COMPARADOR DE CUOTAS
-window.updateOddsComparison = function() {
-  const tbody = document.getElementById('odds-compare-tbody');
-  if (!tbody || lastCombinedProb <= 0) return;
-
-  const houses = [
-    { name: "Bet365", inputId: "odds-bet365" },
-    { name: "1xBet", inputId: "odds-1xbet" },
-    { name: "Pinnacle", inputId: "odds-pinnacle" },
-    { name: "Betfair", inputId: "odds-betfair" }
-  ];
-
-  let results = [];
-  houses.forEach(h => {
-    const el = document.getElementById(h.inputId);
-    const odds = el ? parseFloat(el.value) : NaN;
-    if (!isNaN(odds) && odds > 1.0) {
-      const edge = (lastCombinedProb * odds) - 1.0;
-      const payout = (100 * odds - 100);
-      results.push({ name: h.name, odds, edge, payout });
-    }
-  });
-
-  if (results.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 15px; color: var(--color-text-muted);">Ingresa una cuota arriba para comparar.</td></tr>`;
-    return;
-  }
-
-  results.sort((x, y) => y.edge - x.edge);
-  const bestName = results[0].name;
-
-  tbody.innerHTML = results.map(r => {
-    const isBest = r.name === bestName;
-    const edgeColor = r.edge > 0.05 ? '#10b981' : r.edge < 0 ? '#ef4444' : 'var(--color-text-secondary)';
-    const rowBorder = isBest ? 'border: 2px solid #fbbf24; background: rgba(251,191,36,0.03); font-weight: bold;' : 'border-bottom: 1px solid rgba(255,255,255,0.02);';
-    const bestBadge = isBest ? ' <span style="color: #fbbf24; font-size: 0.7rem; font-weight: bold; border: 1px solid #fbbf24; padding: 1px 4px; border-radius: 4px; margin-left: 5px;">🔥 MEJOR</span>' : '';
-    return `
-      <tr style="${rowBorder}">
-        <td style="padding: 10px 4px; color: #ffffff;">${r.name}${bestBadge}</td>
-        <td style="padding: 10px 4px; text-align: center; color: #ffffff;">${r.odds.toFixed(2)}</td>
-        <td style="padding: 10px 4px; text-align: center; color: ${edgeColor};">${(r.edge * 100).toFixed(1)}%</td>
-        <td style="padding: 10px 4px; text-align: right; color: #ffffff;">$${r.payout.toFixed(2)}</td>
-      </tr>
-    `;
-  }).join('');
-};
-
-// TAREA 2.3: MODO INVERSO (HEDGING)
-let inverseModeActive = false;
-
-window.toggleInverseMode = function() {
-  inverseModeActive = !inverseModeActive;
-  const btn = document.getElementById('btn-toggle-inverse');
-  const panel = document.getElementById('inverse-metrics-panel');
-  
-  if (!btn || !panel) return;
-  
-  if (inverseModeActive) {
-    btn.textContent = "Desactivar Inverso";
-    btn.style.background = "rgba(239, 68, 68, 0.15)";
-    btn.style.borderColor = "#ef4444";
-    btn.style.color = "#ef4444";
-    panel.style.display = "flex";
-    
-    const invProb = 1.0 - lastCombinedProb;
-    const invOdds = invProb > 0 ? (1.0 / invProb) : 999.00;
-    
-    document.getElementById('bb-inverse-prob').textContent = `${(invProb * 100).toFixed(1)}%`;
-    document.getElementById('bb-inverse-odds').textContent = `${invOdds.toFixed(2)}`;
-  } else {
-    btn.textContent = "Activar Inverso";
-    btn.style.background = "rgba(240,179,16,0.15)";
-    btn.style.borderColor = "var(--color-primary)";
-    btn.style.color = "var(--color-primary)";
-    panel.style.display = "none";
-  }
-};
-
-// TAREA 2.4: ALERTAS DE VALUE BETS
-window.toggleAlertsState = function() {
-  const enabled = document.getElementById('alert-enable').checked;
-  const config = document.getElementById('alerts-config-fields');
-  if (config) config.style.display = enabled ? 'flex' : 'none';
-};
-
-async function dispatchValueBetEmail(toEmail, details) {
-  const payload = {
-    service_id: "service_default",
-    template_id: "template_value_bet",
-    user_id: "user_default_key",
-    template_params: {
-      to_email: toEmail,
-      match_name: details.matchName,
-      legs: details.legs.join(", "),
-      prob: details.prob,
-      odds: details.odds,
-      edge: details.edge
-    }
-  };
-  
-  try {
-    const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    if (res.ok) {
-      console.log("EmailJS: Alerta enviada con éxito.");
-    }
-  } catch (e) {
-    console.error("Error al enviar alerta por email:", e);
-  }
-}
-
-function checkAndTriggerValueBetAlert(prob, fairOdds) {
-  const alertsEnabled = document.getElementById('alert-enable')?.checked;
-  if (!alertsEnabled) return;
-  
-  const minEdge = parseFloat(document.getElementById('alert-min-edge').value);
-  const email = document.getElementById('alert-email').value.trim();
-  const inputOdds = parseFloat(document.getElementById('bb-market-odds').value);
-  
-  if (isNaN(inputOdds) || inputOdds <= 1.0) return;
-  
-  const edge = (prob * inputOdds) - 1.0;
-  if (edge >= minEdge) {
-    const nameA = TEAM_METADATA[selectedTeamA]?.name || selectedTeamA;
-    const nameB = TEAM_METADATA[selectedTeamB]?.name || selectedTeamB;
-    const checkboxes = document.querySelectorAll('input[name="bb-leg"]:checked');
-    const legs = Array.from(checkboxes).map(cb => translateLeg(cb.value));
-
-    const alertDetails = {
-      matchName: `${nameA} vs ${nameB}`,
-      legs: legs,
-      prob: `${(prob * 100).toFixed(1)}%`,
-      odds: inputOdds.toFixed(2),
-      edge: `${(edge * 100).toFixed(1)}%`
-    };
-
-    const historyLog = document.getElementById('alert-history-log');
-    if (historyLog) {
-      historyLog.innerHTML = `⚡ <strong>Value Bet:</strong> ${alertDetails.matchName} a cuota <strong>${alertDetails.odds}</strong> (Edge: <span style="color: #10b981; font-weight: bold;">+${alertDetails.edge}</span>)`;
-    }
-
-    const savedLogs = JSON.parse(localStorage.getItem('bb_alerts_history') || '[]');
-    savedLogs.push({ ...alertDetails, timestamp: new Date().toISOString() });
-    localStorage.setItem('bb_alerts_history', JSON.stringify(savedLogs));
-
-    if (email) {
-      dispatchValueBetEmail(email, alertDetails);
-    }
-  }
-}
-
-const originalRunSim = window.runBetBuilderSimulation;
-window.runBetBuilderSimulation = async function() {
-  await originalRunSim();
-  
-  if (inverseModeActive) {
-    const invProb = 1.0 - lastCombinedProb;
-    const invOdds = invProb > 0 ? (1.0 / invProb) : 999.00;
-    const invProbEl = document.getElementById('bb-inverse-prob');
-    const invOddsEl = document.getElementById('bb-inverse-odds');
-    if (invProbEl) invProbEl.textContent = `${(invProb * 100).toFixed(1)}%`;
-    if (invOddsEl) invOddsEl.textContent = `${invOdds.toFixed(2)}`;
-  }
-  
-  checkAndTriggerValueBetAlert(lastCombinedProb, lastCombinedProb > 0 ? 1 / lastCombinedProb : 999);
-};
-
-// Control de navegación de pestañas en móvil/tablet para el Bet Builder
-window.switchBetBuilderTab = function(activeTabName) {
-  const buttons = {
-    'markets': document.getElementById('bb-nav-btn-markets'),
-    'summary': document.getElementById('bb-nav-btn-summary')
-  };
-  
-  for (let key in buttons) {
-    if (buttons[key]) buttons[key].classList.remove('active');
-  }
-  if (buttons[activeTabName]) buttons[activeTabName].classList.add('active');
-
-  const allTabGroups = [
-    { cls: 'bb-card-markets', active: activeTabName === 'markets' },
-    { cls: 'bb-card-summary',  active: activeTabName === 'summary' }
-  ];
-
-  allTabGroups.forEach(({ cls, active }) => {
-    document.querySelectorAll('.' + cls).forEach(c => {
-      if (active) {
-        c.classList.remove('bb-tab-hidden');
-      } else {
-        c.classList.add('bb-tab-hidden');
-      }
-    });
-  });
-};
-
-
-/* ==========================================================================
-   TEAM DETAILS MODAL
-   ========================================================================== */
-window.viewTeamDetails = function(teamSlug) {
-  const slug = teamSlug || selectedTeamA;
-  const meta = TEAM_METADATA[slug];
-  
-  if (!meta) {
-    console.error('Team not found:', slug);
-    return;
-  }
-
-  // Update modal header
-  document.getElementById('team-details-flag').textContent = meta.flag;
-  document.getElementById('team-details-name').textContent = meta.name;
-
-  // Update basic stats
-  document.getElementById('team-details-rank').textContent = '#' + meta.rank;
-  
-  // Get Elo and strength data from ratingsData
-  const teamData = ratingsData[slug] || {};
-  const elo = teamData.elo || Math.round(1500 - (meta.rank - 1) * 5);
-  const attack = teamData.attack || 1.0;
-  const defense = teamData.defense || 1.0;
-  
-  document.getElementById('team-details-elo').textContent = Math.round(elo);
-  document.getElementById('team-details-attack').textContent = attack.toFixed(2);
-  document.getElementById('team-details-defense').textContent = defense.toFixed(2);
-
-  // Load recent form
-  loadRecentFormForModal(slug);
-
-  // Load xG data
-  loadXGDataForModal(slug);
-
-  // Load additional stats
-  loadAdditionalStatsForModal(slug);
-
-  // Show modal
-  const dialog = document.getElementById('team-details-dialog');
-  if (dialog) {
-    dialog.showModal();
-  }
-};
-
-async function loadRecentFormForModal(slug) {
-  const formContainer = document.getElementById('team-details-form');
-  if (!formContainer) return;
-
-  try {
-    const res = await fetch(`/api/team/${slug}/form`);
-    if (!res.ok) throw new Error('Form data not available');
+    if (!res.ok) throw new Error("Simulation failed");
     const data = await res.json();
     
-    if (data.form && data.form.length > 0) {
-      formContainer.innerHTML = data.form.map(result => {
-        const className = result === 'W' ? 'bb-form-badge win' : 
-                         result === 'D' ? 'bb-form-badge draw' : 'bb-form-badge loss';
-        return `<span class="${className}">${result}</span>`;
-      }).join('');
-    } else {
-      formContainer.innerHTML = '<span style="color: var(--color-text-secondary); font-size: 0.9rem;">No recent matches</span>';
+    const prob = (data.simulation.combinedProb * 100).toFixed(1);
+    if (probCircle) probCircle.textContent = `${prob}%`;
+    
+    const fairOdds = 1 / data.simulation.combinedProb;
+    if (fairOddsEl) fairOddsEl.textContent = isFinite(fairOdds) ? fairOdds.toFixed(2) : '99.00';
+    
+    window.updateBetBuilderEdge();
+    window.updateOddsComparison();
+    populateValidationTables(data.historicalMatches, checkedLegs);
+  } catch (e) {
+    console.error("Bet Builder simulation error:", e);
+    if (probCircle) probCircle.textContent = 'Error';
+  }
+};
+
+// ── Update Bet Builder Labels ──
+window.updateBetBuilderLabels = function() {
+  const metaA = TEAM_METADATA[selectedTeamA] || { name: "Local" };
+  const metaB = TEAM_METADATA[selectedTeamB] || { name: "Visitante" };
+  
+  document.querySelectorAll('.bb-lbl-a').forEach(el => el.textContent = `Victoria ${metaA.name}`);
+  document.querySelectorAll('.bb-lbl-b').forEach(el => el.textContent = `Victoria ${metaB.name}`);
+  
+  const cbCornersA = document.querySelector('input[value="corners_win_a"]');
+  if (cbCornersA && cbCornersA.nextSibling) {
+    cbCornersA.nextSibling.textContent = ` Más Córners ${metaA.name}`;
+  }
+  const cbCornersB = document.querySelector('input[value="corners_win_b"]');
+  if (cbCornersB && cbCornersB.nextSibling) {
+    cbCornersB.nextSibling.textContent = ` Más Córners ${metaB.name}`;
+  }
+  
+  const cbHcA1 = document.querySelector('input[value="handicap_minus_1_5_a"]');
+  if (cbHcA1 && cbHcA1.nextSibling) cbHcA1.nextSibling.textContent = ` ${metaA.name} Handicap -1.5`;
+  const cbHcA2 = document.querySelector('input[value="handicap_plus_1_5_a"]');
+  if (cbHcA2 && cbHcA2.nextSibling) cbHcA2.nextSibling.textContent = ` ${metaA.name} Handicap +1.5`;
+  const cbHcB1 = document.querySelector('input[value="handicap_minus_1_5_b"]');
+  if (cbHcB1 && cbHcB1.nextSibling) cbHcB1.nextSibling.textContent = ` ${metaB.name} Handicap -1.5`;
+  const cbHcB2 = document.querySelector('input[value="handicap_plus_1_5_b"]');
+  if (cbHcB2 && cbHcB2.nextSibling) cbHcB2.nextSibling.textContent = ` ${metaB.name} Handicap +1.5`;
+};
+
+// Init donut + sync range sliders with number inputs
+(function initWeightsUI() {
+  renderWeightDonut();
+  [['fifa','input-weight-fifa','slider-weight-fifa'],['h2h','input-weight-h2h','slider-weight-h2h'],['decay','input-decay','slider-decay']].forEach(([,inputId,sliderId]) => {
+    const input = document.getElementById(inputId);
+    const slider = document.getElementById(sliderId);
+    if (input && slider) {
+      input.addEventListener('input', () => { slider.value = input.value; renderWeightDonut(); });
+      slider.addEventListener('input', () => { input.value = slider.value; renderWeightDonut(); });
     }
-  } catch (e) {
-    formContainer.innerHTML = '<span style="color: var(--color-text-secondary); font-size: 0.9rem;">Form data not available</span>';
-  }
-}
+  });
+})();
 
-async function loadXGDataForModal(slug) {
-  const xgForEl = document.getElementById('team-details-xg-for');
-  const xgAgainstEl = document.getElementById('team-details-xg-against');
-  
-  try {
-    const res = await fetch('/data/xg_by_team.json');
-    if (!res.ok) throw new Error('xG data not available');
-    const data = await res.json();
-    
-    const teamXG = data[slug] || {};
-    xgForEl.textContent = teamXG.xg_for ? teamXG.xg_for.toFixed(2) : '-';
-    xgAgainstEl.textContent = teamXG.xg_against ? teamXG.xg_against.toFixed(2) : '-';
-  } catch (e) {
-    xgForEl.textContent = '-';
-    xgAgainstEl.textContent = '-';
+// Wire up BB checkbox listener for leg count and trigger simulation
+document.addEventListener('change', function bbCheckChange(e) {
+  if (e.target && e.target.matches('input[name="bb-leg"]')) {
+    updateBBLegsCount();
+    window.runBetBuilderSimulation();
   }
-}
-
-async function loadAdditionalStatsForModal(slug) {
-  const matchesEl = document.getElementById('team-details-matches');
-  const winrateEl = document.getElementById('team-details-winrate');
-  const avgScoredEl = document.getElementById('team-details-avg-scored');
-  const avgConcededEl = document.getElementById('team-details-avg-conceded');
-  
-  try {
-    const res = await fetch(`/api/team/${slug}/stats`);
-    if (!res.ok) throw new Error('Stats not available');
-    const data = await res.json();
-    
-    matchesEl.textContent = data.matches_played || '-';
-    winrateEl.textContent = data.win_rate ? (data.win_rate * 100).toFixed(1) + '%' : '-';
-    avgScoredEl.textContent = data.avg_goals_scored ? data.avg_goals_scored.toFixed(2) : '-';
-    avgConcededEl.textContent = data.avg_goals_conceded ? data.avg_goals_conceded.toFixed(2) : '-';
-  } catch (e) {
-    matchesEl.textContent = '-';
-    winrateEl.textContent = '-';
-    avgScoredEl.textContent = '-';
-    avgConcededEl.textContent = '-';
-  }
-}
+});

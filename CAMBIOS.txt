@@ -1,0 +1,94 @@
+RESUMEN DE CAMBIOS — JLY Predictor
+=====================================
+
+Archivos modificados: app.js, index.css
+
+═══════════════════════════════════════════
+app.js
+═══════════════════════════════════════════
+
+1. loadAdvancedH2HData() + window.switchH2HSubTab
+   - Centro H2H avanzado con stats, goleadores, forma, insights, gráficos
+   - Endpoint: /api/history/advanced/{teamA}/{teamB}
+
+2. window.compareTeams
+   - Modal "Comparar Equipos" (reemplazó botón "View Team Details")
+   - Tabla lado a lado: ranking, forma, H2H, ventajas clave, rendimiento, insights
+
+3. window.toggleBBAccordion(btn)
+   - Expandir/colapsar secciones de mercado en bet builder
+
+4. window.clearAllBBLegs()
+   - Desmarcar todos los checkbox input[name="bb-leg"]
+
+5. window.filterBBMarkets()
+   - Filtrar mercados por texto de búsqueda
+
+6. window.switchBBSegment(name)
+   - Cambiar entre segmentos de resultados (summary/goals/markets/validation)
+   - Scoped a #bb-col-results para no afectar otros elementos
+
+7. window.switchBetBuilderTab(name)
+   - Navegación móvil entre columnas markets/summary
+   - Corregido: usa classList.toggle('bb-tab-hidden') en vez de style.display
+   - Añadido flag _bbSegInit para llamar switchBBSegment('summary') en primer switch
+
+8. window.updateBetBuilderEdge()
+   - Calcular edge, Kelly, nivel de riesgo desde cuota de mercado + prob combinada
+
+9. window.exportBetBuilderPDF()
+   - window.print()
+
+10. window.toggleInverseMode()
+    - Panel de cobertura/hedging
+    - Corregido ID: bb-inverse-panel → inverse-metrics-panel
+    - Display: block → flex
+
+11. window.updateOddsComparison()
+    - Leer cuotas de 4 casas (Bet365, 1xBet, Pinnacle, Betfair)
+    - Calcular edge y retorno esperado
+    - Ordenar por edge descendente
+    - Poblar tbody #odds-compare-tbody
+
+12. window.toggleAlertsState()
+    - Mostrar/ocultar #alerts-config-fields según estado del checkbox
+
+13. renderWeightDonut()
+    - Gráfico donut Chart.js (FIFA/h2h/Forma) en canvas #bb-donut-canvas
+    - Destroy/create cycle para evitar memory leaks
+
+14. Sliders ↔ inputs sincronización
+    - Bind bidireccional entre #slider-weight-* y #input-weight-*
+    - Llama renderWeightDonut() al cambiar cualquier valor
+
+15. Hook en updateWeightsPreview()
+    - Llama renderWeightDonut() al inicio para mantener donut sincronizado
+
+16. Init en initializeApp()
+    - Ocultar segmentos no-summary al cargar la página
+    - Activar botón "summary" como default
+    - Arregla layout desktop (todos los segmentos se overlapeaban)
+
+═══════════════════════════════════════════
+index.css
+═══════════════════════════════════════════
+
+17. body.light-theme #tab-betbuilder (24 reglas CSS)
+    - Override de colores inline dark-mode en el bet builder:
+      • color: white → #0F172A
+      • background: rgba(0,0,0,0.25) → rgba(0,0,0,0.03)
+      • border: rgba(255,255,255,0.1) → rgba(0,0,0,0.1)
+      • backgrounds rgba(15,23,42,...) → rgba(0,0,0,0.04)
+      • labels, spans, h3, h4, p, inputs, selects, checkboxes, etc.
+
+═══════════════════════════════════════════
+Problemas Resueltos
+═══════════════════════════════════════════
+
+• Desktop: todos los segmentos overlapeados al cargar → init oculta no-summary
+• Móvil: style.display no podía sobreescribir CSS !important → classList.toggle
+• Light mode: bet builder ilegible en tema claro → 24 reglas CSS overriding
+• ID incorrecto en toggleInverseMode (bb-inverse-panel no existía)
+• toggleAlertsState y updateOddsComparison no estaban definidas
+• switchBBSegment afectaba elementos fuera del bet builder → scoped
+• app.js sobrescrito accidentalmente con write tool → restaurado con git checkout

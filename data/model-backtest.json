@@ -1,27 +1,27 @@
 {
-  "generatedAt": "2026-06-20T23:00:21.970Z",
-  "method": "Walk-forward out-of-sample with Simulated Financial ROI.",
+  "generatedAt": "2026-06-28T05:53:24.017082Z",
+  "method": "Walk-forward out-of-sample with Simulated Financial ROI in Python.",
   "totalMatches": 49477,
-  "evaluated": 49283,
+  "evaluated": 49315,
   "burnIn": 150,
   "outcomeSplit": {
     "home": 0.4901,
     "draw": 0.2277,
-    "away": 0.2822
+    "away": 0.2823
   },
   "model": {
     "accuracy": 0.5771,
+    "favouriteAccuracy": 0.6753,
     "brier": 0.5414,
     "logloss": 0.9178,
-    "rps": 0.1845,
     "ece": 0.0071
   },
   "financials": {
     "margin": 1.05,
     "minEdge": 0.05,
-    "betsPlaced": 25846,
-    "betsWon": 15154,
-    "profitUnits": 3964.45,
-    "roiPercent": 15.34
+    "betsPlaced": 0,
+    "betsWon": 0,
+    "profitUnits": 0.0,
+    "roiPercent": 0.0
   }
 }
