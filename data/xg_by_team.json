@@ -1,9 +1,7 @@
 {
-  "last_updated": "2026-06-25T01:46:03.399422",
-  "methodology": "xG calculado desde datos reales del Mundial (FBref), eliminatorias (SofaScore) o partidos recientes 2022-2026 (CSV). source='fbref_world_cup'=datos Copa del Mundo reales. source='sofascore_qualifiers'=datos eliminatorias SofaScore. source='csv_recent_4yr'=estimación desde resultados 2022-2026.",
+  "last_updated": "2026-06-27T00:01:45.305070",
+  "methodology": "xG calculado a partir de datos reales del Mundial en FBref (goles/90min + eficiencia de remate), mezclado con historial estimado. source='fbref_world_cup' indica datos reales de Copa del Mundo.",
   "fbref_teams_count": 58,
-  "sofascore_teams_count": 0,
-  "csv_recent_teams_count": 9,
   "total_teams": 340,
   "teams": {
     "scotland": {

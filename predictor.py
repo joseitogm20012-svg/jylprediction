@@ -408,6 +408,523 @@ def get_h2h_stats(team_a, team_b, matches):
         "matches": matches_list
     }
 
+_goalscorers_cache = None
+_active_scorers_set = None
+
+def load_goalscorers_data():
+    global _goalscorers_cache, _active_scorers_set
+    if _goalscorers_cache is not None:
+        return _goalscorers_cache, _active_scorers_set
+        
+    _goalscorers_cache = {}
+    _active_scorers_set = set()
+    
+    goalscorers_path = os.path.join(BASE_DIR, "data", "goalscorers.csv")
+    if os.path.exists(goalscorers_path):
+        with open(goalscorers_path, "r", encoding="utf-8", errors="replace") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                try:
+                    date_str = row.get("date", "")
+                    home_team = row.get("home_team", "")
+                    away_team = row.get("away_team", "")
+                    team = row.get("team", "")
+                    scorer = row.get("scorer", "")
+                    minute_val = row.get("minute", "")
+                    own_goal = row.get("own_goal", "").upper() == "TRUE"
+                    penalty = row.get("penalty", "").upper() == "TRUE"
+                    
+                    if not date_str or not scorer:
+                        continue
+                        
+                    minute = int(minute_val) if minute_val and minute_val.isdigit() else 0
+                    
+                    # Track active players (scored in 2021 or later)
+                    parts = date_str.split("-")
+                    if parts and int(parts[0]) >= 2021:
+                        _active_scorers_set.add(scorer)
+                        
+                    # Index by team slugs
+                    slug1 = name_to_slug(home_team)
+                    slug2 = name_to_slug(away_team)
+                    key = tuple(sorted([slug1, slug2]))
+                    
+                    if key not in _goalscorers_cache:
+                        _goalscorers_cache[key] = []
+                        
+                    _goalscorers_cache[key].append({
+                        "date": date_str,
+                        "home_team": home_team,
+                        "away_team": away_team,
+                        "team": team,
+                        "scorer": scorer,
+                        "minute": minute,
+                        "own_goal": own_goal,
+                        "penalty": penalty
+                    })
+                except Exception as e:
+                    continue
+    return _goalscorers_cache, _active_scorers_set
+
+def get_advanced_h2h_center_data(team_a, team_b):
+    matches, ratings = load_data()
+    
+    name_a = team_a.replace("-", " ").title()
+    name_b = team_b.replace("-", " ").title()
+    for m in matches:
+        if m["homeSlug"] == team_a:
+            name_a = m["homeName"]
+            break
+        elif m["awaySlug"] == team_a:
+            name_a = m["awayName"]
+            break
+            
+    for m in matches:
+        if m["homeSlug"] == team_b:
+            name_b = m["homeName"]
+            break
+        elif m["awaySlug"] == team_b:
+            name_b = m["awayName"]
+            break
+
+    # Direct Matches
+    direct = [
+        m for m in matches 
+        if (m["homeSlug"] == team_a and m["awaySlug"] == team_b) or
+           (m["homeSlug"] == team_b and m["awaySlug"] == team_a)
+    ]
+    
+    count = len(direct)
+    wins_a = 0
+    wins_b = 0
+    draws = 0
+    total_goals = 0
+    goals_a = 0
+    goals_b = 0
+    
+    btts_count = 0
+    over25_count = 0
+    cs_a_count = 0
+    cs_b_count = 0
+    
+    local_a_matches = 0
+    local_a_wins = 0
+    local_a_draws = 0
+    local_a_losses = 0
+    
+    visit_a_matches = 0
+    visit_a_wins = 0
+    visit_a_draws = 0
+    visit_a_losses = 0
+    
+    neutral_matches = 0
+    neutral_wins_a = 0
+    neutral_draws = 0
+    neutral_wins_b = 0
+    
+    comp_records = {}
+    score_counts = {}
+    timeline_matches = []
+    
+    max_diff = -1
+    biggest_win_str = "No registrado"
+    
+    for m in direct:
+        is_a_home = m["homeSlug"] == team_a
+        gs_a = m["hg"] if is_a_home else m["ag"]
+        gs_b = m["ag"] if is_a_home else m["hg"]
+        
+        if gs_a > gs_b:
+            wins_a += 1
+            winner_slug = "A"
+        elif gs_a < gs_b:
+            wins_b += 1
+            winner_slug = "B"
+        else:
+            draws += 1
+            winner_slug = "Draw"
+            
+        total_goals += (gs_a + gs_b)
+        goals_a += gs_a
+        goals_b += gs_b
+        
+        if gs_a > 0 and gs_b > 0:
+            btts_count += 1
+        if (gs_a + gs_b) > 2.5:
+            over25_count += 1
+        if gs_b == 0:
+            cs_a_count += 1
+        if gs_a == 0:
+            cs_b_count += 1
+            
+        if m["neutral"]:
+            neutral_matches += 1
+            if winner_slug == "A":
+                neutral_wins_a += 1
+            elif winner_slug == "B":
+                neutral_wins_b += 1
+            else:
+                neutral_draws += 1
+        elif is_a_home:
+            local_a_matches += 1
+            if winner_slug == "A":
+                local_a_wins += 1
+            elif winner_slug == "B":
+                local_a_losses += 1
+            else:
+                local_a_draws += 1
+        else:
+            visit_a_matches += 1
+            if winner_slug == "A":
+                visit_a_wins += 1
+            elif winner_slug == "B":
+                visit_a_losses += 1
+            else:
+                visit_a_draws += 1
+                
+        comp = m["tournament"]
+        if comp not in comp_records:
+            comp_records[comp] = {"pj": 0, "winsA": 0, "draws": 0, "winsB": 0}
+        comp_records[comp]["pj"] += 1
+        if winner_slug == "A":
+            comp_records[comp]["winsA"] += 1
+        elif winner_slug == "B":
+            comp_records[comp]["winsB"] += 1
+        else:
+            comp_records[comp]["draws"] += 1
+            
+        score_key = f"{gs_a}-{gs_b}"
+        score_counts[score_key] = score_counts.get(score_key, 0) + 1
+        
+        diff = abs(gs_a - gs_b)
+        if diff > max_diff:
+            max_diff = diff
+            if gs_a > gs_b:
+                biggest_win_str = f"{name_a} {gs_a}-{gs_b} {name_b} ({m['date'].split('-')[0]})"
+            elif gs_b > gs_a:
+                biggest_win_str = f"{name_b} {gs_b}-{gs_a} {name_a} ({m['date'].split('-')[0]})"
+            else:
+                biggest_win_str = f"Empate {gs_a}-{gs_b} ({m['date'].split('-')[0]})"
+                
+        timeline_matches.append({
+            "date": m["date"],
+            "homeName": m["homeName"],
+            "awayName": m["awayName"],
+            "hg": m["hg"],
+            "ag": m["ag"],
+            "tournament": m["tournament"],
+            "winner": winner_slug
+        })
+        
+    avg_goals = (total_goals / count) if count > 0 else 0.0
+    btts_pct = (btts_count / count * 100) if count > 0 else 0.0
+    over25_pct = (over25_count / count * 100) if count > 0 else 0.0
+    cs_a_pct = (cs_a_count / count * 100) if count > 0 else 0.0
+    cs_b_pct = (cs_b_count / count * 100) if count > 0 else 0.0
+    
+    home_a_str = f"{local_a_wins}V-{local_a_draws}E-{local_a_losses}D" if local_a_matches > 0 else "0V-0E-0D"
+    away_a_str = f"{visit_a_wins}V-{visit_a_draws}E-{visit_a_losses}D" if visit_a_matches > 0 else "0V-0E-0D"
+    neutral_str = f"{neutral_wins_a}V-{neutral_draws}E-{neutral_wins_b}D" if neutral_matches > 0 else "0V-0E-0D"
+    
+    most_freq_scores = sorted(
+        [{"score": k, "count": v} for k, v in score_counts.items()],
+        key=lambda x: x["count"],
+        reverse=True
+    )[:5]
+    
+    last_winner_badge = "No hay partidos previos"
+    if direct:
+        last_m = direct[-1]
+        last_yr = last_m["date"].split("-")[0]
+        is_a_home = last_m["homeSlug"] == team_a
+        winner_slug = "A" if last_m["hg"] > last_m["ag"] else ("B" if last_m["ag"] > last_m["hg"] else "Draw")
+        if not is_a_home and winner_slug != "Draw":
+            winner_slug = "B" if winner_slug == "A" else "A"
+            
+        if winner_slug == "A":
+            last_winner_badge = f"🔥 {name_a} ganó el último H2H ({last_yr})"
+        elif winner_slug == "B":
+            last_winner_badge = f"🔥 {name_b} ganó el último H2H ({last_yr})"
+        else:
+            last_winner_badge = f"⚡ Vienen de empatar el último H2H ({last_yr})"
+            
+        win_a_years = [m["date"].split("-")[0] for m in direct if (m["hg"] > m["ag"] and m["homeSlug"] == team_a) or (m["ag"] > m["hg"] and m["awaySlug"] == team_a)]
+        win_b_years = [m["date"].split("-")[0] for m in direct if (m["hg"] > m["ag"] and m["homeSlug"] == team_b) or (m["ag"] > m["hg"] and m["awaySlug"] == team_b)]
+        
+        last_win_yr_a = win_a_years[-1] if win_a_years else None
+        last_win_yr_b = win_b_years[-1] if win_b_years else None
+        
+        current_year = 2026
+        if last_win_yr_a and (current_year - int(last_win_yr_a)) >= 5:
+            last_winner_badge = f"🔥 {name_a} no le gana a {name_b} desde {last_win_yr_a}"
+        elif last_win_yr_b and (current_year - int(last_win_yr_b)) >= 5:
+            last_winner_badge = f"🔥 {name_b} no le gana a {name_a} desde {last_win_yr_b}"
+            
+    scorers_cache, active_set = load_goalscorers_data()
+    h2h_scorers = scorers_cache.get(tuple(sorted([team_a, team_b])), [])
+    
+    direct_dates = set(m["date"] for m in direct)
+    matched_scorers = [s for s in h2h_scorers if s["date"] in direct_dates]
+    
+    scorer_counts = {}
+    all_minutes = []
+    penalties_count = 0
+    own_goals_count = 0
+    period_counts = {"0-15": 0, "16-30": 0, "31-45": 0, "46-60": 0, "61-75": 0, "76-90": 0}
+    
+    for s in matched_scorers:
+        sname = s["scorer"]
+        steam = name_to_slug(s["team"])
+        steam_display = "ARG" if steam == "argentina" else ("URU" if steam == "uruguay" else steam[:3].upper())
+        
+        if sname not in scorer_counts:
+            scorer_counts[sname] = {"goals": 0, "team": steam_display, "active": sname in active_set}
+        scorer_counts[sname]["goals"] += 1
+        
+        min_val = s["minute"]
+        if min_val > 0:
+            all_minutes.append(min_val)
+            if min_val <= 15:
+                period_counts["0-15"] += 1
+            elif min_val <= 30:
+                period_counts["16-30"] += 1
+            elif min_val <= 45:
+                period_counts["31-45"] += 1
+            elif min_val <= 60:
+                period_counts["46-60"] += 1
+            elif min_val <= 75:
+                period_counts["61-75"] += 1
+            else:
+                period_counts["76-90"] += 1
+                
+        if s["penalty"]:
+            penalties_count += 1
+        if s["own_goal"]:
+            own_goals_count += 1
+            
+    top_scorers_list = sorted(
+        [{"name": k, "goals": v["goals"], "team": v["team"], "active": v["active"]} for k, v in scorer_counts.items()],
+        key=lambda x: x["goals"],
+        reverse=True
+    )[:5]
+    
+    avg_goal_minute = int(np.mean(all_minutes)) if all_minutes else 0
+    total_min_goals = len(all_minutes)
+    period_pct = {}
+    for k, v in period_counts.items():
+        period_pct[k] = round(v / total_min_goals * 100) if total_min_goals > 0 else 0
+        
+    history_a = get_team_history(team_a, matches, ratings, 18)[:10]
+    history_b = get_team_history(team_b, matches, ratings, 18)[:10]
+    
+    def analyze_form(history_list, team_slug):
+        if not history_list:
+            return {
+                "record": "0V-0E-0D", "avg_gf": 0.0, "avg_gc": 0.0, "clean_sheets": 0, "btts": 0, "over25": 0,
+                "streaks": {"unbeaten": 0, "losing": 0, "scoring": 0, "clean_sheet": 0},
+                "by_rival": {"top": "0V-0E-0D", "high": "0V-0E-0D", "medium": "0V-0E-0D"}
+            }
+            
+        wins = sum(1 for h in history_list if h["goalsScored"] > h["goalsConceded"])
+        draws = sum(1 for h in history_list if h["goalsScored"] == h["goalsConceded"])
+        losses = sum(1 for h in history_list if h["goalsScored"] < h["goalsConceded"])
+        
+        gf_total = sum(h["goalsScored"] for h in history_list)
+        gc_total = sum(h["goalsConceded"] for h in history_list)
+        n = len(history_list)
+        
+        cs = sum(1 for h in history_list if h["goalsConceded"] == 0)
+        btts_c = sum(1 for h in history_list if h["goalsScored"] > 0 and h["goalsConceded"] > 0)
+        o25 = sum(1 for h in history_list if h["goalsScored"] + h["goalsConceded"] > 2.5)
+        
+        unbeaten_streak = 0
+        for h in history_list:
+            if h["goalsScored"] >= h["goalsConceded"]:
+                unbeaten_streak += 1
+            else:
+                break
+                
+        losing_streak = 0
+        for h in history_list:
+            if h["goalsScored"] < h["goalsConceded"]:
+                losing_streak += 1
+            else:
+                break
+                
+        scoring_streak = 0
+        for h in history_list:
+            if h["goalsScored"] > 0:
+                scoring_streak += 1
+            else:
+                break
+                
+        cs_streak = 0
+        for h in history_list:
+            if h["goalsConceded"] == 0:
+                cs_streak += 1
+            else:
+                break
+                
+        rival_records = {
+            "Top Nivel": {"w": 0, "d": 0, "l": 0},
+            "Nivel Alto": {"w": 0, "d": 0, "l": 0},
+            "Normal": {"w": 0, "d": 0, "l": 0}
+        }
+        for h in history_list:
+            lvl = h["opponentLevel"]
+            if h["goalsScored"] > h["goalsConceded"]:
+                rival_records[lvl]["w"] += 1
+            elif h["goalsScored"] == h["goalsConceded"]:
+                rival_records[lvl]["d"] += 1
+            else:
+                rival_records[lvl]["l"] += 1
+                
+        def fmt_rec(rec):
+            return f"{rec['w']}V-{rec['d']}E-{rec['l']}D"
+            
+        return {
+            "record": f"{wins}V - {draws}E - {losses}D",
+            "avg_gf": round(gf_total / n, 1) if n > 0 else 0.0,
+            "avg_gc": round(gc_total / n, 1) if n > 0 else 0.0,
+            "clean_sheets": round(cs / n * 100) if n > 0 else 0,
+            "btts": round(btts_c / n * 100) if n > 0 else 0,
+            "over25": round(o25 / n * 100) if n > 0 else 0,
+            "streaks": {
+                "unbeaten": unbeaten_streak,
+                "losing": losing_streak,
+                "scoring": scoring_streak,
+                "clean_sheet": cs_streak
+            },
+            "by_rival": {
+                "top": fmt_rec(rival_records["Top Nivel"]),
+                "high": fmt_rec(rival_records["Nivel Alto"]),
+                "medium": fmt_rec(rival_records["Normal"])
+            }
+        }
+        
+    form_stats_a = analyze_form(history_a, team_a)
+    form_stats_b = analyze_form(history_b, team_b)
+    
+    detected_patterns = []
+    if count > 0:
+        if btts_pct >= 70:
+            detected_patterns.append(f"✅ En {round(btts_pct)}% de los H2H, ambos equipos anotan.")
+        if over25_pct >= 50:
+            detected_patterns.append(f"✅ {round(over25_pct)}% de los partidos terminan con Over 2.5 goles.")
+        if local_a_matches >= 2 and local_a_losses == 0:
+            detected_patterns.append(f"✅ {name_a} no pierde como local en H2H ({home_a_str}).")
+        if visit_a_matches >= 2 and visit_a_wins == 0:
+            detected_patterns.append(f"⚠️ {name_b} no gana como visitante en H2H ({away_a_str.replace('D', 'V').replace('V', 'D')}).")
+        detected_patterns.append(f"💡 El promedio de goles es {avg_goals:.1f}/partido.")
+    else:
+        detected_patterns.append("💡 Sin partidos previos registrados. Toda la predicción se basa en forma actual.")
+        
+    if form_stats_a["streaks"]["unbeaten"] >= 3:
+        detected_patterns.append(f"🔥 {name_a}: {form_stats_a['streaks']['unbeaten']} partidos sin perder.")
+    if form_stats_b["streaks"]["losing"] >= 2:
+        detected_patterns.append(f"⚠️ {name_b}: {form_stats_b['streaks']['losing']} derrotas consecutivas.")
+        
+    comparative_matrix = {
+        "avg_goals": {
+            "h2h": f"{avg_goals:.1f}",
+            "team_a": f"{form_stats_a['avg_gf'] + form_stats_a['avg_gc']:.1f}",
+            "team_b": f"{form_stats_b['avg_gf'] + form_stats_b['avg_gc']:.1f}"
+        },
+        "btts": {
+            "h2h": f"{round(btts_pct)}%",
+            "team_a": f"{form_stats_a['btts']}%",
+            "team_b": f"{form_stats_b['btts']}%"
+        },
+        "over25": {
+            "h2h": f"{round(over25_pct)}%",
+            "team_a": f"{form_stats_a['over25']}%",
+            "team_b": f"{form_stats_b['over25']}%"
+        },
+        "clean_sheets": {
+            "h2h": f"{round(cs_a_pct)}% (A) / {round(cs_b_pct)}% (B)",
+            "team_a": f"{form_stats_a['clean_sheets']}%",
+            "team_b": f"{form_stats_b['clean_sheets']}%"
+        }
+    }
+    
+    pred_res = "Empate"
+    pred_prob = 33
+    if count > 0:
+        pct_a = wins_a / count * 100
+        pct_b = wins_b / count * 100
+        pct_d = draws / count * 100
+        
+        if pct_a > pct_b and pct_a > pct_d:
+            pred_res = f"Victoria {name_a}"
+            pred_prob = round(pct_a)
+        elif pct_b > pct_a and pct_b > pct_d:
+            pred_res = f"Victoria {name_b}"
+            pred_prob = round(pct_b)
+        else:
+            pred_res = "Empate"
+            pred_prob = round(pct_d)
+            
+    confidence = "MEDIA"
+    if count >= 8:
+        confidence = "ALTA"
+    elif count < 4:
+        confidence = "BAJA"
+        
+    most_freq_str = most_freq_scores[0]["score"] if most_freq_scores else "1-1"
+    
+    historical_prediction = {
+        "outcome": pred_res,
+        "probability": pred_prob,
+        "freq_score": most_freq_str,
+        "exp_goals": round(avg_goals, 1),
+        "confidence": confidence,
+        "sample_size": count
+    }
+    
+    return {
+        "h2h": {
+            "count": count,
+            "winsA": wins_a,
+            "winsB": wins_b,
+            "draws": draws,
+            "goalsA": goals_a,
+            "goalsB": goals_b,
+            "avgGoals": avg_goals,
+            "biggestWin": biggest_win_str,
+            "patterns": {
+                "btts": round(btts_pct),
+                "over25": round(over25_pct),
+                "csA": round(cs_a_pct),
+                "csB": round(cs_b_pct)
+            },
+            "byCondition": {
+                "homeA": home_a_str,
+                "awayA": away_a_str,
+                "neutral": neutral_str
+            },
+            "byCompetition": [{"competition": k, "pj": v["pj"], "winsA": v["winsA"], "draws": v["draws"], "winsB": v["winsB"]} for k, v in comp_records.items()],
+            "mostFrequentScores": most_freq_scores,
+            "lastWinner": last_winner_badge,
+            "timeline": timeline_matches
+        },
+        "scorers": {
+            "topScorers": top_scorers_list,
+            "avgGoalMinute": avg_goal_minute,
+            "periodDistribution": period_pct,
+            "penaltiesCount": penalties_count,
+            "ownGoalsCount": own_goals_count
+        },
+        "form": {
+            "teamA": form_stats_a,
+            "teamB": form_stats_b
+        },
+        "insights": {
+            "detectedPatterns": detected_patterns,
+            "comparativeMatrix": comparative_matrix,
+            "historicalPrediction": historical_prediction
+        }
+    }
+
 def estimate_rho_from_data(matches, ratings, sample_size=2000):
     """
     Mejora 3: Estima el parámetro rho de Dixon-Coles desde los datos históricos.
@@ -1056,3 +1573,486 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
         "scoreHeatmap": score_heatmap,
         "comparisonStats": comparison_stats
     }
+
+
+def eval_leg(leg_key, g_a, g_b, c_a, c_b):
+    """Evalúa si se cumple una selección (leg_key) en los arrays de simulación."""
+    if leg_key == "win_a":
+        return g_a > g_b
+    elif leg_key == "draw":
+        return g_a == g_b
+    elif leg_key == "win_b":
+        return g_a < g_b
+    elif leg_key == "btts_yes":
+        return (g_a >= 1) & (g_b >= 1)
+    elif leg_key == "btts_no":
+        return (g_a == 0) | (g_b == 0)
+    elif leg_key == "over_0_5_goals":
+        return (g_a + g_b) > 0.5
+    elif leg_key == "under_0_5_goals":
+        return (g_a + g_b) < 0.5
+    elif leg_key == "over_1_5_goals":
+        return (g_a + g_b) > 1.5
+    elif leg_key == "under_1_5_goals":
+        return (g_a + g_b) < 1.5
+    elif leg_key == "over_2_5_goals":
+        return (g_a + g_b) > 2.5
+    elif leg_key == "under_2_5_goals":
+        return (g_a + g_b) < 2.5
+    elif leg_key == "over_3_5_goals":
+        return (g_a + g_b) > 3.5
+    elif leg_key == "under_3_5_goals":
+        return (g_a + g_b) < 3.5
+    elif leg_key == "corners_win_a":
+        return c_a > c_b
+    elif leg_key == "corners_draw":
+        return c_a == c_b
+    elif leg_key == "corners_win_b":
+        return c_b > c_a
+    elif leg_key == "corners_over_7_5":
+        return (c_a + c_b) > 7.5
+    elif leg_key == "corners_under_7_5":
+        return (c_a + c_b) < 7.5
+    elif leg_key == "corners_over_8_5":
+        return (c_a + c_b) > 8.5
+    elif leg_key == "corners_under_8_5":
+        return (c_a + c_b) < 8.5
+    elif leg_key == "corners_over_9_5":
+        return (c_a + c_b) > 9.5
+    elif leg_key == "corners_under_9_5":
+        return (c_a + c_b) < 9.5
+    elif leg_key == "corners_over_10_5":
+        return (c_a + c_b) > 10.5
+    elif leg_key == "corners_under_10_5":
+        return (c_a + c_b) < 10.5
+    elif leg_key == "handicap_minus_1_5_a":
+        return (g_a - g_b) >= 2
+    elif leg_key == "handicap_plus_1_5_b":
+        return (g_a - g_b) < 2
+    elif leg_key == "handicap_minus_1_5_b":
+        return (g_b - g_a) >= 2
+    elif leg_key == "handicap_plus_1_5_a":
+        return (g_b - g_a) < 2
+    elif leg_key == "double_chance_1X":
+        return g_a >= g_b
+    elif leg_key == "double_chance_12":
+        return g_a != g_b
+    elif leg_key == "double_chance_X2":
+        return g_b >= g_a
+    else:
+        return np.ones(len(g_a), dtype=bool)
+
+
+def simulate_bet_builder(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weight_pct, half_life_months, num_sims=100000, strength_override_a=1.0, strength_override_b=1.0, altitude=0, host_country=None, legs=[]):
+    """Realiza una simulación Monte Carlo de goles y córners correlacionados para evaluar un Bet Builder."""
+    matches, ratings = load_data()
+    
+    fifa_weight = fifa_weight_pct / 100.0
+    h2h_weight = h2h_weight_pct / 100.0
+    
+    # Calcular goles esperados
+    xg_data = load_xg_data()
+    raw_data = load_match_raw_data(team_a, team_b, half_life_months, matches, ratings, xg_data)
+    xg_a, xg_b, h2h_mult_a, h2h_mult_b, xg_source_a, xg_source_b = compute_xg_from_raw_data(
+        raw_data, rank_a, rank_b, fifa_weight, h2h_weight
+    )
+    
+    # Ajuste por altitud
+    if altitude > 1500:
+        if team_a not in ALTITUDE_ACCLIMATED_TEAMS:
+            penalty_a = 1.0 - 0.08 * ((altitude - 1500) / 1000.0)
+            penalty_a = max(0.70, penalty_a)
+            xg_a *= penalty_a
+        if team_b not in ALTITUDE_ACCLIMATED_TEAMS:
+            penalty_b = 1.0 - 0.08 * ((altitude - 1500) / 1000.0)
+            penalty_b = max(0.70, penalty_b)
+            xg_b *= penalty_b
+
+    # Ajuste por país anfitrión
+    if host_country and host_country.lower() in WC2026_HOST_CONCACAF:
+        host_boosts = WC2026_HOST_CONCACAF[host_country.lower()]
+        if team_a in CONCACAF_TEAMS:
+            xg_a *= (1.0 + host_boosts.get(team_a, 0.0))
+        if team_b in CONCACAF_TEAMS:
+            xg_b *= (1.0 + host_boosts.get(team_b, 0.0))
+
+    xg_a = max(0.1, min(4.5, xg_a * strength_override_a))
+    xg_b = max(0.1, min(4.5, xg_b * strength_override_b))
+    
+    # Calcular distribución Dixon-Coles
+    joint_probs = {}
+    for a in range(11):
+        pa = poisson_pmf(a, xg_a)
+        for b in range(11):
+            tau = dc_tau(a, b, xg_a, xg_b, DC_RHO)
+            p = max(0.0, pa * poisson_pmf(b, xg_b) * tau)
+            joint_probs[(a, b)] = p
+                
+    total_prob = sum(joint_probs.values())
+    if total_prob > 0:
+        for k in joint_probs:
+            joint_probs[k] /= total_prob
+            
+    score_keys = list(joint_probs.keys())
+    score_probs = [joint_probs[k] for k in score_keys]
+    cdf = np.cumsum(score_probs)
+    
+    # Simulación goles
+    random_floats = np.random.rand(num_sims)
+    sim_indices = np.searchsorted(cdf, random_floats)
+    
+    sim_goals_a = np.array([score_keys[i][0] for i in sim_indices])
+    sim_goals_b = np.array([score_keys[i][1] for i in sim_indices])
+
+    # Calcular parámetros córners
+    entry_a = xg_data.get(team_a, {})
+    entry_b = xg_data.get(team_b, {})
+    factor_a = xg_a / 1.35
+    factor_b = xg_b / 1.35
+
+    sh_a = entry_a.get("shots_per_90") or max(5.0, min(25.0, 11.5 * factor_a))
+    crs_a = entry_a.get("crosses_per_90") or max(5.0, min(25.0, 13.0 * factor_a))
+    sh_blocked_a = entry_a.get("shots_blocked_per_90") or (1.5 * factor_a)
+    sh_off_a = entry_a.get("shots_off_target_per_90") or (4.0 * factor_a)
+
+    sh_b = entry_b.get("shots_per_90") or max(5.0, min(25.0, 11.5 * factor_b))
+    crs_b = entry_b.get("crosses_per_90") or max(5.0, min(25.0, 13.0 * factor_b))
+    sh_blocked_b = entry_b.get("shots_blocked_per_90") or (1.5 * factor_b)
+    sh_off_b = entry_b.get("shots_off_target_per_90") or (4.0 * factor_b)
+
+    cam_a = 0.3 * (sh_a / 11.5) + 0.3 * ((sh_blocked_a + sh_off_a) / 5.0) + 0.4 * (crs_a / 13.0)
+    cam_b = 0.3 * (sh_b / 11.5) + 0.3 * ((sh_blocked_b + sh_off_b) / 5.0) + 0.4 * (crs_b / 13.0)
+
+    elo_a = ratings.get(team_a, 1500)
+    elo_b = ratings.get(team_b, 1500)
+    elo_diff = elo_a - elo_b
+    concession_a_elo = 10 ** (-elo_diff / 800.0)
+    concession_b_elo = 10 ** (elo_diff / 800.0)
+
+    corners_against_a = entry_a.get("corners_against_per_90")
+    concession_a_mixed = 0.5 * (corners_against_a / 4.5) + 0.5 * concession_a_elo if corners_against_a else concession_a_elo
+    corners_against_b = entry_b.get("corners_against_per_90")
+    concession_b_mixed = 0.5 * (corners_against_b / 4.5) + 0.5 * concession_b_elo if corners_against_b else concession_b_elo
+
+    concession_a = max(0.5, min(1.8, concession_a_mixed))
+    concession_b = max(0.5, min(1.8, concession_b_mixed))
+
+    corners_for_a = entry_a.get("corners_for_per_90")
+    expected_corners_base_a = corners_for_a if corners_for_a else 5.0 * cam_a
+    corners_for_b = entry_b.get("corners_for_per_90")
+    expected_corners_base_b = corners_for_b if corners_for_b else 4.0 * cam_b
+
+    lambda_corners_a = max(1.5, min(9.5, expected_corners_base_a * concession_b))
+    lambda_corners_b = max(1.5, min(9.5, expected_corners_base_b * concession_a))
+
+    # Simulación córners con correlación a goles marcados
+    lambdas_a = np.clip(lambda_corners_a * (1.0 + 0.12 * (sim_goals_a - xg_a)), 1.5, 15.0)
+    lambdas_b = np.clip(lambda_corners_b * (1.0 + 0.12 * (sim_goals_b - xg_b)), 1.5, 15.0)
+
+    sim_corners_a = np.random.poisson(lambdas_a)
+    sim_corners_b = np.random.poisson(lambdas_b)
+
+    # Evaluar selecciones
+    leg_vectors = {}
+    individual_probs = {}
+    for leg in legs:
+        v = eval_leg(leg, sim_goals_a, sim_goals_b, sim_corners_a, sim_corners_b)
+        leg_vectors[leg] = v
+        individual_probs[leg] = float(np.mean(v))
+
+    # Probabilidad combinada real
+    if legs:
+        all_true = np.ones(num_sims, dtype=bool)
+        for leg in legs:
+            all_true &= leg_vectors[leg]
+        combined_prob = float(np.mean(all_true))
+    else:
+        combined_prob = 1.0
+
+    # Calcular correlaciones de Pearson
+    correlations = []
+    num_legs = len(legs)
+    for i in range(num_legs):
+        for j in range(i + 1, num_legs):
+            v_i = leg_vectors[legs[i]].astype(float)
+            v_j = leg_vectors[legs[j]].astype(float)
+            std_i = np.std(v_i)
+            std_j = np.std(v_j)
+            if std_i > 0 and std_j > 0:
+                corr = float(np.cov(v_i, v_j)[0, 1] / (std_i * std_j))
+            else:
+                corr = 0.0
+            correlations.append({
+                "legA": legs[i],
+                "legB": legs[j],
+                "coefficient": round(corr, 4)
+            })
+
+    # Generate 6x6 score heatmap
+    score_heatmap = []
+    for a in range(6):
+        row = []
+        pa = poisson_pmf(a, xg_a)
+        for b in range(6):
+            tau = dc_tau(a, b, xg_a, xg_b, DC_RHO)
+            p = max(0.0, pa * poisson_pmf(b, xg_b) * tau)
+            if total_prob > 0:
+                p /= total_prob
+            row.append(round(p, 4))
+        score_heatmap.append(row)
+
+    # Calculate advanced metrics
+    prob_win_a = float(np.mean(sim_goals_a > sim_goals_b))
+    prob_draw = float(np.mean(sim_goals_a == sim_goals_b))
+    prob_win_b = float(np.mean(sim_goals_b > sim_goals_a))
+
+    xpts_a = prob_win_a * 3 + prob_draw * 1
+    xpts_b = prob_win_b * 3 + prob_draw * 1
+
+    cs_a = float(np.mean(sim_goals_b == 0))
+    cs_b = float(np.mean(sim_goals_a == 0))
+
+    w2n_a = float(np.mean((sim_goals_a > sim_goals_b) & (sim_goals_b == 0)))
+    w2n_b = float(np.mean((sim_goals_b > sim_goals_a) & (sim_goals_a == 0)))
+
+    ah_minus_1_5_a = float(np.mean((sim_goals_a - sim_goals_b) >= 2))
+    ah_minus_1_0_a = float(np.mean((sim_goals_a - sim_goals_b) > 1)) + 0.5 * float(np.mean((sim_goals_a - sim_goals_b) == 1))
+    ah_plus_0_5_b = float(np.mean((sim_goals_b - sim_goals_a) >= 0))
+    ah_plus_1_5_b = float(np.mean((sim_goals_b - sim_goals_a) >= -1))
+
+    band_0_1 = float(np.mean((sim_goals_a + sim_goals_b) <= 1))
+    band_2_3 = float(np.mean(((sim_goals_a + sim_goals_b) >= 2) & ((sim_goals_a + sim_goals_b) <= 3)))
+    band_4_5 = float(np.mean(((sim_goals_a + sim_goals_b) >= 4) & ((sim_goals_a + sim_goals_b) <= 5)))
+    band_6_plus = float(np.mean((sim_goals_a + sim_goals_b) >= 6))
+
+    ht_goals_a = np.random.binomial(sim_goals_a, 0.45)
+    ht_goals_b = np.random.binomial(sim_goals_b, 0.45)
+    ht_win_a = ht_goals_a > ht_goals_b
+    ht_draw = ht_goals_a == ht_goals_b
+    ht_win_b = ht_goals_b > ht_goals_a
+    ft_win_a = sim_goals_a > sim_goals_b
+    ft_draw = sim_goals_a == sim_goals_b
+    ft_win_b = sim_goals_b > sim_goals_a
+
+    htft = {
+        "AA": round(float(np.mean(ht_win_a & ft_win_a)), 4),
+        "DA": round(float(np.mean(ht_draw & ft_win_a)), 4),
+        "BA": round(float(np.mean(ht_win_b & ft_win_a)), 4),
+        "AD": round(float(np.mean(ht_win_a & ft_draw)), 4),
+        "DD": round(float(np.mean(ht_draw & ft_draw)), 4),
+        "BD": round(float(np.mean(ht_win_b & ft_draw)), 4),
+        "AB": round(float(np.mean(ht_win_a & ft_win_b)), 4),
+        "DB": round(float(np.mean(ht_draw & ft_win_b)), 4),
+        "BB": round(float(np.mean(ht_win_b & ft_win_b)), 4),
+    }
+
+    ttg_a = {
+        "over0_5": round(float(np.mean(sim_goals_a > 0.5)), 4),
+        "over1_5": round(float(np.mean(sim_goals_a > 1.5)), 4),
+        "over2_5": round(float(np.mean(sim_goals_a > 2.5)), 4)
+    }
+    ttg_b = {
+        "over0_5": round(float(np.mean(sim_goals_b > 0.5)), 4),
+        "over1_5": round(float(np.mean(sim_goals_b > 1.5)), 4),
+        "over2_5": round(float(np.mean(sim_goals_b > 2.5)), 4)
+    }
+
+    form_a = 5.0 + 2.5 * (xg_a - 1.35)
+    form_b = 5.0 + 2.5 * (xg_b - 1.35)
+    form_a = max(1.0, min(9.9, form_a))
+    form_b = max(1.0, min(9.9, form_b))
+
+    conf_win_a = 1.96 * np.sqrt(prob_win_a * (1.0 - prob_win_a) / num_sims)
+    conf_draw = 1.96 * np.sqrt(prob_draw * (1.0 - prob_draw) / num_sims)
+    conf_win_b = 1.96 * np.sqrt(prob_win_b * (1.0 - prob_win_b) / num_sims)
+
+    timing_dist = [12.5, 15.3, 18.7, 16.2, 19.8, 17.5]
+
+    corners_expected_a = float(np.mean(sim_corners_a))
+    corners_expected_b = float(np.mean(sim_corners_b))
+
+    shots_expected_a = float(sh_a * concession_b)
+    shots_expected_b = float(sh_b * concession_a)
+
+    possession_a = elo_a / (elo_a + elo_b) * 100
+    possession_a = max(35.0, min(65.0, possession_a))
+    possession_b = 100.0 - possession_a
+
+    return {
+        "xgA": round(xg_a, 4),
+        "xgB": round(xg_b, 4),
+        "combinedProb": round(combined_prob, 4),
+        "individualProbs": {k: round(v, 4) for k, v in individual_probs.items()},
+        "correlations": correlations,
+        "scoreHeatmap": score_heatmap,
+        "advanced": {
+            "probWinA": round(prob_win_a, 4),
+            "probDraw": round(prob_draw, 4),
+            "probWinB": round(prob_win_b, 4),
+            "xptsA": round(xpts_a, 2),
+            "xptsB": round(xpts_b, 2),
+            "csA": round(cs_a, 4),
+            "csB": round(cs_b, 4),
+            "w2nA": round(w2n_a, 4),
+            "w2nB": round(w2n_b, 4),
+            "ahMinus1_5A": round(ah_minus_1_5_a, 4),
+            "ahMinus1_0A": round(ah_minus_1_0_a, 4),
+            "ahPlus0_5B": round(ah_plus_0_5_b, 4),
+            "ahPlus1_5B": round(ah_plus_1_5_b, 4),
+            "band_0_1": round(band_0_1, 4),
+            "band_2_3": round(band_2_3, 4),
+            "band_4_5": round(band_4_5, 4),
+            "band_6_plus": round(band_6_plus, 4),
+            "htft": htft,
+            "ttgA": ttg_a,
+            "ttgB": ttg_b,
+            "formA": round(form_a, 1),
+            "formB": round(form_b, 1),
+            "confWinA": round(conf_win_a, 4),
+            "confDraw": round(conf_draw, 4),
+            "confWinB": round(conf_win_b, 4),
+            "timingDist": timing_dist,
+            "cornersA": round(corners_expected_a, 1),
+            "cornersB": round(corners_expected_b, 1),
+            "shotsA": round(shots_expected_a, 1),
+            "shotsB": round(shots_expected_b, 1),
+            "possessionA": round(possession_a, 1),
+            "possessionB": round(possession_b, 1)
+        }
+    }
+
+
+def eval_historical_leg(leg_key, hg, ag, home_slug, away_slug, team_a_slug, team_b_slug):
+    """Determina si un logro se cumplió en un partido histórico (solo con marcador de goles)."""
+    is_a_home = (home_slug == team_a_slug)
+    
+    if leg_key == "win_a":
+        return hg > ag if is_a_home else ag > hg
+    elif leg_key == "draw":
+        return hg == ag
+    elif leg_key == "win_b":
+        return ag > hg if is_a_home else hg > ag
+    elif leg_key == "btts_yes":
+        return hg >= 1 and ag >= 1
+    elif leg_key == "btts_no":
+        return hg == 0 or ag == 0
+    elif leg_key.startswith("over_") and leg_key.endswith("_goals"):
+        try:
+            val = float(leg_key.split("_")[1].replace(",", "."))
+            return (hg + ag) > val
+        except:
+            return False
+    elif leg_key.startswith("under_") and leg_key.endswith("_goals"):
+        try:
+            val = float(leg_key.split("_")[1].replace(",", "."))
+            return (hg + ag) < val
+        except:
+            return False
+    elif leg_key == "double_chance_1X":
+        return hg >= ag if is_a_home else ag >= hg
+    elif leg_key == "double_chance_12":
+        return hg != ag
+    elif leg_key == "double_chance_X2":
+        return ag >= hg if is_a_home else hg >= ag
+    elif leg_key == "handicap_minus_1_5_a":
+        return (hg - ag) >= 2 if is_a_home else (ag - hg) >= 2
+    elif leg_key == "handicap_plus_1_5_b":
+        return (hg - ag) < 2 if is_a_home else (ag - hg) < 2
+    elif leg_key == "handicap_minus_1_5_b":
+        return (ag - hg) >= 2 if is_a_home else (hg - ag) >= 2
+    elif leg_key == "handicap_plus_1_5_a":
+        return (ag - hg) < 2 if is_a_home else (hg - ag) < 2
+    return None # Córners y otros mercados no se registran en results.csv
+
+
+def find_similar_matches(team_a, team_b, legs=[]):
+    """Busca partidos H2H directos e históricos con perfiles de ELO y relevancia temporal similar."""
+    matches, ratings = load_data()
+    
+    elo_a = ratings.get(team_a, 1500)
+    elo_b = ratings.get(team_b, 1500)
+    target_diff = elo_a - elo_b
+    
+    direct_h2h = []
+    similar_profile = []
+    
+    for m in matches:
+        hg, ag = m["hg"], m["ag"]
+        h_slug, a_slug = m["homeSlug"], m["awaySlug"]
+        
+        # 1. H2H directo
+        if (h_slug == team_a and a_slug == team_b) or (h_slug == team_b and a_slug == team_a):
+            eval_results = {}
+            total_legs = 0
+            successful_legs = 0
+            
+            for leg in legs:
+                res = eval_historical_leg(leg, hg, ag, h_slug, a_slug, team_a, team_b)
+                if res is not None:
+                    eval_results[leg] = res
+                    total_legs += 1
+                    if res:
+                        successful_legs += 1
+            
+            direct_h2h.append({
+                "date": m["date"],
+                "homeName": m["homeName"],
+                "awayName": m["awayName"],
+                "score": f"{hg}-{ag}",
+                "tournament": m["tournament"],
+                "legsEvaluation": eval_results,
+                "fullyMet": (successful_legs == total_legs) if total_legs > 0 else True
+            })
+            
+        # 2. Similar profile matches (since 1990 to keep it relevant, filter out direct H2Hs)
+        elif m["date"] >= "1990-01-01":
+            elo_h = ratings.get(h_slug, 1500)
+            elo_a_match = ratings.get(a_slug, 1500)
+            match_diff = elo_h - elo_a_match
+            
+            # Calculate similarity metrics
+            diff_similarity = math.exp(-abs(target_diff - match_diff) / 150.0)
+            strength_similarity = math.exp(-(abs(elo_a - elo_h) + abs(elo_b - elo_a_match)) / 300.0)
+            
+            try:
+                year = int(m["date"].split("-")[0])
+            except:
+                year = 2000
+            recency_weight = max(0.1, 1.0 - (2026 - year) / 36.0)
+            
+            # Weighted average similarity
+            similarity_score = 0.5 * diff_similarity + 0.3 * strength_similarity + 0.2 * recency_weight
+            
+            if similarity_score >= 0.65:
+                eval_results = {}
+                total_legs = 0
+                successful_legs = 0
+                
+                for leg in legs:
+                    res = eval_historical_leg(leg, hg, ag, h_slug, a_slug, team_a, team_b)
+                    if res is not None:
+                        eval_results[leg] = res
+                        total_legs += 1
+                        if res:
+                            successful_legs += 1
+                
+                similar_profile.append({
+                    "date": m["date"],
+                    "homeName": m["homeName"],
+                    "awayName": m["awayName"],
+                    "score": f"{hg}-{ag}",
+                    "tournament": m["tournament"],
+                    "legsEvaluation": eval_results,
+                    "fullyMet": (successful_legs == total_legs) if total_legs > 0 else True,
+                    "similarity": round(similarity_score * 100, 1)
+                })
+
+    # Sort similar matches by similarity score descending, direct H2H by date descending
+    similar_profile = sorted(similar_profile, key=lambda x: x["similarity"], reverse=True)[:10]
+    direct_h2h = sorted(direct_h2h, key=lambda x: x["date"], reverse=True)[:10]
+    
+    return {
+        "directH2H": direct_h2h,
+        "similarProfile": similar_profile
+    }
+
