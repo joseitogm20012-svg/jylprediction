@@ -264,8 +264,8 @@
       <div class="config-group group-teams">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; width: 100%;">
           <div class="config-group-title" style="margin: 0;">Equipos y Ranking</div>
-          <button type="button" class="btn-view-team-details" onclick="window.viewTeamDetails()" style="background: transparent; border: none; color: var(--color-primary); cursor: pointer; font-size: 0.78rem; text-decoration: underline; font-weight: 600; display: flex; align-items: center; gap: 4px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> View Team Details
+          <button type="button" class="btn-view-team-details" onclick="window.openComparisonModal()" style="background: transparent; border: none; color: var(--color-primary); cursor: pointer; font-size: 0.78rem; text-decoration: underline; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Comparar Equipos
           </button>
         </div>
 
@@ -309,7 +309,7 @@
               </div>
             </div>
             
-            <button type="button" class="btn btn-secondary" onclick="window.viewTeamDetails()" style="font-size: 0.72rem; min-height: unset; height: 26px; justify-content: center; padding: 0 10px; margin-top: 4px; width: 100%; border-radius: 6px;">View Team Details</button>
+            <button type="button" class="btn btn-secondary" onclick="window.viewTeamDetails('uruguay')" style="font-size: 0.72rem; min-height: unset; height: 26px; justify-content: center; padding: 0 10px; margin-top: 4px; width: 100%; border-radius: 6px;">View Team Details</button>
           </div>
 
           <!-- Sub-Card B (Argelia) -->
@@ -350,7 +350,7 @@
               </div>
             </div>
             
-            <button type="button" class="btn btn-secondary" onclick="window.viewTeamDetails()" style="font-size: 0.72rem; min-height: unset; height: 26px; justify-content: center; padding: 0 10px; margin-top: 4px; width: 100%; border-radius: 6px;">View Team Details</button>
+            <button type="button" class="btn btn-secondary" onclick="window.viewTeamDetails('saudi-arabia')" style="font-size: 0.72rem; min-height: unset; height: 26px; justify-content: center; padding: 0 10px; margin-top: 4px; width: 100%; border-radius: 6px;">View Team Details</button>
           </div>
         </div>
       </div>
@@ -2269,7 +2269,7 @@
   </dialog>
 
   <!-- Modal para Detalles del Equipo -->
-  <dialog id="team-details-dialog" style="border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(10px); border-radius: 16px; padding: 0; color: white; width: 95%; max-width: 700px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);">
+  <dialog id="team-details-dialog" style="border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(10px); border-radius: 16px; padding: 0; color: white; width: 95%; max-width: 900px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);">
     <div style="position: sticky; top: 0; background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.98) 100%); padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; z-index: 10;">
       <h2 id="team-details-title" style="margin: 0; font-family: var(--font-family-title); font-size: 1.4rem; display: flex; align-items: center; gap: 12px;">
         <span id="team-details-flag" style="font-size: 2rem;"></span>
@@ -2278,76 +2278,160 @@
       <button onclick="document.getElementById('team-details-dialog').close()" style="background: rgba(255,255,255,0.08); color: white; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">×</button>
     </div>
     <div id="team-details-content" style="padding: 24px;">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
-        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px;">
-          <div style="font-size: 0.75rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 8px;">FIFA Ranking</div>
-          <div id="team-details-rank" style="font-size: 2rem; font-weight: 800; color: var(--color-primary);">#-</div>
-        </div>
-        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px;">
-          <div style="font-size: 0.75rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 8px;">Elo Rating</div>
-          <div id="team-details-elo" style="font-size: 2rem; font-weight: 800; color: #10b981;">-</div>
-        </div>
-        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px;">
-          <div style="font-size: 0.75rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 8px;">Attack Strength</div>
-          <div id="team-details-attack" style="font-size: 2rem; font-weight: 800; color: #f59e0b;">-</div>
-        </div>
-        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px;">
-          <div style="font-size: 0.75rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 8px;">Defense Strength</div>
-          <div id="team-details-defense" style="font-size: 2rem; font-weight: 800; color: #ef4444;">-</div>
-        </div>
+      <!-- Loading Spinner -->
+      <div id="team-details-loading" style="text-align: center; padding: 40px;">
+        <div style="width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--color-primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px;"></div>
+        <p style="color: var(--color-text-secondary);">Cargando datos del equipo...</p>
       </div>
       
-      <div style="margin-bottom: 24px;">
-        <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Recent Form
-        </h3>
-        <div id="team-details-form" style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <span style="color: var(--color-text-secondary); font-size: 0.9rem;">No data available</span>
+      <!-- Contenido principal (se llena dinámicamente) -->
+      <div id="team-details-main-content" style="display: none;">
+        <!-- Cards Superiores -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px;">
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px;">
+            <div style="font-size: 0.7rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">FIFA Ranking</div>
+            <div id="team-details-rank" style="font-size: 1.8rem; font-weight: 800; color: var(--color-primary);">#-</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px;">
+            <div style="font-size: 0.7rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Elo Rating</div>
+            <div id="team-details-elo" style="font-size: 1.8rem; font-weight: 800; color: #10b981;">-</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px;">
+            <div style="font-size: 0.7rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Ataque</div>
+            <div id="team-details-attack" style="font-size: 1.8rem; font-weight: 800; color: #f59e0b;">-</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px;">
+            <div style="font-size: 0.7rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">Defensa</div>
+            <div id="team-details-defense" style="font-size: 1.8rem; font-weight: 800; color: #ef4444;">-</div>
+          </div>
         </div>
-      </div>
+        
+        <!-- Forma Reciente y Toggle -->
+        <div style="margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; display: flex; align-items: center; gap: 8px; margin: 0;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M5 20v-8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v8"/><path d="M13 20v-5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v5"/><rect x="2" y="2" width="20" height="8" rx="2"/></svg>
+              Forma Reciente
+            </h3>
+            <div style="display: flex; gap: 8px;">
+              <button id="btn-last5" onclick="toggleMatchView(5)" style="background: var(--color-primary); color: white; border: none; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; font-weight: 600;">Últimos 5</button>
+              <button id="btn-last10" onclick="toggleMatchView(10)" style="background: rgba(255,255,255,0.08); color: var(--color-text-secondary); border: 1px solid rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; font-weight: 600;">Últimos 10</button>
+            </div>
+          </div>
+          <div id="team-details-form" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;"></div>
+          
+          <!-- Estadísticas de forma reciente -->
+          <div id="recent-stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px;">
+            <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; padding: 12px;">
+              <div style="font-size: 0.65rem; color: #10b981; text-transform: uppercase; font-weight: 700;">Record</div>
+              <div id="stat-record" style="font-size: 1.1rem; font-weight: 700; color: white;">-</div>
+            </div>
+            <div style="background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 10px; padding: 12px;">
+              <div style="font-size: 0.65rem; color: #3b82f6; text-transform: uppercase; font-weight: 700;">Goles a favor</div>
+              <div id="stat-gf" style="font-size: 1.1rem; font-weight: 700; color: white;">-</div>
+            </div>
+            <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 10px; padding: 12px;">
+              <div style="font-size: 0.65rem; color: #ef4444; text-transform: uppercase; font-weight: 700;">Goles en contra</div>
+              <div id="stat-ga" style="font-size: 1.1rem; font-weight: 700; color: white;">-</div>
+            </div>
+            <div style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 10px; padding: 12px;">
+              <div style="font-size: 0.65rem; color: #8b5cf6; text-transform: uppercase; font-weight: 700;">Clean Sheets</div>
+              <div id="stat-cs" style="font-size: 1.1rem; font-weight: 700; color: white;">-</div>
+            </div>
+            <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 10px; padding: 12px;">
+              <div style="font-size: 0.65rem; color: #f59e0b; text-transform: uppercase; font-weight: 700;">BTTS</div>
+              <div id="stat-btts" style="font-size: 1.1rem; font-weight: 700; color: white;">-</div>
+            </div>
+            <div style="background: rgba(236, 72, 153, 0.08); border: 1px solid rgba(236, 72, 153, 0.2); border-radius: 10px; padding: 12px;">
+              <div style="font-size: 0.65rem; color: #ec4899; text-transform: uppercase; font-weight: 700;">Over 2.5</div>
+              <div id="stat-over25" style="font-size: 1.1rem; font-weight: 700; color: white;">-</div>
+            </div>
+          </div>
+        </div>
 
-      <div style="margin-bottom: 24px;">
-        <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M5 20v-8a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v8"/><path d="M13 20v-5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v5"/><rect x="2" y="2" width="20" height="8" rx="2"/></svg>
-          Expected Goals (xG)
-        </h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; padding: 14px;">
-            <div style="font-size: 0.75rem; color: #10b981; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">xG For (per match)</div>
-            <div id="team-details-xg-for" style="font-size: 1.5rem; font-weight: 700; color: #10b981;">-</div>
-          </div>
-          <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 10px; padding: 14px;">
-            <div style="font-size: 0.75rem; color: #ef4444; text-transform: uppercase; font-weight: 700; margin-bottom: 4px;">xG Against (per match)</div>
-            <div id="team-details-xg-against" style="font-size: 1.5rem; font-weight: 700; color: #ef4444;">-</div>
-          </div>
+        <!-- Tabla de últimos partidos -->
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-family: var(--font-family-title); font-size: 1rem; margin-bottom: 12px; color: var(--color-text-secondary);">Partidos Recientes</h3>
+          <div id="recent-matches-table" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden;"></div>
         </div>
-      </div>
 
-      <div id="team-details-stats" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px;">
-        <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          Additional Statistics
-        </h3>
-        <div id="team-details-stats-content" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 0.9rem;">
-          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <span style="color: var(--color-text-secondary);">Matches Played</span>
-            <span id="team-details-matches" style="font-weight: 600;">-</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <span style="color: var(--color-text-secondary);">Win Rate</span>
-            <span id="team-details-winrate" style="font-weight: 600;">-</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <span style="color: var(--color-text-secondary);">Avg Goals Scored</span>
-            <span id="team-details-avg-scored" style="font-weight: 600;">-</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <span style="color: var(--color-text-secondary);">Avg Goals Conceded</span>
-            <span id="team-details-avg-conceded" style="font-weight: 600;">-</span>
-          </div>
+        <!-- Rachas Actuales -->
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.9-2.5-2-3C6.31 7.74 4.5 6 4.5 4c0-.55.45-1 1-1 .55 0 1 .45 1 1 0 1.5 1.5 3 3.5 4 2.5 1.18 4 3.5 4 5.5 0 2.48-2.5 4.5-5.5 4.5S3 16.5 3 14.5"/><path d="M15.5 14.5A2.5 2.5 0 0 0 18 12c0-1.38-.9-2.5-2-3-2.69-1.26-4.5-3-4.5-5 0-.55.45-1 1-1 .55 0 1 .45 1 1 0 1.5 1.5 3 3.5 4 2.5 1.18 4 3.5 4 5.5 0 2.48-2.5 4.5-5.5 4.5S10 16.5 10 14.5"/></svg>
+            Rachas Actuales
+          </h3>
+          <div id="current-streaks" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+        </div>
+
+        <!-- Distribución de Goles por Minuto -->
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Goles por Periodo
+          </h3>
+          <div id="goal-timing-chart" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px;"></div>
+        </div>
+
+        <!-- Goleadores -->
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Goleadores (2024-2026)
+          </h3>
+          <div id="top-scorers" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px;"></div>
+        </div>
+
+        <!-- Marcadores Frecuentes -->
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            Marcadores Frecuentes
+          </h3>
+          <div id="frequent-scores" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px;"></div>
+        </div>
+
+        <!-- Rendimiento por Nivel de Rival -->
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Rendimiento por Nivel de Rival
+          </h3>
+          <div id="performance-by-level" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden;"></div>
+        </div>
+
+        <!-- Rendimiento por Competición -->
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Rendimiento por Competición
+          </h3>
+          <div id="performance-by-competition" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden;"></div>
+        </div>
+
+        <!-- Local/Visitante/Neutral -->
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Local / Visitante / Neutral
+          </h3>
+          <div id="home-away-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;"></div>
         </div>
       </div>
+    </div>
+  </dialog>
+
+  <!-- Modal para Comparacion de Equipos -->
+  <dialog id="comparison-dialog" style="border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(10px); border-radius: 16px; padding: 0; color: white; width: 95%; max-width: 900px; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);">
+    <div style="position: sticky; top: 0; background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.98) 100%); padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; z-index: 10;">
+      <h2 style="margin: 0; font-family: var(--font-family-title); font-size: 1.4rem; display: flex; align-items: center; gap: 12px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Comparacion de Equipos
+      </h2>
+      <button onclick="document.getElementById('comparison-dialog').close()" style="background: rgba(255,255,255,0.08); color: white; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">×</button>
+    </div>
+    <div id="comparison-content" style="padding: 24px;">
+      <!-- Contenido cargado dinamicamente -->
     </div>
   </dialog>
 

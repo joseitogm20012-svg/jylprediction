@@ -20,6 +20,7 @@ if os.path.exists(".env"):
 
 from predictor import load_data, run_prediction_sim, get_team_history, get_h2h_stats, simulate_bet_builder, find_similar_matches, get_advanced_h2h_center_data
 import db
+from team_analytics import get_team_details, compare_teams, get_team_recent_matches
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -271,6 +272,50 @@ def get_team_stats(team_slug: str):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error loading team stats: {str(e)}")
+
+@app.get("/api/team/{team_slug}/details")
+def api_get_team_details(team_slug: str):
+    """
+    Endpoint para obtener todos los detalles avanzados de un equipo.
+    Usado por el modal de detalles del equipo.
+    """
+    try:
+        _, ratings = load_data()
+        
+        # Convertir ratings a formato de ranking (slug -> rank)
+        rankings_dict = {}
+        for slug, data in ratings.items():
+            # Buscar el ranking en TEAM_METADATA si existe
+            from predictor import TEAM_SLUG_TO_NAME
+            rankings_dict[slug] = data.get('rank', 999)
+        
+        details = get_team_details(team_slug, rankings_dict)
+        return details
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error loading team details: {str(e)}")
+
+@app.get("/api/teams/compare/{team_a}/{team_b}")
+def api_compare_teams(team_a: str, team_b: str):
+    """
+    Endpoint para comparar dos equipos.
+    Usado por el modal de comparación de equipos.
+    """
+    try:
+        _, ratings = load_data()
+        
+        # Convertir ratings a formato de ranking
+        rankings_dict = {}
+        for slug, data in ratings.items():
+            rankings_dict[slug] = data.get('rank', 999)
+        
+        comparison = compare_teams(team_a, team_b, rankings_dict)
+        return comparison
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error comparing teams: {str(e)}")
 
 
 @app.get("/api/backtest-metrics")

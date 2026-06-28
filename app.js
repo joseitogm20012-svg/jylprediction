@@ -5264,9 +5264,14 @@ window.switchBetBuilderTab = function(activeTabName) {
 
 
 /* ==========================================================================
-   TEAM DETAILS MODAL
+   TEAM DETAILS MODAL - PRIORIDAD 2 COMPLETA
    ========================================================================== */
-window.viewTeamDetails = function(teamSlug) {
+
+// Variable global para almacenar datos del equipo actual
+let currentTeamData = null;
+let currentMatchesView = 5;
+
+window.viewTeamDetails = async function(teamSlug) {
   const slug = teamSlug || selectedTeamA;
   const meta = TEAM_METADATA[slug];
   
@@ -5275,31 +5280,37 @@ window.viewTeamDetails = function(teamSlug) {
     return;
   }
 
+  // Mostrar loading, ocultar contenido
+  document.getElementById('team-details-loading').style.display = 'block';
+  document.getElementById('team-details-main-content').style.display = 'none';
+
   // Update modal header
   document.getElementById('team-details-flag').textContent = meta.flag;
   document.getElementById('team-details-name').textContent = meta.name;
 
-  // Update basic stats
-  document.getElementById('team-details-rank').textContent = '#' + meta.rank;
-  
-  // Get Elo and strength data from ratingsData
-  const teamData = ratingsData[slug] || {};
-  const elo = teamData.elo || Math.round(1500 - (meta.rank - 1) * 5);
-  const attack = teamData.attack || 1.0;
-  const defense = teamData.defense || 1.0;
-  
-  document.getElementById('team-details-elo').textContent = Math.round(elo);
-  document.getElementById('team-details-attack').textContent = attack.toFixed(2);
-  document.getElementById('team-details-defense').textContent = defense.toFixed(2);
-
-  // Load recent form
-  loadRecentFormForModal(slug);
-
-  // Load xG data
-  loadXGDataForModal(slug);
-
-  // Load additional stats
-  loadAdditionalStatsForModal(slug);
+  try {
+    // Cargar datos completos desde API
+    const res = await fetch(`/api/team/${slug}/details`);
+    if (!res.ok) throw new Error('Datos no disponibles');
+    const data = await res.json();
+    
+    currentTeamData = data;
+    currentMatchesView = 5;
+    
+    // Renderizar todo el contenido
+    renderTeamDetailsModal(slug, data);
+    
+    // Ocultar loading, mostrar contenido
+    document.getElementById('team-details-loading').style.display = 'none';
+    document.getElementById('team-details-main-content').style.display = 'block';
+    
+  } catch (e) {
+    console.error('Error cargando datos:', e);
+    document.getElementById('team-details-loading').innerHTML = `
+      <p style="color: #ef4444;">Error cargando datos: ${e.message}</p>
+      <button onclick="window.viewTeamDetails('${slug}')" style="margin-top: 12px; background: var(--color-primary); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">Reintentar</button>
+    `;
+  }
 
   // Show modal
   const dialog = document.getElementById('team-details-dialog');
@@ -5308,66 +5319,502 @@ window.viewTeamDetails = function(teamSlug) {
   }
 };
 
-async function loadRecentFormForModal(slug) {
+function renderTeamDetailsModal(slug, data) {
+  const meta = TEAM_METADATA[slug] || {};
+  const teamData = ratingsData[slug] || {};
+  
+  // Cards superiores
+  document.getElementById('team-details-rank').textContent = '#' + (meta.rank || '-');
+  document.getElementById('team-details-elo').textContent = Math.round(teamData.elo || 1500);
+  document.getElementById('team-details-attack').textContent = (teamData.attack || 1.0).toFixed(2);
+  document.getElementById('team-details-defense').textContent = (teamData.defense || 1.0).toFixed(2);
+  
+  // Forma reciente badges
+  const recentForm = data.recent_form || [];
   const formContainer = document.getElementById('team-details-form');
-  if (!formContainer) return;
+  if (recentForm.length > 0) {
+    formContainer.innerHTML = recentForm.slice(0, currentMatchesView).map(m => {
+      const className = m.result === 'W' ? 'bb-form-badge win' : 
+                       m.result === 'D' ? 'bb-form-badge draw' : 'bb-form-badge loss';
+      return `<span class="${className}" title="${m.opponent} - ${m.score}">${m.result}</span>`;
+    }).join('');
+  } else {
+    formContainer.innerHTML = '<span style="color: var(--color-text-secondary);">Sin datos</span>';
+  }
+  
+  // Estadísticas de forma reciente
+  const stats = data.stats || {};
+  const record = stats.record || {wins: 0, draws: 0, losses: 0};
+  document.getElementById('stat-record').textContent = `${record.wins}V-${record.draws}E-${record.losses}D`;
+  document.getElementById('stat-gf').textContent = `${stats.goals_for?.total || 0} (${stats.goals_for?.avg || 0})`;
+  document.getElementById('stat-ga').textContent = `${stats.goals_against?.total || 0} (${stats.goals_against?.avg || 0})`;
+  document.getElementById('stat-cs').textContent = `${stats.clean_sheets_pct || 0}%`;
+  document.getElementById('stat-btts').textContent = `${stats.btts_pct || 0}%`;
+  document.getElementById('stat-over25').textContent = `${stats.over_2_5_pct || 0}%`;
+  
+  // Tabla de partidos recientes
+  renderRecentMatchesTable(recentForm.slice(0, currentMatchesView));
+  
+  // Rachas actuales
+  renderCurrentStreaks(data.current_streaks || {});
+  
+  // Distribución de goles por minuto
+  renderGoalTimingChart(data.goal_timing || {});
+  
+  // Goleadores
+  renderTopScorers(data.top_scorers?.active || []);
+  
+  // Marcadores frecuentes
+  renderFrequentScores(data.frequent_scores || []);
+  
+  // Rendimiento por nivel de rival
+  renderPerformanceByLevel(data.performance_by_rival_level || {});
+  
+  // Rendimiento por competición
+  renderPerformanceByCompetition(data.performance_by_competition || {});
+  
+  // Local/Visitante/Neutral
+  renderHomeAwayStats(data.home_away_stats || {});
+  
+  // Actualizar estado de botones toggle
+  updateToggleButtons();
+}
 
-  try {
-    const res = await fetch(`/api/team/${slug}/form`);
-    if (!res.ok) throw new Error('Form data not available');
-    const data = await res.json();
+function renderRecentMatchesTable(matches) {
+  const container = document.getElementById('recent-matches-table');
+  if (!matches || matches.length === 0) {
+    container.innerHTML = '<div style="padding: 16px; text-align: center; color: var(--color-text-secondary);">Sin partidos recientes</div>';
+    return;
+  }
+  
+  const rows = matches.map(m => {
+    const resultClass = m.result === 'W' ? 'color: #10b981;' : m.result === 'D' ? 'color: #6b7280;' : 'color: #ef4444;';
+    const locationIcon = m.is_home ? '🏠' : '✈️';
+    return `
+      <div style="display: grid; grid-template-columns: 80px 1fr 60px 50px 1fr; gap: 12px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center; font-size: 0.85rem;">
+        <span style="color: var(--color-text-secondary); font-size: 0.75rem;">${m.date}</span>
+        <span style="font-weight: 600;">${locationIcon} ${formatTeamName(m.opponent)}</span>
+        <span style="font-weight: 700; ${resultClass}">${m.result}</span>
+        <span style="color: var(--color-text-secondary);">${m.score}</span>
+        <span style="color: var(--color-text-secondary); font-size: 0.75rem; text-align: right;">${truncateString(m.tournament, 25)}</span>
+      </div>
+    `;
+  }).join('');
+  
+  container.innerHTML = rows;
+}
+
+function renderCurrentStreaks(streaks) {
+  const container = document.getElementById('current-streaks');
+  const items = [];
+  
+  if (streaks.unbeaten > 0) {
+    items.push(`<span style="background: rgba(16, 185, 129, 0.15); color: #10b981; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">🔥 ${streaks.unbeaten} sin perder</span>`);
+  }
+  if (streaks.scoring > 0) {
+    items.push(`<span style="background: rgba(59, 130, 246, 0.15); color: #3b82f6; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">⚽ ${streaks.scoring} anotando</span>`);
+  }
+  if (streaks.clean_sheets > 0) {
+    items.push(`<span style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">🧤 ${streaks.clean_sheets} clean sheets</span>`);
+  }
+  if (streaks.losing > 0) {
+    items.push(`<span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">❌ ${streaks.losing} perdiendo</span>`);
+  }
+  if (streaks.conceding > 0) {
+    items.push(`<span style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">⚠️ ${streaks.conceding} recibiendo</span>`);
+  }
+  
+  container.innerHTML = items.length > 0 ? items.join('') : '<span style="color: var(--color-text-secondary); font-size: 0.85rem;">Sin rachas destacadas</span>';
+}
+
+function renderGoalTimingChart(timing) {
+  const container = document.getElementById('goal-timing-chart');
+  const periods = ['0-15', '16-30', '31-45', '46-60', '61-75', '76-90'];
+  
+  const maxValue = Math.max(...Object.values(timing), 1);
+  
+  const bars = periods.map(p => {
+    const value = timing[p] || 0;
+    const width = (value / maxValue) * 100;
+    return `
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <span style="width: 50px; font-size: 0.75rem; color: var(--color-text-secondary);">${p}'</span>
+        <div style="flex: 1; height: 24px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden;">
+          <div style="width: ${width}%; height: 100%; background: linear-gradient(90deg, var(--color-primary), #f59e0b); display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 0.75rem; font-weight: 600; color: white;">${value}%</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  container.innerHTML = bars;
+}
+
+function renderTopScorers(scorers) {
+  const container = document.getElementById('top-scorers');
+  if (!scorers || scorers.length === 0) {
+    container.innerHTML = '<span style="color: var(--color-text-secondary); font-size: 0.85rem;">Datos de goleadores no disponibles</span>';
+    return;
+  }
+  
+  const list = scorers.slice(0, 5).map((s, i) => `
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: ${i < Math.min(scorers.length - 1, 4) ? '1px solid rgba(255,255,255,0.05)' : 'none'};">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="width: 24px; height: 24px; background: ${i === 0 ? 'rgba(245, 158, 11, 0.2)' : 'rgba(255,255,255,0.05)'}; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: ${i === 0 ? '#f59e0b' : 'var(--color-text-secondary)'};">${i + 1}</span>
+        <span style="font-weight: 600;">${s.name}</span>
+        ${s.penalties > 0 ? `<span style="font-size: 0.7rem; color: var(--color-text-secondary);">(P: ${s.penalties})</span>` : ''}
+      </div>
+      <div style="text-align: right;">
+        <div style="font-weight: 700; color: var(--color-primary);">${s.goals} ⚽</div>
+        <div style="font-size: 0.7rem; color: var(--color-text-secondary);">${s.matches} partidos</div>
+      </div>
+    </div>
+  `).join('');
+  
+  container.innerHTML = list;
+}
+
+function renderFrequentScores(scores) {
+  const container = document.getElementById('frequent-scores');
+  if (!scores || scores.length === 0) {
+    container.innerHTML = '<span style="color: var(--color-text-secondary); font-size: 0.85rem;">Sin datos suficientes</span>';
+    return;
+  }
+  
+  const maxCount = Math.max(...scores.map(s => s.count), 1);
+  
+  const list = scores.map((s, i) => {
+    const width = (s.count / maxCount) * 100;
+    return `
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <span style="width: 50px; font-weight: 700; color: var(--color-primary);">${s.score}</span>
+        <div style="flex: 1; height: 20px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden;">
+          <div style="width: ${width}%; height: 100%; background: rgba(59, 130, 246, 0.5);"></div>
+        </div>
+        <span style="width: 60px; font-size: 0.8rem; color: var(--color-text-secondary); text-align: right;">${s.count} veces</span>
+      </div>
+    `;
+  }).join('');
+  
+  container.innerHTML = list;
+}
+
+function renderPerformanceByLevel(performance) {
+  const container = document.getElementById('performance-by-level');
+  const levels = performance || {};
+  
+  const rows = Object.entries(levels).map(([key, data]) => {
+    const r = data.record || {wins: 0, draws: 0, losses: 0};
+    const total = r.wins + r.draws + r.losses;
+    const winRate = total > 0 ? Math.round(r.wins / total * 100) : 0;
+    return `
+      <div style="display: grid; grid-template-columns: 1fr 80px 100px; gap: 16px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center;">
+        <span style="font-weight: 600;">${data.name || key}</span>
+        <span style="color: var(--color-text-secondary); font-size: 0.85rem;">${total} partidos</span>
+        <div style="display: flex; gap: 8px; font-size: 0.85rem;">
+          <span style="color: #10b981; font-weight: 600;">${r.wins}V</span>
+          <span style="color: #6b7280;">${r.draws}E</span>
+          <span style="color: #ef4444; font-weight: 600;">${r.losses}D</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  container.innerHTML = rows || '<span style="padding: 16px; display: block; color: var(--color-text-secondary);">Sin datos</span>';
+}
+
+function renderPerformanceByCompetition(performance) {
+  const container = document.getElementById('performance-by-competition');
+  const comps = performance || {};
+  
+  const rows = Object.entries(comps).map(([key, data]) => {
+    const r = data.record || {wins: 0, draws: 0, losses: 0};
+    const total = r.wins + r.draws + r.losses;
+    if (total === 0) return '';
+    return `
+      <div style="display: grid; grid-template-columns: 1fr 80px 100px; gap: 16px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center;">
+        <span style="font-weight: 600;">${data.name || key}</span>
+        <span style="color: var(--color-text-secondary); font-size: 0.85rem;">${total} partidos</span>
+        <div style="display: flex; gap: 8px; font-size: 0.85rem;">
+          <span style="color: #10b981; font-weight: 600;">${r.wins}V</span>
+          <span style="color: #6b7280;">${r.draws}E</span>
+          <span style="color: #ef4444; font-weight: 600;">${r.losses}D</span>
+        </div>
+      </div>
+    `;
+  }).filter(Boolean).join('');
+  
+  container.innerHTML = rows || '<span style="padding: 16px; display: block; color: var(--color-text-secondary);">Sin datos</span>';
+}
+
+function renderHomeAwayStats(stats) {
+  const container = document.getElementById('home-away-stats');
+  
+  const locations = [
+    {key: 'home', name: 'Local', icon: '🏠'},
+    {key: 'away', name: 'Visitante', icon: '✈️'},
+    {key: 'neutral', name: 'Neutral', icon: '🏟️'}
+  ];
+  
+  const cards = locations.map(loc => {
+    const data = stats[loc.key] || {record: {wins: 0, draws: 0, losses: 0}, goals_for: 0, goals_against: 0, matches: 0};
+    const r = data.record;
+    const total = r.wins + r.draws + r.losses;
+    return `
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px;">
+        <div style="font-size: 0.7rem; color: var(--color-text-secondary); text-transform: uppercase; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+          ${loc.icon} ${loc.name}
+        </div>
+        <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 8px;">${total}</div>
+        <div style="display: flex; gap: 8px; font-size: 0.85rem; margin-bottom: 8px;">
+          <span style="color: #10b981; font-weight: 600;">${r.wins}V</span>
+          <span style="color: #6b7280;">${r.draws}E</span>
+          <span style="color: #ef4444; font-weight: 600;">${r.losses}D</span>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--color-text-secondary);">
+          GF: ${data.goals_for} | GC: ${data.goals_against}
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  container.innerHTML = cards;
+}
+
+// Toggle entre últimos 5 y 10 partidos
+window.toggleMatchView = function(n) {
+  currentMatchesView = n;
+  updateToggleButtons();
+  
+  if (currentTeamData) {
+    const matches = currentTeamData.recent_form || [];
+    renderRecentMatchesTable(matches.slice(0, n));
     
-    if (data.form && data.form.length > 0) {
-      formContainer.innerHTML = data.form.map(result => {
-        const className = result === 'W' ? 'bb-form-badge win' : 
-                         result === 'D' ? 'bb-form-badge draw' : 'bb-form-badge loss';
-        return `<span class="${className}">${result}</span>`;
-      }).join('');
+    // Recalcular estadísticas para los últimos n partidos
+    const stats = calculateStatsForMatches(matches.slice(0, n));
+    updateStatsDisplay(stats);
+  }
+};
+
+function updateToggleButtons() {
+  const btn5 = document.getElementById('btn-last5');
+  const btn10 = document.getElementById('btn-last10');
+  
+  if (btn5 && btn10) {
+    if (currentMatchesView === 5) {
+      btn5.style.background = 'var(--color-primary)';
+      btn5.style.color = 'white';
+      btn10.style.background = 'rgba(255,255,255,0.08)';
+      btn10.style.color = 'var(--color-text-secondary)';
     } else {
-      formContainer.innerHTML = '<span style="color: var(--color-text-secondary); font-size: 0.9rem;">No recent matches</span>';
+      btn10.style.background = 'var(--color-primary)';
+      btn10.style.color = 'white';
+      btn5.style.background = 'rgba(255,255,255,0.08)';
+      btn5.style.color = 'var(--color-text-secondary)';
     }
-  } catch (e) {
-    formContainer.innerHTML = '<span style="color: var(--color-text-secondary); font-size: 0.9rem;">Form data not available</span>';
   }
 }
 
-async function loadXGDataForModal(slug) {
-  const xgForEl = document.getElementById('team-details-xg-for');
-  const xgAgainstEl = document.getElementById('team-details-xg-against');
+function calculateStatsForMatches(matches) {
+  if (!matches || matches.length === 0) {
+    return {
+      record: {wins: 0, draws: 0, losses: 0},
+      goals_for: {total: 0, avg: 0},
+      goals_against: {total: 0, avg: 0},
+      clean_sheets_pct: 0,
+      btts_pct: 0,
+      over_2_5_pct: 0
+    };
+  }
+  
+  const wins = matches.filter(m => m.result === 'W').length;
+  const draws = matches.filter(m => m.result === 'D').length;
+  const losses = matches.filter(m => m.result === 'L').length;
+  const totalGoalsFor = matches.reduce((sum, m) => sum + m.goals_for, 0);
+  const totalGoalsAgainst = matches.reduce((sum, m) => sum + m.goals_against, 0);
+  const cleanSheets = matches.filter(m => m.goals_against === 0).length;
+  const btts = matches.filter(m => m.goals_for > 0 && m.goals_against > 0).length;
+  const over25 = matches.filter(m => m.goals_for + m.goals_against > 2.5).length;
+  const n = matches.length;
+  
+  return {
+    record: {wins, draws, losses},
+    goals_for: {total: totalGoalsFor, avg: parseFloat((totalGoalsFor / n).toFixed(2))},
+    goals_against: {total: totalGoalsAgainst, avg: parseFloat((totalGoalsAgainst / n).toFixed(2))},
+    clean_sheets_pct: parseFloat((cleanSheets / n * 100).toFixed(1)),
+    btts_pct: parseFloat((btts / n * 100).toFixed(1)),
+    over_2_5_pct: parseFloat((over25 / n * 100).toFixed(1))
+  };
+}
+
+function updateStatsDisplay(stats) {
+  const record = stats.record || {wins: 0, draws: 0, losses: 0};
+  document.getElementById('stat-record').textContent = `${record.wins}V-${record.draws}E-${record.losses}D`;
+  document.getElementById('stat-gf').textContent = `${stats.goals_for?.total || 0} (${stats.goals_for?.avg || 0})`;
+  document.getElementById('stat-ga').textContent = `${stats.goals_against?.total || 0} (${stats.goals_against?.avg || 0})`;
+  document.getElementById('stat-cs').textContent = `${stats.clean_sheets_pct || 0}%`;
+  document.getElementById('stat-btts').textContent = `${stats.btts_pct || 0}%`;
+  document.getElementById('stat-over25').textContent = `${stats.over_2_5_pct || 0}%`;
+}
+
+// Funciones auxiliares
+function formatTeamName(slug) {
+  const meta = TEAM_METADATA[slug];
+  return meta ? meta.name : slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function truncateString(str, len) {
+  if (!str) return '';
+  return str.length > len ? str.substring(0, len) + '...' : str;
+}
+
+/* ==========================================================================
+   COMPARISON MODAL - PRIORIDAD 3
+   ========================================================================== */
+
+window.openComparisonModal = function() {
+  const teamA = selectedTeamA;
+  const teamB = selectedTeamB;
+  
+  if (!teamA || !teamB) {
+    alert('Por favor selecciona dos equipos primero');
+    return;
+  }
+  
+  openComparisonModalWithTeams(teamA, teamB);
+};
+
+async function openComparisonModalWithTeams(teamA, teamB) {
+  const dialog = document.getElementById('comparison-dialog');
+  const content = document.getElementById('comparison-content');
+  
+  // Mostrar loading
+  content.innerHTML = `
+    <div style="text-align: center; padding: 60px 20px;">
+      <div style="width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.1); border-top-color: var(--color-primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+      <p style="color: var(--color-text-secondary);">Cargando comparación...</p>
+    </div>
+  `;
+  
+  if (dialog) {
+    dialog.showModal();
+  }
   
   try {
-    const res = await fetch('/data/xg_by_team.json');
-    if (!res.ok) throw new Error('xG data not available');
+    const res = await fetch(`/api/teams/compare/${teamA}/${teamB}`);
+    if (!res.ok) throw new Error('Datos de comparación no disponibles');
     const data = await res.json();
     
-    const teamXG = data[slug] || {};
-    xgForEl.textContent = teamXG.xg_for ? teamXG.xg_for.toFixed(2) : '-';
-    xgAgainstEl.textContent = teamXG.xg_against ? teamXG.xg_against.toFixed(2) : '-';
+    renderComparisonModal(teamA, teamB, data);
+    
   } catch (e) {
-    xgForEl.textContent = '-';
-    xgAgainstEl.textContent = '-';
+    console.error('Error cargando comparación:', e);
+    content.innerHTML = `
+      <div style="text-align: center; padding: 60px 20px;">
+        <p style="color: #ef4444; margin-bottom: 16px;">Error: ${e.message}</p>
+        <button onclick="openComparisonModalWithTeams('${teamA}', '${teamB}')" style="background: var(--color-primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">Reintentar</button>
+      </div>
+    `;
   }
 }
 
-async function loadAdditionalStatsForModal(slug) {
-  const matchesEl = document.getElementById('team-details-matches');
-  const winrateEl = document.getElementById('team-details-winrate');
-  const avgScoredEl = document.getElementById('team-details-avg-scored');
-  const avgConcededEl = document.getElementById('team-details-avg-conceded');
+function renderComparisonModal(teamA, teamB, data) {
+  const content = document.getElementById('comparison-content');
+  const metaA = TEAM_METADATA[teamA] || {};
+  const metaB = TEAM_METADATA[teamB] || {};
   
-  try {
-    const res = await fetch(`/api/team/${slug}/stats`);
-    if (!res.ok) throw new Error('Stats not available');
-    const data = await res.json();
+  const statsA = data.team_a_stats || {};
+  const statsB = data.team_b_stats || {};
+  const comparison = data.comparison || {};
+  const advantagesA = data.advantages_a || [];
+  const advantagesB = data.advantages_b || [];
+  const h2h = data.h2h_history || [];
+  
+  // Calcular resumen H2H
+  const h2hSummary = {
+    aWins: h2h.filter(m => m.winner === 'a').length,
+    draws: h2h.filter(m => m.winner === 'draw').length,
+    bWins: h2h.filter(m => m.winner === 'b').length
+  };
+  
+  content.innerHTML = `
+    <!-- Encabezado -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+      <div style="text-align: center; flex: 1;">
+        <div style="font-size: 2.5rem;">${metaA.flag || '🏳️'}</div>
+        <div style="font-weight: 700; font-size: 1.1rem; margin-top: 8px;">${metaA.name || teamA}</div>
+        <div style="color: var(--color-text-secondary); font-size: 0.85rem;">#${metaA.rank || '-'}</div>
+      </div>
+      <div style="padding: 0 40px; display: flex; flex-direction: column; align-items: center;">
+        <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary);">VS</div>
+      </div>
+      <div style="text-align: center; flex: 1;">
+        <div style="font-size: 2.5rem;">${metaB.flag || '🏳️'}</div>
+        <div style="font-weight: 700; font-size: 1.1rem; margin-top: 8px;">${metaB.name || teamB}</div>
+        <div style="color: var(--color-text-secondary); font-size: 0.85rem;">#${metaB.rank || '-'}</div>
+      </div>
+    </div>
     
-    matchesEl.textContent = data.matches_played || '-';
-    winrateEl.textContent = data.win_rate ? (data.win_rate * 100).toFixed(1) + '%' : '-';
-    avgScoredEl.textContent = data.avg_goals_scored ? data.avg_goals_scored.toFixed(2) : '-';
-    avgConcededEl.textContent = data.avg_goals_conceded ? data.avg_goals_conceded.toFixed(2) : '-';
-  } catch (e) {
-    matchesEl.textContent = '-';
-    winrateEl.textContent = '-';
-    avgScoredEl.textContent = '-';
-    avgConcededEl.textContent = '-';
-  }
+    <!-- Tabla Comparativa -->
+    <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 16px;">Comparación Directa</h3>
+    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; margin-bottom: 24px;">
+      ${renderComparisonRow('Goles a favor (prom)', statsA.stats?.goals_for?.avg || 0, statsB.stats?.goals_for?.avg || 0, 'higher')}
+      ${renderComparisonRow('Goles en contra (prom)', statsA.stats?.goals_against?.avg || 0, statsB.stats?.goals_against?.avg || 0, 'lower')}
+      ${renderComparisonRow('Clean Sheets %', statsA.stats?.clean_sheets_pct || 0, statsB.stats?.clean_sheets_pct || 0, 'higher')}
+      ${renderComparisonRow('BTTS %', statsA.stats?.btts_pct || 0, statsB.stats?.btts_pct || 0, 'lower')}
+      ${renderComparisonRow('Over 2.5 %', statsA.stats?.over_2_5_pct || 0, statsB.stats?.over_2_5_pct || 0, 'context')}
+      ${renderComparisonRow('Victorias (últimos 10)', statsA.stats?.record?.wins || 0, statsB.stats?.record?.wins || 0, 'higher')}
+    </div>
+    
+    <!-- Ventajas Clave -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+      <div>
+        <h3 style="font-family: var(--font-family-title); font-size: 1rem; margin-bottom: 12px; color: var(--color-primary);">${metaA.name || teamA} - Ventajas</h3>
+        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.15); border-radius: 12px; padding: 16px;">
+          ${advantagesA.length > 0 ? advantagesA.map(a => `<div style="margin-bottom: 8px; font-size: 0.85rem; display: flex; gap: 8px;"><span style="color: #10b981;">✓</span><span>${a}</span></div>`).join('') : '<span style="color: var(--color-text-secondary); font-size: 0.85rem;">Sin ventajas destacadas</span>'}
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family: var(--font-family-title); font-size: 1rem; margin-bottom: 12px; color: var(--color-primary);">${metaB.name || teamB} - Ventajas</h3>
+        <div style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.15); border-radius: 12px; padding: 16px;">
+          ${advantagesB.length > 0 ? advantagesB.map(a => `<div style="margin-bottom: 8px; font-size: 0.85rem; display: flex; gap: 8px;"><span style="color: #3b82f6;">✓</span><span>${a}</span></div>`).join('') : '<span style="color: var(--color-text-secondary); font-size: 0.85rem;">Sin ventajas destacadas</span>'}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Historial H2H -->
+    <h3 style="font-family: var(--font-family-title); font-size: 1.1rem; margin-bottom: 16px;">
+      Enfrentamientos Directos 
+      <span style="font-size: 0.85rem; color: var(--color-text-secondary); font-weight: 400;">
+        (${h2hSummary.aWins}V ${metaA.name || teamA} - ${h2hSummary.draws}E - ${h2hSummary.bWins}V ${metaB.name || teamB})
+      </span>
+    </h3>
+    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden;">
+      ${h2h.length > 0 ? h2h.map(m => `
+        <div style="display: grid; grid-template-columns: 100px 1fr 80px 1fr; gap: 12px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center; font-size: 0.85rem;">
+          <span style="color: var(--color-text-secondary); font-size: 0.75rem;">${m.date}</span>
+          <span style="text-align: right; font-weight: 600;">${formatTeamName(m.home_team)}</span>
+          <span style="font-weight: 700; color: var(--color-primary); text-align: center;">${m.score}</span>
+          <span style="font-weight: 600;">${formatTeamName(m.away_team)}</span>
+        </div>
+      `).join('') : '<div style="padding: 24px; text-align: center; color: var(--color-text-secondary);">Sin enfrentamientos previos registrados</div>'}
+    </div>
+  `;
+}
+
+function renderComparisonRow(label, valA, valB, type) {
+  const betterA = type === 'higher' ? valA > valB : type === 'lower' ? valA < valB : false;
+  const equal = valA === valB;
+  
+  const styleA = equal ? '' : betterA ? 'background: rgba(16, 185, 129, 0.15); color: #10b981; font-weight: 700;' : 'background: rgba(239, 68, 68, 0.1); color: #ef4444;';
+  const styleB = equal ? '' : !betterA ? 'background: rgba(16, 185, 129, 0.15); color: #10b981; font-weight: 700;' : 'background: rgba(239, 68, 68, 0.1); color: #ef4444;';
+  
+  const formatVal = (v) => typeof v === 'number' ? (v % 1 === 0 ? v : v.toFixed(2)) : v;
+  
+  return `
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center;">
+      <div style="font-size: 0.85rem; color: var(--color-text-secondary);">${label}</div>
+      <div style="text-align: center; padding: 8px; border-radius: 6px; ${styleA}">${formatVal(valA)}</div>
+      <div style="text-align: center; padding: 8px; border-radius: 6px; ${styleB}">${formatVal(valB)}</div>
+    </div>
+  `;
 }
