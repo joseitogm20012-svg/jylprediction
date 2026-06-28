@@ -5262,3 +5262,112 @@ window.switchBetBuilderTab = function(activeTabName) {
   });
 };
 
+
+/* ==========================================================================
+   TEAM DETAILS MODAL
+   ========================================================================== */
+window.viewTeamDetails = function(teamSlug) {
+  const slug = teamSlug || selectedTeamA;
+  const meta = TEAM_METADATA[slug];
+  
+  if (!meta) {
+    console.error('Team not found:', slug);
+    return;
+  }
+
+  // Update modal header
+  document.getElementById('team-details-flag').textContent = meta.flag;
+  document.getElementById('team-details-name').textContent = meta.name;
+
+  // Update basic stats
+  document.getElementById('team-details-rank').textContent = '#' + meta.rank;
+  
+  // Get Elo and strength data from ratingsData
+  const teamData = ratingsData[slug] || {};
+  const elo = teamData.elo || Math.round(1500 - (meta.rank - 1) * 5);
+  const attack = teamData.attack || 1.0;
+  const defense = teamData.defense || 1.0;
+  
+  document.getElementById('team-details-elo').textContent = Math.round(elo);
+  document.getElementById('team-details-attack').textContent = attack.toFixed(2);
+  document.getElementById('team-details-defense').textContent = defense.toFixed(2);
+
+  // Load recent form
+  loadRecentFormForModal(slug);
+
+  // Load xG data
+  loadXGDataForModal(slug);
+
+  // Load additional stats
+  loadAdditionalStatsForModal(slug);
+
+  // Show modal
+  const dialog = document.getElementById('team-details-dialog');
+  if (dialog) {
+    dialog.showModal();
+  }
+};
+
+async function loadRecentFormForModal(slug) {
+  const formContainer = document.getElementById('team-details-form');
+  if (!formContainer) return;
+
+  try {
+    const res = await fetch(`/api/team/${slug}/form`);
+    if (!res.ok) throw new Error('Form data not available');
+    const data = await res.json();
+    
+    if (data.form && data.form.length > 0) {
+      formContainer.innerHTML = data.form.map(result => {
+        const className = result === 'W' ? 'bb-form-badge win' : 
+                         result === 'D' ? 'bb-form-badge draw' : 'bb-form-badge loss';
+        return `<span class="${className}">${result}</span>`;
+      }).join('');
+    } else {
+      formContainer.innerHTML = '<span style="color: var(--color-text-secondary); font-size: 0.9rem;">No recent matches</span>';
+    }
+  } catch (e) {
+    formContainer.innerHTML = '<span style="color: var(--color-text-secondary); font-size: 0.9rem;">Form data not available</span>';
+  }
+}
+
+async function loadXGDataForModal(slug) {
+  const xgForEl = document.getElementById('team-details-xg-for');
+  const xgAgainstEl = document.getElementById('team-details-xg-against');
+  
+  try {
+    const res = await fetch('/data/xg_by_team.json');
+    if (!res.ok) throw new Error('xG data not available');
+    const data = await res.json();
+    
+    const teamXG = data[slug] || {};
+    xgForEl.textContent = teamXG.xg_for ? teamXG.xg_for.toFixed(2) : '-';
+    xgAgainstEl.textContent = teamXG.xg_against ? teamXG.xg_against.toFixed(2) : '-';
+  } catch (e) {
+    xgForEl.textContent = '-';
+    xgAgainstEl.textContent = '-';
+  }
+}
+
+async function loadAdditionalStatsForModal(slug) {
+  const matchesEl = document.getElementById('team-details-matches');
+  const winrateEl = document.getElementById('team-details-winrate');
+  const avgScoredEl = document.getElementById('team-details-avg-scored');
+  const avgConcededEl = document.getElementById('team-details-avg-conceded');
+  
+  try {
+    const res = await fetch(`/api/team/${slug}/stats`);
+    if (!res.ok) throw new Error('Stats not available');
+    const data = await res.json();
+    
+    matchesEl.textContent = data.matches_played || '-';
+    winrateEl.textContent = data.win_rate ? (data.win_rate * 100).toFixed(1) + '%' : '-';
+    avgScoredEl.textContent = data.avg_goals_scored ? data.avg_goals_scored.toFixed(2) : '-';
+    avgConcededEl.textContent = data.avg_goals_conceded ? data.avg_goals_conceded.toFixed(2) : '-';
+  } catch (e) {
+    matchesEl.textContent = '-';
+    winrateEl.textContent = '-';
+    avgScoredEl.textContent = '-';
+    avgConcededEl.textContent = '-';
+  }
+}

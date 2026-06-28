@@ -212,6 +212,66 @@ def get_h2h(team_a: str, team_b: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error loading H2H stats: {str(e)}")
 
+@app.get("/api/team/{team_slug}/form")
+def get_team_form(team_slug: str):
+    try:
+        matches, _ = load_data()
+        # Get last 5 matches for the team
+        team_matches = [m for m in matches if m['team_a'] == team_slug or m['team_b'] == team_slug]
+        team_matches.sort(key=lambda x: x['date'], reverse=True)
+        last_5 = team_matches[:5]
+        
+        form = []
+        for m in last_5:
+            is_home = m['team_a'] == team_slug
+            goals_for = m['score_a'] if is_home else m['score_b']
+            goals_against = m['score_b'] if is_home else m['score_a']
+            
+            if goals_for > goals_against:
+                form.append('W')
+            elif goals_for == goals_against:
+                form.append('D')
+            else:
+                form.append('L')
+        
+        return {"form": form, "matches": last_5}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error loading team form: {str(e)}")
+
+@app.get("/api/team/{team_slug}/stats")
+def get_team_stats(team_slug: str):
+    try:
+        matches, ratings = load_data()
+        team_matches = [m for m in matches if m['team_a'] == team_slug or m['team_b'] == team_slug]
+        
+        if not team_matches:
+            return {"matches_played": 0, "win_rate": 0, "avg_goals_scored": 0, "avg_goals_conceded": 0}
+        
+        wins = 0
+        total_goals_scored = 0
+        total_goals_conceded = 0
+        
+        for m in team_matches:
+            is_home = m['team_a'] == team_slug
+            goals_for = m['score_a'] if is_home else m['score_b']
+            goals_against = m['score_b'] if is_home else m['score_a']
+            
+            total_goals_scored += goals_for
+            total_goals_conceded += goals_against
+            
+            if goals_for > goals_against:
+                wins += 1
+        
+        n = len(team_matches)
+        return {
+            "matches_played": n,
+            "win_rate": wins / n if n > 0 else 0,
+            "avg_goals_scored": total_goals_scored / n if n > 0 else 0,
+            "avg_goals_conceded": total_goals_conceded / n if n > 0 else 0
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error loading team stats: {str(e)}")
+
 
 @app.get("/api/backtest-metrics")
 def get_backtest_metrics():
