@@ -3,7 +3,7 @@
 Provides a CLI entry point `main` that can be invoked as
 `python scrapycoco/scrape_corners_hybrid.py --update`.
 """
-import argparse, json, time, sys, asyncio
+import argparse, json, time, sys, asyncio, logging
 from pathlib import Path
 from datetime import datetime
 import requests
@@ -28,6 +28,23 @@ except Exception:
         def wait(self, domain: str):
             time.sleep(1.0)
     _limiter = _DummyLimiter()
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+LOG_DIR = BASE_DIR / "logs"
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+LOG_FILE = LOG_DIR / "corners_scraper.log"
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logger.handlers.clear()
+fh = logging.FileHandler(LOG_FILE, encoding="utf-8")
+fh.setFormatter(logging.Formatter("%(asctime)s %(message)s"))
+logger.addHandler(fh)
+ch = logging.StreamHandler()
+ch.setFormatter(logging.Formatter("%(message)s"))
+logger.addHandler(ch)
 
 # ---------------------------------------------------------------------------
 # Utility functions
@@ -191,30 +208,75 @@ def extract_corners_flashscore(url):
 # Main driver
 # ---------------------------------------------------------------------------
 
-def main(update: bool = False):
+def main():
     parser = argparse.ArgumentParser(description="Hybrid corners scraper (Soccerway + FlashScore)")
     parser.add_argument("--update", action="store_true", help="Only process new fixtures")
     args = parser.parse_args()
-    update = args.update
 
     existing = load_existing()
-    processed_ids = {m["id"] for m in existing.get("matches", [])} if update else set()
+    processed_ids = {m["id"] for m in existing.get("matches", [])} if args.update else set()
+
+    logger.info("Starting hybrid corners scraper (update=%s)", args.update)
+    logger.info("Soccerway URL: https://int.soccerway.com/matches/2026/")
 
     fixtures = fetch_soccerway_fixtures()
+    logger.info("Fixtures retrieved: %d", len(fixtures))
+    print(f"Total fixtures obtenidos: {len(fixtures)}")
+
     new_matches = []
     for fix in fixtures:
         fid = fix.get("id")
         if not fid:
             continue
-        if update and fid in processed_ids:
+        if args.update and fid in processed_ids:
+            logger.info("%s SKIP already_processed", fid)
             continue
-        # Try primary source
-        corners = extract_corners_soccerway(fix.get("url", ""))
+
+        source = None
+        corners = None
+        max_retries = 2
+
+        # Try primary source (Soccerway)
+        for attempt in range(max_retries + 1):
+            try:
+                corners = extract_corners_soccerway(fix.get("url", ""))
+                if corners:
+                    source = "soccerway"
+                    break
+            except Exception as e:
+                logger.warning("%s soccerway attempt %d ERROR: %s", fid, attempt + 1, e)
+                if attempt < max_retries:
+                    backoff = 2 ** attempt
+                    logger.info("%s soccerway retry in %ds", fid, backoff)
+                    time.sleep(backoff)
+            else:
+                if attempt < max_retries:
+                    backoff = 2 ** attempt
+                    time.sleep(backoff)
+
+        # Fallback to FlashScore
         if not corners:
-            corners = extract_corners_flashscore(fix.get("url", ""))
+            for attempt in range(max_retries + 1):
+                try:
+                    corners = extract_corners_flashscore(fix.get("url", ""))
+                    if corners:
+                        source = "flashscore"
+                        break
+                except Exception as e:
+                    logger.warning("%s flashscore attempt %d ERROR: %s", fid, attempt + 1, e)
+                    if attempt < max_retries:
+                        backoff = 2 ** attempt
+                        time.sleep(backoff)
+                else:
+                    if attempt < max_retries:
+                        backoff = 2 ** attempt
+                        time.sleep(backoff)
+
         if not corners:
-            # No data – skip
+            logger.warning("%s SKIP no_corners_data", fid)
+            print(f"⚠️ Sin datos de corners para fixture {fid}")
             continue
+
         home_corners, away_corners = corners
         new_matches.append({
             "id": fid,
@@ -226,15 +288,28 @@ def main(update: bool = False):
             "competition": fix.get("competition", ""),
             "type": "international",
         })
+        new_matches[-1]["_fetched_at"] = datetime.now().isoformat()
+        logger.info("%s %s OK corners=%s-%s", fid, source, home_corners, away_corners)
+        print(f"Partido {fid} OK ({source}) - {fix.get('home','?')} vs {fix.get('away','?')}: corners {home_corners}/{away_corners}")
+
     if new_matches:
         existing.setdefault("matches", []).extend(new_matches)
         # recompute teams_processed
         teams = {m["home_team"] for m in existing["matches"]}.union({m["away_team"] for m in existing["matches"]})
         existing["teams_processed"] = len(teams)
         save_data(existing)
-        print(f"🟢 Añadidos {len(new_matches)} partidos nuevos.")
+        logger.info("Añadidos %d partidos nuevos. Total: %d", len(new_matches), existing["total_matches"])
+        print(f"Añadidos {len(new_matches)} partidos nuevos.")
     else:
-        print("ℹ️ No se encontraron partidos nuevos para añadir.")
+        logger.info("No se encontraron partidos nuevos para añadir.")
+        print("No se encontraron partidos nuevos para añadir.")
+
+    # Summary
+    print(f"\n--- SUMMARY ---")
+    print(f"Total fixtures: {len(fixtures)}")
+    print(f"New matches: {len(new_matches)}")
+    print(f"Total in JSON: {existing.get('total_matches', 0)}")
+    print(f"Log file: {LOG_FILE}")
 
 if __name__ == "__main__":
     main()
