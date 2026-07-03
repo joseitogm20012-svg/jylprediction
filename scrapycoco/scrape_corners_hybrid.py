@@ -3,10 +3,15 @@
 Provides a CLI entry point `main` that can be invoked as
 `python scrapycoco/scrape_corners_hybrid.py --update`.
 """
-import argparse, json, time, sys
+import argparse, json, time, sys, asyncio
 from pathlib import Path
 from datetime import datetime
 import requests
+
+try:
+    from playwright.async_api import async_playwright
+except Exception:
+    async_playwright = None
 from bs4 import BeautifulSoup
 
 # Project root and output file
@@ -128,11 +133,59 @@ def extract_corners_soccerway(url):
 
 
 def extract_corners_flashscore(url):
-    """Attempt to extract corners using Playwright on FlashScore.
-    Stub implementation – returns ``None``.
-    """
+    """Extract corners using Playwright on FlashScore."""
     _limiter.wait_sync("flashscore.com")
-    return None
+    if async_playwright is None:
+        print("⚠️ Playwright not available")
+        return None
+    
+    async def _extract():
+        async with async_playwright() as pw:
+            browser = await pw.chromium.launch(headless=True)
+            page = await browser.new_page()
+            try:
+                # Accept cookie banner if present
+                try:
+                    await page.goto(url, wait_until="domcontentloaded", timeout=15000)
+                    await page.wait_for_timeout(1000)
+                    cookie_btn = await page.query_selector("#onetrust-accept-btn-handler")
+                    if cookie_btn:
+                        await cookie_btn.click()
+                        await page.wait_for_timeout(500)
+                except Exception:
+                    pass
+                
+                # Click "Statistics" tab
+                try:
+                    stats_tab = await page.query_selector('a[href*="statistics"], button:has-text("Estadísticas"), button:has-text("Statistics")')
+                    if stats_tab:
+                        await stats_tab.click()
+                        await page.wait_for_timeout(1500)
+                except Exception:
+                    pass
+                
+                # Wait for content and parse
+                await page.wait_for_load_state("networkidle")
+                html = await page.content()
+                
+            finally:
+                await browser.close()
+            
+            # Parse HTML with BeautifulSoup
+            soup = BeautifulSoup(html, "html.parser")
+            for row in soup.find_all("tr"):
+                cells = [c.get_text(strip=True) for c in row.find_all(["th", "td"])]
+                if cells and "corner" in cells[0].lower():
+                    if len(cells) >= 3:
+                        try:
+                            home_corners = int(cells[1])
+                            away_corners = int(cells[2])
+                            return (home_corners, away_corners)
+                        except Exception:
+                            return None
+            return None
+    
+    return asyncio.run(_extract())
 
 # ---------------------------------------------------------------------------
 # Main driver
