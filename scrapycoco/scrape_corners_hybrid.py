@@ -6,6 +6,8 @@ Provides a CLI entry point `main` that can be invoked as
 import argparse, json, time, sys
 from pathlib import Path
 from datetime import datetime
+import requests
+from bs4 import BeautifulSoup
 
 # Project root and output file
 BASE_DIR = Path(__file__).parent.parent
@@ -64,19 +66,64 @@ def save_data(data):
 # ---------------------------------------------------------------------------
 
 def fetch_soccerway_fixtures():
-    """Return a list of fixture dicts.
-    For now this is a stub returning an empty list; the full implementation
-    will be added later.
-    """
-    _limiter.wait("soccerway.com")
-    return []
+    """Fetch fixture list from Soccerway for 2026 matches."""
+    _limiter.wait_sync("soccerway.com")
+    calendar_url = "https://int.soccerway.com/matches/2026/"
+    try:
+        resp = requests.get(calendar_url, timeout=15)
+        resp.raise_for_status()
+        html = resp.text
+    except Exception as e:
+        print(f"⚠️ Error fetching Soccerway fixtures: {e}")
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    fixtures = []
+    for a in soup.find_all("a", href=True):
+        href = a["href"]
+        if "/match/" in href and href.rstrip("/").split("/")[-1].isdigit():
+            match_id = href.rstrip("/").split("/")[-1]
+            match_url = f"https://int.soccerway.com{href}"
+            # Attempt to infer team names from URL segment after '/match/'
+            parts = href.split("/")
+            try:
+                name_seg = next(p for p in parts if p and p != "match")
+                teams = name_seg.split("-")
+                home = teams[0].replace("-", " ").title()
+                away = teams[1].replace("-", " ").title()
+            except Exception:
+                home = away = ""
+            fixtures.append({
+                "id": match_id,
+                "url": match_url,
+                "home": home,
+                "away": away,
+                "date": "",
+                "competition": ""
+            })
+    return fixtures
 
 
 def extract_corners_soccerway(url):
-    """Attempt to extract (home_corners, away_corners) from a Soccerway page.
-    Stub implementation – returns ``None`` to trigger fallback.
-    """
-    _limiter.wait("soccerway.com")
+    """Extract (home_corners, away_corners) from a Soccerway match page."""
+    _limiter.wait_sync("soccerway.com")
+    try:
+        resp = requests.get(url, timeout=15)
+        resp.raise_for_status()
+        html = resp.text
+    except Exception as e:
+        print(f"⚠️ Error fetching Soccerway match page: {e}")
+        return None
+    soup = BeautifulSoup(html, "html.parser")
+    for row in soup.find_all("tr"):
+        cells = [c.get_text(strip=True) for c in row.find_all(["th", "td"])]
+        if cells and cells[0].lower() == "corners":
+            if len(cells) >= 3:
+                try:
+                    home_corners = int(cells[1])
+                    away_corners = int(cells[2])
+                    return (home_corners, away_corners)
+                except Exception:
+                    return None
     return None
 
 
@@ -84,7 +131,7 @@ def extract_corners_flashscore(url):
     """Attempt to extract corners using Playwright on FlashScore.
     Stub implementation – returns ``None``.
     """
-    _limiter.wait("flashscore.com")
+    _limiter.wait_sync("flashscore.com")
     return None
 
 # ---------------------------------------------------------------------------

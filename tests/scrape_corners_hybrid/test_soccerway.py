@@ -13,7 +13,7 @@ def test_new_scraper_fetch_soccerway_fixtures(monkeypatch):
         # Return simple HTML containing a match link
         html = '<a href="/match/argentina-mexico-2026/1234567/">Match</a>'
         return DummyResponse(html)
-    monkeypatch.setattr('scrapycoco.scrape_corners_hybrid.requests.get', mock_get)
+    monkeypatch.setattr(mod.requests, "get", mock_get)
     fixtures = mod.fetch_soccerway_fixtures()
     assert isinstance(fixtures, list)
     assert len(fixtures) == 1
@@ -34,6 +34,6 @@ def test_new_scraper_extract_corners_soccerway(monkeypatch):
     def mock_get(url, timeout=15):
         html = '<table><tr><td>Corners</td><td>5</td><td>3</td></tr></table>'
         return DummyResponse(html)
-    monkeypatch.setattr('scrapycoco.scrape_corners_hybrid.requests.get', mock_get)
+    monkeypatch.setattr(mod.requests, "get", mock_get)
     corners = mod.extract_corners_soccerway('https://example.com/match')
     assert corners == (5, 3)
