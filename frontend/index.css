@@ -1128,8 +1128,102 @@ body.light-theme .btn-secondary:hover:not(:disabled) {
 }
 
 /* ==========================================================================
-   FOOTER STYLING
+   MARKETS SUB-TABS REDESIGN (Sleek Glassmorphism)
    ========================================================================== */
+
+.markets-subtabs-container {
+  width: 100%;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.markets-subtabs-track {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--border-radius-lg);
+  scrollbar-width: none; /* Firefox */
+}
+
+.markets-subtabs-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.market-subtab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-title);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  outline: none;
+}
+
+.market-subtab-btn svg {
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+}
+
+.market-subtab-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.market-subtab-btn:hover svg {
+  opacity: 1;
+}
+
+.market-subtab-btn.active {
+  background: var(--color-primary-glow);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 15px var(--color-primary-glow);
+}
+
+.market-subtab-btn.active svg {
+  opacity: 1;
+  stroke: var(--color-primary);
+}
+
+.market-subtab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+body.light-theme .markets-subtabs-track {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(18, 42, 82, 0.1);
+}
+
+body.light-theme .market-subtab-btn {
+  color: var(--color-text-secondary);
+}
+
+body.light-theme .market-subtab-btn.active {
+  background: rgba(209, 138, 0, 0.1);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
 .app-footer {
   margin-top: 24px;
   padding: 20px;

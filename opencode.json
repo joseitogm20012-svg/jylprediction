@@ -19,6 +19,14 @@
         "Authorization": "Bearer bnni_1hgp3FaODkZEiWYxP4bEPzgTD8YWlE8t"
       },
       "enabled": true
+    },
+    "stitch": {
+      "type": "remote",
+      "url": "https://stitch.googleapis.com/mcp",
+      "enabled": true,
+      "headers": {
+        "X-Goog-Api-Key": "GCP_API_KEY_PLACEHOLDER"
+      }
     }
   }
 }

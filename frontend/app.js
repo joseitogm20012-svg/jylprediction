@@ -420,7 +420,7 @@ function bindListeners() {
     runPredictionFlow();
   });
 
-  // Tab switching logic for the results panel (Dynamic based on index.html)
+// Tab switching logic for the results panel (Dynamic based on index.html)
   const resultsTabHeader = document.getElementById("results-tab-header");
   if (resultsTabHeader) {
     const tabButtons = resultsTabHeader.querySelectorAll(".tab-btn");
@@ -455,6 +455,29 @@ function bindListeners() {
       });
     });
   }
+
+  window.switchMarketSubTab = function(tabName) {
+    // 1. Update buttons state
+    const subTabButtons = document.querySelectorAll('.market-subtab-btn');
+    subTabButtons.forEach(btn => btn.classList.remove('active'));
+    
+    const activeBtn = document.getElementById(`market-subtab-btn-${tabName}`);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    // 2. Update content visibility
+    const contents = document.querySelectorAll('.market-subtab-content');
+    contents.forEach(content => {
+      content.classList.add('hidden');
+      content.style.display = 'none';
+    });
+
+    const activeContent = document.getElementById(`sub-tab-content-${tabName}`);
+    if (activeContent) {
+      activeContent.classList.remove('hidden');
+      activeContent.style.display = 'block';
+    }
+  };
+
 
   // Defensively bind optional/deleted UI elements to prevent TypeErrors
   if (btnRunBacktest) {
