@@ -1199,10 +1199,14 @@ body.light-theme .btn-secondary:hover:not(:disabled) {
 }
 
 .market-subtab-content {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 20px;
   animation: fadeIn 0.3s ease;
+}
+
+.market-subtab-content.active {
+  display: flex;
 }
 
 @keyframes fadeIn {
@@ -5398,52 +5402,123 @@ body.light-theme #tab-betbuilder [style*="border: 1px solid rgba(255,255,255,"] 
   border-color: rgba(0,0,0,0.1) !important;
 }
 
-/* Markets Sub-tabs navigation */
-.markets-subtabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid var(--panel-border);
-  padding-bottom: 8px;
-  overflow-x: auto;
-  scrollbar-width: none;
+/* ==========================================================================
+   MOBILE RESPONSIVE: MERCADOS & CUOTAS (for screens under 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .markets-subtabs-track {
+    padding: 6px;
+    gap: 6px;
+  }
+  .market-subtab-btn {
+    padding: 8px 12px;
+    font-size: 0.72rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .market-subtab-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+  .markets-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .market-box {
+    padding: 10px 12px;
+  }
+  .market-odds-row {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .market-odds-row div {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 4px 6px;
+    font-size: 0.78rem;
+  }
+  .goals-markets-section .ou-table,
+  .corners-prediction-section .ou-table {
+    font-size: 0.75rem;
+    min-width: 240px;
+  }
+  .goals-markets-section .responsive-grid > div,
+  .corners-prediction-section .responsive-grid > div {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ou-table th,
+  .ou-table td {
+    padding: 6px 8px;
+  }
+  .corners-expected-row {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+  }
+  .expected-corners-divider {
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid var(--panel-border);
+    border-bottom: 1px solid var(--panel-border);
+    padding: 8px 0;
+    width: 100%;
+  }
+  .expected-corners-box strong {
+    font-size: 1.2rem;
+  }
+  .ev-mini {
+    font-size: 0.7rem;
+    min-width: auto;
+    margin-left: 4px;
+    display: inline;
+  }
+  .glass-card {
+    padding: 16px !important;
+  }
+  .responsive-grid.grid-1fr-1fr {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .comparative-bar-row {
+    grid-template-columns: 40px 1fr 80px 1fr 40px;
+    gap: 6px;
+  }
+  .comp-val-left, .comp-val-right {
+    font-size: 0.75rem;
+  }
+  .comp-label {
+    font-size: 0.65rem;
+  }
 }
-.markets-subtabs::-webkit-scrollbar {
-  display: none;
-}
-.market-subtab-btn {
-  flex: 0 0 auto;
-  padding: 8px 16px;
-  border: none;
-  background: transparent;
-  color: var(--color-text-secondary);
-  font-family: var(--font-family-body);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  text-transform: uppercase;
-}
-.market-subtab-btn:hover {
-  color: var(--color-text-primary);
-  background: rgba(240, 179, 16, 0.08);
-}
-.market-subtab-btn.active {
-  background: var(--color-primary);
-  color: #000;
-  font-weight: 700;
-}
-.market-subtab-content {
-  display: none;
-  animation: fadeInUp 0.25s ease;
-}
-.market-subtab-content.active {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+
+@media (max-width: 480px) {
+  .market-subtab-btn {
+    padding: 6px 10px;
+    font-size: 0.68rem;
+  }
+  .market-subtab-btn svg {
+    display: none;
+  }
+  .markets-subtabs-track {
+    gap: 4px;
+    padding: 4px;
+  }
+  .market-box h4 {
+    font-size: 0.65rem;
+  }
+  .ou-table {
+    font-size: 0.7rem;
+    min-width: 200px;
+  }
+  .ou-table th,
+  .ou-table td {
+    padding: 4px 6px;
+  }
+  .expected-corners-box span {
+    font-size: 0.65rem;
+  }
 }
 
 /* Betting Edge Section */
@@ -5577,6 +5652,7 @@ body.light-theme .h2h-stat {
 body.light-theme .ou-table thead th {
   background: rgba(0, 0, 0, 0.05);
 }
+
 body.light-theme .market-subtab-btn.active {
   color: #fff;
   background: var(--color-primary-light, #2563EB);

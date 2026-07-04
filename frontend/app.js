@@ -456,29 +456,6 @@ function bindListeners() {
     });
   }
 
-  window.switchMarketSubTab = function(tabName) {
-    // 1. Update buttons state
-    const subTabButtons = document.querySelectorAll('.market-subtab-btn');
-    subTabButtons.forEach(btn => btn.classList.remove('active'));
-    
-    const activeBtn = document.getElementById(`market-subtab-btn-${tabName}`);
-    if (activeBtn) activeBtn.classList.add('active');
-
-    // 2. Update content visibility
-    const contents = document.querySelectorAll('.market-subtab-content');
-    contents.forEach(content => {
-      content.classList.add('hidden');
-      content.style.display = 'none';
-    });
-
-    const activeContent = document.getElementById(`sub-tab-content-${tabName}`);
-    if (activeContent) {
-      activeContent.classList.remove('hidden');
-      activeContent.style.display = 'block';
-    }
-  };
-
-
   // Defensively bind optional/deleted UI elements to prevent TypeErrors
   if (btnRunBacktest) {
     btnRunBacktest.addEventListener("click", () => {
@@ -5160,24 +5137,23 @@ document.addEventListener('change', function bbCheckChange(e) {
 
 // ── Markets Sub-Tabs Switcher ──
 window.switchMarketSubTab = function(tabId) {
-  // Deactivate all tabs and tab buttons
-  document.querySelectorAll('.markets-subtabs .market-subtab-btn').forEach(btn => {
+  document.querySelectorAll('.market-subtab-btn').forEach(function(btn) {
     btn.classList.remove('active');
   });
-  document.querySelectorAll('#tab-markets .market-subtab-content').forEach(content => {
+  document.querySelectorAll('.market-subtab-content').forEach(function(content) {
     content.classList.remove('active');
   });
   
-  // Activate selected
-  const activeBtn = document.getElementById(`market-subtab-btn-${tabId}`);
+  var activeBtn = document.getElementById('market-subtab-btn-' + tabId);
   if (activeBtn) activeBtn.classList.add('active');
   
-  const activeContent = document.getElementById(`sub-tab-content-${tabId}`);
+  var activeContent = document.getElementById('sub-tab-content-' + tabId);
   if (activeContent) activeContent.classList.add('active');
   
-  // Recalculate Kelly if switched to Kelly
   if (tabId === 'kelly') {
-    calculateKellyResult();
+    if (typeof calculateKellyResult === 'function') {
+      calculateKellyResult();
+    }
   }
 };
 
