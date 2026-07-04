@@ -1150,14 +1150,35 @@
             </div>
 
             <!-- Markets Navigation Sub-Tabs -->
-            <div class="markets-subtabs">
-              <button id="market-subtab-btn-main" class="market-subtab-btn active" onclick="switchMarketSubTab('main')">Goles & Córners</button>
-              <button id="market-subtab-btn-cards-shots" class="market-subtab-btn" onclick="switchMarketSubTab('cards-shots')">Tarjetas & Tiros</button>
-              <button id="market-subtab-btn-times" class="market-subtab-btn" onclick="switchMarketSubTab('times')">Tiempos (HT/FT)</button>
-              <button id="market-subtab-btn-players" class="market-subtab-btn" onclick="switchMarketSubTab('players')">Goleadores & Jugadores</button>
-              <button id="market-subtab-btn-specials" class="market-subtab-btn" onclick="switchMarketSubTab('specials')">Especiales & Penales</button>
-              <button id="market-subtab-btn-kelly" class="market-subtab-btn" onclick="switchMarketSubTab('kelly')">Value Bets & Kelly</button>
+            <div class="markets-subtabs-container">
+              <div class="markets-subtabs-track">
+                <button id="market-subtab-btn-main" class="market-subtab-btn active" onclick="switchMarketSubTab('main')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+                  Goles & Córners
+                </button>
+                <button id="market-subtab-btn-cards-shots" class="market-subtab-btn" onclick="switchMarketSubTab('cards-shots')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+                  Tarjetas & Tiros
+                </button>
+                <button id="market-subtab-btn-times" class="market-subtab-btn" onclick="switchMarketSubTab('times')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Tiempos
+                </button>
+                <button id="market-subtab-btn-players" class="market-subtab-btn" onclick="switchMarketSubTab('players')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  Goleadores
+                </button>
+                <button id="market-subtab-btn-specials" class="market-subtab-btn" onclick="switchMarketSubTab('specials')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  Especiales
+                </button>
+                <button id="market-subtab-btn-kelly" class="market-subtab-btn" onclick="switchMarketSubTab('kelly')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 11.35V13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V11.35"/></svg>
+                  Kelly
+                </button>
+              </div>
             </div>
+
 
             <!-- SUB-TAB 1: GOLES & CÓRNERS -->
             <div id="sub-tab-content-main" class="market-subtab-content active">
