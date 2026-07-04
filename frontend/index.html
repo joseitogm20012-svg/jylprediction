@@ -1161,35 +1161,35 @@
 
             <!-- SUB-TAB 1: GOLES & CÓRNERS -->
             <div id="sub-tab-content-main" class="market-subtab-content active">
-              <!-- Goles Markets Card -->
-              <div class="goals-markets-section glass-card hidden" id="goals-markets-card">
-                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Mercados de Goles &amp; Hándicaps</h3>
-                <div class="markets-grid" style="margin-bottom: 20px;">
-                  <div class="market-box" style="padding: 10px; border: 1px solid var(--card-border-inner); border-radius: 8px;">
-                    <h4 style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase; margin-bottom: 4px;">Ambos Anotan</h4>
-                    <div class="market-odds-row" style="font-size: 0.85rem;">
-                      <div><span>Sí: </span><strong id="market-btts-yes" style="font-family: var(--font-family-mono);">--</strong><span id="ev-btts-yes" class="ev-mini"></span></div>
-                      <div><span>No: </span><strong id="market-btts-no" style="font-family: var(--font-family-mono);">--</strong><span id="ev-btts-no" class="ev-mini"></span></div>
+<!-- Goles Markets Card -->
+              <div class="goals-markets-section hidden" id="goals-markets-card">
+                <h3>Mercados de Goles & Hándicaps</h3>
+                <div class="markets-grid">
+                  <div class="market-box">
+                    <h4>Ambos Anotan</h4>
+                    <div class="market-odds-row">
+                      <div><span>Sí: </span><strong id="market-btts-yes"><span id="ev-btts-yes" class="ev-mini"></span></strong></div>
+                      <div><span>No: </span><strong id="market-btts-no"><span id="ev-btts-no" class="ev-mini"></span></strong></div>
                     </div>
                   </div>
-                  <div class="market-box" style="padding: 10px; border: 1px solid var(--card-border-inner); border-radius: 8px;">
-                    <h4 style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase; margin-bottom: 4px;">Doble Oportunidad</h4>
-                    <div class="market-odds-row" style="font-size: 0.85rem;">
-                      <div><span>1X: </span><strong id="market-dc-1X" style="font-family: var(--font-family-mono);">--</strong><span id="ev-dc-1X" class="ev-mini"></span></div>
-                      <div><span>12: </span><strong id="market-dc-12" style="font-family: var(--font-family-mono);">--</strong><span id="ev-dc-12" class="ev-mini"></span></div>
-                      <div><span>X2: </span><strong id="market-dc-X2" style="font-family: var(--font-family-mono);">--</strong><span id="ev-dc-X2" class="ev-mini"></span></div>
+                  <div class="market-box">
+                    <h4>Doble Oportunidad</h4>
+                    <div class="market-odds-row">
+                      <div><span>1X: </span><strong id="market-dc-1X"><span id="ev-dc-1X" class="ev-mini"></span></strong></div>
+                      <div><span>12: </span><strong id="market-dc-12"><span id="ev-dc-12" class="ev-mini"></span></strong></div>
+                      <div><span>X2: </span><strong id="market-dc-X2"><span id="ev-dc-X2" class="ev-mini"></span></strong></div>
                     </div>
                   </div>
-                  <div class="market-box" style="padding: 10px; border: 1px solid var(--card-border-inner); border-radius: 8px;">
-                    <h4 style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase; margin-bottom: 4px;">DNB</h4>
-                    <div class="market-odds-row" style="font-size: 0.85rem;">
-                      <div><span id="label-dnb-1">1: </span><strong id="market-dnb-1" style="font-family: var(--font-family-mono);">--</strong><span id="ev-dnb-1" class="ev-mini"></span></div>
-                      <div><span id="label-dnb-2">2: </span><strong id="market-dnb-2" style="font-family: var(--font-family-mono);">--</strong><span id="ev-dnb-2" class="ev-mini"></span></div>
+                  <div class="market-box">
+                    <h4>DNB</h4>
+                    <div class="market-odds-row">
+                      <div><span id="label-dnb-1">1: </span><strong id="market-dnb-1"><span id="ev-dnb-1" class="ev-mini"></span></strong></div>
+                      <div><span id="label-dnb-2">2: </span><strong id="market-dnb-2"><span id="ev-dnb-2" class="ev-mini"></span></strong></div>
                     </div>
                   </div>
                 </div>
 
-                <div class="responsive-grid grid-1fr-1fr" style="gap: 20px;">
+                <div class="responsive-grid grid-1fr-1fr">
                   <div>
                     <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Over/Under Goles</h4>
                     <table class="ou-table">
@@ -1208,30 +1208,29 @@
                       <tbody id="ah-tbody"></tbody>
                     </table>
                   </div>
-                </div>
               </div>
 
               <!-- Córners Prediction Card -->
-              <div class="corners-prediction-section glass-card hidden" id="corners-prediction-card">
-                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Mercados de Córners</h3>
-                <div class="corners-expected-row" style="margin-bottom: 15px;">
+              <div class="corners-prediction-section hidden" id="corners-prediction-card">
+                <h3>Mercados de Córners</h3>
+                <div class="corners-expected-row">
                   <div class="expected-corners-box">
-                    <span id="expected-corners-label-a" style="font-size: 0.72rem;">Córners A</span>
-                    <strong id="expected-corners-val-a" style="font-family: var(--font-family-mono);">--</strong>
+                    <span id="expected-corners-label-a">Córners A</span>
+                    <strong id="expected-corners-val-a"></strong>
                   </div>
                   <div class="expected-corners-divider">
-                    <span style="font-size: 0.72rem;">Total Esperado</span>
-                    <strong id="expected-corners-total" style="font-family: var(--font-family-mono);">--</strong>
+                    <span>Total Esperado</span>
+                    <strong id="expected-corners-total"></strong>
                   </div>
                   <div class="expected-corners-box">
-                    <span id="expected-corners-label-b" style="font-size: 0.72rem;">Córners B</span>
-                    <strong id="expected-corners-val-b" style="font-family: var(--font-family-mono);">--</strong>
+                    <span id="expected-corners-label-b">Córners B</span>
+                    <strong id="expected-corners-val-b"></strong>
                   </div>
                 </div>
 
-                <div class="responsive-grid grid-1fr-1fr" style="gap: 20px;">
+                <div class="responsive-grid grid-1fr-1fr">
                   <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Over/Under Córners</h4>
+                    <h4>Over/Under Córners</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
@@ -1240,7 +1239,7 @@
                     </table>
                   </div>
                   <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Más Córners (1X2)</h4>
+                    <h4>Más Córners (1X2)</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Opción</th><th>Probabilidad</th></tr>
@@ -1268,33 +1267,33 @@
             <!-- SUB-TAB 2: TARJETAS & TIROS -->
             <div id="sub-tab-content-cards-shots" class="market-subtab-content">
               <!-- Tarjetas Card -->
-              <div class="glass-card" style="padding: 24px;">
-                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Mercados de Tarjetas</h3>
-                <div class="corners-expected-row" style="margin-bottom: 15px;">
+              <div class="market-card">
+                <h3>Mercados de Tarjetas</h3>
+                <div class="corners-expected-row">
                   <div class="expected-corners-box">
                     <span id="expected-cards-label-a">Tarjetas A</span>
-                    <strong id="expected-cards-val-a" style="font-family: var(--font-family-mono);">--</strong>
+                    <strong id="expected-cards-val-a"></strong>
                   </div>
                   <div class="expected-corners-divider">
                     <span>Total Tarjetas</span>
-                    <strong id="expected-cards-total" style="font-family: var(--font-family-mono);">--</strong>
+                    <strong id="expected-cards-total"></strong>
                   </div>
                   <div class="expected-corners-box">
                     <span id="expected-cards-label-b">Tarjetas B</span>
-                    <strong id="expected-cards-val-b" style="font-family: var(--font-family-mono);">--</strong>
+                    <strong id="expected-cards-val-b"></strong>
                   </div>
                 </div>
-                <div class="responsive-grid grid-1fr-1fr" style="gap: 20px;">
+                <div class="responsive-grid grid-1fr-1fr">
                   <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Over/Under Tarjetas</h4>
+                    <h4>Over/Under Tarjetas</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
                       </thead>
                       <tbody id="ou-cards-tbody"></tbody>
                     </table>
-                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.015); border: 1px solid var(--card-border-inner); border-radius: 8px;">
-                      <h4 style="font-size: 0.72rem; color: var(--color-text-secondary); text-transform: uppercase; margin-bottom: 4px;">Tarjeta Roja en Partido</h4>
+                    <div class="market-card-box">
+                      <h4>Tarjeta Roja en Partido</h4>
                       <div style="font-size: 0.85rem; font-weight: 700;">
                         <span>Sí: </span><span id="prob-red-card-yes" style="font-family: var(--font-family-mono); color: #ef4444;">--%</span>
                         <span style="margin: 0 10px;">|</span>
@@ -1309,38 +1308,38 @@
                         <tr><th>Jugador</th><th>Probabilidad</th></tr>
                       </thead>
                       <tbody id="booking-players-tbody"></tbody>
-                    </table>
+</table>
                   </div>
                 </div>
               </div>
               
               <!-- Tiros Card -->
-              <div class="glass-card" style="padding: 24px;">
-                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Mercados de Tiros & Remates</h3>
-                <div class="corners-expected-row" style="margin-bottom: 15px;">
+              <div class="market-card">
+                <h3>Mercados de Tiros & Remates</h3>
+                <div class="corners-expected-row">
                   <div class="expected-corners-box">
                     <span id="expected-shots-label-a">Tiros A</span>
-                    <strong id="expected-shots-val-a" style="font-family: var(--font-family-mono);">--</strong>
+                    <strong id="expected-shots-val-a"></strong>
                   </div>
                   <div class="expected-corners-divider">
                     <span>Total Tiros</span>
-                    <strong id="expected-shots-total" style="font-family: var(--font-family-mono);">--</strong>
+                    <strong id="expected-shots-total"></strong>
                   </div>
                   <div class="expected-corners-box">
                     <span id="expected-shots-label-b">Tiros B</span>
-                    <strong id="expected-shots-val-b" style="font-family: var(--font-family-mono);">--</strong>
+                    <strong id="expected-shots-val-b"></strong>
                   </div>
                 </div>
-                <div class="responsive-grid grid-1fr-1fr" style="gap: 20px;">
+                <div class="responsive-grid grid-1fr-1fr">
                   <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Over/Under Tiros Totales</h4>
+                    <h4>Over/Under Tiros Totales</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
                       </thead>
                       <tbody id="ou-shots-tbody"></tbody>
                     </table>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-top: 15px; margin-bottom: 6px;">Over/Under Tiros a Puerta</h4>
+                    <h4 style="margin-top: 16px;">Over/Under Tiros a Puerta</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
@@ -1349,7 +1348,7 @@
                     </table>
                   </div>
                   <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Jugador con Más Tiros</h4>
+                    <h4>Jugador con Más Tiros</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Jugador</th><th>Probabilidad</th></tr>
@@ -1374,11 +1373,11 @@
 
             <!-- SUB-TAB 3: TIMING (HT/FT) -->
             <div id="sub-tab-content-times" class="market-subtab-content">
-              <div class="glass-card" style="padding: 24px;">
-                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Mercados por Tiempo y HT/FT</h3>
-                <div class="responsive-grid grid-1fr-1fr" style="gap: 20px;">
+              <div class="market-card">
+                <h3>Mercados por Tiempo y HT/FT</h3>
+                <div class="responsive-grid grid-1fr-1fr">
                   <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Ganador Primer y Segundo Tiempo</h4>
+                    <h4>Ganador Primer y Segundo Tiempo</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Opción</th><th>1T (%)</th><th>2T (%)</th></tr>
@@ -1389,14 +1388,14 @@
                         <tr><td id="lbl-times-win-b">Equipo B</td><td style="font-weight:700;" id="prob-1t-win-b">--%</td><td style="font-weight:700;" id="prob-2t-win-b">--%</td></tr>
                       </tbody>
                     </table>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-top: 15px; margin-bottom: 6px;">Over/Under 1T Goles</h4>
+                    <h4 style="margin-top: 16px;">Over/Under 1T Goles</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
                       </thead>
                       <tbody id="ou-1t-tbody"></tbody>
                     </table>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-top: 15px; margin-bottom: 6px;">Ambos Anotan (BTTS) por Tiempos</h4>
+                    <h4 style="margin-top: 16px;">Ambos Anotan (BTTS) por Tiempos</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Tiempo</th><th>Sí (%)</th><th>No (%)</th></tr>
@@ -1408,7 +1407,7 @@
                     </table>
                   </div>
                   <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Combinado Descanso / Final (HT/FT)</h4>
+                    <h4 style="margin-top: 16px;">Combinado Descanso / Final (HT/FT)</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>HT / FT</th><th>Probabilidad</th></tr>
@@ -1432,11 +1431,11 @@
 
             <!-- SUB-TAB 4: PLAYERS & SCORERS -->
             <div id="sub-tab-content-players" class="market-subtab-content">
-              <div class="glass-card" style="padding: 24px;">
-                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Goleadores y Creadores de Juego</h3>
-                <div class="responsive-grid grid-1fr-1fr" style="gap: 20px;">
-                  <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;" id="lbl-scorers-team-a">Goleadores A</h4>
+              <div class="market-card">
+                <h3>Goleadores y Creadores de Juego</h3>
+                <div class="responsive-grid grid-1fr-1fr">
+<div>
+                    <h4 id="lbl-scorers-team-a">Goleadores A</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Jugador</th><th>1° Gol</th><th>Anytime</th><th>2+ Goles</th></tr>
@@ -1444,7 +1443,7 @@
                       <tbody id="scorers-team-a-tbody"></tbody>
                     </table>
                     
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-top: 20px; margin-bottom: 6px;" id="lbl-assists-team-a">Asistencias A</h4>
+                    <h4 style="margin-top: 16px;" id="lbl-assists-team-a">Asistencias A</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Jugador</th><th>Probabilidad</th></tr>
@@ -1453,7 +1452,7 @@
                     </table>
                   </div>
                   <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;" id="lbl-scorers-team-b">Goleadores B</h4>
+                    <h4 id="lbl-scorers-team-b">Goleadores B</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Jugador</th><th>1° Gol</th><th>Anytime</th><th>2+ Goles</th></tr>
@@ -1461,7 +1460,7 @@
                       <tbody id="scorers-team-b-tbody"></tbody>
                     </table>
                     
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-top: 20px; margin-bottom: 6px;" id="lbl-assists-team-b">Asistencias B</h4>
+                    <h4 style="margin-top: 16px;" id="lbl-assists-team-b">Asistencias B</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Jugador</th><th>Probabilidad</th></tr>
@@ -1475,11 +1474,11 @@
 
             <!-- SUB-TAB 5: SPECIALS & PENALTIES -->
             <div id="sub-tab-content-specials" class="market-subtab-content">
-              <div class="glass-card" style="padding: 24px;">
-                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Mercados Especiales y de Penales</h3>
-                <div class="responsive-grid grid-1fr-1fr" style="gap: 20px;">
+              <div class="market-card">
+                <h3>Mercados Especiales y de Penales</h3>
+                <div class="responsive-grid grid-1fr-1fr">
                   <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Mercado de Penales</h4>
+                    <h4>Mercado de Penales</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Evento</th><th>Sí (%)</th><th>No (%)</th></tr>
@@ -1491,7 +1490,7 @@
                       </tbody>
                     </table>
                     
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-top: 20px; margin-bottom: 6px;">Estilo de Gol y Eventos de Partido</h4>
+                    <h4 style="margin-top: 16px;">Estilo de Gol y Eventos de Partido</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Tipo de Jugada</th><th>Sí (%)</th><th>No (%)</th></tr>
@@ -1505,7 +1504,7 @@
                     </table>
                   </div>
                   <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Portería a Cero (Clean Sheets)</h4>
+                    <h4>Portería a Cero (Clean Sheets)</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Equipo</th><th>Clean Sheet (%)</th><th>Recibe Gol (%)</th></tr>
@@ -1516,7 +1515,7 @@
                       </tbody>
                     </table>
                     
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-top: 20px; margin-bottom: 6px;">Victoria sin Encajar (Win to Nil)</h4>
+                    <h4 style="margin-top: 16px;">Victoria sin Encajar (Win to Nil)</h4>
                     <table class="ou-table">
                       <thead>
                         <tr><th>Equipo</th><th>Sí (%)</th><th>No (%)</th></tr>
@@ -1533,10 +1532,10 @@
 
             <!-- SUB-TAB 6: KELLY CRITERION & VALUE BETS -->
             <div id="sub-tab-content-kelly" class="market-subtab-content">
-              <div class="glass-card" style="padding: 24px;">
-                <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Calculadora de Criterio de Kelly</h3>
+              <div class="market-card">
+                <h3>Calculadora de Criterio de Kelly</h3>
                 <p class="slider-desc" style="margin-bottom: 15px;">Evalúa el porcentaje sugerido de tu bankroll (Stake) en base a la cuota real y la probabilidad matemática calculada.</p>
-                <div class="responsive-grid grid-1fr-1fr" style="gap: 20px;">
+                <div class="responsive-grid grid-1fr-1fr">
                   <div style="padding: 15px; background: rgba(255,255,255,0.015); border: 1px solid var(--panel-border); border-radius: 12px;">
                     <div class="form-group" style="margin-bottom: 12px;">
                       <label style="font-size: 0.72rem;">Selecciona Mercado</label>

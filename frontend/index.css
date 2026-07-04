@@ -1161,77 +1161,137 @@ body.light-theme .btn-secondary:hover:not(:disabled) {
 }
 
 .market-box {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--card-border-inner);
   border-radius: var(--border-radius-md);
   padding: 12px 14px;
+  margin-bottom: 8px;
 }
 
 .market-box h4 {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  color: var(--color-text-muted);
-  letter-spacing: 0.05em;
-  margin-bottom: 8px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
   font-weight: 700;
+  border-bottom: 1px solid var(--panel-border);
+  padding-bottom: 6px;
 }
 
 .market-odds-row {
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
 }
 
 .market-odds-row div {
   background: rgba(255, 255, 255, 0.04);
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 6px 10px;
+  border-radius: 6px;
   flex: 1;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  min-width: 0;
 }
 
 .market-odds-row span {
   color: var(--color-text-secondary);
+  font-size: 0.75rem;
 }
 
 .market-odds-row strong {
   color: var(--color-primary);
   font-weight: 700;
+  font-family: var(--font-family-mono);
 }
 
 /* Over Under Tables */
 .ou-table-container {
   overflow-x: auto;
-  margin-top: 4px;
+  margin-top: 8px;
 }
 
 .ou-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   text-align: left;
 }
 
 .ou-table th {
-  padding: 6px 12px;
-  color: var(--color-text-muted);
+  padding: 8px 12px;
+  color: var(--color-text-secondary);
   font-weight: 600;
   border-bottom: 1px solid var(--panel-border);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
 .ou-table td {
-  padding: 8px 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   font-weight: 500;
 }
 
 .ou-table tr:last-child td {
   border-bottom: none;
+}
+
+.ou-table td:first-child {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.ou-table td:not(:first-child) {
+  color: #fff;
+  font-family: var(--font-family-mono);
+  text-align: right;
+}
+
+/* Market Cards (cleaner than glass-card for sub-tabs) */
+.market-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border-inner);
+  border-radius: var(--border-radius-md);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.market-card h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 12px;
+}
+
+.market-card h4 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.market-card-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border-inner);
+  border-radius: var(--border-radius-md);
+  padding: 12px 14px;
+  margin-top: 12px;
+}
+
+.market-card-box h4 {
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 /* Corners expected visualizer */
@@ -1242,9 +1302,9 @@ body.light-theme .btn-secondary:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--card-border-inner);
   border-radius: var(--border-radius-md);
-  padding: 16px;
+  padding: 14px 12px;
   margin-top: 10px;
-  gap: 12px;
+  gap: 8px;
 }
 
 .expected-corners-box {
@@ -1253,37 +1313,41 @@ body.light-theme .btn-secondary:hover:not(:disabled) {
   align-items: center;
   flex: 1;
   text-align: center;
+  min-width: 0;
 }
 
 .expected-corners-box span {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--color-text-secondary);
   font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   word-break: break-word;
+  letter-spacing: 0.03em;
 }
 
 .expected-corners-box strong {
-  font-size: 1.4rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: #fff;
-  font-family: var(--font-family-title);
+  font-family: var(--font-family-mono);
+  line-height: 1.2;
 }
 
 .expected-corners-divider {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4px 16px;
+  padding: 2px 12px;
   border-left: 1px solid var(--panel-border);
   border-right: 1px solid var(--panel-border);
 }
 
 .expected-corners-divider span {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   color: var(--color-text-muted);
   text-transform: uppercase;
+  letter-spacing: 0.03em;
   letter-spacing: 0.05em;
   white-space: nowrap;
 }
@@ -5286,6 +5350,138 @@ body.light-theme #tab-betbuilder [style*="border: 1px solid rgba(255,255,255,"] 
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+/* Betting Edge Section */
+.betting-edge-section {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border-inner);
+  border-radius: var(--border-radius-md);
+  padding: 20px;
+}
+
+.betting-edge-section h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 12px;
+}
+
+.h2h-stats-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.h2h-stat {
+  flex: 1;
+  min-width: 120px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border-inner);
+  border-radius: var(--border-radius-md);
+  padding: 14px 16px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.h2h-stat:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+}
+
+.h2h-stat-num {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: var(--font-family-mono);
+  color: var(--color-primary);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.h2h-stat-label {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+#odds-alert-message {
+  padding: 10px 14px !important;
+  font-size: 0.8rem !important;
+  border-radius: var(--border-radius-md) !important;
+  font-weight: 600 !important;
+}
+
+/* Goals markets card */
+.goals-markets-section,
+.corners-prediction-section {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border-inner);
+  border-radius: var(--border-radius-md);
+  padding: 20px;
+}
+
+.goals-markets-section h3,
+.corners-prediction-section h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 12px;
+}
+
+.markets-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.responsive-grid.grid-1fr-1fr {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.ou-table-container {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--panel-border);
+  overflow: hidden;
+}
+
+.ou-table thead th {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.ou-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Light theme adjustments */
+body.light-theme .betting-edge-section,
+body.light-theme .goals-markets-section,
+body.light-theme .corners-prediction-section,
+body.light-theme .market-box,
+body.light-theme .ou-table-container,
+body.light-theme .market-card,
+body.light-theme .market-card-box {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .h2h-stat {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .ou-table thead th {
+  background: rgba(0, 0, 0, 0.05);
 }
 body.light-theme .market-subtab-btn.active {
   color: #fff;
