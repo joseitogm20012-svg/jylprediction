@@ -60,16 +60,7 @@ app = FastAPI(
     version="2.0.0"
 )
 
-<<<<<<< Updated upstream
-# Security: Trusted Host middleware (prevents Host header attacks)
-allowed_hosts_env = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1")
-allowed_hosts = allowed_hosts_env.split(",")
-if "RENDER" in os.environ.get("RENDER_EXTERNAL_HOSTNAME", ""):
-    allowed_hosts = ["*"]
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
-
-=======
->>>>>>> Stashed changes
+# Security: Rate Limiting
 # Security: Rate Limiting
 limiter = Limiter(key_func=get_remote_address, default_limits=["200/minute", "50/second"])
 app.state.limiter = limiter
