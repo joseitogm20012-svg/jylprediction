@@ -62,7 +62,10 @@ app = FastAPI(
 )
 
 # Security: Trusted Host middleware (prevents Host header attacks)
-allowed_hosts = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+allowed_hosts_env = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1")
+allowed_hosts = allowed_hosts_env.split(",")
+if "RENDER" in os.environ.get("RENDER_EXTERNAL_HOSTNAME", ""):
+    allowed_hosts = ["*"]
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
 
 # Security: Rate Limiting
