@@ -1,0 +1,53 @@
+{
+  "match_id": "EZmXxG15",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Williams",
+        "20Mudau",
+        "21Okon",
+        "14Mbokazi",
+        "6Modiba",
+        "4Mokoena",
+        "13Sithole",
+        "12Maseko",
+        "10Mofokeng",
+        "7Appollis",
+        "17Makgopa"
+      ],
+      "suplentes": [
+        "Sigur N.",
+        "De Fougerolles L.",
+        "David P.",
+        "Shaffelburg J.",
+        "Davies A."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "16Crepeau",
+        "2Johnston",
+        "15Bombito",
+        "13Cornelius",
+        "22Laryea",
+        "17Buchanan",
+        "25Saliba",
+        "7Eustaquio",
+        "11Millar",
+        "10David",
+        "12Oluwaseyi"
+      ],
+      "suplentes": [
+        "Mbatha T.",
+        "Rayners I.",
+        "Moremi T."
+      ],
+      "formacion": "4 - 4 - 2"
+    }
+  },
+  "error": null,
+  "description": "28.06.2026 15:00SudáfricaFIFA: 60.0-1FinalizadoCanadáEquipo que avanzaFIFA: 30.0-1Finalizado",
+  "score": "0-1"
+}

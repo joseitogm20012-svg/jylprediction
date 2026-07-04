@@ -1,0 +1,188 @@
+{
+  "match_id": "hEWfCwid",
+  "estadisticas": {
+    "2.17Goles esperados (xG)0.20": {
+      "home": "2.17",
+      "away": "0.20"
+    },
+    "58%Posesión42%": {
+      "home": "58%",
+      "away": "42%"
+    },
+    "19Remates totales3": {
+      "home": "19",
+      "away": "3"
+    },
+    "4Remates a puerta1": {
+      "home": "4",
+      "away": "1"
+    },
+    "3Grandes ocasiones0": {
+      "home": "3",
+      "away": "0"
+    },
+    "2Córneres4": {
+      "home": "2",
+      "away": "4"
+    },
+    "82%(400/485)Pases76%(269/355)": {
+      "home": "82%(400/485)",
+      "away": "76%(269/355)"
+    },
+    "3Tarjetas amarillas2": {
+      "home": "3",
+      "away": "2"
+    },
+    "2.35xG a puerta (xGOT)0.29": {
+      "home": "2.35",
+      "away": "0.29"
+    },
+    "14Remates fuera2": {
+      "home": "14",
+      "away": "2"
+    },
+    "1Remates rechazados0": {
+      "home": "1",
+      "away": "0"
+    },
+    "11Remates dentro del área2": {
+      "home": "11",
+      "away": "2"
+    },
+    "8Remates fuera del área1": {
+      "home": "8",
+      "away": "1"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "30Toques en el área rival7": {
+      "home": "30",
+      "away": "7"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Fueras de juego1": {
+      "home": "3",
+      "away": "1"
+    },
+    "16Tiros libres6": {
+      "home": "16",
+      "away": "6"
+    },
+    "47%(28/59)Pases largos36%(21/59)": {
+      "home": "47%(28/59)",
+      "away": "36%(21/59)"
+    },
+    "71%(91/128)Pases en el último tercio62%(61/99)": {
+      "home": "71%(91/128)",
+      "away": "62%(61/99)"
+    },
+    "23%(5/22)Centros13%(2/16)": {
+      "home": "23%(5/22)",
+      "away": "13%(2/16)"
+    },
+    "0.89Asistencias esperadas (xA)0.24": {
+      "home": "0.89",
+      "away": "0.24"
+    },
+    "26Saques de banda23": {
+      "home": "26",
+      "away": "23"
+    },
+    "6Faltas16": {
+      "home": "6",
+      "away": "16"
+    },
+    "65%(13/20)Entradas62%(18/29)": {
+      "home": "65%(13/20)",
+      "away": "62%(18/29)"
+    },
+    "58Duelos ganados63": {
+      "home": "58",
+      "away": "63"
+    },
+    "25Despejes38": {
+      "home": "25",
+      "away": "38"
+    },
+    "7Intercepciones12": {
+      "home": "7",
+      "away": "12"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Paradas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0.29xGOT enfrentados2.35": {
+      "home": "0.29",
+      "away": "2.35"
+    },
+    "-0.71Goles evitados-0.65": {
+      "home": "-0.71",
+      "away": "-0.65"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Mpasi-Nzau",
+        "2Wan-Bissaka",
+        "22Mbemba",
+        "4Tuanzebe",
+        "26Masuaku",
+        "7Mbuku",
+        "8Moutoussamy",
+        "14Sadiki",
+        "9Cipenga",
+        "17Bakambu",
+        "20Wissa"
+      ],
+      "suplentes": [
+        "Mayele F.",
+        "Bongonda T.",
+        "Mukau N.",
+        "Elia M.",
+        "Kayembe J."
+      ],
+      "formacion": "4 - 4 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "12Nematov",
+        "5Ashurmatov",
+        "2Khusanov",
+        "26Urozov",
+        "3Alizhonov",
+        "6Mozgovoy",
+        "7Shukurov",
+        "13Nasrullaev",
+        "17Khamdamov",
+        "22Fayzullaev",
+        "14Shomurodov"
+      ],
+      "suplentes": [
+        "Khamrobekov O.",
+        "Ganiev A.",
+        "Urunov O.",
+        "Sergeev I.",
+        "Iskanderov J."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    }
+  },
+  "error": null,
+  "description": "27.06.2026 19:30RD CongoFIFA: 46.UzbekistánFIFA: 50.",
+  "score": "3-1"
+}

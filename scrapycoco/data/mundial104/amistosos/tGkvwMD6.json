@@ -1,0 +1,187 @@
+{
+  "match_id": "tGkvwMD6",
+  "estadisticas": {
+    "4.87Goles esperados (xG)0.24": {
+      "home": "4.87",
+      "away": "0.24"
+    },
+    "76%Posesión24%": {
+      "home": "76%",
+      "away": "24%"
+    },
+    "25Remates totales3": {
+      "home": "25",
+      "away": "3"
+    },
+    "13Remates a puerta1": {
+      "home": "13",
+      "away": "1"
+    },
+    "9Grandes ocasiones1": {
+      "home": "9",
+      "away": "1"
+    },
+    "6Córneres0": {
+      "home": "6",
+      "away": "0"
+    },
+    "87%(551/631)Pases62%(123/199)": {
+      "home": "87%(551/631)",
+      "away": "62%(123/199)"
+    },
+    "0Tarjetas amarillas4": {
+      "home": "0",
+      "away": "4"
+    },
+    "5.25xG a puerta (xGOT)0.67": {
+      "home": "5.25",
+      "away": "0.67"
+    },
+    "11Remates fuera2": {
+      "home": "11",
+      "away": "2"
+    },
+    "1Remates rechazados0": {
+      "home": "1",
+      "away": "0"
+    },
+    "19Remates dentro del área2": {
+      "home": "19",
+      "away": "2"
+    },
+    "6Remates fuera del área1": {
+      "home": "6",
+      "away": "1"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "54Toques en el área rival3": {
+      "home": "54",
+      "away": "3"
+    },
+    "1Pases entre líneas completados0": {
+      "home": "1",
+      "away": "0"
+    },
+    "2Fueras de juego0": {
+      "home": "2",
+      "away": "0"
+    },
+    "18Tiros libres7": {
+      "home": "18",
+      "away": "7"
+    },
+    "61%(19/31)Pases largos27%(13/49)": {
+      "home": "61%(19/31)",
+      "away": "27%(13/49)"
+    },
+    "77%(170/221)Pases en el último tercio41%(12/29)": {
+      "home": "77%(170/221)",
+      "away": "41%(12/29)"
+    },
+    "31%(4/13)Centros0%(0/2)": {
+      "home": "31%(4/13)",
+      "away": "0%(0/2)"
+    },
+    "2.80Asistencias esperadas (xA)0.03": {
+      "home": "2.80",
+      "away": "0.03"
+    },
+    "26Saques de banda20": {
+      "home": "26",
+      "away": "20"
+    },
+    "7Faltas18": {
+      "home": "7",
+      "away": "18"
+    },
+    "56%(9/16)Entradas50%(13/26)": {
+      "home": "56%(9/16)",
+      "away": "50%(13/26)"
+    },
+    "53Duelos ganados43": {
+      "home": "53",
+      "away": "43"
+    },
+    "9Despejes35": {
+      "home": "9",
+      "away": "35"
+    },
+    "5Intercepciones3": {
+      "home": "5",
+      "away": "3"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Paradas8": {
+      "home": "0",
+      "away": "8"
+    },
+    "0.67xGOT enfrentados5.25": {
+      "home": "0.67",
+      "away": "5.25"
+    },
+    "-0.33Goles evitados0.25": {
+      "home": "-0.33",
+      "away": "0.25"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "12Tarnovanu",
+        "2Ratiu",
+        "5Ghita",
+        "15Eissat",
+        "11Bancu",
+        "22Dragomir",
+        "6Screciu",
+        "19Tanase",
+        "20Man",
+        "9Birligea",
+        "7Baiaram"
+      ],
+      "suplentes": [
+        "Marin R.",
+        "Olaru D.",
+        "Munteanu L.",
+        "Hagi I.",
+        "Petrila C."
+      ],
+      "formacion": "4 - 3 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "1Colombo",
+        "4Fabbri",
+        "14Valentini",
+        "6Rossi",
+        "11Riccardi",
+        "8Pancotti",
+        "17Golinucci",
+        "23Valli Casadei",
+        "22Mularoni",
+        "18Zannoni",
+        "19Giacopetti"
+      ],
+      "suplentes": [
+        "Benvenuti G.",
+        "Tosi A.",
+        "Vitaioli M.",
+        "Capicchioni G."
+      ],
+      "formacion": "4 - 5 - 1"
+    }
+  },
+  "error": null,
+  "description": "18.11.2025 15:45RumaníaFIFA: 54.7-1FinalizadoSan MarinoFIFA: 211.7-1Finalizado",
+  "score": "7-1"
+}

@@ -1,0 +1,54 @@
+{
+  "match_id": "Iiqjm5Pq",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "23Simón",
+        "5Llorente",
+        "22Cubarsí",
+        "14Laporte",
+        "24Cucurella",
+        "8Ruiz",
+        "16Rodri",
+        "20Pedri",
+        "7Torres",
+        "21Oyarzabal",
+        "9Gavi"
+      ],
+      "suplentes": [
+        "Semedo W.",
+        "Da Costa N.",
+        "Duarte D.",
+        "Joao Paulo",
+        "Arcanjo T."
+      ],
+      "formacion": "4 - 3 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "1Vozinha",
+        "22Moreira",
+        "4Lopes",
+        "3Borges",
+        "13Lopes Cabral",
+        "6Lenini",
+        "20Mendes",
+        "15Duarte",
+        "10Monteiro",
+        "7Cabral",
+        "19Livramento"
+      ],
+      "suplentes": [
+        "Merino M.",
+        "Lamine Yamal",
+        "Olmo D.",
+        "Williams N."
+      ],
+      "formacion": "4 - 1 - 4 - 1"
+    }
+  },
+  "error": null,
+  "description": "15.06.2026 12:00EspañaFIFA: 2.Cabo VerdeFIFA: 67.",
+  "score": "0-0"
+}

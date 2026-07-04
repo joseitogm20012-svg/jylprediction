@@ -1,0 +1,152 @@
+{
+  "match_id": "0rAjVxuo",
+  "estadisticas": {
+    "2.60Goles esperados (xG)1.01": {
+      "home": "2.60",
+      "away": "1.01"
+    },
+    "51%Posesión49%": {
+      "home": "51%",
+      "away": "49%"
+    },
+    "10Remates totales16": {
+      "home": "10",
+      "away": "16"
+    },
+    "7Remates a puerta8": {
+      "home": "7",
+      "away": "8"
+    },
+    "3Grandes ocasiones2": {
+      "home": "3",
+      "away": "2"
+    },
+    "2Córneres5": {
+      "home": "2",
+      "away": "5"
+    },
+    "89%(398/449)Pases85%(361/425)": {
+      "home": "89%(398/449)",
+      "away": "85%(361/425)"
+    },
+    "0Tarjetas amarillas3": {
+      "home": "0",
+      "away": "3"
+    },
+    "4.20xG a puerta (xGOT)1.71": {
+      "home": "4.20",
+      "away": "1.71"
+    },
+    "2Remates fuera5": {
+      "home": "2",
+      "away": "5"
+    },
+    "1Remates rechazados3": {
+      "home": "1",
+      "away": "3"
+    },
+    "6Remates dentro del área7": {
+      "home": "6",
+      "away": "7"
+    },
+    "4Remates fuera del área9": {
+      "home": "4",
+      "away": "9"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "20Toques en el área rival26": {
+      "home": "20",
+      "away": "26"
+    },
+    "1Pases entre líneas completados1": {
+      "home": "1",
+      "away": "1"
+    },
+    "3Fueras de juego3": {
+      "home": "3",
+      "away": "3"
+    },
+    "12Tiros libres9": {
+      "home": "12",
+      "away": "9"
+    },
+    "51%(18/35)Pases largos23%(7/30)": {
+      "home": "51%(18/35)",
+      "away": "23%(7/30)"
+    },
+    "76%(74/97)Pases en el último tercio82%(87/106)": {
+      "home": "76%(74/97)",
+      "away": "82%(87/106)"
+    },
+    "19%(3/16)Centros14%(3/21)": {
+      "home": "19%(3/16)",
+      "away": "14%(3/21)"
+    },
+    "1.43Asistencias esperadas (xA)0.77": {
+      "home": "1.43",
+      "away": "0.77"
+    },
+    "13Saques de banda22": {
+      "home": "13",
+      "away": "22"
+    },
+    "9Faltas12": {
+      "home": "9",
+      "away": "12"
+    },
+    "53%(8/15)Entradas50%(9/18)": {
+      "home": "53%(8/15)",
+      "away": "50%(9/18)"
+    },
+    "43Duelos ganados47": {
+      "home": "43",
+      "away": "47"
+    },
+    "24Despejes15": {
+      "home": "24",
+      "away": "15"
+    },
+    "8Intercepciones5": {
+      "home": "8",
+      "away": "5"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "7Paradas2": {
+      "home": "7",
+      "away": "2"
+    },
+    "1.71xGOT enfrentados4.20": {
+      "home": "1.71",
+      "away": "4.20"
+    },
+    "0.71Goles evitados-0.80": {
+      "home": "0.71",
+      "away": "-0.80"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "20.06.2026 13:00Países BajosFIFA: 8.5-1FinalizadoSueciaFIFA: 38.5-1Finalizado",
+  "score": "5-1"
+}

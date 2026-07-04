@@ -1,0 +1,186 @@
+{
+  "match_id": "OjRH5DuB",
+  "estadisticas": {
+    "0.84Goles esperados (xG)1.97": {
+      "home": "0.84",
+      "away": "1.97"
+    },
+    "61%Posesión39%": {
+      "home": "61%",
+      "away": "39%"
+    },
+    "15Remates totales13": {
+      "home": "15",
+      "away": "13"
+    },
+    "3Remates a puerta4": {
+      "home": "3",
+      "away": "4"
+    },
+    "0Grandes ocasiones5": {
+      "home": "0",
+      "away": "5"
+    },
+    "8Córneres2": {
+      "home": "8",
+      "away": "2"
+    },
+    "87%(513/589)Pases77%(281/367)": {
+      "home": "87%(513/589)",
+      "away": "77%(281/367)"
+    },
+    "3Tarjetas amarillas4": {
+      "home": "3",
+      "away": "4"
+    },
+    "0.47xG a puerta (xGOT)1.23": {
+      "home": "0.47",
+      "away": "1.23"
+    },
+    "6Remates fuera6": {
+      "home": "6",
+      "away": "6"
+    },
+    "6Remates rechazados3": {
+      "home": "6",
+      "away": "3"
+    },
+    "8Remates dentro del área10": {
+      "home": "8",
+      "away": "10"
+    },
+    "7Remates fuera del área3": {
+      "home": "7",
+      "away": "3"
+    },
+    "0Al palo1": {
+      "home": "0",
+      "away": "1"
+    },
+    "28Toques en el área rival26": {
+      "home": "28",
+      "away": "26"
+    },
+    "0Pases entre líneas completados1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Fueras de juego3": {
+      "home": "0",
+      "away": "3"
+    },
+    "16Tiros libres11": {
+      "home": "16",
+      "away": "11"
+    },
+    "41%(18/44)Pases largos44%(29/66)": {
+      "home": "41%(18/44)",
+      "away": "44%(29/66)"
+    },
+    "70%(91/130)Pases en el último tercio52%(51/98)": {
+      "home": "70%(91/130)",
+      "away": "52%(51/98)"
+    },
+    "27%(4/15)Centros10%(1/10)": {
+      "home": "27%(4/15)",
+      "away": "10%(1/10)"
+    },
+    "1.29Asistencias esperadas (xA)0.87": {
+      "home": "1.29",
+      "away": "0.87"
+    },
+    "14Saques de banda15": {
+      "home": "14",
+      "away": "15"
+    },
+    "11Faltas16": {
+      "home": "11",
+      "away": "16"
+    },
+    "59%(10/17)Entradas77%(17/22)": {
+      "home": "59%(10/17)",
+      "away": "77%(17/22)"
+    },
+    "63Duelos ganados71": {
+      "home": "63",
+      "away": "71"
+    },
+    "38Despejes32": {
+      "home": "38",
+      "away": "32"
+    },
+    "7Intercepciones8": {
+      "home": "7",
+      "away": "8"
+    },
+    "1Errores conducentes a remate1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Paradas2": {
+      "home": "2",
+      "away": "2"
+    },
+    "1.23xGOT enfrentados0.47": {
+      "home": "1.23",
+      "away": "0.47"
+    },
+    "0.23Goles evitados-0.53": {
+      "home": "0.23",
+      "away": "-0.53"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "23Shobeir",
+        "3Hany",
+        "5Rabia",
+        "6Abdelmonem",
+        "13Fatouh",
+        "17Lasheen",
+        "21Saber",
+        "8Ashour",
+        "10Salah",
+        "7Trezeguet",
+        "11Ziko"
+      ],
+      "suplentes": [
+        "Ibrahim Y.",
+        "Marmoush O.",
+        "Attia M.",
+        "Zizo",
+        "Abdelkarim H."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Beiranvand",
+        "23Rezaeian",
+        "13Kanaani",
+        "4Khalilzadeh",
+        "19Nemati",
+        "5Mohammadi",
+        "14Ghoddos",
+        "21Ghorbani",
+        "6Ezatolahi",
+        "8Mohebi",
+        "9Taremi"
+      ],
+      "suplentes": [
+        "Hardani S.",
+        "Moghanlou S.",
+        "Jahanbakhsh A."
+      ],
+      "formacion": "5 - 4 - 1"
+    }
+  },
+  "error": null,
+  "description": "26.06.2026 23:00EgiptoFIFA: 29.1-1FinalizadoIránFIFA: 20.1-1Finalizado",
+  "score": "1-1"
+}

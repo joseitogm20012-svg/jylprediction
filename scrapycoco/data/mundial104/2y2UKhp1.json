@@ -1,0 +1,57 @@
+{
+  "match_id": "2y2UKhp1",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Neuer",
+        "6Kimmich",
+        "4Tah",
+        "2Rüdiger",
+        "18Brown",
+        "19Sané",
+        "23Nmecha",
+        "5Pavlovic",
+        "17Wirtz",
+        "7Havertz",
+        "26Undav"
+      ],
+      "suplentes": [
+        "Goretzka L.",
+        "Musiala J.",
+        "Anton W.",
+        "Woltemade N.",
+        "Amiri N.",
+        "Thiaw M."
+      ],
+      "formacion": "4 - 4 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "12Gill",
+        "4Caceres",
+        "15Gómez",
+        "13Canale",
+        "6Alonso",
+        "10Almirón",
+        "16Bobadilla",
+        "14Cubas",
+        "23Galarza",
+        "21Avalos",
+        "19Enciso"
+      ],
+      "suplentes": [
+        "Caballero G.",
+        "Mauricio",
+        "Velazquez G.",
+        "Ojeda B.",
+        "Sanabria A.",
+        "Fabian Balbuena"
+      ],
+      "formacion": "4 - 4 - 2"
+    }
+  },
+  "error": null,
+  "description": "29.06.2026 16:30AlemaniaFIFA: 10.1-1Tras la prórrogaPen: 3 - 4ParaguayEquipo que avanzaFIFA: 41.1-1Pen: 3 - 4",
+  "score": "1-1"
+}

@@ -1,0 +1,192 @@
+{
+  "match_id": "djmY6NcJ",
+  "estadisticas": {
+    "2.06Goles esperados (xG)0.23": {
+      "home": "2.06",
+      "away": "0.23"
+    },
+    "62%Posesión38%": {
+      "home": "62%",
+      "away": "38%"
+    },
+    "13Remates totales5": {
+      "home": "13",
+      "away": "5"
+    },
+    "7Remates a puerta3": {
+      "home": "7",
+      "away": "3"
+    },
+    "4Grandes ocasiones0": {
+      "home": "4",
+      "away": "0"
+    },
+    "7Córneres3": {
+      "home": "7",
+      "away": "3"
+    },
+    "88%(516/586)Pases81%(287/354)": {
+      "home": "88%(516/586)",
+      "away": "81%(287/354)"
+    },
+    "1Tarjetas amarillas2": {
+      "home": "1",
+      "away": "2"
+    },
+    "0Tarjetas rojas1": {
+      "home": "0",
+      "away": "1"
+    },
+    "2.45xG a puerta (xGOT)0.27": {
+      "home": "2.45",
+      "away": "0.27"
+    },
+    "3Remates fuera1": {
+      "home": "3",
+      "away": "1"
+    },
+    "3Remates rechazados1": {
+      "home": "3",
+      "away": "1"
+    },
+    "9Remates dentro del área3": {
+      "home": "9",
+      "away": "3"
+    },
+    "4Remates fuera del área2": {
+      "home": "4",
+      "away": "2"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "35Toques en el área rival8": {
+      "home": "35",
+      "away": "8"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Fueras de juego1": {
+      "home": "3",
+      "away": "1"
+    },
+    "18Tiros libres7": {
+      "home": "18",
+      "away": "7"
+    },
+    "50%(25/50)Pases largos27%(13/48)": {
+      "home": "50%(25/50)",
+      "away": "27%(13/48)"
+    },
+    "79%(131/165)Pases en el último tercio58%(42/72)": {
+      "home": "79%(131/165)",
+      "away": "58%(42/72)"
+    },
+    "4%(1/23)Centros0%(0/12)": {
+      "home": "4%(1/23)",
+      "away": "0%(0/12)"
+    },
+    "0.88Asistencias esperadas (xA)0.31": {
+      "home": "0.88",
+      "away": "0.31"
+    },
+    "21Saques de banda8": {
+      "home": "21",
+      "away": "8"
+    },
+    "7Faltas18": {
+      "home": "7",
+      "away": "18"
+    },
+    "68%(13/19)Entradas23%(3/13)": {
+      "home": "68%(13/19)",
+      "away": "23%(3/13)"
+    },
+    "52Duelos ganados38": {
+      "home": "52",
+      "away": "38"
+    },
+    "17Despejes36": {
+      "home": "17",
+      "away": "36"
+    },
+    "5Intercepciones11": {
+      "home": "5",
+      "away": "11"
+    },
+    "1Errores conducentes a remate1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Paradas3": {
+      "home": "2",
+      "away": "3"
+    },
+    "0.27xGOT enfrentados2.45": {
+      "home": "0.27",
+      "away": "2.45"
+    },
+    "-0.73Goles evitados-1.55": {
+      "home": "-0.73",
+      "away": "-1.55"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Kobel",
+        "3Widmer",
+        "4Elvedi",
+        "5Akanji",
+        "13Rodríguez",
+        "20Aebischer",
+        "10Xhaka",
+        "8Freuler",
+        "22Rieder",
+        "7Embolo",
+        "11Ndoye"
+      ],
+      "suplentes": [
+        "Manzambi J.",
+        "Vargas R.",
+        "Sow D.",
+        "Jaquez L.",
+        "Itten C."
+      ],
+      "formacion": "4 - 3 - 1 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "1Vasilj",
+        "7Dedic",
+        "18Katic",
+        "4Muharemovic",
+        "5Kolasinac",
+        "15Memic",
+        "6Tahirovic",
+        "14Sunjic",
+        "19Alajbegovic",
+        "10Demirovic",
+        "11Dzeko"
+      ],
+      "suplentes": [
+        "Basic I.",
+        "Bajraktarevic E.",
+        "Lukic J.",
+        "Hadziahmetovic A.",
+        "Mahmic E."
+      ],
+      "formacion": "4 - 4 - 2"
+    }
+  },
+  "error": null,
+  "description": "18.06.2026 15:00SuizaFIFA: 19.Bosnia-HerzegovinaFIFA: 64.",
+  "score": "4-1"
+}

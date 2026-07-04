@@ -1,0 +1,187 @@
+{
+  "match_id": "nRafcAyG",
+  "estadisticas": {
+    "0.52Goles esperados (xG)1.00": {
+      "home": "0.52",
+      "away": "1.00"
+    },
+    "41%Posesión59%": {
+      "home": "41%",
+      "away": "59%"
+    },
+    "6Remates totales12": {
+      "home": "6",
+      "away": "12"
+    },
+    "0Remates a puerta2": {
+      "home": "0",
+      "away": "2"
+    },
+    "1Grandes ocasiones3": {
+      "home": "1",
+      "away": "3"
+    },
+    "2Córneres5": {
+      "home": "2",
+      "away": "5"
+    },
+    "85%(388/456)Pases90%(600/670)": {
+      "home": "85%(388/456)",
+      "away": "90%(600/670)"
+    },
+    "1Tarjetas amarillas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0.00xG a puerta (xGOT)0.49": {
+      "home": "0.00",
+      "away": "0.49"
+    },
+    "3Remates fuera6": {
+      "home": "3",
+      "away": "6"
+    },
+    "3Remates rechazados4": {
+      "home": "3",
+      "away": "4"
+    },
+    "5Remates dentro del área9": {
+      "home": "5",
+      "away": "9"
+    },
+    "1Remates fuera del área3": {
+      "home": "1",
+      "away": "3"
+    },
+    "0Al palo1": {
+      "home": "0",
+      "away": "1"
+    },
+    "20Toques en el área rival26": {
+      "home": "20",
+      "away": "26"
+    },
+    "0Pases entre líneas completados2": {
+      "home": "0",
+      "away": "2"
+    },
+    "1Fueras de juego0": {
+      "home": "1",
+      "away": "0"
+    },
+    "8Tiros libres11": {
+      "home": "8",
+      "away": "11"
+    },
+    "43%(20/47)Pases largos32%(14/44)": {
+      "home": "43%(20/47)",
+      "away": "32%(14/44)"
+    },
+    "61%(59/96)Pases en el último tercio72%(96/134)": {
+      "home": "61%(59/96)",
+      "away": "72%(96/134)"
+    },
+    "23%(3/13)Centros20%(2/10)": {
+      "home": "23%(3/13)",
+      "away": "20%(2/10)"
+    },
+    "0.43Asistencias esperadas (xA)0.96": {
+      "home": "0.43",
+      "away": "0.96"
+    },
+    "9Saques de banda19": {
+      "home": "9",
+      "away": "19"
+    },
+    "11Faltas8": {
+      "home": "11",
+      "away": "8"
+    },
+    "60%(12/20)Entradas60%(6/10)": {
+      "home": "60%(12/20)",
+      "away": "60%(6/10)"
+    },
+    "37Duelos ganados33": {
+      "home": "37",
+      "away": "33"
+    },
+    "17Despejes14": {
+      "home": "17",
+      "away": "14"
+    },
+    "9Intercepciones5": {
+      "home": "9",
+      "away": "5"
+    },
+    "1Errores conducentes a remate1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Paradas0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0.49xGOT enfrentados0.00": {
+      "home": "0.49",
+      "away": "0.00"
+    },
+    "-0.51Goles evitados0.00": {
+      "home": "-0.51",
+      "away": "0.00"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Gunn",
+        "22Patterson",
+        "5Hanley",
+        "13Hendry",
+        "3Robertson",
+        "7McGinn",
+        "11Christie",
+        "19Ferguson",
+        "6Tierney",
+        "4McTominay",
+        "10Adams"
+      ],
+      "suplentes": [
+        "Gannon-Doak B.",
+        "Dykes L.",
+        "McLean K.",
+        "Ralston A.",
+        "Stewart R."
+      ],
+      "formacion": "4 - 4 - 1 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Bono",
+        "2Hakimi",
+        "14Diop",
+        "18Riad",
+        "3Mazraoui",
+        "6Bouaddi",
+        "24El Aynaoui",
+        "10Díaz",
+        "8Ounahi",
+        "23El Khannouss",
+        "11Saibari"
+      ],
+      "suplentes": [
+        "Rahimi S.",
+        "Talbi C.",
+        "Amaimouni A.",
+        "El Mourabet S."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "19.06.2026 18:00EscociaFIFA: 42.0-1FinalizadoMarruecosFIFA: 7.0-1Finalizado",
+  "score": "0-1"
+}

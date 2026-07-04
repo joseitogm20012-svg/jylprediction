@@ -1,0 +1,192 @@
+{
+  "match_id": "67vLrBMM",
+  "estadisticas": {
+    "4.60Goles esperados (xG)0.22": {
+      "home": "4.60",
+      "away": "0.22"
+    },
+    "79%Posesión21%": {
+      "home": "79%",
+      "away": "21%"
+    },
+    "32Remates totales2": {
+      "home": "32",
+      "away": "2"
+    },
+    "10Remates a puerta0": {
+      "home": "10",
+      "away": "0"
+    },
+    "6Grandes ocasiones0": {
+      "home": "6",
+      "away": "0"
+    },
+    "19Córneres1": {
+      "home": "19",
+      "away": "1"
+    },
+    "91%(515/567)Pases64%(104/162)": {
+      "home": "91%(515/567)",
+      "away": "64%(104/162)"
+    },
+    "1Tarjetas amarillas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0Tarjetas rojas2": {
+      "home": "0",
+      "away": "2"
+    },
+    "4.84xG a puerta (xGOT)0.00": {
+      "home": "4.84",
+      "away": "0.00"
+    },
+    "8Remates fuera1": {
+      "home": "8",
+      "away": "1"
+    },
+    "14Remates rechazados1": {
+      "home": "14",
+      "away": "1"
+    },
+    "21Remates dentro del área1": {
+      "home": "21",
+      "away": "1"
+    },
+    "11Remates fuera del área1": {
+      "home": "11",
+      "away": "1"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "97Toques en el área rival1": {
+      "home": "97",
+      "away": "1"
+    },
+    "1Pases entre líneas completados0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1Fueras de juego1": {
+      "home": "1",
+      "away": "1"
+    },
+    "10Tiros libres9": {
+      "home": "10",
+      "away": "9"
+    },
+    "63%(10/16)Pases largos31%(17/55)": {
+      "home": "63%(10/16)",
+      "away": "31%(17/55)"
+    },
+    "90%(342/381)Pases en el último tercio33%(9/27)": {
+      "home": "90%(342/381)",
+      "away": "33%(9/27)"
+    },
+    "24%(13/55)Centros33%(1/3)": {
+      "home": "24%(13/55)",
+      "away": "33%(1/3)"
+    },
+    "3.86Asistencias esperadas (xA)0.05": {
+      "home": "3.86",
+      "away": "0.05"
+    },
+    "23Saques de banda9": {
+      "home": "23",
+      "away": "9"
+    },
+    "9Faltas10": {
+      "home": "9",
+      "away": "10"
+    },
+    "56%(5/9)Entradas63%(10/16)": {
+      "home": "56%(5/9)",
+      "away": "63%(10/16)"
+    },
+    "33Duelos ganados34": {
+      "home": "33",
+      "away": "34"
+    },
+    "3Despejes59": {
+      "home": "3",
+      "away": "59"
+    },
+    "6Intercepciones10": {
+      "home": "6",
+      "away": "10"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Errores conducentes a gol2": {
+      "home": "0",
+      "away": "2"
+    },
+    "0Paradas4": {
+      "home": "0",
+      "away": "4"
+    },
+    "0.00xGOT enfrentados4.84": {
+      "home": "0.00",
+      "away": "4.84"
+    },
+    "0.00Goles evitados-0.16": {
+      "home": "0.00",
+      "away": "-0.16"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "16Crepeau",
+        "2Johnston",
+        "4De Fougerolles",
+        "13Cornelius",
+        "22Laryea",
+        "17Buchanan",
+        "8Koné",
+        "7Eustaquio",
+        "20Ahmed",
+        "10David",
+        "9Larin"
+      ],
+      "suplentes": [
+        "Bombito M.",
+        "Saliba N.",
+        "Shaffelburg J.",
+        "Oluwaseyi T.",
+        "Sigur N."
+      ],
+      "formacion": "4 - 4 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "1Abunada",
+        "13Al Oui",
+        "2Pedro Miguel",
+        "16Khoukhi",
+        "14Al Amin",
+        "5Gaber",
+        "23Madibo",
+        "4Laye",
+        "8Edmilson Junior",
+        "15Abdurisag",
+        "11Afif"
+      ],
+      "suplentes": [
+        "Al Brake S.",
+        "Fathi A.",
+        "Al Mannai M.",
+        "Al Hussain A.",
+        "Lucas Mendes"
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "18.06.2026 18:00CanadáFIFA: 30.6-0FinalizadoCatarFIFA: 56.6-0Finalizado",
+  "score": "6-0"
+}

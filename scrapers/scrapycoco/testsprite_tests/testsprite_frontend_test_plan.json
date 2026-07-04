@@ -1,0 +1,28 @@
+[
+  {
+    "id": "TC001",
+    "title": "View scraper cards and core dashboard tabs",
+    "description": "This verifies that the dashboard loads the full scraper grid and exposes the main tabs needed to access core features.",
+    "category": "Scraper Grid",
+    "steps": [
+      { "type": "action", "description": "Navigate to /" },
+      { "type": "assertion", "description": "Verify all scraper cards are displayed" },
+      { "type": "assertion", "description": "Verify the main dashboard tabs are displayed" }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Run a single scraper and see live completion updates",
+    "description": "This verifies that a user can start one scraper from the grid and observe live terminal output through to completion.",
+    "category": "Scraper Grid",
+    "steps": [
+      { "type": "action", "description": "Navigate to /" },
+      { "type": "action", "description": "Select a scraper" },
+      { "type": "action", "description": "Run the scraper" },
+      { "type": "assertion", "description": "Verify live log output is displayed" },
+      { "type": "assertion", "description": "Verify the run completion state is displayed" }
+    ],
+    "priority": "High"
+  }
+]

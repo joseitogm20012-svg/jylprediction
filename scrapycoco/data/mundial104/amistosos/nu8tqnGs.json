@@ -1,0 +1,190 @@
+{
+  "match_id": "nu8tqnGs",
+  "estadisticas": {
+    "0.74Goles esperados (xG)0.61": {
+      "home": "0.74",
+      "away": "0.61"
+    },
+    "32%Posesión68%": {
+      "home": "32%",
+      "away": "68%"
+    },
+    "6Remates totales15": {
+      "home": "6",
+      "away": "15"
+    },
+    "3Remates a puerta6": {
+      "home": "3",
+      "away": "6"
+    },
+    "3Grandes ocasiones2": {
+      "home": "3",
+      "away": "2"
+    },
+    "2Córneres16": {
+      "home": "2",
+      "away": "16"
+    },
+    "75%(163/216)Pases87%(376/433)": {
+      "home": "75%(163/216)",
+      "away": "87%(376/433)"
+    },
+    "3Tarjetas amarillas2": {
+      "home": "3",
+      "away": "2"
+    },
+    "0.88xG a puerta (xGOT)0.70": {
+      "home": "0.88",
+      "away": "0.70"
+    },
+    "2Remates fuera4": {
+      "home": "2",
+      "away": "4"
+    },
+    "1Remates rechazados5": {
+      "home": "1",
+      "away": "5"
+    },
+    "4Remates dentro del área4": {
+      "home": "4",
+      "away": "4"
+    },
+    "2Remates fuera del área11": {
+      "home": "2",
+      "away": "11"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1Goles de cabeza0": {
+      "home": "1",
+      "away": "0"
+    },
+    "7Toques en el área rival26": {
+      "home": "7",
+      "away": "26"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Fueras de juego0": {
+      "home": "0",
+      "away": "0"
+    },
+    "12Tiros libres20": {
+      "home": "12",
+      "away": "20"
+    },
+    "48%(21/44)Pases largos54%(21/39)": {
+      "home": "48%(21/44)",
+      "away": "54%(21/39)"
+    },
+    "62%(33/53)Pases en el último tercio75%(111/148)": {
+      "home": "62%(33/53)",
+      "away": "75%(111/148)"
+    },
+    "40%(2/5)Centros6%(2/34)": {
+      "home": "40%(2/5)",
+      "away": "6%(2/34)"
+    },
+    "0.46Asistencias esperadas (xA)0.69": {
+      "home": "0.46",
+      "away": "0.69"
+    },
+    "13Saques de banda21": {
+      "home": "13",
+      "away": "21"
+    },
+    "20Faltas12": {
+      "home": "20",
+      "away": "12"
+    },
+    "71%(12/17)Entradas50%(5/10)": {
+      "home": "71%(12/17)",
+      "away": "50%(5/10)"
+    },
+    "48Duelos ganados45": {
+      "home": "48",
+      "away": "45"
+    },
+    "47Despejes7": {
+      "home": "47",
+      "away": "7"
+    },
+    "8Intercepciones3": {
+      "home": "8",
+      "away": "3"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "5Paradas1": {
+      "home": "5",
+      "away": "1"
+    },
+    "0.70xGOT enfrentados0.88": {
+      "home": "0.70",
+      "away": "0.88"
+    },
+    "-0.30Goles evitados-1.12": {
+      "home": "-0.30",
+      "away": "-1.12"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "22Basil",
+        "3Ali",
+        "4Tahseen",
+        "5Hashem",
+        "23Doski",
+        "7Amyn",
+        "20Sher",
+        "16Al Ammari",
+        "8Bayesh",
+        "18Hussein",
+        "9Al Hamadi"
+      ],
+      "suplentes": [
+        "Farji M.",
+        "Ismaeel Z.",
+        "Ali M.",
+        "Jasim A.",
+        "Yakob K."
+      ],
+      "formacion": "4 - 4 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "23Viscarra",
+        "3Medina Roman",
+        "4Haquin",
+        "5Morales",
+        "17Fernandez",
+        "14Robson Matheus",
+        "13Paniagua",
+        "15Villamil",
+        "7Miguelito",
+        "18Godoy",
+        "10Vaca"
+      ],
+      "suplentes": [
+        "Macazaga L.",
+        "Nava F.",
+        "Monteiro E."
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "31.03.2026 23:00IrakEquipo que avanzaFIFA: 57.2-1FinalizadoBoliviaFIFA: 77.2-1Finalizado",
+  "score": "2-1"
+}

@@ -1,0 +1,191 @@
+{
+  "match_id": "ruCkETbS",
+  "estadisticas": {
+    "0.58Goles esperados (xG)0.77": {
+      "home": "0.58",
+      "away": "0.77"
+    },
+    "57%Posesión43%": {
+      "home": "57%",
+      "away": "43%"
+    },
+    "13Remates totales16": {
+      "home": "13",
+      "away": "16"
+    },
+    "4Remates a puerta2": {
+      "home": "4",
+      "away": "2"
+    },
+    "0Grandes ocasiones1": {
+      "home": "0",
+      "away": "1"
+    },
+    "8Córneres6": {
+      "home": "8",
+      "away": "6"
+    },
+    "80%(339/425)Pases73%(232/316)": {
+      "home": "80%(339/425)",
+      "away": "73%(232/316)"
+    },
+    "2Tarjetas amarillas3": {
+      "home": "2",
+      "away": "3"
+    },
+    "1Tarjetas rojas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0.22xG a puerta (xGOT)0.24": {
+      "home": "0.22",
+      "away": "0.24"
+    },
+    "5Remates fuera10": {
+      "home": "5",
+      "away": "10"
+    },
+    "4Remates rechazados4": {
+      "home": "4",
+      "away": "4"
+    },
+    "6Remates dentro del área11": {
+      "home": "6",
+      "away": "11"
+    },
+    "7Remates fuera del área5": {
+      "home": "7",
+      "away": "5"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "18Toques en el área rival21": {
+      "home": "18",
+      "away": "21"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Fueras de juego1": {
+      "home": "2",
+      "away": "1"
+    },
+    "19Tiros libres16": {
+      "home": "19",
+      "away": "16"
+    },
+    "55%(33/60)Pases largos38%(28/74)": {
+      "home": "55%(33/60)",
+      "away": "38%(28/74)"
+    },
+    "60%(61/101)Pases en el último tercio57%(62/109)": {
+      "home": "60%(61/101)",
+      "away": "57%(62/109)"
+    },
+    "16%(4/25)Centros30%(6/20)": {
+      "home": "16%(4/25)",
+      "away": "30%(6/20)"
+    },
+    "0.47Asistencias esperadas (xA)0.49": {
+      "home": "0.47",
+      "away": "0.49"
+    },
+    "29Saques de banda19": {
+      "home": "29",
+      "away": "19"
+    },
+    "16Faltas19": {
+      "home": "16",
+      "away": "19"
+    },
+    "64%(7/11)Entradas74%(14/19)": {
+      "home": "64%(7/11)",
+      "away": "74%(14/19)"
+    },
+    "65Duelos ganados72": {
+      "home": "65",
+      "away": "72"
+    },
+    "26Despejes41": {
+      "home": "26",
+      "away": "41"
+    },
+    "3Intercepciones10": {
+      "home": "3",
+      "away": "10"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Paradas5": {
+      "home": "2",
+      "away": "5"
+    },
+    "0.24xGOT enfrentados0.22": {
+      "home": "0.24",
+      "away": "0.22"
+    },
+    "0.24Goles evitados0.22": {
+      "home": "0.24",
+      "away": "0.22"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Navas",
+        "20Quiros",
+        "19Waston",
+        "4Vargas",
+        "15Calvo",
+        "21Zamora",
+        "14Galo",
+        "13Murillo",
+        "10Alcocer",
+        "9Ugalde",
+        "17Madrigal"
+      ],
+      "suplentes": [
+        "Vargas K.",
+        "Hernandez A.",
+        "Bran Flores A. J.",
+        "Campbell J.",
+        "Gamboa A."
+      ],
+      "formacion": "4 - 4 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "1Menjivar",
+        "14Najar",
+        "3Santos",
+        "4Vega",
+        "8Rosales",
+        "5Arriaga",
+        "20Flores",
+        "23Álvarez",
+        "17Palma",
+        "21Arboleda",
+        "12Quioto"
+      ],
+      "suplentes": [
+        "Moncada D.",
+        "Pineda C.",
+        "Ramirez Arauz M. R.",
+        "Benguche J."
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "18.11.2025 21:00Costa RicaFIFA: 53.0-0FinalizadoHondurasFIFA: 65.0-0Finalizado",
+  "score": "0-0"
+}

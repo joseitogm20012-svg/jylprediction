@@ -1,0 +1,191 @@
+{
+  "match_id": "YT2GZZ9N",
+  "estadisticas": {
+    "0.76Goles esperados (xG)2.38": {
+      "home": "0.76",
+      "away": "2.38"
+    },
+    "68%Posesión32%": {
+      "home": "68%",
+      "away": "32%"
+    },
+    "10Remates totales10": {
+      "home": "10",
+      "away": "10"
+    },
+    "4Remates a puerta4": {
+      "home": "4",
+      "away": "4"
+    },
+    "2Grandes ocasiones2": {
+      "home": "2",
+      "away": "2"
+    },
+    "9Córneres3": {
+      "home": "9",
+      "away": "3"
+    },
+    "84%(474/562)Pases75%(202/268)": {
+      "home": "84%(474/562)",
+      "away": "75%(202/268)"
+    },
+    "2Tarjetas amarillas1": {
+      "home": "2",
+      "away": "1"
+    },
+    "1.47xG a puerta (xGOT)2.78": {
+      "home": "1.47",
+      "away": "2.78"
+    },
+    "5Remates fuera4": {
+      "home": "5",
+      "away": "4"
+    },
+    "1Remates rechazados2": {
+      "home": "1",
+      "away": "2"
+    },
+    "7Remates dentro del área9": {
+      "home": "7",
+      "away": "9"
+    },
+    "3Remates fuera del área1": {
+      "home": "3",
+      "away": "1"
+    },
+    "0Al palo1": {
+      "home": "0",
+      "away": "1"
+    },
+    "1Goles de cabeza0": {
+      "home": "1",
+      "away": "0"
+    },
+    "21Toques en el área rival16": {
+      "home": "21",
+      "away": "16"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "5Fueras de juego0": {
+      "home": "5",
+      "away": "0"
+    },
+    "10Tiros libres12": {
+      "home": "10",
+      "away": "12"
+    },
+    "33%(15/46)Pases largos36%(19/53)": {
+      "home": "33%(15/46)",
+      "away": "36%(19/53)"
+    },
+    "72%(97/134)Pases en el último tercio63%(55/88)": {
+      "home": "72%(97/134)",
+      "away": "63%(55/88)"
+    },
+    "16%(5/32)Centros29%(2/7)": {
+      "home": "16%(5/32)",
+      "away": "29%(2/7)"
+    },
+    "0.72Asistencias esperadas (xA)0.88": {
+      "home": "0.72",
+      "away": "0.88"
+    },
+    "22Saques de banda18": {
+      "home": "22",
+      "away": "18"
+    },
+    "12Faltas10": {
+      "home": "12",
+      "away": "10"
+    },
+    "56%(10/18)Entradas100%(6/6)": {
+      "home": "56%(10/18)",
+      "away": "100%(6/6)"
+    },
+    "43Duelos ganados35": {
+      "home": "43",
+      "away": "35"
+    },
+    "10Despejes45": {
+      "home": "10",
+      "away": "45"
+    },
+    "5Intercepciones10": {
+      "home": "5",
+      "away": "10"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Errores conducentes a gol1": {
+      "home": "0",
+      "away": "1"
+    },
+    "1Paradas3": {
+      "home": "1",
+      "away": "3"
+    },
+    "2.78xGOT enfrentados1.47": {
+      "home": "2.78",
+      "away": "1.47"
+    },
+    "-0.22Goles evitados0.47": {
+      "home": "-0.22",
+      "away": "0.47"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "12Trubin",
+        "22Tymchyk",
+        "13Zabarnyi",
+        "5Bondar",
+        "16Mykolenko",
+        "21Kaliuzhnyi",
+        "15Tsygankov",
+        "18Yarmolyuk",
+        "17Sudakov",
+        "20Zubkov",
+        "19Vanat"
+      ],
+      "suplentes": [
+        "Yaremchuk R.",
+        "Ocheretko O.",
+        "Gutsulyak O.",
+        "Ponomarenko M.",
+        "Shaparenko M."
+      ],
+      "formacion": "4 - 1 - 4 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "23Nordfeldt",
+        "2Lagerbielke",
+        "4Hien",
+        "3Lindelof",
+        "6Johansson",
+        "18Ayari",
+        "16Karlström",
+        "5Gudmundsson",
+        "11Elanga",
+        "10Nygren",
+        "17Gyökeres"
+      ],
+      "suplentes": [
+        "Starfelt C.",
+        "Svensson D.",
+        "Bergvall L.",
+        "Svanberg M."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    }
+  },
+  "error": null,
+  "description": "26.03.2026 15:45UcraniaFIFA: 32.1-3FinalizadoSueciaEquipo que avanzaFIFA: 38.1-3Finalizado",
+  "score": "1-3"
+}

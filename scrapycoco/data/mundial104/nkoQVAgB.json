@@ -1,0 +1,195 @@
+{
+  "match_id": "nkoQVAgB",
+  "estadisticas": {
+    "2.15Goles esperados (xG)0.77": {
+      "home": "2.15",
+      "away": "0.77"
+    },
+    "60%Posesión40%": {
+      "home": "60%",
+      "away": "40%"
+    },
+    "16Remates totales7": {
+      "home": "16",
+      "away": "7"
+    },
+    "7Remates a puerta2": {
+      "home": "7",
+      "away": "2"
+    },
+    "7Grandes ocasiones1": {
+      "home": "7",
+      "away": "1"
+    },
+    "5Córneres3": {
+      "home": "5",
+      "away": "3"
+    },
+    "91%(468/517)Pases82%(299/365)": {
+      "home": "91%(468/517)",
+      "away": "82%(299/365)"
+    },
+    "1Tarjetas amarillas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "2.44xG a puerta (xGOT)0.31": {
+      "home": "2.44",
+      "away": "0.31"
+    },
+    "6Remates fuera3": {
+      "home": "6",
+      "away": "3"
+    },
+    "3Remates rechazados2": {
+      "home": "3",
+      "away": "2"
+    },
+    "13Remates dentro del área2": {
+      "home": "13",
+      "away": "2"
+    },
+    "3Remates fuera del área5": {
+      "home": "3",
+      "away": "5"
+    },
+    "0Al palo1": {
+      "home": "0",
+      "away": "1"
+    },
+    "1Goles de cabeza0": {
+      "home": "1",
+      "away": "0"
+    },
+    "40Toques en el área rival11": {
+      "home": "40",
+      "away": "11"
+    },
+    "2Pases entre líneas completados0": {
+      "home": "2",
+      "away": "0"
+    },
+    "0Fueras de juego4": {
+      "home": "0",
+      "away": "4"
+    },
+    "12Tiros libres10": {
+      "home": "12",
+      "away": "10"
+    },
+    "56%(18/32)Pases largos39%(18/46)": {
+      "home": "56%(18/32)",
+      "away": "39%(18/46)"
+    },
+    "84%(167/198)Pases en el último tercio67%(58/87)": {
+      "home": "84%(167/198)",
+      "away": "67%(58/87)"
+    },
+    "21%(9/43)Centros15%(2/13)": {
+      "home": "21%(9/43)",
+      "away": "15%(2/13)"
+    },
+    "2.08Asistencias esperadas (xA)0.11": {
+      "home": "2.08",
+      "away": "0.11"
+    },
+    "15Saques de banda24": {
+      "home": "15",
+      "away": "24"
+    },
+    "10Faltas12": {
+      "home": "10",
+      "away": "12"
+    },
+    "55%(6/11)Entradas40%(8/20)": {
+      "home": "55%(6/11)",
+      "away": "40%(8/20)"
+    },
+    "44Duelos ganados45": {
+      "home": "44",
+      "away": "45"
+    },
+    "23Despejes36": {
+      "home": "23",
+      "away": "36"
+    },
+    "7Intercepciones3": {
+      "home": "7",
+      "away": "3"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Paradas5": {
+      "home": "1",
+      "away": "5"
+    },
+    "0.31xGOT enfrentados2.44": {
+      "home": "0.31",
+      "away": "2.44"
+    },
+    "-0.69Goles evitados0.44": {
+      "home": "-0.69",
+      "away": "0.44"
+    },
+    "5Saques de puerta16": {
+      "home": "5",
+      "away": "16"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Pickford",
+        "25Spence",
+        "2Konsa",
+        "6Guehi",
+        "3O'Reilly",
+        "8Anderson",
+        "4Rice",
+        "20Madueke",
+        "10Bellingham",
+        "11Rashford",
+        "9Kane"
+      ],
+      "suplentes": [
+        "Elia M.",
+        "Kayembe E.",
+        "Bongonda T.",
+        "Kayembe J.",
+        "Mayele F."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Mpasi-Nzau",
+        "2Wan-Bissaka",
+        "22Mbemba",
+        "4Tuanzebe",
+        "26Masuaku",
+        "6Mukau",
+        "8Moutoussamy",
+        "14Sadiki",
+        "7Mbuku",
+        "20Wissa",
+        "9Cipenga"
+      ],
+      "suplentes": [
+        "Gordon A.",
+        "Saka B.",
+        "Eze E.",
+        "Stones J."
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "01.07.2026 12:00InglaterraEquipo que avanzaFIFA: 4.2-1FinalizadoRD CongoFIFA: 46.2-1Finalizado",
+  "score": "2-1"
+}

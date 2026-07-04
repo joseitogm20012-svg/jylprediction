@@ -1,0 +1,188 @@
+{
+  "match_id": "vL2qotaK",
+  "estadisticas": {
+    "1.70Goles esperados (xG)0.92": {
+      "home": "1.70",
+      "away": "0.92"
+    },
+    "55%Posesión45%": {
+      "home": "55%",
+      "away": "45%"
+    },
+    "24Remates totales13": {
+      "home": "24",
+      "away": "13"
+    },
+    "6Remates a puerta2": {
+      "home": "6",
+      "away": "2"
+    },
+    "2Grandes ocasiones2": {
+      "home": "2",
+      "away": "2"
+    },
+    "5Córneres2": {
+      "home": "5",
+      "away": "2"
+    },
+    "89%(485/544)Pases91%(405/446)": {
+      "home": "89%(485/544)",
+      "away": "91%(405/446)"
+    },
+    "1Tarjetas amarillas0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0.61xG a puerta (xGOT)0.47": {
+      "home": "0.61",
+      "away": "0.47"
+    },
+    "11Remates fuera7": {
+      "home": "11",
+      "away": "7"
+    },
+    "7Remates rechazados4": {
+      "home": "7",
+      "away": "4"
+    },
+    "15Remates dentro del área5": {
+      "home": "15",
+      "away": "5"
+    },
+    "9Remates fuera del área8": {
+      "home": "9",
+      "away": "8"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "34Toques en el área rival13": {
+      "home": "34",
+      "away": "13"
+    },
+    "0Pases entre líneas completados1": {
+      "home": "0",
+      "away": "1"
+    },
+    "3Fueras de juego2": {
+      "home": "3",
+      "away": "2"
+    },
+    "6Tiros libres12": {
+      "home": "6",
+      "away": "12"
+    },
+    "54%(25/46)Pases largos69%(20/29)": {
+      "home": "54%(25/46)",
+      "away": "69%(20/29)"
+    },
+    "86%(167/195)Pases en el último tercio85%(94/110)": {
+      "home": "86%(167/195)",
+      "away": "85%(94/110)"
+    },
+    "27%(3/11)Centros15%(2/13)": {
+      "home": "27%(3/11)",
+      "away": "15%(2/13)"
+    },
+    "1.53Asistencias esperadas (xA)0.43": {
+      "home": "1.53",
+      "away": "0.43"
+    },
+    "10Saques de banda9": {
+      "home": "10",
+      "away": "9"
+    },
+    "12Faltas6": {
+      "home": "12",
+      "away": "6"
+    },
+    "53%(8/15)Entradas56%(5/9)": {
+      "home": "53%(8/15)",
+      "away": "56%(5/9)"
+    },
+    "29Duelos ganados37": {
+      "home": "29",
+      "away": "37"
+    },
+    "16Despejes22": {
+      "home": "16",
+      "away": "22"
+    },
+    "6Intercepciones13": {
+      "home": "6",
+      "away": "13"
+    },
+    "1Errores conducentes a remate0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Paradas6": {
+      "home": "2",
+      "away": "6"
+    },
+    "0.47xGOT enfrentados0.61": {
+      "home": "0.47",
+      "away": "0.61"
+    },
+    "0.47Goles evitados0.61": {
+      "home": "0.47",
+      "away": "0.61"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "12Vargas",
+        "4Arias S.",
+        "23Sánchez",
+        "3Lucumi",
+        "22Machado",
+        "11Arias J.",
+        "16Lerma",
+        "14Puerta",
+        "10Rodríguez",
+        "9Córdoba",
+        "7Diaz"
+      ],
+      "suplentes": [
+        "Rios R.",
+        "Suárez L. J.",
+        "Castano K.",
+        "Quintero J. F.",
+        "Muñoz D."
+      ],
+      "formacion": "4 - 3 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "1Costa",
+        "20Cancelo",
+        "3Dias",
+        "13Veiga",
+        "25Mendes",
+        "21Neves",
+        "23Vitinha",
+        "18Neto",
+        "8Fernandes",
+        "11Joao Félix",
+        "7Ronaldo"
+      ],
+      "suplentes": [
+        "Neves J.",
+        "Dalot D.",
+        "Leao R.",
+        "Samú Costa",
+        "Nunes M."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "27.06.2026 19:30ColombiaFIFA: 13.0-0FinalizadoPortugalFIFA: 5.0-0Finalizado",
+  "score": "0-0"
+}

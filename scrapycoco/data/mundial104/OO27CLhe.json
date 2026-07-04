@@ -1,0 +1,188 @@
+{
+  "match_id": "OO27CLhe",
+  "estadisticas": {
+    "1.69Goles esperados (xG)0.46": {
+      "home": "1.69",
+      "away": "0.46"
+    },
+    "63%Posesión37%": {
+      "home": "63%",
+      "away": "37%"
+    },
+    "11Remates totales11": {
+      "home": "11",
+      "away": "11"
+    },
+    "4Remates a puerta4": {
+      "home": "4",
+      "away": "4"
+    },
+    "4Grandes ocasiones0": {
+      "home": "4",
+      "away": "0"
+    },
+    "4Córneres3": {
+      "home": "4",
+      "away": "3"
+    },
+    "84%(487/580)Pases73%(241/332)": {
+      "home": "84%(487/580)",
+      "away": "73%(241/332)"
+    },
+    "1Tarjetas amarillas0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1.29xG a puerta (xGOT)1.17": {
+      "home": "1.29",
+      "away": "1.17"
+    },
+    "6Remates fuera5": {
+      "home": "6",
+      "away": "5"
+    },
+    "1Remates rechazados2": {
+      "home": "1",
+      "away": "2"
+    },
+    "6Remates dentro del área7": {
+      "home": "6",
+      "away": "7"
+    },
+    "5Remates fuera del área4": {
+      "home": "5",
+      "away": "4"
+    },
+    "0Al palo1": {
+      "home": "0",
+      "away": "1"
+    },
+    "28Toques en el área rival21": {
+      "home": "28",
+      "away": "21"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Fueras de juego1": {
+      "home": "3",
+      "away": "1"
+    },
+    "7Tiros libres12": {
+      "home": "7",
+      "away": "12"
+    },
+    "38%(18/47)Pases largos44%(23/52)": {
+      "home": "38%(18/47)",
+      "away": "44%(23/52)"
+    },
+    "69%(96/140)Pases en el último tercio70%(66/94)": {
+      "home": "69%(96/140)",
+      "away": "70%(66/94)"
+    },
+    "18%(3/17)Centros20%(3/15)": {
+      "home": "18%(3/17)",
+      "away": "20%(3/15)"
+    },
+    "0.97Asistencias esperadas (xA)0.32": {
+      "home": "0.97",
+      "away": "0.32"
+    },
+    "21Saques de banda19": {
+      "home": "21",
+      "away": "19"
+    },
+    "12Faltas7": {
+      "home": "12",
+      "away": "7"
+    },
+    "53%(9/17)Entradas40%(6/15)": {
+      "home": "53%(9/17)",
+      "away": "40%(6/15)"
+    },
+    "43Duelos ganados48": {
+      "home": "43",
+      "away": "48"
+    },
+    "24Despejes39": {
+      "home": "24",
+      "away": "39"
+    },
+    "15Intercepciones12": {
+      "home": "15",
+      "away": "12"
+    },
+    "0Errores conducentes a remate2": {
+      "home": "0",
+      "away": "2"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Paradas1": {
+      "home": "3",
+      "away": "1"
+    },
+    "1.17xGOT enfrentados1.29": {
+      "home": "1.17",
+      "away": "1.29"
+    },
+    "0.17Goles evitados-0.71": {
+      "home": "0.17",
+      "away": "-0.71"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Schlager A.",
+        "5Posch",
+        "15Lienhart",
+        "8Alaba",
+        "16Mwene",
+        "6Seiwald",
+        "4Schlager X.",
+        "18Schmid",
+        "20Laimer",
+        "9Sabitzer",
+        "14Kalajdzic"
+      ],
+      "suplentes": [
+        "Arnautovic M.",
+        "Wanner P.",
+        "Danso K.",
+        "Chukwuemeka C.",
+        "Wimmer P."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Abulaila",
+        "3Nasib",
+        "5Al Arab",
+        "16Abualnadi",
+        "23Haddad",
+        "21Al Rashdan",
+        "8Al Rawabdeh",
+        "20Abu Taha",
+        "11Al Fakhouri",
+        "9Olwan",
+        "10Tamari"
+      ],
+      "suplentes": [
+        "Obaid S.",
+        "Al Rosan S.",
+        "Al Mardi M.",
+        "Al Daoud M.",
+        "Azaizeh A."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    }
+  },
+  "error": null,
+  "description": "17.06.2026 00:00AustriaFIFA: 24.3-1FinalizadoJordaniaFIFA: 63.3-1Finalizado",
+  "score": "3-1"
+}

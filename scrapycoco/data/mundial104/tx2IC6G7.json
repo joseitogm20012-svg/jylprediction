@@ -1,0 +1,190 @@
+{
+  "match_id": "tx2IC6G7",
+  "estadisticas": {
+    "1.49Goles esperados (xG)1.91": {
+      "home": "1.49",
+      "away": "1.91"
+    },
+    "47%Posesión53%": {
+      "home": "47%",
+      "away": "53%"
+    },
+    "14Remates totales9": {
+      "home": "14",
+      "away": "9"
+    },
+    "5Remates a puerta4": {
+      "home": "5",
+      "away": "4"
+    },
+    "3Grandes ocasiones4": {
+      "home": "3",
+      "away": "4"
+    },
+    "14Córneres3": {
+      "home": "14",
+      "away": "3"
+    },
+    "85%(339/401)Pases88%(415/474)": {
+      "home": "85%(339/401)",
+      "away": "88%(415/474)"
+    },
+    "0Tarjetas amarillas1": {
+      "home": "0",
+      "away": "1"
+    },
+    "1.40xG a puerta (xGOT)2.02": {
+      "home": "1.40",
+      "away": "2.02"
+    },
+    "9Remates fuera2": {
+      "home": "9",
+      "away": "2"
+    },
+    "0Remates rechazados3": {
+      "home": "0",
+      "away": "3"
+    },
+    "10Remates dentro del área8": {
+      "home": "10",
+      "away": "8"
+    },
+    "4Remates fuera del área1": {
+      "home": "4",
+      "away": "1"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "48Toques en el área rival26": {
+      "home": "48",
+      "away": "26"
+    },
+    "0Pases entre líneas completados2": {
+      "home": "0",
+      "away": "2"
+    },
+    "2Fueras de juego2": {
+      "home": "2",
+      "away": "2"
+    },
+    "7Tiros libres6": {
+      "home": "7",
+      "away": "6"
+    },
+    "45%(17/38)Pases largos50%(16/32)": {
+      "home": "45%(17/38)",
+      "away": "50%(16/32)"
+    },
+    "78%(101/129)Pases en el último tercio78%(106/136)": {
+      "home": "78%(101/129)",
+      "away": "78%(106/136)"
+    },
+    "24%(7/29)Centros50%(5/10)": {
+      "home": "24%(7/29)",
+      "away": "50%(5/10)"
+    },
+    "1.63Asistencias esperadas (xA)2.58": {
+      "home": "1.63",
+      "away": "2.58"
+    },
+    "16Saques de banda23": {
+      "home": "16",
+      "away": "23"
+    },
+    "6Faltas7": {
+      "home": "6",
+      "away": "7"
+    },
+    "75%(18/24)Entradas58%(11/19)": {
+      "home": "75%(18/24)",
+      "away": "58%(11/19)"
+    },
+    "50Duelos ganados41": {
+      "home": "50",
+      "away": "41"
+    },
+    "11Despejes37": {
+      "home": "11",
+      "away": "37"
+    },
+    "4Intercepciones5": {
+      "home": "4",
+      "away": "5"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Paradas4": {
+      "home": "1",
+      "away": "4"
+    },
+    "2.02xGOT enfrentados1.40": {
+      "home": "2.02",
+      "away": "1.40"
+    },
+    "0.02Goles evitados0.40": {
+      "home": "0.02",
+      "away": "0.40"
+    },
+    "3Saques de puerta12": {
+      "home": "3",
+      "away": "12"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Fofana",
+        "17Doue",
+        "7Kossounou",
+        "20Agbadou",
+        "3Konan",
+        "18Sangaré",
+        "19Pépé",
+        "8Kessie",
+        "26Inao Oulai",
+        "11Diomandé",
+        "9Bonny"
+      ],
+      "suplentes": [
+        "Diallo A.",
+        "Wahi E.",
+        "Diakite O.",
+        "Guessand E.",
+        "Toure B."
+      ],
+      "formacion": "4 - 1 - 4 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Nyland",
+        "16Pedersen",
+        "3Ajer",
+        "17Lysaker Heggem",
+        "5Wolfe",
+        "10Odegaard",
+        "8Berge",
+        "6Berg",
+        "7Sorloth",
+        "9Haaland",
+        "20Nusa"
+      ],
+      "suplentes": [
+        "Schjelderup A.",
+        "Bobb O.",
+        "Aursnes F."
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "30.06.2026 13:00Costa de MarfilFIFA: 33.1-2FinalizadoNoruegaEquipo que avanzaFIFA: 31.1-2Finalizado",
+  "score": "1-2"
+}

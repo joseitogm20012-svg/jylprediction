@@ -156,9 +156,57 @@ Desde ahí puedes:
 
 ---
 
+## Actualizar estadísticas de córners
+
+El scraper híbrido obtiene córners por partido de dos fuentes y los guarda en `data/per_match_corners.json`.
+
+```bash
+# Ejecutar scraper (Soccerway + FlashScore fallback)
+update_corners.bat
+
+# O directamente:
+python scrapycoco\scrape_corners_hybrid.py --update
+
+# Log de ejecución en
+logs\corners_scraper.log
+```
+
+**Fuentes:**
+1. **Soccerway** (primaria) — HTTP + BeautifulSoup
+2. **FlashScore** (fallback) — Playwright headless Chromium
+
+**Verificar datos:**
+```bash
+# Exportar datos a Excel en el escritorio
+python data\export_corners_excel.py
+```
+
+**Requisitos:**
+- `playwright` instalado (`playwright install chromium`)
+
+---
+
+## Cliente OpenAI (NVIDIA)
+
+Cliente para el modelo `z-ai/glm-5.2` vía API de NVIDIA. Ubicado en `.opencode/openai_client.py`.
+
+```bash
+# Configurar API key
+set NVIDIA_API_KEY=tu_clave   # Windows
+export NVIDIA_API_KEY=tu_clave  # Linux/Mac
+
+# Ejecutar cliente (streaming a stdout)
+python .opencode\openai_client.py
+```
+
+---
+
 ## Tests
 
 ```bash
+# Suite completa del scraper de córners
+python -m pytest tests/scrape_corners_hybrid/ -v
+
 # CRUD de análisis IA (requiere ADMIN_PASSWORD en .env o entorno)
 set ADMIN_PASSWORD=tu_password   # Windows
 export ADMIN_PASSWORD=tu_password  # Linux/Mac

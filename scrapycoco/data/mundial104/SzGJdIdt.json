@@ -1,0 +1,152 @@
+{
+  "match_id": "SzGJdIdt",
+  "estadisticas": {
+    "0.04Goles esperados (xG)2.13": {
+      "home": "0.04",
+      "away": "2.13"
+    },
+    "38%Posesión62%": {
+      "home": "38%",
+      "away": "62%"
+    },
+    "2Remates totales11": {
+      "home": "2",
+      "away": "11"
+    },
+    "0Remates a puerta5": {
+      "home": "0",
+      "away": "5"
+    },
+    "0Grandes ocasiones4": {
+      "home": "0",
+      "away": "4"
+    },
+    "3Córneres5": {
+      "home": "3",
+      "away": "5"
+    },
+    "80%(284/354)Pases89%(521/583)": {
+      "home": "80%(284/354)",
+      "away": "89%(521/583)"
+    },
+    "0.00xG a puerta (xGOT)2.74": {
+      "home": "0.00",
+      "away": "2.74"
+    },
+    "1Remates fuera3": {
+      "home": "1",
+      "away": "3"
+    },
+    "1Remates rechazados3": {
+      "home": "1",
+      "away": "3"
+    },
+    "1Remates dentro del área8": {
+      "home": "1",
+      "away": "8"
+    },
+    "1Remates fuera del área3": {
+      "home": "1",
+      "away": "3"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Goles de cabeza1": {
+      "home": "0",
+      "away": "1"
+    },
+    "8Toques en el área rival17": {
+      "home": "8",
+      "away": "17"
+    },
+    "0Pases entre líneas completados1": {
+      "home": "0",
+      "away": "1"
+    },
+    "1Fueras de juego1": {
+      "home": "1",
+      "away": "1"
+    },
+    "15Tiros libres8": {
+      "home": "15",
+      "away": "8"
+    },
+    "29%(16/56)Pases largos56%(18/32)": {
+      "home": "29%(16/56)",
+      "away": "56%(18/32)"
+    },
+    "53%(42/79)Pases en el último tercio70%(95/135)": {
+      "home": "53%(42/79)",
+      "away": "70%(95/135)"
+    },
+    "20%(2/10)Centros18%(2/11)": {
+      "home": "20%(2/10)",
+      "away": "18%(2/11)"
+    },
+    "0.15Asistencias esperadas (xA)1.41": {
+      "home": "0.15",
+      "away": "1.41"
+    },
+    "29Saques de banda23": {
+      "home": "29",
+      "away": "23"
+    },
+    "8Faltas15": {
+      "home": "8",
+      "away": "15"
+    },
+    "89%(16/18)Entradas67%(12/18)": {
+      "home": "89%(16/18)",
+      "away": "67%(12/18)"
+    },
+    "38Duelos ganados43": {
+      "home": "38",
+      "away": "43"
+    },
+    "23Despejes25": {
+      "home": "23",
+      "away": "25"
+    },
+    "14Intercepciones7": {
+      "home": "14",
+      "away": "7"
+    },
+    "1Errores conducentes a remate0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1Errores conducentes a gol0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1Paradas0": {
+      "home": "1",
+      "away": "0"
+    },
+    "2.74xGOT enfrentados0.00": {
+      "home": "2.74",
+      "away": "0.00"
+    },
+    "-1.26Goles evitados0.00": {
+      "home": "-1.26",
+      "away": "0.00"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "21.06.2026 00:00TúnezFIFA: 45.0-4FinalizadoJapónFIFA: 18.0-4Finalizado",
+  "score": "0-4"
+}

@@ -1,0 +1,156 @@
+{
+  "match_id": "f7ENGzPc",
+  "estadisticas": {
+    "2.07Goles esperados (xG)0.33": {
+      "home": "2.07",
+      "away": "0.33"
+    },
+    "69%Posesión31%": {
+      "home": "69%",
+      "away": "31%"
+    },
+    "19Remates totales5": {
+      "home": "19",
+      "away": "5"
+    },
+    "7Remates a puerta2": {
+      "home": "7",
+      "away": "2"
+    },
+    "5Grandes ocasiones0": {
+      "home": "5",
+      "away": "0"
+    },
+    "6Córneres2": {
+      "home": "6",
+      "away": "2"
+    },
+    "92%(625/682)Pases83%(260/313)": {
+      "home": "92%(625/682)",
+      "away": "83%(260/313)"
+    },
+    "2Tarjetas amarillas3": {
+      "home": "2",
+      "away": "3"
+    },
+    "1.45xG a puerta (xGOT)0.79": {
+      "home": "1.45",
+      "away": "0.79"
+    },
+    "6Remates fuera1": {
+      "home": "6",
+      "away": "1"
+    },
+    "6Remates rechazados2": {
+      "home": "6",
+      "away": "2"
+    },
+    "12Remates dentro del área2": {
+      "home": "12",
+      "away": "2"
+    },
+    "7Remates fuera del área3": {
+      "home": "7",
+      "away": "3"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1Goles de cabeza0": {
+      "home": "1",
+      "away": "0"
+    },
+    "35Toques en el área rival10": {
+      "home": "35",
+      "away": "10"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Fueras de juego0": {
+      "home": "1",
+      "away": "0"
+    },
+    "13Tiros libres4": {
+      "home": "13",
+      "away": "4"
+    },
+    "47%(21/45)Pases largos53%(24/45)": {
+      "home": "47%(21/45)",
+      "away": "53%(24/45)"
+    },
+    "86%(210/243)Pases en el último tercio70%(55/79)": {
+      "home": "86%(210/243)",
+      "away": "70%(55/79)"
+    },
+    "26%(10/39)Centros18%(2/11)": {
+      "home": "26%(10/39)",
+      "away": "18%(2/11)"
+    },
+    "1.94Asistencias esperadas (xA)0.23": {
+      "home": "1.94",
+      "away": "0.23"
+    },
+    "21Saques de banda16": {
+      "home": "21",
+      "away": "16"
+    },
+    "4Faltas13": {
+      "home": "4",
+      "away": "13"
+    },
+    "58%(7/12)Entradas40%(4/10)": {
+      "home": "58%(7/12)",
+      "away": "40%(4/10)"
+    },
+    "41Duelos ganados34": {
+      "home": "41",
+      "away": "34"
+    },
+    "19Despejes45": {
+      "home": "19",
+      "away": "45"
+    },
+    "9Intercepciones6": {
+      "home": "9",
+      "away": "6"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "1Errores conducentes a gol1": {
+      "home": "1",
+      "away": "1"
+    },
+    "1Paradas4": {
+      "home": "1",
+      "away": "4"
+    },
+    "0.79xGOT enfrentados1.45": {
+      "home": "0.79",
+      "away": "1.45"
+    },
+    "-0.21Goles evitados-0.55": {
+      "home": "-0.21",
+      "away": "-0.55"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "29.06.2026 13:00BrasilEquipo que avanzaFIFA: 6.JapónFIFA: 18.",
+  "score": "2-1"
+}

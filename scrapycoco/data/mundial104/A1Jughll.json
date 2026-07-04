@@ -1,0 +1,194 @@
+{
+  "match_id": "A1Jughll",
+  "estadisticas": {
+    "0.92Goles esperados (xG)0.24": {
+      "home": "0.92",
+      "away": "0.24"
+    },
+    "48%Posesión52%": {
+      "home": "48%",
+      "away": "52%"
+    },
+    "8Remates totales10": {
+      "home": "8",
+      "away": "10"
+    },
+    "2Remates a puerta3": {
+      "home": "2",
+      "away": "3"
+    },
+    "1Grandes ocasiones0": {
+      "home": "1",
+      "away": "0"
+    },
+    "4Córneres3": {
+      "home": "4",
+      "away": "3"
+    },
+    "84%(349/415)Pases82%(365/447)": {
+      "home": "84%(349/415)",
+      "away": "82%(365/447)"
+    },
+    "0Tarjetas amarillas1": {
+      "home": "0",
+      "away": "1"
+    },
+    "1Tarjetas rojas0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0.27xG a puerta (xGOT)0.13": {
+      "home": "0.27",
+      "away": "0.13"
+    },
+    "4Remates fuera4": {
+      "home": "4",
+      "away": "4"
+    },
+    "2Remates rechazados3": {
+      "home": "2",
+      "away": "3"
+    },
+    "6Remates dentro del área5": {
+      "home": "6",
+      "away": "5"
+    },
+    "2Remates fuera del área5": {
+      "home": "2",
+      "away": "5"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "24Toques en el área rival7": {
+      "home": "24",
+      "away": "7"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Fueras de juego0": {
+      "home": "3",
+      "away": "0"
+    },
+    "13Tiros libres7": {
+      "home": "13",
+      "away": "7"
+    },
+    "39%(17/44)Pases largos24%(12/51)": {
+      "home": "39%(17/44)",
+      "away": "24%(12/51)"
+    },
+    "66%(78/119)Pases en el último tercio65%(60/93)": {
+      "home": "66%(78/119)",
+      "away": "65%(60/93)"
+    },
+    "21%(3/14)Centros0%(0/13)": {
+      "home": "21%(3/14)",
+      "away": "0%(0/13)"
+    },
+    "0.73Asistencias esperadas (xA)0.14": {
+      "home": "0.73",
+      "away": "0.14"
+    },
+    "20Saques de banda20": {
+      "home": "20",
+      "away": "20"
+    },
+    "7Faltas13": {
+      "home": "7",
+      "away": "13"
+    },
+    "67%(8/12)Entradas80%(12/15)": {
+      "home": "67%(8/12)",
+      "away": "80%(12/15)"
+    },
+    "46Duelos ganados34": {
+      "home": "46",
+      "away": "34"
+    },
+    "27Despejes28": {
+      "home": "27",
+      "away": "28"
+    },
+    "7Intercepciones7": {
+      "home": "7",
+      "away": "7"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol2": {
+      "home": "0",
+      "away": "2"
+    },
+    "3Paradas0": {
+      "home": "3",
+      "away": "0"
+    },
+    "0.13xGOT enfrentados0.27": {
+      "home": "0.13",
+      "away": "0.27"
+    },
+    "0.13Goles evitados-1.73": {
+      "home": "0.13",
+      "away": "-1.73"
+    },
+    "4Saques de puerta11": {
+      "home": "4",
+      "away": "11"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "24Freese",
+        "16Freeman",
+        "3Richards",
+        "13Ream",
+        "5Robinson",
+        "8McKennie",
+        "4Adams",
+        "17Tillman",
+        "2Dest",
+        "20Balogun",
+        "10Pulisic"
+      ],
+      "suplentes": [
+        "Bajraktarevic E.",
+        "Tahirovic B.",
+        "Mahmic E.",
+        "Tabakovic H.",
+        "Memic A."
+      ],
+      "formacion": "4 - 3 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "1Vasilj",
+        "7Dedic",
+        "18Katic",
+        "4Muharemovic",
+        "21Radeljic",
+        "5Kolasinac",
+        "8Gigovic",
+        "14Sunjic",
+        "19Alajbegovic",
+        "11Dzeko",
+        "10Demirovic"
+      ],
+      "suplentes": [
+        "Berhalter S.",
+        "Pepi R.",
+        "Reyna G."
+      ],
+      "formacion": "5 - 3 - 2"
+    }
+  },
+  "error": null,
+  "description": "01.07.2026 20:00EE. UU.Equipo que avanzaFIFA: 17.2-0FinalizadoBosnia-HerzegovinaFIFA: 64.2-0Finalizado",
+  "score": "2-0"
+}

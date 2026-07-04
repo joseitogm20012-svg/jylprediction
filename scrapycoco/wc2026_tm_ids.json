@@ -1,0 +1,17 @@
+{
+  "germany": 3262, "england": 3299, "portugal": 3300,
+  "spain": 3375, "italy": 3376, "france": 3377, "greece": 3378,
+  "netherlands": 3379, "turkey": 3381, "belgium": 3382, "switzerland": 3384,
+  "australia": 3433, "cameroon": 3434, "japan": 3435,
+  "denmark": 3436, "argentina": 3437, "serbia": 3438, "brazil": 3439,
+  "ghana": 3441, "poland": 3442, "nigeria": 3444,
+  "czech-republic": 3445, "uruguay": 3449,
+  "senegal": 3499, "usa": 3505, "canada": 3510,
+  "croatia": 3556, "morocco": 3575, "panama": 3577,
+  "paraguay": 3581, "iran": 3582, "south-korea": 3589, "honduras": 3590,
+  "algeria": 3614, "tunisia": 3670, "jamaica": 3671, "egypt": 3672,
+  "chile": 3700, "south-africa": 3806, "saudi-arabia": 3807,
+  "colombia": 3816, "bolivia": 5233, "ecuador": 5750,
+  "mexico": 6303, "costa-rica": 8497, "new-zealand": 9171,
+  "guatemala": 13342, "indonesia": 13958, "qatar": 14162
+}

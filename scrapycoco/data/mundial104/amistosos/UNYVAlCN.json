@@ -1,0 +1,54 @@
+{
+  "match_id": "UNYVAlCN",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "12Hazard",
+        "13McConville",
+        "17McNair",
+        "22Brown",
+        "2Bradley",
+        "16Lyons",
+        "20McDonnell",
+        "3Lewis",
+        "7Galbraith",
+        "10Donley",
+        "14Price"
+      ],
+      "suplentes": [
+        "Devlin T.",
+        "Smyth P.",
+        "Marshall C.",
+        "Magennis J.",
+        "Kelly P."
+      ],
+      "formacion": "3 - 4 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "1Moris",
+        "22Martins M.",
+        "2Korac",
+        "13Carlson",
+        "18Jans",
+        "19Olesen",
+        "16Barreiro",
+        "15Thill",
+        "8Martins C.",
+        "7Dardari",
+        "10Sinani"
+      ],
+      "suplentes": [
+        "de Sousa T.",
+        "Avdusinovic K.",
+        "Muratovic E.",
+        "Dzogovic E."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "17.11.2025 15:45Irlanda del NorteFIFA: 70.1-0FinalizadoLuxemburgoFIFA: 98.1-0Finalizado",
+  "score": "1-0"
+}

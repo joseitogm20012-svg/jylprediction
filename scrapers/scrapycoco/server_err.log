@@ -1,0 +1,25 @@
+C:\Users\Equipo\Desktop\predecirv2\scrapycoco\main.py:112: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Will watch for changes in these directories: ['C:\\Users\\Equipo\\Desktop\\predecirv2\\scrapycoco']
+INFO:     Uvicorn running on http://0.0.0.0:3005 (Press CTRL+C to quit)
+INFO:     Started reloader process [61548] using StatReload
+INFO:     Started server process [60352]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+Execution of job "_schedule_job.<locals>.job_func (trigger: cron[month='*', day='*', day_of_week='*', hour='*', minute='*/5'], next run at: 2026-06-29 01:35:00 -04)" skipped: maximum number of running instances reached (1)
+Execution of job "_schedule_job.<locals>.job_func (trigger: cron[month='*', day='*', day_of_week='*', hour='*', minute='*/5'], next run at: 2026-06-29 01:40:00 -04)" skipped: maximum number of running instances reached (1)
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+Execution of job "_schedule_job.<locals>.job_func (trigger: cron[month='*', day='*', day_of_week='*', hour='*', minute='*/5'], next run at: 2026-06-29 01:45:00 -04)" skipped: maximum number of running instances reached (1)
+Execution of job "_schedule_job.<locals>.job_func (trigger: cron[month='*', day='*', day_of_week='*', hour='*', minute='*/5'], next run at: 2026-06-29 01:50:00 -04)" skipped: maximum number of running instances reached (1)
+Execution of job "_schedule_job.<locals>.job_func (trigger: cron[month='*', day='*', day_of_week='*', hour='*', minute='*/5'], next run at: 2026-06-29 01:55:00 -04)" skipped: maximum number of running instances reached (1)
+Execution of job "_schedule_job.<locals>.job_func (trigger: cron[month='*', day='*', day_of_week='*', hour='*', minute='*/5'], next run at: 2026-06-29 02:00:00 -04)" skipped: maximum number of running instances reached (1)
+Execution of job "_schedule_job.<locals>.job_func (trigger: cron[month='*', day='*', day_of_week='*', hour='*', minute='*/5'], next run at: 2026-06-29 02:05:00 -04)" skipped: maximum number of running instances reached (1)
+Execution of job "_schedule_job.<locals>.job_func (trigger: cron[month='*', day='*', day_of_week='*', hour='*', minute='*/5'], next run at: 2026-06-29 02:10:00 -04)" skipped: maximum number of running instances reached (1)
+Execution of job "_schedule_job.<locals>.job_func (trigger: cron[month='*', day='*', day_of_week='*', hour='*', minute='*/5'], next run at: 2026-06-29 02:15:00 -04)" skipped: maximum number of running instances reached (1)

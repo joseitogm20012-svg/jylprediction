@@ -1,0 +1,55 @@
+{
+  "match_id": "Cpq2Y2FE",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "23Martinez",
+        "26Molina",
+        "13Romero",
+        "6Martínez L.",
+        "25Medina",
+        "7de Paul",
+        "20Mac Allister",
+        "24Fernández",
+        "16Almada",
+        "10Messi",
+        "22Martínez L."
+      ],
+      "suplentes": [
+        "Otamendi N.",
+        "Alvarez J.",
+        "González N.",
+        "Paredes L.",
+        "Tagliafico N."
+      ],
+      "formacion": "4 - 4 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "1Schlager A.",
+        "5Posch",
+        "3Danso",
+        "8Alaba",
+        "20Laimer",
+        "6Seiwald",
+        "4Schlager X.",
+        "18Schmid",
+        "24Wanner",
+        "9Sabitzer",
+        "11Gregoritsch"
+      ],
+      "suplentes": [
+        "Friedl M.",
+        "Prass A.",
+        "Arnautovic M.",
+        "Wimmer P.",
+        "Chukwuemeka C."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "22.06.2026 13:00ArgentinaFIFA: 1.2-0FinalizadoAustriaFIFA: 24.2-0Finalizado",
+  "score": "2-0"
+}

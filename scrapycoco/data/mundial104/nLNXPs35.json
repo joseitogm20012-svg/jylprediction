@@ -1,0 +1,188 @@
+{
+  "match_id": "nLNXPs35",
+  "estadisticas": {
+    "1.18Goles esperados (xG)1.36": {
+      "home": "1.18",
+      "away": "1.36"
+    },
+    "28%Posesión72%": {
+      "home": "28%",
+      "away": "72%"
+    },
+    "9Remates totales30": {
+      "home": "9",
+      "away": "30"
+    },
+    "4Remates a puerta8": {
+      "home": "4",
+      "away": "8"
+    },
+    "1Grandes ocasiones2": {
+      "home": "1",
+      "away": "2"
+    },
+    "5Córneres8": {
+      "home": "5",
+      "away": "8"
+    },
+    "74%(201/271)Pases90%(635/704)": {
+      "home": "74%(201/271)",
+      "away": "90%(635/704)"
+    },
+    "0Tarjetas amarillas1": {
+      "home": "0",
+      "away": "1"
+    },
+    "1.08xG a puerta (xGOT)1.46": {
+      "home": "1.08",
+      "away": "1.46"
+    },
+    "4Remates fuera10": {
+      "home": "4",
+      "away": "10"
+    },
+    "1Remates rechazados12": {
+      "home": "1",
+      "away": "12"
+    },
+    "6Remates dentro del área14": {
+      "home": "6",
+      "away": "14"
+    },
+    "3Remates fuera del área16": {
+      "home": "3",
+      "away": "16"
+    },
+    "0Al palo1": {
+      "home": "0",
+      "away": "1"
+    },
+    "18Toques en el área rival51": {
+      "home": "18",
+      "away": "51"
+    },
+    "0Pases entre líneas completados1": {
+      "home": "0",
+      "away": "1"
+    },
+    "1Fueras de juego3": {
+      "home": "1",
+      "away": "3"
+    },
+    "4Tiros libres12": {
+      "home": "4",
+      "away": "12"
+    },
+    "28%(16/57)Pases largos68%(19/28)": {
+      "home": "28%(16/57)",
+      "away": "68%(19/28)"
+    },
+    "60%(43/72)Pases en el último tercio87%(285/329)": {
+      "home": "60%(43/72)",
+      "away": "87%(285/329)"
+    },
+    "29%(4/14)Centros8%(2/26)": {
+      "home": "29%(4/14)",
+      "away": "8%(2/26)"
+    },
+    "0.35Asistencias esperadas (xA)1.44": {
+      "home": "0.35",
+      "away": "1.44"
+    },
+    "14Saques de banda24": {
+      "home": "14",
+      "away": "24"
+    },
+    "12Faltas4": {
+      "home": "12",
+      "away": "4"
+    },
+    "33%(5/15)Entradas67%(8/12)": {
+      "home": "33%(5/15)",
+      "away": "67%(8/12)"
+    },
+    "42Duelos ganados46": {
+      "home": "42",
+      "away": "46"
+    },
+    "55Despejes29": {
+      "home": "55",
+      "away": "29"
+    },
+    "7Intercepciones4": {
+      "home": "7",
+      "away": "4"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "8Paradas2": {
+      "home": "8",
+      "away": "2"
+    },
+    "1.46xGOT enfrentados1.08": {
+      "home": "1.46",
+      "away": "1.08"
+    },
+    "1.46Goles evitados-0.92": {
+      "home": "1.46",
+      "away": "-0.92"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "18Beach",
+        "4Italiano",
+        "3Circati",
+        "19Souttar",
+        "21Burgess",
+        "5Bos",
+        "8Metcalfe",
+        "13O'Neill",
+        "24Okon-Engstler",
+        "17Irankunda",
+        "9Toure"
+      ],
+      "suplentes": [
+        "Velupillay N.",
+        "Yengi T.",
+        "Geria J.",
+        "Behich A.",
+        "Irvine J."
+      ],
+      "formacion": "5 - 4 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "23Cakir",
+        "2Çelik",
+        "3Demiral",
+        "14Bardakci",
+        "20Kadioglu",
+        "16Yuksek",
+        "10Calhanoglu",
+        "8Güler",
+        "6Kokcu",
+        "21Yilmaz",
+        "7Akturkoglu"
+      ],
+      "suplentes": [
+        "Yildiz K.",
+        "Akgun Y.",
+        "Ozcan S.",
+        "Muldur M.",
+        "Gul D."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "14.06.2026 00:00AustraliaFIFA: 27.2-0FinalizadoTurquíaFIFA: 22.2-0Finalizado",
+  "score": "2-0"
+}

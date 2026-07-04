@@ -1,0 +1,55 @@
+{
+  "match_id": "C8oCpXiA",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Abunada",
+        "13Al Oui",
+        "2Pedro Miguel",
+        "16Khoukhi",
+        "14Al Amin",
+        "5Gaber",
+        "23Madibo",
+        "4Laye",
+        "8Edmilson Junior",
+        "15Abdurisag",
+        "11Afif"
+      ],
+      "suplentes": [
+        "Fathi A.",
+        "Boudiaf K.",
+        "Alaaeldin A.",
+        "Al Mannai M.",
+        "Al Haydos H."
+      ],
+      "formacion": "4 - 3 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "1Kobel",
+        "6Zakaria",
+        "4Elvedi",
+        "5Akanji",
+        "13Rodríguez",
+        "20Aebischer",
+        "10Xhaka",
+        "8Freuler",
+        "11Ndoye",
+        "7Embolo",
+        "17Vargas"
+      ],
+      "suplentes": [
+        "Manzambi J.",
+        "Rieder F.",
+        "Amdouni Z.",
+        "Muheim M.",
+        "Jashari A."
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "13.06.2026 15:00CatarFIFA: 56.1-1FinalizadoSuizaFIFA: 19.1-1Finalizado",
+  "score": "1-1"
+}

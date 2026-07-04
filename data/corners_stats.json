@@ -1,0 +1,1914 @@
+{
+  "argentina": {
+    "corners_for": 3.58,
+    "corners_against": 2.93,
+    "games": 24,
+    "_updated": "2026-07-03T15:43:01.537728",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 2.44,
+        "conceded": 1.06,
+        "over35": 50,
+        "over45": 39,
+        "over55": 0,
+        "matches": 18
+      },
+      "home": {
+        "taken": 2.33,
+        "conceded": 1.0,
+        "over35": 44,
+        "over45": 33,
+        "over55": 0,
+        "matches": 9
+      },
+      "away": {
+        "taken": 2.56,
+        "conceded": 1.11,
+        "over35": 56,
+        "over45": 44,
+        "over55": 0,
+        "matches": 9
+      }
+    }
+  },
+  "france": {
+    "corners_for": 4.84,
+    "corners_against": 3.96,
+    "games": 22,
+    "_updated": "2026-07-03T15:43:01.537630",
+    "_source": "footystats",
+    "second_half": {
+      "away": {
+        "taken": 3.33,
+        "conceded": 0.67,
+        "over35": 33,
+        "over45": 33,
+        "over55": 33,
+        "matches": 3
+      }
+    }
+  },
+  "brazil": {
+    "corners_for": 4.4,
+    "corners_against": 3.6,
+    "games": 20,
+    "_updated": "2026-07-03T15:43:01.537675",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 2.78,
+        "conceded": 1.78,
+        "over35": 61,
+        "over45": 39,
+        "over55": 33,
+        "matches": 18
+      },
+      "home": {
+        "taken": 2.67,
+        "conceded": 1.44,
+        "over35": 33,
+        "over45": 22,
+        "over55": 22,
+        "matches": 9
+      },
+      "away": {
+        "taken": 2.89,
+        "conceded": 2.11,
+        "over35": 89,
+        "over45": 56,
+        "over55": 44,
+        "matches": 9
+      }
+    }
+  },
+  "spain": {
+    "corners_for": 4.9,
+    "corners_against": 4.0,
+    "games": 18,
+    "_updated": "2026-07-03T15:43:01.537611",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.25,
+        "conceded": 0.5,
+        "over35": 25,
+        "over45": 25,
+        "over55": 25,
+        "matches": 4
+      }
+    }
+  },
+  "germany": {
+    "corners_for": 6.27,
+    "corners_against": 5.13,
+    "games": 16,
+    "_updated": "2026-07-03T15:43:01.537497",
+    "_source": "footystats"
+  },
+  "england": {
+    "corners_for": 5.5,
+    "corners_against": 4.5,
+    "games": 22,
+    "_updated": "2026-07-03T15:43:01.537550",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.75,
+        "conceded": 0.5,
+        "over35": 75,
+        "over45": 25,
+        "over55": 25,
+        "matches": 8
+      },
+      "away": {
+        "taken": 3.75,
+        "conceded": 0.75,
+        "over35": 75,
+        "over45": 25,
+        "over55": 25,
+        "matches": 4
+      }
+    }
+  },
+  "italy": {
+    "corners_for": 5.2,
+    "corners_against": 3.9,
+    "games": 15,
+    "second_half": {
+      "home": {
+        "taken": 4.2,
+        "conceded": 1.6,
+        "over35": 100,
+        "over45": 100,
+        "over55": 80,
+        "matches": 5
+      }
+    }
+  },
+  "uruguay": {
+    "corners_for": 5.74,
+    "corners_against": 4.7,
+    "games": 18,
+    "_updated": "2026-07-03T15:43:01.537527",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 2.06,
+        "conceded": 2.39,
+        "over35": 61,
+        "over45": 50,
+        "over55": 17,
+        "matches": 18
+      },
+      "home": {
+        "taken": 2.56,
+        "conceded": 1.0,
+        "over35": 33,
+        "over45": 33,
+        "over55": 0,
+        "matches": 9
+      },
+      "away": {
+        "taken": 1.56,
+        "conceded": 3.78,
+        "over35": 89,
+        "over45": 67,
+        "over55": 33,
+        "matches": 9
+      }
+    }
+  },
+  "mexico": {
+    "corners_for": 3.8,
+    "corners_against": 3.11,
+    "games": 19,
+    "_updated": "2026-07-03T15:43:01.537714",
+    "_source": "footystats"
+  },
+  "usa": {
+    "corners_for": 5.67,
+    "corners_against": 4.64,
+    "games": 20,
+    "_updated": "2026-07-03T15:43:01.537545",
+    "_source": "footystats"
+  },
+  "japan": {
+    "corners_for": 4.29,
+    "corners_against": 3.51,
+    "games": 17,
+    "_updated": "2026-07-03T15:43:01.537694",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.8,
+        "conceded": 0.87,
+        "over35": 67,
+        "over45": 40,
+        "over55": 33,
+        "matches": 15
+      },
+      "home": {
+        "taken": 4.13,
+        "conceded": 0.63,
+        "over35": 75,
+        "over45": 38,
+        "over55": 38,
+        "matches": 8
+      },
+      "away": {
+        "taken": 3.43,
+        "conceded": 1.14,
+        "over35": 57,
+        "over45": 43,
+        "over55": 29,
+        "matches": 7
+      }
+    }
+  },
+  "morocco": {
+    "corners_for": 5.5,
+    "corners_against": 4.5,
+    "games": 16,
+    "_updated": "2026-07-03T15:43:01.537554",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.75,
+        "conceded": 2.0,
+        "over35": 100,
+        "over45": 75,
+        "over55": 75,
+        "matches": 4
+      },
+      "home": {
+        "taken": 4.75,
+        "conceded": 1.0,
+        "over35": 100,
+        "over45": 100,
+        "over55": 25,
+        "matches": 4
+      }
+    }
+  },
+  "portugal": {
+    "corners_for": 4.84,
+    "corners_against": 3.96,
+    "games": 19,
+    "_updated": "2026-07-03T15:43:01.537621",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.33,
+        "conceded": 1.17,
+        "over35": 67,
+        "over45": 33,
+        "over55": 33,
+        "matches": 6
+      },
+      "away": {
+        "taken": 3.33,
+        "conceded": 1.33,
+        "over35": 67,
+        "over45": 33,
+        "over55": 33,
+        "matches": 3
+      }
+    }
+  },
+  "belgium": {
+    "corners_for": 5.72,
+    "corners_against": 4.68,
+    "games": 18,
+    "_updated": "2026-07-03T15:43:01.537539",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 4.38,
+        "conceded": 0.5,
+        "over35": 63,
+        "over45": 50,
+        "over55": 38,
+        "matches": 8
+      },
+      "home": {
+        "taken": 4.75,
+        "conceded": 0.5,
+        "over35": 50,
+        "over45": 50,
+        "over55": 50,
+        "matches": 4
+      },
+      "away": {
+        "taken": 4.0,
+        "conceded": 0.5,
+        "over35": 75,
+        "over45": 50,
+        "over55": 25,
+        "matches": 4
+      }
+    }
+  },
+  "croatia": {
+    "corners_for": 5.06,
+    "corners_against": 4.14,
+    "games": 21,
+    "_updated": "2026-07-03T15:43:01.537596",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 4.88,
+        "conceded": 2.25,
+        "over35": 100,
+        "over45": 75,
+        "over55": 63,
+        "matches": 8
+      },
+      "home": {
+        "taken": 4.75,
+        "conceded": 2.5,
+        "over35": 100,
+        "over45": 100,
+        "over55": 75,
+        "matches": 4
+      },
+      "away": {
+        "taken": 5.0,
+        "conceded": 2.0,
+        "over35": 100,
+        "over45": 50,
+        "over55": 50,
+        "matches": 4
+      }
+    }
+  },
+  "senegal": {
+    "corners_for": 5.72,
+    "corners_against": 4.68,
+    "games": 14,
+    "_updated": "2026-07-03T15:43:01.537535",
+    "_source": "footystats"
+  },
+  "iran": {
+    "corners_for": 3.54,
+    "corners_against": 2.89,
+    "games": 12,
+    "_updated": "2026-07-03T15:43:01.537732",
+    "_source": "footystats"
+  },
+  "saudi-arabia": {
+    "corners_for": 4.07,
+    "corners_against": 3.33,
+    "games": 13,
+    "_updated": "2026-07-03T15:43:01.537704",
+    "_source": "footystats"
+  },
+  "scotland": {
+    "corners_for": 5.88,
+    "corners_against": 4.81,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537517",
+    "_source": "footystats"
+  },
+  "wales": {
+    "corners_for": 3.69,
+    "corners_against": 4.5,
+    "games": 3
+  },
+  "canada": {
+    "corners_for": 6.27,
+    "corners_against": 5.13,
+    "games": 4,
+    "_updated": "2026-07-03T15:43:01.537504",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 5.25,
+        "conceded": 0.75,
+        "over35": 50,
+        "over45": 50,
+        "over55": 50,
+        "matches": 4
+      }
+    }
+  },
+  "austria": {
+    "corners_for": 3.74,
+    "corners_against": 3.06,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537718",
+    "_source": "footystats"
+  },
+  "hungary": {
+    "corners_for": 4.59,
+    "corners_against": 4.42,
+    "games": 47,
+    "second_half": {
+      "home": {
+        "taken": 4.0,
+        "conceded": 2.0,
+        "over35": 100,
+        "over45": 67,
+        "over55": 67,
+        "matches": 3
+      }
+    }
+  },
+  "switzerland": {
+    "corners_for": 4.62,
+    "corners_against": 3.78,
+    "games": 9,
+    "_updated": "2026-07-03T15:43:01.537645",
+    "_source": "footystats"
+  },
+  "netherlands": {
+    "corners_for": 4.9,
+    "corners_against": 4.0,
+    "games": 6,
+    "_updated": "2026-07-03T15:43:01.537616",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.25,
+        "conceded": 1.13,
+        "over35": 63,
+        "over45": 38,
+        "over55": 25,
+        "matches": 8
+      }
+    }
+  },
+  "south-africa": {
+    "corners_for": 3.61,
+    "corners_against": 2.95,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537723",
+    "_source": "footystats",
+    "second_half": {
+      "away": {
+        "taken": 3.0,
+        "conceded": 1.4,
+        "over35": 40,
+        "over45": 40,
+        "over55": 40,
+        "matches": 5
+      }
+    }
+  },
+  "sweden": {
+    "corners_for": 4.84,
+    "corners_against": 3.96,
+    "games": 6,
+    "_updated": "2026-07-03T15:43:01.537625",
+    "_source": "footystats"
+  },
+  "norway": {
+    "corners_for": 5.23,
+    "corners_against": 4.28,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537581",
+    "_source": "footystats"
+  },
+  "denmark": {
+    "corners_for": 5.35,
+    "corners_against": 4.5,
+    "games": 7,
+    "second_half": {
+      "overall": {
+        "taken": 4.5,
+        "conceded": 1.75,
+        "over35": 75,
+        "over45": 63,
+        "over55": 63,
+        "matches": 8
+      },
+      "home": {
+        "taken": 6.0,
+        "conceded": 1.75,
+        "over35": 100,
+        "over45": 75,
+        "over55": 75,
+        "matches": 4
+      }
+    }
+  },
+  "russia": {
+    "corners_for": 4.81,
+    "corners_against": 4.5,
+    "games": 6
+  },
+  "paraguay": {
+    "corners_for": 4.95,
+    "corners_against": 4.05,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537606",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 1.89,
+        "conceded": 2.72,
+        "over35": 67,
+        "over45": 44,
+        "over55": 28,
+        "matches": 18
+      },
+      "home": {
+        "taken": 2.56,
+        "conceded": 1.67,
+        "over35": 67,
+        "over45": 44,
+        "over55": 33,
+        "matches": 9
+      },
+      "away": {
+        "taken": 1.22,
+        "conceded": 3.78,
+        "over35": 67,
+        "over45": 44,
+        "over55": 22,
+        "matches": 9
+      }
+    }
+  },
+  "egypt": {
+    "corners_for": 4.62,
+    "corners_against": 3.78,
+    "games": 4,
+    "_updated": "2026-07-03T15:43:01.537649",
+    "_source": "footystats"
+  },
+  "costa-rica": {
+    "corners_for": 3.15,
+    "corners_against": 4.5,
+    "games": 6,
+    "second_half": {
+      "overall": {
+        "taken": 3.5,
+        "conceded": 1.67,
+        "over35": 83,
+        "over45": 67,
+        "over55": 33,
+        "matches": 10
+      },
+      "home": {
+        "taken": 4.33,
+        "conceded": 2.67,
+        "over35": 100,
+        "over45": 67,
+        "over55": 67,
+        "matches": 5
+      },
+      "away": {
+        "taken": 2.67,
+        "conceded": 0.67,
+        "over35": 67,
+        "over45": 67,
+        "over55": 0,
+        "matches": 5
+      }
+    }
+  },
+  "poland": {
+    "corners_for": 4.19,
+    "corners_against": 4.5,
+    "games": 7,
+    "second_half": {
+      "away": {
+        "taken": 3.4,
+        "conceded": 3.0,
+        "over35": 100,
+        "over45": 100,
+        "over55": 80,
+        "matches": 5
+      }
+    }
+  },
+  "new-zealand": {
+    "corners_for": 5.45,
+    "corners_against": 4.46,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537566",
+    "_source": "footystats"
+  },
+  "australia": {
+    "corners_for": 4.02,
+    "corners_against": 3.29,
+    "games": 8,
+    "_updated": "2026-07-03T15:43:01.537709",
+    "_source": "footystats"
+  },
+  "turkey": {
+    "corners_for": 6.49,
+    "corners_against": 5.31,
+    "games": 51,
+    "_updated": "2026-07-03T15:43:01.537460",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.25,
+        "conceded": 3.0,
+        "over35": 75,
+        "over45": 63,
+        "over55": 63,
+        "matches": 8
+      },
+      "home": {
+        "taken": 5.0,
+        "conceded": 3.25,
+        "over35": 100,
+        "over45": 100,
+        "over55": 100,
+        "matches": 4
+      }
+    }
+  },
+  "haiti": {
+    "corners_for": 4.35,
+    "corners_against": 3.56,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537689",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 1.83,
+        "conceded": 3.83,
+        "over35": 100,
+        "over45": 50,
+        "over55": 33,
+        "matches": 10
+      },
+      "home": {
+        "taken": 2.33,
+        "conceded": 3.0,
+        "over35": 100,
+        "over45": 67,
+        "over55": 33,
+        "matches": 5
+      },
+      "away": {
+        "taken": 1.33,
+        "conceded": 4.67,
+        "over35": 100,
+        "over45": 33,
+        "over55": 33,
+        "matches": 5
+      }
+    }
+  },
+  "peru": {
+    "corners_for": 4.13,
+    "corners_against": 4.5,
+    "games": 3,
+    "second_half": {
+      "overall": {
+        "taken": 1.33,
+        "conceded": 2.5,
+        "over35": 39,
+        "over45": 33,
+        "over55": 22,
+        "matches": 18
+      },
+      "home": {
+        "taken": 2.0,
+        "conceded": 2.56,
+        "over35": 67,
+        "over45": 56,
+        "over55": 33,
+        "matches": 9
+      },
+      "away": {
+        "taken": 0.67,
+        "conceded": 2.44,
+        "over35": 11,
+        "over45": 11,
+        "over55": 11,
+        "matches": 9
+      }
+    }
+  },
+  "honduras": {
+    "corners_for": 4.13,
+    "corners_against": 4.9,
+    "games": 57,
+    "second_half": {
+      "overall": {
+        "taken": 2.5,
+        "conceded": 2.0,
+        "over35": 67,
+        "over45": 50,
+        "over55": 50,
+        "matches": 10
+      },
+      "away": {
+        "taken": 3.33,
+        "conceded": 3.67,
+        "over35": 100,
+        "over45": 100,
+        "over55": 100,
+        "matches": 5
+      }
+    }
+  },
+  "ukraine": {
+    "corners_for": 5.03,
+    "corners_against": 4.02,
+    "games": 45,
+    "second_half": {
+      "overall": {
+        "taken": 3.57,
+        "conceded": 1.86,
+        "over35": 71,
+        "over45": 57,
+        "over55": 29,
+        "matches": 7
+      },
+      "home": {
+        "taken": 4.5,
+        "conceded": 2.0,
+        "over35": 75,
+        "over45": 75,
+        "over55": 50,
+        "matches": 4
+      }
+    }
+  },
+  "indonesia": {
+    "corners_for": 5.41,
+    "corners_against": 3.74,
+    "games": 58
+  },
+  "colombia": {
+    "corners_for": 4.51,
+    "corners_against": 3.69,
+    "games": 5,
+    "_updated": "2026-07-03T15:43:01.537670",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 2.17,
+        "conceded": 2.06,
+        "over35": 56,
+        "over45": 33,
+        "over55": 17,
+        "matches": 18
+      },
+      "home": {
+        "taken": 1.56,
+        "conceded": 1.89,
+        "over35": 56,
+        "over45": 11,
+        "over55": 0,
+        "matches": 9
+      },
+      "away": {
+        "taken": 2.78,
+        "conceded": 2.22,
+        "over35": 56,
+        "over45": 56,
+        "over55": 33,
+        "matches": 9
+      }
+    }
+  },
+  "panama": {
+    "corners_for": 4.57,
+    "corners_against": 3.74,
+    "games": 4,
+    "_updated": "2026-07-03T15:43:01.537661",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.17,
+        "conceded": 2.0,
+        "over35": 83,
+        "over45": 67,
+        "over55": 33,
+        "matches": 10
+      },
+      "home": {
+        "taken": 3.0,
+        "conceded": 1.0,
+        "over35": 67,
+        "over45": 67,
+        "over55": 0,
+        "matches": 5
+      },
+      "away": {
+        "taken": 3.33,
+        "conceded": 3.0,
+        "over35": 100,
+        "over45": 67,
+        "over55": 67,
+        "matches": 5
+      }
+    }
+  },
+  "venezuela": {
+    "corners_for": 4.09,
+    "corners_against": 4.96,
+    "games": 46,
+    "second_half": {
+      "overall": {
+        "taken": 2.06,
+        "conceded": 1.72,
+        "over35": 44,
+        "over45": 28,
+        "over55": 17,
+        "matches": 18
+      },
+      "home": {
+        "taken": 1.89,
+        "conceded": 1.89,
+        "over35": 56,
+        "over45": 33,
+        "over55": 22,
+        "matches": 9
+      },
+      "away": {
+        "taken": 2.22,
+        "conceded": 1.56,
+        "over35": 33,
+        "over45": 22,
+        "over55": 11,
+        "matches": 9
+      }
+    }
+  },
+  "ecuador": {
+    "corners_for": 4.12,
+    "corners_against": 3.38,
+    "games": 4,
+    "_updated": "2026-07-03T15:43:01.537699",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 1.72,
+        "conceded": 1.78,
+        "over35": 44,
+        "over45": 28,
+        "over55": 6,
+        "matches": 18
+      },
+      "home": {
+        "taken": 2.67,
+        "conceded": 1.56,
+        "over35": 56,
+        "over45": 44,
+        "over55": 11,
+        "matches": 9
+      },
+      "away": {
+        "taken": 0.78,
+        "conceded": 2.0,
+        "over35": 33,
+        "over45": 11,
+        "over55": 0,
+        "matches": 9
+      }
+    }
+  },
+  "slovakia": {
+    "corners_for": 4.56,
+    "corners_against": 4.44,
+    "games": 48
+  },
+  "iceland": {
+    "corners_for": 5.32,
+    "corners_against": 4.5,
+    "games": 3,
+    "second_half": {
+      "away": {
+        "taken": 3.0,
+        "conceded": 2.33,
+        "over35": 67,
+        "over45": 67,
+        "over55": 33,
+        "matches": 3
+      }
+    }
+  },
+  "dr-congo": {
+    "corners_for": 3.89,
+    "corners_against": 5.21,
+    "games": 54,
+    "second_half": {
+      "home": {
+        "taken": 3.2,
+        "conceded": 1.6,
+        "over35": 80,
+        "over45": 60,
+        "over55": 40,
+        "matches": 5
+      }
+    }
+  },
+  "south-korea": {
+    "corners_for": 4.62,
+    "corners_against": 3.78,
+    "games": 8,
+    "_updated": "2026-07-03T15:43:01.537640",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.88,
+        "conceded": 1.06,
+        "over35": 63,
+        "over45": 50,
+        "over55": 44,
+        "matches": 16
+      },
+      "home": {
+        "taken": 4.25,
+        "conceded": 1.25,
+        "over35": 75,
+        "over45": 63,
+        "over55": 50,
+        "matches": 8
+      },
+      "away": {
+        "taken": 3.5,
+        "conceded": 0.88,
+        "over35": 50,
+        "over45": 38,
+        "over55": 38,
+        "matches": 8
+      }
+    }
+  },
+  "nigeria": {
+    "corners_for": 5.31,
+    "corners_against": 4.5,
+    "games": 3
+  },
+  "serbia": {
+    "corners_for": 5.74,
+    "corners_against": 4.5,
+    "games": 6,
+    "second_half": {
+      "overall": {
+        "taken": 3.25,
+        "conceded": 2.13,
+        "over35": 88,
+        "over45": 63,
+        "over55": 38,
+        "matches": 8
+      }
+    }
+  },
+  "ghana": {
+    "corners_for": 4.51,
+    "corners_against": 3.69,
+    "games": 4,
+    "_updated": "2026-07-03T15:43:01.537665",
+    "_source": "footystats",
+    "second_half": {
+      "away": {
+        "taken": 3.4,
+        "conceded": 1.2,
+        "over35": 80,
+        "over45": 60,
+        "over55": 20,
+        "matches": 5
+      }
+    }
+  },
+  "cameroon": {
+    "corners_for": 5.13,
+    "corners_against": 4.5,
+    "games": 3
+  },
+  "tunisia": {
+    "corners_for": 5.12,
+    "corners_against": 4.19,
+    "games": 7,
+    "_updated": "2026-07-03T15:43:01.537591",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.1,
+        "conceded": 1.8,
+        "over35": 60,
+        "over45": 40,
+        "over55": 40,
+        "matches": 10
+      }
+    }
+  },
+  "cape-verde": {
+    "corners_for": 5.14,
+    "corners_against": 4.2,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537586",
+    "_source": "footystats",
+    "second_half": {
+      "home": {
+        "taken": 3.4,
+        "conceded": 2.8,
+        "over35": 80,
+        "over45": 60,
+        "over55": 60,
+        "matches": 5
+      }
+    }
+  },
+  "ivory-coast": {
+    "corners_for": 5.88,
+    "corners_against": 4.81,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537522",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.4,
+        "conceded": 1.7,
+        "over35": 70,
+        "over45": 40,
+        "over55": 40,
+        "matches": 10
+      },
+      "home": {
+        "taken": 3.2,
+        "conceded": 1.6,
+        "over35": 80,
+        "over45": 20,
+        "over55": 20,
+        "matches": 5
+      },
+      "away": {
+        "taken": 3.6,
+        "conceded": 1.8,
+        "over35": 60,
+        "over45": 60,
+        "over55": 60,
+        "matches": 5
+      }
+    }
+  },
+  "mali": {
+    "corners_for": 5.0,
+    "corners_against": 4.05,
+    "games": 48,
+    "second_half": {
+      "overall": {
+        "taken": 3.78,
+        "conceded": 1.33,
+        "over35": 78,
+        "over45": 56,
+        "over55": 56,
+        "matches": 10
+      },
+      "home": {
+        "taken": 3.6,
+        "conceded": 1.4,
+        "over35": 80,
+        "over45": 60,
+        "over55": 60,
+        "matches": 5
+      },
+      "away": {
+        "taken": 4.0,
+        "conceded": 1.25,
+        "over35": 75,
+        "over45": 50,
+        "over55": 50,
+        "matches": 5
+      }
+    }
+  },
+  "iraq": {
+    "corners_for": 5.0,
+    "corners_against": 4.09,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537601",
+    "_source": "footystats"
+  },
+  "algeria": {
+    "corners_for": 4.4,
+    "corners_against": 3.6,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537679",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.3,
+        "conceded": 1.7,
+        "over35": 60,
+        "over45": 50,
+        "over55": 40,
+        "matches": 10
+      },
+      "away": {
+        "taken": 3.6,
+        "conceded": 2.6,
+        "over35": 80,
+        "over45": 60,
+        "over55": 60,
+        "matches": 5
+      }
+    }
+  },
+  "jordan": {
+    "corners_for": 5.33,
+    "corners_against": 4.37,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537571",
+    "_source": "footystats",
+    "second_half": {
+      "away": {
+        "taken": 3.38,
+        "conceded": 2.63,
+        "over35": 88,
+        "over45": 75,
+        "over55": 63,
+        "matches": 8
+      }
+    }
+  },
+  "qatar": {
+    "corners_for": 6.0,
+    "corners_against": 4.91,
+    "games": 4,
+    "_updated": "2026-07-03T15:43:01.537511",
+    "_source": "footystats",
+    "second_half": {
+      "away": {
+        "taken": 3.0,
+        "conceded": 1.44,
+        "over35": 67,
+        "over45": 44,
+        "over55": 44,
+        "matches": 9
+      }
+    }
+  },
+  "uzbekistan": {
+    "corners_for": 4.68,
+    "corners_against": 3.83,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537635",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 3.06,
+        "conceded": 1.31,
+        "over35": 56,
+        "over45": 44,
+        "over55": 19,
+        "matches": 16
+      },
+      "home": {
+        "taken": 3.38,
+        "conceded": 1.13,
+        "over35": 75,
+        "over45": 50,
+        "over55": 13,
+        "matches": 8
+      }
+    }
+  },
+  "czech-republic": {
+    "corners_for": 5.25,
+    "corners_against": 4.3,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537576",
+    "_source": "footystats",
+    "second_half": {
+      "overall": {
+        "taken": 4.2,
+        "conceded": 1.4,
+        "over35": 80,
+        "over45": 80,
+        "over55": 60,
+        "matches": 10
+      },
+      "away": {
+        "taken": 5.25,
+        "conceded": 0.5,
+        "over35": 100,
+        "over45": 100,
+        "over55": 50,
+        "matches": 4
+      }
+    }
+  },
+  "bosnia-&-herz": {
+    "corners_for": 3.33,
+    "corners_against": 4.5,
+    "games": 1
+  },
+  "congo-dr": {
+    "corners_for": 4.4,
+    "corners_against": 3.6,
+    "games": 1,
+    "_updated": "2026-07-03T15:43:01.537684",
+    "_source": "footystats"
+  },
+  "curacao": {
+    "corners_for": 2.71,
+    "corners_against": 4.5,
+    "games": 1,
+    "second_half": {
+      "overall": {
+        "taken": 3.0,
+        "conceded": 2.5,
+        "over35": 83,
+        "over45": 50,
+        "over55": 33,
+        "matches": 10
+      },
+      "home": {
+        "taken": 3.67,
+        "conceded": 3.0,
+        "over35": 67,
+        "over45": 67,
+        "over55": 67,
+        "matches": 5
+      },
+      "away": {
+        "taken": 2.33,
+        "conceded": 2.0,
+        "over35": 100,
+        "over45": 33,
+        "over55": 0,
+        "matches": 5
+      }
+    }
+  },
+  "türkiye": {
+    "corners_for": 10.1,
+    "corners_against": 4.5,
+    "games": 1
+  },
+  "bosnia": {
+    "corners_for": 5.45,
+    "corners_against": 4.46,
+    "games": 10,
+    "_updated": "2026-07-03T15:43:01.537560",
+    "_source": "footystats"
+  },
+  "curaao": {
+    "corners_for": 4.58,
+    "corners_against": 3.75,
+    "games": 10,
+    "_updated": "2026-07-03T15:43:01.537655",
+    "_source": "footystats"
+  },
+  "_meta": {
+    "source": "Scraped from https://footystats.org/world-cup",
+    "total_teams": 48,
+    "updated_teams": 48,
+    "scraped_at": "2026-07-03T15:43:01.537737",
+    "home_factor": 0.55,
+    "away_factor": 0.45,
+    "note": "avg corners per game. Corners split by HOME_FACTOR/AWAY_FACTOR. Clamped to [3.0-8.0] (for) / [2.0-6.0] (against).",
+    "footiqo_second_half_updated": "2026-07-03T17:17:54.848211"
+  },
+  "chile": {
+    "second_half": {
+      "overall": {
+        "taken": 2.67,
+        "conceded": 1.78,
+        "over35": 72,
+        "over45": 56,
+        "over55": 28,
+        "matches": 18
+      },
+      "home": {
+        "taken": 3.0,
+        "conceded": 2.0,
+        "over35": 78,
+        "over45": 67,
+        "over55": 44,
+        "matches": 9
+      },
+      "away": {
+        "taken": 2.33,
+        "conceded": 1.56,
+        "over35": 67,
+        "over45": 44,
+        "over55": 11,
+        "matches": 9
+      }
+    }
+  },
+  "bolivia": {
+    "second_half": {
+      "overall": {
+        "taken": 1.5,
+        "conceded": 2.83,
+        "over35": 61,
+        "over45": 28,
+        "over55": 22,
+        "matches": 18
+      },
+      "home": {
+        "taken": 2.33,
+        "conceded": 2.67,
+        "over35": 67,
+        "over45": 33,
+        "over55": 22,
+        "matches": 9
+      },
+      "away": {
+        "taken": 0.67,
+        "conceded": 3.0,
+        "over35": 56,
+        "over45": 22,
+        "over55": 22,
+        "matches": 9
+      }
+    }
+  },
+  "angola": {
+    "second_half": {
+      "overall": {
+        "taken": 3.5,
+        "conceded": 1.9,
+        "over35": 70,
+        "over45": 70,
+        "over55": 40,
+        "matches": 10
+      },
+      "away": {
+        "taken": 4.6,
+        "conceded": 2.0,
+        "over35": 80,
+        "over45": 80,
+        "over55": 80,
+        "matches": 5
+      }
+    }
+  },
+  "guinea": {
+    "second_half": {
+      "overall": {
+        "taken": 3.3,
+        "conceded": 2.0,
+        "over35": 70,
+        "over45": 70,
+        "over55": 50,
+        "matches": 10
+      },
+      "home": {
+        "taken": 4.8,
+        "conceded": 2.0,
+        "over35": 100,
+        "over45": 100,
+        "over55": 100,
+        "matches": 5
+      }
+    }
+  },
+  "zimbabwe": {
+    "second_half": {
+      "overall": {
+        "taken": 3.2,
+        "conceded": 2.9,
+        "over35": 80,
+        "over45": 80,
+        "over55": 60,
+        "matches": 10
+      },
+      "away": {
+        "taken": 3.2,
+        "conceded": 3.2,
+        "over35": 100,
+        "over45": 100,
+        "over55": 80,
+        "matches": 5
+      }
+    }
+  },
+  "equatorial-guinea": {
+    "second_half": {
+      "overall": {
+        "taken": 3.14,
+        "conceded": 1.14,
+        "over35": 57,
+        "over45": 14,
+        "over55": 14,
+        "matches": 7
+      },
+      "away": {
+        "taken": 3.33,
+        "conceded": 0.33,
+        "over35": 67,
+        "over45": 0,
+        "over55": 0,
+        "matches": 3
+      }
+    }
+  },
+  "malawi": {
+    "second_half": {
+      "overall": {
+        "taken": 3.11,
+        "conceded": 2.33,
+        "over35": 78,
+        "over45": 56,
+        "over55": 44,
+        "matches": 9
+      },
+      "away": {
+        "taken": 3.2,
+        "conceded": 3.0,
+        "over35": 80,
+        "over45": 60,
+        "over55": 60,
+        "matches": 5
+      }
+    }
+  },
+  "gabon": {
+    "second_half": {
+      "overall": {
+        "taken": 3.11,
+        "conceded": 2.67,
+        "over35": 89,
+        "over45": 67,
+        "over55": 56,
+        "matches": 11
+      },
+      "home": {
+        "taken": 3.75,
+        "conceded": 2.0,
+        "over35": 75,
+        "over45": 75,
+        "over55": 50,
+        "matches": 5
+      }
+    }
+  },
+  "kenya": {
+    "second_half": {
+      "home": {
+        "taken": 3.6,
+        "conceded": 2.0,
+        "over35": 100,
+        "over45": 60,
+        "over55": 40,
+        "matches": 5
+      }
+    }
+  },
+  "libya": {
+    "second_half": {
+      "home": {
+        "taken": 3.5,
+        "conceded": 1.75,
+        "over35": 75,
+        "over45": 50,
+        "over55": 50,
+        "matches": 5
+      }
+    }
+  },
+  "uganda": {
+    "second_half": {
+      "home": {
+        "taken": 3.4,
+        "conceded": 1.0,
+        "over35": 80,
+        "over45": 40,
+        "over55": 20,
+        "matches": 5
+      }
+    }
+  },
+  "togo": {
+    "second_half": {
+      "away": {
+        "taken": 3.2,
+        "conceded": 2.2,
+        "over35": 40,
+        "over45": 40,
+        "over55": 20,
+        "matches": 5
+      }
+    }
+  },
+  "israel": {
+    "second_half": {
+      "home": {
+        "taken": 4.5,
+        "conceded": 1.5,
+        "over35": 75,
+        "over45": 50,
+        "over55": 50,
+        "matches": 4
+      }
+    }
+  },
+  "ireland": {
+    "second_half": {
+      "home": {
+        "taken": 4.33,
+        "conceded": 1.0,
+        "over35": 100,
+        "over45": 67,
+        "over55": 33,
+        "matches": 3
+      }
+    }
+  },
+  "cyprus": {
+    "second_half": {
+      "home": {
+        "taken": 4.25,
+        "conceded": 1.75,
+        "over35": 100,
+        "over45": 100,
+        "over55": 75,
+        "matches": 4
+      }
+    }
+  },
+  "slovenia": {
+    "second_half": {
+      "away": {
+        "taken": 3.33,
+        "conceded": 1.33,
+        "over35": 33,
+        "over45": 33,
+        "over55": 33,
+        "matches": 3
+      }
+    }
+  },
+  "greece": {
+    "second_half": {
+      "away": {
+        "taken": 3.0,
+        "conceded": 2.33,
+        "over35": 67,
+        "over45": 67,
+        "over55": 67,
+        "matches": 3
+      }
+    }
+  },
+  "thailand": {
+    "second_half": {
+      "overall": {
+        "taken": 5.17,
+        "conceded": 2.67,
+        "over35": 83,
+        "over45": 83,
+        "over55": 67,
+        "matches": 6
+      },
+      "home": {
+        "taken": 6.0,
+        "conceded": 1.67,
+        "over35": 67,
+        "over45": 67,
+        "over55": 67,
+        "matches": 3
+      },
+      "away": {
+        "taken": 4.33,
+        "conceded": 3.67,
+        "over35": 100,
+        "over45": 100,
+        "over55": 67,
+        "matches": 3
+      }
+    }
+  },
+  "malaysia": {
+    "second_half": {
+      "overall": {
+        "taken": 3.5,
+        "conceded": 2.5,
+        "over35": 83,
+        "over45": 67,
+        "over55": 50,
+        "matches": 6
+      },
+      "home": {
+        "taken": 4.0,
+        "conceded": 2.33,
+        "over35": 100,
+        "over45": 67,
+        "over55": 33,
+        "matches": 3
+      }
+    }
+  },
+  "palestine": {
+    "second_half": {
+      "overall": {
+        "taken": 3.47,
+        "conceded": 3.2,
+        "over35": 80,
+        "over45": 67,
+        "over55": 53,
+        "matches": 16
+      },
+      "home": {
+        "taken": 3.86,
+        "conceded": 4.0,
+        "over35": 86,
+        "over45": 71,
+        "over55": 71,
+        "matches": 8
+      },
+      "away": {
+        "taken": 3.13,
+        "conceded": 2.5,
+        "over35": 75,
+        "over45": 63,
+        "over55": 38,
+        "matches": 8
+      }
+    }
+  },
+  "hong-kong": {
+    "second_half": {
+      "overall": {
+        "taken": 3.4,
+        "conceded": 2.8,
+        "over35": 100,
+        "over45": 100,
+        "over55": 40,
+        "matches": 8
+      },
+      "home": {
+        "taken": 4.67,
+        "conceded": 2.33,
+        "over35": 100,
+        "over45": 100,
+        "over55": 67,
+        "matches": 4
+      }
+    }
+  },
+  "tajikistan": {
+    "second_half": {
+      "overall": {
+        "taken": 3.33,
+        "conceded": 1.5,
+        "over35": 67,
+        "over45": 67,
+        "over55": 33,
+        "matches": 6
+      },
+      "away": {
+        "taken": 4.0,
+        "conceded": 1.67,
+        "over35": 100,
+        "over45": 100,
+        "over55": 33,
+        "matches": 3
+      }
+    }
+  },
+  "north-korea": {
+    "second_half": {
+      "overall": {
+        "taken": 2.92,
+        "conceded": 2.23,
+        "over35": 85,
+        "over45": 54,
+        "over55": 46,
+        "matches": 15
+      },
+      "away": {
+        "taken": 3.25,
+        "conceded": 2.38,
+        "over35": 88,
+        "over45": 63,
+        "over55": 50,
+        "matches": 8
+      }
+    }
+  },
+  "oman": {
+    "second_half": {
+      "overall": {
+        "taken": 2.82,
+        "conceded": 2.47,
+        "over35": 76,
+        "over45": 47,
+        "over55": 41,
+        "matches": 18
+      }
+    }
+  },
+  "yemen": {
+    "second_half": {
+      "home": {
+        "taken": 3.5,
+        "conceded": 3.5,
+        "over35": 100,
+        "over45": 100,
+        "over55": 100,
+        "matches": 4
+      }
+    }
+  },
+  "united-arab-emirates": {
+    "second_half": {
+      "home": {
+        "taken": 3.4,
+        "conceded": 2.5,
+        "over35": 80,
+        "over45": 60,
+        "over55": 50,
+        "matches": 10
+      }
+    }
+  },
+  "india": {
+    "second_half": {
+      "home": {
+        "taken": 3.33,
+        "conceded": 2.33,
+        "over35": 100,
+        "over45": 67,
+        "over55": 67,
+        "matches": 3
+      }
+    }
+  },
+  "syria": {
+    "second_half": {
+      "away": {
+        "taken": 3.5,
+        "conceded": 0.5,
+        "over35": 50,
+        "over45": 50,
+        "over55": 50,
+        "matches": 3
+      }
+    }
+  },
+  "lebanon": {
+    "second_half": {
+      "away": {
+        "taken": 3.0,
+        "conceded": 2.67,
+        "over35": 67,
+        "over45": 33,
+        "over55": 33,
+        "matches": 3
+      }
+    }
+  },
+  "trinidad--tobago": {
+    "second_half": {
+      "overall": {
+        "taken": 4.33,
+        "conceded": 1.67,
+        "over35": 67,
+        "over45": 67,
+        "over55": 50,
+        "matches": 10
+      },
+      "home": {
+        "taken": 5.33,
+        "conceded": 1.0,
+        "over35": 67,
+        "over45": 67,
+        "over55": 33,
+        "matches": 5
+      },
+      "away": {
+        "taken": 3.33,
+        "conceded": 2.33,
+        "over35": 67,
+        "over45": 67,
+        "over55": 67,
+        "matches": 5
+      }
+    }
+  },
+  "guatemala": {
+    "second_half": {
+      "overall": {
+        "taken": 3.17,
+        "conceded": 2.33,
+        "over35": 83,
+        "over45": 83,
+        "over55": 67,
+        "matches": 10
+      },
+      "home": {
+        "taken": 5.33,
+        "conceded": 1.33,
+        "over35": 100,
+        "over45": 100,
+        "over55": 100,
+        "matches": 5
+      }
+    }
+  },
+  "jamaica": {
+    "second_half": {
+      "overall": {
+        "taken": 2.5,
+        "conceded": 1.83,
+        "over35": 67,
+        "over45": 33,
+        "over55": 33,
+        "matches": 10
+      },
+      "home": {
+        "taken": 2.67,
+        "conceded": 2.67,
+        "over35": 100,
+        "over45": 67,
+        "over55": 67,
+        "matches": 5
+      },
+      "away": {
+        "taken": 2.33,
+        "conceded": 1.0,
+        "over35": 33,
+        "over45": 0,
+        "over55": 0,
+        "matches": 5
+      }
+    }
+  },
+  "nicaragua": {
+    "second_half": {
+      "overall": {
+        "taken": 2.0,
+        "conceded": 2.33,
+        "over35": 83,
+        "over45": 33,
+        "over55": 17,
+        "matches": 10
+      },
+      "home": {
+        "taken": 2.0,
+        "conceded": 3.33,
+        "over35": 100,
+        "over45": 67,
+        "over55": 33,
+        "matches": 5
+      },
+      "away": {
+        "taken": 2.0,
+        "conceded": 1.33,
+        "over35": 67,
+        "over45": 0,
+        "over55": 0,
+        "matches": 5
+      }
+    }
+  },
+  "suriname": {
+    "second_half": {
+      "overall": {
+        "taken": 2.0,
+        "conceded": 3.5,
+        "over35": 83,
+        "over45": 83,
+        "over55": 50,
+        "matches": 10
+      },
+      "home": {
+        "taken": 2.33,
+        "conceded": 3.33,
+        "over35": 67,
+        "over45": 67,
+        "over55": 67,
+        "matches": 5
+      },
+      "away": {
+        "taken": 1.67,
+        "conceded": 3.67,
+        "over35": 100,
+        "over45": 100,
+        "over55": 33,
+        "matches": 5
+      }
+    }
+  },
+  "el-salvador": {
+    "second_half": {
+      "home": {
+        "taken": 2.67,
+        "conceded": 1.0,
+        "over35": 67,
+        "over45": 33,
+        "over55": 0,
+        "matches": 5
+      }
+    }
+  },
+  "bermuda": {
+    "second_half": {
+      "away": {
+        "taken": 1.33,
+        "conceded": 7.33,
+        "over35": 100,
+        "over45": 100,
+        "over55": 100,
+        "matches": 5
+      }
+    }
+  }
+}

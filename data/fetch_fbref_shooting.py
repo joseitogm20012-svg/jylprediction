@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Obtiene estadísticas de TIROS por jugador desde FBref (Mundiales 2018, 2022, 2026)
-usando soccerdata. Escribe en data/player_stats.json bajo 'shooting'.
-
-Campos: player, shots, shots_on_target, goals, shots_per_90, goals_per_90, g_per_shot
+Obtiene estadísticas de TIROS por jugador desde caché FBref (soccerdata).
 """
 import json, sys, io
 from pathlib import Path
-import soccerdata as sd
+from bs4 import BeautifulSoup, Comment
 
 if hasattr(sys.stdout, 'buffer'):
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 BASE_DIR = Path(__file__).parent
 PLAYER_STATS_PATH = BASE_DIR / "player_stats.json"
+SOCCERDATA_CACHE = Path.home() / "soccerdata" / "data" / "FBref"
 
 FBREF_NAME_TO_SLUG = {
     "United States": "usa", "Mexico": "mexico", "Canada": "canada",
@@ -47,78 +45,104 @@ FBREF_NAME_TO_SLUG = {
     "Democratic Republic of the Congo": "dr-congo",
     "South Africa": "south-africa", "Tunisia": "tunisia", "Senegal": "senegal",
     "Cameroon": "cameroon", "Nigeria": "nigeria", "Mali": "mali",
-    "Burkina Faso": "burkina-faso", "New Zealand": "new-zealand",
-    "Indonesia": "indonesia",
+    "Burkina Faso": "burkina-faso", "New Zealand": "new-zealand", "Indonesia": "indonesia",
 }
 
-SEASONS = ["2026", "2022", "2018"]
+CACHE_FILES = ["players_INT-World Cup_2022_shooting.html", "players_INT-World Cup_2026_shooting.html"]
 
-def slug_for_fbref_name(name: str) -> str | None:
-    clean = name.replace("\u00e7", "c").replace("\u00f4", "o").replace("\u2019", "'")
-    if clean in FBREF_NAME_TO_SLUG:
-        return FBREF_NAME_TO_SLUG[clean]
-    if name in FBREF_NAME_TO_SLUG:
-        return FBREF_NAME_TO_SLUG[name]
+def parse_val(s):
+    if not s or s == "":
+        return 0.0
+    s = s.strip().replace(",", "")
+    try:
+        return float(s)
+    except:
+        return 0.0
+
+def extract_team_name(raw):
+    if len(raw) >= 3 and raw[:2].isalpha() and raw[2:]:
+        return raw[2:]
+    return raw
+
+def find_table_in_comments(soup, table_id):
+    for comment in soup.find_all(string=lambda s: isinstance(s, Comment) and table_id in s):
+        inner = BeautifulSoup(str(comment), "html.parser")
+        tbl = inner.find("table", id=table_id)
+        if tbl:
+            return tbl
     return None
+
+def parse_player_table(filepath):
+    if not filepath.exists():
+        print(f"  Caché no encontrado: {filepath.name}")
+        return []
+    html = filepath.read_text(encoding="utf-8", errors="replace")
+    soup = BeautifulSoup(html, "html.parser")
+    table = find_table_in_comments(soup, "stats_shooting")
+    if not table:
+        # try non-commented version
+        table = soup.find("table", id="stats_shooting")
+    if not table:
+        print(f"  No se encontró tabla stats_shooting en {filepath.name}")
+        return []
+    tbody = table.find("tbody")
+    if not tbody:
+        print(f"  No hay tbody")
+        return []
+    rows = []
+    for tr in tbody.find_all("tr"):
+        player_el = tr.find("td", {"data-stat": "player"})
+        if not player_el:
+            continue
+        player = player_el.get_text(strip=True)
+        team_el = tr.find("td", {"data-stat": "team"})
+        if not team_el:
+            continue
+        team_raw = team_el.get_text(strip=True)
+        team = extract_team_name(team_raw)
+        slug = FBREF_NAME_TO_SLUG.get(team)
+        if not slug:
+            continue
+        def g(stat):
+            el = tr.find("td", {"data-stat": stat})
+            return el.get_text(strip=True) if el else "0"
+        rows.append({
+            "player": player,
+            "team_slug": slug,
+            "shots": int(parse_val(g("shots"))),
+            "shots_on_target": int(parse_val(g("shots_on_target"))),
+            "goals": int(parse_val(g("goals"))),
+            "shots_per_90": round(parse_val(g("shots_per90")), 2),
+            "g_per_shot": round(parse_val(g("goals_per_shot")), 3),
+        })
+    return rows
 
 def main():
     print("=" * 60)
-    print("  FBref Player Shooting Stats Scraper")
+    print("  FBref Player Shooting Stats (desde caché)")
     print("=" * 60)
-
     all_data = {}
     if PLAYER_STATS_PATH.exists():
         try:
             all_data = json.loads(PLAYER_STATS_PATH.read_text(encoding="utf-8"))
-            print(f"Datos existentes cargados: {len(all_data)} equipos")
-        except Exception:
+            print(f"Datos existentes: {len(all_data)} equipos")
+        except:
             all_data = {}
-
-    for season in SEASONS:
-        print(f"\n--- Season {season} ---")
-        try:
-            fbref = sd.FBref(leagues=["INT-World Cup"], seasons=[season])
-            df = fbref.read_player_season_stats(stat_type="shooting")
-        except Exception as e:
-            print(f"  Error cargando {season}: {e}")
-            continue
-
-        if df is None or df.empty:
-            print(f"  Sin datos para {season}")
-            continue
-
-        # MultiIndex columns: ('Standard', 'Gls'), etc.
-        df.columns = ['_'.join(c).strip('_') for c in df.columns]
-
-        for (league, season_val, team_fbref, player), row in df.iterrows():
-            slug = slug_for_fbref_name(team_fbref)
-            if not slug:
-                continue
-
-            entry = {
-                "player": player,
-                "shots": int(row.get("Standard_Sh", 0) or 0),
-                "shots_on_target": int(row.get("Standard_SoT", 0) or 0),
-                "goals": int(row.get("Standard_Gls", 0) or 0),
-                "shots_per_90": round(float(row.get("Standard_Sh/90", 0) or 0), 2),
-                "goals_per_90": round(float(row.get("Standard_Gls", 0) or 0) / max(float(row.get("_90s", 1) or 1), 0.1), 2),
-                "g_per_shot": round(float(row.get("Standard_G/Sh", 0) or 0), 3),
-                "pk": int(row.get("Standard_PK", 0) or 0),
-                "pkatt": int(row.get("Standard_PKatt", 0) or 0),
-            }
-
+    for fname in CACHE_FILES:
+        cache_path = SOCCERDATA_CACHE / fname
+        print(f"\n--- {fname} ---")
+        rows = parse_player_table(cache_path)
+        for row in rows:
+            slug = row.pop("team_slug")
             if slug not in all_data:
                 all_data[slug] = {}
             if "shooting" not in all_data[slug]:
                 all_data[slug]["shooting"] = []
-            all_data[slug]["shooting"].append(entry)
-
-        print(f"  Procesados: {len(all_data.get(next(iter(all_data)), {}).get('shooting', []))} registros (sample)")
-
+            all_data[slug]["shooting"].append(row)
+        print(f"  {len(rows)} jugadores")
     PLAYER_STATS_PATH.write_text(json.dumps(all_data, ensure_ascii=False, indent=2), encoding="utf-8")
-    total_players = sum(len(d.get("shooting", [])) for d in all_data.values())
-    print(f"\nTotal equipos: {len(all_data)}, total jugadores: {total_players}")
-    print(f"Datos guardados en {PLAYER_STATS_PATH}")
+    total = sum(len(v.get("shooting",[])) for v in all_data.values())
+    print(f"\nTotal equipos: {len(all_data)}, jugadores: {total}")
 
 if __name__ == "__main__":
     main()

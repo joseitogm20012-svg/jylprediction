@@ -1,0 +1,54 @@
+{
+  "match_id": "bo9vy2zK",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "24Freese",
+        "16Freeman",
+        "3Richards",
+        "13Ream",
+        "5Robinson",
+        "4Adams",
+        "17Tillman",
+        "2Dest",
+        "8McKennie",
+        "10Pulisic",
+        "20Balogun"
+      ],
+      "suplentes": [
+        "Mauricio",
+        "Arce A.",
+        "Sosa R.",
+        "Velazquez G.",
+        "Kaku"
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "12Gill",
+        "4Caceres",
+        "15Gómez",
+        "3Alderete",
+        "6Alonso",
+        "8Gomez",
+        "14Cubas",
+        "16Bobadilla",
+        "10Almirón",
+        "9Sanabria",
+        "19Enciso"
+      ],
+      "suplentes": [
+        "Berhalter S.",
+        "Weah T.",
+        "Pepi R.",
+        "Reyna G."
+      ],
+      "formacion": "4 - 4 - 2"
+    }
+  },
+  "error": null,
+  "description": "12.06.2026 21:00EE. UU.FIFA: 17.4-1FinalizadoParaguayFIFA: 41.4-1Finalizado",
+  "score": "4-1"
+}

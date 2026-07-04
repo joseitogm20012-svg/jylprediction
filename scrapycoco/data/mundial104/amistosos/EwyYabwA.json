@@ -1,0 +1,55 @@
+{
+  "match_id": "EwyYabwA",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Kovar",
+        "5Coufal",
+        "4Hranac",
+        "20Zeleny",
+        "17Jurasek",
+        "21Beran",
+        "22Soucek",
+        "13Doudera",
+        "10Schick",
+        "7Karabec",
+        "19Chory"
+      ],
+      "suplentes": [
+        "Danek K.",
+        "Cerv L.",
+        "Chaloupek S.",
+        "Sadilek M.",
+        "Chytil M."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "23Hankins",
+        "3Jolley",
+        "14Ronan",
+        "6Lopes",
+        "17Olivero",
+        "2Mauro",
+        "9Del Rio",
+        "4Pozo",
+        "22Torrilla",
+        "8Scanlon",
+        "7Bartolo"
+      ],
+      "suplentes": [
+        "McClafferty P.",
+        "Bent D.",
+        "Vinet J.",
+        "Morgan K.",
+        "Perera J."
+      ],
+      "formacion": "5 - 4 - 1"
+    }
+  },
+  "error": null,
+  "description": "17.11.2025 15:45República ChecaFIFA: 40.6-0FinalizadoGibraltarFIFA: 202.6-0Finalizado",
+  "score": "6-0"
+}

@@ -1,0 +1,245 @@
+version: "3.9"
+
+x-logging: &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+x-restart: &default-restart
+  restart: unless-stopped
+
+networks:
+  backend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+  monitoring:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+
+volumes:
+  postgres_data:
+    driver: local
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+services:
+  # ═══════════════════════════════════════════════
+  # APP — FastAPI + Scrapers
+  # ═══════════════════════════════════════════════
+  app:
+    <<: *default-restart
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3006:3006"
+    env_file:
+      - .env
+    environment:
+      - PORT=3006
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-scrapycoco}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-scrapycoco}
+      - REDIS_HOST=redis
+      - MONGODB_URI=mongodb://mongodb:27017/scrapycoco
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      mongodb:
+        condition: service_started
+    networks:
+      - backend
+    volumes:
+      - ./data:/app/data
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3006/api/scrapers"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  # ═══════════════════════════════════════════════
+  # POSTGRESQL — Datos estructurados
+  # ═══════════════════════════════════════════════
+  postgres:
+    <<: *default-restart
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-scrapycoco}
+      POSTGRES_USER: ${POSTGRES_USER:-scrapycoco}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-scrapycoco} -d ${POSTGRES_DB:-scrapycoco}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ═══════════════════════════════════════════════
+  # MONGODB — Datos semi-estructurados
+  # ═══════════════════════════════════════════════
+  mongodb:
+    <<: *default-restart
+    image: mongo:7-jammy
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - backend
+    logging: *default-logging
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh --quiet
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  # ═══════════════════════════════════════════════
+  # REDIS — Caché + Celery Broker
+  # ═══════════════════════════════════════════════
+  redis:
+    <<: *default-restart
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  # ═══════════════════════════════════════════════
+  # CELERY WORKER — Procesamiento distribuido
+  # ═══════════════════════════════════════════════
+  celery-worker:
+    <<: *default-restart
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A tasks worker --loglevel=info --concurrency=4
+    env_file:
+      - .env
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-scrapycoco}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/${POSTGRES_DB:-scrapycoco}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    networks:
+      - backend
+    volumes:
+      - ./data:/app/data
+    logging: *default-logging
+
+  # ═══════════════════════════════════════════════
+  # CELERY BEAT — Programador de tareas
+  # ═══════════════════════════════════════════════
+  celery-beat:
+    <<: *default-restart
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A tasks beat --loglevel=info
+    env_file:
+      - .env
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    networks:
+      - backend
+    volumes:
+      - ./data:/app/data
+    logging: *default-logging
+
+  # ═══════════════════════════════════════════════
+  # GRAFANA — Dashboard de monitoreo
+  # ═══════════════════════════════════════════════
+  grafana:
+    <<: *default-restart
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    networks:
+      - monitoring
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ═══════════════════════════════════════════════
+  # ELASTICSEARCH — Búsqueda full-text + logs
+  # ═══════════════════════════════════════════════
+  elasticsearch:
+    <<: *default-restart
+    image: elasticsearch:8.12.0
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - cluster.name=scrapycoco
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - monitoring
+    logging: *default-logging
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200/_cluster/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536

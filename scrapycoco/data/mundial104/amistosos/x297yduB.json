@@ -1,0 +1,194 @@
+{
+  "match_id": "x297yduB",
+  "estadisticas": {
+    "1.45Goles esperados (xG)1.28": {
+      "home": "1.45",
+      "away": "1.28"
+    },
+    "58%Posesión42%": {
+      "home": "58%",
+      "away": "42%"
+    },
+    "12Remates totales10": {
+      "home": "12",
+      "away": "10"
+    },
+    "3Remates a puerta3": {
+      "home": "3",
+      "away": "3"
+    },
+    "2Grandes ocasiones1": {
+      "home": "2",
+      "away": "1"
+    },
+    "6Córneres9": {
+      "home": "6",
+      "away": "9"
+    },
+    "79%(427/539)Pases67%(263/393)": {
+      "home": "79%(427/539)",
+      "away": "67%(263/393)"
+    },
+    "1Tarjetas amarillas2": {
+      "home": "1",
+      "away": "2"
+    },
+    "1.88xG a puerta (xGOT)1.51": {
+      "home": "1.88",
+      "away": "1.51"
+    },
+    "5Remates fuera5": {
+      "home": "5",
+      "away": "5"
+    },
+    "4Remates rechazados2": {
+      "home": "4",
+      "away": "2"
+    },
+    "8Remates dentro del área6": {
+      "home": "8",
+      "away": "6"
+    },
+    "4Remates fuera del área4": {
+      "home": "4",
+      "away": "4"
+    },
+    "1Al palo2": {
+      "home": "1",
+      "away": "2"
+    },
+    "1Goles de cabeza0": {
+      "home": "1",
+      "away": "0"
+    },
+    "28Toques en el área rival27": {
+      "home": "28",
+      "away": "27"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Fueras de juego1": {
+      "home": "2",
+      "away": "1"
+    },
+    "14Tiros libres25": {
+      "home": "14",
+      "away": "25"
+    },
+    "41%(30/74)Pases largos31%(24/77)": {
+      "home": "41%(30/74)",
+      "away": "31%(24/77)"
+    },
+    "65%(92/141)Pases en el último tercio47%(57/121)": {
+      "home": "65%(92/141)",
+      "away": "47%(57/121)"
+    },
+    "24%(8/33)Centros30%(8/27)": {
+      "home": "24%(8/33)",
+      "away": "30%(8/27)"
+    },
+    "0.92Asistencias esperadas (xA)0.68": {
+      "home": "0.92",
+      "away": "0.68"
+    },
+    "23Saques de banda33": {
+      "home": "23",
+      "away": "33"
+    },
+    "25Faltas14": {
+      "home": "25",
+      "away": "14"
+    },
+    "52%(12/23)Entradas58%(7/12)": {
+      "home": "52%(12/23)",
+      "away": "58%(7/12)"
+    },
+    "93Duelos ganados91": {
+      "home": "93",
+      "away": "91"
+    },
+    "55Despejes41": {
+      "home": "55",
+      "away": "41"
+    },
+    "9Intercepciones8": {
+      "home": "9",
+      "away": "8"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Paradas1": {
+      "home": "2",
+      "away": "1"
+    },
+    "1.51xGOT enfrentados1.88": {
+      "home": "1.51",
+      "away": "1.88"
+    },
+    "0.51Goles evitados-0.12": {
+      "home": "0.51",
+      "away": "-0.12"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Kovar",
+        "3Holes",
+        "4Hranac",
+        "7Krejci",
+        "5Coufal",
+        "14Provod",
+        "8Darida",
+        "17Jurasek",
+        "10Schick",
+        "19Chory",
+        "15Sulc"
+      ],
+      "suplentes": [
+        "Soucek T.",
+        "Chaloupek S.",
+        "Chytil M.",
+        "Sadilek M.",
+        "Karabec A.",
+        "Kliment J."
+      ],
+      "formacion": "3 - 4 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "1Kelleher",
+        "5O'Brien",
+        "22Collins",
+        "4O'Shea",
+        "2Coleman",
+        "6Molumby",
+        "14Taylor",
+        "3Manning",
+        "20Ogbene",
+        "8Azaz",
+        "7Parrott"
+      ],
+      "suplentes": [
+        "Browne A.",
+        "Brady R.",
+        "Idah A.",
+        "Dunne J.",
+        "Szmodics S.",
+        "Vale H."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    }
+  },
+  "error": null,
+  "description": "26.03.2026 15:45República ChecaEquipo que avanzaFIFA: 40.2-2Tras la prórrogaPen: 4 - 3IrlandaFIFA: 58.2-2Pen: 4 - 3",
+  "score": "2-2"
+}

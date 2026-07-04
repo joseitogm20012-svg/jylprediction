@@ -4,6 +4,8 @@ __pycache__/
 *.pyd
 .env
 .env.*
+.env.bak
+.env.backup
 node_modules/
 dist/
 .DS_Store

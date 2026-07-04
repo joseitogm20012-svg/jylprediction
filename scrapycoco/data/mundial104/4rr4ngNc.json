@@ -1,0 +1,152 @@
+{
+  "match_id": "4rr4ngNc",
+  "estadisticas": {
+    "1.16Goles esperados (xG)0.91": {
+      "home": "1.16",
+      "away": "0.91"
+    },
+    "32%Posesión68%": {
+      "home": "32%",
+      "away": "68%"
+    },
+    "13Remates totales8": {
+      "home": "13",
+      "away": "8"
+    },
+    "4Remates a puerta3": {
+      "home": "4",
+      "away": "3"
+    },
+    "1Grandes ocasiones1": {
+      "home": "1",
+      "away": "1"
+    },
+    "4Córneres6": {
+      "home": "4",
+      "away": "6"
+    },
+    "81%(277/340)Pases89%(641/719)": {
+      "home": "81%(277/340)",
+      "away": "89%(641/719)"
+    },
+    "1Tarjetas amarillas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0.50xG a puerta (xGOT)1.42": {
+      "home": "0.50",
+      "away": "1.42"
+    },
+    "5Remates fuera4": {
+      "home": "5",
+      "away": "4"
+    },
+    "4Remates rechazados1": {
+      "home": "4",
+      "away": "1"
+    },
+    "5Remates dentro del área5": {
+      "home": "5",
+      "away": "5"
+    },
+    "8Remates fuera del área3": {
+      "home": "8",
+      "away": "3"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "13Toques en el área rival18": {
+      "home": "13",
+      "away": "18"
+    },
+    "1Pases entre líneas completados2": {
+      "home": "1",
+      "away": "2"
+    },
+    "3Fueras de juego0": {
+      "home": "3",
+      "away": "0"
+    },
+    "9Tiros libres7": {
+      "home": "9",
+      "away": "7"
+    },
+    "33%(19/57)Pases largos56%(29/52)": {
+      "home": "33%(19/57)",
+      "away": "56%(29/52)"
+    },
+    "55%(37/67)Pases en el último tercio80%(160/201)": {
+      "home": "55%(37/67)",
+      "away": "80%(160/201)"
+    },
+    "13%(1/8)Centros21%(7/34)": {
+      "home": "13%(1/8)",
+      "away": "21%(7/34)"
+    },
+    "0.75Asistencias esperadas (xA)1.60": {
+      "home": "0.75",
+      "away": "1.60"
+    },
+    "8Saques de banda24": {
+      "home": "8",
+      "away": "24"
+    },
+    "7Faltas9": {
+      "home": "7",
+      "away": "9"
+    },
+    "64%(7/11)Entradas75%(9/12)": {
+      "home": "64%(7/11)",
+      "away": "75%(9/12)"
+    },
+    "42Duelos ganados45": {
+      "home": "42",
+      "away": "45"
+    },
+    "40Despejes16": {
+      "home": "40",
+      "away": "16"
+    },
+    "15Intercepciones4": {
+      "home": "15",
+      "away": "4"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Paradas3": {
+      "home": "2",
+      "away": "3"
+    },
+    "1.42xGOT enfrentados0.50": {
+      "home": "1.42",
+      "away": "0.50"
+    },
+    "1.42Goles evitados-0.50": {
+      "home": "1.42",
+      "away": "-0.50"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "24.06.2026 21:00SudáfricaFIFA: 60.1-0FinalizadoCorea del SurFIFA: 25.1-0Finalizado",
+  "score": "1-0"
+}

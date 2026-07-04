@@ -1,0 +1,192 @@
+{
+  "match_id": "EgVZxtj1",
+  "estadisticas": {
+    "1.05Goles esperados (xG)4.34": {
+      "home": "1.05",
+      "away": "4.34"
+    },
+    "46%Posesión54%": {
+      "home": "46%",
+      "away": "54%"
+    },
+    "14Remates totales21": {
+      "home": "14",
+      "away": "21"
+    },
+    "5Remates a puerta9": {
+      "home": "5",
+      "away": "9"
+    },
+    "1Grandes ocasiones6": {
+      "home": "1",
+      "away": "6"
+    },
+    "7Córneres6": {
+      "home": "7",
+      "away": "6"
+    },
+    "90%(450/500)Pases93%(564/605)": {
+      "home": "90%(450/500)",
+      "away": "93%(564/605)"
+    },
+    "1Tarjetas amarillas2": {
+      "home": "1",
+      "away": "2"
+    },
+    "1.23xG a puerta (xGOT)4.80": {
+      "home": "1.23",
+      "away": "4.80"
+    },
+    "6Remates fuera7": {
+      "home": "6",
+      "away": "7"
+    },
+    "3Remates rechazados5": {
+      "home": "3",
+      "away": "5"
+    },
+    "10Remates dentro del área14": {
+      "home": "10",
+      "away": "14"
+    },
+    "4Remates fuera del área7": {
+      "home": "4",
+      "away": "7"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Goles de cabeza1": {
+      "home": "0",
+      "away": "1"
+    },
+    "27Toques en el área rival35": {
+      "home": "27",
+      "away": "35"
+    },
+    "0Pases entre líneas completados3": {
+      "home": "0",
+      "away": "3"
+    },
+    "0Fueras de juego1": {
+      "home": "0",
+      "away": "1"
+    },
+    "11Tiros libres10": {
+      "home": "11",
+      "away": "10"
+    },
+    "52%(17/33)Pases largos44%(12/27)": {
+      "home": "52%(17/33)",
+      "away": "44%(12/27)"
+    },
+    "76%(71/93)Pases en el último tercio84%(110/131)": {
+      "home": "76%(71/93)",
+      "away": "84%(110/131)"
+    },
+    "39%(9/23)Centros17%(2/12)": {
+      "home": "39%(9/23)",
+      "away": "17%(2/12)"
+    },
+    "1.46Asistencias esperadas (xA)2.54": {
+      "home": "1.46",
+      "away": "2.54"
+    },
+    "16Saques de banda10": {
+      "home": "16",
+      "away": "10"
+    },
+    "10Faltas11": {
+      "home": "10",
+      "away": "11"
+    },
+    "67%(8/12)Entradas43%(6/14)": {
+      "home": "67%(8/12)",
+      "away": "43%(6/14)"
+    },
+    "29Duelos ganados49": {
+      "home": "29",
+      "away": "49"
+    },
+    "13Despejes24": {
+      "home": "13",
+      "away": "24"
+    },
+    "2Intercepciones13": {
+      "home": "2",
+      "away": "13"
+    },
+    "0Errores conducentes a remate2": {
+      "home": "0",
+      "away": "2"
+    },
+    "2Errores conducentes a gol0": {
+      "home": "2",
+      "away": "0"
+    },
+    "5Paradas5": {
+      "home": "5",
+      "away": "5"
+    },
+    "4.80xGOT enfrentados1.23": {
+      "home": "4.80",
+      "away": "1.23"
+    },
+    "1.80Goles evitados1.23": {
+      "home": "1.80",
+      "away": "1.23"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Gunn",
+        "22Patterson",
+        "13Hendry",
+        "26McKenna",
+        "3Robertson",
+        "19Ferguson",
+        "23McLean",
+        "17Gannon-Doak",
+        "4McTominay",
+        "7McGinn",
+        "20Shankland"
+      ],
+      "suplentes": [
+        "Tierney K.",
+        "Ralston A.",
+        "Christie R.",
+        "Adams C.",
+        "Curtis F."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Alisson",
+        "13Danilo",
+        "4Marquinhos",
+        "3Gabriel",
+        "16Douglas Santos",
+        "8Bruno Guimaraes",
+        "5Casemiro",
+        "20Lucas Paqueta",
+        "26Rayan",
+        "9Cunha",
+        "7Vinicius Junior"
+      ],
+      "suplentes": [
+        "Fabinho",
+        "Martinelli G.",
+        "Neymar",
+        "A. Sandro",
+        "Endrick"
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "24.06.2026 18:00EscociaFIFA: 42.0-3FinalizadoBrasilFIFA: 6.0-3Finalizado",
+  "score": "0-3"
+}

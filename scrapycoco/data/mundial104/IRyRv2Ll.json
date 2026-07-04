@@ -1,0 +1,55 @@
+{
+  "match_id": "IRyRv2Ll",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Alisson",
+        "13Danilo",
+        "4Marquinhos",
+        "3Gabriel",
+        "16Douglas Santos",
+        "8Bruno Guimaraes",
+        "5Casemiro",
+        "20Lucas Paqueta",
+        "11Raphinha",
+        "9Cunha",
+        "7Vinicius Junior"
+      ],
+      "suplentes": [
+        "Rayan",
+        "Martinelli G.",
+        "Endrick",
+        "Danilo Santos",
+        "Ederson"
+      ],
+      "formacion": "4 - 3 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "1Placide",
+        "2Arcus",
+        "22Duverne",
+        "4Ade",
+        "5Delcroix",
+        "8Experience",
+        "21Casimir",
+        "17Jean Jacques",
+        "10Bellegarde",
+        "15Providence",
+        "20Pierrot"
+      ],
+      "suplentes": [
+        "Simón D.",
+        "Isidor W.",
+        "Deedson L.",
+        "Joseph L.",
+        "Etienne D."
+      ],
+      "formacion": "5 - 4 - 1"
+    }
+  },
+  "error": null,
+  "description": "19.06.2026 20:30BrasilFIFA: 6.3-0FinalizadoHaitíFIFA: 83.3-0Finalizado",
+  "score": "3-0"
+}

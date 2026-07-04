@@ -1,0 +1,17 @@
+{
+  "status": "init",
+  "scope": "codebase",
+  "type": "frontend",
+  "localEndpoint": "http://localhost:3005/",
+  "serverPort": 49425,
+  "executionArgs": {
+    "projectName": "scrapycoco",
+    "projectPath": "C:\\Users\\Equipo\\Desktop\\predecirv2\\scrapycoco",
+    "testIds": [],
+    "additionalInstruction": "Run all scraper dashboard API tests: list scrapers, SSE run, batch run, history, preview, export, scheduler CRUD, diagnostic endpoints, and static file serving",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-3FJuZE4FlGzxpFePYNrRGVk2xNSqdaOAs0EhEcp0UnpsYZkmsLoRluQj4CifUda4a6QtAaVKk8LJgKMcsxjKKEgDdtH388nvaqjrSbT-VKvt-O45FsSZtvfmJnGTTm39GYo"
+    }
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "match_id": "p2XLmuKP",
+  "estadisticas": {
+    "2.84Goles esperados (xG)0.50": {
+      "home": "2.84",
+      "away": "0.50"
+    },
+    "75%Posesión25%": {
+      "home": "75%",
+      "away": "25%"
+    },
+    "27Remates totales10": {
+      "home": "27",
+      "away": "10"
+    },
+    "15Remates a puerta3": {
+      "home": "15",
+      "away": "3"
+    },
+    "6Grandes ocasiones0": {
+      "home": "6",
+      "away": "0"
+    },
+    "9Córneres0": {
+      "home": "9",
+      "away": "0"
+    },
+    "90%(581/644)Pases70%(159/227)": {
+      "home": "90%(581/644)",
+      "away": "70%(159/227)"
+    },
+    "1Tarjetas amarillas5": {
+      "home": "1",
+      "away": "5"
+    },
+    "2.27xG a puerta (xGOT)0.88": {
+      "home": "2.27",
+      "away": "0.88"
+    },
+    "10Remates fuera4": {
+      "home": "10",
+      "away": "4"
+    },
+    "2Remates rechazados3": {
+      "home": "2",
+      "away": "3"
+    },
+    "21Remates dentro del área4": {
+      "home": "21",
+      "away": "4"
+    },
+    "6Remates fuera del área6": {
+      "home": "6",
+      "away": "6"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "43Toques en el área rival12": {
+      "home": "43",
+      "away": "12"
+    },
+    "1Pases entre líneas completados0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1Fueras de juego2": {
+      "home": "1",
+      "away": "2"
+    },
+    "10Tiros libres7": {
+      "home": "10",
+      "away": "7"
+    },
+    "41%(14/34)Pases largos30%(15/50)": {
+      "home": "41%(14/34)",
+      "away": "30%(15/50)"
+    },
+    "81%(191/235)Pases en el último tercio62%(32/52)": {
+      "home": "81%(191/235)",
+      "away": "62%(32/52)"
+    },
+    "33%(11/33)Centros100%(1/1)": {
+      "home": "33%(11/33)",
+      "away": "100%(1/1)"
+    },
+    "1.56Asistencias esperadas (xA)0.21": {
+      "home": "1.56",
+      "away": "0.21"
+    },
+    "18Saques de banda15": {
+      "home": "18",
+      "away": "15"
+    },
+    "7Faltas10": {
+      "home": "7",
+      "away": "10"
+    },
+    "58%(11/19)Entradas41%(7/17)": {
+      "home": "58%(11/19)",
+      "away": "41%(7/17)"
+    },
+    "51Duelos ganados52": {
+      "home": "51",
+      "away": "52"
+    },
+    "17Despejes32": {
+      "home": "17",
+      "away": "32"
+    },
+    "7Intercepciones8": {
+      "home": "7",
+      "away": "8"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Paradas15": {
+      "home": "3",
+      "away": "15"
+    },
+    "0.88xGOT enfrentados2.27": {
+      "home": "0.88",
+      "away": "2.27"
+    },
+    "0.88Goles evitados2.27": {
+      "home": "0.88",
+      "away": "2.27"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Galindez",
+        "21Franco",
+        "6Pacho",
+        "3Hincapié",
+        "5Alcivar",
+        "9Yeboah",
+        "15Vite",
+        "23Caicedo",
+        "7Estupiñán",
+        "19Plata",
+        "13Valencia"
+      ],
+      "suplentes": [
+        "Gorre K.",
+        "van Eijma R.",
+        "Margaritha J.",
+        "Kastaneer G.",
+        "Roemeratoe G."
+      ],
+      "formacion": "3 - 1 - 4 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "1Room",
+        "20Brenet",
+        "3Gaari",
+        "18Obispo",
+        "5Floranus",
+        "24Fonville",
+        "21Chong",
+        "8Comenencia",
+        "10Bacuna L.",
+        "7Bacuna J.",
+        "9Locadia"
+      ],
+      "suplentes": [
+        "Rodriguez K.",
+        "Angulo N.",
+        "Preciado A.",
+        "Caicedo J."
+      ],
+      "formacion": "5 - 4 - 1"
+    }
+  },
+  "error": null,
+  "description": "20.06.2026 20:00EcuadorFIFA: 23.0-0FinalizadoCurazaoFIFA: 82.0-0Finalizado",
+  "score": "0-0"
+}

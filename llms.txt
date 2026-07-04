@@ -1,0 +1,60 @@
+# JLY Predictor & ScrapyCoco Suite
+
+Este archivo proporciona contexto estructurado para Modelos de Lenguaje (LLMs) y agentes de IA que asistan en el desarrollo de este proyecto.
+
+---
+
+## 📋 Resumen del Proyecto
+
+**JLY Predictor** es un simulador estadístico de partidos de fútbol para el Mundial 2026. Combina un modelo Elo calibrado, regresión Poisson Dixon-Coles (rho = -0.13), simulación Monte Carlo asíncrona y ajustes contextuales (fatiga por días de descanso, altitud, ventaja de sede y récords de penaltis knockout).
+
+**ScrapyCoco** es el administrador visual de scrapers que corre en el puerto `3005`, transmitiendo logs de subprocesos en tiempo real mediante Server-Sent Events (SSE).
+
+---
+
+## 🧱 Arquitectura del Repositorio
+
+*   **[main.py](file:///c:/Users/Equipo/Desktop/predecirv2/main.py)**: API de FastAPI para el simulador y auth (Supabase JWT).
+*   **[predictor.py](file:///c:/Users/Equipo/Desktop/predecirv2/predictor.py)**: Motor numérico y estadístico (Poisson, Monte Carlo, ELO, descanso, penaltis).
+*   **[db.py](file:///c:/Users/Equipo/Desktop/predecirv2/db.py)**: Abstracción de datos con soporte dual SQLite (desarrollo) y PostgreSQL (producción).
+*   **[app.js](file:///c:/Users/Equipo/Desktop/predecirv2/app.js)**: Lógica principal del frontend del simulador.
+*   **[index.html](file:///c:/Users/Equipo/Desktop/predecirv2/index.html)**: UI principal del simulador.
+*   **[scrapycoco/](file:///c:/Users/Equipo/Desktop/predecirv2/scrapycoco)**: Módulo de extracción de datos visual (FastAPI en port 3005 + HTML/JS).
+
+---
+
+## 🔄 Cómo Extender la Suite de Datos (Scrapers)
+
+Si un desarrollador o agente de IA necesita añadir un nuevo scraper en el futuro (por ejemplo, edad de plantilla de Transfermarkt, alineaciones de Sofascore, etc.), debe seguir esta convención:
+
+### Paso 1: Crear el Script del Scraper
+Crea el script de extracción dentro de la carpeta `data/` (ej. `data/fetch_transfermarkt_age.py`). Asegúrate de que:
+*   Maneje argumentos de línea de comandos de forma no interactiva.
+*   Utilice rutas absolutas basadas en `Path(__file__).parent` para guardar los resultados (típicamente en `data/xg_by_team.json` o `data/results.csv`).
+*   Muestre el progreso usando `print()` estándar para que se capturen en la consola en tiempo real.
+
+### Paso 2: Registrar el Scraper en ScrapyCoco
+Abre `scrapycoco/main.py` y añade el nuevo scraper al diccionario global `SCRAPERS`:
+```python
+SCRAPERS = {
+    # ... scrapers existentes ...
+    "transfermarkt_age": {
+        "name": "Edad Promedio y Plantilla",
+        "description": "Extrae el promedio de edad e indicadores de madurez desde Transfermarkt.",
+        "script": "data/fetch_transfermarkt_age.py"
+    }
+}
+```
+
+### Paso 3: Integrar en el Predictor (`predictor.py`)
+1.  Modifica `load_match_raw_data` para extraer la nueva variable desde el archivo JSON de datos actualizados.
+2.  Incorpora la variable en `compute_xg_from_raw_data` (por ejemplo, modificando la varianza de simulación o aplicando multiplicadores de xG).
+
+---
+
+## 🔑 Variables de Entorno Requeridas (.env)
+*   `SUPABASE_URL`: URL del endpoint de Supabase Auth/DB.
+*   `SUPABASE_PUBLISHABLE_KEY`: Anon publishable key para cliente.
+*   `SUPABASE_SECRET_KEY`: Service role key para validación JWT del lado del servidor.
+*   `DATABASE_URL`: Connection string del pool de PostgreSQL de Supabase.
+*   `ADMIN_PASSWORD`: Contraseña del panel de administración.

@@ -1,0 +1,52 @@
+{
+  "match_id": "ALxYcMw2",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "16Maignan",
+        "5Koundé",
+        "4Upamecano",
+        "17Saliba",
+        "19Hernández",
+        "8Tchouaméni",
+        "14Rabiot",
+        "11Olise",
+        "7Dembélé",
+        "20Doue",
+        "10Mbappé"
+      ],
+      "suplentes": [
+        "Mbaye I.",
+        "Diarra H.",
+        "Ndiaye I.",
+        "Dieng B.",
+        "Ciss P."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "16Mendy",
+        "15Diatta",
+        "3Koulibaly",
+        "19Niakhate",
+        "25Diouf",
+        "5Gueye I.",
+        "26Gueye P.",
+        "18Sarr",
+        "8Camara",
+        "10Mané",
+        "11Jackson"
+      ],
+      "suplentes": [
+        "Barcola B.",
+        "Cherki R."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "16.06.2026 15:00FranciaFIFA: 3.3-1FinalizadoSenegalFIFA: 15.3-1Finalizado",
+  "score": "3-1"
+}

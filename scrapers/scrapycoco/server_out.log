@@ -1,0 +1,582 @@
+INFO:     127.0.0.1:50640 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50651 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50664 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50665 - "GET /api/run/invalid_scraper_id_123456789 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50666 - "GET /api/scrapers HTTP/1.1" 200 OK
+============================================================
+  FBref Scraper Module — XG
+============================================================
+
+============================================================
+  FBref World Cup Stats Fetcher - Predictor Mundial 2026
+============================================================
+[06/29/26 01:16:06] INFO     No custom team name replacements     _config.py:92
+                             found. You can configure these in
+                             C:\Users\Equipo\soccerdata\config\te
+                             amname_replacements.json.
+                    INFO     No custom league dict found. You    _config.py:190
+                             can configure additional leagues in
+                             C:\Users\Equipo\soccerdata\config\l
+                             eague_dict.json.
+============================================================
+Descargando estadisticas del Mundial desde FBref
+  Temporadas: 2018, 2022, 2026
+  Fuente: FBref (datos reales de partidos)
+============================================================
+
+[2026] Descargando (peso=1.0)...
+                    INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+  [2026] OK -> 48 equipos
+
+[2022] Descargando (peso=0.85)...
+[06/29/26 01:16:22] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+INFO:     127.0.0.1:50729 - "GET /api/scrapers HTTP/1.1" 200 OK
+============================================================
+  FBref Scraper Module — XG
+============================================================
+  [2022] OK -> 32 equipos
+
+[2018] Descargando (peso=0.65)...
+[06/29/26 01:16:37] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+
+============================================================
+  FBref World Cup Stats Fetcher - Predictor Mundial 2026
+============================================================
+[06/29/26 01:16:44] INFO     No custom team name replacements     _config.py:92
+                             found. You can configure these in
+                             C:\Users\Equipo\soccerdata\config\te
+                             amname_replacements.json.
+                    INFO     No custom league dict found. You    _config.py:190
+                             can configure additional leagues in
+                             C:\Users\Equipo\soccerdata\config\l
+                             eague_dict.json.
+============================================================
+Descargando estadisticas del Mundial desde FBref
+  Temporadas: 2018, 2022, 2026
+  Fuente: FBref (datos reales de partidos)
+============================================================
+
+[2026] Descargando (peso=1.0)...
+                    INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+  [2018] OK -> 32 equipos
+INFO:     127.0.0.1:50792 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50794 - "GET /api/run/results?match_id=1234&team_name=teamA&type=full&sandbox=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50796 - "GET /api/history HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50799 - "GET /api/history?limit=5&offset=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50800 - "GET /api/history?limit=invalid HTTP/1.1" 422 Unprocessable Content
+INFO:     127.0.0.1:50801 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50802 - "POST /api/scheduler/add HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50803 - "DELETE /api/scheduler/8 HTTP/1.1" 200 OK
+  [2026] OK -> 48 equipos
+
+[2022] Descargando (peso=0.85)...
+[06/29/26 01:17:09] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+INFO:     127.0.0.1:50804 - "POST /api/scheduler/add HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50805 - "POST /api/scheduler/9/pause HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50807 - "POST /api/scheduler/9/resume HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50809 - "DELETE /api/scheduler/9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50810 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50811 - "POST /api/diagnostic/run/results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50812 - "GET /api/diagnostic/history/results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50813 - "POST /api/diagnostic/run/results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50814 - "GET /api/diagnostic/history/results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50816 - "GET /api/diagnostic/compare/2/1 HTTP/1.1" 200 OK
+  [2022] OK -> 32 equipos
+
+[2018] Descargando (peso=0.65)...
+[06/29/26 01:17:32] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+INFO:     127.0.0.1:50881 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50889 - "GET /api/run/results?match_id=1234&team_name=teamA&type=full&sandbox=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50920 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50922 - "GET /api/run/results?match_id=1234&team_name=teamA&type=full&sandbox=true HTTP/1.1" 200 OK
+  [2018] OK -> 32 equipos
+INFO:     127.0.0.1:51105 - "GET /api/scheduler/list HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51105 - "DELETE /api/scheduler/7 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51105 - "DELETE /api/scheduler/6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51105 - "DELETE /api/scheduler/5 HTTP/1.1" 200 OK
+
+Resultados obtenidos para 58 selecciones:
+  germany                    xG/90=3.117  Sh/90=24.09  Crs/90=21.95  [2026+2022+2018]
+  sweden                     xG/90=2.523  Sh/90=12.21  Crs/90=12.95  [2026+2018]
+  england                    xG/90=2.345  Sh/90=15.92  Crs/90=15.33  [2026+2022+2018]
+  norway                     xG/90=2.261  Sh/90=12.00  Crs/90=17.00  [2026]
+  colombia                   xG/90=1.911  Sh/90=12.76  Crs/90=15.14  [2026+2018]
+  france                     xG/90=1.895  Sh/90=11.99  Crs/90=13.28  [2026+2022+2018]
+  argentina                  xG/90=1.811  Sh/90=11.96  Crs/90=11.09  [2026+2022+2018]
+  new-zealand                xG/90=1.738  Sh/90=14.00  Crs/90=12.00  [2026]
+  usa                        xG/90=1.710  Sh/90=13.82  Crs/90=19.87  [2026+2022]
+  austria                    xG/90=1.622  Sh/90=11.00  Crs/90=17.00  [2026]
+  netherlands                xG/90=1.516  Sh/90=9.05  Crs/90=17.51  [2026+2022]
+  brazil                     xG/90=1.428  Sh/90=16.41  Crs/90=19.13  [2026+2022+2018]
+  south-korea                xG/90=1.394  Sh/90=13.11  Crs/90=16.00  [2026+2022+2018]
+  russia                     xG/90=1.383  Sh/90=8.60  Crs/90=16.67  [2018]
+  croatia                    xG/90=1.375  Sh/90=11.19  Crs/90=17.84  [2026+2022+2018]
+  spain                      xG/90=1.368  Sh/90=18.83  Crs/90=25.24  [2026+2022+2018]
+
+Fusionando con datos existentes (340 equipos)...
+  Actualizados con datos FBref WC: 58
+  Equipos nuevos:                  0
+  Total en base de datos:          340
+
+Datos guardados en: C:\Users\Equipo\Desktop\predecirv2\data\xg_by_team.json
+  Equipos con datos FBref WC: 58
+  Total en base de datos:     340
+
+Listo! El predictor usa rendimiento real del Mundial para calcular xG.
+
+Resultados obtenidos para 58 selecciones:
+  germany                    xG/90=3.117  Sh/90=24.09  Crs/90=21.95  [2026+2022+2018]
+  sweden                     xG/90=2.523  Sh/90=12.21  Crs/90=12.95  [2026+2018]
+  england                    xG/90=2.345  Sh/90=15.92  Crs/90=15.33  [2026+2022+2018]
+  norway                     xG/90=2.261  Sh/90=12.00  Crs/90=17.00  [2026]
+  colombia                   xG/90=1.911  Sh/90=12.76  Crs/90=15.14  [2026+2018]
+  france                     xG/90=1.895  Sh/90=11.99  Crs/90=13.28  [2026+2022+2018]
+  argentina                  xG/90=1.811  Sh/90=11.96  Crs/90=11.09  [2026+2022+2018]
+  new-zealand                xG/90=1.738  Sh/90=14.00  Crs/90=12.00  [2026]
+  usa                        xG/90=1.710  Sh/90=13.82  Crs/90=19.87  [2026+2022]
+  austria                    xG/90=1.622  Sh/90=11.00  Crs/90=17.00  [2026]
+  netherlands                xG/90=1.516  Sh/90=9.05  Crs/90=17.51  [2026+2022]
+  brazil                     xG/90=1.428  Sh/90=16.41  Crs/90=19.13  [2026+2022+2018]
+  south-korea                xG/90=1.394  Sh/90=13.11  Crs/90=16.00  [2026+2022+2018]
+  russia                     xG/90=1.383  Sh/90=8.60  Crs/90=16.67  [2018]
+  croatia                    xG/90=1.375  Sh/90=11.19  Crs/90=17.84  [2026+2022+2018]
+  spain                      xG/90=1.368  Sh/90=18.83  Crs/90=25.24  [2026+2022+2018]
+
+Fusionando con datos existentes (340 equipos)...
+  Actualizados con datos FBref WC: 58
+  Equipos nuevos:                  0
+  Total en base de datos:          340
+
+Datos guardados en: C:\Users\Equipo\Desktop\predecirv2\data\xg_by_team.json
+  Equipos con datos FBref WC: 58
+  Total en base de datos:     340
+
+Listo! El predictor usa rendimiento real del Mundial para calcular xG.
+INFO:     127.0.0.1:51267 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51279 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51280 - "GET /api/run/fake HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51281 - "GET /api/scrapers HTTP/1.1" 200 OK
+============================================================
+  FBref Scraper Module — XG
+============================================================
+
+============================================================
+  FBref World Cup Stats Fetcher - Predictor Mundial 2026
+============================================================
+[06/29/26 01:24:48] INFO     No custom team name replacements     _config.py:92
+                             found. You can configure these in
+                             C:\Users\Equipo\soccerdata\config\te
+                             amname_replacements.json.
+                    INFO     No custom league dict found. You    _config.py:190
+                             can configure additional leagues in
+                             C:\Users\Equipo\soccerdata\config\l
+                             eague_dict.json.
+============================================================
+Descargando estadisticas del Mundial desde FBref
+  Temporadas: 2018, 2022, 2026
+  Fuente: FBref (datos reales de partidos)
+============================================================
+
+[2026] Descargando (peso=1.0)...
+                    INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+  [2026] OK -> 48 equipos
+
+[2022] Descargando (peso=0.85)...
+[06/29/26 01:25:04] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+INFO:     127.0.0.1:51347 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51348 - "GET /api/preview/results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51349 - "POST /api/export HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:51351 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51352 - "GET /api/run/xg?match_id=12345&team_name=Barcelona&type=full&sandbox=true HTTP/1.1" 200 OK
+============================================================
+  FBref Scraper Module — FULL
+============================================================
+? El script no existe en: data/fetch_fbref_full.py
+INFO:     127.0.0.1:51353 - "POST /api/batch/run HTTP/1.1" 200 OK
+============================================================
+  FBref Scraper Module — XG
+============================================================
+  [2022] OK -> 32 equipos
+
+[2018] Descargando (peso=0.65)...
+[06/29/26 01:25:25] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+
+============================================================
+  FBref World Cup Stats Fetcher - Predictor Mundial 2026
+============================================================
+[06/29/26 01:25:26] INFO     No custom team name replacements     _config.py:92
+                             found. You can configure these in
+                             C:\Users\Equipo\soccerdata\config\te
+                             amname_replacements.json.
+                    INFO     No custom league dict found. You    _config.py:190
+                             can configure additional leagues in
+                             C:\Users\Equipo\soccerdata\config\l
+                             eague_dict.json.
+============================================================
+Descargando estadisticas del Mundial desde FBref
+  Temporadas: 2018, 2022, 2026
+  Fuente: FBref (datos reales de partidos)
+============================================================
+
+[2026] Descargando (peso=1.0)...
+                    INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+  [2018] OK -> 32 equipos
+  [2026] OK -> 48 equipos
+
+[2022] Descargando (peso=0.85)...
+[06/29/26 01:25:49] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+  [2022] OK -> 32 equipos
+
+[2018] Descargando (peso=0.65)...
+[06/29/26 01:26:11] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+  [2018] OK -> 32 equipos
+INFO:     127.0.0.1:51718 - "GET /api/history HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51722 - "GET /api/history?limit=5&offset=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51728 - "GET /api/history?limit=invalid HTTP/1.1" 422 Unprocessable Content
+INFO:     127.0.0.1:51733 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51738 - "POST /api/scheduler/add HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51741 - "DELETE /api/scheduler/10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51742 - "POST /api/scheduler/add HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51745 - "POST /api/scheduler/11/pause HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51746 - "POST /api/scheduler/11/resume HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51749 - "DELETE /api/scheduler/11 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51750 - "POST /api/diagnostic/run/xg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51751 - "GET /api/diagnostic/history/xg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51753 - "POST /api/diagnostic/run/xg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51756 - "GET /api/diagnostic/history/xg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51758 - "GET /api/diagnostic/compare/3/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51762 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51763 - "GET /api/preview/results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51767 - "POST /api/export HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:51769 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51770 - "GET /api/run/xg?match_id=12345&team_name=Barcelona&type=full&sandbox=true HTTP/1.1" 200 OK
+============================================================
+  FBref Scraper Module — FULL
+============================================================
+? El script no existe en: data/fetch_fbref_full.py
+INFO:     127.0.0.1:51866 - "GET /api/scrapers HTTP/1.1" 200 OK
+============================================================
+  FBref Scraper Module — XG
+============================================================
+
+Resultados obtenidos para 58 selecciones:
+  germany                    xG/90=3.117  Sh/90=24.09  Crs/90=21.95  [2026+2022+2018]
+  sweden                     xG/90=2.523  Sh/90=12.21  Crs/90=12.95  [2026+2018]
+  england                    xG/90=2.345  Sh/90=15.92  Crs/90=15.33  [2026+2022+2018]
+  norway                     xG/90=2.261  Sh/90=12.00  Crs/90=17.00  [2026]
+  colombia                   xG/90=1.911  Sh/90=12.76  Crs/90=15.14  [2026+2018]
+  france                     xG/90=1.895  Sh/90=11.99  Crs/90=13.28  [2026+2022+2018]
+  argentina                  xG/90=1.811  Sh/90=11.96  Crs/90=11.09  [2026+2022+2018]
+  new-zealand                xG/90=1.738  Sh/90=14.00  Crs/90=12.00  [2026]
+  usa                        xG/90=1.710  Sh/90=13.82  Crs/90=19.87  [2026+2022]
+  austria                    xG/90=1.622  Sh/90=11.00  Crs/90=17.00  [2026]
+  netherlands                xG/90=1.516  Sh/90=9.05  Crs/90=17.51  [2026+2022]
+  brazil                     xG/90=1.428  Sh/90=16.41  Crs/90=19.13  [2026+2022+2018]
+  south-korea                xG/90=1.394  Sh/90=13.11  Crs/90=16.00  [2026+2022+2018]
+  russia                     xG/90=1.383  Sh/90=8.60  Crs/90=16.67  [2018]
+  croatia                    xG/90=1.375  Sh/90=11.19  Crs/90=17.84  [2026+2022+2018]
+  spain                      xG/90=1.368  Sh/90=18.83  Crs/90=25.24  [2026+2022+2018]
+
+Fusionando con datos existentes (340 equipos)...
+  Actualizados con datos FBref WC: 58
+  Equipos nuevos:                  0
+  Total en base de datos:          340
+
+Datos guardados en: C:\Users\Equipo\Desktop\predecirv2\data\xg_by_team.json
+  Equipos con datos FBref WC: 58
+  Total en base de datos:     340
+
+Listo! El predictor usa rendimiento real del Mundial para calcular xG.
+
+============================================================
+  FBref World Cup Stats Fetcher - Predictor Mundial 2026
+============================================================
+[06/29/26 01:27:36] INFO     No custom team name replacements     _config.py:92
+                             found. You can configure these in
+                             C:\Users\Equipo\soccerdata\config\te
+                             amname_replacements.json.
+                    INFO     No custom league dict found. You    _config.py:190
+                             can configure additional leagues in
+                             C:\Users\Equipo\soccerdata\config\l
+                             eague_dict.json.
+============================================================
+Descargando estadisticas del Mundial desde FBref
+  Temporadas: 2018, 2022, 2026
+  Fuente: FBref (datos reales de partidos)
+============================================================
+
+[2026] Descargando (peso=1.0)...
+                    INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+  [2026] OK -> 48 equipos
+
+[2022] Descargando (peso=0.85)...
+[06/29/26 01:27:53] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+INFO:     127.0.0.1:52013 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52018 - "GET /api/run/xg?match_id=12345&team_name=Barcelona&type=full&sandbox=True HTTP/1.1" 200 OK
+============================================================
+  FBref Scraper Module — FULL
+============================================================
+? El script no existe en: data/fetch_fbref_full.py
+  [2022] OK -> 32 equipos
+
+[2018] Descargando (peso=0.65)...
+[06/29/26 01:28:14] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+
+Resultados obtenidos para 58 selecciones:
+  germany                    xG/90=3.117  Sh/90=24.09  Crs/90=21.95  [2026+2022+2018]
+  sweden                     xG/90=2.523  Sh/90=12.21  Crs/90=12.95  [2026+2018]
+  england                    xG/90=2.345  Sh/90=15.92  Crs/90=15.33  [2026+2022+2018]
+  norway                     xG/90=2.261  Sh/90=12.00  Crs/90=17.00  [2026]
+  colombia                   xG/90=1.911  Sh/90=12.76  Crs/90=15.14  [2026+2018]
+  france                     xG/90=1.895  Sh/90=11.99  Crs/90=13.28  [2026+2022+2018]
+  argentina                  xG/90=1.811  Sh/90=11.96  Crs/90=11.09  [2026+2022+2018]
+  new-zealand                xG/90=1.738  Sh/90=14.00  Crs/90=12.00  [2026]
+  usa                        xG/90=1.710  Sh/90=13.82  Crs/90=19.87  [2026+2022]
+  austria                    xG/90=1.622  Sh/90=11.00  Crs/90=17.00  [2026]
+  netherlands                xG/90=1.516  Sh/90=9.05  Crs/90=17.51  [2026+2022]
+  brazil                     xG/90=1.428  Sh/90=16.41  Crs/90=19.13  [2026+2022+2018]
+  south-korea                xG/90=1.394  Sh/90=13.11  Crs/90=16.00  [2026+2022+2018]
+  russia                     xG/90=1.383  Sh/90=8.60  Crs/90=16.67  [2018]
+  croatia                    xG/90=1.375  Sh/90=11.19  Crs/90=17.84  [2026+2022+2018]
+  spain                      xG/90=1.368  Sh/90=18.83  Crs/90=25.24  [2026+2022+2018]
+
+Fusionando con datos existentes (340 equipos)...
+  Actualizados con datos FBref WC: 58
+  Equipos nuevos:                  0
+  Total en base de datos:          340
+
+Datos guardados en: C:\Users\Equipo\Desktop\predecirv2\data\xg_by_team.json
+  Equipos con datos FBref WC: 58
+  Total en base de datos:     340
+
+Listo! El predictor usa rendimiento real del Mundial para calcular xG.
+  [2018] OK -> 32 equipos
+INFO:     127.0.0.1:52289 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52338 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52340 - "GET /api/run/invalid_scraper_xyz HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52341 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52342 - "POST /api/batch/run HTTP/1.1" 200 OK
+============================================================
+  FBref Scraper Module — XG
+============================================================
+
+Resultados obtenidos para 58 selecciones:
+  germany                    xG/90=3.117  Sh/90=24.09  Crs/90=21.95  [2026+2022+2018]
+  sweden                     xG/90=2.523  Sh/90=12.21  Crs/90=12.95  [2026+2018]
+  england                    xG/90=2.345  Sh/90=15.92  Crs/90=15.33  [2026+2022+2018]
+  norway                     xG/90=2.261  Sh/90=12.00  Crs/90=17.00  [2026]
+  colombia                   xG/90=1.911  Sh/90=12.76  Crs/90=15.14  [2026+2018]
+  france                     xG/90=1.895  Sh/90=11.99  Crs/90=13.28  [2026+2022+2018]
+  argentina                  xG/90=1.811  Sh/90=11.96  Crs/90=11.09  [2026+2022+2018]
+  new-zealand                xG/90=1.738  Sh/90=14.00  Crs/90=12.00  [2026]
+  usa                        xG/90=1.710  Sh/90=13.82  Crs/90=19.87  [2026+2022]
+  austria                    xG/90=1.622  Sh/90=11.00  Crs/90=17.00  [2026]
+  netherlands                xG/90=1.516  Sh/90=9.05  Crs/90=17.51  [2026+2022]
+  brazil                     xG/90=1.428  Sh/90=16.41  Crs/90=19.13  [2026+2022+2018]
+  south-korea                xG/90=1.394  Sh/90=13.11  Crs/90=16.00  [2026+2022+2018]
+  russia                     xG/90=1.383  Sh/90=8.60  Crs/90=16.67  [2018]
+  croatia                    xG/90=1.375  Sh/90=11.19  Crs/90=17.84  [2026+2022+2018]
+  spain                      xG/90=1.368  Sh/90=18.83  Crs/90=25.24  [2026+2022+2018]
+
+Fusionando con datos existentes (340 equipos)...
+  Actualizados con datos FBref WC: 58
+  Equipos nuevos:                  0
+  Total en base de datos:          340
+
+Datos guardados en: C:\Users\Equipo\Desktop\predecirv2\data\xg_by_team.json
+  Equipos con datos FBref WC: 58
+  Total en base de datos:     340
+
+Listo! El predictor usa rendimiento real del Mundial para calcular xG.
+
+============================================================
+  FBref World Cup Stats Fetcher - Predictor Mundial 2026
+============================================================
+[06/29/26 01:29:48] INFO     No custom team name replacements     _config.py:92
+                             found. You can configure these in
+                             C:\Users\Equipo\soccerdata\config\te
+                             amname_replacements.json.
+                    INFO     No custom league dict found. You    _config.py:190
+                             can configure additional leagues in
+                             C:\Users\Equipo\soccerdata\config\l
+                             eague_dict.json.
+============================================================
+Descargando estadisticas del Mundial desde FBref
+  Temporadas: 2018, 2022, 2026
+  Fuente: FBref (datos reales de partidos)
+============================================================
+
+[2026] Descargando (peso=1.0)...
+                    INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+============================================================
+  FBref Scraper Module — XG
+============================================================
+  [2026] OK -> 48 equipos
+
+[2022] Descargando (peso=0.85)...
+[06/29/26 01:30:01] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+
+============================================================
+  FBref World Cup Stats Fetcher - Predictor Mundial 2026
+============================================================
+[06/29/26 01:30:08] INFO     No custom team name replacements     _config.py:92
+                             found. You can configure these in
+                             C:\Users\Equipo\soccerdata\config\te
+                             amname_replacements.json.
+                    INFO     No custom league dict found. You    _config.py:190
+                             can configure additional leagues in
+                             C:\Users\Equipo\soccerdata\config\l
+                             eague_dict.json.
+============================================================
+Descargando estadisticas del Mundial desde FBref
+  Temporadas: 2018, 2022, 2026
+  Fuente: FBref (datos reales de partidos)
+============================================================
+
+[2026] Descargando (peso=1.0)...
+                    INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+  [2022] OK -> 32 equipos
+
+[2018] Descargando (peso=0.65)...
+[06/29/26 01:30:22] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+  [2026] OK -> 48 equipos
+
+[2022] Descargando (peso=0.85)...
+[06/29/26 01:30:30] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+  [2018] OK -> 32 equipos
+  [2022] OK -> 32 equipos
+
+[2018] Descargando (peso=0.65)...
+[06/29/26 01:31:02] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+INFO:     127.0.0.1:52579 - "GET /api/scrapers HTTP/1.1" 200 OK
+============================================================
+  FBref Scraper Module — XG
+============================================================
+
+============================================================
+  FBref World Cup Stats Fetcher - Predictor Mundial 2026
+============================================================
+[06/29/26 01:31:26] INFO     No custom team name replacements     _config.py:92
+                             found. You can configure these in
+                             C:\Users\Equipo\soccerdata\config\te
+                             amname_replacements.json.
+                    INFO     No custom league dict found. You    _config.py:190
+                             can configure additional leagues in
+                             C:\Users\Equipo\soccerdata\config\l
+                             eague_dict.json.
+============================================================
+Descargando estadisticas del Mundial desde FBref
+  Temporadas: 2018, 2022, 2026
+  Fuente: FBref (datos reales de partidos)
+============================================================
+
+[2026] Descargando (peso=1.0)...
+                    INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+  [2018] OK -> 32 equipos
+INFO:     127.0.0.1:52686 - "GET /api/scrapers HTTP/1.1" 200 OK
+  [2026] OK -> 48 equipos
+
+[2022] Descargando (peso=0.85)...
+[06/29/26 01:32:05] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+INFO:     127.0.0.1:52822 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52824 - "GET /api/run/results?match_id=1234&team_name=teamA&type=full&sandbox=true HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52834 - "GET /api/history HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52839 - "POST /api/scheduler/add HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52841 - "POST /api/scheduler/12/pause HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52842 - "POST /api/scheduler/12/resume HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52845 - "DELETE /api/scheduler/12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52847 - "GET /api/run/invalid_scraper_xyz HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52848 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52849 - "POST /api/diagnostic/run/results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52854 - "POST /api/diagnostic/run/results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52862 - "GET /api/diagnostic/history/results HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52865 - "GET /api/diagnostic/compare/2/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52868 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52869 - "POST /api/scheduler/add HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52873 - "DELETE /api/scheduler/13 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52874 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52875 - "GET /api/run/results?match_id=1234&team_name=teamA&type=full&sandbox=True HTTP/1.1" 200 OK
+  [2022] OK -> 32 equipos
+
+[2018] Descargando (peso=0.65)...
+[06/29/26 01:32:41] INFO     Saving cached data to               _common.py:250
+                             C:\Users\Equipo\soccerdata\data\FBr
+                             ef
+
+Resultados obtenidos para 58 selecciones:
+  germany                    xG/90=3.117  Sh/90=24.09  Crs/90=21.95  [2026+2022+2018]
+  sweden                     xG/90=2.523  Sh/90=12.21  Crs/90=12.95  [2026+2018]
+  england                    xG/90=2.345  Sh/90=15.92  Crs/90=15.33  [2026+2022+2018]
+  norway                     xG/90=2.261  Sh/90=12.00  Crs/90=17.00  [2026]
+  colombia                   xG/90=1.911  Sh/90=12.76  Crs/90=15.14  [2026+2018]
+  france                     xG/90=1.895  Sh/90=11.99  Crs/90=13.28  [2026+2022+2018]
+  argentina                  xG/90=1.811  Sh/90=11.96  Crs/90=11.09  [2026+2022+2018]
+  new-zealand                xG/90=1.738  Sh/90=14.00  Crs/90=12.00  [2026]
+  usa                        xG/90=1.710  Sh/90=13.82  Crs/90=19.87  [2026+2022]
+  austria                    xG/90=1.622  Sh/90=11.00  Crs/90=17.00  [2026]
+  netherlands                xG/90=1.516  Sh/90=9.05  Crs/90=17.51  [2026+2022]
+  brazil                     xG/90=1.428  Sh/90=16.41  Crs/90=19.13  [2026+2022+2018]
+  south-korea                xG/90=1.394  Sh/90=13.11  Crs/90=16.00  [2026+2022+2018]
+  russia                     xG/90=1.383  Sh/90=8.60  Crs/90=16.67  [2018]
+  croatia                    xG/90=1.375  Sh/90=11.19  Crs/90=17.84  [2026+2022+2018]
+  spain                      xG/90=1.368  Sh/90=18.83  Crs/90=25.24  [2026+2022+2018]
+
+Fusionando con datos existentes (340 equipos)...
+  Actualizados con datos FBref WC: 58
+  Equipos nuevos:                  0
+  Total en base de datos:          340
+
+Datos guardados en: C:\Users\Equipo\Desktop\predecirv2\data\xg_by_team.json
+  Equipos con datos FBref WC: 58
+  Total en base de datos:     340
+
+Listo! El predictor usa rendimiento real del Mundial para calcular xG.
+INFO:     127.0.0.1:52976 - "GET /api/scrapers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52978 - "GET /api/run/results?match_id=1234&team_name=teamA&type=full&sandbox=True HTTP/1.1" 200 OK
+ 

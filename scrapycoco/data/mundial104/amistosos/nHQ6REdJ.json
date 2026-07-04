@@ -1,0 +1,52 @@
+{
+  "match_id": "nHQ6REdJ",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "12Hassan",
+        "3Ali",
+        "4Tahseen",
+        "5Hashem",
+        "23Doski",
+        "8Sher",
+        "16Al Ammari",
+        "17Jasim",
+        "7Karim",
+        "21Farji",
+        "18Hussein"
+      ],
+      "suplentes": [
+        "Iqbal Z.",
+        "Ali M.",
+        "Saadoon M.",
+        "Muhsin A."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "17Eisa",
+        "5Zouhir",
+        "3Pimenta Peres Lopes",
+        "4Kouadio",
+        "2Amaral",
+        "21Bruno",
+        "16Barbosa Meloni",
+        "15Nader",
+        "20Luan Pereira",
+        "14Gimenez",
+        "10Caio Lucas"
+      ],
+      "suplentes": [
+        "Saleh A.",
+        "Adil S.",
+        "Ramadan A."
+      ],
+      "formacion": "4 - 4 - 1 - 1"
+    }
+  },
+  "error": null,
+  "description": "18.11.2025 12:00IrakGanadorFIFA: 57.2-1FinalizadoEmiratos Árabes UnidosFIFA: 68.2-1Finalizado",
+  "score": "2-1"
+}

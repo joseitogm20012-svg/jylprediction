@@ -1,0 +1,152 @@
+{
+  "match_id": "KAnAWtpR",
+  "estadisticas": {
+    "0.76Goles esperados (xG)2.13": {
+      "home": "0.76",
+      "away": "2.13"
+    },
+    "27%Posesión73%": {
+      "home": "27%",
+      "away": "73%"
+    },
+    "5Remates totales12": {
+      "home": "5",
+      "away": "12"
+    },
+    "1Remates a puerta4": {
+      "home": "1",
+      "away": "4"
+    },
+    "1Grandes ocasiones3": {
+      "home": "1",
+      "away": "3"
+    },
+    "2Córneres6": {
+      "home": "2",
+      "away": "6"
+    },
+    "80%(228/285)Pases92%(737/801)": {
+      "home": "80%(228/285)",
+      "away": "92%(737/801)"
+    },
+    "3Tarjetas amarillas0": {
+      "home": "3",
+      "away": "0"
+    },
+    "0.72xG a puerta (xGOT)1.45": {
+      "home": "0.72",
+      "away": "1.45"
+    },
+    "2Remates fuera7": {
+      "home": "2",
+      "away": "7"
+    },
+    "2Remates rechazados1": {
+      "home": "2",
+      "away": "1"
+    },
+    "2Remates dentro del área6": {
+      "home": "2",
+      "away": "6"
+    },
+    "3Remates fuera del área6": {
+      "home": "3",
+      "away": "6"
+    },
+    "0Al palo2": {
+      "home": "0",
+      "away": "2"
+    },
+    "4Toques en el área rival15": {
+      "home": "4",
+      "away": "15"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Fueras de juego3": {
+      "home": "1",
+      "away": "3"
+    },
+    "7Tiros libres13": {
+      "home": "7",
+      "away": "13"
+    },
+    "39%(14/36)Pases largos60%(15/25)": {
+      "home": "39%(14/36)",
+      "away": "60%(15/25)"
+    },
+    "64%(44/69)Pases en el último tercio74%(115/156)": {
+      "home": "64%(44/69)",
+      "away": "74%(115/156)"
+    },
+    "29%(2/7)Centros60%(3/5)": {
+      "home": "29%(2/7)",
+      "away": "60%(3/5)"
+    },
+    "0.37Asistencias esperadas (xA)1.34": {
+      "home": "0.37",
+      "away": "1.34"
+    },
+    "11Saques de banda19": {
+      "home": "11",
+      "away": "19"
+    },
+    "13Faltas7": {
+      "home": "13",
+      "away": "7"
+    },
+    "50%(8/16)Entradas36%(5/14)": {
+      "home": "50%(8/16)",
+      "away": "36%(5/14)"
+    },
+    "34Duelos ganados32": {
+      "home": "34",
+      "away": "32"
+    },
+    "13Despejes9": {
+      "home": "13",
+      "away": "9"
+    },
+    "19Intercepciones12": {
+      "home": "19",
+      "away": "12"
+    },
+    "1Errores conducentes a remate1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Paradas0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1.45xGOT enfrentados0.72": {
+      "home": "1.45",
+      "away": "0.72"
+    },
+    "-1.55Goles evitados-0.28": {
+      "home": "-1.55",
+      "away": "-0.28"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "27.06.2026 22:00JordaniaFIFA: 63.1-3FinalizadoArgentinaFIFA: 1.1-3Finalizado",
+  "score": "1-3"
+}

@@ -1,0 +1,55 @@
+{
+  "match_id": "StJedUO9",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Verbruggen",
+        "3Timber",
+        "6de Ligt",
+        "4van Dijk",
+        "5Aké",
+        "14Reijnders",
+        "21de Jong",
+        "7Simons",
+        "18Malen",
+        "10Depay",
+        "11Gakpo"
+      ],
+      "suplentes": [
+        "Emegha E.",
+        "Timber Q.",
+        "Geertruida L.",
+        "Valente L.",
+        "Lang N."
+      ],
+      "formacion": "4 - 3 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "1Gertmonas",
+        "17Sirvys",
+        "18Armalas",
+        "3Utkus",
+        "2Tutyskinas",
+        "13Lasickas",
+        "11Sirgedas",
+        "6Vorobjovas",
+        "15Gineitis",
+        "8Kalinauskas",
+        "10Cernych"
+      ],
+      "suplentes": [
+        "Beneta M.",
+        "Golubickas P.",
+        "Paulauskas G.",
+        "Burba M.",
+        "Upstas K."
+      ],
+      "formacion": "5 - 4 - 1"
+    }
+  },
+  "error": null,
+  "description": "17.11.2025 15:45Países BajosFIFA: 8.4-0FinalizadoLituaniaFIFA: 149.4-0Finalizado",
+  "score": "4-0"
+}

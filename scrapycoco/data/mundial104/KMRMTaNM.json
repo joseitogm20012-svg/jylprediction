@@ -1,0 +1,152 @@
+{
+  "match_id": "KMRMTaNM",
+  "estadisticas": {
+    "2.67Goles esperados (xG)0.62": {
+      "home": "2.67",
+      "away": "0.62"
+    },
+    "56%Posesión44%": {
+      "home": "56%",
+      "away": "44%"
+    },
+    "19Remates totales4": {
+      "home": "19",
+      "away": "4"
+    },
+    "5Remates a puerta0": {
+      "home": "5",
+      "away": "0"
+    },
+    "5Grandes ocasiones1": {
+      "home": "5",
+      "away": "1"
+    },
+    "4Córneres2": {
+      "home": "4",
+      "away": "2"
+    },
+    "90%(540/603)Pases86%(413/481)": {
+      "home": "90%(540/603)",
+      "away": "86%(413/481)"
+    },
+    "0Tarjetas amarillas1": {
+      "home": "0",
+      "away": "1"
+    },
+    "2.27xG a puerta (xGOT)0.00": {
+      "home": "2.27",
+      "away": "0.00"
+    },
+    "10Remates fuera3": {
+      "home": "10",
+      "away": "3"
+    },
+    "4Remates rechazados1": {
+      "home": "4",
+      "away": "1"
+    },
+    "12Remates dentro del área3": {
+      "home": "12",
+      "away": "3"
+    },
+    "7Remates fuera del área1": {
+      "home": "7",
+      "away": "1"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "41Toques en el área rival7": {
+      "home": "41",
+      "away": "7"
+    },
+    "3Pases entre líneas completados0": {
+      "home": "3",
+      "away": "0"
+    },
+    "1Fueras de juego0": {
+      "home": "1",
+      "away": "0"
+    },
+    "4Tiros libres8": {
+      "home": "4",
+      "away": "8"
+    },
+    "57%(17/30)Pases largos41%(21/51)": {
+      "home": "57%(17/30)",
+      "away": "41%(21/51)"
+    },
+    "81%(197/243)Pases en el último tercio64%(34/53)": {
+      "home": "81%(197/243)",
+      "away": "64%(34/53)"
+    },
+    "14%(2/14)Centros44%(4/9)": {
+      "home": "14%(2/14)",
+      "away": "44%(4/9)"
+    },
+    "1.95Asistencias esperadas (xA)0.65": {
+      "home": "1.95",
+      "away": "0.65"
+    },
+    "17Saques de banda15": {
+      "home": "17",
+      "away": "15"
+    },
+    "8Faltas4": {
+      "home": "8",
+      "away": "4"
+    },
+    "64%(9/14)Entradas50%(8/16)": {
+      "home": "64%(9/14)",
+      "away": "50%(8/16)"
+    },
+    "40Duelos ganados38": {
+      "home": "40",
+      "away": "38"
+    },
+    "9Despejes28": {
+      "home": "9",
+      "away": "28"
+    },
+    "5Intercepciones10": {
+      "home": "5",
+      "away": "10"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Errores conducentes a gol1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Paradas2": {
+      "home": "0",
+      "away": "2"
+    },
+    "0.00xGOT enfrentados2.27": {
+      "home": "0.00",
+      "away": "2.27"
+    },
+    "0.00Goles evitados-0.73": {
+      "home": "0.00",
+      "away": "-0.73"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "22.06.2026 17:00FranciaFIFA: 3.IrakFIFA: 57.",
+  "score": "3-0"
+}

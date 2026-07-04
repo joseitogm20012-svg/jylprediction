@@ -1,0 +1,156 @@
+{
+  "match_id": "YZajsXcn",
+  "estadisticas": {
+    "0.66Goles esperados (xG)1.57": {
+      "home": "0.66",
+      "away": "1.57"
+    },
+    "33%Posesión67%": {
+      "home": "33%",
+      "away": "67%"
+    },
+    "13Remates totales17": {
+      "home": "13",
+      "away": "17"
+    },
+    "2Remates a puerta6": {
+      "home": "2",
+      "away": "6"
+    },
+    "0Grandes ocasiones4": {
+      "home": "0",
+      "away": "4"
+    },
+    "3Córneres7": {
+      "home": "3",
+      "away": "7"
+    },
+    "75%(202/268)Pases88%(490/558)": {
+      "home": "75%(202/268)",
+      "away": "88%(490/558)"
+    },
+    "2Tarjetas amarillas1": {
+      "home": "2",
+      "away": "1"
+    },
+    "0.21xG a puerta (xGOT)2.01": {
+      "home": "0.21",
+      "away": "2.01"
+    },
+    "8Remates fuera8": {
+      "home": "8",
+      "away": "8"
+    },
+    "3Remates rechazados3": {
+      "home": "3",
+      "away": "3"
+    },
+    "8Remates dentro del área12": {
+      "home": "8",
+      "away": "12"
+    },
+    "5Remates fuera del área5": {
+      "home": "5",
+      "away": "5"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Goles de cabeza1": {
+      "home": "0",
+      "away": "1"
+    },
+    "14Toques en el área rival39": {
+      "home": "14",
+      "away": "39"
+    },
+    "0Pases entre líneas completados6": {
+      "home": "0",
+      "away": "6"
+    },
+    "4Fueras de juego4": {
+      "home": "4",
+      "away": "4"
+    },
+    "13Tiros libres16": {
+      "home": "13",
+      "away": "16"
+    },
+    "46%(25/54)Pases largos56%(20/36)": {
+      "home": "46%(25/54)",
+      "away": "56%(20/36)"
+    },
+    "54%(29/54)Pases en el último tercio76%(139/182)": {
+      "home": "54%(29/54)",
+      "away": "76%(139/182)"
+    },
+    "33%(3/9)Centros16%(4/25)": {
+      "home": "33%(3/9)",
+      "away": "16%(4/25)"
+    },
+    "0.42Asistencias esperadas (xA)2.07": {
+      "home": "0.42",
+      "away": "2.07"
+    },
+    "24Saques de banda14": {
+      "home": "24",
+      "away": "14"
+    },
+    "16Faltas13": {
+      "home": "16",
+      "away": "13"
+    },
+    "69%(11/16)Entradas94%(17/18)": {
+      "home": "69%(11/16)",
+      "away": "94%(17/18)"
+    },
+    "43Duelos ganados61": {
+      "home": "43",
+      "away": "61"
+    },
+    "34Despejes20": {
+      "home": "34",
+      "away": "20"
+    },
+    "6Intercepciones5": {
+      "home": "6",
+      "away": "5"
+    },
+    "0Errores conducentes a remate3": {
+      "home": "0",
+      "away": "3"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "4Paradas2": {
+      "home": "4",
+      "away": "2"
+    },
+    "2.01xGOT enfrentados0.21": {
+      "home": "2.01",
+      "away": "0.21"
+    },
+    "0.01Goles evitados0.21": {
+      "home": "0.01",
+      "away": "0.21"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "27.06.2026 17:00PanamáFIFA: 34.0-2FinalizadoInglaterraFIFA: 4.0-2Finalizado",
+  "score": "0-2"
+}

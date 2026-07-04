@@ -1,0 +1,92 @@
+{
+    "argentina": {
+        "corners_for": 6.2,
+        "corners_against": 3.1,
+        "games": 24
+    },
+    "france": {
+        "corners_for": 5.8,
+        "corners_against": 3.8,
+        "games": 22
+    },
+    "brazil": {
+        "corners_for": 6.8,
+        "corners_against": 3.0,
+        "games": 20
+    },
+    "spain": {
+        "corners_for": 6.5,
+        "corners_against": 2.9,
+        "games": 18
+    },
+    "germany": {
+        "corners_for": 6.1,
+        "corners_against": 3.4,
+        "games": 16
+    },
+    "england": {
+        "corners_for": 5.4,
+        "corners_against": 3.6,
+        "games": 22
+    },
+    "italy": {
+        "corners_for": 5.2,
+        "corners_against": 3.9,
+        "games": 15
+    },
+    "uruguay": {
+        "corners_for": 4.8,
+        "corners_against": 4.2,
+        "games": 18
+    },
+    "mexico": {
+        "corners_for": 5.0,
+        "corners_against": 4.5,
+        "games": 19
+    },
+    "usa": {
+        "corners_for": 5.1,
+        "corners_against": 4.4,
+        "games": 20
+    },
+    "japan": {
+        "corners_for": 4.6,
+        "corners_against": 4.8,
+        "games": 17
+    },
+    "morocco": {
+        "corners_for": 4.1,
+        "corners_against": 5.2,
+        "games": 16
+    },
+    "portugal": {
+        "corners_for": 5.9,
+        "corners_against": 3.5,
+        "games": 19
+    },
+    "belgium": {
+        "corners_for": 5.6,
+        "corners_against": 3.9,
+        "games": 18
+    },
+    "croatia": {
+        "corners_for": 4.9,
+        "corners_against": 4.6,
+        "games": 21
+    },
+    "senegal": {
+        "corners_for": 4.4,
+        "corners_against": 4.3,
+        "games": 14
+    },
+    "iran": {
+        "corners_for": 3.8,
+        "corners_against": 5.5,
+        "games": 12
+    },
+    "saudi-arabia": {
+        "corners_for": 3.9,
+        "corners_against": 5.8,
+        "games": 13
+    }
+}

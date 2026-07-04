@@ -1,0 +1,54 @@
+{
+  "match_id": "2VVVu9Bc",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Widell Zetterstrom",
+        "20Krafth",
+        "15Starfelt",
+        "3Lindelof",
+        "8Svensson",
+        "11Lundgren",
+        "22Zeneli",
+        "19Svanberg",
+        "13Sema",
+        "14Bardghji",
+        "17Lidberg"
+      ],
+      "suplentes": [
+        "Forsberg E.",
+        "Gudmundsson G.",
+        "Bernhardsson A.",
+        "Johansson H.",
+        "Lagerbielke G."
+      ],
+      "formacion": "4 - 4 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "1Vekic",
+        "2Karnicnik",
+        "21Drkusic",
+        "6Bijol",
+        "3Balkovec",
+        "13Janza",
+        "11Seslar",
+        "22Gnezda Cerin",
+        "10Elsnik",
+        "15Sturm",
+        "9Sporar"
+      ],
+      "suplentes": [
+        "Horvat T.",
+        "Petrovic D.",
+        "Mlakar J.",
+        "Gorenc Stankovic J."
+      ],
+      "formacion": "5 - 4 - 1"
+    }
+  },
+  "error": null,
+  "description": "18.11.2025 15:45SueciaFIFA: 38.EsloveniaFIFA: 59.",
+  "score": ""
+}

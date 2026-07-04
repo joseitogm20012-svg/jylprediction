@@ -1,0 +1,87 @@
+import scrapy
+
+
+class MatchItem(scrapy.Item):
+    source = scrapy.Field()
+    home_team = scrapy.Field()
+    away_team = scrapy.Field()
+    home_goals = scrapy.Field()
+    away_goals = scrapy.Field()
+    match_date = scrapy.Field()
+    competition = scrapy.Field()
+    season = scrapy.Field()
+    status = scrapy.Field()
+    venue = scrapy.Field()
+    referee = scrapy.Field()
+    attendance = scrapy.Field()
+
+
+class PlayerStatsItem(scrapy.Item):
+    source = scrapy.Field()
+    match_id = scrapy.Field()
+    team = scrapy.Field()
+    player_name = scrapy.Field()
+    nationality = scrapy.Field()
+    position = scrapy.Field()
+    minutes_played = scrapy.Field()
+    goals = scrapy.Field()
+    assists = scrapy.Field()
+    shots = scrapy.Field()
+    shots_on_target = scrapy.Field()
+    xg = scrapy.Field()
+    xa = scrapy.Field()
+    key_passes = scrapy.Field()
+    passes_attempted = scrapy.Field()
+    passes_completed = scrapy.Field()
+    tackles = scrapy.Field()
+    interceptions = scrapy.Field()
+    fouls = scrapy.Field()
+    yellow_card = scrapy.Field()
+    red_card = scrapy.Field()
+    rating = scrapy.Field()
+
+
+class OddsItem(scrapy.Item):
+    source = scrapy.Field()
+    match_id = scrapy.Field()
+    bookmaker = scrapy.Field()
+    home_odd = scrapy.Field()
+    draw_odd = scrapy.Field()
+    away_odd = scrapy.Field()
+    over_under_line = scrapy.Field()
+    over_odd = scrapy.Field()
+    under_odd = scrapy.Field()
+    btts_yes = scrapy.Field()
+    btts_no = scrapy.Field()
+    asian_handicap_line = scrapy.Field()
+    asian_handicap_home = scrapy.Field()
+    asian_handicap_away = scrapy.Field()
+
+
+class StandingItem(scrapy.Item):
+    source = scrapy.Field()
+    competition = scrapy.Field()
+    season = scrapy.Field()
+    position = scrapy.Field()
+    team = scrapy.Field()
+    played = scrapy.Field()
+    won = scrapy.Field()
+    drawn = scrapy.Field()
+    lost = scrapy.Field()
+    goals_for = scrapy.Field()
+    goals_against = scrapy.Field()
+    goal_diff = scrapy.Field()
+    points = scrapy.Field()
+    form = scrapy.Field()
+
+
+class LineupItem(scrapy.Item):
+    source = scrapy.Field()
+    match_id = scrapy.Field()
+    team = scrapy.Field()
+    formation = scrapy.Field()
+    player_name = scrapy.Field()
+    shirt_number = scrapy.Field()
+    is_substitute = scrapy.Field()
+    position = scrapy.Field()
+    captain = scrapy.Field()

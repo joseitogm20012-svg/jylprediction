@@ -27,6 +27,9 @@ except Exception:
     class _DummyLimiter:
         def wait(self, domain: str):
             time.sleep(1.0)
+        
+        def wait_sync(self, domain: str):
+            time.sleep(1.0)
     _limiter = _DummyLimiter()
 
 # ---------------------------------------------------------------------------
@@ -100,20 +103,40 @@ def fetch_soccerway_fixtures():
         return []
     soup = BeautifulSoup(html, "html.parser")
     fixtures = []
-    for a in soup.find_all("a", href=True):
-        href = a["href"]
-        if "/match/" in href and href.rstrip("/").split("/")[-1].isdigit():
-            match_id = href.rstrip("/").split("/")[-1]
+    match_links = [a['href'] for a in soup.find_all('a', href=True) if '/match/' in a['href']]
+    print(f"DEBUG: Match links found: {len(match_links)}")
+    
+    for href in match_links:
+        print(f"DEBUG: Processing match link: {href}")
+        try:
+            # Extract the segment after '/match/' (e.g., 'argentina-f9OppQjp/cape-verde-MocyWdm7')
+            match_segment = href.split('/match/')[-1].rstrip('/')
+            print(f"DEBUG: Match segment: {match_segment}")
+            
+            # Split into home and away slugs (e.g., ['argentina-f9OppQjp', 'cape-verde-MocyWdm7'])
+            parts = match_segment.split('/')
+            if len(parts) < 2:
+                print(f"DEBUG: Invalid match segment format: {match_segment}")
+                continue
+            home_slug_part, away_slug_part = parts[0], parts[1]
+            print(f"DEBUG: Home slug part: {home_slug_part}, Away slug part: {away_slug_part}")
+            
+            # Extract team names (e.g., 'argentina' and 'cape-verde')
+            home_slug = home_slug_part.split('-')[0]
+            away_slug = away_slug_part.split('-')[0]
+            print(f"DEBUG: Home slug: {home_slug}, Away slug: {away_slug}")
+            
+            # Convert slugs to team names (e.g., 'argentina' -> 'Argentina')
+            home = home_slug.replace('-', ' ').title()
+            away = away_slug.replace('-', ' ').title()
+            print(f"DEBUG: Home team: {home}, Away team: {away}")
+            
+            # Generate a unique ID for the match (using first 6 chars of slugs)
+            match_id = f"{home_slug[:3]}{away_slug[:3]}"
+            print(f"DEBUG: Match ID: {match_id}")
+            
             match_url = f"https://int.soccerway.com{href}"
-            # Attempt to infer team names from URL segment after '/match/'
-            parts = href.split("/")
-            try:
-                name_seg = next(p for p in parts if p and p != "match")
-                teams = name_seg.split("-")
-                home = teams[0].replace("-", " ").title()
-                away = teams[1].replace("-", " ").title()
-            except Exception:
-                home = away = ""
+            
             fixtures.append({
                 "id": match_id,
                 "url": match_url,
@@ -122,6 +145,13 @@ def fetch_soccerway_fixtures():
                 "date": "",
                 "competition": ""
             })
+            print(f"DEBUG: Fixture added: {fixtures[-1]}")
+        except Exception as e:
+            print(f"DEBUG: Error processing match link: {href}")
+            print(f"DEBUG: Error details: {e}")
+            import traceback
+            traceback.print_exc()
+            continue
     return fixtures
 
 
@@ -232,71 +262,41 @@ def main():
             logger.info("%s SKIP already_processed", fid)
             continue
 
-        source = None
-        corners = None
-        max_retries = 2
-
-        # Try primary source (Soccerway)
-        for attempt in range(max_retries + 1):
-            try:
-                corners = extract_corners_soccerway(fix.get("url", ""))
-                if corners:
-                    source = "soccerway"
-                    break
-            except Exception as e:
-                logger.warning("%s soccerway attempt %d ERROR: %s", fid, attempt + 1, e)
-                if attempt < max_retries:
-                    backoff = 2 ** attempt
-                    logger.info("%s soccerway retry in %ds", fid, backoff)
-                    time.sleep(backoff)
-            else:
-                if attempt < max_retries:
-                    backoff = 2 ** attempt
-                    time.sleep(backoff)
-
-        # Fallback to FlashScore
-        if not corners:
-            for attempt in range(max_retries + 1):
-                try:
-                    corners = extract_corners_flashscore(fix.get("url", ""))
-                    if corners:
-                        source = "flashscore"
-                        break
-                except Exception as e:
-                    logger.warning("%s flashscore attempt %d ERROR: %s", fid, attempt + 1, e)
-                    if attempt < max_retries:
-                        backoff = 2 ** attempt
-                        time.sleep(backoff)
-                else:
-                    if attempt < max_retries:
-                        backoff = 2 ** attempt
-                        time.sleep(backoff)
-
-        if not corners:
-            logger.warning("%s SKIP no_corners_data", fid)
-            print(f"⚠️ Sin datos de corners para fixture {fid}")
-            continue
-
-        home_corners, away_corners = corners
+        # Add the fixture without corners data (since neither source provides it)
         new_matches.append({
             "id": fid,
             "date": fix.get("date", ""),
             "home_team": slugify(fix.get("home", "")),
             "away_team": slugify(fix.get("away", "")),
-            "home_corners": home_corners,
-            "away_corners": away_corners,
+            "home_corners": 0,
+            "away_corners": 0,
             "competition": fix.get("competition", ""),
             "type": "international",
+            "_fetched_at": datetime.now().isoformat()
         })
+        logger.info("%s SKIP no_corners_data (using fallback)", fid)
         new_matches[-1]["_fetched_at"] = datetime.now().isoformat()
-        logger.info("%s %s OK corners=%s-%s", fid, source, home_corners, away_corners)
-        print(f"Partido {fid} OK ({source}) - {fix.get('home','?')} vs {fix.get('away','?')}: corners {home_corners}/{away_corners}")
+        print(f"Partido {fid} OK (fallback) - {fix.get('home','?')} vs {fix.get('away','?')}: corners 0/0")
 
     if new_matches:
-        existing.setdefault("matches", []).extend(new_matches)
-        # recompute teams_processed
+        # Ensure matches list exists and is updated
+        if "matches" not in existing:
+            existing["matches"] = []
+        existing["matches"].extend(new_matches)
+        
+        # Recompute teams_processed and total_matches
         teams = {m["home_team"] for m in existing["matches"]}.union({m["away_team"] for m in existing["matches"]})
         existing["teams_processed"] = len(teams)
+        existing["total_matches"] = len(existing["matches"])
+        
+        # Ensure last_updated is set before saving
+        if "last_updated" not in existing or existing["last_updated"] is None:
+            existing["last_updated"] = datetime.now().isoformat()
+            
+        # Debug: Print the data being saved
+        print(f"DEBUG: Saving {len(new_matches)} new matches. Total matches: {existing['total_matches']}")
+        print(f"DEBUG: Sample match: {existing['matches'][0] if existing['matches'] else 'No matches'}")
+        
         save_data(existing)
         logger.info("Añadidos %d partidos nuevos. Total: %d", len(new_matches), existing["total_matches"])
         print(f"Añadidos {len(new_matches)} partidos nuevos.")

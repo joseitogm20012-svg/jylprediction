@@ -1,0 +1,187 @@
+{
+  "match_id": "xlsPC2Il",
+  "estadisticas": {
+    "0.88Goles esperados (xG)1.77": {
+      "home": "0.88",
+      "away": "1.77"
+    },
+    "43%Posesión57%": {
+      "home": "43%",
+      "away": "57%"
+    },
+    "11Remates totales12": {
+      "home": "11",
+      "away": "12"
+    },
+    "2Remates a puerta3": {
+      "home": "2",
+      "away": "3"
+    },
+    "1Grandes ocasiones1": {
+      "home": "1",
+      "away": "1"
+    },
+    "3Córneres2": {
+      "home": "3",
+      "away": "2"
+    },
+    "73%(269/369)Pases84%(423/503)": {
+      "home": "73%(269/369)",
+      "away": "84%(423/503)"
+    },
+    "3Tarjetas amarillas5": {
+      "home": "3",
+      "away": "5"
+    },
+    "0.80xG a puerta (xGOT)1.17": {
+      "home": "0.80",
+      "away": "1.17"
+    },
+    "5Remates fuera3": {
+      "home": "5",
+      "away": "3"
+    },
+    "4Remates rechazados6": {
+      "home": "4",
+      "away": "6"
+    },
+    "5Remates dentro del área7": {
+      "home": "5",
+      "away": "7"
+    },
+    "6Remates fuera del área5": {
+      "home": "6",
+      "away": "5"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "20Toques en el área rival23": {
+      "home": "20",
+      "away": "23"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Fueras de juego2": {
+      "home": "1",
+      "away": "2"
+    },
+    "10Tiros libres12": {
+      "home": "10",
+      "away": "12"
+    },
+    "43%(27/63)Pases largos34%(17/50)": {
+      "home": "43%(27/63)",
+      "away": "34%(17/50)"
+    },
+    "57%(63/111)Pases en el último tercio68%(88/130)": {
+      "home": "57%(63/111)",
+      "away": "68%(88/130)"
+    },
+    "27%(4/15)Centros0%(0/10)": {
+      "home": "27%(4/15)",
+      "away": "0%(0/10)"
+    },
+    "0.31Asistencias esperadas (xA)0.95": {
+      "home": "0.31",
+      "away": "0.95"
+    },
+    "31Saques de banda13": {
+      "home": "31",
+      "away": "13"
+    },
+    "12Faltas10": {
+      "home": "12",
+      "away": "10"
+    },
+    "47%(8/17)Entradas80%(12/15)": {
+      "home": "47%(8/17)",
+      "away": "80%(12/15)"
+    },
+    "45Duelos ganados47": {
+      "home": "45",
+      "away": "47"
+    },
+    "12Despejes32": {
+      "home": "12",
+      "away": "32"
+    },
+    "9Intercepciones11": {
+      "home": "9",
+      "away": "11"
+    },
+    "1Errores conducentes a remate1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Paradas2": {
+      "home": "1",
+      "away": "2"
+    },
+    "1.17xGOT enfrentados0.80": {
+      "home": "1.17",
+      "away": "0.80"
+    },
+    "0.17Goles evitados0.80": {
+      "home": "0.17",
+      "away": "0.80"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Muric",
+        "5Dellova",
+        "13Hajrizi",
+        "21Hajdari",
+        "15Vojvoda",
+        "20Hodza",
+        "6Rexhbecaj",
+        "19Gallapeni",
+        "11Asllani",
+        "18Muriqi",
+        "8Muslija"
+      ],
+      "suplentes": [
+        "Yilmaz B.",
+        "Ozcan S.",
+        "Elmali E.",
+        "Gul D.",
+        "Muldur M."
+      ],
+      "formacion": "3 - 4 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "23Cakir",
+        "16Yuksek",
+        "15Kabak",
+        "14Bardakci",
+        "2Çelik",
+        "10Calhanoglu",
+        "6Kokcu",
+        "20Kadioglu",
+        "8Güler",
+        "11Yildiz",
+        "7Akturkoglu"
+      ],
+      "suplentes": [
+        "Zhegrova E.",
+        "Aliti F.",
+        "Rashica M.",
+        "Rrahmani A."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    }
+  },
+  "error": null,
+  "description": "31.03.2026 14:45KosovoFIFA: 78.0-1FinalizadoTurquíaEquipo que avanzaFIFA: 22.0-1Finalizado",
+  "score": "0-1"
+}

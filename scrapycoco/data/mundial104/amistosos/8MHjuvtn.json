@@ -1,0 +1,190 @@
+{
+  "match_id": "8MHjuvtn",
+  "estadisticas": {
+    "1.75Goles esperados (xG)1.13": {
+      "home": "1.75",
+      "away": "1.13"
+    },
+    "58%Posesión42%": {
+      "home": "58%",
+      "away": "42%"
+    },
+    "21Remates totales9": {
+      "home": "21",
+      "away": "9"
+    },
+    "8Remates a puerta5": {
+      "home": "8",
+      "away": "5"
+    },
+    "2Grandes ocasiones2": {
+      "home": "2",
+      "away": "2"
+    },
+    "7Córneres3": {
+      "home": "7",
+      "away": "3"
+    },
+    "85%(377/445)Pases74%(241/324)": {
+      "home": "85%(377/445)",
+      "away": "74%(241/324)"
+    },
+    "2Tarjetas amarillas3": {
+      "home": "2",
+      "away": "3"
+    },
+    "1.16xG a puerta (xGOT)2.27": {
+      "home": "1.16",
+      "away": "2.27"
+    },
+    "6Remates fuera2": {
+      "home": "6",
+      "away": "2"
+    },
+    "7Remates rechazados2": {
+      "home": "7",
+      "away": "2"
+    },
+    "14Remates dentro del área6": {
+      "home": "14",
+      "away": "6"
+    },
+    "7Remates fuera del área3": {
+      "home": "7",
+      "away": "3"
+    },
+    "2Al palo0": {
+      "home": "2",
+      "away": "0"
+    },
+    "1Goles de cabeza1": {
+      "home": "1",
+      "away": "1"
+    },
+    "26Toques en el área rival14": {
+      "home": "26",
+      "away": "14"
+    },
+    "1Pases entre líneas completados0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0Fueras de juego2": {
+      "home": "0",
+      "away": "2"
+    },
+    "16Tiros libres14": {
+      "home": "16",
+      "away": "14"
+    },
+    "58%(18/31)Pases largos39%(22/56)": {
+      "home": "58%(18/31)",
+      "away": "39%(22/56)"
+    },
+    "80%(116/145)Pases en el último tercio56%(55/98)": {
+      "home": "80%(116/145)",
+      "away": "56%(55/98)"
+    },
+    "26%(6/23)Centros17%(3/18)": {
+      "home": "26%(6/23)",
+      "away": "17%(3/18)"
+    },
+    "1.19Asistencias esperadas (xA)0.53": {
+      "home": "1.19",
+      "away": "0.53"
+    },
+    "20Saques de banda15": {
+      "home": "20",
+      "away": "15"
+    },
+    "14Faltas16": {
+      "home": "14",
+      "away": "16"
+    },
+    "83%(5/6)Entradas50%(7/14)": {
+      "home": "83%(5/6)",
+      "away": "50%(7/14)"
+    },
+    "46Duelos ganados45": {
+      "home": "46",
+      "away": "45"
+    },
+    "23Despejes33": {
+      "home": "23",
+      "away": "33"
+    },
+    "10Intercepciones6": {
+      "home": "10",
+      "away": "6"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol1": {
+      "home": "0",
+      "away": "1"
+    },
+    "2Paradas5": {
+      "home": "2",
+      "away": "5"
+    },
+    "2.27xGOT enfrentados1.16": {
+      "home": "2.27",
+      "away": "1.16"
+    },
+    "-1.73Goles evitados-1.84": {
+      "home": "-1.73",
+      "away": "-1.84"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Dubravka",
+        "4Valjent",
+        "3Vavro",
+        "5Obert",
+        "21Bero",
+        "22Lobotka",
+        "8Duda",
+        "16Hancko",
+        "18Sauer",
+        "17Haraslin",
+        "15Strelec"
+      ],
+      "suplentes": [
+        "Suslov T.",
+        "Tupta L.",
+        "Benes L.",
+        "Mraz S."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Muric",
+        "15Vojvoda",
+        "5Dellova",
+        "13Hajrizi",
+        "21Hajdari",
+        "19Gallapeni",
+        "20Hodza",
+        "6Rexhbecaj",
+        "8Muslija",
+        "11Asllani",
+        "18Muriqi"
+      ],
+      "suplentes": [
+        "Zabergja B.",
+        "Hadergjonaj F.",
+        "Emerllahu L.",
+        "Rrahmani A."
+      ],
+      "formacion": "5 - 3 - 2"
+    }
+  },
+  "error": null,
+  "description": "26.03.2026 15:45EslovaquiaFIFA: 47.3-4FinalizadoKosovoEquipo que avanzaFIFA: 78.3-4Finalizado",
+  "score": "3-4"
+}

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScrapyCoco — Panel de Scraping</title>
+  <meta name="description" content="Panel de control para scraping de datos de futbol">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Navegacion principal">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/><path d="M16 2a10 10 0 1 0 0 20"/></svg>
+      </div>
+      <div class="sidebar-brand-text">
+        <h2>ScrapyCoco</h2>
+        <span>Data Scraping Suite</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Secciones">
+      <div class="nav-section-label">General</div>
+
+      <button class="nav-item active" data-tab="dashboard" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <span class="nav-item-text">Dashboard</span>
+      </button>
+
+      <button class="nav-item" data-tab="extraction">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="nav-item-text">Extraccion</span>
+        <span class="nav-item-badge" id="nav-scrapers-count">0</span>
+      </button>
+
+      <button class="nav-item" data-tab="history">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="nav-item-text">Historial</span>
+      </button>
+
+      <div class="nav-section-label">Sistema</div>
+
+      <button class="nav-item" data-tab="scheduler">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="nav-item-text">Programador</span>
+      </button>
+
+      <button class="nav-item" data-tab="config">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span class="nav-item-text">Configuracion</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="server-status" role="status" aria-live="polite">
+        <span class="status-dot online" id="status-dot"></span>
+        <span class="status-text" id="status-text">Verificando conexion...</span>
+      </div>
+    </div>
+
+    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Colapsar sidebar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+  </aside>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <div class="main-content">
+
+    <!-- Header -->
+    <header class="header" role="banner">
+      <div class="header-left">
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="#">ScrapyCoco</a>
+          <span class="breadcrumb-sep" aria-hidden="true">/</span>
+          <span class="breadcrumb-current" id="breadcrumb-current">Dashboard</span>
+        </nav>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Batch Progress -->
+    <div id="batch-progress" class="batch-progress" style="display:none" role="status" aria-live="polite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;color:var(--clr-primary-500);flex-shrink:0"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <div class="batch-progress-bar">
+        <div class="batch-progress-fill" id="batch-progress-fill" style="width:0%"></div>
+      </div>
+      <span class="batch-progress-text" id="batch-progress-text">Inicializando...</span>
+    </div>
+
+    <!-- Validation Panel -->
+    <div id="validation-panel" class="card" style="display:none;margin:0 var(--space-6) var(--space-4)">
+      <div class="card-header">
+        <h3>Advertencias de Validacion</h3>
+        <span class="status-badge warning" id="validation-badge">0</span>
+        <button class="btn btn-ghost btn-sm" onclick="closeValidationPanel()" aria-label="Cerrar panel de validacion">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="card-body" id="validation-panel-body">
+        <p style="color:var(--text-tertiary);font-size:var(--fs-sm)">Sin advertencias</p>
+      </div>
+    </div>
+
+    <!-- ═══ PAGE CONTENT ═══ -->
+    <div class="page-content" role="main">
+
+      <!-- ── TAB: DASHBOARD ── -->
+      <section class="tab-content active" id="tab-dashboard" aria-label="Dashboard">
+
+        <div class="top-bar">
+          <div class="top-bar-title">
+            <h1>Dashboard</h1>
+            <p>Resumen de actividad del sistema de scraping</p>
+          </div>
+          <div class="top-bar-actions">
+            <button class="btn btn-secondary" onclick="loadDashboard()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Actualizar
+            </button>
+          </div>
+        </div>
+
+        <div class="kpi-grid" id="dashboard-kpis">
+          <div class="kpi-card"><div class="kpi-card-header"><div class="kpi-card-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div></div><div class="kpi-value" id="kpi-total-runs">-</div><div class="kpi-label">Ejecuciones totales</div></div>
+          <div class="kpi-card"><div class="kpi-card-header"><div class="kpi-card-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div><div class="kpi-value" id="kpi-success-rate">-</div><div class="kpi-label">Tasa de exito</div></div>
+          <div class="kpi-card"><div class="kpi-card-header"><div class="kpi-card-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div><div class="kpi-value" id="kpi-avg-duration">-</div><div class="kpi-label">Duracion promedio</div></div>
+          <div class="kpi-card"><div class="kpi-card-header"><div class="kpi-card-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div></div><div class="kpi-value" id="kpi-total-records">-</div><div class="kpi-label">Registros obtenidos</div></div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="chart-card">
+            <h3>Estado por Scraper</h3>
+            <div class="chart-wrapper"><canvas id="chart-scraper-status"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <h3>Duracion Promedio (ms)</h3>
+            <div class="chart-wrapper"><canvas id="chart-avg-duration"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TAB: EXTRACTION ── -->
+      <section class="tab-content" id="tab-extraction" aria-label="Extraccion">
+
+        <div class="top-bar">
+          <div class="top-bar-title">
+            <h1>Extraccion</h1>
+            <p>Selecciona y ejecuta scrapers para obtener datos</p>
+          </div>
+          <div class="top-bar-actions">
+            <span style="font-size:var(--fs-sm);color:var(--text-secondary)" id="batch-count">0 seleccionados</span>
+            <button class="btn btn-primary" id="btn-batch-run" disabled onclick="runBatch()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Ejecutar Lote
+            </button>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-bottom:var(--space-5)">
+          <div class="form-group">
+            <label class="form-label" for="custom-match-id">Partido de prueba</label>
+            <input class="input" type="text" id="custom-match-id" placeholder="Ej. Argentina vs Brasil">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="custom-team-name">Seleccion (Transfermarkt)</label>
+            <input class="input" type="text" id="custom-team-name" placeholder="Ej. Argentina">
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-bottom:var(--space-5)">
+          <label class="toggle">
+            <input type="checkbox" id="chk-sandbox">
+            <span class="toggle-track"></span>
+            <span class="toggle-label">Modo Sandbox (simulacion sin datos reales)</span>
+          </label>
+          <span id="sandbox-indicator" class="status-badge warning" style="display:none">Sandbox Activo</span>
+        </div>
+
+        <div class="scrapers-grid" id="scrapers-grid">
+          <div class="loading-state">
+            <div class="spinner" role="status" aria-label="Cargando scrapers"></div>
+            <span>Cargando scrapers...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TAB: HISTORY ── -->
+      <section class="tab-content" id="tab-history" aria-label="Historial">
+
+        <div class="top-bar">
+          <div class="top-bar-title">
+            <h1>Historial</h1>
+            <p>Metricas y registro de ejecuciones</p>
+          </div>
+          <div class="top-bar-actions">
+            <select class="input" id="history-scraper-filter" style="width:auto" aria-label="Filtrar por scraper">
+              <option value="">Todos los scrapers</option>
+            </select>
+            <button class="btn btn-secondary" onclick="loadHistory()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refrescar
+            </button>
+          </div>
+        </div>
+
+        <div class="kpi-grid" id="history-metrics">
+          <div class="kpi-card"><span class="kpi-value" id="metric-total">0</span><span class="kpi-label">Ejecuciones totales</span></div>
+          <div class="kpi-card"><span class="kpi-value" id="metric-success-rate">0%</span><span class="kpi-label">Tasa de exito</span></div>
+          <div class="kpi-card"><span class="kpi-value" id="metric-avg-duration">0ms</span><span class="kpi-label">Duracion promedio</span></div>
+          <div class="kpi-card"><span class="kpi-value" id="metric-records">0</span><span class="kpi-label">Registros totales</span></div>
+        </div>
+
+        <div class="table-container">
+          <table class="history-table" id="history-table" role="table">
+            <caption class="sr-only">Historial de ejecuciones</caption>
+            <thead>
+              <tr><th>Scraper</th><th>Inicio</th><th>Duracion</th><th>Estado</th><th>Registros</th><th>Sandbox</th><th>Acciones</th></tr>
+            </thead>
+            <tbody id="history-tbody">
+              <tr><td colspan="7" class="loading-state"><div class="spinner"></div><span>Cargando historial...</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── TAB: SCHEDULER ── -->
+      <section class="tab-content" id="tab-scheduler" aria-label="Programador">
+
+        <div class="top-bar">
+          <div class="top-bar-title">
+            <h1>Programador</h1>
+            <p>Tareas automaticas programadas con cron</p>
+          </div>
+          <div class="top-bar-actions">
+            <button class="btn btn-primary" onclick="showSchedulerForm()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Nueva Tarea
+            </button>
+          </div>
+        </div>
+
+        <div class="schedule-list" id="scheduler-list">
+          <div class="loading-state"><div class="spinner"></div><span>Cargando tareas...</span></div>
+        </div>
+      </section>
+
+      <!-- ── TAB: CONFIG ── -->
+      <section class="tab-content" id="tab-config" aria-label="Configuracion">
+
+        <div class="top-bar">
+          <div class="top-bar-title">
+            <h1>Configuracion</h1>
+            <p>Parametros del sistema y credenciales</p>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <!-- Export -->
+          <div class="card">
+            <div class="card-header"><h3>Exportacion de Datos</h3></div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">Formato de exportacion</label>
+                <div class="radio-group">
+                  <label class="radio-label"><input type="radio" name="export-format" value="csv" checked> CSV</label>
+                  <label class="radio-label"><input type="radio" name="export-format" value="json"> JSON</label>
+                  <label class="radio-label"><input type="radio" name="export-format" value="xlsx"> Excel</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Transformaciones</label>
+                <div class="checkbox-group">
+                  <label class="checkbox-label"><input type="checkbox" class="transform-check" value="iso_dates"> Fechas ISO</label>
+                  <label class="checkbox-label"><input type="checkbox" class="transform-check" value="unify_countries"> Unificar paises</label>
+                  <label class="checkbox-label"><input type="checkbox" class="transform-check" value="normalize_teams"> Normalizar equipos</label>
+                  <label class="checkbox-label"><input type="checkbox" class="transform-check" value="drop_empty"> Eliminar vacias</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Credentials -->
+          <div class="card">
+            <div class="card-header"><h3>Credenciales Externas</h3></div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:var(--space-4)">
+              <div><label class="form-label" for="cred-fbref">FBref API Key</label><div style="display:flex;gap:var(--space-2)"><input class="input" type="password" id="cred-fbref" placeholder="Ingrese API key"><button class="btn btn-primary btn-sm" onclick="saveCredential('fbref')">Guardar</button></div></div>
+              <div><label class="form-label" for="cred-supabase">Supabase Service Key</label><div style="display:flex;gap:var(--space-2)"><input class="input" type="password" id="cred-supabase" placeholder="Ingrese service key"><button class="btn btn-primary btn-sm" onclick="saveCredential('supabase')">Guardar</button></div></div>
+              <div><label class="form-label" for="cred-sportmonks">Sportmonks API Key</label><div style="display:flex;gap:var(--space-2)"><input class="input" type="password" id="cred-sportmonks" placeholder="Ingrese API key"><button class="btn btn-primary btn-sm" onclick="saveCredential('sportmonks')">Guardar</button></div></div>
+            </div>
+          </div>
+
+          <!-- Proxies -->
+          <div class="card" style="grid-column:1/-1">
+            <div class="card-header"><h3>Servidores Proxy</h3></div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label" for="proxy-list">Lista de proxies (uno por linea)</label>
+                <textarea class="input" id="proxy-list" rows="4" placeholder="http://proxy1:8080&#10;http://proxy2:8080" style="font-family:var(--font-mono);font-size:var(--fs-xs)"></textarea>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-3)">
+                <label class="toggle">
+                  <input type="checkbox" id="chk-proxies-enabled">
+                  <span class="toggle-track"></span>
+                  <span class="toggle-label">Activar proxy rotation</span>
+                </label>
+                <button class="btn btn-primary btn-sm" onclick="saveProxies()">Guardar proxies</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ═══ CONSOLE DRAWER ═══ -->
+    <div id="console-drawer" class="console-drawer collapsed" role="log" aria-label="Consola de logs">
+      <div class="console-drawer-header" id="console-drawer-header" onclick="toggleConsoleDrawer()" tabindex="0" role="button" aria-expanded="false" aria-controls="console-body">
+        <div class="console-drawer-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span>Consola en Vivo</span>
+          <span class="status-dot online" style="margin-left:var(--space-2)"></span>
+        </div>
+        <span class="console-toggle-btn" style="font-size:var(--fs-xs);color:var(--text-tertiary)">Ver Logs</span>
+      </div>
+
+      <div class="console-toolbar">
+        <div class="log-filters" id="log-filters">
+          <button class="log-filter-btn active" data-level="all">Todos</button>
+          <button class="log-filter-btn" data-level="info">Info</button>
+          <button class="log-filter-btn" data-level="warning">Warning</button>
+          <button class="log-filter-btn" data-level="error">Error</button>
+          <button class="log-filter-btn" data-level="success">Exito</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--space-3)">
+          <label class="toggle" style="gap:var(--space-1)">
+            <input type="checkbox" id="chk-autoscroll" checked>
+            <span class="toggle-track"></span>
+            <span class="toggle-label" style="font-size:var(--fs-xs)">Auto-scroll</span>
+          </label>
+          <button class="btn btn-ghost btn-sm" id="btn-clear-console">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Limpiar
+          </button>
+        </div>
+      </div>
+
+      <div class="console-body" id="console-output">
+        <div class="console-line system-msg">[Sistema] Listo para operar. Los logs apareceran aqui.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ MODALS ═══ -->
+
+<!-- Scheduler Modal -->
+<div class="modal-overlay" id="scheduler-modal" style="display:none" onclick="if(event.target===this)closeSchedulerForm()" role="dialog" aria-modal="true" aria-labelledby="scheduler-modal-title">
+  <div class="modal-card modal-sm" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3 id="scheduler-modal-title">Nueva Tarea Programada</h3>
+      <button class="modal-close" onclick="closeSchedulerForm()" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label" for="sched-scraper">Scraper</label>
+        <select class="input" id="sched-scraper"></select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="sched-cron">Expresion Cron</label>
+        <input class="input" type="text" id="sched-cron" placeholder="*/30 * * * * (cada 30 min)">
+        <p class="form-help">minuto hora dia-del-mes mes dia-de-la-semana</p>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Modo Sandbox</label>
+        <label class="toggle">
+          <input type="checkbox" id="sched-sandbox">
+          <span class="toggle-track"></span>
+          <span class="toggle-label">Activar sandbox</span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeSchedulerForm()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveSchedulerJob()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Diagnostic Modal -->
+<div class="modal-overlay" id="diagnostic-modal" style="display:none" onclick="if(event.target===this)closeDiagnosticModal()" role="dialog" aria-modal="true">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3 id="diagnostic-modal-title">Diagnostico de Estructura</h3>
+      <button class="modal-close" onclick="closeDiagnosticModal()" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="diagnostic-summary" id="diagnostic-summary"></div>
+      <div class="diagnostic-tree" id="diagnostic-tree"></div>
+      <div class="diagnostic-history" id="diagnostic-history" style="margin-top:var(--space-5)">
+        <h4 style="font-size:var(--fs-sm);margin-bottom:var(--space-3)">Historial de Snapshots</h4>
+        <div id="diagnostic-history-list"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeDiagnosticModal()">Cerrar</button>
+      <button class="btn btn-primary" onclick="runDiagnostic()">Re-ejecutar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal-overlay" id="preview-modal" style="display:none" onclick="closePreviewModal(event)" role="dialog" aria-modal="true">
+  <div class="modal-card modal-lg" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3 id="preview-modal-title">Vista Previa</h3>
+      <button class="modal-close" onclick="closePreviewModal()" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="preview-summary" style="margin-bottom:var(--space-4)">
+        <span style="font-size:var(--fs-sm);color:var(--text-secondary)" id="preview-count">0 registros</span>
+        <span class="preview-warnings-badge" id="preview-warnings-count">0 advertencias</span>
+      </div>
+      <div class="preview-modal-table">
+        <div class="table-container">
+          <table class="preview-table" id="preview-table">
+            <thead id="preview-thead"></thead>
+            <tbody id="preview-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closePreviewModal()">Descartar</button>
+      <button class="btn btn-secondary" onclick="exportFromPreview('csv')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        CSV
+      </button>
+      <button class="btn btn-primary" onclick="showExportSubmodal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Exportar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Export Submodal -->
+<div class="modal-overlay" id="export-submodal" style="display:none" onclick="if(event.target===this)closeExportSubmodal()" role="dialog" aria-modal="true">
+  <div class="modal-card modal-sm" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Exportar Datos</h3>
+      <button class="modal-close" onclick="closeExportSubmodal()" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Formato</label>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="sub-export-format" value="csv" checked> CSV</label>
+          <label class="radio-label"><input type="radio" name="sub-export-format" value="json"> JSON</label>
+          <label class="radio-label"><input type="radio" name="sub-export-format" value="xlsx"> Excel</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Transformaciones</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" class="sub-transform-check" value="iso_dates"> ISO fechas</label>
+          <label class="checkbox-label"><input type="checkbox" class="sub-transform-check" value="unify_countries"> Unificar paises</label>
+          <label class="checkbox-label"><input type="checkbox" class="sub-transform-check" value="normalize_teams"> Normalizar equipos</label>
+          <label class="checkbox-label"><input type="checkbox" class="sub-transform-check" value="drop_empty"> Eliminar vacias</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeExportSubmodal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="confirmExport()">Descargar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+<!-- Mobile overlay -->
+<div class="mobile-overlay" id="mobile-overlay" style="display:none" onclick="closeMobileSidebar()" aria-hidden="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

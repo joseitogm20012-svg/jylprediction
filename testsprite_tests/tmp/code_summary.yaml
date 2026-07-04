@@ -1,0 +1,178 @@
+version: "2"
+type: backend
+tech_stack:
+  - language: Python 3.12+
+  - framework: FastAPI
+  - database: SQLite
+  - other: HTML5, CSS3, JavaScript vanilla, Chart.js, Flatpickr, Playwright, APScheduler
+features:
+  - name: Scraper Management API
+    description: List, execute, and monitor 8 web scrapers for football data extraction
+    files:
+      - scrapycoco/main.py
+      - scrapycoco/scrapers/base.py
+      - scrapycoco/scrapers/fbref.py
+      - scrapycoco/scrapers/flashscore.py
+      - scrapycoco/scrapers/transfermarkt.py
+    endpoints:
+      - method: GET
+        path: /api/scrapers
+        description: List all scrapers with their current status (idle/running/success/error)
+        auth_required: false
+        response_schema:
+          "200": "Array of {id, name, description, status, last_run, exit_code}"
+      - method: GET
+        path: /api/run/{scraper_id}
+        description: Execute a scraper via SSE stream with real-time logs
+        auth_required: false
+        request_schema:
+          params: match_id, team_name, type, sandbox
+        response_schema:
+          "200": "SSE event stream (start, log, end events)"
+          "404": "Scraper not found"
+      - method: POST
+        path: /api/batch/run
+        description: Execute multiple scrapers sequentially via SSE stream
+        auth_required: false
+        request_schema:
+          body: "{scraper_ids: string[], sandbox: boolean}"
+        response_schema:
+          "200": "SSE event stream (batch-start, progress, end events)"
+    depends_on:
+      - SQLite Database
+  - name: Preview & Export
+    description: Preview scraped data with validation warnings and export to CSV/JSON/Excel
+    files:
+      - scrapycoco/main.py
+      - scrapycoco/validation.py
+      - scrapycoco/export.py
+      - scrapycoco/transform.py
+    endpoints:
+      - method: GET
+        path: /api/preview/{scraper_id}
+        description: Run scraper in sandbox mode and return data preview with validation warnings
+        auth_required: false
+        response_schema:
+          "200": "{columns, rows, total, warnings: [{row, field, message, severity}]}"
+      - method: POST
+        path: /api/export
+        description: Export data as CSV, JSON, or Excel file with optional transforms
+        auth_required: false
+        request_schema:
+          body: "{scraper_id, format: 'csv'|'json'|'xlsx', transforms: string[], preview_data: array}"
+        response_schema:
+          "200": "File download (binary stream)"
+    depends_on:
+      - Scraper Management API
+  - name: Execution History
+    description: Track scraper execution history, metrics, and statistics
+    files:
+      - scrapycoco/db.py
+      - scrapycoco/main.py
+    endpoints:
+      - method: GET
+        path: /api/history
+        description: List execution history with pagination
+        auth_required: false
+        response_schema:
+          "200": "Array of {scraper_id, status, started_at, duration_ms, records_count, sandbox}"
+      - method: GET
+        path: /api/history/metrics
+        description: Aggregate metrics (total runs, success rate, avg duration)
+        auth_required: false
+        response_schema:
+          "200": "{total_runs, success_count, error_count, avg_duration_ms, total_records}"
+      - method: GET
+        path: /api/history/stats
+        description: Per-scraper statistics for chart rendering
+        auth_required: false
+        response_schema:
+          "200": "Array of {scraper_id, total_runs, success_count, error_count, avg_duration_ms}"
+    depends_on:
+      - SQLite Database
+  - name: Scheduler
+    description: CRUD for automated scraper scheduling using APScheduler
+    files:
+      - scrapycoco/scheduler.py
+      - scrapycoco/main.py
+      - scrapycoco/db.py
+    endpoints:
+      - method: GET
+        path: /api/scheduler/list
+        description: List all scheduled jobs
+        auth_required: false
+        response_schema:
+          "200": "Array of {id, scraper_id, cron_expression, enabled, created_at, next_run_time}"
+      - method: POST
+        path: /api/scheduler/add
+        description: Add new scheduled job
+        auth_required: false
+        request_schema:
+          body: "{scraper_id, cron_expression, params?: {sandbox, match_id, team_name}}"
+        response_schema:
+          "200": "{id, message}"
+      - method: DELETE
+        path: /api/scheduler/{schedule_id}
+        description: Delete a scheduled job
+        auth_required: false
+        response_schema:
+          "200": "{message: Tarea eliminada}"
+      - method: POST
+        path: /api/scheduler/{schedule_id}/pause
+        description: Pause a scheduled job
+        auth_required: false
+        response_schema:
+          "200": "{message: Tarea pausada}"
+      - method: POST
+        path: /api/scheduler/{schedule_id}/resume
+        description: Resume a paused job
+        auth_required: false
+        response_schema:
+          "200": "{message: Tarea reanudada}"
+      - method: POST
+        path: /api/scheduler/{schedule_id}/run-now
+        description: Execute a scheduled job immediately
+        auth_required: false
+        response_schema:
+          "200": "{scraper_id, status, exit_code, duration_ms}"
+    depends_on:
+      - SQLite Database
+      - Scraper Management API
+  - name: Diagnostic
+    description: HTML structure analysis for scraper resilience monitoring
+    files:
+      - scrapycoco/diagnostic.py
+      - scrapycoco/main.py
+    endpoints:
+      - method: POST
+        path: /api/diagnostic/run/{scraper_id}
+        description: Run HTML structure diagnostic and compare with last snapshot
+        auth_required: false
+        request_schema:
+          body: "{url: string, page_source?: string}"
+        response_schema:
+          "200": "{has_changes, severity, changes: [], snapshot, tab_labels, table_count, class_hashes}"
+      - method: GET
+        path: /api/diagnostic/history/{scraper_id}
+        description: List snapshots for a scraper
+        auth_required: false
+        response_schema:
+          "200": "Array of {id, scraper_id, snapshot, html_hash, created_at}"
+      - method: GET
+        path: /api/diagnostic/compare/{id1}/{id2}
+        description: Compare two snapshots
+        auth_required: false
+        response_schema:
+          "200": "{has_changes, severity, changes: [], snapshot_old_id, snapshot_new_id}"
+    depends_on:
+      - SQLite Database
+known_limitations:
+  - issue: Script-based scrapers (results, wc2026, elo) cannot use preview/export features
+    location: scrapycoco/main.py
+    impact: Preview modal shows "No soportado para scripts legacy" for these scrapers
+  - issue: APScheduler may not be installed, scheduler runs in graceful degradation mode
+    location: scrapycoco/scheduler.py
+    impact: Scheduled jobs register in DB but don't auto-execute without APScheduler
+  - issue: Playwright-based scrapers (flashscore, transfermarkt) require browser binary
+    location: scrapycoco/scrapers/flashscore.py
+    impact: Online-only scrapers may fail if Playwright browser is not installed

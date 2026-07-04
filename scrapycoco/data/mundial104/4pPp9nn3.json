@@ -1,0 +1,156 @@
+{
+  "match_id": "4pPp9nn3",
+  "estadisticas": {
+    "2.31Goles esperados (xG)0.88": {
+      "home": "2.31",
+      "away": "0.88"
+    },
+    "65%Posesión35%": {
+      "home": "65%",
+      "away": "35%"
+    },
+    "17Remates totales12": {
+      "home": "17",
+      "away": "12"
+    },
+    "2Remates a puerta4": {
+      "home": "2",
+      "away": "4"
+    },
+    "2Grandes ocasiones1": {
+      "home": "2",
+      "away": "1"
+    },
+    "11Córneres4": {
+      "home": "11",
+      "away": "4"
+    },
+    "82%(420/511)Pases74%(205/278)": {
+      "home": "82%(420/511)",
+      "away": "74%(205/278)"
+    },
+    "2Tarjetas amarillas2": {
+      "home": "2",
+      "away": "2"
+    },
+    "1.65xG a puerta (xGOT)1.26": {
+      "home": "1.65",
+      "away": "1.26"
+    },
+    "8Remates fuera4": {
+      "home": "8",
+      "away": "4"
+    },
+    "7Remates rechazados4": {
+      "home": "7",
+      "away": "4"
+    },
+    "9Remates dentro del área2": {
+      "home": "9",
+      "away": "2"
+    },
+    "8Remates fuera del área10": {
+      "home": "8",
+      "away": "10"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1Goles de cabeza0": {
+      "home": "1",
+      "away": "0"
+    },
+    "34Toques en el área rival10": {
+      "home": "34",
+      "away": "10"
+    },
+    "0Pases entre líneas completados1": {
+      "home": "0",
+      "away": "1"
+    },
+    "3Fueras de juego0": {
+      "home": "3",
+      "away": "0"
+    },
+    "4Tiros libres11": {
+      "home": "4",
+      "away": "11"
+    },
+    "48%(23/48)Pases largos30%(18/61)": {
+      "home": "48%(23/48)",
+      "away": "30%(18/61)"
+    },
+    "72%(142/197)Pases en el último tercio47%(21/45)": {
+      "home": "72%(142/197)",
+      "away": "47%(21/45)"
+    },
+    "14%(4/29)Centros29%(2/7)": {
+      "home": "14%(4/29)",
+      "away": "29%(2/7)"
+    },
+    "0.86Asistencias esperadas (xA)0.33": {
+      "home": "0.86",
+      "away": "0.33"
+    },
+    "30Saques de banda19": {
+      "home": "30",
+      "away": "19"
+    },
+    "11Faltas4": {
+      "home": "11",
+      "away": "4"
+    },
+    "50%(8/16)Entradas94%(15/16)": {
+      "home": "50%(8/16)",
+      "away": "94%(15/16)"
+    },
+    "47Duelos ganados55": {
+      "home": "47",
+      "away": "55"
+    },
+    "11Despejes48": {
+      "home": "11",
+      "away": "48"
+    },
+    "7Intercepciones13": {
+      "home": "7",
+      "away": "13"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Errores conducentes a gol0": {
+      "home": "2",
+      "away": "0"
+    },
+    "2Paradas0": {
+      "home": "2",
+      "away": "0"
+    },
+    "1.26xGOT enfrentados1.65": {
+      "home": "1.26",
+      "away": "1.65"
+    },
+    "-0.74Goles evitados-0.35": {
+      "home": "-0.74",
+      "away": "-0.35"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "21.06.2026 18:00UruguayFIFA: 16.2-2FinalizadoCabo VerdeFIFA: 67.2-2Finalizado",
+  "score": "2-2"
+}

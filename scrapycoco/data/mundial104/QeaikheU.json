@@ -1,0 +1,156 @@
+{
+  "match_id": "QeaikheU",
+  "estadisticas": {
+    "1.24Goles esperados (xG)1.87": {
+      "home": "1.24",
+      "away": "1.87"
+    },
+    "44%Posesión56%": {
+      "home": "44%",
+      "away": "56%"
+    },
+    "11Remates totales19": {
+      "home": "11",
+      "away": "19"
+    },
+    "5Remates a puerta7": {
+      "home": "5",
+      "away": "7"
+    },
+    "3Grandes ocasiones3": {
+      "home": "3",
+      "away": "3"
+    },
+    "4Córneres3": {
+      "home": "4",
+      "away": "3"
+    },
+    "80%(337/421)Pases87%(460/526)": {
+      "home": "80%(337/421)",
+      "away": "87%(460/526)"
+    },
+    "2Tarjetas amarillas1": {
+      "home": "2",
+      "away": "1"
+    },
+    "1.62xG a puerta (xGOT)2.55": {
+      "home": "1.62",
+      "away": "2.55"
+    },
+    "3Remates fuera6": {
+      "home": "3",
+      "away": "6"
+    },
+    "3Remates rechazados6": {
+      "home": "3",
+      "away": "6"
+    },
+    "6Remates dentro del área12": {
+      "home": "6",
+      "away": "12"
+    },
+    "5Remates fuera del área7": {
+      "home": "5",
+      "away": "7"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Goles de cabeza2": {
+      "home": "1",
+      "away": "2"
+    },
+    "17Toques en el área rival36": {
+      "home": "17",
+      "away": "36"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Fueras de juego0": {
+      "home": "3",
+      "away": "0"
+    },
+    "8Tiros libres14": {
+      "home": "8",
+      "away": "14"
+    },
+    "40%(20/50)Pases largos46%(22/48)": {
+      "home": "40%(20/50)",
+      "away": "46%(22/48)"
+    },
+    "60%(53/88)Pases en el último tercio81%(135/166)": {
+      "home": "60%(53/88)",
+      "away": "81%(135/166)"
+    },
+    "20%(3/15)Centros32%(7/22)": {
+      "home": "20%(3/15)",
+      "away": "32%(7/22)"
+    },
+    "1.08Asistencias esperadas (xA)1.43": {
+      "home": "1.08",
+      "away": "1.43"
+    },
+    "21Saques de banda23": {
+      "home": "21",
+      "away": "23"
+    },
+    "14Faltas8": {
+      "home": "14",
+      "away": "8"
+    },
+    "50%(6/12)Entradas81%(13/16)": {
+      "home": "50%(6/12)",
+      "away": "81%(13/16)"
+    },
+    "43Duelos ganados54": {
+      "home": "43",
+      "away": "54"
+    },
+    "22Despejes37": {
+      "home": "22",
+      "away": "37"
+    },
+    "4Intercepciones6": {
+      "home": "4",
+      "away": "6"
+    },
+    "2Errores conducentes a remate2": {
+      "home": "2",
+      "away": "2"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "4Paradas4": {
+      "home": "4",
+      "away": "4"
+    },
+    "2.55xGOT enfrentados1.62": {
+      "home": "2.55",
+      "away": "1.62"
+    },
+    "-0.45Goles evitados0.62": {
+      "home": "-0.45",
+      "away": "0.62"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "21.06.2026 21:00Nueva ZelandaFIFA: 85.1-3FinalizadoEgiptoFIFA: 29.1-3Finalizado",
+  "score": "1-3"
+}

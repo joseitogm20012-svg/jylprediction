@@ -1,0 +1,53 @@
+{
+  "match_id": "K0YnEaMq",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "12Vargas",
+        "2Muñoz",
+        "23Sánchez",
+        "3Lucumi",
+        "17Mojica",
+        "14Puerta",
+        "16Lerma",
+        "11Arias",
+        "10Rodríguez",
+        "25Suárez",
+        "7Diaz"
+      ],
+      "suplentes": [
+        "Sadiki N.",
+        "Banza S.",
+        "Kayembe J.",
+        "Pickel C.",
+        "Mbuku N."
+      ],
+      "formacion": "4 - 3 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "1Mpasi-Nzau",
+        "2Wan-Bissaka",
+        "22Mbemba",
+        "4Tuanzebe",
+        "3Kapuadi",
+        "26Masuaku",
+        "6Mukau",
+        "8Moutoussamy",
+        "25Kayembe",
+        "17Bakambu",
+        "20Wissa"
+      ],
+      "suplentes": [
+        "Córdoba J.",
+        "Quintero J. F.",
+        "Rios R."
+      ],
+      "formacion": "5 - 3 - 2"
+    }
+  },
+  "error": null,
+  "description": "23.06.2026 22:00ColombiaFIFA: 13.1-0FinalizadoRD CongoFIFA: 46.1-0Finalizado",
+  "score": "1-0"
+}

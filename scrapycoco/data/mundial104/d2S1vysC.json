@@ -1,0 +1,55 @@
+{
+  "match_id": "d2S1vysC",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Room",
+        "20Brenet",
+        "3Gaari",
+        "18Obispo",
+        "24Fonville",
+        "5Floranus",
+        "21Chong",
+        "8Comenencia",
+        "10Bacuna L.",
+        "7Bacuna J.",
+        "9Locadia"
+      ],
+      "suplentes": [
+        "Antonisse J.",
+        "Kastaneer G.",
+        "Noslin T.",
+        "Sambo S.",
+        "Kuwas B."
+      ],
+      "formacion": "5 - 4 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Fofana",
+        "17Doue",
+        "7Kossounou",
+        "2Diomande O.",
+        "13Operi",
+        "18Sangaré",
+        "8Kessie",
+        "15Diallo",
+        "19Pépé",
+        "11Diomandé Y.",
+        "9Bonny"
+      ],
+      "suplentes": [
+        "Inao Oulai C.",
+        "Wahi E.",
+        "Diakite O.",
+        "Toure B.",
+        "Seri J."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "25.06.2026 16:00CurazaoFIFA: 82.0-2FinalizadoCosta de MarfilFIFA: 33.0-2Finalizado",
+  "score": "0-2"
+}

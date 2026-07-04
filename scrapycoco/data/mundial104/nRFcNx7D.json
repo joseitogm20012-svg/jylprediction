@@ -1,0 +1,188 @@
+{
+  "match_id": "nRFcNx7D",
+  "estadisticas": {
+    "2.60Goles esperados (xG)0.25": {
+      "home": "2.60",
+      "away": "0.25"
+    },
+    "66%Posesión34%": {
+      "home": "66%",
+      "away": "34%"
+    },
+    "17Remates totales7": {
+      "home": "17",
+      "away": "7"
+    },
+    "9Remates a puerta2": {
+      "home": "9",
+      "away": "2"
+    },
+    "7Grandes ocasiones0": {
+      "home": "7",
+      "away": "0"
+    },
+    "3Córneres2": {
+      "home": "3",
+      "away": "2"
+    },
+    "90%(561/624)Pases80%(262/327)": {
+      "home": "90%(561/624)",
+      "away": "80%(262/327)"
+    },
+    "1Tarjetas amarillas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "3.50xG a puerta (xGOT)0.09": {
+      "home": "3.50",
+      "away": "0.09"
+    },
+    "5Remates fuera2": {
+      "home": "5",
+      "away": "2"
+    },
+    "3Remates rechazados3": {
+      "home": "3",
+      "away": "3"
+    },
+    "12Remates dentro del área4": {
+      "home": "12",
+      "away": "4"
+    },
+    "5Remates fuera del área3": {
+      "home": "5",
+      "away": "3"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "36Toques en el área rival6": {
+      "home": "36",
+      "away": "6"
+    },
+    "5Pases entre líneas completados0": {
+      "home": "5",
+      "away": "0"
+    },
+    "2Fueras de juego2": {
+      "home": "2",
+      "away": "2"
+    },
+    "15Tiros libres14": {
+      "home": "15",
+      "away": "14"
+    },
+    "55%(22/40)Pases largos30%(9/30)": {
+      "home": "55%(22/40)",
+      "away": "30%(9/30)"
+    },
+    "78%(137/175)Pases en el último tercio70%(52/74)": {
+      "home": "78%(137/175)",
+      "away": "70%(52/74)"
+    },
+    "23%(5/22)Centros0%(0/8)": {
+      "home": "23%(5/22)",
+      "away": "0%(0/8)"
+    },
+    "1.64Asistencias esperadas (xA)0.20": {
+      "home": "1.64",
+      "away": "0.20"
+    },
+    "20Saques de banda16": {
+      "home": "20",
+      "away": "16"
+    },
+    "14Faltas15": {
+      "home": "14",
+      "away": "15"
+    },
+    "71%(10/14)Entradas72%(13/18)": {
+      "home": "71%(10/14)",
+      "away": "72%(13/18)"
+    },
+    "54Duelos ganados45": {
+      "home": "54",
+      "away": "45"
+    },
+    "16Despejes30": {
+      "home": "16",
+      "away": "30"
+    },
+    "6Intercepciones14": {
+      "home": "6",
+      "away": "14"
+    },
+    "0Errores conducentes a remate3": {
+      "home": "0",
+      "away": "3"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Paradas4": {
+      "home": "2",
+      "away": "4"
+    },
+    "0.09xGOT enfrentados3.50": {
+      "home": "0.09",
+      "away": "3.50"
+    },
+    "0.09Goles evitados-0.50": {
+      "home": "0.09",
+      "away": "-0.50"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Costa",
+        "20Cancelo",
+        "3Dias",
+        "13Veiga",
+        "25Mendes",
+        "15Neves",
+        "23Vitinha",
+        "18Neto",
+        "8Fernandes",
+        "11Joao Félix",
+        "7Ronaldo"
+      ],
+      "suplentes": [
+        "Semedo N.",
+        "Conceicao F.",
+        "Trincao",
+        "Silva B.",
+        "Leao R."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "12Nematov",
+        "2Khusanov",
+        "18Abdullaev",
+        "5Ashurmatov",
+        "24Karimov",
+        "9Khamrobekov",
+        "7Shukurov",
+        "13Nasrullaev",
+        "19Ganiev",
+        "22Fayzullaev",
+        "14Shomurodov"
+      ],
+      "suplentes": [
+        "Alizhonov K.",
+        "Mozgovoy A.",
+        "Sergeev I.",
+        "Jiyanov R.",
+        "Esanov S."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    }
+  },
+  "error": null,
+  "description": "23.06.2026 13:00PortugalFIFA: 5.UzbekistánFIFA: 50.",
+  "score": "5-0"
+}

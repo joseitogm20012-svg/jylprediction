@@ -1,0 +1,191 @@
+{
+  "match_id": "4zTHJLbM",
+  "estadisticas": {
+    "0.65Goles esperados (xG)0.87": {
+      "home": "0.65",
+      "away": "0.87"
+    },
+    "75%Posesión25%": {
+      "home": "75%",
+      "away": "25%"
+    },
+    "7Remates totales8": {
+      "home": "7",
+      "away": "8"
+    },
+    "1Remates a puerta2": {
+      "home": "1",
+      "away": "2"
+    },
+    "0Grandes ocasiones1": {
+      "home": "0",
+      "away": "1"
+    },
+    "5Córneres4": {
+      "home": "5",
+      "away": "4"
+    },
+    "92%(724/783)Pases78%(195/249)": {
+      "home": "92%(724/783)",
+      "away": "78%(195/249)"
+    },
+    "3Tarjetas amarillas1": {
+      "home": "3",
+      "away": "1"
+    },
+    "0.53xG a puerta (xGOT)0.97": {
+      "home": "0.53",
+      "away": "0.97"
+    },
+    "4Remates fuera3": {
+      "home": "4",
+      "away": "3"
+    },
+    "2Remates rechazados3": {
+      "home": "2",
+      "away": "3"
+    },
+    "5Remates dentro del área2": {
+      "home": "5",
+      "away": "2"
+    },
+    "2Remates fuera del área6": {
+      "home": "2",
+      "away": "6"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Goles de cabeza1": {
+      "home": "1",
+      "away": "1"
+    },
+    "29Toques en el área rival10": {
+      "home": "29",
+      "away": "10"
+    },
+    "1Pases entre líneas completados0": {
+      "home": "1",
+      "away": "0"
+    },
+    "3Fueras de juego2": {
+      "home": "3",
+      "away": "2"
+    },
+    "10Tiros libres9": {
+      "home": "10",
+      "away": "9"
+    },
+    "64%(41/64)Pases largos28%(11/40)": {
+      "home": "64%(41/64)",
+      "away": "28%(11/40)"
+    },
+    "85%(176/207)Pases en el último tercio68%(50/73)": {
+      "home": "85%(176/207)",
+      "away": "68%(50/73)"
+    },
+    "26%(6/23)Centros10%(1/10)": {
+      "home": "26%(6/23)",
+      "away": "10%(1/10)"
+    },
+    "1.84Asistencias esperadas (xA)0.71": {
+      "home": "1.84",
+      "away": "0.71"
+    },
+    "16Saques de banda15": {
+      "home": "16",
+      "away": "15"
+    },
+    "9Faltas10": {
+      "home": "9",
+      "away": "10"
+    },
+    "50%(6/12)Entradas53%(9/17)": {
+      "home": "50%(6/12)",
+      "away": "53%(9/17)"
+    },
+    "34Duelos ganados42": {
+      "home": "34",
+      "away": "42"
+    },
+    "10Despejes27": {
+      "home": "10",
+      "away": "27"
+    },
+    "3Intercepciones5": {
+      "home": "3",
+      "away": "5"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Paradas0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0.97xGOT enfrentados0.53": {
+      "home": "0.97",
+      "away": "0.53"
+    },
+    "-0.03Goles evitados-0.47": {
+      "home": "-0.03",
+      "away": "-0.47"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Costa",
+        "20Cancelo",
+        "4Araújo",
+        "13Veiga",
+        "25Mendes",
+        "15Neves",
+        "23Vitinha",
+        "10Silva",
+        "8Fernandes",
+        "18Neto",
+        "7Ronaldo"
+      ],
+      "suplentes": [
+        "Sadiki N.",
+        "Pickel C.",
+        "Kayembe J.",
+        "Kalulu G.",
+        "Banza S."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Mpasi-Nzau",
+        "2Wan-Bissaka",
+        "22Mbemba",
+        "4Tuanzebe",
+        "3Kapuadi",
+        "26Masuaku",
+        "6Mukau",
+        "8Moutoussamy",
+        "25Kayembe",
+        "20Wissa",
+        "17Bakambu"
+      ],
+      "suplentes": [
+        "Conceicao F.",
+        "Leao R.",
+        "Semedo N.",
+        "Ramos G. M."
+      ],
+      "formacion": "5 - 3 - 2"
+    }
+  },
+  "error": null,
+  "description": "17.06.2026 13:00PortugalFIFA: 5.1-1FinalizadoRD CongoFIFA: 46.1-1Finalizado",
+  "score": "1-1"
+}

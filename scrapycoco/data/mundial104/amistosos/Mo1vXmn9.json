@@ -1,0 +1,152 @@
+{
+  "match_id": "Mo1vXmn9",
+  "estadisticas": {
+    "3.62Goles esperados (xG)0.63": {
+      "home": "3.62",
+      "away": "0.63"
+    },
+    "70%Posesión30%": {
+      "home": "70%",
+      "away": "30%"
+    },
+    "17Remates totales6": {
+      "home": "17",
+      "away": "6"
+    },
+    "10Remates a puerta2": {
+      "home": "10",
+      "away": "2"
+    },
+    "6Grandes ocasiones1": {
+      "home": "6",
+      "away": "1"
+    },
+    "9Córneres3": {
+      "home": "9",
+      "away": "3"
+    },
+    "91%(550/605)Pases73%(191/262)": {
+      "home": "91%(550/605)",
+      "away": "73%(191/262)"
+    },
+    "0Tarjetas amarillas3": {
+      "home": "0",
+      "away": "3"
+    },
+    "5.42xG a puerta (xGOT)0.70": {
+      "home": "5.42",
+      "away": "0.70"
+    },
+    "2Remates fuera2": {
+      "home": "2",
+      "away": "2"
+    },
+    "5Remates rechazados2": {
+      "home": "5",
+      "away": "2"
+    },
+    "15Remates dentro del área2": {
+      "home": "15",
+      "away": "2"
+    },
+    "2Remates fuera del área4": {
+      "home": "2",
+      "away": "4"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "33Toques en el área rival7": {
+      "home": "33",
+      "away": "7"
+    },
+    "3Pases entre líneas completados1": {
+      "home": "3",
+      "away": "1"
+    },
+    "0Fueras de juego0": {
+      "home": "0",
+      "away": "0"
+    },
+    "12Tiros libres6": {
+      "home": "12",
+      "away": "6"
+    },
+    "56%(25/45)Pases largos35%(15/43)": {
+      "home": "56%(25/45)",
+      "away": "35%(15/43)"
+    },
+    "71%(100/141)Pases en el último tercio55%(26/47)": {
+      "home": "71%(100/141)",
+      "away": "55%(26/47)"
+    },
+    "28%(7/25)Centros11%(1/9)": {
+      "home": "28%(7/25)",
+      "away": "11%(1/9)"
+    },
+    "1.16Asistencias esperadas (xA)0.31": {
+      "home": "1.16",
+      "away": "0.31"
+    },
+    "17Saques de banda12": {
+      "home": "17",
+      "away": "12"
+    },
+    "6Faltas12": {
+      "home": "6",
+      "away": "12"
+    },
+    "50%(6/12)Entradas67%(8/12)": {
+      "home": "50%(6/12)",
+      "away": "67%(8/12)"
+    },
+    "37Duelos ganados26": {
+      "home": "37",
+      "away": "26"
+    },
+    "15Despejes23": {
+      "home": "15",
+      "away": "23"
+    },
+    "3Intercepciones6": {
+      "home": "3",
+      "away": "6"
+    },
+    "1Errores conducentes a remate1": {
+      "home": "1",
+      "away": "1"
+    },
+    "1Errores conducentes a gol0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1Paradas3": {
+      "home": "1",
+      "away": "3"
+    },
+    "0.70xGOT enfrentados5.42": {
+      "home": "0.70",
+      "away": "5.42"
+    },
+    "-0.30Goles evitados-1.58": {
+      "home": "-0.30",
+      "away": "-1.58"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "18.11.2025 15:45GalesFIFA: 37.7-1FinalizadoMacedonia del NorteFIFA: 69.7-1Finalizado",
+  "score": "7-1"
+}

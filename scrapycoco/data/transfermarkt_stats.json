@@ -1,0 +1,14 @@
+{
+  "argentina": {
+    "team": "Argentina",
+    "average_age": "26.4",
+    "manager": "Lionel Scaloni",
+    "market_value": "€750.00m"
+  },
+  "colombia": {
+    "team": "Colombia",
+    "average_age": "26.4",
+    "manager": "Dorival Júnior",
+    "market_value": "€950.00m"
+  }
+}

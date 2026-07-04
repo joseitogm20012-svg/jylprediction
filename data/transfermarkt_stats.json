@@ -1,0 +1,440 @@
+{
+  "argentina": {
+    "team": "Argentina",
+    "slug": "argentina",
+    "tm_id": 3437,
+    "market_value": "€807.50m",
+    "average_age": "29.2",
+    "squad_size": "26",
+    "manager": "Lionel Scaloni"
+  },
+  "colombia": {
+    "team": "Colombia",
+    "average_age": "26.4",
+    "manager": "Dorival Júnior",
+    "market_value": "€950.00m"
+  },
+  "germany": {
+    "team": "Germany",
+    "slug": "germany",
+    "tm_id": 3262,
+    "market_value": "€947.00m",
+    "average_age": "28.1",
+    "squad_size": "26",
+    "manager": "Julian Nagelsmann"
+  },
+  "england": {
+    "team": "England",
+    "slug": "england",
+    "tm_id": 3299,
+    "market_value": "€1.36b",
+    "average_age": "27.4",
+    "squad_size": "26",
+    "manager": "Thomas Tuchel"
+  },
+  "portugal": {
+    "team": "Portugal",
+    "slug": "portugal",
+    "tm_id": 3300,
+    "market_value": "€1.01b",
+    "average_age": "28.1",
+    "squad_size": "26",
+    "manager": "Roberto Martínez"
+  },
+  "spain": {
+    "team": "Spain",
+    "slug": "spain",
+    "tm_id": 3375,
+    "market_value": "€1.22b",
+    "average_age": "26.8",
+    "squad_size": "26",
+    "manager": "Luis de la Fuente"
+  },
+  "italy": {
+    "team": "Italy",
+    "slug": "italy",
+    "tm_id": 3376,
+    "market_value": "€319.00m",
+    "average_age": "21.0",
+    "squad_size": "23",
+    "manager": ""
+  },
+  "france": {
+    "team": "France",
+    "slug": "france",
+    "tm_id": 3377,
+    "market_value": "€1.52b",
+    "average_age": "27.1",
+    "squad_size": "26",
+    "manager": "Didier Deschamps"
+  },
+  "greece": {
+    "team": "Greece",
+    "slug": "greece",
+    "tm_id": 3378,
+    "market_value": "€275.60m",
+    "average_age": "26.3",
+    "squad_size": "25",
+    "manager": "Ivan Jovanovic"
+  },
+  "netherlands": {
+    "team": "Netherlands",
+    "slug": "netherlands",
+    "tm_id": 3379,
+    "market_value": "€754.20m",
+    "average_age": "27.9",
+    "squad_size": "26",
+    "manager": "Ronald Koeman"
+  },
+  "turkey": {
+    "team": "Türkiye",
+    "slug": "turkey",
+    "tm_id": 3381,
+    "market_value": "€473.70m",
+    "average_age": "27.8",
+    "squad_size": "26",
+    "manager": "Vincenzo Montella"
+  },
+  "belgium": {
+    "team": "Belgium",
+    "slug": "belgium",
+    "tm_id": 3382,
+    "market_value": "€547.50m",
+    "average_age": "27.7",
+    "squad_size": "26",
+    "manager": "Rudi Garcia"
+  },
+  "switzerland": {
+    "team": "Switzerland",
+    "slug": "switzerland",
+    "tm_id": 3384,
+    "market_value": "€332.50m",
+    "average_age": "28.4",
+    "squad_size": "26",
+    "manager": "Murat Yakin"
+  },
+  "australia": {
+    "team": "Australia",
+    "slug": "australia",
+    "tm_id": 3433,
+    "market_value": "€77.45m",
+    "average_age": "27.4",
+    "squad_size": "26",
+    "manager": "Tony Popovic"
+  },
+  "cameroon": {
+    "team": "Cameroon",
+    "slug": "cameroon",
+    "tm_id": 3434,
+    "market_value": "€198.60m",
+    "average_age": "23.8",
+    "squad_size": "24",
+    "manager": "David Pagou"
+  },
+  "japan": {
+    "team": "Japan",
+    "slug": "japan",
+    "tm_id": 3435,
+    "market_value": "€270.85m",
+    "average_age": "27.6",
+    "squad_size": "26",
+    "manager": "Hajime Moriyasu"
+  },
+  "denmark": {
+    "team": "Denmark",
+    "slug": "denmark",
+    "tm_id": 3436,
+    "market_value": "€365.00m",
+    "average_age": "25.6",
+    "squad_size": "23",
+    "manager": "Brian Riemer"
+  },
+  "serbia": {
+    "team": "Serbia",
+    "slug": "serbia",
+    "tm_id": 3438,
+    "market_value": "€209.50m",
+    "average_age": "23.1",
+    "squad_size": "27",
+    "manager": "Veljko Paunovic"
+  },
+  "brazil": {
+    "team": "Brazil",
+    "slug": "brazil",
+    "tm_id": 3439,
+    "market_value": "€928.20m",
+    "average_age": "29.4",
+    "squad_size": "26",
+    "manager": "Carlo Ancelotti"
+  },
+  "ghana": {
+    "team": "Ghana",
+    "slug": "ghana",
+    "tm_id": 3441,
+    "market_value": "€234.35m",
+    "average_age": "27.1",
+    "squad_size": "26",
+    "manager": "Carlos Queiroz"
+  },
+  "poland": {
+    "team": "Poland",
+    "slug": "poland",
+    "tm_id": 3442,
+    "market_value": "€232.10m",
+    "average_age": "26.4",
+    "squad_size": "26",
+    "manager": "Jan Urban"
+  },
+  "nigeria": {
+    "team": "Nigeria",
+    "slug": "nigeria",
+    "tm_id": 3444,
+    "market_value": "€172.30m",
+    "average_age": "26.6",
+    "squad_size": "23",
+    "manager": "Éric Chelle"
+  },
+  "czech-republic": {
+    "team": "Czech Republic",
+    "slug": "czech-republic",
+    "tm_id": 3445,
+    "market_value": "€188.18m",
+    "average_age": "27.7",
+    "squad_size": "26",
+    "manager": ""
+  },
+  "uruguay": {
+    "team": "Uruguay",
+    "slug": "uruguay",
+    "tm_id": 3449,
+    "market_value": "€359.30m",
+    "average_age": "28.8",
+    "squad_size": "26",
+    "manager": ""
+  },
+  "senegal": {
+    "team": "Senegal",
+    "slug": "senegal",
+    "tm_id": 3499,
+    "market_value": "€478.10m",
+    "average_age": "27.2",
+    "squad_size": "26",
+    "manager": "Pape Thiaw"
+  },
+  "usa": {
+    "team": "USA",
+    "slug": "usa",
+    "tm_id": 3505,
+    "market_value": "€385.65m",
+    "average_age": "27.0",
+    "squad_size": "26",
+    "manager": "Mauricio Pochettino"
+  },
+  "canada": {
+    "team": "Canada",
+    "slug": "canada",
+    "tm_id": 3510,
+    "market_value": "€198.65m",
+    "average_age": "27.1",
+    "squad_size": "26",
+    "manager": "Jesse Marsch"
+  },
+  "croatia": {
+    "team": "Croatia",
+    "slug": "croatia",
+    "tm_id": 3556,
+    "market_value": "€387.30m",
+    "average_age": "28.4",
+    "squad_size": "26",
+    "manager": "Zlatko Dalic"
+  },
+  "morocco": {
+    "team": "Morocco",
+    "slug": "morocco",
+    "tm_id": 3575,
+    "market_value": "€447.70m",
+    "average_age": "26.7",
+    "squad_size": "26",
+    "manager": "Mohamed Ouahbi"
+  },
+  "panama": {
+    "team": "Panama",
+    "slug": "panama",
+    "tm_id": 3577,
+    "market_value": "€34.55m",
+    "average_age": "30.5",
+    "squad_size": "26",
+    "manager": "Thomas Christiansen"
+  },
+  "paraguay": {
+    "team": "Paraguay",
+    "slug": "paraguay",
+    "tm_id": 3581,
+    "market_value": "€153.65m",
+    "average_age": "29.1",
+    "squad_size": "26",
+    "manager": "Gustavo Alfaro"
+  },
+  "iran": {
+    "team": "Iran",
+    "slug": "iran",
+    "tm_id": 3582,
+    "market_value": "€32.05m",
+    "average_age": "30.4",
+    "squad_size": "26",
+    "manager": "Amir Ghalenoei"
+  },
+  "south-korea": {
+    "team": "South Korea",
+    "slug": "south-korea",
+    "tm_id": 3589,
+    "market_value": "€139.05m",
+    "average_age": "28.1",
+    "squad_size": "26",
+    "manager": "Yong-soo Lee"
+  },
+  "honduras": {
+    "team": "Honduras",
+    "slug": "honduras",
+    "tm_id": 3590,
+    "market_value": "€21.43m",
+    "average_age": "25.4",
+    "squad_size": "26",
+    "manager": ""
+  },
+  "algeria": {
+    "team": "Algeria",
+    "slug": "algeria",
+    "tm_id": 3614,
+    "market_value": "€256.90m",
+    "average_age": "26.9",
+    "squad_size": "26",
+    "manager": "Vladimir Petkovic"
+  },
+  "tunisia": {
+    "team": "Tunisia",
+    "slug": "tunisia",
+    "tm_id": 3670,
+    "market_value": "€69.95m",
+    "average_age": "26.7",
+    "squad_size": "26",
+    "manager": "Hervé Renard"
+  },
+  "jamaica": {
+    "team": "Jamaica",
+    "slug": "jamaica",
+    "tm_id": 3671,
+    "market_value": "€9.05m",
+    "average_age": "23.2",
+    "squad_size": "24",
+    "manager": ""
+  },
+  "egypt": {
+    "team": "Egypt",
+    "slug": "egypt",
+    "tm_id": 3672,
+    "market_value": "€116.48m",
+    "average_age": "29.1",
+    "squad_size": "26",
+    "manager": "Hossam Hassan"
+  },
+  "chile": {
+    "team": "Chile",
+    "slug": "chile",
+    "tm_id": 3700,
+    "market_value": "€66.80m",
+    "average_age": "25.9",
+    "squad_size": "25",
+    "manager": "Felipe Correa"
+  },
+  "south-africa": {
+    "team": "South Africa",
+    "slug": "south-africa",
+    "tm_id": 3806,
+    "market_value": "€49.25m",
+    "average_age": "26.9",
+    "squad_size": "26",
+    "manager": "Hugo Broos"
+  },
+  "saudi-arabia": {
+    "team": "Saudi Arabia",
+    "slug": "saudi-arabia",
+    "tm_id": 3807,
+    "market_value": "€40.68m",
+    "average_age": "28.6",
+    "squad_size": "26",
+    "manager": "Georgios Donis"
+  },
+  "bolivia": {
+    "team": "Bolivia",
+    "slug": "bolivia",
+    "tm_id": 5233,
+    "market_value": "€17.85m",
+    "average_age": "23.8",
+    "squad_size": "27",
+    "manager": "Óscar Villegas"
+  },
+  "ecuador": {
+    "team": "Ecuador",
+    "slug": "ecuador",
+    "tm_id": 5750,
+    "market_value": "€368.70m",
+    "average_age": "26.2",
+    "squad_size": "26",
+    "manager": ""
+  },
+  "mexico": {
+    "team": "Mexico",
+    "slug": "mexico",
+    "tm_id": 6303,
+    "market_value": "€191.85m",
+    "average_age": "28.0",
+    "squad_size": "26",
+    "manager": "Javier Aguirre"
+  },
+  "costa-rica": {
+    "team": "Costa Rica",
+    "slug": "costa-rica",
+    "tm_id": 8497,
+    "market_value": "€28.20m",
+    "average_age": "24.9",
+    "squad_size": "21",
+    "manager": "Fernando Batista"
+  },
+  "new-zealand": {
+    "team": "New Zealand",
+    "slug": "new-zealand",
+    "tm_id": 9171,
+    "market_value": "€34.30m",
+    "average_age": "28.4",
+    "squad_size": "26",
+    "manager": "Darren Bazeley"
+  },
+  "guatemala": {
+    "team": "Guatemala",
+    "slug": "guatemala",
+    "tm_id": 13342,
+    "market_value": "€7.78m",
+    "average_age": "25.8",
+    "squad_size": "23",
+    "manager": "Luis Fernando Tena"
+  },
+  "indonesia": {
+    "team": "Indonesia",
+    "slug": "indonesia",
+    "tm_id": 13958,
+    "market_value": "€19.55m",
+    "average_age": "25.7",
+    "squad_size": "23",
+    "manager": "John Herdman"
+  },
+  "qatar": {
+    "team": "Qatar",
+    "slug": "qatar",
+    "tm_id": 14162,
+    "market_value": "€19.93m",
+    "average_age": "29.6",
+    "squad_size": "26",
+    "manager": "Julen Lopetegui"
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1781998161573,
+    "timestamp": "2026-06-20T19:29:21.573382",
+    "date": "2026-06-20",
+    "teamA": "tunisia",
+    "teamB": "japan",
+    "probWinA": 0.14586,
+    "probDraw": 0.24528,
+    "probWinB": 0.60886,
+    "xgA": 0.8476460795467068,
+    "xgB": 1.9058274150789558,
+    "strengthOverrideA": 1.0,
+    "strengthOverrideB": 1.0,
+    "altitude": 0,
+    "actualResult": "Manual",
+    "status": "completed",
+    "isCorrect": true,
+    "actualScore": "Manual",
+    "rps": 0.0
+  },
+  {
+    "id": 1781997173782,
+    "timestamp": "2026-06-20T19:12:53.782488",
+    "date": "2026-06-20",
+    "teamA": "ecuador",
+    "teamB": "curacao",
+    "probWinA": 0.42079,
+    "probDraw": 0.35779,
+    "probWinB": 0.22142,
+    "xgA": 1.0891983105395475,
+    "xgB": 0.7178745062242132,
+    "strengthOverrideA": 1.0,
+    "strengthOverrideB": 1.0,
+    "altitude": 0,
+    "actualResult": "Manual",
+    "status": "completed",
+    "isCorrect": true,
+    "actualScore": "Manual",
+    "rps": 0.0
+  }
+]

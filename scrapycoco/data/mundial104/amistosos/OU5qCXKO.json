@@ -1,0 +1,188 @@
+{
+  "match_id": "OU5qCXKO",
+  "estadisticas": {
+    "0.98Goles esperados (xG)2.70": {
+      "home": "0.98",
+      "away": "2.70"
+    },
+    "37%Posesión63%": {
+      "home": "37%",
+      "away": "63%"
+    },
+    "12Remates totales17": {
+      "home": "12",
+      "away": "17"
+    },
+    "5Remates a puerta7": {
+      "home": "5",
+      "away": "7"
+    },
+    "1Grandes ocasiones5": {
+      "home": "1",
+      "away": "5"
+    },
+    "5Córneres3": {
+      "home": "5",
+      "away": "3"
+    },
+    "78%(221/285)Pases89%(438/491)": {
+      "home": "78%(221/285)",
+      "away": "89%(438/491)"
+    },
+    "3Tarjetas amarillas1": {
+      "home": "3",
+      "away": "1"
+    },
+    "1.56xG a puerta (xGOT)2.55": {
+      "home": "1.56",
+      "away": "2.55"
+    },
+    "6Remates fuera5": {
+      "home": "6",
+      "away": "5"
+    },
+    "1Remates rechazados5": {
+      "home": "1",
+      "away": "5"
+    },
+    "4Remates dentro del área14": {
+      "home": "4",
+      "away": "14"
+    },
+    "8Remates fuera del área3": {
+      "home": "8",
+      "away": "3"
+    },
+    "1Al palo1": {
+      "home": "1",
+      "away": "1"
+    },
+    "11Toques en el área rival41": {
+      "home": "11",
+      "away": "41"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Fueras de juego0": {
+      "home": "2",
+      "away": "0"
+    },
+    "16Tiros libres17": {
+      "home": "16",
+      "away": "17"
+    },
+    "51%(31/61)Pases largos64%(27/42)": {
+      "home": "51%(31/61)",
+      "away": "64%(27/42)"
+    },
+    "52%(30/58)Pases en el último tercio80%(127/159)": {
+      "home": "52%(30/58)",
+      "away": "80%(127/159)"
+    },
+    "36%(5/14)Centros29%(7/24)": {
+      "home": "36%(5/14)",
+      "away": "29%(7/24)"
+    },
+    "0.42Asistencias esperadas (xA)1.21": {
+      "home": "0.42",
+      "away": "1.21"
+    },
+    "11Saques de banda15": {
+      "home": "11",
+      "away": "15"
+    },
+    "17Faltas16": {
+      "home": "17",
+      "away": "16"
+    },
+    "38%(6/16)Entradas62%(8/13)": {
+      "home": "38%(6/16)",
+      "away": "62%(8/13)"
+    },
+    "44Duelos ganados51": {
+      "home": "44",
+      "away": "51"
+    },
+    "26Despejes22": {
+      "home": "26",
+      "away": "22"
+    },
+    "3Intercepciones4": {
+      "home": "3",
+      "away": "4"
+    },
+    "2Errores conducentes a remate0": {
+      "home": "2",
+      "away": "0"
+    },
+    "1Errores conducentes a gol1": {
+      "home": "1",
+      "away": "1"
+    },
+    "4Paradas3": {
+      "home": "4",
+      "away": "3"
+    },
+    "2.55xGOT enfrentados1.56": {
+      "home": "2.55",
+      "away": "1.56"
+    },
+    "-0.45Goles evitados-0.44": {
+      "home": "-0.45",
+      "away": "-0.44"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "13Nikic",
+        "7Vesovic",
+        "6Tuci",
+        "5Rubezic",
+        "23Marusic",
+        "8Jankovic",
+        "21Bulatovic",
+        "19Loncar",
+        "10Jovetic",
+        "20Osmajic",
+        "9Krstovic"
+      ],
+      "suplentes": [
+        "Perovic M.",
+        "Vukotic M.",
+        "Adzic V.",
+        "Brnovic M.",
+        "Sipcic N."
+      ],
+      "formacion": "4 - 3 - 1 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "1Livakovic",
+        "18Jakic",
+        "6Sutalo",
+        "5Caleta-Car",
+        "4Gvardiol",
+        "15Pasalic",
+        "8Moro",
+        "20Ivanovic",
+        "13Vlasic",
+        "14Perisic",
+        "21Matanovic"
+      ],
+      "suplentes": [
+        "Pongracic M.",
+        "Stanisic J.",
+        "Kramaric A.",
+        "Musa P.",
+        "Modric L."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "17.11.2025 15:45MontenegroFIFA: 80.2-3FinalizadoCroaciaFIFA: 11.2-3Finalizado",
+  "score": "2-3"
+}

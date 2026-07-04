@@ -1,0 +1,192 @@
+{
+  "match_id": "KnyuOLXH",
+  "estadisticas": {
+    "2.17Goles esperados (xG)0.33": {
+      "home": "2.17",
+      "away": "0.33"
+    },
+    "79%Posesión21%": {
+      "home": "79%",
+      "away": "21%"
+    },
+    "32Remates totales7": {
+      "home": "32",
+      "away": "7"
+    },
+    "5Remates a puerta2": {
+      "home": "5",
+      "away": "2"
+    },
+    "5Grandes ocasiones0": {
+      "home": "5",
+      "away": "0"
+    },
+    "12Córneres0": {
+      "home": "12",
+      "away": "0"
+    },
+    "89%(559/629)Pases54%(96/178)": {
+      "home": "89%(559/629)",
+      "away": "54%(96/178)"
+    },
+    "1Tarjetas amarillas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0Tarjetas rojas1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0.67xG a puerta (xGOT)0.21": {
+      "home": "0.67",
+      "away": "0.21"
+    },
+    "15Remates fuera3": {
+      "home": "15",
+      "away": "3"
+    },
+    "12Remates rechazados2": {
+      "home": "12",
+      "away": "2"
+    },
+    "16Remates dentro del área3": {
+      "home": "16",
+      "away": "3"
+    },
+    "16Remates fuera del área4": {
+      "home": "16",
+      "away": "4"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "50Toques en el área rival12": {
+      "home": "50",
+      "away": "12"
+    },
+    "1Pases entre líneas completados0": {
+      "home": "1",
+      "away": "0"
+    },
+    "2Fueras de juego3": {
+      "home": "2",
+      "away": "3"
+    },
+    "15Tiros libres14": {
+      "home": "15",
+      "away": "14"
+    },
+    "67%(28/42)Pases largos34%(22/64)": {
+      "home": "67%(28/42)",
+      "away": "34%(22/64)"
+    },
+    "84%(260/309)Pases en el último tercio42%(27/65)": {
+      "home": "84%(260/309)",
+      "away": "42%(27/65)"
+    },
+    "19%(8/42)Centros33%(2/6)": {
+      "home": "19%(8/42)",
+      "away": "33%(2/6)"
+    },
+    "2.03Asistencias esperadas (xA)0.19": {
+      "home": "2.03",
+      "away": "0.19"
+    },
+    "34Saques de banda18": {
+      "home": "34",
+      "away": "18"
+    },
+    "14Faltas15": {
+      "home": "14",
+      "away": "15"
+    },
+    "65%(11/17)Entradas60%(15/25)": {
+      "home": "65%(11/17)",
+      "away": "60%(15/25)"
+    },
+    "58Duelos ganados69": {
+      "home": "58",
+      "away": "69"
+    },
+    "28Despejes47": {
+      "home": "28",
+      "away": "47"
+    },
+    "6Intercepciones9": {
+      "home": "6",
+      "away": "9"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Paradas5": {
+      "home": "1",
+      "away": "5"
+    },
+    "0.21xGOT enfrentados0.67": {
+      "home": "0.21",
+      "away": "0.67"
+    },
+    "-0.79Goles evitados0.67": {
+      "home": "-0.79",
+      "away": "0.67"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "23Cakir",
+        "18Muldur",
+        "3Demiral",
+        "14Bardakci",
+        "20Kadioglu",
+        "10Calhanoglu",
+        "16Yuksek",
+        "19Akgun",
+        "8Güler",
+        "11Yildiz",
+        "7Akturkoglu"
+      ],
+      "suplentes": [
+        "Yilmaz B.",
+        "Uzun C.",
+        "Gul D.",
+        "Elmali E.",
+        "Kokcu O."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "12Gill",
+        "4Caceres",
+        "15Gómez",
+        "3Alderete",
+        "6Alonso",
+        "10Almirón",
+        "14Cubas",
+        "8Gomez",
+        "23Galarza",
+        "25Pitta",
+        "19Enciso"
+      ],
+      "suplentes": [
+        "Bobadilla D.",
+        "Velazquez G.",
+        "Maidana A.",
+        "Avalos G.",
+        "Canale J."
+      ],
+      "formacion": "4 - 4 - 2"
+    }
+  },
+  "error": null,
+  "description": "19.06.2026 23:00TurquíaFIFA: 22.0-1FinalizadoParaguayFIFA: 41.0-1Finalizado",
+  "score": "0-1"
+}

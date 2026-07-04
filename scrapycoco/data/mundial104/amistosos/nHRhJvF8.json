@@ -1,0 +1,152 @@
+{
+  "match_id": "nHRhJvF8",
+  "estadisticas": {
+    "1.45Goles esperados (xG)0.30": {
+      "home": "1.45",
+      "away": "0.30"
+    },
+    "47%Posesión53%": {
+      "home": "47%",
+      "away": "53%"
+    },
+    "19Remates totales6": {
+      "home": "19",
+      "away": "6"
+    },
+    "3Remates a puerta1": {
+      "home": "3",
+      "away": "1"
+    },
+    "3Grandes ocasiones0": {
+      "home": "3",
+      "away": "0"
+    },
+    "5Córneres7": {
+      "home": "5",
+      "away": "7"
+    },
+    "78%(388/499)Pases80%(437/549)": {
+      "home": "78%(388/499)",
+      "away": "80%(437/549)"
+    },
+    "0Tarjetas amarillas2": {
+      "home": "0",
+      "away": "2"
+    },
+    "0.86xG a puerta (xGOT)0.01": {
+      "home": "0.86",
+      "away": "0.01"
+    },
+    "10Remates fuera4": {
+      "home": "10",
+      "away": "4"
+    },
+    "6Remates rechazados1": {
+      "home": "6",
+      "away": "1"
+    },
+    "12Remates dentro del área4": {
+      "home": "12",
+      "away": "4"
+    },
+    "7Remates fuera del área2": {
+      "home": "7",
+      "away": "2"
+    },
+    "1Al palo1": {
+      "home": "1",
+      "away": "1"
+    },
+    "36Toques en el área rival17": {
+      "home": "36",
+      "away": "17"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "8Fueras de juego0": {
+      "home": "8",
+      "away": "0"
+    },
+    "13Tiros libres16": {
+      "home": "13",
+      "away": "16"
+    },
+    "38%(32/84)Pases largos28%(23/81)": {
+      "home": "38%(32/84)",
+      "away": "28%(23/81)"
+    },
+    "60%(99/164)Pases en el último tercio50%(51/102)": {
+      "home": "60%(99/164)",
+      "away": "50%(51/102)"
+    },
+    "19%(3/16)Centros24%(6/25)": {
+      "home": "19%(3/16)",
+      "away": "24%(6/25)"
+    },
+    "0.51Asistencias esperadas (xA)0.66": {
+      "home": "0.51",
+      "away": "0.66"
+    },
+    "29Saques de banda34": {
+      "home": "29",
+      "away": "34"
+    },
+    "16Faltas13": {
+      "home": "16",
+      "away": "13"
+    },
+    "67%(14/21)Entradas75%(18/24)": {
+      "home": "67%(14/21)",
+      "away": "75%(18/24)"
+    },
+    "65Duelos ganados68": {
+      "home": "65",
+      "away": "68"
+    },
+    "26Despejes28": {
+      "home": "26",
+      "away": "28"
+    },
+    "8Intercepciones11": {
+      "home": "8",
+      "away": "11"
+    },
+    "1Errores conducentes a remate0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Paradas2": {
+      "home": "1",
+      "away": "2"
+    },
+    "0.01xGOT enfrentados0.86": {
+      "home": "0.01",
+      "away": "0.86"
+    },
+    "0.01Goles evitados-0.14": {
+      "home": "0.01",
+      "away": "-0.14"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "31.03.2026 17:00RD CongoGanadorFIFA: 46.1-0Tras la prórrogaJamaicaFIFA: 71.1-0Tras la prórroga",
+  "score": "1-0"
+}

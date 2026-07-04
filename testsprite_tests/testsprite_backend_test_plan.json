@@ -1,0 +1,52 @@
+[
+  {
+    "id": "TC001",
+    "title": "list_all_scrapers_with_status",
+    "description": "Verify that GET /api/scrapers returns a 200 response with an array of all supported scrapers including their id, name, description, current status, last run time, and exit code."
+  },
+  {
+    "id": "TC002",
+    "title": "execute_single_scraper_with_sse_logs",
+    "description": "Verify that GET /api/run/{scraper_id} with valid parameters initiates scraper execution and returns a Server-Sent Events stream with start, log, and end events including exit code and final status."
+  },
+  {
+    "id": "TC003",
+    "title": "handle_scraper_not_found_on_execution",
+    "description": "Verify that GET /api/run/{scraper_id} with an invalid scraper_id returns a 404 response and does not open an execution stream."
+  },
+  {
+    "id": "TC004",
+    "title": "execute_multiple_scrapers_sequentially_with_progress",
+    "description": "Verify that POST /api/batch/run with a list of scraper_ids and sandbox flag returns a 200 SSE stream with batch-start, progress events for each scraper, and a final end event after sequential execution."
+  },
+  {
+    "id": "TC005",
+    "title": "preview_scraper_data_with_validation_warnings",
+    "description": "Verify that GET /api/preview/{scraper_id} returns a 200 response with columns, rows, total count, and an array of validation warnings when preview is supported for the scraper."
+  },
+  {
+    "id": "TC006",
+    "title": "export_scraper_data_in_supported_formats",
+    "description": "Verify that POST /api/export with valid scraper_id, supported format (csv, json, xlsx), optional transforms, and preview_data returns a binary file download of the exported data."
+  },
+  {
+    "id": "TC007",
+    "title": "list_execution_history_with_pagination",
+    "description": "Verify that GET /api/history returns a 200 response with an array of execution records including scraper_id, status, start time, duration, records count, and sandbox flag, supporting pagination parameters."
+  },
+  {
+    "id": "TC008",
+    "title": "add_new_scheduler_job_with_cron_expression",
+    "description": "Verify that POST /api/scheduler/add with valid scraper_id, cron_expression, and optional params returns a 200 response with the new schedule id and confirmation message."
+  },
+  {
+    "id": "TC009",
+    "title": "pause_and_resume_scheduled_job",
+    "description": "Verify that POST /api/scheduler/{schedule_id}/pause returns a 200 response with task paused message and POST /api/scheduler/{schedule_id}/resume returns a 200 response with task resumed message for an existing schedule."
+  },
+  {
+    "id": "TC010",
+    "title": "run_html_structure_diagnostic_and_compare_snapshots",
+    "description": "Verify that POST /api/diagnostic/run/{scraper_id} with url and optional page_source returns a 200 response with diagnostic results including has_changes and severity, and that GET /api/diagnostic/compare/{id1}/{id2} returns a 200 response with comparison results of two snapshots."
+  }
+]

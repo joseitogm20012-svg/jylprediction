@@ -1,0 +1,53 @@
+{
+  "match_id": "dtiRRcc6",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Neuer",
+        "6Kimmich",
+        "4Tah",
+        "15Schlotterbeck",
+        "18Brown",
+        "23Nmecha",
+        "5Pavlovic",
+        "19Sané",
+        "10Musiala",
+        "17Wirtz",
+        "7Havertz"
+      ],
+      "suplentes": [
+        "Undav D.",
+        "Rüdiger A.",
+        "Goretzka L.",
+        "Raum D.",
+        "Anton W."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Room",
+        "5Floranus",
+        "23Bazoer",
+        "18Obispo",
+        "24Fonville",
+        "8Comenencia",
+        "10Bacuna L.",
+        "7Bacuna J.",
+        "21Chong",
+        "9Locadia",
+        "12Hansen"
+      ],
+      "suplentes": [
+        "Antonisse J.",
+        "Margaritha J.",
+        "Kastaneer G."
+      ],
+      "formacion": "4 - 3 - 1 - 2"
+    }
+  },
+  "error": null,
+  "description": "14.06.2026 13:00AlemaniaFIFA: 10.7-1FinalizadoCurazaoFIFA: 82.7-1Finalizado",
+  "score": "7-1"
+}

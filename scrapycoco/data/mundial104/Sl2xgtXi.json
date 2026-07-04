@@ -1,0 +1,55 @@
+{
+  "match_id": "Sl2xgtXi",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Suzuki",
+        "20Seko",
+        "4Itakura",
+        "21Ito",
+        "2Sugawara",
+        "7Tanaka",
+        "15Kamada",
+        "13Nakamura",
+        "10Doan",
+        "11Maeda",
+        "18Ueda"
+      ],
+      "suplentes": [
+        "Taniguchi S.",
+        "Ogawa K.",
+        "Ito J.",
+        "Nagatomo Y.",
+        "Watanabe T."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Widell Zetterstrom",
+        "2Lagerbielke",
+        "4Hien",
+        "5Gudmundsson",
+        "21Bernhardsson",
+        "3Lindelof",
+        "18Ayari",
+        "24Stroud",
+        "11Elanga",
+        "17Gyökeres",
+        "9Isak"
+      ],
+      "suplentes": [
+        "Bergvall L.",
+        "Svensson D.",
+        "Sema K.",
+        "Starfelt C.",
+        "Nygren B."
+      ],
+      "formacion": "3 - 4 - 3"
+    }
+  },
+  "error": null,
+  "description": "25.06.2026 19:00JapónFIFA: 18.1-1FinalizadoSueciaFIFA: 38.1-1Finalizado",
+  "score": "1-1"
+}

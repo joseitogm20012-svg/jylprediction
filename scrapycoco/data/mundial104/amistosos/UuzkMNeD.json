@@ -1,0 +1,191 @@
+{
+  "match_id": "UuzkMNeD",
+  "estadisticas": {
+    "2.96Goles esperados (xG)0.42": {
+      "home": "2.96",
+      "away": "0.42"
+    },
+    "48%Posesión52%": {
+      "home": "48%",
+      "away": "52%"
+    },
+    "24Remates totales9": {
+      "home": "24",
+      "away": "9"
+    },
+    "10Remates a puerta3": {
+      "home": "10",
+      "away": "3"
+    },
+    "6Grandes ocasiones0": {
+      "home": "6",
+      "away": "0"
+    },
+    "12Córneres2": {
+      "home": "12",
+      "away": "2"
+    },
+    "81%(322/399)Pases83%(369/444)": {
+      "home": "81%(322/399)",
+      "away": "83%(369/444)"
+    },
+    "1Tarjetas amarillas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "3.38xG a puerta (xGOT)0.25": {
+      "home": "3.38",
+      "away": "0.25"
+    },
+    "6Remates fuera3": {
+      "home": "6",
+      "away": "3"
+    },
+    "8Remates rechazados3": {
+      "home": "8",
+      "away": "3"
+    },
+    "17Remates dentro del área4": {
+      "home": "17",
+      "away": "4"
+    },
+    "7Remates fuera del área5": {
+      "home": "7",
+      "away": "5"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1Goles de cabeza0": {
+      "home": "1",
+      "away": "0"
+    },
+    "40Toques en el área rival12": {
+      "home": "40",
+      "away": "12"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Fueras de juego0": {
+      "home": "0",
+      "away": "0"
+    },
+    "8Tiros libres9": {
+      "home": "8",
+      "away": "9"
+    },
+    "49%(37/75)Pases largos48%(29/61)": {
+      "home": "49%(37/75)",
+      "away": "48%(29/61)"
+    },
+    "66%(77/116)Pases en el último tercio60%(70/116)": {
+      "home": "66%(77/116)",
+      "away": "60%(70/116)"
+    },
+    "34%(10/29)Centros24%(4/17)": {
+      "home": "34%(10/29)",
+      "away": "24%(4/17)"
+    },
+    "1.94Asistencias esperadas (xA)0.51": {
+      "home": "1.94",
+      "away": "0.51"
+    },
+    "16Saques de banda21": {
+      "home": "16",
+      "away": "21"
+    },
+    "9Faltas8": {
+      "home": "9",
+      "away": "8"
+    },
+    "64%(9/14)Entradas42%(5/12)": {
+      "home": "64%(9/14)",
+      "away": "42%(5/12)"
+    },
+    "36Duelos ganados39": {
+      "home": "36",
+      "away": "39"
+    },
+    "23Despejes23": {
+      "home": "23",
+      "away": "23"
+    },
+    "10Intercepciones11": {
+      "home": "10",
+      "away": "11"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Paradas6": {
+      "home": "3",
+      "away": "6"
+    },
+    "0.25xGOT enfrentados3.38": {
+      "home": "0.25",
+      "away": "3.38"
+    },
+    "0.25Goles evitados0.38": {
+      "home": "0.25",
+      "away": "0.38"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Hagen",
+        "7Herrera",
+        "4Pinto",
+        "3Samayoa",
+        "16Morales",
+        "22Franco",
+        "5Rosales",
+        "18Santis",
+        "10Altan",
+        "11Muñoz",
+        "14Lom"
+      ],
+      "suplentes": [
+        "Becker S.",
+        "Grot J.",
+        "Balker R.",
+        "Misidjan V.",
+        "Denswil S."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Hahn",
+        "15Anderson",
+        "12Abena",
+        "19Pinas",
+        "5Haps",
+        "6Klas",
+        "22Paal",
+        "10Jubitana",
+        "8Lonwijk",
+        "9Margaret",
+        "18Chery"
+      ],
+      "suplentes": [
+        "Escobar O.",
+        "Rubin R.",
+        "Evans M.",
+        "Saravia R."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "18.11.2025 21:00GuatemalaFIFA: 97.SurinamFIFA: 125.",
+  "score": "3-1"
+}

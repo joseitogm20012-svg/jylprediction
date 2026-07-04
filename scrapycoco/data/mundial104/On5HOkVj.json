@@ -1,0 +1,152 @@
+{
+  "match_id": "On5HOkVj",
+  "estadisticas": {
+    "0.52Goles esperados (xG)0.91": {
+      "home": "0.52",
+      "away": "0.91"
+    },
+    "42%Posesión58%": {
+      "home": "42%",
+      "away": "58%"
+    },
+    "8Remates totales9": {
+      "home": "8",
+      "away": "9"
+    },
+    "4Remates a puerta2": {
+      "home": "4",
+      "away": "2"
+    },
+    "2Grandes ocasiones3": {
+      "home": "2",
+      "away": "3"
+    },
+    "0Córneres2": {
+      "home": "0",
+      "away": "2"
+    },
+    "82%(349/427)Pases84%(488/578)": {
+      "home": "82%(349/427)",
+      "away": "84%(488/578)"
+    },
+    "0Tarjetas amarillas2": {
+      "home": "0",
+      "away": "2"
+    },
+    "0.90xG a puerta (xGOT)0.76": {
+      "home": "0.90",
+      "away": "0.76"
+    },
+    "3Remates fuera4": {
+      "home": "3",
+      "away": "4"
+    },
+    "1Remates rechazados3": {
+      "home": "1",
+      "away": "3"
+    },
+    "5Remates dentro del área6": {
+      "home": "5",
+      "away": "6"
+    },
+    "3Remates fuera del área3": {
+      "home": "3",
+      "away": "3"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "6Toques en el área rival11": {
+      "home": "6",
+      "away": "11"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Fueras de juego6": {
+      "home": "3",
+      "away": "6"
+    },
+    "7Tiros libres9": {
+      "home": "7",
+      "away": "9"
+    },
+    "29%(16/56)Pases largos36%(23/64)": {
+      "home": "29%(16/56)",
+      "away": "36%(23/64)"
+    },
+    "54%(39/72)Pases en el último tercio57%(67/118)": {
+      "home": "54%(39/72)",
+      "away": "57%(67/118)"
+    },
+    "67%(4/6)Centros56%(5/9)": {
+      "home": "67%(4/6)",
+      "away": "56%(5/9)"
+    },
+    "0.31Asistencias esperadas (xA)0.80": {
+      "home": "0.31",
+      "away": "0.80"
+    },
+    "17Saques de banda25": {
+      "home": "17",
+      "away": "25"
+    },
+    "9Faltas7": {
+      "home": "9",
+      "away": "7"
+    },
+    "50%(7/14)Entradas59%(10/17)": {
+      "home": "50%(7/14)",
+      "away": "59%(10/17)"
+    },
+    "42Duelos ganados47": {
+      "home": "42",
+      "away": "47"
+    },
+    "20Despejes12": {
+      "home": "20",
+      "away": "12"
+    },
+    "6Intercepciones5": {
+      "home": "6",
+      "away": "5"
+    },
+    "0Errores conducentes a remate2": {
+      "home": "0",
+      "away": "2"
+    },
+    "0Errores conducentes a gol1": {
+      "home": "0",
+      "away": "1"
+    },
+    "2Paradas3": {
+      "home": "2",
+      "away": "3"
+    },
+    "0.76xGOT enfrentados0.90": {
+      "home": "0.76",
+      "away": "0.90"
+    },
+    "0.76Goles evitados-0.10": {
+      "home": "0.76",
+      "away": "-0.10"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "18.06.2026 21:00MéxicoFIFA: 14.1-0FinalizadoCorea del SurFIFA: 25.1-0Finalizado",
+  "score": "1-0"
+}

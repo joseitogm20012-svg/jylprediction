@@ -1,0 +1,187 @@
+{
+  "match_id": "UPBJl1go",
+  "estadisticas": {
+    "1.98Goles esperados (xG)2.38": {
+      "home": "1.98",
+      "away": "2.38"
+    },
+    "63%Posesión37%": {
+      "home": "63%",
+      "away": "37%"
+    },
+    "18Remates totales14": {
+      "home": "18",
+      "away": "14"
+    },
+    "6Remates a puerta4": {
+      "home": "6",
+      "away": "4"
+    },
+    "3Grandes ocasiones3": {
+      "home": "3",
+      "away": "3"
+    },
+    "5Córneres5": {
+      "home": "5",
+      "away": "5"
+    },
+    "88%(426/482)Pases72%(193/269)": {
+      "home": "88%(426/482)",
+      "away": "72%(193/269)"
+    },
+    "3Tarjetas amarillas4": {
+      "home": "3",
+      "away": "4"
+    },
+    "2.05xG a puerta (xGOT)1.66": {
+      "home": "2.05",
+      "away": "1.66"
+    },
+    "4Remates fuera7": {
+      "home": "4",
+      "away": "7"
+    },
+    "8Remates rechazados3": {
+      "home": "8",
+      "away": "3"
+    },
+    "10Remates dentro del área11": {
+      "home": "10",
+      "away": "11"
+    },
+    "8Remates fuera del área3": {
+      "home": "8",
+      "away": "3"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "22Toques en el área rival27": {
+      "home": "22",
+      "away": "27"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Fueras de juego0": {
+      "home": "1",
+      "away": "0"
+    },
+    "17Tiros libres13": {
+      "home": "17",
+      "away": "13"
+    },
+    "58%(22/38)Pases largos39%(17/44)": {
+      "home": "58%(22/38)",
+      "away": "39%(17/44)"
+    },
+    "79%(106/135)Pases en el último tercio62%(66/107)": {
+      "home": "79%(106/135)",
+      "away": "62%(66/107)"
+    },
+    "27%(3/11)Centros6%(1/17)": {
+      "home": "27%(3/11)",
+      "away": "6%(1/17)"
+    },
+    "0.64Asistencias esperadas (xA)1.31": {
+      "home": "0.64",
+      "away": "1.31"
+    },
+    "20Saques de banda17": {
+      "home": "20",
+      "away": "17"
+    },
+    "13Faltas17": {
+      "home": "13",
+      "away": "17"
+    },
+    "60%(6/10)Entradas83%(10/12)": {
+      "home": "60%(6/10)",
+      "away": "83%(10/12)"
+    },
+    "46Duelos ganados42": {
+      "home": "46",
+      "away": "42"
+    },
+    "32Despejes16": {
+      "home": "32",
+      "away": "16"
+    },
+    "7Intercepciones8": {
+      "home": "7",
+      "away": "8"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Paradas4": {
+      "home": "3",
+      "away": "4"
+    },
+    "1.66xGOT enfrentados2.05": {
+      "home": "1.66",
+      "away": "2.05"
+    },
+    "0.66Goles evitados0.05": {
+      "home": "0.66",
+      "away": "0.05"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "23Viscarra",
+        "3Medina Roman",
+        "4Haquin",
+        "5Morales",
+        "17Fernandez",
+        "14Robson Matheus",
+        "6Cuellar",
+        "15Villamil",
+        "7Miguelito",
+        "9Monteiro",
+        "10Vaca"
+      ],
+      "suplentes": [
+        "Balker R.",
+        "Dijksteel A.",
+        "Becker S.",
+        "Malone D.",
+        "Jubitana D."
+      ],
+      "formacion": "4 - 3 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "23Vaessen",
+        "20van Gelderen",
+        "12Abena",
+        "4Denswil",
+        "15Anderson",
+        "6Bogarde",
+        "8Boëtius",
+        "19Pinas",
+        "10Chery",
+        "9Piroe",
+        "7Kerk"
+      ],
+      "suplentes": [
+        "Paniagua M.",
+        "Godoy J.",
+        "Vaca Moreno E.",
+        "Arroyo D."
+      ],
+      "formacion": "3 - 4 - 1 - 2"
+    }
+  },
+  "error": null,
+  "description": "26.03.2026 18:00BoliviaEquipo que avanzaFIFA: 77.2-1FinalizadoSurinamFIFA: 125.2-1Finalizado",
+  "score": "2-1"
+}

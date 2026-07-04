@@ -1,0 +1,188 @@
+{
+  "match_id": "Olnboqfd",
+  "estadisticas": {
+    "0.66Goles esperados (xG)1.72": {
+      "home": "0.66",
+      "away": "1.72"
+    },
+    "33%Posesión67%": {
+      "home": "33%",
+      "away": "67%"
+    },
+    "7Remates totales27": {
+      "home": "7",
+      "away": "27"
+    },
+    "3Remates a puerta10": {
+      "home": "3",
+      "away": "10"
+    },
+    "1Grandes ocasiones2": {
+      "home": "1",
+      "away": "2"
+    },
+    "4Córneres14": {
+      "home": "4",
+      "away": "14"
+    },
+    "73%(236/322)Pases88%(540/612)": {
+      "home": "73%(236/322)",
+      "away": "88%(540/612)"
+    },
+    "1Tarjetas amarillas0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0.65xG a puerta (xGOT)1.69": {
+      "home": "0.65",
+      "away": "1.69"
+    },
+    "3Remates fuera10": {
+      "home": "3",
+      "away": "10"
+    },
+    "1Remates rechazados7": {
+      "home": "1",
+      "away": "7"
+    },
+    "4Remates dentro del área16": {
+      "home": "4",
+      "away": "16"
+    },
+    "3Remates fuera del área11": {
+      "home": "3",
+      "away": "11"
+    },
+    "0Al palo1": {
+      "home": "0",
+      "away": "1"
+    },
+    "10Toques en el área rival41": {
+      "home": "10",
+      "away": "41"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Fueras de juego6": {
+      "home": "0",
+      "away": "6"
+    },
+    "6Tiros libres11": {
+      "home": "6",
+      "away": "11"
+    },
+    "24%(10/41)Pases largos59%(24/41)": {
+      "home": "24%(10/41)",
+      "away": "59%(24/41)"
+    },
+    "53%(38/72)Pases en el último tercio83%(169/204)": {
+      "home": "53%(38/72)",
+      "away": "83%(169/204)"
+    },
+    "50%(3/6)Centros34%(16/47)": {
+      "home": "50%(3/6)",
+      "away": "34%(16/47)"
+    },
+    "0.41Asistencias esperadas (xA)1.68": {
+      "home": "0.41",
+      "away": "1.68"
+    },
+    "18Saques de banda20": {
+      "home": "18",
+      "away": "20"
+    },
+    "11Faltas6": {
+      "home": "11",
+      "away": "6"
+    },
+    "73%(8/11)Entradas67%(2/3)": {
+      "home": "73%(8/11)",
+      "away": "67%(2/3)"
+    },
+    "41Duelos ganados42": {
+      "home": "41",
+      "away": "42"
+    },
+    "42Despejes18": {
+      "home": "42",
+      "away": "18"
+    },
+    "9Intercepciones10": {
+      "home": "9",
+      "away": "10"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Errores conducentes a gol1": {
+      "home": "1",
+      "away": "1"
+    },
+    "9Paradas2": {
+      "home": "9",
+      "away": "2"
+    },
+    "1.69xGOT enfrentados0.65": {
+      "home": "1.69",
+      "away": "0.65"
+    },
+    "0.69Goles evitados-0.35": {
+      "home": "0.69",
+      "away": "-0.35"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "21Al Owais",
+        "12Abdulhamid",
+        "4Al Amri",
+        "5Tambakti",
+        "24Al Harbi",
+        "26Abu Al Shamat",
+        "23Kanno",
+        "15Al Khaibari",
+        "10Al Dawsari",
+        "9Al Buraikan",
+        "7Al Juwayr"
+      ],
+      "suplentes": [
+        "Al Dawsari N.",
+        "Boushal N.",
+        "Lajami A.",
+        "Al Hamdan A.",
+        "Hejji A."
+      ],
+      "formacion": "4 - 4 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "23Muslera",
+        "13Varela",
+        "3Caceres",
+        "16Olivera",
+        "17Viña",
+        "5Ugarte",
+        "6Bentancur",
+        "8Valverde",
+        "21Viñas",
+        "20Araújo",
+        "9Núñez"
+      ],
+      "suplentes": [
+        "Sanabria J.",
+        "Canobbio A.",
+        "de la Cruz N.",
+        "Rodriguez B.",
+        "Aguirre R."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "15.06.2026 18:00Arabia SaudíFIFA: 61.UruguayFIFA: 16.",
+  "score": "1-1"
+}

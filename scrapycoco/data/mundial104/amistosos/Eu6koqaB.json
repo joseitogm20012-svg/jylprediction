@@ -1,0 +1,55 @@
+{
+  "match_id": "Eu6koqaB",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "23Simón",
+        "5Llorente",
+        "15Cubarsí",
+        "14Laporte",
+        "22Cucurella",
+        "6Merino",
+        "20García",
+        "8Ruiz",
+        "11Pino",
+        "21Oyarzabal",
+        "10Olmo"
+      ],
+      "suplentes": [
+        "Torres F.",
+        "Baena A.",
+        "Samu",
+        "Fermín",
+        "Fornals P."
+      ],
+      "formacion": "4 - 3 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "12Bayindir",
+        "2Çelik",
+        "15Akaydin",
+        "3Demiral",
+        "4Söyüncü",
+        "20Kadioglu",
+        "17Kahveci",
+        "5Ozcan",
+        "6Kokcu",
+        "9Yilmaz",
+        "21Gul"
+      ],
+      "suplentes": [
+        "Sari Y.",
+        "Muldur M.",
+        "Karazor A.",
+        "Eskihellac M.",
+        "Akcicek Y."
+      ],
+      "formacion": "5 - 4 - 1"
+    }
+  },
+  "error": null,
+  "description": "18.11.2025 15:45EspañaFIFA: 2.2-2FinalizadoTurquíaFIFA: 22.2-2Finalizado",
+  "score": "2-2"
+}

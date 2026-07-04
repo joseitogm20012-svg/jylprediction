@@ -1,0 +1,191 @@
+{
+  "match_id": "4lBawIAb",
+  "estadisticas": {
+    "1.34Goles esperados (xG)1.10": {
+      "home": "1.34",
+      "away": "1.10"
+    },
+    "62%Posesión38%": {
+      "home": "62%",
+      "away": "38%"
+    },
+    "19Remates totales14": {
+      "home": "19",
+      "away": "14"
+    },
+    "3Remates a puerta5": {
+      "home": "3",
+      "away": "5"
+    },
+    "0Grandes ocasiones4": {
+      "home": "0",
+      "away": "4"
+    },
+    "9Córneres3": {
+      "home": "9",
+      "away": "3"
+    },
+    "84%(586/701)Pases72%(316/440)": {
+      "home": "84%(586/701)",
+      "away": "72%(316/440)"
+    },
+    "1Tarjetas amarillas4": {
+      "home": "1",
+      "away": "4"
+    },
+    "0.57xG a puerta (xGOT)1.98": {
+      "home": "0.57",
+      "away": "1.98"
+    },
+    "9Remates fuera4": {
+      "home": "9",
+      "away": "4"
+    },
+    "7Remates rechazados5": {
+      "home": "7",
+      "away": "5"
+    },
+    "12Remates dentro del área8": {
+      "home": "12",
+      "away": "8"
+    },
+    "7Remates fuera del área6": {
+      "home": "7",
+      "away": "6"
+    },
+    "2Al palo0": {
+      "home": "2",
+      "away": "0"
+    },
+    "0Goles de cabeza1": {
+      "home": "0",
+      "away": "1"
+    },
+    "35Toques en el área rival23": {
+      "home": "35",
+      "away": "23"
+    },
+    "1Pases entre líneas completados1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0Fueras de juego1": {
+      "home": "0",
+      "away": "1"
+    },
+    "20Tiros libres8": {
+      "home": "20",
+      "away": "8"
+    },
+    "32%(23/71)Pases largos30%(25/82)": {
+      "home": "32%(23/71)",
+      "away": "30%(25/82)"
+    },
+    "71%(143/202)Pases en el último tercio59%(80/135)": {
+      "home": "71%(143/202)",
+      "away": "59%(80/135)"
+    },
+    "24%(10/41)Centros20%(4/20)": {
+      "home": "24%(10/41)",
+      "away": "20%(4/20)"
+    },
+    "1.40Asistencias esperadas (xA)1.25": {
+      "home": "1.40",
+      "away": "1.25"
+    },
+    "26Saques de banda20": {
+      "home": "26",
+      "away": "20"
+    },
+    "8Faltas20": {
+      "home": "8",
+      "away": "20"
+    },
+    "88%(15/17)Entradas56%(9/16)": {
+      "home": "88%(15/17)",
+      "away": "56%(9/16)"
+    },
+    "74Duelos ganados57": {
+      "home": "74",
+      "away": "57"
+    },
+    "33Despejes54": {
+      "home": "33",
+      "away": "54"
+    },
+    "7Intercepciones12": {
+      "home": "7",
+      "away": "12"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol2": {
+      "home": "0",
+      "away": "2"
+    },
+    "4Paradas2": {
+      "home": "4",
+      "away": "2"
+    },
+    "1.98xGOT enfrentados0.57": {
+      "home": "1.98",
+      "away": "0.57"
+    },
+    "0.98Goles evitados-0.43": {
+      "home": "0.98",
+      "away": "-0.43"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Darlow",
+        "3Williams",
+        "6Rodon",
+        "4Lawlor",
+        "2Dasilva",
+        "5Ampadu",
+        "20James D.",
+        "8Wilson",
+        "17James J.",
+        "11Johnson",
+        "7Brooks"
+      ],
+      "suplentes": [
+        "Basic I.",
+        "Alajbegovic K.",
+        "Burnic D.",
+        "Tabakovic H.",
+        "Hadziahmetovic A.",
+        "Gigovic A."
+      ],
+      "formacion": "4 - 1 - 4 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Vasilj",
+        "7Dedic",
+        "18Katic",
+        "4Muharemovic",
+        "5Kolasinac",
+        "20Bajraktarevic",
+        "14Sunjic",
+        "6Tahirovic",
+        "15Memic",
+        "11Dzeko",
+        "10Demirovic"
+      ],
+      "suplentes": [
+        "Cullen L.",
+        "Harris M.",
+        "Thomas S."
+      ],
+      "formacion": "4 - 4 - 2"
+    }
+  },
+  "error": null,
+  "description": "26.03.2026 15:45GalesFIFA: 37.Bosnia-HerzegovinaEquipo que avanzaFIFA: 64.",
+  "score": "1-1"
+}

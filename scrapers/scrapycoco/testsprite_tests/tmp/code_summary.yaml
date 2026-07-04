@@ -1,0 +1,154 @@
+version: "2"
+type: frontend
+tech_stack:
+  - language: Python
+  - framework: FastAPI
+  - ui_library: Vanilla JS + Chart.js
+  - other: SQLite, SSE, Chart.js
+routes:
+  - path: /
+    file: index.html
+    auth_required: false
+    description: Single-page dashboard with 4 tabs (Extraction, History, Config, Scheduler)
+features:
+  - name: Scraper Grid
+    description: Display 8 scrapers as interactive cards with status, last run, and action buttons
+    files:
+      - index.html
+      - script.js
+      - style.css
+    entry_route: /
+    user_interactions:
+      - View all 8 scraper cards with names and descriptions
+      - See status badge (idle/running/success/error) per scraper
+      - Select scrapers via checkboxes for batch execution
+      - Click "Ejecutar" to run individual scraper
+      - Click "Vista Previa" to see scraped data preview
+    api_calls:
+      - method: GET
+        endpoint: /api/scrapers
+      - method: GET
+        endpoint: /api/run/{scraper_id}
+      - method: GET
+        endpoint: /api/preview/{scraper_id}
+    auth_required: false
+  - name: Batch Execution
+    description: Select and run multiple scrapers sequentially with progress bar
+    files:
+      - script.js
+      - index.html
+    entry_route: /
+    user_interactions:
+      - Select multiple scrapers via checkboxes
+      - Click "Ejecutar Seleccionados" button
+      - See progress bar updating in real-time
+      - View logs from each scraper in the terminal
+      - See final summary (success/failure count)
+    api_calls:
+      - method: POST
+        endpoint: /api/batch/run
+    auth_required: false
+  - name: Live Terminal Logs
+    description: Real-time console output from running scrapers via SSE
+    files:
+      - script.js
+      - index.html
+    entry_route: /
+    user_interactions:
+      - View streaming log lines in terminal widget
+      - Filter logs by level (system/error/success/info/warning)
+      - Clear console output
+      - Toggle autoscroll
+    api_calls:
+      - method: GET
+        endpoint: /api/run/{scraper_id}
+    auth_required: false
+  - name: History Dashboard
+    description: View execution history with charts and metrics
+    files:
+      - script.js
+      - index.html
+    entry_route: /
+    user_interactions:
+      - Click "Historial" tab
+      - View execution history table with dates and statuses
+      - Filter history by scraper
+      - See pie chart (success/failure distribution)
+      - See bar chart (average duration per scraper)
+      - View global stats (total runs, success rate, avg duration)
+    api_calls:
+      - method: GET
+        endpoint: /api/history
+      - method: GET
+        endpoint: /api/history/metrics
+      - method: GET
+        endpoint: /api/history/stats
+    auth_required: false
+  - name: Scheduler Management
+    description: CRUD operations for automated scraper scheduling
+    files:
+      - scheduler.py
+      - script.js
+      - index.html
+    entry_route: /
+    user_interactions:
+      - Click "Programador" tab
+      - View list of scheduled tasks
+      - Add new scheduled task with cron expression
+      - Pause/resume existing tasks
+      - Delete tasks
+      - Click "Run Now" to execute task immediately
+    api_calls:
+      - method: GET
+        endpoint: /api/scheduler/list
+      - method: POST
+        endpoint: /api/scheduler/add
+      - method: DELETE
+        endpoint: /api/scheduler/{id}
+      - method: POST
+        endpoint: /api/scheduler/{id}/pause
+      - method: POST
+        endpoint: /api/scheduler/{id}/resume
+      - method: POST
+        endpoint: /api/scheduler/{id}/run-now
+    auth_required: false
+  - name: Data Export
+    description: Export scraped data as CSV, JSON, or Excel
+    files:
+      - export.py
+      - script.js
+      - index.html
+    entry_route: /
+    user_interactions:
+      - Click "Configuración" tab
+      - Select scraper to export
+      - Choose format (CSV/JSON/Excel)
+      - Apply optional transforms
+      - Download exported file
+    api_calls:
+      - method: POST
+        endpoint: /api/export
+    auth_required: false
+  - name: HTML Diagnostic
+    description: Analyze HTML structure of target websites for scraper maintenance
+    files:
+      - diagnostic.py
+      - script.js
+      - index.html
+    entry_route: /
+    user_interactions:
+      - Click diagnostic button on a scraper card
+      - View HTML structure analysis
+      - See snapshot comparison between runs
+    api_calls:
+      - method: POST
+        endpoint: /api/diagnostic/run/{id}
+      - method: GET
+        endpoint: /api/diagnostic/history/{id}
+      - method: GET
+        endpoint: /api/diagnostic/compare/{id1}/{id2}
+    auth_required: false
+known_limitations:
+  - issue: Preview and export only supported for class-based scrapers (FBref, Flashscore, Transfermarkt), not for legacy scripts (results, wc2026, elo)
+    location: main.py lines 348-349
+    impact: Script-based scrapers cannot preview or export data through the UI

@@ -1,0 +1,55 @@
+{
+  "match_id": "jaMlPbx1",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Yusupov",
+        "2Khusanov",
+        "18Abdullaev",
+        "5Ashurmatov",
+        "24Karimov",
+        "6Mozgovoy",
+        "7Shukurov",
+        "13Nasrullaev",
+        "22Fayzullaev",
+        "11Urunov",
+        "14Shomurodov"
+      ],
+      "suplentes": [
+        "Khamdamov D.",
+        "Sayfiev F.",
+        "Amonov A.",
+        "Urozov J.",
+        "Sergeev I."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "12Vargas",
+        "2Muñoz",
+        "23Sánchez",
+        "3Lucumi",
+        "17Mojica",
+        "14Puerta",
+        "16Lerma",
+        "11Arias",
+        "10Rodríguez",
+        "25Suárez",
+        "7Diaz"
+      ],
+      "suplentes": [
+        "Campaz J.",
+        "Cucho Hernández",
+        "Rios R.",
+        "Gomez A.",
+        "Castano K."
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "17.06.2026 22:00UzbekistánFIFA: 50.ColombiaFIFA: 13.",
+  "score": "1-3"
+}

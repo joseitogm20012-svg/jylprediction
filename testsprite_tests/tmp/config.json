@@ -1,0 +1,18 @@
+{
+  "status": "commited",
+  "type": "backend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3005",
+  "backendAuthType": "public",
+  "executionArgs": {
+    "projectName": "predecirv2",
+    "projectPath": "C:\\Users\\Equipo\\Desktop\\predecirv2",
+    "testIds": [],
+    "additionalInstruction": "Re-testing after bug fixes: B1 - tasks_state now uses try/finally to ensure status resets to idle. B2 - records_count uses COALESCE to return 0 instead of null. Verify TC002 (SSE execution) and TC007 (history pagination) pass now.",
+    "serverMode": "production",
+    "envs": {
+      "API_KEY": "sk-user-3FJuZE4FlGzxpFePYNrRGVk2xNSqdaOAs0EhEcp0UnpsYZkmsLoRluQj4CifUda4a6QtAaVKk8LJgKMcsxjKKEgDdtH388nvaqjrSbT-VKvt-O45FsSZtvfmJnGTTm39GYo"
+    }
+  },
+  "serverPort": 56706
+}

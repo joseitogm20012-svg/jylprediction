@@ -1,0 +1,152 @@
+{
+  "match_id": "8nrACRTs",
+  "estadisticas": {
+    "1.02Goles esperados (xG)1.38": {
+      "home": "1.02",
+      "away": "1.38"
+    },
+    "38%Posesión62%": {
+      "home": "38%",
+      "away": "62%"
+    },
+    "14Remates totales17": {
+      "home": "14",
+      "away": "17"
+    },
+    "3Remates a puerta4": {
+      "home": "3",
+      "away": "4"
+    },
+    "3Grandes ocasiones1": {
+      "home": "3",
+      "away": "1"
+    },
+    "5Córneres5": {
+      "home": "5",
+      "away": "5"
+    },
+    "80%(272/341)Pases90%(508/563)": {
+      "home": "80%(272/341)",
+      "away": "90%(508/563)"
+    },
+    "1Tarjetas amarillas2": {
+      "home": "1",
+      "away": "2"
+    },
+    "0.54xG a puerta (xGOT)1.12": {
+      "home": "0.54",
+      "away": "1.12"
+    },
+    "8Remates fuera5": {
+      "home": "8",
+      "away": "5"
+    },
+    "3Remates rechazados8": {
+      "home": "3",
+      "away": "8"
+    },
+    "11Remates dentro del área6": {
+      "home": "11",
+      "away": "6"
+    },
+    "3Remates fuera del área11": {
+      "home": "3",
+      "away": "11"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "16Toques en el área rival20": {
+      "home": "16",
+      "away": "20"
+    },
+    "0Pases entre líneas completados1": {
+      "home": "0",
+      "away": "1"
+    },
+    "2Fueras de juego3": {
+      "home": "2",
+      "away": "3"
+    },
+    "10Tiros libres12": {
+      "home": "10",
+      "away": "12"
+    },
+    "49%(22/45)Pases largos52%(30/58)": {
+      "home": "49%(22/45)",
+      "away": "52%(30/58)"
+    },
+    "60%(40/67)Pases en el último tercio77%(101/132)": {
+      "home": "60%(40/67)",
+      "away": "77%(101/132)"
+    },
+    "44%(7/16)Centros24%(4/17)": {
+      "home": "44%(7/16)",
+      "away": "24%(4/17)"
+    },
+    "0.95Asistencias esperadas (xA)0.95": {
+      "home": "0.95",
+      "away": "0.95"
+    },
+    "16Saques de banda15": {
+      "home": "16",
+      "away": "15"
+    },
+    "12Faltas10": {
+      "home": "12",
+      "away": "10"
+    },
+    "33%(4/12)Entradas55%(11/20)": {
+      "home": "33%(4/12)",
+      "away": "55%(11/20)"
+    },
+    "45Duelos ganados47": {
+      "home": "45",
+      "away": "47"
+    },
+    "22Despejes24": {
+      "home": "22",
+      "away": "24"
+    },
+    "9Intercepciones9": {
+      "home": "9",
+      "away": "9"
+    },
+    "1Errores conducentes a remate1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Paradas2": {
+      "home": "3",
+      "away": "2"
+    },
+    "1.12xGOT enfrentados0.54": {
+      "home": "1.12",
+      "away": "0.54"
+    },
+    "0.12Goles evitados-0.46": {
+      "home": "0.12",
+      "away": "-0.46"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "18.06.2026 12:00República ChecaFIFA: 40.1-1FinalizadoSudáfricaFIFA: 60.1-1Finalizado",
+  "score": "1-1"
+}

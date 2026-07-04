@@ -1,0 +1,152 @@
+{
+  "match_id": "QBBoaW63",
+  "estadisticas": {
+    "1.04Goles esperados (xG)1.05": {
+      "home": "1.04",
+      "away": "1.05"
+    },
+    "54%Posesión46%": {
+      "home": "54%",
+      "away": "46%"
+    },
+    "15Remates totales9": {
+      "home": "15",
+      "away": "9"
+    },
+    "2Remates a puerta2": {
+      "home": "2",
+      "away": "2"
+    },
+    "1Grandes ocasiones2": {
+      "home": "1",
+      "away": "2"
+    },
+    "4Córneres3": {
+      "home": "4",
+      "away": "3"
+    },
+    "85%(367/431)Pases82%(307/374)": {
+      "home": "85%(367/431)",
+      "away": "82%(307/374)"
+    },
+    "1Tarjetas amarillas3": {
+      "home": "1",
+      "away": "3"
+    },
+    "0.22xG a puerta (xGOT)1.18": {
+      "home": "0.22",
+      "away": "1.18"
+    },
+    "9Remates fuera5": {
+      "home": "9",
+      "away": "5"
+    },
+    "4Remates rechazados2": {
+      "home": "4",
+      "away": "2"
+    },
+    "8Remates dentro del área8": {
+      "home": "8",
+      "away": "8"
+    },
+    "7Remates fuera del área1": {
+      "home": "7",
+      "away": "1"
+    },
+    "0Al palo1": {
+      "home": "0",
+      "away": "1"
+    },
+    "22Toques en el área rival21": {
+      "home": "22",
+      "away": "21"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Fueras de juego1": {
+      "home": "3",
+      "away": "1"
+    },
+    "21Tiros libres23": {
+      "home": "21",
+      "away": "23"
+    },
+    "44%(26/59)Pases largos52%(30/58)": {
+      "home": "44%(26/59)",
+      "away": "52%(30/58)"
+    },
+    "71%(83/117)Pases en el último tercio57%(48/84)": {
+      "home": "71%(83/117)",
+      "away": "57%(48/84)"
+    },
+    "22%(5/23)Centros36%(5/14)": {
+      "home": "22%(5/23)",
+      "away": "36%(5/14)"
+    },
+    "0.98Asistencias esperadas (xA)0.40": {
+      "home": "0.98",
+      "away": "0.40"
+    },
+    "14Saques de banda23": {
+      "home": "14",
+      "away": "23"
+    },
+    "23Faltas21": {
+      "home": "23",
+      "away": "21"
+    },
+    "58%(7/12)Entradas42%(5/12)": {
+      "home": "58%(7/12)",
+      "away": "42%(5/12)"
+    },
+    "51Duelos ganados59": {
+      "home": "51",
+      "away": "59"
+    },
+    "20Despejes17": {
+      "home": "20",
+      "away": "17"
+    },
+    "6Intercepciones6": {
+      "home": "6",
+      "away": "6"
+    },
+    "0Errores conducentes a remate3": {
+      "home": "0",
+      "away": "3"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Paradas2": {
+      "home": "1",
+      "away": "2"
+    },
+    "1.18xGOT enfrentados0.22": {
+      "home": "1.18",
+      "away": "0.22"
+    },
+    "0.18Goles evitados0.22": {
+      "home": "0.18",
+      "away": "0.22"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "13.06.2026 21:00HaitíFIFA: 83.0-1FinalizadoEscociaFIFA: 42.0-1Finalizado",
+  "score": "0-1"
+}

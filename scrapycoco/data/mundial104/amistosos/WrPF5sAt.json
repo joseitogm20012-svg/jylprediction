@@ -1,0 +1,189 @@
+{
+  "match_id": "WrPF5sAt",
+  "estadisticas": {
+    "1.04Goles esperados (xG)0.84": {
+      "home": "1.04",
+      "away": "0.84"
+    },
+    "60%Posesión40%": {
+      "home": "60%",
+      "away": "40%"
+    },
+    "13Remates totales16": {
+      "home": "13",
+      "away": "16"
+    },
+    "1Remates a puerta5": {
+      "home": "1",
+      "away": "5"
+    },
+    "4Grandes ocasiones0": {
+      "home": "4",
+      "away": "0"
+    },
+    "3Córneres3": {
+      "home": "3",
+      "away": "3"
+    },
+    "73%(260/358)Pases68%(169/249)": {
+      "home": "73%(260/358)",
+      "away": "68%(169/249)"
+    },
+    "4Tarjetas amarillas2": {
+      "home": "4",
+      "away": "2"
+    },
+    "1Tarjetas rojas0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0.25xG a puerta (xGOT)0.37": {
+      "home": "0.25",
+      "away": "0.37"
+    },
+    "9Remates fuera6": {
+      "home": "9",
+      "away": "6"
+    },
+    "3Remates rechazados5": {
+      "home": "3",
+      "away": "5"
+    },
+    "8Remates dentro del área10": {
+      "home": "8",
+      "away": "10"
+    },
+    "5Remates fuera del área6": {
+      "home": "5",
+      "away": "6"
+    },
+    "3Al palo0": {
+      "home": "3",
+      "away": "0"
+    },
+    "23Toques en el área rival23": {
+      "home": "23",
+      "away": "23"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Fueras de juego2": {
+      "home": "1",
+      "away": "2"
+    },
+    "19Tiros libres17": {
+      "home": "19",
+      "away": "17"
+    },
+    "24%(16/66)Pases largos39%(28/71)": {
+      "home": "24%(16/66)",
+      "away": "39%(28/71)"
+    },
+    "40%(40/99)Pases en el último tercio56%(50/89)": {
+      "home": "40%(40/99)",
+      "away": "56%(50/89)"
+    },
+    "20%(3/15)Centros13%(1/8)": {
+      "home": "20%(3/15)",
+      "away": "13%(1/8)"
+    },
+    "0.55Asistencias esperadas (xA)0.38": {
+      "home": "0.55",
+      "away": "0.38"
+    },
+    "28Saques de banda22": {
+      "home": "28",
+      "away": "22"
+    },
+    "17Faltas19": {
+      "home": "17",
+      "away": "19"
+    },
+    "55%(6/11)Entradas58%(11/19)": {
+      "home": "55%(6/11)",
+      "away": "58%(11/19)"
+    },
+    "60Duelos ganados60": {
+      "home": "60",
+      "away": "60"
+    },
+    "22Despejes46": {
+      "home": "22",
+      "away": "46"
+    },
+    "8Intercepciones9": {
+      "home": "8",
+      "away": "9"
+    },
+    "3Errores conducentes a remate0": {
+      "home": "3",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "4Paradas1": {
+      "home": "4",
+      "away": "1"
+    },
+    "0.37xGOT enfrentados0.25": {
+      "home": "0.37",
+      "away": "0.25"
+    },
+    "0.37Goles evitados0.25": {
+      "home": "0.37",
+      "away": "0.25"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Blake",
+        "2Lembikisa",
+        "6King",
+        "5Pinnock",
+        "22Leigh",
+        "21Fray",
+        "14Hayden",
+        "7Gray",
+        "10De Cordova-Reid",
+        "20Cephas",
+        "11Nicholson"
+      ],
+      "suplentes": [
+        "Dixon K.",
+        "Russell J.",
+        "Richards D.",
+        "Cadamarteri B."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Room",
+        "2Sambo",
+        "4van Eijma",
+        "18Obispo",
+        "5Floranus",
+        "10Bacuna L.",
+        "8Comenencia",
+        "7Bacuna J.",
+        "12Hansen",
+        "9Locadia",
+        "14Gorre"
+      ],
+      "suplentes": [
+        "Antonisse J.",
+        "Gaari J.",
+        "Paulina J."
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "18.11.2025 21:00JamaicaFIFA: 71.0-0FinalizadoCurazaoFIFA: 82.0-0Finalizado",
+  "score": "0-0"
+}

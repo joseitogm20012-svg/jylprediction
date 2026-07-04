@@ -1,0 +1,156 @@
+{
+  "match_id": "4rOtRK7l",
+  "estadisticas": {
+    "1.67Goles esperados (xG)1.49": {
+      "home": "1.67",
+      "away": "1.49"
+    },
+    "65%Posesión35%": {
+      "home": "65%",
+      "away": "35%"
+    },
+    "12Remates totales10": {
+      "home": "12",
+      "away": "10"
+    },
+    "5Remates a puerta3": {
+      "home": "5",
+      "away": "3"
+    },
+    "3Grandes ocasiones3": {
+      "home": "3",
+      "away": "3"
+    },
+    "0Córneres3": {
+      "home": "0",
+      "away": "3"
+    },
+    "94%(706/754)Pases87%(346/396)": {
+      "home": "94%(706/754)",
+      "away": "87%(346/396)"
+    },
+    "0Tarjetas amarillas1": {
+      "home": "0",
+      "away": "1"
+    },
+    "2.78xG a puerta (xGOT)1.31": {
+      "home": "2.78",
+      "away": "1.31"
+    },
+    "5Remates fuera6": {
+      "home": "5",
+      "away": "6"
+    },
+    "2Remates rechazados1": {
+      "home": "2",
+      "away": "1"
+    },
+    "6Remates dentro del área6": {
+      "home": "6",
+      "away": "6"
+    },
+    "6Remates fuera del área4": {
+      "home": "6",
+      "away": "4"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0Goles de cabeza1": {
+      "home": "0",
+      "away": "1"
+    },
+    "22Toques en el área rival18": {
+      "home": "22",
+      "away": "18"
+    },
+    "1Pases entre líneas completados1": {
+      "home": "1",
+      "away": "1"
+    },
+    "1Fueras de juego3": {
+      "home": "1",
+      "away": "3"
+    },
+    "7Tiros libres3": {
+      "home": "7",
+      "away": "3"
+    },
+    "59%(26/44)Pases largos44%(14/32)": {
+      "home": "59%(26/44)",
+      "away": "44%(14/32)"
+    },
+    "83%(112/135)Pases en el último tercio77%(75/98)": {
+      "home": "83%(112/135)",
+      "away": "77%(75/98)"
+    },
+    "0%(0/5)Centros23%(3/13)": {
+      "home": "0%(0/5)",
+      "away": "23%(3/13)"
+    },
+    "0.97Asistencias esperadas (xA)1.06": {
+      "home": "0.97",
+      "away": "1.06"
+    },
+    "16Saques de banda10": {
+      "home": "16",
+      "away": "10"
+    },
+    "3Faltas7": {
+      "home": "3",
+      "away": "7"
+    },
+    "45%(5/11)Entradas36%(4/11)": {
+      "home": "45%(5/11)",
+      "away": "36%(4/11)"
+    },
+    "34Duelos ganados28": {
+      "home": "34",
+      "away": "28"
+    },
+    "18Despejes19": {
+      "home": "18",
+      "away": "19"
+    },
+    "4Intercepciones10": {
+      "home": "4",
+      "away": "10"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "1Errores conducentes a gol0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0Paradas2": {
+      "home": "0",
+      "away": "2"
+    },
+    "1.31xGOT enfrentados2.78": {
+      "home": "1.31",
+      "away": "2.78"
+    },
+    "-1.69Goles evitados-0.22": {
+      "home": "-1.69",
+      "away": "-0.22"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "27.06.2026 22:00ArgeliaFIFA: 28.3-3FinalizadoAustriaFIFA: 24.3-3Finalizado",
+  "score": "3-3"
+}

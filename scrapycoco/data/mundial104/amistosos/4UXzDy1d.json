@@ -1,0 +1,202 @@
+{
+  "match_id": "4UXzDy1d",
+  "estadisticas": {
+    "3.58Goles esperados (xG)0.58": {
+      "home": "3.58",
+      "away": "0.58"
+    },
+    "55%Posesión45%": {
+      "home": "55%",
+      "away": "45%"
+    },
+    "20Remates totales16": {
+      "home": "20",
+      "away": "16"
+    },
+    "12Remates a puerta9": {
+      "home": "12",
+      "away": "9"
+    },
+    "6Grandes ocasiones0": {
+      "home": "6",
+      "away": "0"
+    },
+    "1Córneres1": {
+      "home": "1",
+      "away": "1"
+    },
+    "88%(510/580)Pases86%(394/456)": {
+      "home": "88%(510/580)",
+      "away": "86%(394/456)"
+    },
+    "0Tarjetas amarillas1": {
+      "home": "0",
+      "away": "1"
+    },
+    "5.52xG a puerta (xGOT)1.10": {
+      "home": "5.52",
+      "away": "1.10"
+    },
+    "6Remates fuera4": {
+      "home": "6",
+      "away": "4"
+    },
+    "2Remates rechazados3": {
+      "home": "2",
+      "away": "3"
+    },
+    "13Remates dentro del área4": {
+      "home": "13",
+      "away": "4"
+    },
+    "7Remates fuera del área12": {
+      "home": "7",
+      "away": "12"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Goles de cabeza0": {
+      "home": "1",
+      "away": "0"
+    },
+    "39Toques en el área rival11": {
+      "home": "39",
+      "away": "11"
+    },
+    "4Pases entre líneas completados1": {
+      "home": "4",
+      "away": "1"
+    },
+    "1Fueras de juego2": {
+      "home": "1",
+      "away": "2"
+    },
+    "5Tiros libres14": {
+      "home": "5",
+      "away": "14"
+    },
+    "61%(28/46)Pases largos49%(29/59)": {
+      "home": "61%(28/46)",
+      "away": "49%(29/59)"
+    },
+    "70%(85/122)Pases en el último tercio67%(62/92)": {
+      "home": "70%(85/122)",
+      "away": "67%(62/92)"
+    },
+    "0%(0/2)Centros22%(2/9)": {
+      "home": "0%(0/2)",
+      "away": "22%(2/9)"
+    },
+    "1.75Asistencias esperadas (xA)0.35": {
+      "home": "1.75",
+      "away": "0.35"
+    },
+    "10Saques de banda12": {
+      "home": "10",
+      "away": "12"
+    },
+    "14Faltas5": {
+      "home": "14",
+      "away": "5"
+    },
+    "59%(10/17)Entradas63%(10/16)": {
+      "home": "59%(10/17)",
+      "away": "63%(10/16)"
+    },
+    "48Duelos ganados42": {
+      "home": "48",
+      "away": "42"
+    },
+    "15Despejes14": {
+      "home": "15",
+      "away": "14"
+    },
+    "10Intercepciones7": {
+      "home": "10",
+      "away": "7"
+    },
+    "2Errores conducentes a remate1": {
+      "home": "2",
+      "away": "1"
+    },
+    "0Errores conducentes a gol2": {
+      "home": "0",
+      "away": "2"
+    },
+    "8Paradas6": {
+      "home": "8",
+      "away": "6"
+    },
+    "1.10xGOT enfrentados5.52": {
+      "home": "1.10",
+      "away": "5.52"
+    },
+    "0.10Goles evitados-0.48": {
+      "home": "0.10",
+      "away": "-0.48"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Alisson",
+        "2Wesley Franca",
+        "14Bremer",
+        "15Leo Pereira",
+        "6A. Sandro",
+        "8Bruno Guimaraes",
+        "5Casemiro",
+        "21Luiz Henrique",
+        "11Raphinha",
+        "7Vinicius Junior",
+        "9Cunha"
+      ],
+      "suplentes": [
+        "Ederson(G)",
+        "Fabinho",
+        "Roger Ibañez",
+        "Rayan",
+        "Endrick",
+        "Thiago I.",
+        "Danilo Santos",
+        "Danilo",
+        "Douglas Santos",
+        "Lucas Paqueta"
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "22Mosquera",
+        "23Murillo",
+        "4Escobar",
+        "3Cordoba",
+        "16Andrade",
+        "2Blackman",
+        "7Rodriguez",
+        "11Barcenas",
+        "14Harvey",
+        "10Diaz",
+        "18Waterman"
+      ],
+      "suplentes": [
+        "Fajardo J.",
+        "Martinez C.",
+        "Miller R.",
+        "Ramos J.",
+        "Davis E.",
+        "Farina E.",
+        "Rodriguez T.",
+        "Barria K.",
+        "Anderson I.",
+        "Griffith V."
+      ],
+      "formacion": "5 - 4 - 1"
+    }
+  },
+  "error": null,
+  "description": "31.05.2026 17:30BrasilFIFA: 6.6-2FinalizadoPanamáFIFA: 34.6-2Finalizado",
+  "score": "6-2"
+}

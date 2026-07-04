@@ -1,0 +1,146 @@
+[
+  {
+    "id": "TC001",
+    "title": "List scrapers API returns all 8 scrapers",
+    "description": "Verify GET /api/scrapers returns all 8 scrapers with correct fields: id, name, description, status, last_run, exit_code",
+    "category": "Scraper API",
+    "steps": [
+      { "type": "action", "description": "Send GET request to /api/scrapers" },
+      { "type": "assertion", "description": "Verify response status is 200" },
+      { "type": "assertion", "description": "Verify response is a JSON array" },
+      { "type": "assertion", "description": "Verify array contains exactly 8 scrapers" },
+      { "type": "assertion", "description": "Verify each scraper has id, name, description, status, last_run, exit_code fields" }
+    ],
+    "priority": "p0"
+  },
+  {
+    "id": "TC002",
+    "title": "Run scraper SSE returns streaming events",
+    "description": "Verify GET /api/run/{id} returns SSE stream with valid run events for a known scraper",
+    "category": "Scraper API",
+    "steps": [
+      { "type": "action", "description": "Send GET request to /api/run/results" },
+      { "type": "assertion", "description": "Verify response status is 200" },
+      { "type": "assertion", "description": "Verify Content-Type is text/event-stream" },
+      { "type": "assertion", "description": "Verify SSE events contain start, log, and complete messages" },
+      { "type": "assertion", "description": "Verify unknown scraper ID returns 404" }
+    ],
+    "priority": "p0"
+  },
+  {
+    "id": "TC003",
+    "title": "Batch run returns SSE stream for multiple scrapers",
+    "description": "Verify POST /api/batch/run returns SSE stream and validates unknown scraper IDs",
+    "category": "Scraper API",
+    "steps": [
+      { "type": "action", "description": "Send POST request to /api/batch/run with valid scraper IDs" },
+      { "type": "assertion", "description": "Verify response status is 200" },
+      { "type": "assertion", "description": "Verify Content-Type is text/event-stream" },
+      { "type": "assertion", "description": "Verify SSE events contain progress updates for each scraper" },
+      { "type": "action", "description": "Send POST request to /api/batch/run with unknown scraper IDs" },
+      { "type": "assertion", "description": "Verify unknown IDs return validation errors" }
+    ],
+    "priority": "p1"
+  },
+  {
+    "id": "TC004",
+    "title": "History endpoints return valid data",
+    "description": "Verify GET /api/history, /api/history/metrics, and /api/history/stats return valid history and metrics",
+    "category": "History API",
+    "steps": [
+      { "type": "action", "description": "Send GET request to /api/history" },
+      { "type": "assertion", "description": "Verify response status is 200" },
+      { "type": "assertion", "description": "Verify history data is a JSON array" },
+      { "type": "assertion", "description": "Verify each history entry has scraper_id, status, timestamp, duration fields" },
+      { "type": "action", "description": "Send GET request to /api/history/metrics" },
+      { "type": "assertion", "description": "Verify metrics return success rate and average duration" },
+      { "type": "action", "description": "Send GET request to /api/history/stats" },
+      { "type": "assertion", "description": "Verify stats return total_runs, success_rate, avg_duration" }
+    ],
+    "priority": "p0"
+  },
+  {
+    "id": "TC005",
+    "title": "Preview endpoints return scraped data",
+    "description": "Verify GET /api/preview/{id} returns columns and rows for class-based scrapers and warnings for legacy scripts",
+    "category": "Data API",
+    "steps": [
+      { "type": "action", "description": "Send GET request to /api/preview/xg" },
+      { "type": "assertion", "description": "Verify response status is 200" },
+      { "type": "assertion", "description": "Verify response has columns and rows fields" },
+      { "type": "action", "description": "Send GET request to /api/preview/results (legacy script)" },
+      { "type": "assertion", "description": "Verify legacy scraper returns preview_unavailable warning" },
+      { "type": "action", "description": "Send GET request to /api/preview/unknown_scraper" },
+      { "type": "assertion", "description": "Verify unknown scraper returns 404" }
+    ],
+    "priority": "p1"
+  },
+  {
+    "id": "TC006",
+    "title": "Export endpoints return downloadable files",
+    "description": "Verify POST /api/export returns CSV/JSON files for class-based scrapers and rejects legacy/unknown scrapers",
+    "category": "Data API",
+    "steps": [
+      { "type": "action", "description": "Send POST request to /api/export with scraper_id=xg and format=json" },
+      { "type": "assertion", "description": "Verify response status is 200" },
+      { "type": "assertion", "description": "Verify Content-Type is application/json" },
+      { "type": "action", "description": "Send POST request to /api/export with scraper_id=xg and format=csv" },
+      { "type": "assertion", "description": "Verify response returns CSV data" },
+      { "type": "action", "description": "Send POST request to /api/export with unknown scraper" },
+      { "type": "assertion", "description": "Verify unknown scraper returns 404" }
+    ],
+    "priority": "p1"
+  },
+  {
+    "id": "TC007",
+    "title": "Scheduler CRUD endpoints work correctly",
+    "description": "Verify scheduler list, add, delete, pause, resume, and run-now endpoints",
+    "category": "Scheduler API",
+    "steps": [
+      { "type": "action", "description": "Send GET request to /api/scheduler/list" },
+      { "type": "assertion", "description": "Verify response status is 200" },
+      { "type": "action", "description": "Send POST request to /api/scheduler/add with scraper and cron fields" },
+      { "type": "assertion", "description": "Verify scheduler add returns success" },
+      { "type": "action", "description": "Send POST request to /api/scheduler/{id}/pause" },
+      { "type": "assertion", "description": "Verify pause returns success" },
+      { "type": "action", "description": "Send POST request to /api/scheduler/{id}/resume" },
+      { "type": "assertion", "description": "Verify resume returns success" },
+      { "type": "action", "description": "Send DELETE request to /api/scheduler/{id}" },
+      { "type": "assertion", "description": "Verify delete returns success" },
+      { "type": "assertion", "description": "Verify scheduler list no longer contains deleted task" }
+    ],
+    "priority": "p1"
+  },
+  {
+    "id": "TC008",
+    "title": "Diagnostic endpoints return valid data",
+    "description": "Verify diagnostic run, history, and compare endpoints work for scraper analysis",
+    "category": "Diagnostic API",
+    "steps": [
+      { "type": "action", "description": "Send POST request to /api/diagnostic/run/results" },
+      { "type": "assertion", "description": "Verify diagnostic run returns analysis data" },
+      { "type": "action", "description": "Send GET request to /api/diagnostic/history/results" },
+      { "type": "assertion", "description": "Verify diagnostic history returns array of snapshots" },
+      { "type": "action", "description": "Send GET request to /api/diagnostic/compare/id1/id2" },
+      { "type": "assertion", "description": "Verify compare returns diff between two snapshots" }
+    ],
+    "priority": "p2"
+  },
+  {
+    "id": "TC009",
+    "title": "Static files are served correctly",
+    "description": "Verify index.html, style.css, and script.js static files are served correctly by the backend",
+    "category": "Static Files",
+    "steps": [
+      { "type": "action", "description": "Send GET request to /" },
+      { "type": "assertion", "description": "Verify response status is 200" },
+      { "type": "assertion", "description": "Verify Content-Type is text/html" },
+      { "type": "assertion", "description": "Verify response contains HTML document structure" },
+      { "type": "action", "description": "Send GET request to /style.css" },
+      { "type": "assertion", "description": "Verify CSS is served with Content-Type text/css" },
+      { "type": "action", "description": "Send GET request to /script.js" },
+      { "type": "assertion", "description": "Verify JS is served with Content-Type application/javascript" }
+    ],
+    "priority": "p0"
+  }
+]

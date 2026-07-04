@@ -1,0 +1,3569 @@
+{
+  "last_updated": "2026-06-29T16:24:54.503697",
+  "methodology": "xG calculado a partir de datos reales del Mundial en FBref (goles/90min + eficiencia de remate), mezclado con historial estimado. source='fbref_world_cup' indica datos reales de Copa del Mundo.",
+  "fbref_teams_count": 58,
+  "total_teams": 340,
+  "teams": {
+    "scotland": {
+      "xg_home": 1.022,
+      "xg_away": 0.87,
+      "xg_overall": 0.946,
+      "xga_overall": 0.576,
+      "shots_per_90": 9.0,
+      "crosses_per_90": 14.0,
+      "corners_for_per_90": 4.316,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 7.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup"
+    },
+    "england": {
+      "xg_home": 2.533,
+      "xg_away": 2.157,
+      "xg_overall": 2.345,
+      "xga_overall": 1.179,
+      "shots_per_90": 15.919,
+      "crosses_per_90": 15.334,
+      "corners_for_per_90": 5.677,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 8.941,
+      "matches_played": 14,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup"
+    },
+    "wales": {
+      "xg_home": 0.534,
+      "xg_away": 0.454,
+      "xg_overall": 0.494,
+      "xga_overall": 1.776,
+      "shots_per_90": 7.667,
+      "crosses_per_90": 12.0,
+      "corners_for_per_90": 3.692,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 5.667,
+      "matches_played": 3,
+      "seasons": [
+        "2022"
+      ],
+      "source": "fbref_world_cup"
+    },
+    "northern-ireland": {
+      "xg_home": 0.391,
+      "xg_away": 0.264,
+      "xg_overall": 1.048,
+      "xga_overall": 1.833,
+      "matches_played": 707,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "usa": {
+      "xg_home": 1.847,
+      "xg_away": 1.573,
+      "xg_overall": 1.71,
+      "xga_overall": 0.915,
+      "shots_per_90": 13.818,
+      "crosses_per_90": 22.0,
+      "corners_for_per_90": 6.29,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 9.081,
+      "matches_played": 5,
+      "seasons": [
+        "2026",
+        "2022"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 110,
+      "yellow_cards_per_90": 1.2,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.71
+    },
+    "canada": {
+      "xg_home": 0.957,
+      "xg_away": 0.815,
+      "xg_overall": 0.886,
+      "xga_overall": 1.298,
+      "shots_per_90": 12.234,
+      "crosses_per_90": 19.5,
+      "corners_for_per_90": 6.327,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 9.459,
+      "matches_played": 4,
+      "seasons": [
+        "2026",
+        "2022"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 78,
+      "yellow_cards_per_90": 2.5,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 3.57
+    },
+    "uruguay": {
+      "xg_home": 1.338,
+      "xg_away": 1.14,
+      "xg_overall": 1.239,
+      "xga_overall": 0.806,
+      "shots_per_90": 17.608,
+      "crosses_per_90": 22.0,
+      "corners_for_per_90": 8.609,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 11.435,
+      "matches_played": 9,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 88,
+      "yellow_cards_per_90": 2.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.86
+    },
+    "argentina": {
+      "xg_home": 1.956,
+      "xg_away": 1.666,
+      "xg_overall": 1.811,
+      "xga_overall": 0.815,
+      "shots_per_90": 11.965,
+      "crosses_per_90": 12.38,
+      "corners_for_per_90": 4.176,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.649,
+      "matches_played": 13,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 99,
+      "yellow_cards_per_90": 2.184,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 3.12
+    },
+    "austria": {
+      "xg_home": 1.752,
+      "xg_away": 1.492,
+      "xg_overall": 1.622,
+      "xga_overall": 1.022,
+      "shots_per_90": 11.0,
+      "crosses_per_90": 17.0,
+      "corners_for_per_90": 5.253,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 7.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 17,
+      "yellow_cards_per_90": 1.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.43
+    },
+    "hungary": {
+      "xg_overall": 1.376,
+      "xg_home": 1.486,
+      "xg_away": 1.266,
+      "xga_overall": 1.191,
+      "shots_per_90": 11.72,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 4.587,
+      "corners_against_per_90": 4.415,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": null,
+      "matches_played": 47,
+      "seasons": [
+        "2022-2026"
+      ],
+      "source": "csv_recent_4yr"
+    },
+    "czechoslovakia": {
+      "xg_home": 0.746,
+      "xg_away": 0.428,
+      "xg_overall": 1.892,
+      "xga_overall": 1.387,
+      "matches_played": 520,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "belgium": {
+      "xg_home": 1.008,
+      "xg_away": 0.858,
+      "xg_overall": 0.933,
+      "xga_overall": 1.054,
+      "shots_per_90": 13.83,
+      "crosses_per_90": 17.25,
+      "corners_for_per_90": 5.598,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 10.235,
+      "matches_played": 11,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 69,
+      "yellow_cards_per_90": 1.75,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.5
+    },
+    "france": {
+      "xg_home": 2.047,
+      "xg_away": 1.743,
+      "xg_overall": 1.895,
+      "xga_overall": 0.921,
+      "shots_per_90": 11.992,
+      "crosses_per_90": 17.62,
+      "corners_for_per_90": 4.634,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.289,
+      "matches_played": 15,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 141,
+      "yellow_cards_per_90": 0.964,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.38
+    },
+    "switzerland": {
+      "xg_home": 1.46,
+      "xg_away": 1.244,
+      "xg_overall": 1.352,
+      "xga_overall": 1.266,
+      "shots_per_90": 17.25,
+      "crosses_per_90": 17.4,
+      "corners_for_per_90": 7.7,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 12.52,
+      "matches_played": 9,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 87,
+      "yellow_cards_per_90": 2.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.86
+    },
+    "guernsey": {
+      "xg_home": 0.787,
+      "xg_away": 0.593,
+      "xg_overall": 2.567,
+      "xga_overall": 1.304,
+      "matches_played": 240,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "alderney": {
+      "xg_home": 0.114,
+      "xg_away": 0.166,
+      "xg_overall": 0.541,
+      "xga_overall": 4.593,
+      "matches_played": 135,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "jersey": {
+      "xg_home": 0.839,
+      "xg_away": 0.657,
+      "xg_overall": 2.745,
+      "xga_overall": 1.213,
+      "matches_played": 235,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "netherlands": {
+      "xg_home": 1.637,
+      "xg_away": 1.395,
+      "xg_overall": 1.516,
+      "xga_overall": 1.281,
+      "shots_per_90": 9.046,
+      "crosses_per_90": 15.33,
+      "corners_for_per_90": 5.052,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 4.416,
+      "matches_played": 6,
+      "seasons": [
+        "2026",
+        "2022"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 92,
+      "yellow_cards_per_90": 2.381,
+      "red_cards_per_90": 0.159,
+      "discipline_index": 4.08
+    },
+    "guyana": {
+      "xg_home": 0.5,
+      "xg_away": 0.326,
+      "xg_overall": 1.367,
+      "xga_overall": 1.757,
+      "matches_played": 313,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "trinidad-and-tobago": {
+      "xg_home": 0.607,
+      "xg_away": 0.396,
+      "xg_overall": 1.684,
+      "xga_overall": 1.337,
+      "matches_played": 753,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "south-africa": {
+      "xg_home": 0.124,
+      "xg_away": 0.106,
+      "xg_overall": 0.115,
+      "xga_overall": 1.814,
+      "shots_per_90": 3.0,
+      "crosses_per_90": 8.0,
+      "corners_for_per_90": 2.131,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 1.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 8,
+      "yellow_cards_per_90": 2.0,
+      "red_cards_per_90": 2.0,
+      "discipline_index": 10.0
+    },
+    "germany": {
+      "xg_home": 3.366,
+      "xg_away": 2.868,
+      "xg_overall": 3.117,
+      "xga_overall": 1.138,
+      "shots_per_90": 24.087,
+      "crosses_per_90": 20.0,
+      "corners_for_per_90": 8.33,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 14.947,
+      "matches_played": 7,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 80,
+      "yellow_cards_per_90": 0.75,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.07
+    },
+    "sweden": {
+      "xg_home": 2.725,
+      "xg_away": 2.321,
+      "xg_overall": 2.523,
+      "xga_overall": 0.913,
+      "shots_per_90": 12.212,
+      "crosses_per_90": 12.0,
+      "corners_for_per_90": 4.6,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.552,
+      "matches_played": 6,
+      "seasons": [
+        "2026",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 12,
+      "yellow_cards_per_90": 0.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 0.0
+    },
+    "norway": {
+      "xg_home": 2.442,
+      "xg_away": 2.08,
+      "xg_overall": 2.261,
+      "xga_overall": 1.022,
+      "shots_per_90": 12.0,
+      "crosses_per_90": 17.0,
+      "corners_for_per_90": 5.409,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 7.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 17,
+      "yellow_cards_per_90": 0.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 0.0
+    },
+    "denmark": {
+      "xg_home": 0.752,
+      "xg_away": 0.64,
+      "xg_overall": 0.696,
+      "xga_overall": 0.99,
+      "shots_per_90": 10.453,
+      "crosses_per_90": 22.33,
+      "corners_for_per_90": 5.353,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 7.355,
+      "matches_played": 7,
+      "seasons": [
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 67,
+      "yellow_cards_per_90": 1.667,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.38
+    },
+    "italy": {
+      "xg_home": 0.644,
+      "xg_away": 0.437,
+      "xg_overall": 1.753,
+      "xga_overall": 0.981,
+      "matches_played": 893,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "chile": {
+      "xg_home": 0.572,
+      "xg_away": 0.307,
+      "xg_overall": 1.41,
+      "xga_overall": 1.422,
+      "matches_played": 835,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "russia": {
+      "xg_home": 1.494,
+      "xg_away": 1.272,
+      "xg_overall": 1.383,
+      "xga_overall": 1.038,
+      "shots_per_90": 8.596,
+      "crosses_per_90": 16.667,
+      "corners_for_per_90": 4.807,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 5.439,
+      "matches_played": 6,
+      "seasons": [
+        "2018"
+      ],
+      "source": "fbref_world_cup"
+    },
+    "finland": {
+      "xg_home": 0.44,
+      "xg_away": 0.292,
+      "xg_overall": 1.174,
+      "xga_overall": 2.048,
+      "matches_played": 818,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "luxembourg": {
+      "xg_home": 0.214,
+      "xg_away": 0.169,
+      "xg_overall": 0.634,
+      "xga_overall": 2.578,
+      "matches_played": 467,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "catalonia": {
+      "xg_home": 0.515,
+      "xg_away": 0.242,
+      "xg_overall": 1.562,
+      "xga_overall": 1.75,
+      "matches_played": 48,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "philippines": {
+      "xg_home": 0.525,
+      "xg_away": 0.277,
+      "xg_overall": 1.208,
+      "xga_overall": 2.278,
+      "matches_played": 342,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "china": {
+      "xg_home": 0.621,
+      "xg_away": 0.411,
+      "xg_overall": 1.83,
+      "xga_overall": 1.094,
+      "matches_played": 702,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "brazil": {
+      "xg_home": 1.542,
+      "xg_away": 1.314,
+      "xg_overall": 1.428,
+      "xga_overall": 0.805,
+      "shots_per_90": 16.406,
+      "crosses_per_90": 20.33,
+      "corners_for_per_90": 6.541,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 9.864,
+      "matches_played": 11,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 122,
+      "yellow_cards_per_90": 1.27,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.81
+    },
+    "basque-country": {
+      "xg_home": 0.783,
+      "xg_away": 0.775,
+      "xg_overall": 2.562,
+      "xga_overall": 1.391,
+      "matches_played": 64,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "japan": {
+      "xg_home": 1.448,
+      "xg_away": 1.234,
+      "xg_overall": 1.341,
+      "xga_overall": 1.422,
+      "shots_per_90": 10.144,
+      "crosses_per_90": 15.6,
+      "corners_for_per_90": 5.144,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.927,
+      "matches_played": 9,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 78,
+      "yellow_cards_per_90": 1.132,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.62
+    },
+    "paraguay": {
+      "xg_home": 1.022,
+      "xg_away": 0.87,
+      "xg_overall": 0.946,
+      "xga_overall": 2.414,
+      "shots_per_90": 9.0,
+      "crosses_per_90": 5.0,
+      "corners_for_per_90": 2.447,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 8.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 5,
+      "yellow_cards_per_90": 5.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 7.14
+    },
+    "romania": {
+      "xg_home": 0.591,
+      "xg_away": 0.401,
+      "xg_overall": 1.617,
+      "xga_overall": 1.275,
+      "matches_played": 766,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "greece": {
+      "xg_home": 0.458,
+      "xg_away": 0.312,
+      "xg_overall": 1.254,
+      "xga_overall": 1.387,
+      "matches_played": 633,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "yugoslavia": {
+      "xg_home": 0.699,
+      "xg_away": 0.52,
+      "xg_overall": 1.95,
+      "xga_overall": 1.565,
+      "matches_played": 483,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "spain": {
+      "xg_home": 1.477,
+      "xg_away": 1.259,
+      "xg_overall": 1.368,
+      "xga_overall": 0.585,
+      "shots_per_90": 18.828,
+      "crosses_per_90": 21.0,
+      "corners_for_per_90": 8.189,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 13.433,
+      "matches_played": 9,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 105,
+      "yellow_cards_per_90": 0.566,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 0.81
+    },
+    "egypt": {
+      "xg_home": 1.072,
+      "xg_away": 0.914,
+      "xg_overall": 0.993,
+      "xga_overall": 0.985,
+      "shots_per_90": 12.293,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 4.733,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 9.949,
+      "matches_played": 4,
+      "seasons": [
+        "2026",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 13,
+      "yellow_cards_per_90": 2.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.86
+    },
+    "estonia": {
+      "xg_home": 0.336,
+      "xg_away": 0.257,
+      "xg_overall": 0.989,
+      "xga_overall": 1.771,
+      "matches_played": 550,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "suriname": {
+      "xg_home": 0.693,
+      "xg_away": 0.428,
+      "xg_overall": 1.88,
+      "xga_overall": 1.416,
+      "matches_played": 399,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "provence": {
+      "xg_home": 0.932,
+      "xg_away": 0.793,
+      "xg_overall": 3.174,
+      "xga_overall": 2.565,
+      "matches_played": 23,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "costa-rica": {
+      "xg_home": 0.711,
+      "xg_away": 0.605,
+      "xg_overall": 0.658,
+      "xga_overall": 2.372,
+      "shots_per_90": 6.022,
+      "crosses_per_90": 7.0,
+      "corners_for_per_90": 3.146,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 3.4,
+      "matches_played": 6,
+      "seasons": [
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 21,
+      "yellow_cards_per_90": 2.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.86
+    },
+    "el-salvador": {
+      "xg_home": 0.463,
+      "xg_away": 0.248,
+      "xg_overall": 1.248,
+      "xga_overall": 1.52,
+      "matches_played": 614,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guatemala": {
+      "xg_home": 0.519,
+      "xg_away": 0.316,
+      "xg_overall": 1.397,
+      "xga_overall": 1.377,
+      "matches_played": 554,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "poland": {
+      "xg_home": 0.825,
+      "xg_away": 0.703,
+      "xg_overall": 0.764,
+      "xga_overall": 1.292,
+      "shots_per_90": 8.731,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 4.187,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.867,
+      "matches_played": 7,
+      "seasons": [
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 52,
+      "yellow_cards_per_90": 1.75,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.5
+    },
+    "portugal": {
+      "xg_home": 1.472,
+      "xg_away": 1.254,
+      "xg_overall": 1.363,
+      "xga_overall": 1.077,
+      "shots_per_90": 10.402,
+      "crosses_per_90": 20.83,
+      "corners_for_per_90": 6.113,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 7.59,
+      "matches_played": 10,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 125,
+      "yellow_cards_per_90": 1.5,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.14
+    },
+    "brittany": {
+      "xg_home": 0.416,
+      "xg_away": 0.477,
+      "xg_overall": 1.5,
+      "xga_overall": 1.25,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "new-zealand": {
+      "xg_home": 1.877,
+      "xg_away": 1.599,
+      "xg_overall": 1.738,
+      "xga_overall": 1.853,
+      "shots_per_90": 14.0,
+      "crosses_per_90": 12.0,
+      "corners_for_per_90": 4.684,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 12,
+      "yellow_cards_per_90": 0.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 0.0
+    },
+    "australia": {
+      "xg_home": 1.142,
+      "xg_away": 0.972,
+      "xg_overall": 1.057,
+      "xga_overall": 1.264,
+      "shots_per_90": 8.323,
+      "crosses_per_90": 13.6,
+      "corners_for_per_90": 4.571,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 5.61,
+      "matches_played": 8,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 68,
+      "yellow_cards_per_90": 1.4,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.0
+    },
+    "latvia": {
+      "xg_home": 0.366,
+      "xg_away": 0.314,
+      "xg_overall": 1.174,
+      "xga_overall": 1.657,
+      "matches_played": 461,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "galicia": {
+      "xg_home": 0.484,
+      "xg_away": 0.545,
+      "xg_overall": 1.75,
+      "xga_overall": 1.917,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "central-spain": {
+      "xg_home": 0.273,
+      "xg_away": 0.273,
+      "xg_overall": 1.0,
+      "xga_overall": 2.0,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mexico": {
+      "xg_home": 1.412,
+      "xg_away": 1.202,
+      "xg_overall": 1.307,
+      "xga_overall": 0.729,
+      "shots_per_90": 14.947,
+      "crosses_per_90": 22.75,
+      "corners_for_per_90": 6.127,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 10.867,
+      "matches_played": 8,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 91,
+      "yellow_cards_per_90": 2.0,
+      "red_cards_per_90": 0.25,
+      "discipline_index": 3.93
+    },
+    "andalusia": {
+      "xg_home": 0.563,
+      "xg_away": 0.545,
+      "xg_overall": 1.923,
+      "xga_overall": 1.077,
+      "matches_played": 13,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "asturias": {
+      "xg_home": null,
+      "xg_away": 0.818,
+      "xg_overall": 3.0,
+      "xga_overall": 1.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "lithuania": {
+      "xg_home": 0.334,
+      "xg_away": 0.262,
+      "xg_overall": 0.995,
+      "xga_overall": 1.815,
+      "matches_played": 433,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "turkey": {
+      "xg_overall": 1.844,
+      "xg_home": 1.992,
+      "xg_away": 1.696,
+      "xga_overall": 1.333,
+      "shots_per_90": 15.71,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 6.147,
+      "corners_against_per_90": 3.294,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": null,
+      "matches_played": 51,
+      "seasons": [
+        "2022-2026"
+      ],
+      "source": "csv_recent_4yr"
+    },
+    "aruba": {
+      "xg_home": 0.509,
+      "xg_away": 0.323,
+      "xg_overall": 1.309,
+      "xga_overall": 2.349,
+      "matches_played": 152,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "curaçao": {
+      "xg_home": 0.604,
+      "xg_away": 0.42,
+      "xg_overall": 1.648,
+      "xga_overall": 1.593,
+      "matches_played": 386,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bulgaria": {
+      "xg_home": 0.518,
+      "xg_away": 0.35,
+      "xg_overall": 1.38,
+      "xga_overall": 1.501,
+      "matches_played": 736,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ireland": {
+      "xg_home": 0.482,
+      "xg_away": 0.355,
+      "xg_overall": 1.355,
+      "xga_overall": 1.215,
+      "matches_played": 633,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "haiti": {
+      "xg_home": 0.622,
+      "xg_away": 0.53,
+      "xg_overall": 0.576,
+      "xga_overall": 0.946,
+      "shots_per_90": 15.0,
+      "crosses_per_90": 23.0,
+      "corners_for_per_90": 7.125,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 13.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 23,
+      "yellow_cards_per_90": 1.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.43
+    },
+    "jamaica": {
+      "xg_home": 0.478,
+      "xg_away": 0.32,
+      "xg_overall": 1.33,
+      "xga_overall": 1.318,
+      "matches_played": 663,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kenya": {
+      "xg_home": 0.464,
+      "xg_away": 0.315,
+      "xg_overall": 1.385,
+      "xga_overall": 1.357,
+      "matches_played": 706,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "uganda": {
+      "xg_home": 0.552,
+      "xg_away": 0.328,
+      "xg_overall": 1.504,
+      "xga_overall": 1.181,
+      "matches_played": 685,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bolivia": {
+      "xg_home": 0.446,
+      "xg_away": 0.199,
+      "xg_overall": 1.021,
+      "xga_overall": 1.968,
+      "matches_played": 534,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "peru": {
+      "xg_home": 0.847,
+      "xg_away": 0.721,
+      "xg_overall": 0.784,
+      "xga_overall": 0.848,
+      "shots_per_90": 10.0,
+      "crosses_per_90": 12.333,
+      "corners_for_per_90": 4.127,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.333,
+      "matches_played": 3,
+      "seasons": [
+        "2018"
+      ],
+      "source": "fbref_world_cup"
+    },
+    "honduras": {
+      "xg_overall": 1.239,
+      "xg_home": 1.338,
+      "xg_away": 1.14,
+      "xga_overall": 1.281,
+      "shots_per_90": 10.55,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 4.13,
+      "corners_against_per_90": 4.903,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": null,
+      "matches_played": 57,
+      "seasons": [
+        "2022-2026"
+      ],
+      "source": "csv_recent_4yr"
+    },
+    "belarus": {
+      "xg_home": 0.409,
+      "xg_away": 0.34,
+      "xg_overall": 1.152,
+      "xga_overall": 1.473,
+      "matches_played": 315,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ukraine": {
+      "xg_overall": 1.51,
+      "xg_home": 1.631,
+      "xg_away": 1.389,
+      "xga_overall": 1.311,
+      "shots_per_90": 12.86,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 5.033,
+      "corners_against_per_90": 4.023,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": null,
+      "matches_played": 45,
+      "seasons": [
+        "2022-2026"
+      ],
+      "source": "csv_recent_4yr"
+    },
+    "barbados": {
+      "xg_home": 0.422,
+      "xg_away": 0.336,
+      "xg_overall": 1.301,
+      "xga_overall": 1.745,
+      "matches_played": 302,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "nicaragua": {
+      "xg_home": 0.453,
+      "xg_away": 0.245,
+      "xg_overall": 1.054,
+      "xga_overall": 2.405,
+      "matches_played": 222,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cuba": {
+      "xg_home": 0.542,
+      "xg_away": 0.294,
+      "xg_overall": 1.34,
+      "xga_overall": 1.524,
+      "matches_played": 397,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "martinique": {
+      "xg_home": 0.612,
+      "xg_away": 0.385,
+      "xg_overall": 1.77,
+      "xga_overall": 1.302,
+      "matches_played": 331,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "dominica": {
+      "xg_home": 0.388,
+      "xg_away": 0.271,
+      "xg_overall": 1.163,
+      "xga_overall": 2.028,
+      "matches_played": 215,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "silesia": {
+      "xg_home": 0.863,
+      "xg_away": null,
+      "xg_overall": 3.0,
+      "xga_overall": 2.125,
+      "matches_played": 8,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guadeloupe": {
+      "xg_home": 0.548,
+      "xg_away": 0.418,
+      "xg_overall": 1.708,
+      "xga_overall": 1.439,
+      "matches_played": 271,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "israel": {
+      "xg_home": 0.511,
+      "xg_away": 0.396,
+      "xg_overall": 1.506,
+      "xga_overall": 1.48,
+      "matches_played": 498,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "indonesia": {
+      "xg_overall": 1.624,
+      "xg_home": 1.754,
+      "xg_away": 1.494,
+      "xga_overall": 1.328,
+      "shots_per_90": 13.83,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 5.413,
+      "corners_against_per_90": 3.741,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": null,
+      "matches_played": 58,
+      "seasons": [
+        "2022-2026"
+      ],
+      "source": "csv_recent_4yr"
+    },
+    "french-guiana": {
+      "xg_home": 0.51,
+      "xg_away": 0.359,
+      "xg_overall": 1.492,
+      "xga_overall": 1.709,
+      "matches_played": 179,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saint-lucia": {
+      "xg_home": 0.495,
+      "xg_away": 0.324,
+      "xg_overall": 1.422,
+      "xga_overall": 1.904,
+      "matches_played": 230,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "colombia": {
+      "xg_home": 2.064,
+      "xg_away": 1.758,
+      "xg_overall": 1.911,
+      "xga_overall": 0.877,
+      "shots_per_90": 12.755,
+      "crosses_per_90": 15.0,
+      "corners_for_per_90": 5.14,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 9.232,
+      "matches_played": 5,
+      "seasons": [
+        "2026",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 15,
+      "yellow_cards_per_90": 1.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.43
+    },
+    "panama": {
+      "xg_home": 0.492,
+      "xg_away": 0.42,
+      "xg_overall": 0.456,
+      "xga_overall": 1.613,
+      "shots_per_90": 9.818,
+      "crosses_per_90": 21.0,
+      "corners_for_per_90": 5.107,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.343,
+      "matches_played": 4,
+      "seasons": [
+        "2026",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 21,
+      "yellow_cards_per_90": 2.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.86
+    },
+    "venezuela": {
+      "xg_overall": 1.226,
+      "xg_home": 1.324,
+      "xg_away": 1.128,
+      "xga_overall": 1.217,
+      "shots_per_90": 10.44,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 4.087,
+      "corners_against_per_90": 4.955,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": null,
+      "matches_played": 46,
+      "seasons": [
+        "2022-2026"
+      ],
+      "source": "csv_recent_4yr"
+    },
+    "ecuador": {
+      "xg_home": 0.85,
+      "xg_away": 0.724,
+      "xg_overall": 0.787,
+      "xga_overall": 1.029,
+      "shots_per_90": 10.928,
+      "crosses_per_90": 17.75,
+      "corners_for_per_90": 5.095,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 8.856,
+      "matches_played": 4,
+      "seasons": [
+        "2026",
+        "2022"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 71,
+      "yellow_cards_per_90": 1.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.43
+    },
+    "saint-kitts-and-nevis": {
+      "xg_home": 0.617,
+      "xg_away": 0.392,
+      "xg_overall": 1.712,
+      "xga_overall": 1.646,
+      "matches_played": 226,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "grenada": {
+      "xg_home": 0.591,
+      "xg_away": 0.361,
+      "xg_overall": 1.623,
+      "xga_overall": 1.862,
+      "matches_played": 260,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "india": {
+      "xg_home": 0.407,
+      "xg_away": 0.365,
+      "xg_overall": 1.367,
+      "xga_overall": 1.614,
+      "matches_played": 534,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "slovakia": {
+      "xg_overall": 1.369,
+      "xg_home": 1.479,
+      "xg_away": 1.259,
+      "xga_overall": 1.083,
+      "shots_per_90": 11.66,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 4.563,
+      "corners_against_per_90": 4.438,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": null,
+      "matches_played": 48,
+      "seasons": [
+        "2022-2026"
+      ],
+      "source": "csv_recent_4yr"
+    },
+    "manchukuo": {
+      "xg_home": null,
+      "xg_away": null,
+      "xg_overall": null,
+      "xga_overall": 5.333,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "croatia": {
+      "xg_home": 1.485,
+      "xg_away": 1.265,
+      "xg_overall": 1.375,
+      "xga_overall": 1.885,
+      "shots_per_90": 11.193,
+      "crosses_per_90": 20.75,
+      "corners_for_per_90": 5.457,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 7.168,
+      "matches_played": 17,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 166,
+      "yellow_cards_per_90": 0.92,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.31
+    },
+    "lebanon": {
+      "xg_home": 0.44,
+      "xg_away": 0.267,
+      "xg_overall": 1.156,
+      "xga_overall": 1.408,
+      "matches_played": 333,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "puerto-rico": {
+      "xg_home": 0.601,
+      "xg_away": 0.212,
+      "xg_overall": 1.258,
+      "xga_overall": 2.344,
+      "matches_played": 163,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "afghanistan": {
+      "xg_home": 0.317,
+      "xg_away": 0.258,
+      "xg_overall": 0.966,
+      "xga_overall": 1.993,
+      "matches_played": 147,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "iran": {
+      "xg_home": 1.38,
+      "xg_away": 1.176,
+      "xg_overall": 1.278,
+      "xga_overall": 1.567,
+      "shots_per_90": 12.333,
+      "crosses_per_90": 16.75,
+      "corners_for_per_90": 5.251,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 9.567,
+      "matches_played": 7,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 67,
+      "yellow_cards_per_90": 2.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.86
+    },
+    "mongolia": {
+      "xg_home": 0.457,
+      "xg_away": 0.24,
+      "xg_overall": 1.136,
+      "xga_overall": 3.068,
+      "matches_played": 103,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tanzania": {
+      "xg_home": 0.374,
+      "xg_away": 0.268,
+      "xg_overall": 1.102,
+      "xga_overall": 1.489,
+      "matches_played": 599,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "zimbabwe": {
+      "xg_home": 0.464,
+      "xg_away": 0.34,
+      "xg_overall": 1.331,
+      "xga_overall": 1.192,
+      "matches_played": 496,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "zambia": {
+      "xg_home": 0.535,
+      "xg_away": 0.378,
+      "xg_overall": 1.556,
+      "xga_overall": 1.073,
+      "matches_played": 793,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "iceland": {
+      "xg_home": 0.888,
+      "xg_away": 0.756,
+      "xg_overall": 0.822,
+      "xga_overall": 1.742,
+      "shots_per_90": 11.0,
+      "crosses_per_90": 17.333,
+      "corners_for_per_90": 5.322,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 7.667,
+      "matches_played": 3,
+      "seasons": [
+        "2018"
+      ],
+      "source": "fbref_world_cup"
+    },
+    "albania": {
+      "xg_home": 0.345,
+      "xg_away": 0.232,
+      "xg_overall": 0.947,
+      "xga_overall": 1.48,
+      "matches_played": 398,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "montenegro": {
+      "xg_home": 0.475,
+      "xg_away": 0.31,
+      "xg_overall": 1.182,
+      "xga_overall": 1.371,
+      "matches_played": 170,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "madagascar": {
+      "xg_home": 0.465,
+      "xg_away": 0.346,
+      "xg_overall": 1.356,
+      "xga_overall": 1.512,
+      "matches_played": 320,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mauritius": {
+      "xg_home": 0.463,
+      "xg_away": 0.258,
+      "xg_overall": 1.268,
+      "xga_overall": 1.609,
+      "matches_played": 325,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "réunion": {
+      "xg_home": 0.526,
+      "xg_away": 0.43,
+      "xg_overall": 1.766,
+      "xga_overall": 1.774,
+      "matches_played": 124,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "zanzibar": {
+      "xg_home": 0.312,
+      "xg_away": 0.233,
+      "xg_overall": 0.914,
+      "xga_overall": 2.086,
+      "matches_played": 209,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "djibouti": {
+      "xg_home": 0.216,
+      "xg_away": 0.178,
+      "xg_overall": 0.667,
+      "xga_overall": 3.613,
+      "matches_played": 111,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ethiopia": {
+      "xg_home": 0.451,
+      "xg_away": 0.292,
+      "xg_overall": 1.342,
+      "xga_overall": 1.455,
+      "matches_played": 409,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "dr-congo": {
+      "xg_overall": 1.167,
+      "xg_home": 1.26,
+      "xg_away": 1.074,
+      "xga_overall": 0.704,
+      "shots_per_90": 9.94,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 3.89,
+      "corners_against_per_90": 5.206,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": null,
+      "matches_played": 54,
+      "seasons": [
+        "2022-2026"
+      ],
+      "source": "csv_recent_4yr"
+    },
+    "south-korea": {
+      "xg_home": 1.506,
+      "xg_away": 1.282,
+      "xg_overall": 1.394,
+      "xga_overall": 1.235,
+      "shots_per_90": 13.11,
+      "crosses_per_90": 20.8,
+      "corners_for_per_90": 5.375,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 8.4,
+      "matches_played": 8,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 104,
+      "yellow_cards_per_90": 1.6,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.29
+    },
+    "vietnam": {
+      "xg_home": 0.585,
+      "xg_away": 0.383,
+      "xg_overall": 1.646,
+      "xga_overall": 1.367,
+      "matches_played": 297,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "macau": {
+      "xg_home": 0.268,
+      "xg_away": 0.175,
+      "xg_overall": 0.77,
+      "xga_overall": 3.095,
+      "matches_played": 148,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "dominican-republic": {
+      "xg_home": 0.63,
+      "xg_away": 0.428,
+      "xg_overall": 1.673,
+      "xga_overall": 1.597,
+      "matches_played": 159,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cyprus": {
+      "xg_home": 0.333,
+      "xg_away": 0.214,
+      "xg_overall": 0.88,
+      "xga_overall": 2.176,
+      "matches_played": 426,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sierra-leone": {
+      "xg_home": 0.379,
+      "xg_away": 0.236,
+      "xg_overall": 0.963,
+      "xga_overall": 1.379,
+      "matches_played": 301,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "nigeria": {
+      "xg_home": 1.173,
+      "xg_away": 0.999,
+      "xg_overall": 1.086,
+      "xga_overall": 0.946,
+      "shots_per_90": 12.667,
+      "crosses_per_90": 16.0,
+      "corners_for_per_90": 5.306,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 10.0,
+      "matches_played": 3,
+      "seasons": [
+        "2018"
+      ],
+      "source": "fbref_world_cup"
+    },
+    "syria": {
+      "xg_home": 0.569,
+      "xg_away": 0.345,
+      "xg_overall": 1.43,
+      "xga_overall": 1.318,
+      "matches_played": 484,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "serbia": {
+      "xg_home": 1.254,
+      "xg_away": 1.068,
+      "xg_overall": 1.161,
+      "xga_overall": 1.86,
+      "shots_per_90": 10.956,
+      "crosses_per_90": 18.67,
+      "corners_for_per_90": 5.742,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 8.244,
+      "matches_played": 6,
+      "seasons": [
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 56,
+      "yellow_cards_per_90": 4.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 5.71
+    },
+    "taiwan": {
+      "xg_home": 0.421,
+      "xg_away": 0.358,
+      "xg_overall": 1.306,
+      "xga_overall": 2.506,
+      "matches_played": 245,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ghana": {
+      "xg_home": 1.185,
+      "xg_away": 1.009,
+      "xg_overall": 1.097,
+      "xga_overall": 1.13,
+      "shots_per_90": 8.153,
+      "crosses_per_90": 16.25,
+      "corners_for_per_90": 4.631,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 5.694,
+      "matches_played": 4,
+      "seasons": [
+        "2026",
+        "2022"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 65,
+      "yellow_cards_per_90": 2.25,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 3.21
+    },
+    "myanmar": {
+      "xg_home": 0.571,
+      "xg_away": 0.313,
+      "xg_overall": 1.604,
+      "xga_overall": 1.652,
+      "matches_played": 512,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "new-caledonia": {
+      "xg_home": 0.805,
+      "xg_away": 0.645,
+      "xg_overall": 2.634,
+      "xga_overall": 1.392,
+      "matches_played": 265,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "vanuatu": {
+      "xg_home": 0.571,
+      "xg_away": 0.522,
+      "xg_overall": 1.883,
+      "xga_overall": 2.15,
+      "matches_played": 214,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "fiji": {
+      "xg_home": 0.771,
+      "xg_away": 0.421,
+      "xg_overall": 2.269,
+      "xga_overall": 1.638,
+      "matches_played": 268,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "pakistan": {
+      "xg_home": 0.354,
+      "xg_away": 0.237,
+      "xg_overall": 0.94,
+      "xga_overall": 2.299,
+      "matches_played": 251,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sri-lanka": {
+      "xg_home": 0.384,
+      "xg_away": 0.184,
+      "xg_overall": 0.944,
+      "xga_overall": 2.295,
+      "matches_played": 251,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "german-dr": {
+      "xg_home": 0.576,
+      "xg_away": 0.454,
+      "xg_overall": 1.698,
+      "xga_overall": 1.211,
+      "matches_played": 298,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tahiti": {
+      "xg_home": 0.853,
+      "xg_away": 0.652,
+      "xg_overall": 2.715,
+      "xga_overall": 1.533,
+      "matches_played": 242,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "gambia": {
+      "xg_home": 0.37,
+      "xg_away": 0.305,
+      "xg_overall": 1.049,
+      "xga_overall": 1.391,
+      "matches_played": 266,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "hong-kong": {
+      "xg_home": 0.487,
+      "xg_away": 0.347,
+      "xg_overall": 1.45,
+      "xga_overall": 1.638,
+      "matches_played": 447,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "singapore": {
+      "xg_home": 0.506,
+      "xg_away": 0.27,
+      "xg_overall": 1.348,
+      "xga_overall": 1.823,
+      "matches_played": 696,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "malaysia": {
+      "xg_home": 0.595,
+      "xg_away": 0.303,
+      "xg_overall": 1.632,
+      "xga_overall": 1.45,
+      "matches_played": 835,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guinea-bissau": {
+      "xg_home": 0.37,
+      "xg_away": 0.225,
+      "xg_overall": 0.995,
+      "xga_overall": 1.474,
+      "matches_played": 190,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saarland": {
+      "xg_home": 0.259,
+      "xg_away": 0.531,
+      "xg_overall": 1.111,
+      "xga_overall": 2.889,
+      "matches_played": 9,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "burundi": {
+      "xg_home": 0.356,
+      "xg_away": 0.281,
+      "xg_overall": 1.087,
+      "xga_overall": 1.353,
+      "matches_played": 218,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cameroon": {
+      "xg_home": 1.251,
+      "xg_away": 1.065,
+      "xg_overall": 1.158,
+      "xga_overall": 1.35,
+      "shots_per_90": 9.333,
+      "crosses_per_90": 17.67,
+      "corners_for_per_90": 5.13,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 4.0,
+      "matches_played": 3,
+      "seasons": [
+        "2022"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 53,
+      "yellow_cards_per_90": 2.667,
+      "red_cards_per_90": 0.333,
+      "discipline_index": 5.24
+    },
+    "kernow": {
+      "xg_home": 0.593,
+      "xg_away": 1.182,
+      "xg_overall": 2.667,
+      "xga_overall": 1.583,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cambodia": {
+      "xg_home": 0.442,
+      "xg_away": 0.22,
+      "xg_overall": 1.119,
+      "xga_overall": 2.576,
+      "matches_played": 295,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "thailand": {
+      "xg_home": 0.555,
+      "xg_away": 0.382,
+      "xg_overall": 1.607,
+      "xga_overall": 1.481,
+      "matches_played": 865,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "vietnam-republic": {
+      "xg_home": 0.649,
+      "xg_away": 0.473,
+      "xg_overall": 1.867,
+      "xga_overall": 1.6,
+      "matches_played": 195,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kyrgyzstan": {
+      "xg_home": 0.423,
+      "xg_away": 0.284,
+      "xg_overall": 1.152,
+      "xga_overall": 1.681,
+      "matches_played": 191,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "moldova": {
+      "xg_home": 0.299,
+      "xg_away": 0.222,
+      "xg_overall": 0.813,
+      "xga_overall": 1.746,
+      "matches_played": 299,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "north-vietnam": {
+      "xg_home": 1.032,
+      "xg_away": 0.457,
+      "xg_overall": 2.042,
+      "xga_overall": 2.167,
+      "matches_played": 24,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "togo": {
+      "xg_home": 0.436,
+      "xg_away": 0.264,
+      "xg_overall": 1.101,
+      "xga_overall": 1.387,
+      "matches_played": 447,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "north-korea": {
+      "xg_home": 0.612,
+      "xg_away": 0.371,
+      "xg_overall": 1.61,
+      "xga_overall": 1.115,
+      "matches_played": 390,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sudan": {
+      "xg_home": 0.398,
+      "xg_away": 0.251,
+      "xg_overall": 1.083,
+      "xga_overall": 1.352,
+      "matches_played": 469,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "malta": {
+      "xg_home": 0.251,
+      "xg_away": 0.144,
+      "xg_overall": 0.651,
+      "xga_overall": 2.242,
+      "matches_played": 458,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tunisia": {
+      "xg_home": 0.986,
+      "xg_away": 0.84,
+      "xg_overall": 0.913,
+      "xga_overall": 2.119,
+      "shots_per_90": 8.973,
+      "crosses_per_90": 18.5,
+      "corners_for_per_90": 4.622,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.313,
+      "matches_played": 7,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 74,
+      "yellow_cards_per_90": 1.5,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.14
+    },
+    "libya": {
+      "xg_home": 0.524,
+      "xg_away": 0.233,
+      "xg_overall": 1.302,
+      "xga_overall": 1.214,
+      "matches_played": 384,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "malawi": {
+      "xg_home": 0.391,
+      "xg_away": 0.263,
+      "xg_overall": 1.169,
+      "xga_overall": 1.292,
+      "matches_played": 644,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "morocco": {
+      "xg_home": 1.028,
+      "xg_away": 0.876,
+      "xg_overall": 0.952,
+      "xga_overall": 0.942,
+      "shots_per_90": 11.474,
+      "crosses_per_90": 11.25,
+      "corners_for_per_90": 4.83,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 8.616,
+      "matches_played": 11,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 90,
+      "yellow_cards_per_90": 1.084,
+      "red_cards_per_90": 0.12,
+      "discipline_index": 2.06
+    },
+    "benin": {
+      "xg_home": 0.415,
+      "xg_away": 0.256,
+      "xg_overall": 1.083,
+      "xga_overall": 1.726,
+      "matches_played": 325,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cape-verde": {
+      "xg_home": 0.248,
+      "xg_away": 0.212,
+      "xg_overall": 0.23,
+      "xga_overall": 1.037,
+      "shots_per_90": 6.0,
+      "crosses_per_90": 4.0,
+      "corners_for_per_90": 1.77,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 5.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 4,
+      "yellow_cards_per_90": 1.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.43
+    },
+    "ivory-coast": {
+      "xg_home": 1.27,
+      "xg_away": 1.082,
+      "xg_overall": 1.176,
+      "xga_overall": 0.461,
+      "shots_per_90": 15.0,
+      "crosses_per_90": 7.0,
+      "corners_for_per_90": 3.802,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 11.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup"
+    },
+    "burkina-faso": {
+      "xg_home": 0.512,
+      "xg_away": 0.298,
+      "xg_overall": 1.25,
+      "xga_overall": 1.33,
+      "matches_played": 464,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "gabon": {
+      "xg_home": 0.421,
+      "xg_away": 0.311,
+      "xg_overall": 1.178,
+      "xga_overall": 1.195,
+      "matches_played": 405,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "congo": {
+      "xg_home": 0.452,
+      "xg_away": 0.29,
+      "xg_overall": 1.288,
+      "xga_overall": 1.473,
+      "matches_played": 406,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mali": {
+      "xg_overall": 1.5,
+      "xg_home": 1.62,
+      "xg_away": 1.38,
+      "xga_overall": 0.583,
+      "shots_per_90": 12.78,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 5.0,
+      "corners_against_per_90": 4.05,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": null,
+      "matches_played": 48,
+      "seasons": [
+        "2022-2026"
+      ],
+      "source": "csv_recent_4yr"
+    },
+    "central-african-republic": {
+      "xg_home": 0.395,
+      "xg_away": 0.257,
+      "xg_overall": 1.058,
+      "xga_overall": 1.906,
+      "matches_played": 138,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "iraq": {
+      "xg_home": 1.104,
+      "xg_away": 0.94,
+      "xg_overall": 1.022,
+      "xga_overall": 2.261,
+      "shots_per_90": 11.0,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 4.422,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 10.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 13,
+      "yellow_cards_per_90": 1.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.43
+    },
+    "saint-vincent-and-the-grenadines": {
+      "xg_home": 0.58,
+      "xg_away": 0.42,
+      "xg_overall": 1.576,
+      "xga_overall": 1.873,
+      "matches_played": 236,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "senegal": {
+      "xg_home": 1.101,
+      "xg_away": 0.937,
+      "xg_overall": 1.019,
+      "xga_overall": 1.648,
+      "shots_per_90": 9.595,
+      "crosses_per_90": 16.0,
+      "corners_for_per_90": 4.331,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.735,
+      "matches_played": 8,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 80,
+      "yellow_cards_per_90": 1.4,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 2.0
+    },
+    "laos": {
+      "xg_home": 0.373,
+      "xg_away": 0.235,
+      "xg_overall": 1.013,
+      "xga_overall": 3.129,
+      "matches_played": 224,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mauritania": {
+      "xg_home": 0.265,
+      "xg_away": 0.193,
+      "xg_overall": 0.725,
+      "xga_overall": 1.59,
+      "matches_played": 273,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "liberia": {
+      "xg_home": 0.364,
+      "xg_away": 0.188,
+      "xg_overall": 0.894,
+      "xga_overall": 1.474,
+      "matches_played": 302,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "chad": {
+      "xg_home": 0.335,
+      "xg_away": 0.193,
+      "xg_overall": 0.848,
+      "xga_overall": 1.725,
+      "matches_played": 138,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "niger": {
+      "xg_home": 0.421,
+      "xg_away": 0.224,
+      "xg_overall": 0.985,
+      "xga_overall": 1.627,
+      "matches_played": 260,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guinea": {
+      "xg_home": 0.528,
+      "xg_away": 0.313,
+      "xg_overall": 1.354,
+      "xga_overall": 1.224,
+      "matches_played": 539,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "algeria": {
+      "xg_home": 0.291,
+      "xg_away": 0.247,
+      "xg_overall": 0.269,
+      "xga_overall": 2.184,
+      "shots_per_90": 7.0,
+      "crosses_per_90": 8.0,
+      "corners_for_per_90": 2.757,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 7.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 8,
+      "yellow_cards_per_90": 0.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 0.0
+    },
+    "kuwait": {
+      "xg_home": 0.501,
+      "xg_away": 0.404,
+      "xg_overall": 1.56,
+      "xga_overall": 1.126,
+      "matches_played": 684,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "jordan": {
+      "xg_home": 1.104,
+      "xg_away": 0.94,
+      "xg_overall": 1.022,
+      "xga_overall": 1.622,
+      "shots_per_90": 11.0,
+      "crosses_per_90": 15.0,
+      "corners_for_per_90": 4.837,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 7.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 15,
+      "yellow_cards_per_90": 0.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 0.0
+    },
+    "papua-new-guinea": {
+      "xg_home": 0.542,
+      "xg_away": 0.692,
+      "xg_overall": 2.168,
+      "xga_overall": 2.013,
+      "matches_played": 155,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "solomon-islands": {
+      "xg_home": 0.792,
+      "xg_away": 0.453,
+      "xg_overall": 2.159,
+      "xga_overall": 1.967,
+      "matches_played": 214,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "somalia": {
+      "xg_home": 0.15,
+      "xg_away": 0.147,
+      "xg_overall": 0.5,
+      "xga_overall": 2.661,
+      "matches_played": 124,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saudi-arabia": {
+      "xg_home": 0.966,
+      "xg_away": 0.822,
+      "xg_overall": 0.894,
+      "xga_overall": 1.685,
+      "shots_per_90": 9.007,
+      "crosses_per_90": 11.5,
+      "corners_for_per_90": 3.827,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.293,
+      "matches_played": 7,
+      "seasons": [
+        "2026",
+        "2022",
+        "2018"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 46,
+      "yellow_cards_per_90": 3.75,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 5.36
+    },
+    "bermuda": {
+      "xg_home": 0.565,
+      "xg_away": 0.433,
+      "xg_overall": 1.657,
+      "xga_overall": 1.763,
+      "matches_played": 198,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "palestine": {
+      "xg_home": 0.597,
+      "xg_away": 0.275,
+      "xg_overall": 1.333,
+      "xga_overall": 1.39,
+      "matches_played": 249,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "yemen": {
+      "xg_home": 0.421,
+      "xg_away": 0.227,
+      "xg_overall": 0.974,
+      "xga_overall": 2.169,
+      "matches_played": 266,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bahrain": {
+      "xg_home": 0.42,
+      "xg_away": 0.289,
+      "xg_overall": 1.241,
+      "xga_overall": 1.295,
+      "matches_played": 584,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "oman": {
+      "xg_home": 0.426,
+      "xg_away": 0.32,
+      "xg_overall": 1.291,
+      "xga_overall": 1.258,
+      "matches_played": 543,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "wallis-islands-and-futuna": {
+      "xg_home": 0.727,
+      "xg_away": 0.195,
+      "xg_overall": 0.958,
+      "xga_overall": 4.542,
+      "matches_played": 24,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "corsica": {
+      "xg_home": 0.284,
+      "xg_away": 0.664,
+      "xg_overall": 1.111,
+      "xga_overall": 0.556,
+      "matches_played": 9,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "western-australia": {
+      "xg_home": 0.818,
+      "xg_away": 0.545,
+      "xg_overall": 1.969,
+      "xga_overall": 2.344,
+      "matches_played": 32,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "eswatini": {
+      "xg_home": 0.273,
+      "xg_away": 0.215,
+      "xg_overall": 0.843,
+      "xga_overall": 1.661,
+      "matches_played": 274,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "botswana": {
+      "xg_home": 0.271,
+      "xg_away": 0.196,
+      "xg_overall": 0.807,
+      "xga_overall": 1.283,
+      "matches_played": 332,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "qatar": {
+      "xg_home": 0.733,
+      "xg_away": 0.625,
+      "xg_overall": 0.679,
+      "xga_overall": 1.69,
+      "shots_per_90": 6.847,
+      "crosses_per_90": 12.5,
+      "corners_for_per_90": 3.306,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 3.766,
+      "matches_played": 4,
+      "seasons": [
+        "2026",
+        "2022"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 50,
+      "yellow_cards_per_90": 2.25,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 3.21
+    },
+    "lesotho": {
+      "xg_home": 0.251,
+      "xg_away": 0.207,
+      "xg_overall": 0.777,
+      "xga_overall": 1.574,
+      "matches_played": 296,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bahamas": {
+      "xg_home": 0.417,
+      "xg_away": 0.261,
+      "xg_overall": 1.119,
+      "xga_overall": 3.179,
+      "matches_played": 67,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "brunei": {
+      "xg_home": 0.291,
+      "xg_away": 0.188,
+      "xg_overall": 0.781,
+      "xga_overall": 3.277,
+      "matches_played": 137,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cook-islands": {
+      "xg_home": 0.305,
+      "xg_away": 0.172,
+      "xg_overall": 0.811,
+      "xga_overall": 4.981,
+      "matches_played": 53,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "yemen-dpr": {
+      "xg_home": 0.428,
+      "xg_away": 0.275,
+      "xg_overall": 1.0,
+      "xga_overall": 2.76,
+      "matches_played": 25,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "uae": {
+      "xg_home": 0.504,
+      "xg_away": 0.318,
+      "xg_overall": 1.417,
+      "xga_overall": 1.242,
+      "matches_played": 612,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "faroe-islands": {
+      "xg_home": 0.339,
+      "xg_away": 0.191,
+      "xg_overall": 0.836,
+      "xga_overall": 2.244,
+      "matches_played": 287,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "nepal": {
+      "xg_home": 0.332,
+      "xg_away": 0.163,
+      "xg_overall": 0.854,
+      "xga_overall": 2.246,
+      "matches_played": 268,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "antigua-and-barbuda": {
+      "xg_home": 0.407,
+      "xg_away": 0.321,
+      "xg_overall": 1.325,
+      "xga_overall": 1.831,
+      "matches_played": 231,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bangladesh": {
+      "xg_home": 0.339,
+      "xg_away": 0.193,
+      "xg_overall": 0.905,
+      "xga_overall": 1.823,
+      "matches_played": 305,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "seychelles": {
+      "xg_home": 0.279,
+      "xg_away": 0.154,
+      "xg_overall": 0.767,
+      "xga_overall": 2.261,
+      "matches_played": 176,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "equatorial-guinea": {
+      "xg_home": 0.342,
+      "xg_away": 0.217,
+      "xg_overall": 0.872,
+      "xga_overall": 1.464,
+      "matches_played": 179,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mozambique": {
+      "xg_home": 0.388,
+      "xg_away": 0.239,
+      "xg_overall": 1.032,
+      "xga_overall": 1.293,
+      "matches_played": 375,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "guam": {
+      "xg_home": 0.392,
+      "xg_away": 0.326,
+      "xg_overall": 1.138,
+      "xga_overall": 4.902,
+      "matches_played": 123,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "angola": {
+      "xg_home": 0.442,
+      "xg_away": 0.247,
+      "xg_overall": 1.133,
+      "xga_overall": 1.031,
+      "matches_played": 415,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "são-tomé-and-príncipe": {
+      "xg_home": 0.272,
+      "xg_away": 0.2,
+      "xg_overall": 0.746,
+      "xga_overall": 2.563,
+      "matches_played": 71,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "rwanda": {
+      "xg_home": 0.378,
+      "xg_away": 0.227,
+      "xg_overall": 1.032,
+      "xga_overall": 1.2,
+      "matches_played": 280,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "northern-cyprus": {
+      "xg_home": 0.93,
+      "xg_away": 0.523,
+      "xg_overall": 2.882,
+      "xga_overall": 0.912,
+      "matches_played": 34,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "armenia": {
+      "xg_home": 0.352,
+      "xg_away": 0.279,
+      "xg_overall": 1.007,
+      "xga_overall": 1.835,
+      "matches_played": 272,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "georgia": {
+      "xg_home": 0.487,
+      "xg_away": 0.318,
+      "xg_overall": 1.248,
+      "xga_overall": 1.404,
+      "matches_played": 307,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "azerbaijan": {
+      "xg_home": 0.315,
+      "xg_away": 0.181,
+      "xg_overall": 0.768,
+      "xga_overall": 1.677,
+      "matches_played": 310,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kazakhstan": {
+      "xg_home": 0.43,
+      "xg_away": 0.289,
+      "xg_overall": 1.149,
+      "xga_overall": 1.651,
+      "matches_played": 269,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "comoros": {
+      "xg_home": 0.381,
+      "xg_away": 0.255,
+      "xg_overall": 0.887,
+      "xga_overall": 1.616,
+      "matches_played": 151,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "maldives": {
+      "xg_home": 0.453,
+      "xg_away": 0.246,
+      "xg_overall": 1.189,
+      "xga_overall": 2.258,
+      "matches_played": 233,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tonga": {
+      "xg_home": 0.35,
+      "xg_away": 0.322,
+      "xg_overall": 1.191,
+      "xga_overall": 3.721,
+      "matches_played": 68,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kiribati": {
+      "xg_home": 0.273,
+      "xg_away": 0.091,
+      "xg_overall": 0.636,
+      "xga_overall": 11.455,
+      "matches_played": 11,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tuvalu": {
+      "xg_home": 0.378,
+      "xg_away": 0.285,
+      "xg_overall": 1.154,
+      "xga_overall": 5.333,
+      "matches_played": 39,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "samoa": {
+      "xg_home": 0.529,
+      "xg_away": 0.235,
+      "xg_overall": 1.394,
+      "xga_overall": 3.507,
+      "matches_played": 71,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "greenland": {
+      "xg_home": 0.656,
+      "xg_away": 0.413,
+      "xg_overall": 1.883,
+      "xga_overall": 2.065,
+      "matches_played": 77,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "liechtenstein": {
+      "xg_home": 0.121,
+      "xg_away": 0.128,
+      "xg_overall": 0.405,
+      "xga_overall": 2.803,
+      "matches_played": 259,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bhutan": {
+      "xg_home": 0.268,
+      "xg_away": 0.11,
+      "xg_overall": 0.555,
+      "xga_overall": 3.655,
+      "matches_played": 110,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "south-yemen": {
+      "xg_home": null,
+      "xg_away": 0.105,
+      "xg_overall": 0.333,
+      "xga_overall": 2.667,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "niue": {
+      "xg_home": null,
+      "xg_away": null,
+      "xg_overall": null,
+      "xga_overall": 16.5,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "american-samoa": {
+      "xg_home": 0.197,
+      "xg_away": 0.173,
+      "xg_overall": 0.6,
+      "xga_overall": 6.491,
+      "matches_played": 55,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "belize": {
+      "xg_home": 0.413,
+      "xg_away": 0.318,
+      "xg_overall": 1.099,
+      "xga_overall": 1.926,
+      "matches_played": 121,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cayman-islands": {
+      "xg_home": 0.37,
+      "xg_away": 0.23,
+      "xg_overall": 0.983,
+      "xga_overall": 2.45,
+      "matches_played": 120,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "anguilla": {
+      "xg_home": 0.173,
+      "xg_away": 0.204,
+      "xg_overall": 0.571,
+      "xga_overall": 3.835,
+      "matches_played": 91,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "british-virgin-islands": {
+      "xg_home": 0.418,
+      "xg_away": 0.252,
+      "xg_overall": 0.927,
+      "xga_overall": 2.943,
+      "matches_played": 123,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "palau": {
+      "xg_home": 0.545,
+      "xg_away": null,
+      "xg_overall": 2.0,
+      "xga_overall": 10.5,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sint-maarten": {
+      "xg_home": 0.591,
+      "xg_away": 0.363,
+      "xg_overall": 1.467,
+      "xga_overall": 2.55,
+      "matches_played": 60,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "namibia": {
+      "xg_home": 0.352,
+      "xg_away": 0.227,
+      "xg_overall": 0.978,
+      "xga_overall": 1.423,
+      "matches_played": 279,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ynys-môn": {
+      "xg_home": 0.572,
+      "xg_away": 0.469,
+      "xg_overall": 1.866,
+      "xga_overall": 1.433,
+      "matches_played": 67,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "shetland": {
+      "xg_home": 0.523,
+      "xg_away": 0.479,
+      "xg_overall": 1.741,
+      "xga_overall": 1.948,
+      "matches_played": 58,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "åland-islands": {
+      "xg_home": 0.44,
+      "xg_away": 0.368,
+      "xg_overall": 1.51,
+      "xga_overall": 1.686,
+      "matches_played": 51,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saint-martin": {
+      "xg_home": 0.524,
+      "xg_away": 0.468,
+      "xg_overall": 1.485,
+      "xga_overall": 2.456,
+      "matches_played": 68,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "san-marino": {
+      "xg_home": 0.083,
+      "xg_away": 0.065,
+      "xg_overall": 0.196,
+      "xga_overall": 3.956,
+      "matches_played": 225,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "montserrat": {
+      "xg_home": 0.413,
+      "xg_away": 0.244,
+      "xg_overall": 1.091,
+      "xga_overall": 2.955,
+      "matches_played": 66,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "slovenia": {
+      "xg_home": 0.445,
+      "xg_away": 0.326,
+      "xg_overall": 1.237,
+      "xga_overall": 1.174,
+      "matches_played": 317,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "isle-of-wight": {
+      "xg_home": 0.636,
+      "xg_away": 0.649,
+      "xg_overall": 2.354,
+      "xga_overall": 1.25,
+      "matches_played": 48,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "turkmenistan": {
+      "xg_home": 0.573,
+      "xg_away": 0.364,
+      "xg_overall": 1.514,
+      "xga_overall": 1.52,
+      "matches_played": 175,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tajikistan": {
+      "xg_home": 0.601,
+      "xg_away": 0.362,
+      "xg_overall": 1.488,
+      "xga_overall": 1.383,
+      "matches_played": 201,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "uzbekistan": {
+      "xg_home": 0.98,
+      "xg_away": 0.834,
+      "xg_overall": 0.907,
+      "xga_overall": 2.376,
+      "shots_per_90": 8.0,
+      "crosses_per_90": 13.0,
+      "corners_for_per_90": 3.952,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 13,
+      "yellow_cards_per_90": 1.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 1.43
+    },
+    "eritrea": {
+      "xg_home": 0.17,
+      "xg_away": 0.198,
+      "xg_overall": 0.676,
+      "xga_overall": 1.704,
+      "matches_played": 71,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "gibraltar": {
+      "xg_home": 0.455,
+      "xg_away": 0.257,
+      "xg_overall": 1.131,
+      "xga_overall": 2.475,
+      "matches_played": 160,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "isle-of-man": {
+      "xg_home": 1.083,
+      "xg_away": 0.93,
+      "xg_overall": 3.207,
+      "xga_overall": 1.5,
+      "matches_played": 58,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "north-macedonia": {
+      "xg_home": 0.418,
+      "xg_away": 0.316,
+      "xg_overall": 1.193,
+      "xga_overall": 1.346,
+      "matches_played": 306,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "czech-republic": {
+      "xg_home": 0.939,
+      "xg_away": 0.799,
+      "xg_overall": 0.869,
+      "xga_overall": 1.776,
+      "shots_per_90": 7.0,
+      "crosses_per_90": 15.0,
+      "corners_for_per_90": 4.211,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 3.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup",
+      "crosses_for": 15,
+      "yellow_cards_per_90": 0.0,
+      "red_cards_per_90": 0.0,
+      "discipline_index": 0.0
+    },
+    "bosnia-and-herzegovina": {
+      "xg_home": 0.47,
+      "xg_away": 0.413,
+      "xg_overall": 1.37,
+      "xga_overall": 1.37,
+      "matches_played": 284,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "canary-islands": {
+      "xg_home": 0.78,
+      "xg_away": null,
+      "xg_overall": 2.75,
+      "xga_overall": 0.75,
+      "matches_played": 4,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "andorra": {
+      "xg_home": 0.127,
+      "xg_away": 0.084,
+      "xg_overall": 0.328,
+      "xga_overall": 2.371,
+      "matches_played": 229,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "frøya": {
+      "xg_home": 0.636,
+      "xg_away": 0.324,
+      "xg_overall": 1.622,
+      "xga_overall": 3.946,
+      "matches_played": 37,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "hitra": {
+      "xg_home": 0.624,
+      "xg_away": 0.616,
+      "xg_overall": 1.609,
+      "xga_overall": 4.0,
+      "matches_played": 23,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "united-states-virgin-islands": {
+      "xg_home": 0.328,
+      "xg_away": 0.197,
+      "xg_overall": 0.692,
+      "xga_overall": 3.782,
+      "matches_played": 78,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "northern-mariana-islands": {
+      "xg_home": 0.381,
+      "xg_away": 0.127,
+      "xg_overall": 0.9,
+      "xga_overall": 4.3,
+      "matches_played": 30,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "turks-and-caicos-islands": {
+      "xg_home": 0.36,
+      "xg_away": 0.266,
+      "xg_overall": 1.0,
+      "xga_overall": 3.596,
+      "matches_played": 52,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "micronesia": {
+      "xg_home": 0.955,
+      "xg_away": 0.055,
+      "xg_overall": 1.143,
+      "xga_overall": 8.429,
+      "matches_played": 7,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "gotland": {
+      "xg_home": 0.914,
+      "xg_away": 0.382,
+      "xg_overall": 2.7,
+      "xga_overall": 1.9,
+      "matches_played": 30,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saare-county": {
+      "xg_home": 0.4,
+      "xg_away": 0.259,
+      "xg_overall": 1.171,
+      "xga_overall": 2.543,
+      "matches_played": 35,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "rhodes": {
+      "xg_home": 0.521,
+      "xg_away": 0.312,
+      "xg_overall": 1.611,
+      "xga_overall": 1.056,
+      "matches_played": 18,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "monaco": {
+      "xg_home": 0.788,
+      "xg_away": 0.274,
+      "xg_overall": 1.708,
+      "xga_overall": 3.667,
+      "matches_played": 24,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "western-sahara": {
+      "xg_home": 0.584,
+      "xg_away": 0.136,
+      "xg_overall": 1.778,
+      "xga_overall": 4.222,
+      "matches_played": 9,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tibet": {
+      "xg_home": 0.525,
+      "xg_away": 0.418,
+      "xg_overall": 1.429,
+      "xga_overall": 5.762,
+      "matches_played": 21,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "orkney": {
+      "xg_home": 0.587,
+      "xg_away": 0.3,
+      "xg_overall": 1.357,
+      "xga_overall": 3.0,
+      "matches_played": 28,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "falkland-islands": {
+      "xg_home": 0.336,
+      "xg_away": 0.205,
+      "xg_overall": 0.939,
+      "xga_overall": 3.667,
+      "matches_played": 33,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mayotte": {
+      "xg_home": 0.568,
+      "xg_away": 0.283,
+      "xg_overall": 1.342,
+      "xga_overall": 1.474,
+      "matches_played": 38,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "vatican-city": {
+      "xg_home": 0.182,
+      "xg_away": 0.219,
+      "xg_overall": 0.75,
+      "xga_overall": 2.625,
+      "matches_played": 8,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "timor-leste": {
+      "xg_home": 0.32,
+      "xg_away": 0.225,
+      "xg_overall": 0.826,
+      "xga_overall": 3.302,
+      "matches_played": 86,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sark": {
+      "xg_home": null,
+      "xg_away": null,
+      "xg_overall": null,
+      "xga_overall": 17.5,
+      "matches_played": 4,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sealand": {
+      "xg_home": 0.506,
+      "xg_away": 0.764,
+      "xg_overall": 2.25,
+      "xga_overall": 2.5,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "occitania": {
+      "xg_home": 0.914,
+      "xg_away": 0.755,
+      "xg_overall": 3.121,
+      "xga_overall": 1.152,
+      "matches_played": 33,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "chechnya": {
+      "xg_home": 0.545,
+      "xg_away": 0.136,
+      "xg_overall": 1.0,
+      "xga_overall": 9.667,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ambazonia": {
+      "xg_home": null,
+      "xg_away": 0.136,
+      "xg_overall": 0.5,
+      "xga_overall": 2.833,
+      "matches_played": 6,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "western-isles": {
+      "xg_home": 0.608,
+      "xg_away": 0.332,
+      "xg_overall": 1.5,
+      "xga_overall": 2.265,
+      "matches_played": 34,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kosovo": {
+      "xg_home": 0.578,
+      "xg_away": 0.501,
+      "xg_overall": 1.462,
+      "xga_overall": 1.337,
+      "matches_played": 104,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "republic-of-st-pauli": {
+      "xg_home": 0.682,
+      "xg_away": null,
+      "xg_overall": 2.5,
+      "xga_overall": 1.25,
+      "matches_played": 4,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "găgăuzia": {
+      "xg_home": 0.182,
+      "xg_away": null,
+      "xg_overall": 0.667,
+      "xga_overall": 3.0,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "crimea": {
+      "xg_home": null,
+      "xg_away": 0.382,
+      "xg_overall": 1.4,
+      "xga_overall": 2.2,
+      "matches_played": 5,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "sápmi": {
+      "xg_home": 1.033,
+      "xg_away": 0.491,
+      "xg_overall": 3.103,
+      "xga_overall": 1.862,
+      "matches_played": 29,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "romani-people": {
+      "xg_home": 0.364,
+      "xg_away": 0.614,
+      "xg_overall": 1.857,
+      "xga_overall": 3.714,
+      "matches_played": 7,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "menorca": {
+      "xg_home": 0.776,
+      "xg_away": 0.432,
+      "xg_overall": 2.24,
+      "xga_overall": 1.28,
+      "matches_played": 25,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "iraqi-kurdistan": {
+      "xg_home": 0.545,
+      "xg_away": 0.682,
+      "xg_overall": 2.259,
+      "xga_overall": 1.0,
+      "matches_played": 27,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "padania": {
+      "xg_home": 0.63,
+      "xg_away": 0.92,
+      "xg_overall": 2.689,
+      "xga_overall": 0.8,
+      "matches_played": 45,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "arameans-suryoye": {
+      "xg_home": 0.545,
+      "xg_away": 0.39,
+      "xg_overall": 1.6,
+      "xga_overall": 1.2,
+      "matches_played": 10,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "gozo": {
+      "xg_home": 1.151,
+      "xg_away": 0.195,
+      "xg_overall": 2.214,
+      "xga_overall": 2.0,
+      "matches_played": 14,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "two-sicilies": {
+      "xg_home": null,
+      "xg_away": 0.136,
+      "xg_overall": 0.5,
+      "xga_overall": 3.0,
+      "matches_played": 6,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saint-barthélemy": {
+      "xg_home": 0.857,
+      "xg_away": 0.273,
+      "xg_overall": 2.5,
+      "xga_overall": 3.0,
+      "matches_played": 10,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saint-pierre-and-miquelon": {
+      "xg_home": 0.273,
+      "xg_away": 0.045,
+      "xg_overall": 0.286,
+      "xga_overall": 11.143,
+      "matches_played": 7,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bonaire": {
+      "xg_home": 0.435,
+      "xg_away": 0.507,
+      "xg_overall": 1.432,
+      "xga_overall": 2.477,
+      "matches_played": 44,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "chagos-islands": {
+      "xg_home": 0.545,
+      "xg_away": 0.436,
+      "xg_overall": 1.75,
+      "xga_overall": 4.75,
+      "matches_played": 16,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "raetia": {
+      "xg_home": 0.6,
+      "xg_away": 0.358,
+      "xg_overall": 1.654,
+      "xga_overall": 3.962,
+      "matches_played": 26,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cilento": {
+      "xg_home": null,
+      "xg_away": null,
+      "xg_overall": null,
+      "xga_overall": 2.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kurdistan": {
+      "xg_home": 0.843,
+      "xg_away": 0.62,
+      "xg_overall": 2.4,
+      "xga_overall": 0.4,
+      "matches_played": 5,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "darfur": {
+      "xg_home": null,
+      "xg_away": 0.091,
+      "xg_overall": 0.143,
+      "xga_overall": 14.143,
+      "matches_played": 7,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "tamil-eelam": {
+      "xg_home": 0.991,
+      "xg_away": 0.629,
+      "xg_overall": 2.571,
+      "xga_overall": 2.179,
+      "matches_played": 28,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "south-sudan": {
+      "xg_home": 0.292,
+      "xg_away": 0.117,
+      "xg_overall": 0.641,
+      "xga_overall": 1.821,
+      "matches_played": 78,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "abkhazia": {
+      "xg_home": 0.498,
+      "xg_away": 0.327,
+      "xg_overall": 1.636,
+      "xga_overall": 0.788,
+      "matches_played": 33,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "artsakh": {
+      "xg_home": 0.468,
+      "xg_away": 1.364,
+      "xg_overall": 2.909,
+      "xga_overall": 1.273,
+      "matches_played": 11,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "madrid": {
+      "xg_home": 0.273,
+      "xg_away": null,
+      "xg_overall": 1.0,
+      "xga_overall": 2.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "quebec": {
+      "xg_home": 2.864,
+      "xg_away": 0.818,
+      "xg_overall": 8.0,
+      "xga_overall": 0.667,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saugeais": {
+      "xg_home": 0.273,
+      "xg_away": null,
+      "xg_overall": 1.0,
+      "xga_overall": 1.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "south-ossetia": {
+      "xg_home": 0.307,
+      "xg_away": 0.788,
+      "xg_overall": 2.059,
+      "xga_overall": 2.176,
+      "matches_played": 17,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ellan-vannin": {
+      "xg_home": 0.932,
+      "xg_away": 0.355,
+      "xg_overall": 2.455,
+      "xga_overall": 1.455,
+      "matches_played": 22,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "somaliland": {
+      "xg_home": 0.818,
+      "xg_away": 0.455,
+      "xg_overall": 2.333,
+      "xga_overall": 3.333,
+      "matches_played": 6,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "franconia": {
+      "xg_home": 1.091,
+      "xg_away": 0.545,
+      "xg_overall": 2.667,
+      "xga_overall": 3.667,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "county-of-nice": {
+      "xg_home": 0.477,
+      "xg_away": 0.655,
+      "xg_overall": 2.111,
+      "xga_overall": 1.444,
+      "matches_played": 9,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "seborga": {
+      "xg_home": 0.545,
+      "xg_away": null,
+      "xg_overall": 2.0,
+      "xga_overall": 3.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "székely-land": {
+      "xg_home": 0.864,
+      "xg_away": 0.327,
+      "xg_overall": 2.074,
+      "xga_overall": 2.074,
+      "matches_played": 27,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "luhansk-pr": {
+      "xg_home": 0.955,
+      "xg_away": 0.136,
+      "xg_overall": 1.5,
+      "xga_overall": 2.0,
+      "matches_played": 6,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "donetsk-pr": {
+      "xg_home": 0.682,
+      "xg_away": 0.205,
+      "xg_overall": 1.333,
+      "xga_overall": 1.167,
+      "matches_played": 6,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "felvidék": {
+      "xg_home": 0.273,
+      "xg_away": 0.333,
+      "xg_overall": 1.167,
+      "xga_overall": 1.667,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "panjab": {
+      "xg_home": 0.974,
+      "xg_away": 0.659,
+      "xg_overall": 2.842,
+      "xga_overall": 1.579,
+      "matches_played": 19,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "western-armenia": {
+      "xg_home": 0.382,
+      "xg_away": 0.669,
+      "xg_overall": 2.125,
+      "xga_overall": 1.25,
+      "matches_played": 16,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "united-koreans-in-japan": {
+      "xg_home": 0.307,
+      "xg_away": 0.75,
+      "xg_overall": 1.667,
+      "xga_overall": 0.917,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kárpátalja": {
+      "xg_home": 0.927,
+      "xg_away": 0.364,
+      "xg_overall": 2.273,
+      "xga_overall": 1.182,
+      "matches_played": 11,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "délvidék": {
+      "xg_home": 0.545,
+      "xg_away": null,
+      "xg_overall": 2.0,
+      "xga_overall": 1.5,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "barawa": {
+      "xg_home": 0.397,
+      "xg_away": null,
+      "xg_overall": 1.333,
+      "xga_overall": 3.833,
+      "matches_played": 12,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ryūkyū": {
+      "xg_home": null,
+      "xg_away": null,
+      "xg_overall": null,
+      "xga_overall": 9.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "yorkshire": {
+      "xg_home": 1.036,
+      "xg_away": 1.091,
+      "xg_overall": 3.857,
+      "xga_overall": 1.571,
+      "matches_played": 7,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "surrey": {
+      "xg_home": null,
+      "xg_away": 0.818,
+      "xg_overall": 3.0,
+      "xga_overall": 1.0,
+      "matches_played": 1,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "cascadia": {
+      "xg_home": 1.364,
+      "xg_away": 0.709,
+      "xg_overall": 3.286,
+      "xga_overall": 2.0,
+      "matches_played": 7,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "matabeleland": {
+      "xg_home": 0.136,
+      "xg_away": 0.273,
+      "xg_overall": 0.875,
+      "xga_overall": 1.75,
+      "matches_played": 8,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "kabylia": {
+      "xg_home": null,
+      "xg_away": 0.436,
+      "xg_overall": 1.333,
+      "xga_overall": 2.5,
+      "matches_played": 6,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "parishes-of-jersey": {
+      "xg_home": 1.5,
+      "xg_away": null,
+      "xg_overall": 3.667,
+      "xga_overall": 1.333,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "chameria": {
+      "xg_home": 0.955,
+      "xg_away": 0.382,
+      "xg_overall": 2.0,
+      "xga_overall": 1.143,
+      "matches_played": 7,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "saint-helena": {
+      "xg_home": 0.136,
+      "xg_away": 0.227,
+      "xg_overall": 0.75,
+      "xga_overall": 5.125,
+      "matches_played": 8,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "west-papua": {
+      "xg_home": 0.409,
+      "xg_away": null,
+      "xg_overall": 1.5,
+      "xga_overall": 4.5,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "east-turkestan": {
+      "xg_home": null,
+      "xg_away": 1.253,
+      "xg_overall": 3.0,
+      "xga_overall": 3.2,
+      "matches_played": 5,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "elba-island": {
+      "xg_home": 1.227,
+      "xg_away": null,
+      "xg_overall": 4.5,
+      "xga_overall": 1.0,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "yoruba-nation": {
+      "xg_home": 0.136,
+      "xg_away": null,
+      "xg_overall": 0.5,
+      "xga_overall": 1.0,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "biafra": {
+      "xg_home": 0.136,
+      "xg_away": 0.273,
+      "xg_overall": 0.667,
+      "xga_overall": 0.333,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "mapuche": {
+      "xg_home": 0.409,
+      "xg_away": null,
+      "xg_overall": 1.5,
+      "xga_overall": 1.0,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "maule-sur": {
+      "xg_home": null,
+      "xg_away": 0.273,
+      "xg_overall": 1.0,
+      "xga_overall": null,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "aymara": {
+      "xg_home": null,
+      "xg_away": 0.273,
+      "xg_overall": 0.5,
+      "xga_overall": 2.0,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "ticino": {
+      "xg_home": 0.273,
+      "xg_away": 0.273,
+      "xg_overall": 1.0,
+      "xga_overall": 6.5,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "hmong": {
+      "xg_home": 1.364,
+      "xg_away": 0.136,
+      "xg_overall": 2.0,
+      "xga_overall": 3.333,
+      "matches_played": 3,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "marshall-islands": {
+      "xg_home": null,
+      "xg_away": 1.234,
+      "xg_overall": 1.0,
+      "xga_overall": 3.5,
+      "matches_played": 2,
+      "source": "Historical results weighted by opponent quality"
+    },
+    "bosnia-&-herz": {
+      "xg_home": 0.98,
+      "xg_away": 0.834,
+      "xg_overall": 0.907,
+      "xga_overall": 1.099,
+      "shots_per_90": 8.0,
+      "crosses_per_90": 10.0,
+      "corners_for_per_90": 3.329,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 5.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup"
+    },
+    "congo-dr": {
+      "xg_home": 0.98,
+      "xg_away": 0.834,
+      "xg_overall": 0.907,
+      "xga_overall": 0.869,
+      "shots_per_90": 8.0,
+      "crosses_per_90": 9.0,
+      "corners_for_per_90": 3.121,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup"
+    },
+    "curacao": {
+      "xg_home": 0.98,
+      "xg_away": 0.834,
+      "xg_overall": 0.907,
+      "xga_overall": 5.198,
+      "shots_per_90": 8.0,
+      "crosses_per_90": 7.0,
+      "corners_for_per_90": 2.706,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 6.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup"
+    },
+    "türkiye": {
+      "xg_home": 1.244,
+      "xg_away": 1.06,
+      "xg_overall": 1.152,
+      "xga_overall": 1.546,
+      "shots_per_90": 30.0,
+      "crosses_per_90": 26.0,
+      "corners_for_per_90": 10.096,
+      "corners_against_per_90": 4.5,
+      "shots_blocked_per_90": null,
+      "shots_off_target_per_90": 22.0,
+      "matches_played": 1,
+      "seasons": [
+        "2026"
+      ],
+      "source": "fbref_world_cup"
+    }
+  }
+}

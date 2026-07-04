@@ -1,0 +1,261 @@
+{
+  "matches": [
+    {
+      "id": "argcap",
+      "date": "",
+      "home_team": "argentina",
+      "away_team": "cape",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.793544"
+    },
+    {
+      "id": "colgha",
+      "date": "",
+      "home_team": "colombia",
+      "away_team": "ghana",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.793697"
+    },
+    {
+      "id": "canmor",
+      "date": "",
+      "home_team": "canada",
+      "away_team": "morocco",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.793827"
+    },
+    {
+      "id": "frapar",
+      "date": "",
+      "home_team": "france",
+      "away_team": "paraguay",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.793943"
+    },
+    {
+      "id": "branor",
+      "date": "",
+      "home_team": "brazil",
+      "away_team": "norway",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.794051"
+    },
+    {
+      "id": "engmex",
+      "date": "",
+      "home_team": "england",
+      "away_team": "mexico",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.794233"
+    },
+    {
+      "id": "porspa",
+      "date": "",
+      "home_team": "portugal",
+      "away_team": "spain",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.794354"
+    },
+    {
+      "id": "belusa",
+      "date": "",
+      "home_team": "belgium",
+      "away_team": "usa",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.794457"
+    },
+    {
+      "id": "colgha",
+      "date": "",
+      "home_team": "colombia",
+      "away_team": "ghana",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.794561"
+    },
+    {
+      "id": "branor",
+      "date": "",
+      "home_team": "brazil",
+      "away_team": "norway",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.794661"
+    },
+    {
+      "id": "engmex",
+      "date": "",
+      "home_team": "england",
+      "away_team": "mexico",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.794760"
+    },
+    {
+      "id": "belusa",
+      "date": "",
+      "home_team": "belgium",
+      "away_team": "usa",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.794858"
+    },
+    {
+      "id": "birhud",
+      "date": "",
+      "home_team": "birmingham",
+      "away_team": "huddersfield",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.794956"
+    },
+    {
+      "id": "argcap",
+      "date": "",
+      "home_team": "argentina",
+      "away_team": "cape",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.795051"
+    },
+    {
+      "id": "canmor",
+      "date": "",
+      "home_team": "canada",
+      "away_team": "morocco",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.795169"
+    },
+    {
+      "id": "frapar",
+      "date": "",
+      "home_team": "france",
+      "away_team": "paraguay",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.795280"
+    },
+    {
+      "id": "engmex",
+      "date": "",
+      "home_team": "england",
+      "away_team": "mexico",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.795379"
+    },
+    {
+      "id": "porspa",
+      "date": "",
+      "home_team": "portugal",
+      "away_team": "spain",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.795475"
+    },
+    {
+      "id": "belusa",
+      "date": "",
+      "home_team": "belgium",
+      "away_team": "usa",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.795570"
+    },
+    {
+      "id": "azasim",
+      "date": "",
+      "home_team": "azam",
+      "away_team": "simba",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.795664"
+    },
+    {
+      "id": "kinnor",
+      "date": "",
+      "home_team": "king",
+      "away_team": "norwich",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.795758"
+    },
+    {
+      "id": "leinor",
+      "date": "",
+      "home_team": "leicester",
+      "away_team": "northampton",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.795852"
+    },
+    {
+      "id": "colnor",
+      "date": "",
+      "home_team": "colchester",
+      "away_team": "norwich",
+      "home_corners": 0,
+      "away_corners": 0,
+      "competition": "",
+      "type": "international",
+      "_fetched_at": "2026-07-03T15:05:38.795946"
+    }
+  ],
+  "last_updated": "2026-07-03T15:05:38.796013",
+  "teams_processed": 25,
+  "total_matches": 23,
+  "note": "Archivo para almacenar datos de corners por partido. Cuando tenga datos, el predictor usará medias móviles ponderadas. Vacío = usa corners_stats.json como fallback. Formato: cada match con id, date, home_team, away_team, home_corners, away_corners, competition, type."
+}

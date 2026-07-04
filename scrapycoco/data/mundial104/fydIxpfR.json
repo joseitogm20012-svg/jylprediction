@@ -1,0 +1,55 @@
+{
+  "match_id": "fydIxpfR",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Rangel",
+        "2Sánchez",
+        "3Montes",
+        "5Vasquez",
+        "23Gallardo",
+        "19Mora",
+        "6Lira",
+        "7Romo",
+        "25Alvarado",
+        "9Jiménez",
+        "16Quiñones"
+      ],
+      "suplentes": [
+        "Gutierrez B.",
+        "Vargas O.",
+        "Giménez S.",
+        "Pineda O.",
+        "Reyes I."
+      ],
+      "formacion": "4 - 3 - 3"
+    },
+    "visitante": {
+      "titulares": [
+        "1Galindez",
+        "21Franco",
+        "4Ordóñez",
+        "6Pacho",
+        "3Hincapié",
+        "9Yeboah",
+        "23Caicedo",
+        "15Vite",
+        "20Angulo",
+        "19Plata",
+        "13Valencia"
+      ],
+      "suplentes": [
+        "Medina Y.",
+        "Preciado A.",
+        "Rodriguez K.",
+        "Caicedo J.",
+        "Paez K."
+      ],
+      "formacion": "4 - 4 - 2"
+    }
+  },
+  "error": null,
+  "description": "30.06.2026 21:00MéxicoEquipo que avanzaFIFA: 14.2-0FinalizadoEcuadorFIFA: 23.2-0Finalizado",
+  "score": "2-0"
+}

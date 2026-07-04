@@ -1,0 +1,189 @@
+{
+  "match_id": "pEpXAtm1",
+  "estadisticas": {
+    "1.65Goles esperados (xG)1.53": {
+      "home": "1.65",
+      "away": "1.53"
+    },
+    "33%Posesión67%": {
+      "home": "33%",
+      "away": "67%"
+    },
+    "9Remates totales15": {
+      "home": "9",
+      "away": "15"
+    },
+    "5Remates a puerta7": {
+      "home": "5",
+      "away": "7"
+    },
+    "2Grandes ocasiones2": {
+      "home": "2",
+      "away": "2"
+    },
+    "2Córneres9": {
+      "home": "2",
+      "away": "9"
+    },
+    "73%(184/251)Pases85%(432/507)": {
+      "home": "73%(184/251)",
+      "away": "85%(432/507)"
+    },
+    "2Tarjetas amarillas3": {
+      "home": "2",
+      "away": "3"
+    },
+    "2.62xG a puerta (xGOT)1.89": {
+      "home": "2.62",
+      "away": "1.89"
+    },
+    "2Remates fuera3": {
+      "home": "2",
+      "away": "3"
+    },
+    "2Remates rechazados5": {
+      "home": "2",
+      "away": "5"
+    },
+    "9Remates dentro del área8": {
+      "home": "9",
+      "away": "8"
+    },
+    "0Remates fuera del área7": {
+      "home": "0",
+      "away": "7"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1Goles de cabeza0": {
+      "home": "1",
+      "away": "0"
+    },
+    "21Toques en el área rival31": {
+      "home": "21",
+      "away": "31"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Fueras de juego4": {
+      "home": "1",
+      "away": "4"
+    },
+    "15Tiros libres15": {
+      "home": "15",
+      "away": "15"
+    },
+    "24%(10/42)Pases largos54%(32/59)": {
+      "home": "24%(10/42)",
+      "away": "54%(32/59)"
+    },
+    "53%(42/80)Pases en el último tercio74%(98/132)": {
+      "home": "53%(42/80)",
+      "away": "74%(98/132)"
+    },
+    "56%(5/9)Centros23%(6/26)": {
+      "home": "56%(5/9)",
+      "away": "23%(6/26)"
+    },
+    "0.98Asistencias esperadas (xA)1.95": {
+      "home": "0.98",
+      "away": "1.95"
+    },
+    "17Saques de banda17": {
+      "home": "17",
+      "away": "17"
+    },
+    "15Faltas15": {
+      "home": "15",
+      "away": "15"
+    },
+    "80%(8/10)Entradas86%(6/7)": {
+      "home": "80%(8/10)",
+      "away": "86%(6/7)"
+    },
+    "44Duelos ganados45": {
+      "home": "44",
+      "away": "45"
+    },
+    "38Despejes23": {
+      "home": "38",
+      "away": "23"
+    },
+    "7Intercepciones7": {
+      "home": "7",
+      "away": "7"
+    },
+    "1Errores conducentes a remate0": {
+      "home": "1",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "5Paradas2": {
+      "home": "5",
+      "away": "2"
+    },
+    "1.89xGOT enfrentados2.62": {
+      "home": "1.89",
+      "away": "2.62"
+    },
+    "-0.11Goles evitados-0.38": {
+      "home": "-0.11",
+      "away": "-0.38"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "23Nordfeldt",
+        "2Lagerbielke",
+        "15Starfelt",
+        "3Lindelof",
+        "8Svensson",
+        "18Ayari",
+        "16Karlström",
+        "5Gudmundsson",
+        "11Elanga",
+        "10Nygren",
+        "17Gyökeres"
+      ],
+      "suplentes": [
+        "Zeneli B.",
+        "Bergvall L.",
+        "Lundgren G.",
+        "Svanberg M."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Grabara",
+        "3Wisniewski",
+        "5Bednarek",
+        "14Kiwior",
+        "2Cash",
+        "20Szymanski",
+        "10Zielinski",
+        "21Zalewski",
+        "7Swiderski",
+        "13Kaminski",
+        "9Lewandowski"
+      ],
+      "suplentes": [
+        "Pietuszewski O.",
+        "Grosicki K.",
+        "Piatek K."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    }
+  },
+  "error": null,
+  "description": "31.03.2026 14:45SueciaEquipo que avanzaFIFA: 38.3-2FinalizadoPoloniaFIFA: 36.3-2Finalizado",
+  "score": "3-2"
+}

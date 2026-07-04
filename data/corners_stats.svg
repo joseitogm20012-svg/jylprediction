@@ -1,0 +1,632 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1930" style="background: #0f172a; font-family: 'Segoe UI', Arial, sans-serif;">
+  <rect width="900" height="1930" fill="#0f172a"/>
+  <text x="450" y="36" text-anchor="middle" fill="#f1f5f9" font-size="20" font-weight="bold">CORNER STATS — 68 EQUIPOS</text>
+  <text x="450" y="56" text-anchor="middle" fill="#94a3b8" font-size="12">Datos scrapeados de FBref (World Cup 2018/2022/2026 + xg_by_team.json)</text>
+  
+  <!-- Header row -->
+  <rect x="30" y="72" width="840" height="28" rx="4" fill="#1e293b"/>
+  <text x="50" y="91" fill="#94a3b8" font-size="11" font-weight="bold">#</text>
+  <text x="80" y="91" fill="#94a3b8" font-size="11" font-weight="bold">EQUIPO</text>
+  <text x="320" y="91" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="end">CORNERS FOR</text>
+  <text x="430" y="91" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="end">CORNERS AGAINST</text>
+  <text x="540" y="91" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="end">DIF</text>
+  <text x="660" y="91" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="end">PARTIDOS</text>
+  <rect x="690" y="76" width="160" height="20" rx="10" fill="#1e293b"/>
+  <text x="770" y="91" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="middle">BARRA CÓRNERS (for █ against █)</text>
+  <rect x="30" y="106" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="119" fill="#64748b" font-size="10">1</text>
+  <text x="80" y="119" fill="#e2e8f0" font-size="12">Türkiye</text>
+  <text x="320" y="119" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">10.10</text>
+  <text x="430" y="119" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="119" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+5.60</text>
+  <text x="660" y="119" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="111" width="57.714285714285715" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="752.7142857142857" y="111" width="25.714285714285715" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="132" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="145" fill="#64748b" font-size="10">2</text>
+  <text x="80" y="145" fill="#e2e8f0" font-size="12">Switzerland</text>
+  <text x="320" y="145" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">7.70</text>
+  <text x="430" y="145" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="145" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+3.20</text>
+  <text x="660" y="145" fill="#94a3b8" font-size="11" text-anchor="end">9</text>
+  <rect x="695" y="137" width="50.49180327868853" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="745.4918032786885" y="137" width="29.508196721311478" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="158" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="171" fill="#64748b" font-size="10">3</text>
+  <text x="80" y="171" fill="#e2e8f0" font-size="12">Haiti</text>
+  <text x="320" y="171" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">7.12</text>
+  <text x="430" y="171" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="171" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+2.62</text>
+  <text x="660" y="171" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="163" width="49.01893287435456" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="744.0189328743545" y="163" width="30.98106712564544" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="184" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="197" fill="#64748b" font-size="10">4</text>
+  <text x="80" y="197" fill="#e2e8f0" font-size="12">Brazil</text>
+  <text x="320" y="197" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">6.80</text>
+  <text x="430" y="197" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">3.00</text>
+  <text x="540" y="197" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+3.80</text>
+  <text x="660" y="197" fill="#94a3b8" font-size="11" text-anchor="end">20</text>
+  <rect x="695" y="189" width="55.510204081632644" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="750.5102040816327" y="189" width="24.489795918367342" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="210" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="223" fill="#64748b" font-size="10">5</text>
+  <text x="80" y="223" fill="#e2e8f0" font-size="12">Spain</text>
+  <text x="320" y="223" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">6.50</text>
+  <text x="430" y="223" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">2.90</text>
+  <text x="540" y="223" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+3.60</text>
+  <text x="660" y="223" fill="#94a3b8" font-size="11" text-anchor="end">18</text>
+  <rect x="695" y="215" width="55.31914893617021" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="750.3191489361702" y="215" width="24.680851063829788" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="236" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="249" fill="#64748b" font-size="10">6</text>
+  <text x="80" y="249" fill="#e2e8f0" font-size="12">Canada</text>
+  <text x="320" y="249" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">6.33</text>
+  <text x="430" y="249" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="249" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+1.83</text>
+  <text x="660" y="249" fill="#94a3b8" font-size="11" text-anchor="end">4</text>
+  <rect x="695" y="241" width="46.7590027700831" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="741.759002770083" y="241" width="33.24099722991689" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="262" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="275" fill="#64748b" font-size="10">7</text>
+  <text x="80" y="275" fill="#e2e8f0" font-size="12">Argentina</text>
+  <text x="320" y="275" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">6.20</text>
+  <text x="430" y="275" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">3.10</text>
+  <text x="540" y="275" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+3.10</text>
+  <text x="660" y="275" fill="#94a3b8" font-size="11" text-anchor="end">24</text>
+  <rect x="695" y="267" width="53.33333333333333" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="748.3333333333334" y="267" width="26.666666666666664" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="288" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="301" fill="#64748b" font-size="10">8</text>
+  <text x="80" y="301" fill="#e2e8f0" font-size="12">Turkey</text>
+  <text x="320" y="301" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">6.15</text>
+  <text x="430" y="301" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">3.29</text>
+  <text x="540" y="301" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+2.86</text>
+  <text x="660" y="301" fill="#94a3b8" font-size="11" text-anchor="end">51</text>
+  <rect x="695" y="293" width="52.11864406779661" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="747.1186440677966" y="293" width="27.881355932203387" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="314" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="327" fill="#64748b" font-size="10">9</text>
+  <text x="80" y="327" fill="#e2e8f0" font-size="12">Germany</text>
+  <text x="320" y="327" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">6.10</text>
+  <text x="430" y="327" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">3.40</text>
+  <text x="540" y="327" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+2.70</text>
+  <text x="660" y="327" fill="#94a3b8" font-size="11" text-anchor="end">16</text>
+  <rect x="695" y="319" width="51.368421052631575" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="746.3684210526316" y="319" width="28.63157894736842" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="340" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="353" fill="#64748b" font-size="10">10</text>
+  <text x="80" y="353" fill="#e2e8f0" font-size="12">Portugal</text>
+  <text x="320" y="353" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.90</text>
+  <text x="430" y="353" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">3.50</text>
+  <text x="540" y="353" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+2.40</text>
+  <text x="660" y="353" fill="#94a3b8" font-size="11" text-anchor="end">19</text>
+  <rect x="695" y="345" width="50.212765957446805" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="745.2127659574468" y="345" width="29.78723404255319" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="366" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="379" fill="#64748b" font-size="10">11</text>
+  <text x="80" y="379" fill="#e2e8f0" font-size="12">France</text>
+  <text x="320" y="379" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.80</text>
+  <text x="430" y="379" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">3.80</text>
+  <text x="540" y="379" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+2.00</text>
+  <text x="660" y="379" fill="#94a3b8" font-size="11" text-anchor="end">22</text>
+  <rect x="695" y="371" width="48.33333333333333" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="743.3333333333334" y="371" width="31.666666666666664" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="392" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="405" fill="#64748b" font-size="10">12</text>
+  <text x="80" y="405" fill="#e2e8f0" font-size="12">Serbia</text>
+  <text x="320" y="405" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.74</text>
+  <text x="430" y="405" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="405" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+1.24</text>
+  <text x="660" y="405" fill="#94a3b8" font-size="11" text-anchor="end">6</text>
+  <rect x="695" y="397" width="44.84375" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="739.84375" y="397" width="35.15625" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="418" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="431" fill="#64748b" font-size="10">13</text>
+  <text x="80" y="431" fill="#e2e8f0" font-size="12">Belgium</text>
+  <text x="320" y="431" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.60</text>
+  <text x="430" y="431" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">3.90</text>
+  <text x="540" y="431" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+1.70</text>
+  <text x="660" y="431" fill="#94a3b8" font-size="11" text-anchor="end">18</text>
+  <rect x="695" y="423" width="47.1578947368421" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="742.1578947368421" y="423" width="32.8421052631579" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="444" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="457" fill="#64748b" font-size="10">14</text>
+  <text x="80" y="457" fill="#e2e8f0" font-size="12">Norway</text>
+  <text x="320" y="457" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.41</text>
+  <text x="430" y="457" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="457" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.91</text>
+  <text x="660" y="457" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="449" width="43.67305751765893" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="738.6730575176589" y="449" width="36.32694248234107" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="470" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="483" fill="#64748b" font-size="10">15</text>
+  <text x="80" y="483" fill="#e2e8f0" font-size="12">Indonesia</text>
+  <text x="320" y="483" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.41</text>
+  <text x="430" y="483" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">3.74</text>
+  <text x="540" y="483" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+1.67</text>
+  <text x="660" y="483" fill="#94a3b8" font-size="11" text-anchor="end">58</text>
+  <rect x="695" y="475" width="47.30054644808743" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="742.3005464480874" y="475" width="32.69945355191257" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="496" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="509" fill="#64748b" font-size="10">16</text>
+  <text x="80" y="509" fill="#e2e8f0" font-size="12">England</text>
+  <text x="320" y="509" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.40</text>
+  <text x="430" y="509" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">3.60</text>
+  <text x="540" y="509" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+1.80</text>
+  <text x="660" y="509" fill="#94a3b8" font-size="11" text-anchor="end">22</text>
+  <rect x="695" y="501" width="48.00000000000001" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="743.0" y="501" width="32.0" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="522" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="535" fill="#64748b" font-size="10">17</text>
+  <text x="80" y="535" fill="#e2e8f0" font-size="12">South Korea</text>
+  <text x="320" y="535" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.38</text>
+  <text x="430" y="535" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="535" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.88</text>
+  <text x="660" y="535" fill="#94a3b8" font-size="11" text-anchor="end">8</text>
+  <rect x="695" y="527" width="43.56275303643726" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="738.5627530364372" y="527" width="36.43724696356276" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="548" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="561" fill="#64748b" font-size="10">18</text>
+  <text x="80" y="561" fill="#e2e8f0" font-size="12">Denmark</text>
+  <text x="320" y="561" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.35</text>
+  <text x="430" y="561" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="561" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.85</text>
+  <text x="660" y="561" fill="#94a3b8" font-size="11" text-anchor="end">7</text>
+  <rect x="695" y="553" width="43.45177664974619" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="738.4517766497462" y="553" width="36.54822335025381" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="574" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="587" fill="#64748b" font-size="10">19</text>
+  <text x="80" y="587" fill="#e2e8f0" font-size="12">Iceland</text>
+  <text x="320" y="587" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.32</text>
+  <text x="430" y="587" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="587" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.82</text>
+  <text x="660" y="587" fill="#94a3b8" font-size="11" text-anchor="end">3</text>
+  <rect x="695" y="579" width="43.34012219959267" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="738.3401221995927" y="579" width="36.65987780040733" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="600" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="613" fill="#64748b" font-size="10">20</text>
+  <text x="80" y="613" fill="#e2e8f0" font-size="12">Nigeria</text>
+  <text x="320" y="613" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.31</text>
+  <text x="430" y="613" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="613" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.81</text>
+  <text x="660" y="613" fill="#94a3b8" font-size="11" text-anchor="end">3</text>
+  <rect x="695" y="605" width="43.30275229357799" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="738.302752293578" y="605" width="36.697247706422026" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="626" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="639" fill="#64748b" font-size="10">21</text>
+  <text x="80" y="639" fill="#e2e8f0" font-size="12">Austria</text>
+  <text x="320" y="639" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.25</text>
+  <text x="430" y="639" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="639" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.75</text>
+  <text x="660" y="639" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="631" width="43.07692307692307" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="738.0769230769231" y="631" width="36.92307692307693" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="652" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="665" fill="#64748b" font-size="10">22</text>
+  <text x="80" y="665" fill="#e2e8f0" font-size="12">Italy</text>
+  <text x="320" y="665" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.20</text>
+  <text x="430" y="665" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">3.90</text>
+  <text x="540" y="665" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+1.30</text>
+  <text x="660" y="665" fill="#94a3b8" font-size="11" text-anchor="end">15</text>
+  <rect x="695" y="657" width="45.71428571428572" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="740.7142857142858" y="657" width="34.28571428571429" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="678" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="691" fill="#64748b" font-size="10">23</text>
+  <text x="80" y="691" fill="#e2e8f0" font-size="12">Colombia</text>
+  <text x="320" y="691" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.14</text>
+  <text x="430" y="691" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="691" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.64</text>
+  <text x="660" y="691" fill="#94a3b8" font-size="11" text-anchor="end">5</text>
+  <rect x="695" y="683" width="42.65560165975103" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="737.655601659751" y="683" width="37.34439834024896" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="704" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="717" fill="#64748b" font-size="10">24</text>
+  <text x="80" y="717" fill="#e2e8f0" font-size="12">Cameroon</text>
+  <text x="320" y="717" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.13</text>
+  <text x="430" y="717" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="717" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.63</text>
+  <text x="660" y="717" fill="#94a3b8" font-size="11" text-anchor="end">3</text>
+  <rect x="695" y="709" width="42.61682242990655" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="737.6168224299065" y="709" width="37.383177570093466" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="730" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="743" fill="#64748b" font-size="10">25</text>
+  <text x="80" y="743" fill="#e2e8f0" font-size="12">Panama</text>
+  <text x="320" y="743" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.11</text>
+  <text x="430" y="743" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="743" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.61</text>
+  <text x="660" y="743" fill="#94a3b8" font-size="11" text-anchor="end">4</text>
+  <rect x="695" y="735" width="42.53902185223726" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="737.5390218522373" y="735" width="37.46097814776275" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="756" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="769" fill="#64748b" font-size="10">26</text>
+  <text x="80" y="769" fill="#e2e8f0" font-size="12">USA</text>
+  <text x="320" y="769" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.10</text>
+  <text x="430" y="769" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.40</text>
+  <text x="540" y="769" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.70</text>
+  <text x="660" y="769" fill="#94a3b8" font-size="11" text-anchor="end">20</text>
+  <rect x="695" y="761" width="42.94736842105263" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="737.9473684210526" y="761" width="37.05263157894737" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="782" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="795" fill="#64748b" font-size="10">27</text>
+  <text x="80" y="795" fill="#e2e8f0" font-size="12">Ecuador</text>
+  <text x="320" y="795" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.09</text>
+  <text x="430" y="795" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="795" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.59</text>
+  <text x="660" y="795" fill="#94a3b8" font-size="11" text-anchor="end">4</text>
+  <rect x="695" y="787" width="42.46089676746611" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="737.4608967674661" y="787" width="37.53910323253389" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="808" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="821" fill="#64748b" font-size="10">28</text>
+  <text x="80" y="821" fill="#e2e8f0" font-size="12">Netherlands</text>
+  <text x="320" y="821" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.05</text>
+  <text x="430" y="821" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="821" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.55</text>
+  <text x="660" y="821" fill="#94a3b8" font-size="11" text-anchor="end">6</text>
+  <rect x="695" y="813" width="42.303664921465966" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="737.303664921466" y="813" width="37.69633507853403" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="834" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="847" fill="#64748b" font-size="10">29</text>
+  <text x="80" y="847" fill="#e2e8f0" font-size="12">Ukraine</text>
+  <text x="320" y="847" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.03</text>
+  <text x="430" y="847" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.02</text>
+  <text x="540" y="847" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+1.01</text>
+  <text x="660" y="847" fill="#94a3b8" font-size="11" text-anchor="end">45</text>
+  <rect x="695" y="839" width="44.46408839779005" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="739.4640883977901" y="839" width="35.535911602209936" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="860" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="873" fill="#64748b" font-size="10">30</text>
+  <text x="80" y="873" fill="#e2e8f0" font-size="12">Mexico</text>
+  <text x="320" y="873" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.00</text>
+  <text x="430" y="873" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="873" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.50</text>
+  <text x="660" y="873" fill="#94a3b8" font-size="11" text-anchor="end">19</text>
+  <rect x="695" y="865" width="42.10526315789473" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="737.1052631578947" y="865" width="37.89473684210526" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="886" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="899" fill="#64748b" font-size="10">31</text>
+  <text x="80" y="899" fill="#e2e8f0" font-size="12">Mali</text>
+  <text x="320" y="899" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">5.00</text>
+  <text x="430" y="899" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.05</text>
+  <text x="540" y="899" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.95</text>
+  <text x="660" y="899" fill="#94a3b8" font-size="11" text-anchor="end">48</text>
+  <rect x="695" y="891" width="44.1988950276243" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="739.1988950276243" y="891" width="35.80110497237569" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="912" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="925" fill="#64748b" font-size="10">32</text>
+  <text x="80" y="925" fill="#e2e8f0" font-size="12">Croatia</text>
+  <text x="320" y="925" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.90</text>
+  <text x="430" y="925" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.60</text>
+  <text x="540" y="925" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.30</text>
+  <text x="660" y="925" fill="#94a3b8" font-size="11" text-anchor="end">21</text>
+  <rect x="695" y="917" width="41.26315789473685" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="736.2631578947369" y="917" width="38.73684210526315" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="938" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="951" fill="#64748b" font-size="10">33</text>
+  <text x="80" y="951" fill="#e2e8f0" font-size="12">Jordan</text>
+  <text x="320" y="951" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.84</text>
+  <text x="430" y="951" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="951" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.34</text>
+  <text x="660" y="951" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="943" width="41.45610278372591" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="736.4561027837259" y="943" width="38.54389721627409" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="964" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="977" fill="#64748b" font-size="10">34</text>
+  <text x="80" y="977" fill="#e2e8f0" font-size="12">Russia</text>
+  <text x="320" y="977" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.81</text>
+  <text x="430" y="977" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="977" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.31</text>
+  <text x="660" y="977" fill="#94a3b8" font-size="11" text-anchor="end">6</text>
+  <rect x="695" y="969" width="41.33190118152524" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="736.3319011815253" y="969" width="38.66809881847476" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="990" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1003" fill="#64748b" font-size="10">35</text>
+  <text x="80" y="1003" fill="#e2e8f0" font-size="12">Uruguay</text>
+  <text x="320" y="1003" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.80</text>
+  <text x="430" y="1003" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.20</text>
+  <text x="540" y="1003" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.60</text>
+  <text x="660" y="1003" fill="#94a3b8" font-size="11" text-anchor="end">18</text>
+  <rect x="695" y="995" width="42.666666666666664" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="737.6666666666666" y="995" width="37.333333333333336" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1016" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1029" fill="#64748b" font-size="10">36</text>
+  <text x="80" y="1029" fill="#e2e8f0" font-size="12">Egypt</text>
+  <text x="320" y="1029" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.73</text>
+  <text x="430" y="1029" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1029" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.23</text>
+  <text x="660" y="1029" fill="#94a3b8" font-size="11" text-anchor="end">4</text>
+  <rect x="695" y="1021" width="40.9967497291441" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="735.9967497291441" y="1021" width="39.0032502708559" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1042" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1055" fill="#64748b" font-size="10">37</text>
+  <text x="80" y="1055" fill="#e2e8f0" font-size="12">New Zealand</text>
+  <text x="320" y="1055" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.68</text>
+  <text x="430" y="1055" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1055" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.18</text>
+  <text x="660" y="1055" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1047" width="40.78431372549019" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="735.7843137254902" y="1047" width="39.21568627450981" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1068" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1081" fill="#64748b" font-size="10">38</text>
+  <text x="80" y="1081" fill="#e2e8f0" font-size="12">Ghana</text>
+  <text x="320" y="1081" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.63</text>
+  <text x="430" y="1081" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1081" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.13</text>
+  <text x="660" y="1081" fill="#94a3b8" font-size="11" text-anchor="end">4</text>
+  <rect x="695" y="1073" width="40.56955093099671" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="735.5695509309967" y="1073" width="39.43044906900329" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1094" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1107" fill="#64748b" font-size="10">39</text>
+  <text x="80" y="1107" fill="#e2e8f0" font-size="12">Tunisia</text>
+  <text x="320" y="1107" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.62</text>
+  <text x="430" y="1107" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1107" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.12</text>
+  <text x="660" y="1107" fill="#94a3b8" font-size="11" text-anchor="end">7</text>
+  <rect x="695" y="1099" width="40.526315789473685" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="735.5263157894736" y="1099" width="39.47368421052631" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1120" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1133" fill="#64748b" font-size="10">40</text>
+  <text x="80" y="1133" fill="#e2e8f0" font-size="12">Japan</text>
+  <text x="320" y="1133" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.60</text>
+  <text x="430" y="1133" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.80</text>
+  <text x="540" y="1133" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-0.20</text>
+  <text x="660" y="1133" fill="#94a3b8" font-size="11" text-anchor="end">17</text>
+  <rect x="695" y="1125" width="39.14893617021277" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="734.1489361702128" y="1125" width="40.851063829787236" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1146" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1159" fill="#64748b" font-size="10">41</text>
+  <text x="80" y="1159" fill="#e2e8f0" font-size="12">Sweden</text>
+  <text x="320" y="1159" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.60</text>
+  <text x="430" y="1159" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1159" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.10</text>
+  <text x="660" y="1159" fill="#94a3b8" font-size="11" text-anchor="end">6</text>
+  <rect x="695" y="1151" width="40.43956043956044" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="735.4395604395604" y="1151" width="39.56043956043956" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1172" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1185" fill="#64748b" font-size="10">42</text>
+  <text x="80" y="1185" fill="#e2e8f0" font-size="12">Hungary</text>
+  <text x="320" y="1185" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.59</text>
+  <text x="430" y="1185" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.42</text>
+  <text x="540" y="1185" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.17</text>
+  <text x="660" y="1185" fill="#94a3b8" font-size="11" text-anchor="end">47</text>
+  <rect x="695" y="1177" width="40.75471698113208" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="735.7547169811321" y="1177" width="39.24528301886792" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1198" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1211" fill="#64748b" font-size="10">43</text>
+  <text x="80" y="1211" fill="#e2e8f0" font-size="12">Australia</text>
+  <text x="320" y="1211" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.57</text>
+  <text x="430" y="1211" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1211" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.07</text>
+  <text x="660" y="1211" fill="#94a3b8" font-size="11" text-anchor="end">8</text>
+  <rect x="695" y="1203" width="40.30871003307608" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="735.3087100330761" y="1203" width="39.69128996692392" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1224" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1237" fill="#64748b" font-size="10">44</text>
+  <text x="80" y="1237" fill="#e2e8f0" font-size="12">Slovakia</text>
+  <text x="320" y="1237" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.56</text>
+  <text x="430" y="1237" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.44</text>
+  <text x="540" y="1237" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.12</text>
+  <text x="660" y="1237" fill="#94a3b8" font-size="11" text-anchor="end">48</text>
+  <rect x="695" y="1229" width="40.53333333333333" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="735.5333333333333" y="1229" width="39.46666666666667" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1250" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1263" fill="#64748b" font-size="10">45</text>
+  <text x="80" y="1263" fill="#e2e8f0" font-size="12">Iraq</text>
+  <text x="320" y="1263" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.42</text>
+  <text x="430" y="1263" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1263" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-0.08</text>
+  <text x="660" y="1263" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1255" width="39.64125560538116" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="734.6412556053812" y="1255" width="40.35874439461884" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1276" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1289" fill="#64748b" font-size="10">46</text>
+  <text x="80" y="1289" fill="#e2e8f0" font-size="12">Senegal</text>
+  <text x="320" y="1289" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.40</text>
+  <text x="430" y="1289" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.30</text>
+  <text x="540" y="1289" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">+0.10</text>
+  <text x="660" y="1289" fill="#94a3b8" font-size="11" text-anchor="end">14</text>
+  <rect x="695" y="1281" width="40.45977011494253" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="735.4597701149426" y="1281" width="39.54022988505747" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1302" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1315" fill="#64748b" font-size="10">47</text>
+  <text x="80" y="1315" fill="#e2e8f0" font-size="12">Scotland</text>
+  <text x="320" y="1315" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.32</text>
+  <text x="430" y="1315" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1315" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-0.18</text>
+  <text x="660" y="1315" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1307" width="39.183673469387756" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="734.1836734693877" y="1307" width="40.816326530612244" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1328" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1341" fill="#64748b" font-size="10">48</text>
+  <text x="80" y="1341" fill="#e2e8f0" font-size="12">Czech Republic</text>
+  <text x="320" y="1341" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.21</text>
+  <text x="430" y="1341" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1341" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-0.29</text>
+  <text x="660" y="1341" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1333" width="38.66819747416762" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="733.6681974741676" y="1333" width="41.33180252583237" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1354" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1367" fill="#64748b" font-size="10">49</text>
+  <text x="80" y="1367" fill="#e2e8f0" font-size="12">Poland</text>
+  <text x="320" y="1367" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.19</text>
+  <text x="430" y="1367" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1367" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-0.31</text>
+  <text x="660" y="1367" fill="#94a3b8" font-size="11" text-anchor="end">7</text>
+  <rect x="695" y="1359" width="38.57307249712313" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="733.5730724971231" y="1359" width="41.426927502876865" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1380" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1393" fill="#64748b" font-size="10">50</text>
+  <text x="80" y="1393" fill="#e2e8f0" font-size="12">Peru</text>
+  <text x="320" y="1393" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.13</text>
+  <text x="430" y="1393" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1393" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-0.37</text>
+  <text x="660" y="1393" fill="#94a3b8" font-size="11" text-anchor="end">3</text>
+  <rect x="695" y="1385" width="38.28505214368482" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="733.2850521436849" y="1385" width="41.71494785631518" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1406" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1419" fill="#64748b" font-size="10">51</text>
+  <text x="80" y="1419" fill="#e2e8f0" font-size="12">Honduras</text>
+  <text x="320" y="1419" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.13</text>
+  <text x="430" y="1419" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.90</text>
+  <text x="540" y="1419" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-0.77</text>
+  <text x="660" y="1419" fill="#94a3b8" font-size="11" text-anchor="end">57</text>
+  <rect x="695" y="1411" width="36.5891472868217" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="731.5891472868217" y="1411" width="43.41085271317829" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1432" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1445" fill="#64748b" font-size="10">52</text>
+  <text x="80" y="1445" fill="#e2e8f0" font-size="12">Morocco</text>
+  <text x="320" y="1445" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.10</text>
+  <text x="430" y="1445" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">5.20</text>
+  <text x="540" y="1445" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-1.10</text>
+  <text x="660" y="1445" fill="#94a3b8" font-size="11" text-anchor="end">16</text>
+  <rect x="695" y="1437" width="35.26881720430107" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="730.2688172043011" y="1437" width="44.73118279569892" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1458" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1471" fill="#64748b" font-size="10">53</text>
+  <text x="80" y="1471" fill="#e2e8f0" font-size="12">Venezuela</text>
+  <text x="320" y="1471" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">4.09</text>
+  <text x="430" y="1471" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.96</text>
+  <text x="540" y="1471" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-0.87</text>
+  <text x="660" y="1471" fill="#94a3b8" font-size="11" text-anchor="end">46</text>
+  <rect x="695" y="1463" width="36.15469613259668" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="731.1546961325967" y="1463" width="43.84530386740331" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1484" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1497" fill="#64748b" font-size="10">54</text>
+  <text x="80" y="1497" fill="#e2e8f0" font-size="12">Uzbekistan</text>
+  <text x="320" y="1497" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">3.95</text>
+  <text x="430" y="1497" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1497" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-0.55</text>
+  <text x="660" y="1497" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1489" width="37.396449704142015" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="732.396449704142" y="1489" width="42.60355029585799" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1510" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1523" fill="#64748b" font-size="10">55</text>
+  <text x="80" y="1523" fill="#e2e8f0" font-size="12">Saudi Arabia</text>
+  <text x="320" y="1523" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">3.90</text>
+  <text x="430" y="1523" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">5.80</text>
+  <text x="540" y="1523" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-1.90</text>
+  <text x="660" y="1523" fill="#94a3b8" font-size="11" text-anchor="end">13</text>
+  <rect x="695" y="1515" width="32.16494845360825" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="727.1649484536083" y="1515" width="47.83505154639175" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1536" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1549" fill="#64748b" font-size="10">56</text>
+  <text x="80" y="1549" fill="#e2e8f0" font-size="12">DR Congo</text>
+  <text x="320" y="1549" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">3.89</text>
+  <text x="430" y="1549" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">5.21</text>
+  <text x="540" y="1549" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-1.32</text>
+  <text x="660" y="1549" fill="#94a3b8" font-size="11" text-anchor="end">54</text>
+  <rect x="695" y="1541" width="34.197802197802204" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="729.1978021978022" y="1541" width="45.802197802197796" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1562" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1575" fill="#64748b" font-size="10">57</text>
+  <text x="80" y="1575" fill="#e2e8f0" font-size="12">Iran</text>
+  <text x="320" y="1575" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">3.80</text>
+  <text x="430" y="1575" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">5.50</text>
+  <text x="540" y="1575" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-1.70</text>
+  <text x="660" y="1575" fill="#94a3b8" font-size="11" text-anchor="end">12</text>
+  <rect x="695" y="1567" width="32.68817204301075" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="727.6881720430108" y="1567" width="47.31182795698924" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1588" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1601" fill="#64748b" font-size="10">58</text>
+  <text x="80" y="1601" fill="#e2e8f0" font-size="12">Ivory Coast</text>
+  <text x="320" y="1601" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">3.80</text>
+  <text x="430" y="1601" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1601" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-0.70</text>
+  <text x="660" y="1601" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1593" width="36.62650602409638" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="731.6265060240963" y="1593" width="43.373493975903614" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1614" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1627" fill="#64748b" font-size="10">59</text>
+  <text x="80" y="1627" fill="#e2e8f0" font-size="12">Wales</text>
+  <text x="320" y="1627" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">3.69</text>
+  <text x="430" y="1627" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1627" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-0.81</text>
+  <text x="660" y="1627" fill="#94a3b8" font-size="11" text-anchor="end">3</text>
+  <rect x="695" y="1619" width="36.043956043956044" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="731.0439560439561" y="1619" width="43.956043956043956" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1640" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1653" fill="#64748b" font-size="10">60</text>
+  <text x="80" y="1653" fill="#e2e8f0" font-size="12">Bosnia & Herz</text>
+  <text x="320" y="1653" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">3.33</text>
+  <text x="430" y="1653" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1653" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-1.17</text>
+  <text x="660" y="1653" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1645" width="34.02298850574712" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="729.0229885057471" y="1645" width="45.97701149425287" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1666" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1679" fill="#64748b" font-size="10">61</text>
+  <text x="80" y="1679" fill="#e2e8f0" font-size="12">Qatar</text>
+  <text x="320" y="1679" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">3.31</text>
+  <text x="430" y="1679" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1679" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-1.19</text>
+  <text x="660" y="1679" fill="#94a3b8" font-size="11" text-anchor="end">4</text>
+  <rect x="695" y="1671" width="33.905249679897565" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="728.9052496798976" y="1671" width="46.094750320102435" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1692" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1705" fill="#64748b" font-size="10">62</text>
+  <text x="80" y="1705" fill="#e2e8f0" font-size="12">Costa Rica</text>
+  <text x="320" y="1705" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">3.15</text>
+  <text x="430" y="1705" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1705" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-1.35</text>
+  <text x="660" y="1705" fill="#94a3b8" font-size="11" text-anchor="end">6</text>
+  <rect x="695" y="1697" width="32.94117647058823" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="727.9411764705883" y="1697" width="47.05882352941177" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1718" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1731" fill="#64748b" font-size="10">63</text>
+  <text x="80" y="1731" fill="#e2e8f0" font-size="12">Congo Dr</text>
+  <text x="320" y="1731" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">3.12</text>
+  <text x="430" y="1731" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1731" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-1.38</text>
+  <text x="660" y="1731" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1723" width="32.75590551181102" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="727.7559055118111" y="1723" width="47.24409448818897" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1744" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1757" fill="#64748b" font-size="10">64</text>
+  <text x="80" y="1757" fill="#e2e8f0" font-size="12">Algeria</text>
+  <text x="320" y="1757" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">2.76</text>
+  <text x="430" y="1757" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1757" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-1.74</text>
+  <text x="660" y="1757" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1749" width="30.413223140495866" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="725.4132231404959" y="1749" width="49.586776859504134" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1770" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1783" fill="#64748b" font-size="10">65</text>
+  <text x="80" y="1783" fill="#e2e8f0" font-size="12">Curacao</text>
+  <text x="320" y="1783" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">2.71</text>
+  <text x="430" y="1783" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1783" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-1.79</text>
+  <text x="660" y="1783" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1775" width="30.069348127600556" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="725.0693481276005" y="1775" width="49.93065187239945" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1796" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1809" fill="#64748b" font-size="10">66</text>
+  <text x="80" y="1809" fill="#e2e8f0" font-size="12">Paraguay</text>
+  <text x="320" y="1809" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">2.45</text>
+  <text x="430" y="1809" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1809" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-2.05</text>
+  <text x="660" y="1809" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1801" width="28.201438848920866" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="723.2014388489208" y="1801" width="51.798561151079134" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1822" width="840" height="26" rx="2" fill="transparent"/>
+  <text x="50" y="1835" fill="#64748b" font-size="10">67</text>
+  <text x="80" y="1835" fill="#e2e8f0" font-size="12">South Africa</text>
+  <text x="320" y="1835" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">2.13</text>
+  <text x="430" y="1835" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1835" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-2.37</text>
+  <text x="660" y="1835" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1827" width="25.701357466063346" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="720.7013574660633" y="1827" width="54.29864253393666" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1848" width="840" height="26" rx="2" fill="#1a2332"/>
+  <text x="50" y="1861" fill="#64748b" font-size="10">68</text>
+  <text x="80" y="1861" fill="#e2e8f0" font-size="12">Cape Verde</text>
+  <text x="320" y="1861" fill="#4ade80" font-size="12" font-weight="bold" text-anchor="end">1.77</text>
+  <text x="430" y="1861" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">4.50</text>
+  <text x="540" y="1861" fill="#f87171" font-size="12" font-weight="bold" text-anchor="end">-2.73</text>
+  <text x="660" y="1861" fill="#94a3b8" font-size="11" text-anchor="end">1</text>
+  <rect x="695" y="1853" width="22.58373205741627" height="8" rx="3" fill="#4ade80" opacity="0.7"/>
+  <rect x="717.5837320574162" y="1853" width="57.41626794258374" height="8" rx="3" fill="#f87171" opacity="0.7"/>
+  <rect x="30" y="1890" width="12" height="12" rx="2" fill="#4ade80" opacity="0.7"/>
+  <text x="48" y="1900" fill="#94a3b8" font-size="11">Corners For</text>
+  <rect x="130" y="1890" width="12" height="12" rx="2" fill="#f87171" opacity="0.7"/>
+  <text x="148" y="1900" fill="#94a3b8" font-size="11">Corners Against</text>
+</svg>

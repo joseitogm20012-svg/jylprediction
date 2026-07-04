@@ -1,0 +1,152 @@
+{
+  "match_id": "b5JayTEd",
+  "estadisticas": {
+    "1.26Goles esperados (xG)1.36": {
+      "home": "1.26",
+      "away": "1.36"
+    },
+    "51%Posesión49%": {
+      "home": "51%",
+      "away": "49%"
+    },
+    "12Remates totales14": {
+      "home": "12",
+      "away": "14"
+    },
+    "5Remates a puerta3": {
+      "home": "5",
+      "away": "3"
+    },
+    "1Grandes ocasiones2": {
+      "home": "1",
+      "away": "2"
+    },
+    "6Córneres2": {
+      "home": "6",
+      "away": "2"
+    },
+    "87%(449/514)Pases86%(419/486)": {
+      "home": "87%(449/514)",
+      "away": "86%(419/486)"
+    },
+    "2Tarjetas amarillas0": {
+      "home": "2",
+      "away": "0"
+    },
+    "1.37xG a puerta (xGOT)0.74": {
+      "home": "1.37",
+      "away": "0.74"
+    },
+    "4Remates fuera5": {
+      "home": "4",
+      "away": "5"
+    },
+    "3Remates rechazados6": {
+      "home": "3",
+      "away": "6"
+    },
+    "9Remates dentro del área7": {
+      "home": "9",
+      "away": "7"
+    },
+    "3Remates fuera del área7": {
+      "home": "3",
+      "away": "7"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "22Toques en el área rival13": {
+      "home": "22",
+      "away": "13"
+    },
+    "0Pases entre líneas completados1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Fueras de juego1": {
+      "home": "0",
+      "away": "1"
+    },
+    "14Tiros libres16": {
+      "home": "14",
+      "away": "16"
+    },
+    "50%(18/36)Pases largos33%(17/52)": {
+      "home": "50%(18/36)",
+      "away": "33%(17/52)"
+    },
+    "69%(69/100)Pases en el último tercio78%(123/157)": {
+      "home": "69%(69/100)",
+      "away": "78%(123/157)"
+    },
+    "25%(4/16)Centros13%(2/15)": {
+      "home": "25%(4/16)",
+      "away": "13%(2/15)"
+    },
+    "0.64Asistencias esperadas (xA)0.60": {
+      "home": "0.64",
+      "away": "0.60"
+    },
+    "17Saques de banda13": {
+      "home": "17",
+      "away": "13"
+    },
+    "16Faltas14": {
+      "home": "16",
+      "away": "14"
+    },
+    "57%(13/23)Entradas69%(18/26)": {
+      "home": "57%(13/23)",
+      "away": "69%(18/26)"
+    },
+    "53Duelos ganados62": {
+      "home": "53",
+      "away": "62"
+    },
+    "23Despejes17": {
+      "home": "23",
+      "away": "17"
+    },
+    "5Intercepciones5": {
+      "home": "5",
+      "away": "5"
+    },
+    "3Errores conducentes a remate0": {
+      "home": "3",
+      "away": "0"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Paradas4": {
+      "home": "2",
+      "away": "4"
+    },
+    "0.74xGOT enfrentados1.37": {
+      "home": "0.74",
+      "away": "1.37"
+    },
+    "-0.26Goles evitados0.37": {
+      "home": "-0.26",
+      "away": "0.37"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "13.06.2026 18:00BrasilFIFA: 6.1-1FinalizadoMarruecosFIFA: 7.1-1Finalizado",
+  "score": "1-1"
+}

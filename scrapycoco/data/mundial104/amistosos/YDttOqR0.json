@@ -1,0 +1,152 @@
+{
+  "match_id": "YDttOqR0",
+  "estadisticas": {
+    "3.40Goles esperados (xG)0.52": {
+      "home": "3.40",
+      "away": "0.52"
+    },
+    "69%Posesión31%": {
+      "home": "69%",
+      "away": "31%"
+    },
+    "21Remates totales7": {
+      "home": "21",
+      "away": "7"
+    },
+    "10Remates a puerta2": {
+      "home": "10",
+      "away": "2"
+    },
+    "8Grandes ocasiones1": {
+      "home": "8",
+      "away": "1"
+    },
+    "4Córneres1": {
+      "home": "4",
+      "away": "1"
+    },
+    "89%(491/550)Pases74%(179/243)": {
+      "home": "89%(491/550)",
+      "away": "74%(179/243)"
+    },
+    "1Tarjetas amarillas2": {
+      "home": "1",
+      "away": "2"
+    },
+    "2.44xG a puerta (xGOT)0.04": {
+      "home": "2.44",
+      "away": "0.04"
+    },
+    "10Remates fuera4": {
+      "home": "10",
+      "away": "4"
+    },
+    "1Remates rechazados1": {
+      "home": "1",
+      "away": "1"
+    },
+    "17Remates dentro del área4": {
+      "home": "17",
+      "away": "4"
+    },
+    "4Remates fuera del área3": {
+      "home": "4",
+      "away": "3"
+    },
+    "2Al palo0": {
+      "home": "2",
+      "away": "0"
+    },
+    "38Toques en el área rival7": {
+      "home": "38",
+      "away": "7"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "3Fueras de juego0": {
+      "home": "3",
+      "away": "0"
+    },
+    "17Tiros libres22": {
+      "home": "17",
+      "away": "22"
+    },
+    "73%(37/51)Pases largos31%(15/48)": {
+      "home": "73%(37/51)",
+      "away": "31%(15/48)"
+    },
+    "79%(116/147)Pases en el último tercio45%(26/58)": {
+      "home": "79%(116/147)",
+      "away": "45%(26/58)"
+    },
+    "31%(4/13)Centros20%(2/10)": {
+      "home": "31%(4/13)",
+      "away": "20%(2/10)"
+    },
+    "2.91Asistencias esperadas (xA)0.40": {
+      "home": "2.91",
+      "away": "0.40"
+    },
+    "13Saques de banda15": {
+      "home": "13",
+      "away": "15"
+    },
+    "22Faltas17": {
+      "home": "22",
+      "away": "17"
+    },
+    "75%(9/12)Entradas56%(5/9)": {
+      "home": "75%(9/12)",
+      "away": "56%(5/9)"
+    },
+    "48Duelos ganados43": {
+      "home": "48",
+      "away": "43"
+    },
+    "12Despejes23": {
+      "home": "12",
+      "away": "23"
+    },
+    "7Intercepciones5": {
+      "home": "7",
+      "away": "5"
+    },
+    "1Errores conducentes a remate1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "2Paradas6": {
+      "home": "2",
+      "away": "6"
+    },
+    "0.04xGOT enfrentados2.44": {
+      "home": "0.04",
+      "away": "2.44"
+    },
+    "0.04Goles evitados-0.56": {
+      "home": "0.04",
+      "away": "-0.56"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    },
+    "visitante": {
+      "titulares": [],
+      "suplentes": [],
+      "formacion": ""
+    }
+  },
+  "error": null,
+  "description": "18.11.2025 21:00PanamáFIFA: 34.3-0FinalizadoEl SalvadorFIFA: 100.3-0Finalizado",
+  "score": "3-0"
+}

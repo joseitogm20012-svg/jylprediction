@@ -1,0 +1,191 @@
+{
+  "match_id": "zP64Ye2M",
+  "estadisticas": {
+    "1.23Goles esperados (xG)1.35": {
+      "home": "1.23",
+      "away": "1.35"
+    },
+    "23%Posesión77%": {
+      "home": "23%",
+      "away": "77%"
+    },
+    "9Remates totales22": {
+      "home": "9",
+      "away": "22"
+    },
+    "4Remates a puerta8": {
+      "home": "4",
+      "away": "8"
+    },
+    "2Grandes ocasiones2": {
+      "home": "2",
+      "away": "2"
+    },
+    "7Córneres4": {
+      "home": "7",
+      "away": "4"
+    },
+    "57%(163/286)Pases86%(860/997)": {
+      "home": "57%(163/286)",
+      "away": "86%(860/997)"
+    },
+    "1Tarjetas amarillas2": {
+      "home": "1",
+      "away": "2"
+    },
+    "1.42xG a puerta (xGOT)1.92": {
+      "home": "1.42",
+      "away": "1.92"
+    },
+    "3Remates fuera7": {
+      "home": "3",
+      "away": "7"
+    },
+    "2Remates rechazados7": {
+      "home": "2",
+      "away": "7"
+    },
+    "5Remates dentro del área11": {
+      "home": "5",
+      "away": "11"
+    },
+    "4Remates fuera del área11": {
+      "home": "4",
+      "away": "11"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Goles de cabeza2": {
+      "home": "0",
+      "away": "2"
+    },
+    "13Toques en el área rival38": {
+      "home": "13",
+      "away": "38"
+    },
+    "1Pases entre líneas completados1": {
+      "home": "1",
+      "away": "1"
+    },
+    "1Fueras de juego1": {
+      "home": "1",
+      "away": "1"
+    },
+    "11Tiros libres20": {
+      "home": "11",
+      "away": "20"
+    },
+    "34%(21/61)Pases largos46%(32/70)": {
+      "home": "34%(21/61)",
+      "away": "46%(32/70)"
+    },
+    "43%(40/94)Pases en el último tercio80%(258/324)": {
+      "home": "43%(40/94)",
+      "away": "80%(258/324)"
+    },
+    "17%(3/18)Centros25%(7/28)": {
+      "home": "17%(3/18)",
+      "away": "25%(7/28)"
+    },
+    "0.69Asistencias esperadas (xA)2.59": {
+      "home": "0.69",
+      "away": "2.59"
+    },
+    "25Saques de banda36": {
+      "home": "25",
+      "away": "36"
+    },
+    "20Faltas11": {
+      "home": "20",
+      "away": "11"
+    },
+    "57%(12/21)Entradas52%(11/21)": {
+      "home": "57%(12/21)",
+      "away": "52%(11/21)"
+    },
+    "63Duelos ganados80": {
+      "home": "63",
+      "away": "80"
+    },
+    "49Despejes26": {
+      "home": "49",
+      "away": "26"
+    },
+    "13Intercepciones9": {
+      "home": "13",
+      "away": "9"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Errores conducentes a gol0": {
+      "home": "1",
+      "away": "0"
+    },
+    "5Paradas2": {
+      "home": "5",
+      "away": "2"
+    },
+    "1.92xGOT enfrentados1.42": {
+      "home": "1.92",
+      "away": "1.42"
+    },
+    "-0.08Goles evitados-0.58": {
+      "home": "-0.08",
+      "away": "-0.58"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Kovar",
+        "2Chaloupek",
+        "4Hranac",
+        "7Krejci",
+        "5Coufal",
+        "22Soucek",
+        "8Darida",
+        "20Zeleny",
+        "14Provod",
+        "15Sulc",
+        "10Schick"
+      ],
+      "suplentes": [
+        "Norgaard C.",
+        "Eriksen C.",
+        "Dreyer A.",
+        "Hogh K.",
+        "Jensen M."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "16Hermansen",
+        "18Bah",
+        "2Andersen",
+        "3Nelsson",
+        "5Maehle",
+        "21Hjulmand",
+        "23Hojbjerg",
+        "8Isaksen",
+        "12Froholdt",
+        "14Damsgaard",
+        "9Hojlund"
+      ],
+      "suplentes": [
+        "Cerv L.",
+        "Chytil M.",
+        "Chory T.",
+        "Sadilek M."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "31.03.2026 14:45República ChecaEquipo que avanzaFIFA: 40.2-2Tras la prórrogaPen: 3 - 1DinamarcaFIFA: 21.2-2Pen: 3 - 1",
+  "score": "2-2"
+}

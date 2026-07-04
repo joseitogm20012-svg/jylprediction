@@ -1,0 +1,189 @@
+{
+  "match_id": "IF1lMyQr",
+  "estadisticas": {
+    "1.76Goles esperados (xG)2.19": {
+      "home": "1.76",
+      "away": "2.19"
+    },
+    "30%Posesión70%": {
+      "home": "30%",
+      "away": "70%"
+    },
+    "10Remates totales18": {
+      "home": "10",
+      "away": "18"
+    },
+    "5Remates a puerta3": {
+      "home": "5",
+      "away": "3"
+    },
+    "2Grandes ocasiones2": {
+      "home": "2",
+      "away": "2"
+    },
+    "2Córneres9": {
+      "home": "2",
+      "away": "9"
+    },
+    "73%(188/259)Pases88%(536/607)": {
+      "home": "73%(188/259)",
+      "away": "88%(536/607)"
+    },
+    "1Tarjetas amarillas3": {
+      "home": "1",
+      "away": "3"
+    },
+    "0Tarjetas rojas1": {
+      "home": "0",
+      "away": "1"
+    },
+    "2.19xG a puerta (xGOT)2.37": {
+      "home": "2.19",
+      "away": "2.37"
+    },
+    "2Remates fuera8": {
+      "home": "2",
+      "away": "8"
+    },
+    "3Remates rechazados7": {
+      "home": "3",
+      "away": "7"
+    },
+    "7Remates dentro del área10": {
+      "home": "7",
+      "away": "10"
+    },
+    "3Remates fuera del área8": {
+      "home": "3",
+      "away": "8"
+    },
+    "0Al palo0": {
+      "home": "0",
+      "away": "0"
+    },
+    "14Toques en el área rival40": {
+      "home": "14",
+      "away": "40"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Fueras de juego1": {
+      "home": "1",
+      "away": "1"
+    },
+    "12Tiros libres15": {
+      "home": "12",
+      "away": "15"
+    },
+    "36%(17/47)Pases largos43%(18/42)": {
+      "home": "36%(17/47)",
+      "away": "43%(18/42)"
+    },
+    "55%(33/60)Pases en el último tercio83%(167/201)": {
+      "home": "55%(33/60)",
+      "away": "83%(167/201)"
+    },
+    "25%(4/16)Centros24%(8/33)": {
+      "home": "25%(4/16)",
+      "away": "24%(8/33)"
+    },
+    "0.43Asistencias esperadas (xA)1.63": {
+      "home": "0.43",
+      "away": "1.63"
+    },
+    "16Saques de banda19": {
+      "home": "16",
+      "away": "19"
+    },
+    "15Faltas12": {
+      "home": "15",
+      "away": "12"
+    },
+    "73%(19/26)Entradas75%(15/20)": {
+      "home": "73%(19/26)",
+      "away": "75%(15/20)"
+    },
+    "57Duelos ganados61": {
+      "home": "57",
+      "away": "61"
+    },
+    "38Despejes20": {
+      "home": "38",
+      "away": "20"
+    },
+    "12Intercepciones7": {
+      "home": "12",
+      "away": "7"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol1": {
+      "home": "0",
+      "away": "1"
+    },
+    "1Paradas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "2.37xGOT enfrentados2.19": {
+      "home": "2.37",
+      "away": "2.19"
+    },
+    "0.37Goles evitados-1.81": {
+      "home": "0.37",
+      "away": "-1.81"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Gordon",
+        "2Hickey",
+        "5Hanley",
+        "16McKenna",
+        "3Robertson",
+        "19Ferguson",
+        "17Gannon-Doak",
+        "11Christie",
+        "4McTominay",
+        "7McGinn",
+        "9Dykes"
+      ],
+      "suplentes": [
+        "McLean K.",
+        "Shankland L.",
+        "Adams C.",
+        "Tierney K."
+      ],
+      "formacion": "4 - 1 - 4 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Schmeichel",
+        "13Kristensen",
+        "2Andersen",
+        "6Christensen",
+        "17Dorgu",
+        "21Hjulmand",
+        "23Hojbjerg",
+        "8Isaksen",
+        "12Froholdt",
+        "14Damsgaard",
+        "9Hojlund"
+      ],
+      "suplentes": [
+        "Vestergaard J.",
+        "Norgaard C.",
+        "Biereth M."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "18.11.2025 15:45EscociaFIFA: 42.4-2FinalizadoDinamarcaFIFA: 21.4-2Finalizado",
+  "score": "4-2"
+}

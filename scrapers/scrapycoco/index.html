@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScrapyCoco 🥥 — Panel Táctico de Scrapers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-layout">
+    
+    <!-- ── BARRA LATERAL DE NAVEGACIÓN ── -->
+    <aside class="sidebar-nav">
+      <div class="sidebar-brand">
+        <span class="brand-emoji">🥥</span>
+        <div class="brand-text">
+          <h2>ScrapyCoco</h2>
+          <span class="brand-tag">MUNDIAL 2026</span>
+        </div>
+      </div>
+      
+      <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="extraction">
+          <span class="nav-icon">⚡</span> Extracción
+        </button>
+        <button class="tab-btn" data-tab="history">
+          <span class="nav-icon">📊</span> Historial
+        </button>
+        <button class="tab-btn" data-tab="config">
+          <span class="nav-icon">⚙️</span> Configuración
+        </button>
+        <button class="tab-btn" data-tab="scheduler">
+          <span class="nav-icon">⏰</span> Programador
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="server-status">
+          <span class="status-dot online"></span>
+          <span class="status-text">API Online (Puerto 3006)</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── CONTENIDO PRINCIPAL ── -->
+    <main class="main-content">
+      
+      <!-- HERO THESIS: LIVE STATS HUB -->
+      <header class="live-stats-hub">
+        <div class="hub-title-area">
+          <h1>JLY Prediction Engine</h1>
+          <p class="subtitle">Panel de Análisis de Extracción de Datos en Tiempo Real</p>
+        </div>
+        <div class="stats-boxes">
+          <div class="stat-box">
+            <span class="stat-icon">⚽</span>
+            <div class="stat-info">
+              <span class="stat-val">results.csv</span>
+              <span class="stat-lbl">Historial de Partidos</span>
+            </div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-icon">📈</span>
+            <div class="stat-info">
+              <span class="stat-val">elo-calibrated.json</span>
+              <span class="stat-lbl">Ratings de Selección</span>
+            </div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-icon">🎯</span>
+            <div class="stat-info">
+              <span class="stat-val">xg_by_team.json</span>
+              <span class="stat-lbl">Métricas de Rendimiento</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- NOTIFICACIONES Y LOGS DE BATCH RUN -->
+      <div id="validation-panel" class="validation-panel" style="display:none">
+        <div class="validation-panel-header">
+          <h3>⚠️ Advertencias de Validación</h3>
+          <span class="validation-badge" id="validation-badge">0</span>
+          <button class="validation-close" onclick="closeValidationPanel()">&times;</button>
+        </div>
+        <div class="validation-panel-body" id="validation-panel-body">
+          <p class="validation-empty">Sin advertencias de esquema</p>
+        </div>
+      </div>
+
+      <div id="batch-progress" class="batch-progress" style="display:none">
+        <div class="batch-progress-fill" id="batch-progress-fill"></div>
+        <span class="batch-progress-text" id="batch-progress-text">0/0 — Inicializando...</span>
+      </div>
+
+      <!-- PESTAÑA: EXTRACCIÓN -->
+      <div class="tab-content active" id="tab-extraction">
+        <div class="extraction-layout">
+          <!-- Columna Izquierda: Listado de Scrapers -->
+          <div class="scrapers-wrapper">
+            <div class="section-heading">
+              <div>
+                <h2>Estado de Motores de Extracción</h2>
+                <p class="heading-desc">Selecciona y lanza scrapers para procesar xG de FBref, Ratings y alineaciones.</p>
+              </div>
+              <div class="batch-actions">
+                <span class="batch-count" id="batch-count">0 seleccionados</span>
+                <button id="btn-batch-run" class="btn btn-primary" disabled onclick="runBatch()">▶️ Ejecutar Lote</button>
+              </div>
+            </div>
+            
+            <div class="scrapers-grid" id="scrapers-grid">
+              <div class="loading-state">Cargando scrapers del sistema...</div>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Configuración Táctica Local -->
+          <aside class="extraction-settings">
+            <h3>⚙️ Parámetros Avanzados</h3>
+            <p class="settings-desc">Inyecta overrides para pruebas focalizadas antes de la simulación.</p>
+            
+            <div class="settings-group">
+              <div class="params-field">
+                <label for="custom-match-id">Partido de Prueba</label>
+                <input type="text" id="custom-match-id" placeholder="Ej. Argentina vs Jordania">
+              </div>
+              <div class="params-field">
+                <label for="custom-team-name">Selección (Transfermarkt)</label>
+                <input type="text" id="custom-team-name" placeholder="Ej. Argentina">
+              </div>
+              
+              <div class="settings-divider"></div>
+              
+              <div class="sandbox-option">
+                <label class="sandbox-toggle">
+                  <input type="checkbox" id="chk-sandbox">
+                  <span class="sandbox-slider"></span>
+                  <span class="sandbox-label">🧪 Modo Sandbox (Simulación)</span>
+                </label>
+                <p class="field-help">Evita escribir datos en disco o hacer peticiones HTTP en vivo.</p>
+              </div>
+              <span id="sandbox-indicator" class="sandbox-indicator hidden">Modo Sandbox Activo</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- PESTAÑA: HISTORIAL -->
+      <div class="tab-content" id="tab-history">
+        <div class="history-container">
+          <div class="section-heading">
+            <h2>Métricas de Rendimiento</h2>
+            <p class="heading-desc">Tasa de éxito, duración promedio y registros recolectados.</p>
+          </div>
+
+          <div class="history-metrics" id="history-metrics">
+            <div class="metric-card">
+              <span class="metric-value" id="metric-total">0</span>
+              <span class="metric-label">Ejecuciones totales</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-value" id="metric-success-rate">0%</span>
+              <span class="metric-label">Tasa de éxito</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-value" id="metric-avg-duration">0ms</span>
+              <span class="metric-label">Duración promedio</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-value" id="metric-records">0</span>
+              <span class="metric-label">Registros totales</span>
+            </div>
+          </div>
+
+          <div class="chart-row">
+            <div class="chart-card">
+              <h3>Estado por Scraper</h3>
+              <div class="chart-wrapper"><canvas id="chart-scraper-status"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <h3>Duración Promedio (ms)</h3>
+              <div class="chart-wrapper"><canvas id="chart-avg-duration"></canvas></div>
+            </div>
+          </div>
+
+          <div class="history-table-wrapper">
+            <h3>Ejecuciones Recientes</h3>
+            <div class="history-table-controls">
+              <select id="history-scraper-filter"><option value="">Todos los scrapers</option></select>
+              <button id="btn-refresh-history" class="btn btn-secondary">🔄 Refrescar</button>
+            </div>
+            <div class="history-table-scroll">
+              <table class="history-table" id="history-table">
+                <thead><tr>
+                  <th>Scraper</th><th>Inicio</th><th>Duración</th><th>Estado</th><th>Registros</th><th>Sandbox</th>
+                </tr></thead>
+                <tbody id="history-tbody"><tr><td colspan="6" class="loading-state">Cargando historial...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA: CONFIGURACIÓN -->
+      <div class="tab-content" id="tab-config">
+        <div class="config-container">
+          <div class="section-heading">
+            <h2>Configuración del Sistema</h2>
+            <p class="heading-desc">Parámetros globales de exportación, credenciales API y proxies.</p>
+          </div>
+
+          <div class="config-grid">
+            <div class="config-card">
+              <h3>📤 Exportación de Datos</h3>
+              <p class="config-desc">Configuración del formato y transformaciones de esquemas al exportar.</p>
+              <div class="export-config-form">
+                <div class="config-field">
+                  <label>Formato de exportación</label>
+                  <div class="radio-group">
+                    <label class="radio-label"><input type="radio" name="export-format" value="csv" checked> CSV</label>
+                    <label class="radio-label"><input type="radio" name="export-format" value="json"> JSON</label>
+                    <label class="radio-label"><input type="radio" name="export-format" value="xlsx"> Excel</label>
+                  </div>
+                </div>
+                <div class="config-field">
+                  <label>Transformaciones</label>
+                  <div class="transform-toggles">
+                    <label class="toggle-label"><input type="checkbox" class="transform-check" value="iso_dates"> Fechas a ISO</label>
+                    <label class="toggle-label"><input type="checkbox" class="transform-check" value="unify_countries"> Unificar países</label>
+                    <label class="toggle-label"><input type="checkbox" class="transform-check" value="normalize_teams"> Normalizar equipos</label>
+                    <label class="toggle-label"><input type="checkbox" class="transform-check" value="drop_empty"> Eliminar vacías</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="config-card">
+              <h3>🔑 Credenciales Externas</h3>
+              <p class="config-desc">Claves secretas de integración almacenadas de forma segura.</p>
+              <div class="credential-form">
+                <div class="credential-row">
+                  <label for="cred-fbref">FBref API Key</label>
+                  <input type="password" id="cred-fbref" placeholder="API key de FBref">
+                  <button class="btn btn-primary btn-sm" onclick="saveCredential('fbref')">Guardar</button>
+                </div>
+                <div class="credential-row">
+                  <label for="cred-supabase">Supabase Service Key</label>
+                  <input type="password" id="cred-supabase" placeholder="supabase_service_role_key">
+                  <button class="btn btn-primary btn-sm" onclick="saveCredential('supabase')">Guardar</button>
+                </div>
+                <div class="credential-row">
+                  <label for="cred-sportmonks">Sportmonks API Key</label>
+                  <input type="password" id="cred-sportmonks" placeholder="API key de Sportmonks">
+                  <button class="btn btn-primary btn-sm" onclick="saveCredential('sportmonks')">Guardar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="config-card full-width">
+              <h3>🌐 Servidores Proxy</h3>
+              <p class="config-desc">Lista de proxies de red rotativos (dirección por línea) para prevenir CAPTCHAs.</p>
+              <textarea id="proxy-list" rows="4" placeholder="http://proxy1:8080&#10;http://proxy2:8080"></textarea>
+              <div class="proxy-footer">
+                <label class="sandbox-toggle">
+                  <input type="checkbox" id="chk-proxies-enabled">
+                  <span class="sandbox-slider"></span>
+                  <span class="sandbox-label">Activar túnel de proxies</span>
+                </label>
+                <button class="btn btn-primary btn-sm" onclick="saveProxies()">Guardar proxies</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA: PROGRAMADOR -->
+      <div class="tab-content" id="tab-scheduler">
+        <div class="scheduler-container">
+          <div class="section-heading-row">
+            <div>
+              <h2>Programador de Tareas Automáticas</h2>
+              <p class="heading-desc">Programa expresiones cron para mantener actualizados los modelos estadísticos.</p>
+            </div>
+            <button class="btn btn-primary" onclick="showSchedulerForm()">➕ Nueva Tarea</button>
+          </div>
+
+          <div class="scheduler-list" id="scheduler-list">
+            <div class="loading-state">Cargando cron jobs...</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ── CAJÓN FLOTANTE DE LA CONSOLA ── -->
+    <div id="console-drawer" class="console-drawer collapsed">
+      <div class="console-drawer-header" onclick="toggleConsoleDrawer()">
+        <div class="console-drawer-title">
+          <span class="console-trigger-icon">🐚</span>
+          <h3>Consola Táctica en Vivo</h3>
+          <span class="console-status-dot online"></span>
+        </div>
+        <button class="console-toggle-btn">▲ Ver Logs</button>
+      </div>
+      
+      <div class="console-drawer-content">
+        <div class="console-toolbar">
+          <div class="log-filters" id="log-filters">
+            <button class="log-filter-btn active" data-level="all">Todos</button>
+            <button class="log-filter-btn filter-info" data-level="info">Info</button>
+            <button class="log-filter-btn filter-warning" data-level="warning">Warning</button>
+            <button class="log-filter-btn filter-error" data-level="error">Error</button>
+            <button class="log-filter-btn filter-success" data-level="success">Éxito</button>
+          </div>
+          <div class="console-actions">
+            <label class="auto-scroll-label">
+              <input type="checkbox" id="chk-autoscroll" checked> Auto-scroll
+            </label>
+            <button id="btn-clear-console" class="btn btn-secondary btn-sm">Limpiar logs</button>
+          </div>
+        </div>
+        <div class="console-body" id="console-output">
+          <div class="console-line system-msg">[Sistema] Listo para operar. Los logs en tiempo real aparecerán aquí.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALES DE DIÁLOGO -->
+  <div class="modal-overlay" id="scheduler-modal" style="display:none" onclick="event.target.id==='scheduler-modal'&&closeSchedulerForm()">
+    <div class="modal-card modal-sm" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="scheduler-modal-title">Nueva Tarea Programada</h3>
+        <button class="modal-close" onclick="closeSchedulerForm()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="scheduler-form">
+          <div class="config-field">
+            <label>Scraper</label>
+            <select id="sched-scraper" class="sched-select"></select>
+          </div>
+          <div class="config-field">
+            <label>Expresión Cron</label>
+            <input type="text" id="sched-cron" placeholder="*/30 * * * * (cada 30 min)" class="sched-input">
+            <p class="field-help">minuto hora día-del-mes mes día-de-la-semana</p>
+          </div>
+          <div class="config-field">
+            <label>Próxima ejecución</label>
+            <input type="text" id="sched-datetime" class="sched-input" placeholder="Selecciona fecha y hora">
+          </div>
+          <div class="config-field">
+            <label>Sandbox</label>
+            <div class="params-row">
+              <label class="sandbox-toggle">
+                <input type="checkbox" id="sched-sandbox">
+                <span class="sandbox-slider"></span>
+                <span class="sandbox-label">Activar sandbox</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeSchedulerForm()">Cancelar</button>
+        <button class="btn btn-primary" onclick="saveSchedulerJob()">💾 Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="diagnostic-modal" style="display:none" onclick="event.target.id==='diagnostic-modal'&&closeDiagnosticModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="diagnostic-modal-title">🔍 Diagnóstico de Estructura</h3>
+        <button class="modal-close" onclick="closeDiagnosticModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="diagnostic-summary" id="diagnostic-summary"></div>
+        <div class="diagnostic-tree" id="diagnostic-tree"></div>
+        <div class="diagnostic-history" id="diagnostic-history">
+          <h4>Historial de Snapshots</h4>
+          <div id="diagnostic-history-list"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeDiagnosticModal()">Cerrar</button>
+        <button class="btn btn-primary" onclick="runDiagnostic()">🔄 Re-ejecutar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="preview-modal" style="display:none" onclick="closePreviewModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="preview-modal-title">Vista Previa</h3>
+        <button class="modal-close" onclick="closePreviewModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="preview-summary" id="preview-summary">
+          <span id="preview-count">0 registros</span>
+          <span id="preview-warnings-count" class="preview-warnings-badge">0 advertencias</span>
+        </div>
+        <div class="preview-table-scroll">
+          <table class="preview-table" id="preview-table">
+            <thead id="preview-thead"></thead>
+            <tbody id="preview-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closePreviewModal()">❌ Descartar</button>
+        <button class="btn btn-secondary" onclick="exportFromPreview('csv')">📄 Guardar CSV</button>
+        <button class="btn btn-primary" onclick="showExportSubmodal()">📤 Exportar como...</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="export-submodal" style="display:none" onclick="event.target.id === 'export-submodal' && closeExportSubmodal()">
+    <div class="modal-card modal-sm" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Exportar Datos</h3>
+        <button class="modal-close" onclick="closeExportSubmodal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="export-form">
+          <div class="config-field">
+            <label>Formato</label>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="sub-export-format" value="csv" checked> CSV</label>
+              <label class="radio-label"><input type="radio" name="sub-export-format" value="json"> JSON</label>
+              <label class="radio-label"><input type="radio" name="sub-export-format" value="xlsx"> Excel</label>
+            </div>
+          </div>
+          <div class="config-field">
+            <label>Transformaciones</label>
+            <div class="transform-toggles">
+              <label class="toggle-label"><input type="checkbox" class="sub-transform-check" value="iso_dates"> ISO fechas</label>
+              <label class="toggle-label"><input type="checkbox" class="sub-transform-check" value="unify_countries"> Unificar países</label>
+              <label class="toggle-label"><input type="checkbox" class="sub-transform-check" value="normalize_teams"> Normalizar equipos</label>
+              <label class="toggle-label"><input type="checkbox" class="sub-transform-check" value="drop_empty"> Eliminar vacías</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeExportSubmodal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="confirmExport()">⬇️ Descargar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <!-- SCRIPT PARA CAJÓN DE CONSOLA -->
+  <script>
+    function toggleConsoleDrawer() {
+      const drawer = document.getElementById('console-drawer');
+      const btn = drawer.querySelector('.console-toggle-btn');
+      drawer.classList.toggle('collapsed');
+      if (drawer.classList.contains('collapsed')) {
+        btn.textContent = '▲ Ver Logs';
+      } else {
+        btn.textContent = '▼ Colapsar Logs';
+      }
+    }
+  </script>
+</body>
+</html>

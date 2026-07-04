@@ -1,0 +1,190 @@
+{
+  "match_id": "6mbbuBSb",
+  "estadisticas": {
+    "0.42Goles esperados (xG)0.64": {
+      "home": "0.42",
+      "away": "0.64"
+    },
+    "53%Posesión47%": {
+      "home": "53%",
+      "away": "47%"
+    },
+    "8Remates totales6": {
+      "home": "8",
+      "away": "6"
+    },
+    "4Remates a puerta1": {
+      "home": "4",
+      "away": "1"
+    },
+    "0Grandes ocasiones2": {
+      "home": "0",
+      "away": "2"
+    },
+    "3Córneres2": {
+      "home": "3",
+      "away": "2"
+    },
+    "91%(477/523)Pases88%(402/455)": {
+      "home": "91%(477/523)",
+      "away": "88%(402/455)"
+    },
+    "1Tarjetas amarillas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "0.87xG a puerta (xGOT)0.96": {
+      "home": "0.87",
+      "away": "0.96"
+    },
+    "2Remates fuera3": {
+      "home": "2",
+      "away": "3"
+    },
+    "2Remates rechazados2": {
+      "home": "2",
+      "away": "2"
+    },
+    "3Remates dentro del área3": {
+      "home": "3",
+      "away": "3"
+    },
+    "5Remates fuera del área3": {
+      "home": "5",
+      "away": "3"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "1Goles de cabeza0": {
+      "home": "1",
+      "away": "0"
+    },
+    "9Toques en el área rival9": {
+      "home": "9",
+      "away": "9"
+    },
+    "0Pases entre líneas completados0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Fueras de juego2": {
+      "home": "1",
+      "away": "2"
+    },
+    "13Tiros libres9": {
+      "home": "13",
+      "away": "9"
+    },
+    "42%(16/38)Pases largos46%(18/39)": {
+      "home": "42%(16/38)",
+      "away": "46%(18/39)"
+    },
+    "78%(75/96)Pases en el último tercio55%(45/82)": {
+      "home": "78%(75/96)",
+      "away": "55%(45/82)"
+    },
+    "20%(3/15)Centros25%(3/12)": {
+      "home": "20%(3/15)",
+      "away": "25%(3/12)"
+    },
+    "0.61Asistencias esperadas (xA)0.49": {
+      "home": "0.61",
+      "away": "0.49"
+    },
+    "16Saques de banda10": {
+      "home": "16",
+      "away": "10"
+    },
+    "9Faltas13": {
+      "home": "9",
+      "away": "13"
+    },
+    "57%(8/14)Entradas54%(7/13)": {
+      "home": "57%(8/14)",
+      "away": "54%(7/13)"
+    },
+    "42Duelos ganados38": {
+      "home": "42",
+      "away": "38"
+    },
+    "23Despejes11": {
+      "home": "23",
+      "away": "11"
+    },
+    "4Intercepciones9": {
+      "home": "4",
+      "away": "9"
+    },
+    "0Errores conducentes a remate2": {
+      "home": "0",
+      "away": "2"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Paradas2": {
+      "home": "0",
+      "away": "2"
+    },
+    "0.96xGOT enfrentados0.87": {
+      "home": "0.96",
+      "away": "0.87"
+    },
+    "-0.04Goles evitados-1.13": {
+      "home": "-0.04",
+      "away": "-1.13"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Livakovic",
+        "2Stanisic",
+        "6Sutalo",
+        "3Pongracic",
+        "14Perisic",
+        "10Modric",
+        "8Kovacic",
+        "13Vlasic",
+        "17Sucic",
+        "16Baturina",
+        "11Budimir"
+      ],
+      "suplentes": [
+        "Peprah K.",
+        "Fatawu I.",
+        "Thomas-Asante B.",
+        "Nuamah E.",
+        "Yirenkyi C."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "16Asare",
+        "26Senaya",
+        "4Adjetey",
+        "23Luckassen",
+        "14Mensah",
+        "5Partey",
+        "11Semenyo",
+        "15Owusu",
+        "8Sibo",
+        "22Sulemana",
+        "9Ayew"
+      ],
+      "suplentes": [
+        "Matanovic I.",
+        "Pasalic M.",
+        "Gvardiol J."
+      ],
+      "formacion": "4 - 1 - 4 - 1"
+    }
+  },
+  "error": null,
+  "description": "27.06.2026 17:00CroaciaFIFA: 11.2-1FinalizadoGhanaFIFA: 73.2-1Finalizado",
+  "score": "2-1"
+}

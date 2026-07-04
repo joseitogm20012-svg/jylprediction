@@ -1,14 +1,17 @@
 import os
 import sys
 import json
+import io
 import asyncio
 from pathlib import Path
 from typing import Optional
 from datetime import datetime, timezone
-from fastapi import FastAPI, HTTPException, Query, Body
+from contextlib import asynccontextmanager
+from fastapi import FastAPI, HTTPException, Query, Body, Depends, Request
 from fastapi.responses import StreamingResponse, FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from sqlalchemy import text
 
 SCRAPYCOCO_DIR = Path(__file__).parent
 sys.path.append(str(SCRAPYCOCO_DIR))
@@ -16,17 +19,62 @@ sys.path.append(str(SCRAPYCOCO_DIR))
 from scrapers.fbref import FBrefScraper
 from scrapers.flashscore import FlashscoreScraper
 from scrapers.transfermarkt import TransfermarktScraper
+from scrapers.sofascore import SofascoreScraper
 import db
 from validation import validate_rows
 from export import export_data
 from transform import apply_transforms
 import scheduler as sched
 import diagnostic as diag
+from api_security import SecurityHeadersMiddleware, check_rate_limit, rate_limiter
+from mongo_db import connect as mongo_connect, disconnect as mongo_disconnect, get_collection_stats
+from redis_client import connect as redis_connect, disconnect as redis_disconnect, get_info as redis_info
+from api_schemas import (
+    ScraperInfo, RunResponse, BatchRunRequest, BatchRunResult,
+    HistoryEntry, MetricsResponse, StatsResponse,
+    ExportRequest, AddScheduleRequest, ScheduleInfo,
+    DiagnosticRequest, DiagnosticResult, CompareResult,
+    ScrapySpiderList, PipelineRunResponse, PipelineRunRequest,
+    QualitySummary, HealthResponse,
+)
 
 SEVERITY_MAP = {"none": 0, "info": 1, "warning": 2, "critical": 3}
 
-app = FastAPI(title="ScrapyCoco - Suite de Scraping Modular")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    db.init_db()
+    await mongo_connect()
+    await redis_connect()
+    sched.start_scheduler()
+    sched.set_executor(_run_single_scraper_internal)
+    yield
+    sched.stop_scheduler()
+    await mongo_disconnect()
+    await redis_disconnect()
 
+app = FastAPI(
+    title="ScrapyCoco API - Suite de Scraping Modular",
+    description="API para scraping de datos de fútbol de múltiples fuentes (FBref, Flashscore, Transfermarkt, Sofascore, OddsPortal). Incluye pipeline de validación, deduplicación, normalización y tracking de calidad.",
+    version="2.0.0",
+    lifespan=lifespan,
+    contact={"name": "JLY Predictor", "url": "https://github.com/jlypredictor/scrapycoco"},
+    license_info={"name": "MIT"},
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_tags=[
+        {"name": "System", "description": "Health check y rate limiting"},
+        {"name": "Scrapers", "description": "Ejecución y listado de scrapers"},
+        {"name": "History", "description": "Historial y métricas de ejecuciones"},
+        {"name": "Export", "description": "Exportación de datos en CSV/JSON/XLSX"},
+        {"name": "Scheduler", "description": "Gestión de tareas programadas"},
+        {"name": "Diagnostic", "description": "Diagnóstico de selectores HTML"},
+        {"name": "Scrapy", "description": "Spiders Scrapy avanzados"},
+        {"name": "Quality", "description": "Reportes de calidad de datos"},
+        {"name": "Pipeline", "description": "Pipeline de validación y normalización"},
+    ],
+)
+
+app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -100,42 +148,16 @@ SCRAPERS = {
         "name": "Córners por Equipo (FBref - Misc)",
         "description": "Scrapea estadísticas de córners y centros por equipo desde FBref.",
         "script": "data/fetch_fbref_corners.py"
+    },
+    "sofascore": {
+        "name": "Estadísticas Avanzadas (Sofascore)",
+        "description": "Extrae datos detallados de tiros, tarjetas y asistencias desde la API de Sofascore.",
+        "class": SofascoreScraper
     }
+
 }
 
 tasks_state = {}
-
-
-class BatchRunRequest(BaseModel):
-    scraper_ids: list[str]
-    sandbox: bool = False
-    match_id: Optional[str] = None
-    team_name: Optional[str] = None
-
-
-class ExportRequest(BaseModel):
-    scraper_id: str
-    format: str = "csv"
-    transforms: list[str] = []
-    preview_data: Optional[list[dict]] = None
-
-
-class AddScheduleRequest(BaseModel):
-    scraper_id: str
-    cron_expression: str
-    params: Optional[dict] = None
-
-
-class DiagnosticRequest(BaseModel):
-    url: str = ""
-    page_source: Optional[str] = None
-
-
-@app.on_event("startup")
-def startup():
-    db.init_db()
-    sched.start_scheduler()
-    sched.set_executor(_run_single_scraper_internal)
 
 
 def _parse_log_message(msg: str):
@@ -332,7 +354,45 @@ def _yield_log(raw: str):
         yield f"data: {raw}\n\n"
 
 
-@app.get("/api/scrapers")
+@app.get("/api/health", tags=["System"], summary="Health check", response_model=HealthResponse)
+def health_check():
+    from scrapy_runner import SPIDER_REGISTRY
+    return HealthResponse(
+        status="ok", version="2.0.0",
+        scrapers_count=len(SCRAPERS),
+        spiders_available=list(SPIDER_REGISTRY.keys()),
+    )
+
+
+@app.get("/api/rate-limit", tags=["System"], summary="Ver límite de solicitudes")
+def get_rate_limit(request: Request):
+    client_ip = request.client.host if request.client else "unknown"
+    remaining = rate_limiter.remaining(client_ip)
+    return {"client_ip": client_ip, "remaining": remaining, "limit": 60, "window_seconds": 60}
+
+
+@app.get("/api/infra", tags=["System"], summary="Estado de infraestructura",
+         description="Health check de MongoDB, Redis, base de datos SQL y cola de tareas.")
+async def infra_status():
+    mongo_stats = await get_collection_stats()
+    redis_stats = await redis_info()
+    from models.base import engine
+    sql_ok = False
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+            sql_ok = True
+    except Exception:
+        pass
+    return {
+        "sqlite": {"available": sql_ok},
+        "mongodb": mongo_stats,
+        "redis": redis_stats,
+        "queue_pending": redis_stats.get("queue_length", 0) if redis_stats.get("available") else 0,
+    }
+
+
+@app.get("/api/scrapers", tags=["Scrapers"], summary="Listar scrapers disponibles", response_model=list[ScraperInfo])
 def list_scrapers():
     result = []
     for k, v in SCRAPERS.items():
@@ -341,7 +401,8 @@ def list_scrapers():
     return result
 
 
-@app.get("/api/run/{scraper_id}")
+@app.get("/api/run/{scraper_id}", tags=["Scrapers"], summary="Ejecutar scraper individual",
+         description="Ejecuta un scraper por ID con parámetros opcionales. Retorna SSE con logs en tiempo real.")
 async def run_scraper(scraper_id: str, match_id: Optional[str] = Query(None),
                        team_name: Optional[str] = Query(None), type: Optional[str] = Query(None),
                        sandbox: bool = Query(False)):
@@ -372,7 +433,8 @@ async def run_scraper(scraper_id: str, match_id: Optional[str] = Query(None),
     return StreamingResponse(log_generator(), media_type="text/event-stream")
 
 
-@app.post("/api/batch/run")
+@app.post("/api/batch/run", tags=["Scrapers"], summary="Ejecutar scrapers en lote",
+          description="Ejecuta múltiples scrapers secuencialmente retornando SSE con progreso.")
 async def batch_run(req: BatchRunRequest):
     for sid in req.scraper_ids:
         if sid not in SCRAPERS:
@@ -401,7 +463,7 @@ async def batch_run(req: BatchRunRequest):
     return StreamingResponse(batch_generator(), media_type="text/event-stream")
 
 
-@app.get("/api/preview/{scraper_id}")
+@app.get("/api/preview/{scraper_id}", tags=["Scrapers"], summary="Previsualizar datos de scraper")
 async def preview_scraper(scraper_id: str, limit: int = Query(50), sandbox: bool = Query(True),
                            match_id: Optional[str] = Query(None), team_name: Optional[str] = Query(None),
                            type: Optional[str] = Query(None)):
@@ -431,7 +493,29 @@ async def preview_scraper(scraper_id: str, limit: int = Query(50), sandbox: bool
     return JSONResponse(validate_rows(scraper_id, data[:limit] if data else []).model_dump())
 
 
-@app.post("/api/export")
+@app.get("/api/export/filtered", tags=["Export"], summary="Exportar datos filtrados",
+         description="Exporta datos de ejecución filtrados por scraper, estado, con paginación.")
+def export_filtered(
+    scraper_id: Optional[str] = Query(None),
+    format: str = Query("json"),
+    status: Optional[str] = Query(None),
+    limit: int = Query(1000),
+    offset: int = Query(0),
+):
+    from export import export_data
+    import db as db_module
+    rows = db_module.get_history(scraper_id, limit, offset)
+    if status:
+        rows = [r for r in rows if r.get("status") == status]
+    count, blob = export_data(rows, format)
+    if blob:
+        return StreamingResponse(io.BytesIO(blob), media_type="application/octet-stream",
+                                 headers={"Content-Disposition": f"attachment; filename=export.{format}"})
+    return {"exported": count}
+
+
+@app.post("/api/export", tags=["Export"], summary="Exportar datos",
+          description="Exporta datos de scraper en formato CSV, JSON o XLSX.")
 async def export_endpoint(req: ExportRequest):
     if req.scraper_id not in SCRAPERS:
         raise HTTPException(status_code=404, detail="Scraper no encontrado")
@@ -471,12 +555,12 @@ async def export_endpoint(req: ExportRequest):
 
 # ── Scheduler Endpoints ──
 
-@app.get("/api/scheduler/list")
+@app.get("/api/scheduler/list", tags=["Scheduler"], summary="Listar tareas programadas")
 def scheduler_list():
     return sched.list_jobs()
 
 
-@app.post("/api/scheduler/add")
+@app.post("/api/scheduler/add", tags=["Scheduler"], summary="Agregar tarea programada")
 def scheduler_add(req: AddScheduleRequest):
     if req.scraper_id not in SCRAPERS:
         raise HTTPException(status_code=404, detail="Scraper no encontrado")
@@ -484,34 +568,34 @@ def scheduler_add(req: AddScheduleRequest):
     return {"id": db_id, "message": "Tarea programada agregada"}
 
 
-@app.delete("/api/scheduler/{schedule_id}")
+@app.delete("/api/scheduler/{schedule_id}", tags=["Scheduler"], summary="Eliminar tarea programada")
 def scheduler_delete(schedule_id: int):
     sched.remove_job(schedule_id)
     return {"message": "Tarea eliminada"}
 
 
-@app.post("/api/scheduler/{schedule_id}/pause")
+@app.post("/api/scheduler/{schedule_id}/pause", tags=["Scheduler"], summary="Pausar tarea programada")
 def scheduler_pause(schedule_id: int):
     sched.pause_job(schedule_id)
     return {"message": "Tarea pausada"}
 
 
-@app.post("/api/scheduler/{schedule_id}/resume")
+@app.post("/api/scheduler/{schedule_id}/resume", tags=["Scheduler"], summary="Reanudar tarea programada")
 def scheduler_resume(schedule_id: int):
     sched.resume_job(schedule_id)
     return {"message": "Tarea reanudada"}
 
 
-@app.post("/api/scheduler/{schedule_id}/run-now")
+@app.post("/api/scheduler/{schedule_id}/run-now", tags=["Scheduler"], summary="Ejecutar tarea inmediatamente")
 async def scheduler_run_now(schedule_id: int):
     conn = db.get_conn()
     try:
-        row = conn.execute("SELECT * FROM schedules WHERE id=?", (schedule_id,)).fetchone()
+        row = conn.execute(text("SELECT * FROM schedules WHERE id=:sid"), {"sid": schedule_id}).fetchone()
     finally:
         conn.close()
     if not row:
         raise HTTPException(status_code=404, detail="Tarea no encontrada")
-    r = dict(row)
+    r = dict(row._mapping)
     params = {}
     if r.get("params"):
         try: params = json.loads(r["params"])
@@ -525,7 +609,7 @@ async def scheduler_run_now(schedule_id: int):
 
 # ── Diagnostic Endpoints ──
 
-@app.post("/api/diagnostic/run/{scraper_id}")
+@app.post("/api/diagnostic/run/{scraper_id}", tags=["Diagnostic"], summary="Ejecutar diagnóstico de scraper")
 async def diagnostic_run(scraper_id: str, req: DiagnosticRequest):
     if scraper_id not in SCRAPERS:
         raise HTTPException(status_code=404, detail="Scraper no encontrado")
@@ -575,12 +659,12 @@ async def diagnostic_run(scraper_id: str, req: DiagnosticRequest):
     return JSONResponse({"has_changes": False, "severity": SEVERITY_MAP["none"], "changes": [], "message": "Sin datos para diagnosticar"})
 
 
-@app.get("/api/diagnostic/history/{scraper_id}")
+@app.get("/api/diagnostic/history/{scraper_id}", tags=["Diagnostic"], summary="Historial de diagnósticos")
 def diagnostic_history(scraper_id: str):
     return db.get_snapshots(scraper_id)
 
 
-@app.get("/api/diagnostic/compare/{id1}/{id2}")
+@app.get("/api/diagnostic/compare/{id1}/{id2}", tags=["Diagnostic"], summary="Comparar dos diagnósticos")
 def diagnostic_compare(id1: int, id2: int):
     s1 = db.get_snapshot(id1)
     s2 = db.get_snapshot(id2)
@@ -599,18 +683,71 @@ def diagnostic_compare(id1: int, id2: int):
 
 
 # ── History & Static Endpoints ──
-
-@app.get("/api/history")
+@app.get("/api/history", tags=["History"], summary="Historial de ejecuciones",
+         response_model=list[HistoryEntry])
 def get_history(scraper_id: Optional[str] = Query(None), limit: int = Query(100), offset: int = Query(0)):
     return db.get_history(scraper_id, limit, offset)
 
-@app.get("/api/history/metrics")
+@app.get("/api/history/metrics", tags=["History"], summary="Métricas globales de scraping",
+         response_model=MetricsResponse)
 def get_history_metrics(scraper_id: Optional[str] = Query(None)):
     return db.get_metrics(scraper_id)
 
-@app.get("/api/history/stats")
+@app.get("/api/history/stats", tags=["History"], summary="Estadísticas por scraper",
+         response_model=list[StatsResponse])
 def get_history_stats():
     return db.get_history_stats()
+
+
+@app.get("/api/scrapy/spiders", tags=["Scrapy"], summary="Listar spiders Scrapy disponibles",
+         response_model=ScrapySpiderList)
+def list_scrapy_spiders():
+    from scrapy_runner import SPIDER_REGISTRY
+    return {"spiders": list(SPIDER_REGISTRY.keys())}
+
+
+@app.post("/api/scrapy/run/{spider_name}", tags=["Scrapy"], summary="Ejecutar spider Scrapy",
+          description="Ejecuta un spider de Scrapy por nombre. Retorna estadísticas de ejecución.")
+async def run_scrapy_spider(spider_name: str):
+    from scrapy_runner import ScrapyRunner, SPIDER_REGISTRY
+    if spider_name not in SPIDER_REGISTRY:
+        raise HTTPException(status_code=404, detail=f"Spider '{spider_name}' not found")
+    loop = asyncio.get_running_loop()
+    result = await loop.run_in_executor(None, lambda: ScrapyRunner().run_spider(spider_name))
+    return result
+
+
+@app.post("/api/scrapy/run-all", tags=["Scrapy"], summary="Ejecutar todos los spiders Scrapy",
+          description="Ejecuta todos los spiders registrados secuencialmente.")
+async def run_all_scrapy_spiders():
+    from scrapy_runner import ScrapyRunner
+    loop = asyncio.get_running_loop()
+    result = await loop.run_in_executor(None, lambda: ScrapyRunner().run_all())
+    return result
+
+
+@app.get("/api/quality", tags=["Quality"], summary="Resumen global de calidad",
+         response_model=QualitySummary)
+def get_quality_overview():
+    from pipeline_quality import quality_tracker
+    return quality_tracker.get_overall()
+
+
+@app.get("/api/quality/{scraper_id}", tags=["Quality"], summary="Reporte de calidad por scraper")
+def get_quality_report(scraper_id: str):
+    from pipeline_quality import quality_tracker
+    report = quality_tracker.get(scraper_id)
+    if not report:
+        return {"detail": "No quality report found for this scraper"}
+    return report.to_dict()
+
+
+@app.post("/api/pipeline/run", tags=["Pipeline"], summary="Ejecutar pipeline de datos",
+          description="Ejecuta el pipeline de validación, normalización y deduplicación sobre un conjunto de items.")
+async def run_pipeline(payload: PipelineRunRequest):
+    from pipeline_orchestrator import run_pipeline as rp
+    data, result = rp(payload.item_type, payload.items, payload.scraper_id, payload.stages)
+    return {"result": result.to_dict(), "items_out": len(data)}
 
 @app.get("/")
 def serve_index():
@@ -627,5 +764,5 @@ def serve_js():
 if __name__ == "__main__":
     import uvicorn
     import os
-    port = int(os.environ.get("PORT", 3005))
+    port = int(os.environ.get("PORT", 3006))
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)

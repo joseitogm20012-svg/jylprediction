@@ -1,0 +1,850 @@
+[
+  {
+    "id": "TC001",
+    "title": "Run a single scraper and watch live progress",
+    "description": "This verifies that an operator can start one scraper with valid parameters and see live start, log, and completion updates with a final status.",
+    "category": "Scraper Management API",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to run a single scraper"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the match identifier field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the team name field with a valid value"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid scraper type"
+      },
+      {
+        "type": "action",
+        "description": "Enable sandbox mode"
+      },
+      {
+        "type": "action",
+        "description": "Submit the run request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify live execution logs are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the scraper finishes with a final status and exit code"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "List all scrapers on the dashboard",
+    "description": "This verifies that the dashboard shows the full set of supported scrapers with their current status so an operator can choose what to run.",
+    "category": "Scraper Management API",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify all supported scrapers are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify scraper status information is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Run scrapers sequentially in batch mode",
+    "description": "This verifies that an operator can launch multiple scrapers in sequence and see batch progress updates through completion.",
+    "category": "Scraper Management API",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to run scrapers in batch"
+      },
+      {
+        "type": "action",
+        "description": "Select two supported scrapers"
+      },
+      {
+        "type": "action",
+        "description": "Enable sandbox mode"
+      },
+      {
+        "type": "action",
+        "description": "Submit the batch run request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify batch progress events are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the batch completes successfully"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Create a scheduled scraper job",
+    "description": "Verify that a user can add a scheduled job for a scraper and see it appear in the schedule list.",
+    "category": "Scheduler",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /scheduler"
+      },
+      {
+        "type": "action",
+        "description": "Add a new schedule for a scraper with a valid cron expression and sandbox parameters"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new scheduled job appears in the schedule list"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Preview a supported scraper with validation warnings",
+    "description": "This verifies that a data analyst can open a sandbox preview for a supported scraper and review validation warnings alongside the previewed data.",
+    "category": "Preview & Export",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to open a preview for a supported scraper"
+      },
+      {
+        "type": "action",
+        "description": "Select a supported scraper"
+      },
+      {
+        "type": "action",
+        "description": "Enable sandbox mode"
+      },
+      {
+        "type": "action",
+        "description": "Open the preview"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify preview data is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify validation warnings are displayed when present"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Create, pause, resume, run now, and delete a schedule",
+    "description": "This verifies that an operator can manage a scheduled scraper job end to end, including pausing, resuming, running immediately, and deleting it afterward.",
+    "category": "Scheduler CRUD",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open scheduler management"
+      },
+      {
+        "type": "action",
+        "description": "Create a new schedule for a supported scraper with a valid cron expression"
+      },
+      {
+        "type": "action",
+        "description": "Pause the schedule"
+      },
+      {
+        "type": "action",
+        "description": "Resume the schedule"
+      },
+      {
+        "type": "action",
+        "description": "Run the schedule immediately"
+      },
+      {
+        "type": "action",
+        "description": "Delete the schedule"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the schedule is removed from the list"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "Run a scheduled job immediately",
+    "description": "Verify that a user can trigger a scheduled scraper to run now and see execution results returned in the UI.",
+    "category": "Scheduler",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /scheduler"
+      },
+      {
+        "type": "action",
+        "description": "Create a new scheduled job with valid scraper and cron values"
+      },
+      {
+        "type": "action",
+        "description": "Trigger the scheduled job to run immediately"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify execution results are displayed for the triggered job"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "Export a preview as CSV",
+    "description": "This verifies that a user can export a supported preview dataset as CSV after selecting the desired preview content.",
+    "category": "Preview & Export",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Open a preview for a supported scraper"
+      },
+      {
+        "type": "action",
+        "description": "Enable sandbox mode"
+      },
+      {
+        "type": "action",
+        "description": "Open the export controls"
+      },
+      {
+        "type": "action",
+        "description": "Select CSV as the export format"
+      },
+      {
+        "type": "action",
+        "description": "Submit the export request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a CSV export is generated"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "Export a preview with transforms to Excel",
+    "description": "This verifies that a data analyst can apply transforms to previewed data and export the transformed result as an Excel file.",
+    "category": "Preview & Export",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Open a preview for a supported scraper"
+      },
+      {
+        "type": "action",
+        "description": "Enable sandbox mode"
+      },
+      {
+        "type": "action",
+        "description": "Add at least one transform"
+      },
+      {
+        "type": "action",
+        "description": "Open the export controls"
+      },
+      {
+        "type": "action",
+        "description": "Select Excel as the export format"
+      },
+      {
+        "type": "action",
+        "description": "Submit the export request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a transformed Excel export is generated"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC010",
+    "title": "Pause and resume a scheduled job",
+    "description": "Verify that a user can pause a schedule, resume it, and keep it available in the schedule list.",
+    "category": "Scheduler",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /scheduler"
+      },
+      {
+        "type": "action",
+        "description": "Create a new scheduled job with valid scraper and cron values"
+      },
+      {
+        "type": "action",
+        "description": "Pause the newly created scheduled job"
+      },
+      {
+        "type": "action",
+        "description": "Resume the paused scheduled job"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the schedule remains available and is shown as active"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC011",
+    "title": "Show a failure when a browser binary is unavailable for an online scraper",
+    "description": "This verifies that an operator sees live failure logs and an error completion state when a browser-dependent scraper cannot execute.",
+    "category": "Scraper Management API",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to run a single scraper"
+      },
+      {
+        "type": "action",
+        "description": "Select an online scraper that requires a browser binary"
+      },
+      {
+        "type": "action",
+        "description": "Fill in valid run parameters"
+      },
+      {
+        "type": "action",
+        "description": "Submit the run request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify failure logs are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the scraper ends with an error status and non-zero exit code"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC012",
+    "title": "Review execution history records",
+    "description": "This verifies that an analyst can open execution history and see past scraper runs with their core run details.",
+    "category": "Execution History",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to view execution history"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify execution history records are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify run duration and record count information is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC013",
+    "title": "Delete a scheduled job",
+    "description": "Verify that a user can delete an existing scheduled job and remove it from the list.",
+    "category": "Scheduler",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /scheduler"
+      },
+      {
+        "type": "action",
+        "description": "Create a new scheduled job with valid scraper and cron values"
+      },
+      {
+        "type": "action",
+        "description": "Delete the newly created scheduled job"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the scheduled job no longer appears in the list"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC014",
+    "title": "Review aggregate execution metrics and per-scraper stats",
+    "description": "This verifies that an analyst can open the reporting views and inspect aggregated success metrics together with per-scraper statistics.",
+    "category": "Execution History",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to view execution history metrics"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify aggregate execution metrics are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify per-scraper statistics are displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC015",
+    "title": "Reject a run request for an unknown scraper",
+    "description": "This verifies that the dashboard does not start execution when an operator tries to run a scraper that is not supported.",
+    "category": "Scraper Management API",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to run a single scraper"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the scraper identifier field with an unknown value"
+      },
+      {
+        "type": "action",
+        "description": "Submit the run request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a scraper not found message is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC016",
+    "title": "Run HTML diagnostics for a scraper URL",
+    "description": "Verify that a user can run a diagnostic check for a scraper URL and see the resulting structural analysis.",
+    "category": "Diagnostic",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /diagnostic"
+      },
+      {
+        "type": "action",
+        "description": "Select a supported scraper to diagnose"
+      },
+      {
+        "type": "action",
+        "description": "Fill in a valid scraper URL"
+      },
+      {
+        "type": "action",
+        "description": "Run the diagnostic check"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a diagnostic result is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC017",
+    "title": "Compare two diagnostic snapshots",
+    "description": "Verify that a user can compare two stored snapshots and see whether the structure changed.",
+    "category": "Diagnostic",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /diagnostic"
+      },
+      {
+        "type": "action",
+        "description": "Run two diagnostic checks that create distinct snapshots"
+      },
+      {
+        "type": "action",
+        "description": "Open the snapshot comparison view"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a comparison result is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC018",
+    "title": "Run HTML diagnostics and inspect a snapshot result",
+    "description": "This verifies that a maintenance user can run an HTML structure check for a scraper URL and see the resulting snapshot details.",
+    "category": "Diagnostics",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open diagnostics"
+      },
+      {
+        "type": "action",
+        "description": "Enter a valid scraper URL"
+      },
+      {
+        "type": "action",
+        "description": "Run the HTML diagnostics"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a diagnostic snapshot result is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify HTML structure check details are displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC019",
+    "title": "Reject an unsupported export format",
+    "description": "This verifies that a user cannot export preview data using a format that is not supported by the app.",
+    "category": "Preview & Export",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Open a preview for a supported scraper"
+      },
+      {
+        "type": "action",
+        "description": "Enable sandbox mode"
+      },
+      {
+        "type": "action",
+        "description": "Open the export controls"
+      },
+      {
+        "type": "action",
+        "description": "Select an unsupported export format"
+      },
+      {
+        "type": "action",
+        "description": "Submit the export request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an export validation error is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC020",
+    "title": "Review diagnostic snapshot history",
+    "description": "Verify that a user can open diagnostic history and see previously stored snapshots for a scraper.",
+    "category": "Diagnostic",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /diagnostic"
+      },
+      {
+        "type": "action",
+        "description": "Run a diagnostic check for a supported scraper URL"
+      },
+      {
+        "type": "action",
+        "description": "Open the snapshot history for that scraper"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify previously stored snapshots are displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC021",
+    "title": "See metrics reflect recent failures",
+    "description": "This verifies that recent failed runs are reflected in the history reporting views with higher error counts and a lower success rate.",
+    "category": "Execution History",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to view execution history metrics"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify error counts are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify success rate information is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC022",
+    "title": "Reject a schedule without a cron expression",
+    "description": "Verify that the scheduler prevents creating a job when the cron expression is missing.",
+    "category": "Scheduler",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /scheduler"
+      },
+      {
+        "type": "action",
+        "description": "Start creating a new scheduled job"
+      },
+      {
+        "type": "action",
+        "description": "Leave the cron expression empty and submit the form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a validation error is visible and the schedule is not created"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC023",
+    "title": "Block preview and export for a legacy script scraper",
+    "description": "This verifies that unsupported legacy script scrapers cannot use the preview workflow and therefore cannot proceed to export from preview.",
+    "category": "Preview & Export",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to open a preview for a legacy script scraper"
+      },
+      {
+        "type": "action",
+        "description": "Select a legacy script scraper"
+      },
+      {
+        "type": "action",
+        "description": "Open the preview"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an unsupported preview message is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify export controls are unavailable"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC024",
+    "title": "Reject an invalid history limit",
+    "description": "This verifies that the history view handles an invalid pagination limit with a visible validation response instead of showing records.",
+    "category": "Execution History",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to view execution history"
+      },
+      {
+        "type": "action",
+        "description": "Set an invalid history limit"
+      },
+      {
+        "type": "action",
+        "description": "Submit the history request"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a history validation error is displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC025",
+    "title": "Reject a diagnostic run without a URL",
+    "description": "Verify that the diagnostic tool prevents running a check when the URL is missing.",
+    "category": "Diagnostic",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /diagnostic"
+      },
+      {
+        "type": "action",
+        "description": "Start a new diagnostic check"
+      },
+      {
+        "type": "action",
+        "description": "Leave the URL empty and run the check"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a validation error is visible and no result is created"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC026",
+    "title": "Warn when a schedule is missing a cron expression",
+    "description": "This verifies that the scheduler form prevents creating a job without the required cron expression.",
+    "category": "Scheduler CRUD",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Open scheduler management"
+      },
+      {
+        "type": "action",
+        "description": "Start creating a new schedule"
+      },
+      {
+        "type": "action",
+        "description": "Leave the cron expression empty"
+      },
+      {
+        "type": "action",
+        "description": "Submit the schedule"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a cron expression validation error is displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC027",
+    "title": "Handle an unknown schedule action target",
+    "description": "Verify that attempting to pause a non-existent schedule does not change the schedule list state.",
+    "category": "Scheduler",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /scheduler"
+      },
+      {
+        "type": "action",
+        "description": "Open a schedule action for an invalid or missing schedule entry"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to pause the schedule"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the schedule list remains unchanged"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC028",
+    "title": "Reject an invalid diagnostic snapshot reference",
+    "description": "This verifies that the diagnostics view shows a clear validation response when a snapshot reference is invalid.",
+    "category": "Diagnostics",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Open diagnostics"
+      },
+      {
+        "type": "action",
+        "description": "Enter an invalid snapshot reference"
+      },
+      {
+        "type": "action",
+        "description": "Run the comparison"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a snapshot validation error is displayed"
+      }
+    ],
+    "priority": "Low"
+  }
+]

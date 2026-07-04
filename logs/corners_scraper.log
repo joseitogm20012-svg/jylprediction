@@ -1,0 +1,113 @@
+2026-07-03 13:42:49,235 Starting hybrid corners scraper (update=True)
+2026-07-03 13:42:49,236 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 13:42:49,239 Fixtures retrieved: 2
+2026-07-03 13:42:49,241 100001 SKIP already_processed
+2026-07-03 13:42:49,241 100002 soccerway OK corners=4-2
+2026-07-03 13:42:49,245 Añadidos 1 partidos nuevos. Total: 2
+2026-07-03 13:44:56,312 Starting hybrid corners scraper (update=False)
+2026-07-03 13:44:56,313 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 13:44:56,314 Fixtures retrieved: 2
+2026-07-03 13:44:56,314 100001 soccerway OK corners=6-3
+2026-07-03 13:44:59,316 100002 flashscore OK corners=4-2
+2026-07-03 13:44:59,320 Añadidos 2 partidos nuevos. Total: 2
+2026-07-03 13:44:59,329 Starting hybrid corners scraper (update=True)
+2026-07-03 13:44:59,329 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 13:44:59,330 Fixtures retrieved: 2
+2026-07-03 13:44:59,331 100001 SKIP already_processed
+2026-07-03 13:44:59,331 100002 soccerway OK corners=4-2
+2026-07-03 13:44:59,334 Añadidos 1 partidos nuevos. Total: 2
+2026-07-03 13:46:04,703 Starting hybrid corners scraper (update=False)
+2026-07-03 13:46:04,704 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 13:46:04,705 Fixtures retrieved: 2
+2026-07-03 13:46:04,706 100001 soccerway OK corners=6-3
+2026-07-03 13:46:07,709 100002 flashscore OK corners=4-2
+2026-07-03 13:46:07,711 Añadidos 2 partidos nuevos. Total: 2
+2026-07-03 13:46:07,723 Starting hybrid corners scraper (update=True)
+2026-07-03 13:46:07,723 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 13:46:07,723 Fixtures retrieved: 2
+2026-07-03 13:46:07,724 100001 SKIP already_processed
+2026-07-03 13:46:07,724 100002 soccerway OK corners=4-2
+2026-07-03 13:46:07,727 Añadidos 1 partidos nuevos. Total: 2
+2026-07-03 14:19:59,170 Starting hybrid corners scraper (update=True)
+2026-07-03 14:19:59,171 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 14:20:21,370 Starting hybrid corners scraper (update=True)
+2026-07-03 14:20:21,371 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 14:20:24,997 Fixtures retrieved: 0
+2026-07-03 14:20:24,997 No se encontraron partidos nuevos para añadir.
+2026-07-03 14:30:43,264 Starting hybrid corners scraper (update=True)
+2026-07-03 14:30:43,264 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 14:30:46,528 Fixtures retrieved: 23
+2026-07-03 14:31:51,038 argcap SKIP no_corners_data
+2026-07-03 14:32:54,349 Starting hybrid corners scraper (update=True)
+2026-07-03 14:32:54,349 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 14:32:58,116 Fixtures retrieved: 23
+2026-07-03 14:33:37,573 argcap SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:34:09,952 Starting hybrid corners scraper (update=True)
+2026-07-03 14:34:09,953 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 14:34:13,500 Fixtures retrieved: 23
+2026-07-03 14:34:57,652 argcap SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:35:38,985 colgha SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:36:24,599 Starting hybrid corners scraper (update=True)
+2026-07-03 14:36:24,599 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 14:36:28,943 Fixtures retrieved: 23
+2026-07-03 14:37:08,459 argcap SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:37:57,125 colgha SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:38:37,713 canmor SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:39:18,602 frapar SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:39:59,513 branor SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:40:39,796 engmex SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:41:19,014 porspa SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:42:15,956 Starting hybrid corners scraper (update=True)
+2026-07-03 14:42:15,957 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 14:42:20,910 Fixtures retrieved: 23
+2026-07-03 14:43:08,445 argcap SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:43:24,157 Starting hybrid corners scraper (update=False)
+2026-07-03 14:43:24,158 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 14:43:27,497 Fixtures retrieved: 23
+2026-07-03 14:44:08,430 argcap SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:44:37,479 Starting hybrid corners scraper (update=False)
+2026-07-03 14:44:37,479 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 14:44:41,586 Fixtures retrieved: 23
+2026-07-03 14:45:24,450 argcap SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:46:07,120 colgha SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:46:47,097 Starting hybrid corners scraper (update=False)
+2026-07-03 14:46:47,097 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 14:46:50,786 Fixtures retrieved: 23
+2026-07-03 14:47:33,622 argcap SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:48:22,495 colgha SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:49:02,524 canmor SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:49:43,413 frapar SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:50:25,781 branor SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:51:03,833 engmex SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:51:42,057 porspa SKIP no_corners_data (FlashScore failed)
+2026-07-03 14:52:20,444 belusa SKIP no_corners_data (FlashScore failed)
+2026-07-03 15:04:46,956 Starting hybrid corners scraper (update=False)
+2026-07-03 15:04:46,956 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 15:04:50,448 Fixtures retrieved: 23
+2026-07-03 15:04:50,449 argcap SKIP no_corners_data (using fallback)
+2026-07-03 15:05:35,346 Starting hybrid corners scraper (update=False)
+2026-07-03 15:05:35,347 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-07-03 15:05:38,792 Fixtures retrieved: 23
+2026-07-03 15:05:38,793 argcap SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,793 colgha SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,793 canmor SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,793 frapar SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,793 branor SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,794 engmex SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,794 porspa SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,794 belusa SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,794 colgha SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,794 branor SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,794 engmex SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,794 belusa SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,794 birhud SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,794 argcap SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,795 canmor SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,795 frapar SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,795 engmex SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,795 porspa SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,795 belusa SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,795 azasim SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,795 kinnor SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,795 leinor SKIP no_corners_data (using fallback)
+2026-07-03 15:05:38,795 colnor SKIP no_corners_data (using fallback)

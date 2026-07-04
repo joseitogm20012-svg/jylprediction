@@ -1,0 +1,198 @@
+{
+  "match_id": "vPsIXWOb",
+  "estadisticas": {
+    "1.75Goles esperados (xG)3.58": {
+      "home": "1.75",
+      "away": "3.58"
+    },
+    "52%Posesión48%": {
+      "home": "52%",
+      "away": "48%"
+    },
+    "19Remates totales19": {
+      "home": "19",
+      "away": "19"
+    },
+    "5Remates a puerta5": {
+      "home": "5",
+      "away": "5"
+    },
+    "3Grandes ocasiones6": {
+      "home": "3",
+      "away": "6"
+    },
+    "4Córneres2": {
+      "home": "4",
+      "away": "2"
+    },
+    "86%(602/699)Pases84%(536/639)": {
+      "home": "86%(602/699)",
+      "away": "84%(536/639)"
+    },
+    "1Tarjetas amarillas1": {
+      "home": "1",
+      "away": "1"
+    },
+    "2.30xG a puerta (xGOT)1.85": {
+      "home": "2.30",
+      "away": "1.85"
+    },
+    "9Remates fuera11": {
+      "home": "9",
+      "away": "11"
+    },
+    "5Remates rechazados3": {
+      "home": "5",
+      "away": "3"
+    },
+    "11Remates dentro del área10": {
+      "home": "11",
+      "away": "10"
+    },
+    "8Remates fuera del área9": {
+      "home": "8",
+      "away": "9"
+    },
+    "0Al palo2": {
+      "home": "0",
+      "away": "2"
+    },
+    "1Goles de cabeza0": {
+      "home": "1",
+      "away": "0"
+    },
+    "37Toques en el área rival30": {
+      "home": "37",
+      "away": "30"
+    },
+    "0Pases entre líneas completados1": {
+      "home": "0",
+      "away": "1"
+    },
+    "2Fueras de juego2": {
+      "home": "2",
+      "away": "2"
+    },
+    "12Tiros libres22": {
+      "home": "12",
+      "away": "22"
+    },
+    "50%(25/50)Pases largos40%(33/83)": {
+      "home": "50%(25/50)",
+      "away": "40%(33/83)"
+    },
+    "70%(130/185)Pases en el último tercio76%(153/201)": {
+      "home": "70%(130/185)",
+      "away": "76%(153/201)"
+    },
+    "27%(7/26)Centros23%(5/22)": {
+      "home": "27%(7/26)",
+      "away": "23%(5/22)"
+    },
+    "1.53Asistencias esperadas (xA)1.28": {
+      "home": "1.53",
+      "away": "1.28"
+    },
+    "16Saques de banda19": {
+      "home": "16",
+      "away": "19"
+    },
+    "22Faltas12": {
+      "home": "22",
+      "away": "12"
+    },
+    "33%(4/12)Entradas33%(4/12)": {
+      "home": "33%(4/12)",
+      "away": "33%(4/12)"
+    },
+    "60Duelos ganados56": {
+      "home": "60",
+      "away": "56"
+    },
+    "28Despejes31": {
+      "home": "28",
+      "away": "31"
+    },
+    "8Intercepciones11": {
+      "home": "8",
+      "away": "11"
+    },
+    "0Errores conducentes a remate0": {
+      "home": "0",
+      "away": "0"
+    },
+    "0Errores conducentes a gol1": {
+      "home": "0",
+      "away": "1"
+    },
+    "3Paradas3": {
+      "home": "3",
+      "away": "3"
+    },
+    "1.85xGOT enfrentados2.30": {
+      "home": "1.85",
+      "away": "2.30"
+    },
+    "-0.15Goles evitados-0.70": {
+      "home": "-0.15",
+      "away": "-0.70"
+    },
+    "10Saques de puerta12": {
+      "home": "10",
+      "away": "12"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Courtois",
+        "21Castagne",
+        "4Mechele",
+        "3Theate",
+        "5De Cuyper",
+        "8Tielemans",
+        "20Vanaken",
+        "10Trossard",
+        "7De Bruyne",
+        "11Doku",
+        "17De Ketelaere"
+      ],
+      "suplentes": [
+        "Lukaku R.",
+        "Raskin N.",
+        "Lukebakio D.",
+        "Moreira D.",
+        "Meunier T.",
+        "Onana A."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "23Diaw",
+        "15Diatta",
+        "6Ciss",
+        "19Niakhate",
+        "14Jakobs",
+        "21Diarra",
+        "5Gueye I.",
+        "26Gueye P.",
+        "13Ndiaye",
+        "18Sarr",
+        "10Mané"
+      ],
+      "suplentes": [
+        "Camara L.",
+        "Mbaye I.",
+        "Sarr P. M.",
+        "Diouf M.",
+        "Jackson N.",
+        "Sapoko Ndiaye B."
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "01.07.2026 16:00BélgicaEquipo que avanzaFIFA: 9.3-2Tras la prórrogaSenegalFIFA: 15.3-2Tras la prórroga",
+  "score": "3-2"
+}

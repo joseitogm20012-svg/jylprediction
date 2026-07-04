@@ -1,0 +1,191 @@
+ANÁLISIS DE SCRAPYCOCO
+=======================
+Fecha: 2026-06-28
+
+═══════════════════════════════════════════
+1. PROPÓSITO
+═══════════════════════════════════════════
+
+ScrapyCoco es una aplicación web independiente (FastAPI + vanilla JS) que
+sirve como panel de control visual para ejecutar y monitorear todos los
+scrapers de datos del proyecto JLY Predictor.
+
+Reemplaza la necesidad de ejecutar scripts desde la línea de comandos,
+proveyendo una interfaz gráfica con terminal web en vivo vía SSE.
+
+═══════════════════════════════════════════
+2. ESTRUCTURA DEL PROYECTO
+═══════════════════════════════════════════
+
+scrapycoco/
+├── main.py          # Servidor FastAPI (puerto 3005)
+├── index.html       # UI (tema oscuro, glassmorphism)
+├── script.js        # Lógica frontend (EventSource SSE)
+├── style.css        # Estilos visuales
+├── README.md        # Documentación
+├── scrapers/
+│   ├── __init__.py
+│   ├── base.py              # Clase base BaseScraper
+│   ├── fbref.py             # FBrefScraper (xg, xga, cards)
+│   ├── flashscore.py        # FlashscoreScraper (Playwright)
+│   └── transfermarkt.py     # TransfermarktScraper (Playwright)
+└── __pycache__/
+
+═══════════════════════════════════════════
+3. ARQUITECTURA DEL BACKEND (main.py)
+═══════════════════════════════════════════
+
+El servidor FastAPI corre en puerto 3005 (no interfiere con el predictor
+principal en 3000). Expone 3 endpoints:
+
+  GET /api/scrapers
+    → Lista de scrapers con estado (idle/running), última ejecución y
+      código de salida.
+
+  GET /api/run/{scraper_id}
+    → Inicia scraper vía SSE (text/event-stream). Soporta dos modos:
+      A) Legacy: ejecuta scripts Python como subproceso (results, xg,
+         wc2026, elo)
+      B) Modular: ejecuta scrapers OOP en thread pool (FBref, Flashscore,
+         Transfermarkt), con cola de logs asíncrona.
+
+  GET /
+    → Sirve index.html estático.
+
+Registro de scrapers (SCRAPERS dict, 8 en total):
+  1. results     → data/fetch_latest_results.py
+  2. xg          → FBrefScraper(type="xg")
+  3. xga         → FBrefScraper(type="xga")
+  4. cards       → FBrefScraper(type="cards")
+  5. flashscore  → FlashscoreScraper (Playwright)
+  6. transfermarkt → TransfermarktScraper (Playwright)
+  7. wc2026      → data/fetch_wc2026_missing.py
+  8. elo         → data/generate_elo_ratings.py
+
+Los scrapers modales (FBref, Flashscore, Transfermarkt) usan el patrón:
+  - asyncio.to_thread() para ejecución en thread pool
+  - Queue asíncrona + run_coroutine_threadsafe para logs en tiempo real
+
+═══════════════════════════════════════════
+4. CLASE BASE (scrapers/base.py)
+═══════════════════════════════════════════
+
+BaseScraper — 48 líneas, extremadamente simple:
+
+  Atributos:
+    - log_callback: callable opcional para enviar logs a SSE
+    - project_root: Path a la raíz del proyecto (../../ desde scrapers/)
+    - data_dir: Path a data/
+
+  Métodos:
+    - log(msg): print(msg) + callback SSE si existe
+    - get_random_user_agent(): elige aleatorio de 5 user-agents
+    - sleep_random(min, max): sleep con tiempo aleatorio
+    - run(**kwargs): abstracto (NotImplementedError)
+
+═══════════════════════════════════════════
+5. SCRAPERS ESPECÍFICOS
+═══════════════════════════════════════════
+
+5.1 FBrefScraper (scrapers/fbref.py — 56 líneas)
+  - Integrado para scripts legacy de FBref (fetch_fbref_xg.py,
+    fetch_fbref_xga.py, fetch_fbref_cards.py)
+  - run() ejecuta subprocess.Popen con el script correspondiente y
+    redirige stdout línea por línea a self.log()
+  - No usa Playwright ni scraping directo; es un wrapper
+
+5.2 FlashscoreScraper (scrapers/flashscore.py — 292 líneas)
+  - Scraper completo con Playwright (headless Chromium)
+  - Flujo:
+    1. find_team_base_url(): busca selección en flashscore.es
+       → abre buscador, escribe nombre, clic en resultado
+    2. scrape_match_data(): determina si partido es "finalizado" o
+       "futuro" navegando a /resultados/ y /partidos/
+    3. Si finalizado: extrae estadísticas (posesión, tiros, etc.)
+       desde pestaña "Estadísticas"
+    4. Si futuro: extrae alineaciones desde pestaña "Alineaciones"
+    5. Guarda en data/flashscore_match_data.json
+  - Usa BeautifulSoup para parsear HTML after page.content()
+  - Selectores CSS flexibles (contiene * en clases) para evadir
+    hashes dinámicos de Flashscore
+  - Fallback a match_id en URL si el scraper de búsqueda falla
+  - Manejo de cookies banners (#onetrust-accept-btn-handler)
+
+5.3 TransfermarktScraper (scrapers/transfermarkt.py — 134 líneas)
+  - Scraper con Playwright para obtener datos de plantilla
+  - Flujo:
+    1. Busca en Google: "site:transfermarkt.com {team} national team
+       squad startseite"
+    2. Toma el primer enlace a transfermarkt.com de los resultados
+    3. Navega al perfil, espera .data-header
+    4. Extrae: edad promedio, entrenador, valor de mercado
+    5. Guarda en data/transfermarkt_stats.json
+  - Fallback estático para desarrollo si falla la conexión
+
+═══════════════════════════════════════════
+6. FRONTEND (index.html + script.js + style.css)
+═══════════════════════════════════════════
+
+index.html (93 líneas):
+  - Tema oscuro premium con glassmorphism
+  - Layout: grid de 2 columnas (scrapers | consola)
+  - Header con logo 🥥 + estado del servidor (dot online)
+  - Sección "Parámetros de Extracción Avanzada": inputs para
+    match_id y team_name (se pasan como query params a la API)
+  - Scrapers renderizados dinámicamente desde /api/scrapers
+  - Terminal web en vivo (#console-output)
+
+script.js (175 líneas):
+  - loadScrapers(): fetch GET /api/scrapers, renderiza tarjetas
+  - renderScrapers(): crea tarjetas con estado, última ejecución,
+    botón "Ejecutar". Estados: idle, running (pulso), success, error
+  - startScraper(id): crea EventSource /api/run/{id}?params
+    → Eventos: "start", onmessage (logs), "end" (éxito/fallo),
+      onerror (conexión perdida)
+  - cleanup(): cierra EventSource, recarga scrapers
+  - Auto-scroll: checkbox que controla scroll automático de consola
+  - Intervalo 5s: refresh periódico de estado de scrapers
+
+style.css (427 líneas):
+  - Variables CSS modernas (Slate-950, indigo primary, emerald success)
+  - Glassmorphism en tarjetas (backdrop-filter: blur)
+  - Barra lateral de 4px de color según estado (warning/success/error)
+  - Animación pulse en status dot, badge, y barra lateral
+  - Consola estilo terminal: fondo #030712, texto verde emerald,
+    sombra interior, monoespaciado
+  - Responsive: grid 1 col en <1024px
+
+═══════════════════════════════════════════
+7. FLUJO DE DATOS COMPLETO
+═══════════════════════════════════════════
+
+Usuario abre http://localhost:3005
+  → GET /api/scrapers → renderiza 8 tarjetas
+  → Usuario completa parámetros (match_id, team_name) si aplica
+  → Clic "Ejecutar" en una tarjeta
+  → script.js: new EventSource('/api/run/{id}?params')
+  → main.py:
+      - Marca scraper como running
+      - Si legacy: create_subprocess_exec
+      - Si modular: asyncio.to_thread(scraper.run())
+  → Líneas de log via SSE fluyen al navegador
+  → Al terminar: evento "end" con código de salida
+  → script.js: cleanup(), recarga estado de scrapers
+  → Tarjeta se actualiza: success (verde) / error (rojo)
+
+═══════════════════════════════════════════
+8. OBSERVACIONES / POSIBLES MEJORAS
+═══════════════════════════════════════════
+
+- Los scrapers Flashscore y Transfermarkt usan Playwright headless,
+  lo que requiere instalar chromium (playwright install chromium)
+- FBrefScraper es un wrapper sobre scripts legacy, no scraping directo
+- No hay autenticación ni rate limiting en los endpoints
+- SSE no tiene reconexión automática del lado del frontend
+  (si se cae la conexión, hay que reiniciar manualmente)
+- La UI es 100% dark mode (no tiene soporte light-theme)
+- Los user-agents son estáticos y podrían ser detectados por
+  Cloudflare/anti-bot
+- No hay logging persistente (los logs viven solo en la consola web)
+- El fallback de TransfermarktScraper devuelve siempre Argentina/Brasil
+  independientemente del equipo consultado

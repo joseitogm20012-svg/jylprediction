@@ -1,0 +1,52 @@
+{
+  "match_id": "2qgnUDXp",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "23Cakir",
+        "18Muldur",
+        "4Akaydin",
+        "14Bardakci",
+        "20Kadioglu",
+        "16Yuksek",
+        "10Calhanoglu",
+        "9Yilmaz",
+        "8Güler",
+        "11Yildiz",
+        "7Akturkoglu"
+      ],
+      "suplentes": [
+        "Tanase F.",
+        "Stanciu N.",
+        "Miculescu D.",
+        "Baiaram S."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Radu",
+        "2Ratiu",
+        "3Dragusin",
+        "15Burca",
+        "11Bancu",
+        "18Marin",
+        "21Dragomir",
+        "20Man",
+        "14Hagi",
+        "13Mihaila",
+        "9Birligea"
+      ],
+      "suplentes": [
+        "Kokcu O.",
+        "Kabak O.",
+        "Kahveci I."
+      ],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "26.03.2026 13:00TurquíaEquipo que avanzaFIFA: 22.1-0FinalizadoRumaníaFIFA: 54.1-0Finalizado",
+  "score": "1-0"
+}

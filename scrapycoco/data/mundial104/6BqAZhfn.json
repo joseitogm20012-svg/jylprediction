@@ -1,0 +1,43 @@
+{
+  "match_id": "6BqAZhfn",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Costa",
+        "20Cancelo",
+        "3Dias",
+        "13Veiga",
+        "25Mendes",
+        "15Neves",
+        "23Vitinha",
+        "18Neto",
+        "8Fernandes",
+        "11Leao",
+        "7Ronaldo"
+      ],
+      "suplentes": [],
+      "formacion": "4 - 2 - 3 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Livakovic",
+        "2Stanisic",
+        "6Sutalo",
+        "3Pongracic",
+        "4Gvardiol",
+        "10Modric",
+        "8Kovacic",
+        "13Vlasic",
+        "17Sucic",
+        "14Perisic",
+        "11Budimir"
+      ],
+      "suplentes": [],
+      "formacion": "4 - 2 - 3 - 1"
+    }
+  },
+  "error": null,
+  "description": "02.07.2026 19:00PortugalFIFA: 5.-CroaciaFIFA: 11.-02.07.2026 19:00",
+  "score": "-"
+}

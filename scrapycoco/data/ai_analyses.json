@@ -1,0 +1,103 @@
+[
+  {
+    "id": 1782370889641,
+    "teamA": "usa",
+    "teamB": "turkey",
+    "match_key": "turkey-usa",
+    "analysis_text": "Escenarios opuestos: Estados Unidos ya está clasificado como líder del Grupo D con 6 puntos y +5 de diferencia, mientras que Turquía está eliminada con 0 puntos y -3 de diferencia, sin haber marcado un solo gol en 66 disparos acumulados. El historial está parejo: 2 victorias cada uno y 1 empate, con 7 goles por bando, y el último amistoso (junio 2025) lo ganó Turquía 2-1. Pochettino podría rotar por la clasificación asegurada, pero Turquía juega solo por orgullo y para evitar irse en cero. Se espera un Estados Unidos dominante en posesión y ocasiones, aunque Turquía podría encontrar su primer gol del torneo ante un rival relajado.",
+    "key_tips": [
+      "Victoria de Estados Unidos | Más de 2.5 goles | Ambos anotan"
+    ],
+    "confidence": 68,
+    "predicted_score": "null",
+    "model_name": "Manual",
+    "stage": "Fase de Grupos",
+    "key_players": "",
+    "created_at": "2026-06-25T03:01:29.641396",
+    "updated_at": "2026-06-25T15:55:14.219280"
+  },
+  {
+    "id": 1782370790790,
+    "teamA": "paraguay",
+    "teamB": "australia",
+    "match_key": "australia-paraguay",
+    "analysis_text": "Paraguay obligado a ganar tras la expulsión de Almirón, pero con una defensa sólida (mejor marca de CONMEBOL). Australia necesita solo el empate y nunca perdió ante Paraguay (2V, 3E). Se espera partido cerrado y con pocos goles",
+    "key_tips": [
+      "Victoria de Paraguay | Menos de 2.5 goles | Paraguay gana por 1 gol de diferencia"
+    ],
+    "confidence": 62,
+    "predicted_score": "null",
+    "model_name": "Manual",
+    "stage": "Fase de Grupos",
+    "key_players": "",
+    "created_at": "2026-06-25T02:59:50.790073"
+  },
+  {
+    "id": 1782370721656,
+    "teamA": "tunisia",
+    "teamB": "netherlands",
+    "match_key": "netherlands-tunisia",
+    "analysis_text": "Países Bajos es amplio favorito ante un Túnez ya eliminado y con una defensa que ha encajado 9 goles en dos partidos. La Naranja Mecánica viene de golear 5-1 a Suecia y su poderío ofensivo es abrumador. Túnez solo busca el honor, pero su falta de cohesión táctica y el momento dulce neerlandés hacen previsible una nueva goleada. Se espera dominio absoluto de Países Bajos en posesión, ocasiones y córner, con Túnez replegado intentando sobrevivir.",
+    "key_tips": [
+      "Victoria de Países Bajos | Más de 2.5 goles | Países Bajos gana por 2+ goles de diferencia"
+    ],
+    "confidence": 78,
+    "predicted_score": "null",
+    "model_name": "Manual",
+    "stage": "Fase de Grupos",
+    "key_players": "",
+    "created_at": "2026-06-25T02:58:41.656172",
+    "updated_at": "2026-06-25T03:02:49.729853"
+  },
+  {
+    "id": 1782370577418,
+    "teamA": "japan",
+    "teamB": "sweden",
+    "match_key": "japan-sweden",
+    "analysis_text": "Japón llega con mejor momento anímico tras la goleada a Túnez y una defensa sólida. Suecia necesita reivindicarse después del 5-1 en contra y demostrar su poderío ofensivo del debut. Se espera un partido táctico y combativo, con Japón buscando dominar la posesión y Suecia esperando su oportunidad al contragolpe. El historial parejo y la necesidad de ambos por ganar apuntan a un encuentro abierto con opciones para los dos lados.",
+    "key_tips": [
+      "Empate o victoria ajustada de Japón | Más de 2.5 goles | Ambos anotan"
+    ],
+    "confidence": 60,
+    "predicted_score": "null",
+    "model_name": "Manual",
+    "stage": "Fase de Grupos",
+    "key_players": "",
+    "created_at": "2026-06-25T02:56:17.418740",
+    "updated_at": "2026-06-25T03:02:27.630899"
+  },
+  {
+    "id": 1782370506363,
+    "teamA": "germany",
+    "teamB": "ecuador",
+    "match_key": "ecuador-germany",
+    "analysis_text": "Alemania es amplio favorito pese a las posibles rotaciones. Su eficacia ofensiva contrasta con la sequía de Ecuador, que no ha marcado en dos partidos. La Tri está obligada a ganar, pero su falta de gol y el momento dulce alemán hacen muy cuesta arriba la hazaña. Se espera dominio alemán en posesión y ocasiones, con Ecuador replegado intentando sobrevivir al vendaval germano. El historial alemán contra sudamericanos es abrumador: 14 victorias en 20 partidos.",
+    "key_tips": [
+      "Victoria de Alemania | Más de 2.5 goles | Ambos anotan (Ecuador necesita arriesgar y Alemania ha recibido goles en sus dos partidos)"
+    ],
+    "confidence": 72,
+    "predicted_score": "null",
+    "model_name": "Manual",
+    "stage": "Fase de Grupos",
+    "key_players": "",
+    "created_at": "2026-06-25T02:55:06.363735",
+    "updated_at": "2026-06-25T03:02:12.052191"
+  },
+  {
+    "id": 1782367977906,
+    "teamA": "ivory-coast",
+    "teamB": "curacao",
+    "match_key": "curacao-ivory-coast",
+    "analysis_text": "Pronóstico JLYPREDICTION\nCosta de Marfil parte como favorito. La solidez defensiva de Curazao y su récord de atajadas sugieren pocos goles en la primera mitad. Se espera dominio de posesión y córner para Costa de Marfil, con Curazao replegado. La experiencia marfileña y su poder ofensivo deberían imponerse, aunque Curazao puede mantener el marcador ajustado.",
+    "key_tips": [
+      "Victoria de Costa de Marfil | Menos de 3.5 goles | Córners a favor de Costa de Marfil"
+    ],
+    "confidence": 85,
+    "predicted_score": "null",
+    "model_name": "DeepSeek",
+    "stage": "Fase de Grupos",
+    "key_players": "",
+    "created_at": "2026-06-25T02:12:57.906997",
+    "updated_at": "2026-06-25T02:48:16.378770"
+  }
+]

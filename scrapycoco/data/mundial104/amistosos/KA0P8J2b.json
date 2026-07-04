@@ -1,0 +1,53 @@
+{
+  "match_id": "KA0P8J2b",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Mitov",
+        "20Georgiev",
+        "5Dimitrov K.",
+        "15Velkov",
+        "2Petrov",
+        "7Rusev",
+        "22Stoyanov",
+        "4Gruev",
+        "14Krastev",
+        "10Dimitrov Z.",
+        "11Despodov"
+      ],
+      "suplentes": [
+        "Petkov M.",
+        "Nikolov V.",
+        "Shopov S.",
+        "Minchev M.",
+        "Chochev I."
+      ],
+      "formacion": "4 - 5 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Mamardashvili",
+        "13Gocholeishvili",
+        "4Kashia",
+        "14Lochoshvili",
+        "19Tsitaishvili",
+        "15Mekvabishvili",
+        "6Kochorashvili",
+        "17Kiteishvili",
+        "10Davitashvili",
+        "8Zivzivadze",
+        "7Kvaratskhelia"
+      ],
+      "suplentes": [
+        "Kvilitaia G.",
+        "Guliashvili G.",
+        "Abuashvili G."
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "18.11.2025 15:45BulgariaFIFA: 87.2-1FinalizadoGeorgiaFIFA: 72.2-1Finalizado",
+  "score": "2-1"
+}

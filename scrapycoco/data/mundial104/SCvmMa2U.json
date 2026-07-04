@@ -1,0 +1,55 @@
+{
+  "match_id": "SCvmMa2U",
+  "estadisticas": {},
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "23Cakir",
+        "2Çelik",
+        "15Kabak",
+        "14Bardakci",
+        "24Aydin",
+        "5Ozcan",
+        "6Kokcu",
+        "13Elmali",
+        "8Güler",
+        "11Yildiz",
+        "21Yilmaz"
+      ],
+      "suplentes": [
+        "Söyüncü C.",
+        "Uzun C.",
+        "Ayhan K.",
+        "Muldur M.",
+        "Kahveci I."
+      ],
+      "formacion": "3 - 4 - 2 - 1"
+    },
+    "visitante": {
+      "titulares": [
+        "1Turner",
+        "23Scally",
+        "12Robinson",
+        "22McKenzie",
+        "6Trusty",
+        "8McKennie",
+        "14Berhalter",
+        "7Reyna",
+        "11Aaronson",
+        "9Pepi",
+        "21Weah"
+      ],
+      "suplentes": [
+        "Pulisic C.",
+        "Dest S.",
+        "Zendejas A.",
+        "Freeman A.",
+        "Tillman M."
+      ],
+      "formacion": "4 - 3 - 3"
+    }
+  },
+  "error": null,
+  "description": "25.06.2026 22:00TurquíaFIFA: 22.3-2FinalizadoEE. UU.FIFA: 17.3-2Finalizado",
+  "score": "3-2"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ],
+  "mcp": {
+    "testsprite": {
+      "type": "local",
+      "command": ["npx", "-y", "@testsprite/testsprite-mcp@latest"],
+      "enabled": true,
+      "environment": {
+        "API_KEY": "sk-user-3FJuZE4FlGzxpFePYNrRGVk2xNSqdaOAs0EhEcp0UnpsYZkmsLoRluQj4CifUda4a6QtAaVKk8LJgKMcsxjKKEgDdtH388nvaqjrSbT-VKvt-O45FsSZtvfmJnGTTm39GYo"
+      }
+    },
+    "banani-ai": {
+      "type": "remote",
+      "url": "https://app.banani.co/api/mcp/mcp",
+      "headers": {
+        "Authorization": "Bearer bnni_1hgp3FaODkZEiWYxP4bEPzgTD8YWlE8t"
+      },
+      "enabled": true
+    }
+  }
+}

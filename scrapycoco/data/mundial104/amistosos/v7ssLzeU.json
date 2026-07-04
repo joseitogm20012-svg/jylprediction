@@ -1,0 +1,186 @@
+{
+  "match_id": "v7ssLzeU",
+  "estadisticas": {
+    "1.59Goles esperados (xG)0.51": {
+      "home": "1.59",
+      "away": "0.51"
+    },
+    "63%Posesión37%": {
+      "home": "63%",
+      "away": "37%"
+    },
+    "19Remates totales8": {
+      "home": "19",
+      "away": "8"
+    },
+    "8Remates a puerta1": {
+      "home": "8",
+      "away": "1"
+    },
+    "3Grandes ocasiones0": {
+      "home": "3",
+      "away": "0"
+    },
+    "12Córneres3": {
+      "home": "12",
+      "away": "3"
+    },
+    "84%(423/504)Pases76%(236/311)": {
+      "home": "84%(423/504)",
+      "away": "76%(236/311)"
+    },
+    "1Tarjetas amarillas0": {
+      "home": "1",
+      "away": "0"
+    },
+    "2.04xG a puerta (xGOT)0.13": {
+      "home": "2.04",
+      "away": "0.13"
+    },
+    "6Remates fuera4": {
+      "home": "6",
+      "away": "4"
+    },
+    "5Remates rechazados3": {
+      "home": "5",
+      "away": "3"
+    },
+    "14Remates dentro del área4": {
+      "home": "14",
+      "away": "4"
+    },
+    "5Remates fuera del área4": {
+      "home": "5",
+      "away": "4"
+    },
+    "1Al palo0": {
+      "home": "1",
+      "away": "0"
+    },
+    "36Toques en el área rival12": {
+      "home": "36",
+      "away": "12"
+    },
+    "1Pases entre líneas completados0": {
+      "home": "1",
+      "away": "0"
+    },
+    "2Fueras de juego0": {
+      "home": "2",
+      "away": "0"
+    },
+    "8Tiros libres11": {
+      "home": "8",
+      "away": "11"
+    },
+    "55%(29/53)Pases largos47%(28/60)": {
+      "home": "55%(29/53)",
+      "away": "47%(28/60)"
+    },
+    "70%(93/133)Pases en el último tercio55%(55/100)": {
+      "home": "70%(93/133)",
+      "away": "55%(55/100)"
+    },
+    "32%(11/34)Centros20%(2/10)": {
+      "home": "32%(11/34)",
+      "away": "20%(2/10)"
+    },
+    "1.07Asistencias esperadas (xA)0.38": {
+      "home": "1.07",
+      "away": "0.38"
+    },
+    "24Saques de banda16": {
+      "home": "24",
+      "away": "16"
+    },
+    "11Faltas8": {
+      "home": "11",
+      "away": "8"
+    },
+    "90%(9/10)Entradas41%(7/17)": {
+      "home": "90%(9/10)",
+      "away": "41%(7/17)"
+    },
+    "37Duelos ganados52": {
+      "home": "37",
+      "away": "52"
+    },
+    "24Despejes38": {
+      "home": "24",
+      "away": "38"
+    },
+    "8Intercepciones13": {
+      "home": "8",
+      "away": "13"
+    },
+    "0Errores conducentes a remate1": {
+      "home": "0",
+      "away": "1"
+    },
+    "0Errores conducentes a gol0": {
+      "home": "0",
+      "away": "0"
+    },
+    "1Paradas5": {
+      "home": "1",
+      "away": "5"
+    },
+    "0.13xGOT enfrentados2.04": {
+      "home": "0.13",
+      "away": "2.04"
+    },
+    "0.13Goles evitados0.04": {
+      "home": "0.13",
+      "away": "0.04"
+    }
+  },
+  "alineaciones": {
+    "local": {
+      "titulares": [
+        "1Donnarumma",
+        "23Mancini",
+        "21Bastoni",
+        "13Calafiori",
+        "7Politano",
+        "18Barella",
+        "5Locatelli",
+        "8Tonali",
+        "3Dimarco",
+        "11Kean",
+        "9Retegui"
+      ],
+      "suplentes": [
+        "Gatti F.",
+        "Esposito F.",
+        "Pisilli N.",
+        "Palestra M.",
+        "Raspadori G."
+      ],
+      "formacion": "3 - 5 - 2"
+    },
+    "visitante": {
+      "titulares": [
+        "23Charles P.",
+        "2Devlin",
+        "5Hume",
+        "17McNair",
+        "13McConville",
+        "20Spencer",
+        "15Devenny",
+        "19Charles S.",
+        "7Galbraith",
+        "14Price",
+        "10Donley"
+      ],
+      "suplentes": [
+        "Smyth P.",
+        "Reid J.",
+        "Magennis J."
+      ],
+      "formacion": "5 - 4 - 1"
+    }
+  },
+  "error": null,
+  "description": "26.03.2026 15:45ItaliaEquipo que avanzaFIFA: 12.2-0FinalizadoIrlanda del NorteFIFA: 70.2-0Finalizado",
+  "score": "2-0"
+}
