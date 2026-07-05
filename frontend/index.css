@@ -119,6 +119,7 @@ body {
   padding: 24px;
   max-width: 1440px;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 /* ==========================================================================
@@ -1311,11 +1312,17 @@ body.light-theme .market-subtab-btn.active {
   margin-top: 8px;
 }
 
+div:has(> .ou-table) {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .ou-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.85rem;
   text-align: left;
+  min-width: 300px; /* Ensure it doesn't get too squished */
 }
 
 .ou-table th {
@@ -2367,6 +2374,13 @@ body.light-theme .comp-bar-wrapper-right {
     flex: 0 0 auto !important;
     padding: 4px 12px !important;
   }
+
+  .responsive-grid > div {
+    min-width: 0;
+    overflow-x: auto;
+    width: 100%;
+  }
+}
 }
 
 /* ==========================================================================
