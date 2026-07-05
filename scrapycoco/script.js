@@ -847,3 +847,112 @@ window.addEventListener('unhandledrejection', e => {
 window.addEventListener('error', e => {
   addLog('error', `Error: ${e.message}`);
 });
+
+// ─── SYNC TO SUPABASE ────────────────────────────────────
+function openSyncModal() {
+  const modal = document.getElementById('sync-modal');
+  modal.style.display = 'flex';
+  document.getElementById('btn-sync-run').disabled = false;
+  document.getElementById('sync-status-text').textContent = 'Listo para sincronizar';
+  // Reset checkboxes to defaults
+  document.getElementById('sync-matches').checked = true;
+  document.getElementById('sync-elo').checked = true;
+  document.getElementById('sync-metrics').checked = true;
+  document.getElementById('sync-corners-stats').checked = true;
+  document.getElementById('sync-match-corners').checked = false;
+}
+
+function closeSyncModal() {
+  document.getElementById('sync-modal').style.display = 'none';
+}
+
+async function runSync() {
+  const btn = document.getElementById('btn-sync-run');
+  btn.disabled = true;
+  const statusText = document.getElementById('sync-status-text');
+  statusText.textContent = 'Sincronizando...';
+
+  const body = {
+    matches: document.getElementById('sync-matches').checked,
+    elo: document.getElementById('sync-elo').checked,
+    team_metrics: document.getElementById('sync-metrics').checked,
+    corners_stats: document.getElementById('sync-corners-stats').checked,
+    match_corners: document.getElementById('sync-match-corners').checked
+  };
+
+  const selectedCount = Object.values(body).filter(Boolean).length;
+  if (selectedCount === 0) {
+    addLog('warning', 'Sync: No se seleccionó ningún tipo de datos');
+    showToast('Selecciona al menos un tipo de datos', 'warning');
+    btn.disabled = false;
+    statusText.textContent = 'Listo para sincronizar';
+    return;
+  }
+
+  addLog('info', `[Sync] Iniciando sincronización de ${selectedCount} tipo(s) de datos...`);
+
+  try {
+    const resp = await fetch(`${API_BASE}/sync`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let lastEvent = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || '';
+      for (const line of lines) {
+        if (line.startsWith('event: ')) {
+          lastEvent = line.slice(7).trim();
+        } else if (line.startsWith('data: ')) {
+          try {
+            const ev = JSON.parse(line.slice(6));
+            switch (lastEvent) {
+              case 'log':
+                addLog(ev.level || 'info', `[Sync] ${ev.message}`);
+                break;
+              case 'sync-start':
+                addLog('system', `[Sync] ${ev.message}`);
+                break;
+              case 'sync-progress':
+                statusText.textContent = `${ev.completed}/${ev.total} - ${ev.name}`;
+                break;
+              case 'sync-error':
+                addLog('error', `[Sync] ${ev.message}`);
+                showToast(ev.message, 'error');
+                break;
+              case 'sync-end':
+                addLog('success', `[Sync] Sincronización completada`);
+                statusText.textContent = 'Completado';
+                const results = ev.results || {};
+                for (const [key, count] of Object.entries(results)) {
+                  addLog('info', `[Sync]   ${key}: ${count} registros`);
+                }
+                showToast(`Sync completado: ${JSON.stringify(results)}`, 'success');
+                loadHistory();
+                loadDashboard();
+                break;
+            }
+          } catch (e) { /* skip non-JSON data */ }
+        }
+      }
+    }
+  } catch (e) {
+    addLog('error', `[Sync] Error: ${e.message}`);
+    showToast(`Error en sync: ${e.message}`, 'error');
+    statusText.textContent = 'Error';
+  }
+
+  btn.disabled = false;
+  closeSyncModal();
+}

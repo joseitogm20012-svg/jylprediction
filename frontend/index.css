@@ -369,7 +369,7 @@ body.light-theme .theme-toggle-btn .moon-icon {
   letter-spacing: 0.05em;
 }
 
-.custom-select {
+select.custom-select {
   background: #0f1525;
   border: 1px solid var(--panel-border);
   border-radius: var(--border-radius-md);
@@ -383,12 +383,12 @@ body.light-theme .theme-toggle-btn .moon-icon {
   width: 100%;
 }
 
-.custom-select option {
+select.custom-select option {
   background: #0f1525;
   color: #fff;
 }
 
-.custom-select:focus {
+select.custom-select:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 2px var(--color-primary-glow);
 }
@@ -1967,7 +1967,7 @@ body.light-theme .heatmap-table th {
   border-color: var(--color-primary);
 }
 
-.custom-select {
+select.custom-select {
   height: 42px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--card-border-inner);
@@ -2359,7 +2359,7 @@ body.light-theme .comp-bar-wrapper-right {
     flex-grow: 1 !important;
   }
   
-  .param-input, .custom-select, .ts-control {
+  .param-input, select.custom-select, .ts-control {
     width: 100% !important;
   }
   

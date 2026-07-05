@@ -766,3 +766,102 @@ def upsert_team_metric(metric_data: dict):
         conn.commit()
     finally:
         conn.close()
+
+def upsert_corners_stats_batch(rows: list[dict]):
+    """Upsert masivo a public.corners_stats (promedios de corners por equipo)."""
+    if not rows:
+        return
+    
+    conn = get_db_connection()
+    cursor = get_cursor(conn)
+    
+    try:
+        if IS_POSTGRES:
+            import psycopg2.extras
+            sql = """
+            INSERT INTO public.corners_stats (
+                team_slug, corners_for, corners_against, games,
+                second_half_taken, second_half_conceded, second_half_matches, source
+            ) VALUES %s
+            ON CONFLICT (team_slug) DO UPDATE SET
+                corners_for = EXCLUDED.corners_for,
+                corners_against = EXCLUDED.corners_against,
+                games = EXCLUDED.games,
+                second_half_taken = EXCLUDED.second_half_taken,
+                second_half_conceded = EXCLUDED.second_half_conceded,
+                second_half_matches = EXCLUDED.second_half_matches,
+                source = EXCLUDED.source,
+                updated_at = now()
+            """
+            data = [(
+                r.get("team_slug"), r.get("corners_for"), r.get("corners_against"),
+                r.get("games"), r.get("second_half_taken"), r.get("second_half_conceded"),
+                r.get("second_half_matches"), r.get("source")
+            ) for r in rows]
+            psycopg2.extras.execute_values(cursor, sql, data, page_size=500)
+        else:
+            sql = """
+            INSERT INTO public.corners_stats (team_slug, corners_for, corners_against, games, second_half_taken, second_half_conceded, second_half_matches, source)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT (team_slug) DO UPDATE SET
+                corners_for = EXCLUDED.corners_for,
+                corners_against = EXCLUDED.corners_against,
+                games = EXCLUDED.games
+            """
+            data = [(
+                r.get("team_slug"), r.get("corners_for"), r.get("corners_against"),
+                r.get("games"), r.get("second_half_taken"), r.get("second_half_conceded"),
+                r.get("second_half_matches"), r.get("source")
+            ) for r in rows]
+            cursor.executemany(sql, data)
+        
+        conn.commit()
+    finally:
+        conn.close()
+
+def upsert_match_corners_batch(rows: list[dict]):
+    """Upsert masivo a public.match_corners (corners por partido)."""
+    if not rows:
+        return
+    
+    conn = get_db_connection()
+    cursor = get_cursor(conn)
+    
+    try:
+        if IS_POSTGRES:
+            import psycopg2.extras
+            sql = """
+            INSERT INTO public.match_corners (
+                id, date, home_team, away_team, home_corners, away_corners, competition
+            ) VALUES %s
+            ON CONFLICT (id) DO UPDATE SET
+                date = EXCLUDED.date,
+                home_team = EXCLUDED.home_team,
+                away_team = EXCLUDED.away_team,
+                home_corners = EXCLUDED.home_corners,
+                away_corners = EXCLUDED.away_corners,
+                competition = EXCLUDED.competition,
+                updated_at = now()
+            """
+            data = [(
+                r.get("id"), r.get("date"), r.get("home_team"), r.get("away_team"),
+                r.get("home_corners"), r.get("away_corners"), r.get("competition")
+            ) for r in rows]
+            psycopg2.extras.execute_values(cursor, sql, data, page_size=500)
+        else:
+            sql = """
+            INSERT INTO public.match_corners (id, date, home_team, away_team, home_corners, away_corners, competition)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT (id) DO UPDATE SET
+                home_corners = EXCLUDED.home_corners,
+                away_corners = EXCLUDED.away_corners
+            """
+            data = [(
+                r.get("id"), r.get("date"), r.get("home_team"), r.get("away_team"),
+                r.get("home_corners"), r.get("away_corners"), r.get("competition")
+            ) for r in rows]
+            cursor.executemany(sql, data)
+        
+        conn.commit()
+    finally:
+        conn.close()

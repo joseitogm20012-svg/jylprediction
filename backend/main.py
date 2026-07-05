@@ -276,6 +276,16 @@ def get_history_advanced(team_a: str, team_b: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error loading advanced H2H: {str(e)}")
 
+@app.get("/api/scorers/{team_slug}")
+def get_team_scorers_api(team_slug: str, decay_months: Optional[int] = None):
+    try:
+        from predictor import get_scorers_for_team
+        data = get_scorers_for_team(team_slug, decay_months)
+        return data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error loading scorers: {str(e)}")
+
+
 @app.get("/api/backtest-metrics")
 def get_backtest_metrics():
     try:

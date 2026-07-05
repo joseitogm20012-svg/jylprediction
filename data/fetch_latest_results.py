@@ -43,7 +43,8 @@ def download_file(url, file_name):
         return None
 
 def save_with_backup(content, file_name):
-    """Guarda el CSV creando un backup del anterior."""
+    """Guarda el CSV creando un backup del anterior en data/ y data/raw/."""
+    # Guardar en data/
     file_path = os.path.join(BASE_DIR, file_name)
     if os.path.exists(file_path):
         backup = file_path + ".bak"
@@ -51,7 +52,18 @@ def save_with_backup(content, file_name):
 
     with open(file_path, "w", encoding="utf-8", newline="") as f:
         f.write(content)
-    print(f"  -> {file_name} guardado correctamente.")
+        
+    # Guardar en data/raw/
+    raw_dir = os.path.join(BASE_DIR, "raw")
+    if os.path.exists(raw_dir):
+        raw_file_path = os.path.join(raw_dir, file_name)
+        if os.path.exists(raw_file_path):
+            raw_backup = raw_file_path + ".bak"
+            shutil.copy2(raw_file_path, raw_backup)
+        with open(raw_file_path, "w", encoding="utf-8", newline="") as f:
+            f.write(content)
+            
+    print(f"  -> {file_name} guardado en data/ y data/raw/ correctamente.")
 
 def show_recent_matches(n=10):
     """Muestra los N partidos más recientes de results.csv."""

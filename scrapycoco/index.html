@@ -169,6 +169,10 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
               Ejecutar Lote
             </button>
+            <button class="btn btn-secondary" onclick="openSyncModal()" title="Sincronizar datos scrapeados a Supabase">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              Sync a Supabase
+            </button>
           </div>
         </div>
 
@@ -489,6 +493,89 @@
     <div class="modal-footer">
       <button class="btn btn-secondary" onclick="closeExportSubmodal()">Cancelar</button>
       <button class="btn btn-primary" onclick="confirmExport()">Descargar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Sync Modal -->
+<div class="modal-overlay" id="sync-modal" style="display:none" onclick="if(event.target===this)closeSyncModal()" role="dialog" aria-modal="true" aria-labelledby="sync-modal-title">
+  <div class="modal-card modal-sm" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3 id="sync-modal-title">Sincronizar a Supabase</h3>
+      <button class="modal-close" onclick="closeSyncModal()" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:var(--fs-sm);color:var(--text-secondary);margin-bottom:var(--space-4)">
+        Selecciona los datos que deseas sincronizar a Supabase PostgreSQL.
+        Los datos se leerán de los archivos locales scrapeados y se subirán a la base de datos.
+      </p>
+      <div class="sync-options" style="display:flex;flex-direction:column;gap:var(--space-3)">
+        <label class="toggle" style="justify-content:space-between;padding:var(--space-2) var(--space-3);background:var(--bg-tertiary);border-radius:var(--radius-md)">
+          <span class="toggle-label" style="font-weight:500">
+            <span style="display:flex;align-items:center;gap:var(--space-2)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              Resultados (matches)
+            </span>
+            <span style="font-size:var(--fs-xs);color:var(--text-tertiary)">results.csv → public.matches</span>
+          </span>
+          <input type="checkbox" id="sync-matches" checked>
+          <span class="toggle-track"></span>
+        </label>
+        <label class="toggle" style="justify-content:space-between;padding:var(--space-2) var(--space-3);background:var(--bg-tertiary);border-radius:var(--radius-md)">
+          <span class="toggle-label" style="font-weight:500">
+            <span style="display:flex;align-items:center;gap:var(--space-2)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Ratings Elo
+            </span>
+            <span style="font-size:var(--fs-xs);color:var(--text-tertiary)">elo-calibrated.json → public.elo_ratings</span>
+          </span>
+          <input type="checkbox" id="sync-elo" checked>
+          <span class="toggle-track"></span>
+        </label>
+        <label class="toggle" style="justify-content:space-between;padding:var(--space-2) var(--space-3);background:var(--bg-tertiary);border-radius:var(--radius-md)">
+          <span class="toggle-label" style="font-weight:500">
+            <span style="display:flex;align-items:center;gap:var(--space-2)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              xG y Estadísticas
+            </span>
+            <span style="font-size:var(--fs-xs);color:var(--text-tertiary)">xg_by_team.json → public.team_metrics</span>
+          </span>
+          <input type="checkbox" id="sync-metrics" checked>
+          <span class="toggle-track"></span>
+        </label>
+        <label class="toggle" style="justify-content:space-between;padding:var(--space-2) var(--space-3);background:var(--bg-tertiary);border-radius:var(--radius-md)">
+          <span class="toggle-label" style="font-weight:500">
+            <span style="display:flex;align-items:center;gap:var(--space-2)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+              Córners por equipo
+            </span>
+            <span style="font-size:var(--fs-xs);color:var(--text-tertiary)">corners_stats.json → public.corners_stats</span>
+          </span>
+          <input type="checkbox" id="sync-corners-stats" checked>
+          <span class="toggle-track"></span>
+        </label>
+        <label class="toggle" style="justify-content:space-between;padding:var(--space-2) var(--space-3);background:var(--bg-tertiary);border-radius:var(--radius-md)">
+          <span class="toggle-label" style="font-weight:500">
+            <span style="display:flex;align-items:center;gap:var(--space-2)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--info)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Córners por partido
+            </span>
+            <span style="font-size:var(--fs-xs);color:var(--text-tertiary)">per_match_corners.json → public.match_corners</span>
+          </span>
+          <input type="checkbox" id="sync-match-corners">
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer" style="border-top:1px solid var(--border);padding:var(--space-3) var(--space-4);display:flex;justify-content:space-between;align-items:center">
+      <span style="font-size:var(--fs-xs);color:var(--text-tertiary)" id="sync-status-text">Listo para sincronizar</span>
+      <div style="display:flex;gap:var(--space-2)">
+        <button class="btn btn-secondary" onclick="closeSyncModal()">Cancelar</button>
+        <button class="btn btn-primary" id="btn-sync-run" onclick="runSync()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          Sincronizar
+        </button>
+      </div>
     </div>
   </div>
 </div>

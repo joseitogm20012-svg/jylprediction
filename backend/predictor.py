@@ -83,38 +83,140 @@ _cached_goalscorers = None
 _cached_corners = None
 
 def load_corners_data():
+    """Carga datos de corners por equipo. Primero intenta Supabase DB, fallback a archivo."""
     global _cached_corners
     if _cached_corners is not None:
         return _cached_corners
-    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "corners_stats.json")
-    if os.path.exists(path):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                _cached_corners = json.load(f)
-        except Exception:
+    
+    try:
+        conn = db.get_db_connection()
+        cursor = db.get_cursor(conn)
+        cursor.execute("SELECT * FROM public.corners_stats")
+        rows = cursor.fetchall()
+        conn.close()
+        
+        _cached_corners = {}
+        for row in rows:
+            slug = row["team_slug"]
+            entry = {}
+            if row.get("corners_for") is not None:
+                entry["corners_for"] = row["corners_for"]
+            if row.get("corners_against") is not None:
+                entry["corners_against"] = row["corners_against"]
+            if row.get("games") is not None:
+                entry["games"] = row["games"]
+            if row.get("source"):
+                entry["_source"] = row["source"]
+            sh_taken = row.get("second_half_taken")
+            sh_conceded = row.get("second_half_conceded")
+            sh_matches = row.get("second_half_matches")
+            if sh_taken is not None or sh_conceded is not None:
+                sh = {}
+                if sh_taken is not None: sh["taken"] = sh_taken
+                if sh_conceded is not None: sh["conceded"] = sh_conceded
+                if sh_matches is not None: sh["matches"] = sh_matches
+                entry["second_half"] = {"overall": sh}
+            _cached_corners[slug] = entry
+        
+        # Merge home/away splits from JSON (not available in DB schema)
+        _merge_corner_home_away_splits(_cached_corners)
+        
+    except Exception as e:
+        print(f"Error loading corners stats from DB: {e}")
+        # Fallback a archivo
+        path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "corners_stats.json")
+        if os.path.exists(path):
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    _cached_corners = json.load(f)
+                if isinstance(_cached_corners, dict) and "_meta" in _cached_corners:
+                    del _cached_corners["_meta"]
+            except Exception:
+                _cached_corners = {}
+        else:
             _cached_corners = {}
-    else:
+    
+    if _cached_corners is None:
         _cached_corners = {}
     return _cached_corners
+
+def _merge_corner_home_away_splits(cache):
+    """Merge second_half.home and second_half.away from JSON into DB cache."""
+    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "corners_stats.json")
+    if not os.path.exists(path):
+        return
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            json_data = json.load(f)
+        if isinstance(json_data, dict) and "_meta" in json_data:
+            del json_data["_meta"]
+        for slug, entry in json_data.items():
+            sh = entry.get("second_half")
+            if not sh:
+                continue
+            if slug not in cache:
+                cache[slug] = {"corners_for": entry.get("corners_for"), "corners_against": entry.get("corners_against"), "games": entry.get("games")}
+            if "second_half" not in cache[slug]:
+                cache[slug]["second_half"] = {}
+            cache[slug]["second_half"]["home"] = sh.get("home")
+            cache[slug]["second_half"]["away"] = sh.get("away")
+            if "overall" not in cache[slug]["second_half"] and isinstance(sh.get("overall"), dict):
+                cache[slug]["second_half"]["overall"] = sh["overall"]
+    except Exception:
+        pass
 
 _cached_per_match_corners = None
 
 def load_per_match_corners():
+    """Carga datos de corners por partido. Primero intenta Supabase DB, fallback a archivo."""
     global _cached_per_match_corners
     if _cached_per_match_corners is not None:
         return _cached_per_match_corners
-    if os.path.exists(PER_MATCH_CORNERS_PATH):
-        try:
-            with open(PER_MATCH_CORNERS_PATH, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            if data.get("matches") and len(data["matches"]) > 0:
-                _cached_per_match_corners = data
-            else:
-                _cached_per_match_corners = None
-        except Exception:
+    
+    try:
+        conn = db.get_db_connection()
+        cursor = db.get_cursor(conn)
+        cursor.execute("SELECT * FROM public.match_corners ORDER BY date DESC NULLS LAST")
+        rows = cursor.fetchall()
+        conn.close()
+        
+        matches = []
+        for row in rows:
+            matches.append({
+                "id": row["id"],
+                "date": row.get("date") or "",
+                "home_team": row.get("home_team") or "",
+                "away_team": row.get("away_team") or "",
+                "home_corners": row.get("home_corners") or 0,
+                "away_corners": row.get("away_corners") or 0,
+                "competition": row.get("competition") or "",
+            })
+        
+        if matches:
+            _cached_per_match_corners = {
+                "matches": matches,
+                "last_updated": datetime.now().isoformat(),
+                "total_matches": len(matches),
+                "note": "Cargado desde Supabase DB"
+            }
+        else:
             _cached_per_match_corners = None
-    else:
-        _cached_per_match_corners = None
+    except Exception as e:
+        print(f"Error loading match corners from DB: {e}")
+        # Fallback a archivo
+        if os.path.exists(PER_MATCH_CORNERS_PATH):
+            try:
+                with open(PER_MATCH_CORNERS_PATH, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                if data.get("matches") and len(data["matches"]) > 0:
+                    _cached_per_match_corners = data
+                else:
+                    _cached_per_match_corners = None
+            except Exception:
+                _cached_per_match_corners = None
+        else:
+            _cached_per_match_corners = None
+    
     return _cached_per_match_corners
 
 HOME_CORNER_FACTOR = 1.10
@@ -159,21 +261,28 @@ def load_goalscorers():
     try:
         _gs_conn = db.get_db_connection()
         _gs_cur = db.get_cursor(_gs_conn)
-        _gs_cur.execute("SELECT team, scorer, minute, own_goal, penalty FROM public.goalscorers")
+        _gs_cur.execute("SELECT date, team, scorer, minute, own_goal, penalty FROM public.goalscorers")
         for _r in _gs_cur.fetchall():
-            _tn = (_r["team"] if isinstance(_r, dict) else _r[0]).strip().lower()
-            _scorer = (_r["scorer"] if isinstance(_r, dict) else _r[1]).strip()
-            _mraw = _r["minute"] if isinstance(_r, dict) else _r[2]
-            _og = _r["own_goal"] if isinstance(_r, dict) else _r[3]
-            _pk = _r["penalty"] if isinstance(_r, dict) else _r[4]
-            all_scorers.append({"team":_tn,"scorer":_scorer,"minute":_mraw,"own_goal":_og,"penalty":_pk})
+            _date_raw = _r["date"] if isinstance(_r, dict) else _r[0]
+            if isinstance(_date_raw, (datetime.date, datetime.datetime)):
+                _date = _date_raw.strftime('%Y-%m-%d')
+            else:
+                _date = str(_date_raw).strip()
+            _tn = (_r["team"] if isinstance(_r, dict) else _r[1]).strip().lower()
+            _scorer = (_r["scorer"] if isinstance(_r, dict) else _r[2]).strip()
+            _mraw = _r["minute"] if isinstance(_r, dict) else _r[3]
+            _og = _r["own_goal"] if isinstance(_r, dict) else _r[4]
+            _pk = _r["penalty"] if isinstance(_r, dict) else _r[5]
+            all_scorers.append({"date":_date,"team":_tn,"scorer":_scorer,"minute":_mraw,"own_goal":_og,"penalty":_pk})
         _gs_cur.close()
         _gs_conn.close()
-    except Exception:
+    except Exception as e:
+        print(f"Error loading goalscorers from DB, falling back to CSV: {e}")
         _gs_csv = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "raw", "goalscorers.csv")
         if os.path.exists(_gs_csv):
             with open(_gs_csv, "r", encoding="utf-8") as _f:
                 for _row in csv.DictReader(_f):
+                    _date = _row.get("date","").strip()
                     _tn = _row.get("team","").strip().lower()
                     _scorer = _row.get("scorer","").strip()
                     try:
@@ -182,10 +291,100 @@ def load_goalscorers():
                         _mraw = 0
                     _og = _row.get("own_goal","").strip().upper() == "TRUE"
                     _pk = _row.get("penalty","").strip().upper() == "TRUE"
-                    all_scorers.append({"team":_tn,"scorer":_scorer,"minute":_mraw,"own_goal":_og,"penalty":_pk})
+                    all_scorers.append({"date":_date,"team":_tn,"scorer":_scorer,"minute":_mraw,"own_goal":_og,"penalty":_pk})
     
     _cached_goalscorers = all_scorers
     return _cached_goalscorers
+
+
+_cached_processed_scorers = None
+
+def get_scorers_for_team(team_slug, decay_months=None):
+    global _cached_processed_scorers
+    
+    # Load team_scorers_processed.json
+    if _cached_processed_scorers is None:
+        json_path = os.path.join(PROJECT_DIR, "data", "team_scorers_processed.json")
+        if os.path.exists(json_path):
+            try:
+                with open(json_path, "r", encoding="utf-8") as f:
+                    _cached_processed_scorers = json.load(f)
+            except Exception as e:
+                print(f"Error reading team_scorers_processed.json: {e}")
+                _cached_processed_scorers = {}
+        else:
+            _cached_processed_scorers = {}
+            
+    # Get historical list
+    historical = _cached_processed_scorers.get(team_slug.lower(), [])
+    
+    # Map scorer name to active status
+    active_map = {s["name"].lower(): s["active"] for s in historical}
+    
+    # Calculate recent scorers
+    recent = []
+    if decay_months is not None and decay_months > 0:
+        from datetime import timedelta
+        # Load all goalscorers (with date)
+        all_scorers = load_goalscorers()
+        
+        # Determine team names to filter
+        canon_name = SLUG_TO_NAME.get(team_slug, team_slug.replace("-", " ").title())
+        low_name = canon_name.lower()
+        slug_clean = team_slug.replace("-", " ")
+        team_names = {team_slug, slug_clean, low_name}
+        
+        # Find maximum date in all_scorers
+        max_date = None
+        for r in all_scorers:
+            date_str = r.get("date")
+            if date_str:
+                try:
+                    d = datetime.strptime(date_str, "%Y-%m-%d")
+                    if max_date is None or d > max_date:
+                        max_date = d
+                except ValueError:
+                    pass
+                    
+        if max_date is None:
+            max_date = datetime.now()
+            
+        cutoff_date = max_date - timedelta(days=decay_months * 30.44)
+        
+        # Filter and aggregate goals
+        counts = {}
+        for r in all_scorers:
+            tn = r["team"]
+            if tn not in team_names:
+                continue
+                
+            date_str = r.get("date")
+            if not date_str:
+                continue
+                
+            try:
+                d = datetime.strptime(date_str, "%Y-%m-%d")
+                if d >= cutoff_date:
+                    scorer_name = r["scorer"]
+                    counts[scorer_name] = counts.get(scorer_name, 0) + 1
+            except ValueError:
+                pass
+                
+        # Build list of dicts
+        for name, goals in counts.items():
+            active = active_map.get(name.lower(), True)
+            recent.append({"name": name, "goals": goals, "active": active})
+            
+        # Sort by goals descending, then name ascending
+        recent.sort(key=lambda x: (-x["goals"], x["name"]))
+    else:
+        recent = historical
+        
+    return {
+        "historical": historical,
+        "recent": recent
+    }
+
 
 
 _cached_hattrick_rate = None
@@ -388,12 +587,27 @@ def name_to_slug(name):
 
 _cached_matches = None
 _cached_ratings = None
+_cache_timestamp = 0
+CACHE_TTL = 60 # 60 seconds
 
-@lru_cache(maxsize=1)
 def load_data():
-    global _cached_matches, _cached_ratings
-    if _cached_matches is not None and _cached_ratings is not None:
+    global _cached_matches, _cached_ratings, _cache_timestamp
+    import time
+    now = time.time()
+    
+    if (_cached_matches is not None 
+            and _cached_ratings is not None 
+            and (now - _cache_timestamp) < CACHE_TTL):
         return _cached_matches, _cached_ratings
+        
+    # Clear all other database caches to ensure reload
+    global _cached_xg_data, _cached_corners, _cached_goalscorers, _cached_player_stats
+    _cached_xg_data = None
+    _cached_corners = None
+    _cached_goalscorers = None
+    _cached_player_stats = None
+    
+    _cache_timestamp = now
 
     try:
         conn = db.get_db_connection()
@@ -1469,9 +1683,21 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
 
     # Handle Second Half vs Full Match
     if predict_half == "second":
-        # Try to get specific second half data from Footiqo
-        sh_a = real_a.get("second_half", {}).get("overall", {})
-        sh_b = real_b.get("second_half", {}).get("overall", {})
+        # Use venue-specific second-half splits when available
+        sh_data_a = real_a.get("second_half", {})
+        sh_data_b = real_b.get("second_half", {})
+        if venue_a == "home" and sh_data_a.get("home"):
+            sh_a = sh_data_a["home"]
+        elif venue_a == "away" and sh_data_a.get("away"):
+            sh_a = sh_data_a["away"]
+        else:
+            sh_a = sh_data_a.get("overall", {})
+        if venue_b == "home" and sh_data_b.get("home"):
+            sh_b = sh_data_b["home"]
+        elif venue_b == "away" and sh_data_b.get("away"):
+            sh_b = sh_data_b["away"]
+        else:
+            sh_b = sh_data_b.get("overall", {})
         
         base_a = sh_a.get("taken") if sh_a.get("taken") else (real_a.get("corners_for", 5.0) * 0.5)
         base_b = sh_b.get("taken") if sh_b.get("taken") else (real_b.get("corners_for", 5.0) * 0.5)
@@ -1558,12 +1784,25 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
 
     # Blend with historical Over/Under percentages if available (Footiqo)
     if predict_half == "second":
-        sh_a = real_a.get("second_half", {}).get("overall", {})
-        sh_b = real_b.get("second_half", {}).get("overall", {})
+        # Reuse venue-specific splits from above (already computed as sh_a, sh_b)
+        
+        # Dynamic historical weight based on sample size
+        matches_a = sh_a.get("matches", 0) or 0
+        matches_b = sh_b.get("matches", 0) or 0
+        avg_matches = (matches_a + matches_b) / 2.0
+        if avg_matches >= 15:
+            hist_weight = 0.40
+        elif avg_matches >= 10:
+            hist_weight = 0.30
+        elif avg_matches >= 5:
+            hist_weight = 0.20
+        else:
+            hist_weight = 0.10
+        sim_weight = 1.0 - hist_weight
         
         # Mapping of thresholds to Footiqo keys
         thresholds = {
-            7.5: "over35", # simplified mapping for 2nd half
+            7.5: "over35",
             8.5: "over45",
             9.5: "over55",
             10.5: "over55"
@@ -1578,8 +1817,7 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
             hist_b = sh_b.get(key, 50) / 100.0
             hist_avg = (hist_a + hist_b) / 2.0
             
-            # Blend: 70% simulation, 30% historical
-            blended_prob = (0.7 * probs[i]) + (0.3 * hist_avg)
+            blended_prob = (sim_weight * probs[i]) + (hist_weight * hist_avg)
             blended_probs.append(blended_prob)
             
         prob_corners_over_7_5, prob_corners_over_8_5, prob_corners_over_9_5, prob_corners_over_10_5 = blended_probs
@@ -1720,6 +1958,34 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
         _scorers_rows = load_goalscorers()
 
         if _scorers_rows:
+            # 1. Parse dates and find the max date
+            import datetime as dt_mod
+            max_date = None
+            parsed_rows = []
+            
+            for _r in _scorers_rows:
+                _date_str = _r.get("date")
+                if not _date_str:
+                    continue
+                try:
+                    if isinstance(_date_str, (dt_mod.date, dt_mod.datetime)):
+                        _d = dt_mod.datetime.combine(_date_str, dt_mod.time.min) if isinstance(_date_str, dt_mod.date) else _date_str
+                    else:
+                        _d = dt_mod.datetime.strptime(_date_str, "%Y-%m-%d")
+                    if max_date is None or _d > max_date:
+                        max_date = _d
+                    parsed_rows.append((_d, _r))
+                except Exception:
+                    pass
+            
+            if max_date is None:
+                max_date = dt_mod.datetime.now()
+                
+            # Filter rows by cutoff date
+            # half_life_months represents the decay months slider
+            cutoff_days = int(half_life_months * 30.44)
+            cutoff_date = max_date - dt_mod.timedelta(days=cutoff_days)
+            
             _slug_a_clean = team_a.replace("-"," ")
             _slug_b_clean = team_b.replace("-"," ")
             _team_a_names = {team_a, _slug_a_clean, _low_a}
@@ -1738,7 +2004,10 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
             _1h_b = 0
             _2h_b = 0
 
-            for _r in _scorers_rows:
+            for _d, _r in parsed_rows:
+                if _d < cutoff_date:
+                    continue
+                    
                 _tn = _r["team"]
                 _is_a = _tn in _team_a_names
                 _is_b = _tn in _team_b_names
@@ -1838,6 +2107,62 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
         "htft": htft
     }
 
+    # ---- HELPER: Player market builders (defined before CARDS section which uses _build_booking_probs) ----
+    def _build_anytime(scorers_sorted, total_goals, xg_team, limit=10):
+        if not scorers_sorted or total_goals <= 0:
+            return []
+        result = []
+        for name, goals in scorers_sorted[:limit]:
+            share = goals / total_goals
+            player_xg = xg_team * share
+            prob = 1.0 - math.exp(-player_xg)
+            prob = min(prob, 0.85)
+            result.append({"name": name, "probability": round(prob, 4)})
+        return result
+
+    def _build_first(scorers_sorted, total_goals, xg_team, limit=10):
+        if not scorers_sorted or total_goals <= 0:
+            return []
+        result = []
+        for name, goals in scorers_sorted[:limit]:
+            share = goals / total_goals
+            player_xg = xg_team * share
+            anytime = 1.0 - math.exp(-player_xg)
+            prob = anytime * 0.25
+            prob = min(prob, 0.30)
+            result.append({"name": name, "probability": round(prob, 4)})
+        return result
+
+    def _build_multi(scorers_sorted, total_goals, xg_team, limit=10):
+        if not scorers_sorted or total_goals <= 0:
+            return []
+        result = []
+        for name, goals in scorers_sorted[:limit]:
+            share = goals / total_goals
+            player_xg = xg_team * share
+            prob = (1.0 - math.exp(-player_xg)) - (player_xg * math.exp(-player_xg))
+            prob = min(prob, 0.30)
+            result.append({"name": name, "probability": round(prob, 4)})
+        return result
+
+    def _build_booking_probs(team_slug, team_cards, limit=10):
+        ps = load_player_stats()
+        team = ps.get(team_slug, {})
+        players = team.get("misc", [])
+        if not players or team_cards <= 0:
+            return []
+        total_bookings = sum(p.get("cards_yellow", 0) for p in players)
+        if total_bookings <= 0:
+            return []
+        result = []
+        for p in players:
+            share = p.get("cards_yellow", 0) / total_bookings
+            prob = 1.0 - math.exp(-team_cards * share)
+            prob = min(prob, 0.40)
+            result.append({"player": p["player"], "name": p["player"], "probability": round(prob, 4)})
+        result.sort(key=lambda x: -x["probability"])
+        return result[:limit]
+
     # ---- 3. CARDS (con datos reales FBref si disponibles) ----
     cards_a = entry_a.get("yellow_cards_per_90") if "yellow_cards_per_90" in entry_a else None
     cards_b = entry_b.get("yellow_cards_per_90") if "yellow_cards_per_90" in entry_b else None
@@ -1869,8 +2194,8 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
         "expectedA": round(cards_a, 1), "expectedB": round(cards_b, 1), "expectedTotal": round(total_cards, 1),
         "overUnder": _make_ou(total_cards, [3.5, 4.5, 5.5, 6.5]),
         "redCard": {"yes": round(red_any, 4), "no": round(1.0 - red_any, 4)},
-        "bookingPlayersA": _top_players(team_a, "passing", 10),
-        "bookingPlayersB": _top_players(team_b, "passing", 10)
+        "bookingPlayersA": _build_booking_probs(team_a, cards_a, 10),
+        "bookingPlayersB": _build_booking_probs(team_b, cards_b, 10)
     }
 
     # ---- 4. PLAYERS (from goal stats loaded above) ----
@@ -1879,22 +2204,13 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
     _total_a = max(_gs_data["total_a"], 1)
     _total_b = max(_gs_data["total_b"], 1)
 
-    def _build_anytime(scorers_sorted, total_goals, limit=10):
-        return [{"name": n, "probability": round(min(g/total_goals, 0.45), 4)} for n, g in scorers_sorted[:limit]]
-
-    def _build_first(scorers_sorted, total_goals, limit=10):
-        return [{"name": n, "probability": round(min(g/total_goals * 0.22, 0.15), 4)} for n, g in scorers_sorted[:limit]]
-
-    def _build_multi(scorers_sorted, total_goals, limit=10):
-        return [{"name": n, "probability": round(min(g/total_goals * 0.08, 0.06), 4)} for n, g in scorers_sorted[:limit]]
-
     players_markets = {
-        "firstScorerA": _build_first(_scorers_a_sorted, _total_a),
-        "anytimeScorerA": _build_anytime(_scorers_a_sorted, _total_a),
-        "multiGoalsA": _build_multi(_scorers_a_sorted, _total_a),
-        "firstScorerB": _build_first(_scorers_b_sorted, _total_b),
-        "anytimeScorerB": _build_anytime(_scorers_b_sorted, _total_b),
-        "multiGoalsB": _build_multi(_scorers_b_sorted, _total_b),
+        "firstScorerA": _build_first(_scorers_a_sorted, _total_a, xg_a),
+        "anytimeScorerA": _build_anytime(_scorers_a_sorted, _total_a, xg_a),
+        "multiGoalsA": _build_multi(_scorers_a_sorted, _total_a, xg_a),
+        "firstScorerB": _build_first(_scorers_b_sorted, _total_b, xg_b),
+        "anytimeScorerB": _build_anytime(_scorers_b_sorted, _total_b, xg_b),
+        "multiGoalsB": _build_multi(_scorers_b_sorted, _total_b, xg_b),
         "assistsA": [p for p in _top_players(team_a, "passing", 10) if p.get("assists", 0) > 0],
         "assistsB": [p for p in _top_players(team_b, "passing", 10) if p.get("assists", 0) > 0]
     }

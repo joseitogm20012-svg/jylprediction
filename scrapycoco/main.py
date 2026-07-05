@@ -35,7 +35,7 @@ from api_schemas import (
     ExportRequest, AddScheduleRequest, ScheduleInfo,
     DiagnosticRequest, DiagnosticResult, CompareResult,
     ScrapySpiderList, PipelineRunResponse, PipelineRunRequest,
-    QualitySummary, HealthResponse,
+    QualitySummary, HealthResponse, SyncRequest,
 )
 
 SEVERITY_MAP = {"none": 0, "info": 1, "warning": 2, "critical": 3}
@@ -748,6 +748,59 @@ async def run_pipeline(payload: PipelineRunRequest):
     from pipeline_orchestrator import run_pipeline as rp
     data, result = rp(payload.item_type, payload.items, payload.scraper_id, payload.stages)
     return {"result": result.to_dict(), "items_out": len(data)}
+
+@app.post("/api/sync", tags=["Scrapers"], summary="Sincronizar datos a Supabase",
+          description="Ejecuta la sincronización de datos scrapeados a Supabase PostgreSQL. Permite seleccionar qué datos sincronizar.")
+async def sync_to_supabase(req: SyncRequest):
+    queue = asyncio.Queue()
+    loop = asyncio.get_running_loop()
+
+    def thread_safe_log(msg: str):
+        asyncio.run_coroutine_threadsafe(queue.put(msg), loop)
+
+    async def sync_generator():
+        yield f"event: sync-start\ndata: {json.dumps({'message':'Iniciando sincronización a Supabase...','timestamp':datetime.now(timezone.utc).isoformat()})}\n\n"
+
+        from sync_engine import SyncEngine
+        engine = SyncEngine(log_callback=thread_safe_log)
+        steps = []
+        if req.matches: steps.append(("matches", "Resultados", engine.sync_matches))
+        if req.elo: steps.append(("elo", "Ratings Elo", engine.sync_elo))
+        if req.team_metrics: steps.append(("team_metrics", "xG y Estadísticas", engine.sync_team_metrics))
+        if req.corners_stats: steps.append(("corners_stats", "Córners por equipo", engine.sync_corners_stats))
+        if req.match_corners: steps.append(("match_corners", "Córners por partido", engine.sync_match_corners))
+
+        if not steps:
+            yield f"event: sync-error\ndata: {json.dumps({'message':'No se seleccionó ningún tipo de datos para sincronizar','timestamp':datetime.now(timezone.utc).isoformat()})}\n\n"
+            return
+
+        total = len(steps)
+        results = {}
+        for idx, (key, name, func) in enumerate(steps):
+            yield f"event: sync-progress\ndata: {json.dumps({'completed':idx,'total':total,'current':key,'name':name,'status':'running','timestamp':datetime.now(timezone.utc).isoformat()})}\n\n"
+            yield f"event: log\ndata: {json.dumps({'level':'info','message':f'[{idx+1}/{total}] Sincronizando {name}...','timestamp':datetime.now(timezone.utc).isoformat()})}\n\n"
+
+            try:
+                def run_sync_step():
+                    return func()
+                count = await asyncio.to_thread(run_sync_step)
+                results[key] = count
+                yield f"event: log\ndata: {json.dumps({'level':'success','message':f'[{idx+1}/{total}] {name}: {count} registros sincronizados','timestamp':datetime.now(timezone.utc).isoformat()})}\n\n"
+            except Exception as e:
+                results[key] = 0
+                yield f"event: log\ndata: {json.dumps({'level':'error','message':f'[{idx+1}/{total}] {name}: ERROR - {e}','timestamp':datetime.now(timezone.utc).isoformat()})}\n\n"
+
+            yield f"event: sync-progress\ndata: {json.dumps({'completed':idx+1,'total':total,'current':key,'name':name,'status':'success' if results.get(key,0) > 0 else 'error','timestamp':datetime.now(timezone.utc).isoformat()})}\n\n"
+
+            # Drain queued logs
+            while not queue.empty():
+                raw = queue.get_nowait()
+                yield f"event: log\ndata: {raw}\n\n"
+
+        yield f"event: sync-end\ndata: {json.dumps({'results':results,'message':'Sincronización completada','timestamp':datetime.now(timezone.utc).isoformat()})}\n\n"
+
+    return StreamingResponse(sync_generator(), media_type="text/event-stream")
+
 
 @app.get("/")
 def serve_index():

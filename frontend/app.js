@@ -953,9 +953,35 @@ function renderSparkline(svgId, outcomes, height = 40, width = 100) {
   const stepX = effectiveWidth / (n - 1 || 1);
   const values = outcomes.map(o => o === 'W' ? 0.2 : o === 'L' ? 0.8 : 0.5);
   const points = values.map((v, i) => ({ x: padding + i * stepX, y: padding + v * effectiveHeight }));
-  const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
-  const circlesHtml = points.map(p => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="#10b981"/>`).join('');
-  svg.innerHTML = `<path d="${linePath}" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>${circlesHtml}`;
+
+  let defs = '';
+  let pathsHtml = '';
+  for (let i = 0; i < n - 1; i++) {
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const o1 = outcomes[i];
+    const o2 = outcomes[i + 1];
+    
+    const c1 = o1 === 'W' ? '#10b981' : o1 === 'L' ? '#ef4444' : '#f59e0b';
+    const c2 = o2 === 'W' ? '#10b981' : o2 === 'L' ? '#ef4444' : '#f59e0b';
+    
+    const gradId = `grad-${svgId}-${i}`;
+    defs += `
+      <linearGradient id="${gradId}" x1="${p1.x.toFixed(1)}" y1="${p1.y.toFixed(1)}" x2="${p2.x.toFixed(1)}" y2="${p2.y.toFixed(1)}" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="${c1}" />
+        <stop offset="100%" stop-color="${c2}" />
+      </linearGradient>
+    `;
+    pathsHtml += `<line x1="${p1.x.toFixed(1)}" y1="${p1.y.toFixed(1)}" x2="${p2.x.toFixed(1)}" y2="${p2.y.toFixed(1)}" stroke="url(#${gradId})" stroke-width="2" stroke-linecap="round"/>`;
+  }
+
+  const circlesHtml = points.map((p, i) => {
+    const o = outcomes[i];
+    const color = o === 'W' ? '#10b981' : o === 'L' ? '#ef4444' : '#f59e0b';
+    return `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="${color}"/>`;
+  }).join('');
+
+  svg.innerHTML = `<defs>${defs}</defs>${pathsHtml}${circlesHtml}`;
 }
 
 async function updateTeamCardForm(teamSlug, side) {
@@ -4303,6 +4329,28 @@ function renderLeaderboard(rankings) {
   });
 }
 
+// Scorer view toggler
+window.toggleScorersView = function(viewType, uid) {
+  const btnRecent = document.getElementById(`${uid}-btn-scorers-recent`);
+  const btnHist = document.getElementById(`${uid}-btn-scorers-historical`);
+  const gridRecent = document.getElementById(`${uid}-grid-scorers-recent`);
+  const gridHist = document.getElementById(`${uid}-grid-scorers-historical`);
+  
+  if (!btnRecent || !btnHist || !gridRecent || !gridHist) return;
+  
+  if (viewType === 'recent') {
+    btnRecent.classList.add('active');
+    btnHist.classList.remove('active');
+    gridRecent.style.display = 'grid';
+    gridHist.style.display = 'none';
+  } else {
+    btnRecent.classList.remove('active');
+    btnHist.classList.add('active');
+    gridRecent.style.display = 'none';
+    gridHist.style.display = 'grid';
+  }
+};
+
 // ── View Team Details Modal ──
 window.viewTeamDetails = async function(teamKey) {
   const teamSlug = teamKey === 'A' ? selectedTeamA : selectedTeamB;
@@ -4343,13 +4391,15 @@ window.viewTeamDetails = async function(teamKey) {
   if (!tabsEl || !bodyEl) return;
 
   try {
+    const decay = decaySlider ? parseInt(decaySlider.value) : 18;
     const [historyRes, scorersRes] = await Promise.all([
-      fetch(`/api/history/${teamSlug}`),
-      fetch(`/data/team_scorers_processed.json`)
+      fetch(`/api/history/${teamSlug}?decay_months=${decay}`),
+      fetch(`/api/scorers/${teamSlug}?decay_months=${decay}`)
     ]);
     const histData = historyRes.ok ? await historyRes.json() : { history: [] };
-    const allScorers = scorersRes.ok ? await scorersRes.json() : {};
-    const teamScorers = (allScorers[teamSlug] || []).slice(0, 10);
+    const scorersData = scorersRes.ok ? await scorersRes.json() : { historical: [], recent: [] };
+    const historicalScorers = scorersData.historical || [];
+    const recentScorers = scorersData.recent || [];
     const matches = histData.history || [];
     const recent = matches.slice(0, 10);
 
@@ -4434,21 +4484,44 @@ window.viewTeamDetails = async function(teamKey) {
     }
     matchHtml += `</div></div>`;
 
-    let scorersHtml = `<div class="td-tab-content" id="${uid}-tc-scorers">`;
-    scorersHtml += `<div class="td-section-title">🥅 Goleadores históricos</div>`;
-    scorersHtml += `<div class="td-scorers-grid">`;
-    if (!teamScorers.length) {
-      scorersHtml += `<div class="td-empty" style="grid-column:1/-1">Sin datos de goleadores</div>`;
+    let recentHtml = `<div class="td-scorers-grid" id="${uid}-grid-scorers-recent">`;
+    if (!recentScorers.length) {
+      recentHtml += `<div class="td-empty" style="grid-column:1/-1">Sin goles registrados en este periodo</div>`;
     } else {
-      const maxGoals = Math.max(...teamScorers.map(s => s.goals), 1);
+      const topRecent = recentScorers.slice(0, 10);
+      const maxGoalsRecent = Math.max(...topRecent.map(s => s.goals), 1);
       const rankLabels = ['top1', 'top2', 'top3', '', '', '', '', '', '', ''];
-      teamScorers.forEach((s, i) => {
+      topRecent.forEach((s, i) => {
         const dot = s.active ? `<span class="td-scorer-dot active" title="Activo"></span>` : `<span class="td-scorer-dot retired" title="Retirado"></span>`;
-        const barW = Math.round(s.goals / maxGoals * 100);
-        scorersHtml += `<div class="td-scorer"><span class="td-scorer-rank ${rankLabels[i] || ''}">#${i+1}</span><div class="td-scorer-info"><div class="td-scorer-name">${s.name} ${dot}</div><div class="td-scorer-bar-wrap"><div class="td-scorer-bar-fill" style="width:${barW}%"></div></div></div><span class="td-scorer-goals">${s.goals}</span></div>`;
+        const barW = Math.round(s.goals / maxGoalsRecent * 100);
+        recentHtml += `<div class="td-scorer"><span class="td-scorer-rank ${rankLabels[i] || ''}">#${i+1}</span><div class="td-scorer-info"><div class="td-scorer-name">${s.name} ${dot}</div><div class="td-scorer-bar-wrap"><div class="td-scorer-bar-fill" style="width:${barW}%"></div></div></div><span class="td-scorer-goals">${s.goals}</span></div>`;
       });
     }
-    scorersHtml += `</div></div>`;
+    recentHtml += `</div>`;
+
+    let historicalHtml = `<div class="td-scorers-grid" id="${uid}-grid-scorers-historical" style="display: none;">`;
+    if (!historicalScorers.length) {
+      historicalHtml += `<div class="td-empty" style="grid-column:1/-1">Sin datos de goleadores históricos</div>`;
+    } else {
+      const topHistorical = historicalScorers.slice(0, 10);
+      const maxGoalsHist = Math.max(...topHistorical.map(s => s.goals), 1);
+      const rankLabels = ['top1', 'top2', 'top3', '', '', '', '', '', '', ''];
+      topHistorical.forEach((s, i) => {
+        const dot = s.active ? `<span class="td-scorer-dot active" title="Activo"></span>` : `<span class="td-scorer-dot retired" title="Retirado"></span>`;
+        const barW = Math.round(s.goals / maxGoalsHist * 100);
+        historicalHtml += `<div class="td-scorer"><span class="td-scorer-rank ${rankLabels[i] || ''}">#${i+1}</span><div class="td-scorer-info"><div class="td-scorer-name">${s.name} ${dot}</div><div class="td-scorer-bar-wrap"><div class="td-scorer-bar-fill" style="width:${barW}%"></div></div></div><span class="td-scorer-goals">${s.goals}</span></div>`;
+      });
+    }
+    historicalHtml += `</div>`;
+
+    let scorersHtml = `<div class="td-tab-content" id="${uid}-tc-scorers">`;
+    scorersHtml += `<div class="td-section-title">🥅 Goleadores de la Selección</div>`;
+    scorersHtml += `<div class="td-subtabs" style="display: flex; gap: 8px; margin-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 12px;">
+      <button id="${uid}-btn-scorers-recent" class="td-subtab active" onclick="window.toggleScorersView('recent', '${uid}')">Recientes (${decay} meses)</button>
+      <button id="${uid}-btn-scorers-historical" class="td-subtab" onclick="window.toggleScorersView('historical', '${uid}')">Histórico Completo</button>
+    </div>`;
+    scorersHtml += recentHtml + historicalHtml;
+    scorersHtml += `</div>`;
 
     let trendHtml = `<div class="td-tab-content" id="${uid}-tc-trend">`;
     trendHtml += `<div class="td-section-title">📈 Evolución de goles (últimos partidos)</div>`;

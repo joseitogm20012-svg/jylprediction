@@ -183,3 +183,10 @@ class HealthResponse(BaseModel):
     version: str = "1.0.0"
     scrapers_count: int = 0
     spiders_available: list[str] = Field(default_factory=list)
+
+class SyncRequest(BaseModel):
+    matches: bool = False
+    elo: bool = False
+    team_metrics: bool = False
+    corners_stats: bool = False
+    match_corners: bool = False

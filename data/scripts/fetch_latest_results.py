@@ -87,11 +87,13 @@ def save_with_backup(content, file_name):
                     continue
                 seen_matches.add(match_key)
 
-                # Limpieza de marcadores: si es 'NA' o vacío, ponemos 0
-                hg_raw = row.get("home_score", "0")
-                ag_raw = row.get("away_score", "0")
-                hg = int(hg_raw) if hg_raw and hg_raw.isdigit() else 0
-                ag = int(ag_raw) if ag_raw and ag_raw.isdigit() else 0
+                hg_raw = row.get("home_score")
+                ag_raw = row.get("away_score")
+                if hg_raw is None or ag_raw is None or hg_raw == "NA" or ag_raw == "NA" or hg_raw == "" or ag_raw == "":
+                    continue
+
+                hg = int(hg_raw) if hg_raw.isdigit() else 0
+                ag = int(ag_raw) if ag_raw.isdigit() else 0
 
                 matches_batch.append({
                     "date": row.get("date"),
