@@ -1811,11 +1811,11 @@ body.light-theme .score-item {
     gap: 4px;
     overflow-x: auto;
     flex-wrap: nowrap;
-    padding-bottom: 6px;
+    padding-bottom: 2px;
   }
   
   .tab-btn {
-    padding: 8px 12px;
+    padding: 4px 12px;
     font-size: 0.75rem;
     white-space: nowrap;
   }
@@ -2365,7 +2365,7 @@ body.light-theme .comp-bar-wrapper-right {
   
   .tab-btn {
     flex: 0 0 auto !important;
-    padding: 12px 18px !important;
+    padding: 4px 12px !important;
   }
 }
 
