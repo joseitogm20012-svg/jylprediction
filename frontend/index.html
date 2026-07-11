@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="index.css?v=3.0.8">
   
   <!-- Tom Select for searchable dropdowns -->
   <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
@@ -192,10 +192,11 @@
               🔧 Acceso Administrador
             </a>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
+              </div>
+            </div>
+
+          </div>
 
   <div class="app-container hidden">
     <!-- Header -->
@@ -960,145 +961,39 @@
 
       <!-- TAB 2: MERCADOS & CUOTAS -->
       <div class="tab-content hidden" id="tab-markets" style="padding: 24px;">
-        <div class="responsive-grid grid-340-1fr">
-          <!-- Left Col: Real odds inputs -->
-          <div class="glass-card" style="padding: 20px;">
-            <h3 style="margin-bottom: 12px; font-size: 0.95rem; border-left: 3px solid var(--color-primary); padding-left: 12px;">Ingreso de Cuotas</h3>
-            <p class="slider-desc" style="margin-bottom: 15px;">Introduce las cuotas reales para evaluar automáticamente el valor esperado (+EV) con formato monospace.</p>
-            
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label>1X2 Principal</label>
-              <div class="odds-inputs-grid">
-                <div class="odds-input-group">
-                  <label id="odds-label-a">Victoria A</label>
-                  <input type="number" id="input-odds-a" step="0.01" min="1.01" class="odds-input-field" placeholder="2.10">
-                </div>
-                <div class="odds-input-group">
-                  <label>Empate</label>
-                  <input type="number" id="input-odds-draw" step="0.01" min="1.01" class="odds-input-field" placeholder="3.20">
-                </div>
-                <div class="odds-input-group">
-                  <label id="odds-label-b">Victoria B</label>
-                  <input type="number" id="input-odds-b" step="0.01" min="1.01" class="odds-input-field" placeholder="4.50">
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label>Ambos Anotan (BTTS)</label>
-              <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
-                <input type="number" id="in-btts-yes" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-btts-yes" placeholder="Sí">
-                <input type="number" id="in-btts-no" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-btts-no" placeholder="No">
-              </div>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label>Doble Oportunidad</label>
-              <div class="odds-inputs-grid">
-                <input type="number" id="in-dc-1X" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dc-1X" placeholder="1X">
-                <input type="number" id="in-dc-12" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dc-12" placeholder="12">
-                <input type="number" id="in-dc-X2" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dc-X2" placeholder="X2">
-              </div>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label>Empate No Válido (DNB)</label>
-              <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
-                <input type="number" id="in-dnb-1" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dnb-1" placeholder="Eq. A">
-                <input type="number" id="in-dnb-2" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-dnb-2" placeholder="Eq. B">
-              </div>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label>Over/Under Goles</label>
-              <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
-                <input type="number" id="in-ou-goles-05-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-05-over" placeholder="Over 0.5">
-                <input type="number" id="in-ou-goles-05-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-05-under" placeholder="Under 0.5">
-                
-                <input type="number" id="in-ou-goles-15-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-15-over" placeholder="Over 1.5">
-                <input type="number" id="in-ou-goles-15-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-15-under" placeholder="Under 1.5">
-                
-                <input type="number" id="in-ou-goles-25-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-25-over" placeholder="Over 2.5">
-                <input type="number" id="in-ou-goles-25-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-25-under" placeholder="Under 2.5">
-                
-                <input type="number" id="in-ou-goles-35-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-35-over" placeholder="Over 3.5">
-                <input type="number" id="in-ou-goles-35-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-goles-35-under" placeholder="Under 3.5">
-              </div>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 15px;">
-              <label>Hándicap Asiático</label>
-              <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr;">
-                <input type="number" id="in-ah-m15-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m15-a" placeholder="AH -1.5">
-                <input type="number" id="in-ah-m15-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m15-b" placeholder="AH +1.5">
-                
-                <input type="number" id="in-ah-m05-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m05-a" placeholder="AH -0.5">
-                <input type="number" id="in-ah-m05-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-m05-b" placeholder="AH +0.5">
-                
-                <input type="number" id="in-ah-p05-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p05-a" placeholder="AH +0.5">
-                <input type="number" id="in-ah-p05-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p05-b" placeholder="AH -0.5">
-                
-                <input type="number" id="in-ah-p15-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p15-a" placeholder="AH +1.5">
-                <input type="number" id="in-ah-p15-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ah-p15-b" placeholder="AH -1.5">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Córners (Más / OU)</label>
-              <div class="odds-inputs-grid">
-                <input type="number" id="in-most-corners-a" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-most-corners-a" placeholder="Most A">
-                <input type="number" id="in-most-corners-draw" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-most-corners-draw" placeholder="Most X">
-                <input type="number" id="in-most-corners-b" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-most-corners-b" placeholder="Most B">
-              </div>
-              <div class="odds-inputs-grid" style="grid-template-columns: 1fr 1fr; margin-top: 6px;">
-                <input type="number" id="in-ou-corn-75-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-75-over" placeholder="Over 7.5">
-                <input type="number" id="in-ou-corn-75-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-75-under" placeholder="Under 7.5">
-                
-                <input type="number" id="in-ou-corn-85-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-85-over" placeholder="Over 8.5">
-                <input type="number" id="in-ou-corn-85-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-85-under" placeholder="Under 8.5">
-                
-                <input type="number" id="in-ou-corn-95-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-95-over" placeholder="Over 9.5">
-                <input type="number" id="in-ou-corn-95-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-95-under" placeholder="Under 9.5">
-                
-                <input type="number" id="in-ou-corn-105-over" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-105-over" placeholder="Over 10.5">
-                <input type="number" id="in-ou-corn-105-under" step="0.01" min="1.01" class="odds-input-field dyn-odds" data-target="ev-ou-corn-105-under" placeholder="Under 10.5">
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Col: EV display and markets breakdown -->
-          <div style="display: flex; flex-direction: column; gap: 24px;">
-            <!-- EV Banner Card -->
-            <div class="betting-edge-section glass-card" id="betting-edge-card">
-              <h3 style="border-left: 3px solid var(--color-primary); padding-left: 12px; margin-bottom: 12px;">Análisis de Valor de Apuestas (+EV)</h3>
-              <p class="slider-desc" style="margin-bottom: 12px;">Comparamos la probabilidad del simulador con las cuotas reales para detectar ventaja matemática.</p>
-              
-              <div class="no-odds-message" id="odds-helper-text">
-                Introduce las cuotas de 1X2 a la izquierda para evaluar el valor esperado.
-              </div>
-              
-              <div class="h2h-summary-card hidden" id="odds-analysis-container" style="background: none; border: none; padding: 0; box-shadow: none;">
-                <div class="h2h-stats-row">
-                  <div class="h2h-stat" id="ev-stat-a" style="border: 1px solid var(--card-border-inner); padding: 12px; border-radius: 8px;">
-                    <span class="h2h-stat-num" id="ev-pct-a" style="font-family: var(--font-family-mono);">+0.0%</span>
-                    <span class="h2h-stat-label" id="ev-label-a">A EV%</span>
-                  </div>
-                  <div class="h2h-stat" id="ev-stat-draw" style="border: 1px solid var(--card-border-inner); padding: 12px; border-radius: 8px;">
-                    <span class="h2h-stat-num" id="ev-pct-draw" style="font-family: var(--font-family-mono);">+0.0%</span>
-                    <span class="h2h-stat-label">Empate EV%</span>
-                  </div>
-                  <div class="h2h-stat" id="ev-stat-b" style="border: 1px solid var(--card-border-inner); padding: 12px; border-radius: 8px;">
-                    <span class="h2h-stat-num" id="ev-pct-b" style="font-family: var(--font-family-mono);">+0.0%</span>
-                    <span class="h2h-stat-label" id="ev-label-b">B EV%</span>
-                  </div>
-                </div>
-                
-                <div id="odds-alert-message" class="badge" style="width: 100%; margin-top: 15px; padding: 8px; font-weight: 600; text-align: center; display: block; border-radius: var(--border-radius-md);">
-                  No se detectan apuestas de valor positivo.
-                </div>
-              </div>
-            </div>
-
+        <!-- Checkboxes ocultos para persistir y sincronizar las piernas seleccionadas (Bet Builder Backend Bridge) -->
+        <div id="bb-hidden-bridge-container" style="display: none;">
+          <input type="checkbox" name="bb-leg" value="win_a">
+          <input type="checkbox" name="bb-leg" value="win_b">
+          <input type="checkbox" name="bb-leg" value="draw">
+          <input type="checkbox" name="bb-leg" value="btts_yes">
+          <input type="checkbox" name="bb-leg" value="btts_no">
+          <input type="checkbox" name="bb-leg" value="dc_1X">
+          <input type="checkbox" name="bb-leg" value="dc_12">
+          <input type="checkbox" name="bb-leg" value="dc_X2">
+          <input type="checkbox" name="bb-leg" value="over_1_5">
+          <input type="checkbox" name="bb-leg" value="over_2_5">
+          <input type="checkbox" name="bb-leg" value="over_3_5">
+          <input type="checkbox" name="bb-leg" value="under_1_5">
+          <input type="checkbox" name="bb-leg" value="under_2_5">
+          <input type="checkbox" name="bb-leg" value="under_3_5">
+          <input type="checkbox" name="bb-leg" value="corners_over_7_5">
+          <input type="checkbox" name="bb-leg" value="corners_over_8_5">
+          <input type="checkbox" name="bb-leg" value="corners_over_9_5">
+          <input type="checkbox" name="bb-leg" value="corners_over_10_5">
+          <input type="checkbox" name="bb-leg" value="corners_under_7_5">
+          <input type="checkbox" name="bb-leg" value="corners_under_8_5">
+          <input type="checkbox" name="bb-leg" value="corners_under_9_5">
+          <input type="checkbox" name="bb-leg" value="corners_under_10_5">
+          <input type="checkbox" name="bb-leg" value="handicap_plus_1_5_a">
+          <input type="checkbox" name="bb-leg" value="handicap_minus_1_5_b">
+          <input type="checkbox" name="bb-leg" value="corners_win_a">
+          <input type="checkbox" name="bb-leg" value="corners_win_b">
+          <input type="checkbox" name="bb-leg" value="corners_draw">
+        </div>
+        <div class="markets-main-grid">
+          <!-- Columna Izquierda: Pestañas de Mercados y sus tablas -->
+          <div class="markets-left-panel">
             <!-- Markets Navigation Sub-Tabs -->
             <div class="markets-subtabs-container">
               <div class="markets-subtabs-track">
@@ -1133,155 +1028,187 @@
             <!-- SUB-TAB 1: GOLES & CÓRNERS -->
             <div id="sub-tab-content-main" class="market-subtab-content active">
 <!-- Goles Markets Card -->
-              <div class="goals-markets-section hidden" id="goals-markets-card">
-                <h3>Mercados de Goles & Hándicaps</h3>
-                <div class="markets-grid">
-                  <div class="market-box">
-                    <h4>Ambos Anotan</h4>
-                    <div class="market-odds-row">
-                      <div><span>Sí: </span><strong id="market-btts-yes"><span id="ev-btts-yes" class="ev-mini"></span></strong></div>
-                      <div><span>No: </span><strong id="market-btts-no"><span id="ev-btts-no" class="ev-mini"></span></strong></div>
+              <div class="collapsible-card hidden" id="goals-markets-card">
+                <div class="collapsible-header" onclick="window.toggleCardCollapse(this)">
+                  <h3>🥅 Mercados de Goles & Hándicaps</h3>
+                  <span class="collapse-icon">▲</span>
+                </div>
+                <div class="collapsible-content">
+                  <div class="markets-grid">
+                    <div class="market-box">
+                      <h4>Ambos Anotan</h4>
+                      <div class="market-odds-row">
+                        <div class="selectable-market-card add-to-ticket-btn" data-bb-value="btts_yes" onclick="window.toggleTicketLeg('btts_yes', 'Ambos Anotan: Sí', this)">
+                          <span>Sí: </span><strong id="market-btts-yes">--%</strong>
+                        </div>
+                        <div class="selectable-market-card add-to-ticket-btn" data-bb-value="btts_no" onclick="window.toggleTicketLeg('btts_no', 'Ambos Anotan: No', this)">
+                          <span>No: </span><strong id="market-btts-no">--%</strong>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="market-box">
+                      <h4>Doble Oportunidad</h4>
+                      <div class="market-odds-row" style="display: flex; gap: 8px;">
+                        <div class="selectable-market-card add-to-ticket-btn" data-bb-value="dc_1X" onclick="window.toggleTicketLeg('dc_1X', 'Doble Oportunidad: 1X', this)" style="flex: 1;">
+                          <span>1X: </span><strong id="market-dc-1X">--%</strong>
+                        </div>
+                        <div class="selectable-market-card add-to-ticket-btn" data-bb-value="dc_12" onclick="window.toggleTicketLeg('dc_12', 'Doble Oportunidad: 12', this)" style="flex: 1;">
+                          <span>12: </span><strong id="market-dc-12">--%</strong>
+                        </div>
+                        <div class="selectable-market-card add-to-ticket-btn" data-bb-value="dc_X2" onclick="window.toggleTicketLeg('dc_X2', 'Doble Oportunidad: X2', this)" style="flex: 1;">
+                          <span>X2: </span><strong id="market-dc-X2">--%</strong>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="market-box">
+                      <h4>DNB</h4>
+                      <div class="market-odds-row">
+                        <div style="flex: 1; padding: 6px; text-align: center; background: rgba(255,255,255,0.02); border-radius: 6px; border: 1px solid var(--panel-border);">
+                          <span id="label-dnb-1">1: </span><strong id="market-dnb-1">--%</strong>
+                        </div>
+                        <div style="flex: 1; padding: 6px; text-align: center; background: rgba(255,255,255,0.02); border-radius: 6px; border: 1px solid var(--panel-border);">
+                          <span id="label-dnb-2">2: </span><strong id="market-dnb-2">--%</strong>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="market-box">
-                    <h4>Doble Oportunidad</h4>
-                    <div class="market-odds-row">
-                      <div><span>1X: </span><strong id="market-dc-1X"><span id="ev-dc-1X" class="ev-mini"></span></strong></div>
-                      <div><span>12: </span><strong id="market-dc-12"><span id="ev-dc-12" class="ev-mini"></span></strong></div>
-                      <div><span>X2: </span><strong id="market-dc-X2"><span id="ev-dc-X2" class="ev-mini"></span></strong></div>
+
+
+                  <div class="responsive-grid grid-1fr-1fr">
+                    <div>
+                      <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Over/Under Goles</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
+                        </thead>
+                        <tbody id="ou-goals-tbody"></tbody>
+                      </table>
                     </div>
-                  </div>
-                  <div class="market-box">
-                    <h4>DNB</h4>
-                    <div class="market-odds-row">
-                      <div><span id="label-dnb-1">1: </span><strong id="market-dnb-1"><span id="ev-dnb-1" class="ev-mini"></span></strong></div>
-                      <div><span id="label-dnb-2">2: </span><strong id="market-dnb-2"><span id="ev-dnb-2" class="ev-mini"></span></strong></div>
+                    <div>
+                      <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Hándicap Asiático</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Línea</th><th id="th-ah-a">Eq. A (%)</th><th id="th-ah-b">Eq. B (%)</th></tr>
+                        </thead>
+                        <tbody id="ah-tbody"></tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
-
-                <div class="responsive-grid grid-1fr-1fr">
-                  <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Over/Under Goles</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
-                      </thead>
-                      <tbody id="ou-goals-tbody"></tbody>
-                    </table>
-                  </div>
-                  <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Hándicap Asiático</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Línea</th><th id="th-ah-a">Eq. A (%)</th><th id="th-ah-b">Eq. B (%)</th></tr>
-                      </thead>
-                      <tbody id="ah-tbody"></tbody>
-                    </table>
-                  </div>
               </div>
-            </div>
 
             <!-- Córners Prediction Card -->
-              <div class="corners-prediction-section hidden" id="corners-prediction-card">
-                <h3>Mercados de Córners</h3>
-                <div class="corners-expected-row">
-                  <div class="expected-corners-box">
-                    <span id="expected-corners-label-a">Córners A</span>
-                    <strong id="expected-corners-val-a"></strong>
-                  </div>
-                  <div class="expected-corners-divider">
-                    <span>Total Esperado</span>
-                    <strong id="expected-corners-total"></strong>
-                  </div>
-                  <div class="expected-corners-box">
-                    <span id="expected-corners-label-b">Córners B</span>
-                    <strong id="expected-corners-val-b"></strong>
-                  </div>
+              <div class="collapsible-card hidden" id="corners-prediction-card">
+                <div class="collapsible-header" onclick="window.toggleCardCollapse(this)">
+                  <h3>🚩 Mercados de Córners</h3>
+                  <span class="collapse-icon">▲</span>
                 </div>
-
-                <div class="responsive-grid grid-1fr-1fr">
-                  <div>
-                    <h4>Over/Under Córners</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
-                      </thead>
-                      <tbody id="ou-corners-tbody"></tbody>
-                    </table>
-                  </div>
-                  <div>
-                    <h4>Más Córners (1X2)</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Opción</th><th>Probabilidad</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td id="label-most-corners-a">Equipo A</td>
-                          <td style="font-weight:700;"><span id="prob-most-corners-a" style="font-family: var(--font-family-mono);">--</span> <span id="ev-most-corners-a" class="ev-mini"></span></td>
-                        </tr>
-                        <tr>
-                          <td>Empate</td>
-                          <td style="font-weight:700;"><span id="prob-most-corners-draw" style="font-family: var(--font-family-mono);">--</span> <span id="ev-most-corners-draw" class="ev-mini"></span></td>
-                        </tr>
-                        <tr>
-                          <td id="label-most-corners-b">Equipo B</td>
-                          <td style="font-weight:700;"><span id="prob-most-corners-b" style="font-family: var(--font-family-mono);">--</span> <span id="ev-most-corners-b" class="ev-mini"></span></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <!-- Detailed Corner Analysis Card (Integrated) -->
-                <div id="corners-detailed-analysis-card" style="padding-top: 20px; margin-top: 20px; border-top: 1px solid var(--panel-border); display: none;">
-                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
-                    <h4 style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: var(--color-text-secondary);">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-                      Análisis Avanzado de Córneres
-                    </h4>
-                    <div style="display: flex; gap: 8px; align-items: center;">
-                      <span style="font-size: 0.72rem; color: var(--color-text-secondary); font-weight: 600;">Modo:</span>
-                      <select id="corners-mode-select" class="param-input" style="width: 120px; padding: 2px 6px; font-size: 0.72rem; border-radius: 4px; background: rgba(0,0,0,0.2); color: white; border: 1px solid var(--panel-border); outline: none;">
-                        <option value="full">Partido Completo</option>
-                        <option value="second">Segunda Mitad</option>
-                      </select>
+                <div class="collapsible-content">
+                  <div class="corners-expected-row">
+                    <div class="expected-corners-box">
+                      <span id="expected-corners-label-a">Córners A</span>
+                      <strong id="expected-corners-val-a"></strong>
+                    </div>
+                    <div class="expected-corners-divider">
+                      <span>Total Esperado</span>
+                      <strong id="expected-corners-total"></strong>
+                    </div>
+                    <div class="expected-corners-box">
+                      <span id="expected-corners-label-b">Córners B</span>
+                      <strong id="expected-corners-val-b"></strong>
                     </div>
                   </div>
 
-                  <div class="responsive-grid grid-1fr-1fr" style="gap: 20px; margin-bottom: 20px;">
-                    <!-- Corner Comparison Chart -->
-                    <div style="padding: 16px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--panel-border);">
-                      <h5 style="font-size: 0.78rem; color: var(--color-text-secondary); text-transform: uppercase; margin-top: 0; margin-bottom: 12px; letter-spacing: 0.05em; font-weight: 700;">Comparativa de Corners (Avg)</h5>
-                      <div style="height: 200px; position: relative;">
-                        <canvas id="cornersComparisonChart"></canvas>
-                      </div>
+                  <div class="responsive-grid grid-1fr-1fr">
+                    <div>
+                      <h4>Over/Under Córners</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
+                        </thead>
+                        <tbody id="ou-corners-tbody"></tbody>
+                      </table>
                     </div>
+                    <div>
+                      <h4>Más Córners (1X2)</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Opción</th><th>Probabilidad</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td id="label-most-corners-a">Equipo A</td>
+                            <td class="selectable-market-card add-to-ticket-btn" data-bb-value="corners_win_a" onclick="window.toggleTicketLeg('corners_win_a', 'Córners: Más Córners Local', this)" style="font-weight:700; text-align: center; justify-content: center;">
+                              <span><span id="prob-most-corners-a" style="font-family: var(--font-family-mono);">--</span> <span id="ev-most-corners-a" class="ev-mini"></span></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Empate</td>
+                            <td class="selectable-market-card add-to-ticket-btn" data-bb-value="corners_draw" onclick="window.toggleTicketLeg('corners_draw', 'Córners: Empate Córners', this)" style="font-weight:700; text-align: center; justify-content: center;">
+                              <span><span id="prob-most-corners-draw" style="font-family: var(--font-family-mono);">--</span> <span id="ev-most-corners-draw" class="ev-mini"></span></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td id="label-most-corners-b">Equipo B</td>
+                            <td class="selectable-market-card add-to-ticket-btn" data-bb-value="corners_win_b" onclick="window.toggleTicketLeg('corners_win_b', 'Córners: Más Córners Visitante', this)" style="font-weight:700; text-align: center; justify-content: center;">
+                              <span><span id="prob-most-corners-b" style="font-family: var(--font-family-mono);">--</span> <span id="ev-most-corners-b" class="ev-mini"></span></span>
+                            </td>
+                          </tr>
 
-                    <!-- Corner Probabilities and Metrics -->
-                    <div style="display: flex; flex-direction: column; gap: 12px;">
-                      <div class="summary-stat-chip" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--panel-border);">
-                        <span class="chip-label" style="font-size: 0.8rem;">Total Esperado</span>
-                        <span class="chip-value" id="corners-total-expected" style="font-family: var(--font-family-mono); font-weight: 700; color: var(--color-primary); font-size: 0.85rem;">--</span>
-                      </div>
-                      <div class="summary-stat-chip" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--panel-border);">
-                        <span class="chip-label" style="font-size: 0.8rem;">Prob. Over 8.5 (Full)</span>
-                        <span class="chip-value" id="corners-over85-prob" style="font-family: var(--font-family-mono); font-weight: 700; color: var(--color-primary); font-size: 0.85rem;">--%</span>
-                      </div>
-                      <div class="summary-stat-chip" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--panel-border);">
-                        <span class="chip-label" style="font-size: 0.8rem;">Prob. Over 3.5 (2ª Mitad)</span>
-                        <span class="chip-value" id="corners-sh-over35-prob" style="font-family: var(--font-family-mono); font-weight: 700; color: var(--color-primary); font-size: 0.85rem;">--%</span>
-                      </div>
-                      <div style="font-size: 0.72rem; color: var(--color-text-secondary); text-align: center; margin-top: 4px; font-style: italic;">
-                        Datos integrados de FootyStats & Footiqo
-                      </div>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
 
-                  <!-- AI Corner Verdict (Brief) -->
-                  <div id="corners-verdict-box" style="padding: 12px; background: rgba(255,255,255,0.02); border-radius: 8px; border-left: 3px solid var(--color-primary); font-size: 0.85rem; line-height: 1.6; color: var(--color-text-primary);">
-                    Cargando análisis de córneres...
+                  <!-- Detailed Corner Analysis Card (Integrated) -->
+                  <div id="corners-detailed-analysis-card" style="padding-top: 20px; margin-top: 20px; border-top: 1px solid var(--panel-border); display: none;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                      <h4 style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: var(--color-text-secondary);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                        Análisis Avanzado de Córneres
+                      </h4>
+                      <div style="display: flex; gap: 8px; align-items: center;">
+                        <span style="font-size: 0.72rem; color: var(--color-text-secondary); font-weight: 600;">Modo:</span>
+                        <select id="corners-mode-select" class="param-input" style="width: 120px; padding: 2px 6px; font-size: 0.72rem; border-radius: 4px; background: rgba(0,0,0,0.2); color: white; border: 1px solid var(--panel-border); outline: none;">
+                          <option value="full">Partido Completo</option>
+                          <option value="second">Segunda Mitad</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="responsive-grid grid-1fr-1fr" style="gap: 20px; margin-bottom: 20px;">
+                      <!-- Corner Comparison Chart -->
+                      <div style="padding: 16px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--panel-border);">
+                        <h5 style="font-size: 0.78rem; color: var(--color-text-secondary); text-transform: uppercase; margin-top: 0; margin-bottom: 12px; letter-spacing: 0.05em; font-weight: 700;">Comparativa de Corners (Avg)</h5>
+                        <div style="height: 200px; position: relative;">
+                          <canvas id="cornersComparisonChart"></canvas>
+                        </div>
+                      </div>
+
+                      <!-- Corner Probabilities and Metrics -->
+                      <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div class="summary-stat-chip" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--panel-border);">
+                          <span class="chip-label" style="font-size: 0.8rem;">Total Esperado</span>
+                          <span class="chip-value" id="corners-total-expected" style="font-family: var(--font-family-mono); font-weight: 700; color: var(--color-primary); font-size: 0.85rem;">--</span>
+                        </div>
+                        <div class="summary-stat-chip" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--panel-border);">
+                          <span class="chip-label" style="font-size: 0.8rem;">Prob. Over 8.5 (Full)</span>
+                          <span class="chip-value" id="corners-over85-prob" style="font-family: var(--font-family-mono); font-weight: 700; color: var(--color-primary); font-size: 0.85rem;">--%</span>
+                        </div>
+                        <div class="summary-stat-chip" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--panel-border);">
+                          <span class="chip-label" style="font-size: 0.8rem;">Prob. Over 3.5 (2ª Mitad)</span>
+                          <span class="chip-value" id="corners-sh-over35-prob" style="font-family: var(--font-family-mono); font-weight: 700; color: var(--color-primary); font-size: 0.85rem;">--%</span>
+                        </div>
+                        <div style="font-size: 0.72rem; color: var(--color-text-secondary); text-align: center; margin-top: 4px; font-style: italic;">
+                          Datos integrados de FootyStats & Footiqo
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- AI Corner Verdict (Brief) -->
+                    <div id="corners-verdict-box" style="padding: 12px; background: rgba(255,255,255,0.02); border-radius: 8px; border-left: 3px solid var(--color-primary); font-size: 0.85rem; line-height: 1.6; color: var(--color-text-primary);">
+                      Cargando análisis de córneres...
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1290,268 +1217,334 @@
             <!-- SUB-TAB 2: TARJETAS & TIROS -->
             <div id="sub-tab-content-cards-shots" class="market-subtab-content">
               <!-- Tarjetas Card -->
-              <div class="market-card">
-                <h3>Mercados de Tarjetas</h3>
-                <div class="corners-expected-row">
-                  <div class="expected-corners-box">
-                    <span id="expected-cards-label-a">Tarjetas A</span>
-                    <strong id="expected-cards-val-a"></strong>
-                  </div>
-                  <div class="expected-corners-divider">
-                    <span>Total Tarjetas</span>
-                    <strong id="expected-cards-total"></strong>
-                  </div>
-                  <div class="expected-corners-box">
-                    <span id="expected-cards-label-b">Tarjetas B</span>
-                    <strong id="expected-cards-val-b"></strong>
-                  </div>
+              <div class="collapsible-card" id="cards-prediction-card">
+                <div class="collapsible-header" onclick="window.toggleCardCollapse(this)">
+                  <h3>🟨 Mercados de Tarjetas</h3>
+                  <span class="collapse-icon">▲</span>
                 </div>
-                <div class="responsive-grid grid-1fr-1fr">
-                  <div>
-                    <h4>Over/Under Tarjetas</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
-                      </thead>
-                      <tbody id="ou-cards-tbody"></tbody>
-                    </table>
-                    <div class="market-card-box">
-                      <h4>Tarjeta Roja en Partido</h4>
-                      <div style="font-size: 0.85rem; font-weight: 700;">
-                        <span>Sí: </span><span id="prob-red-card-yes" style="font-family: var(--font-family-mono); color: #ef4444;">--%</span>
-                        <span style="margin: 0 10px;">|</span>
-                        <span>No: </span><span id="prob-red-card-no" style="font-family: var(--font-family-mono);">--%</span>
-                      </div>
+                <div class="collapsible-content">
+                  <div class="corners-expected-row">
+                    <div class="expected-corners-box">
+                      <span id="expected-cards-label-a">Tarjetas A</span>
+                      <strong id="expected-cards-val-a"></strong>
+                    </div>
+                    <div class="expected-corners-divider">
+                      <span>Total Tarjetas</span>
+                      <strong id="expected-cards-total"></strong>
+                    </div>
+                    <div class="expected-corners-box">
+                      <span id="expected-cards-label-b">Tarjetas B</span>
+                      <strong id="expected-cards-val-b"></strong>
                     </div>
                   </div>
-                  <div>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Jugadores en Ser Amonestados</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Jugador</th><th>Probabilidad</th></tr>
-                      </thead>
-                      <tbody id="booking-players-tbody"></tbody>
-</table>
+                  <div class="responsive-grid grid-1fr-1fr">
+                    <div>
+                      <h4>Over/Under Tarjetas</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
+                        </thead>
+                        <tbody id="ou-cards-tbody"></tbody>
+                      </table>
+                      <div class="market-card-box">
+                        <h4>Tarjeta Roja en Partido</h4>
+                        <div style="font-size: 0.85rem; font-weight: 700;">
+                          <span>Sí: </span><span id="prob-red-card-yes" style="font-family: var(--font-family-mono); color: #ef4444;">--%</span>
+                          <span style="margin: 0 10px;">|</span>
+                          <span>No: </span><span id="prob-red-card-no" style="font-family: var(--font-family-mono);">--%</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 6px;">Jugadores en Ser Amonestados</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Jugador</th><th>Probabilidad</th></tr>
+                        </thead>
+                        <tbody id="booking-players-tbody"></tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
               
               <!-- Tiros Card -->
-              <div class="market-card">
-                <h3>Mercados de Tiros & Remates</h3>
-                <div class="corners-expected-row">
-                  <div class="expected-corners-box">
-                    <span id="expected-shots-label-a">Tiros A</span>
-                    <strong id="expected-shots-val-a"></strong>
-                  </div>
-                  <div class="expected-corners-divider">
-                    <span>Total Tiros</span>
-                    <strong id="expected-shots-total"></strong>
-                  </div>
-                  <div class="expected-corners-box">
-                    <span id="expected-shots-label-b">Tiros B</span>
-                    <strong id="expected-shots-val-b"></strong>
-                  </div>
+              <div class="collapsible-card" id="shots-prediction-card">
+                <div class="collapsible-header" onclick="window.toggleCardCollapse(this)">
+                  <h3>🎯 Mercados de Tiros & Remates</h3>
+                  <span class="collapse-icon">▲</span>
                 </div>
-                <div class="responsive-grid grid-1fr-1fr">
-                  <div>
-                    <h4>Over/Under Tiros Totales</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
-                      </thead>
-                      <tbody id="ou-shots-tbody"></tbody>
-                    </table>
-                    <h4 style="margin-top: 16px;">Over/Under Tiros a Puerta</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
-                      </thead>
-                      <tbody id="ou-shots-ot-tbody"></tbody>
-                    </table>
+                <div class="collapsible-content">
+                  <div class="corners-expected-row">
+                    <div class="expected-corners-box">
+                      <span id="expected-shots-label-a">Tiros A</span>
+                      <strong id="expected-shots-val-a"></strong>
+                    </div>
+                    <div class="expected-corners-divider">
+                      <span>Total Tiros</span>
+                      <strong id="expected-shots-total"></strong>
+                    </div>
+                    <div class="expected-corners-box">
+                      <span id="expected-shots-label-b">Tiros B</span>
+                      <strong id="expected-shots-val-b"></strong>
+                    </div>
                   </div>
-                  <div>
-                    <h4>Jugador con Más Tiros</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Jugador</th><th>Probabilidad</th></tr>
-                      </thead>
-                      <tbody id="shooting-players-tbody"></tbody>
-                    </table>
-                    <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-top: 15px; margin-bottom: 6px;">Más Tiros (1X2)</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Opción</th><th>Probabilidad</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td id="lbl-most-shots-a">Equipo A</td><td style="font-weight:700;" id="prob-most-shots-a">--%</td></tr>
-                        <tr><td>Empate</td><td style="font-weight:700;" id="prob-most-shots-draw">--%</td></tr>
-                        <tr><td id="lbl-most-shots-b">Equipo B</td><td style="font-weight:700;" id="prob-most-shots-b">--%</td></tr>
-                      </tbody>
-                    </table>
+                  <div class="responsive-grid grid-1fr-1fr">
+                    <div>
+                      <h4>Over/Under Tiros Totales</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
+                        </thead>
+                        <tbody id="ou-shots-tbody"></tbody>
+                      </table>
+                      <h4 style="margin-top: 16px;">Over/Under Tiros a Puerta</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
+                        </thead>
+                        <tbody id="ou-shots-ot-tbody"></tbody>
+                      </table>
+                    </div>
+                    <div>
+                      <h4>Jugador con Más Tiros</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Jugador</th><th>Probabilidad</th></tr>
+                        </thead>
+                        <tbody id="shooting-players-tbody"></tbody>
+                      </table>
+                      <h4 style="font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-top: 15px; margin-bottom: 6px;">Más Tiros (1X2)</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Opción</th><th>Probabilidad</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td id="lbl-most-shots-a">Equipo A</td><td style="font-weight:700;" id="prob-most-shots-a">--%</td></tr>
+                          <tr><td>Empate</td><td style="font-weight:700;" id="prob-most-shots-draw">--%</td></tr>
+                          <tr><td id="lbl-most-shots-b">Equipo B</td><td style="font-weight:700;" id="prob-most-shots-b">--%</td></tr>
+                        </tbody>
+                      </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASS CARD -->
+    <div class="collapsible-card" id="passes-prediction-card">
+      <div class="collapsible-header" onclick="window.toggleCardCollapse(this)">
+        <h3>🟢 Mercados de Pases</h3>
+        <span class="collapse-icon">▲</span>
+      </div>
+      <div class="collapsible-content">
+        <div class="corners-expected-row">
+          <div class="expected-corners-box">
+            <span id="expected-passes-label-a">Pases A</span>
+            <strong id="expected-passes-val-a"></strong>
+          </div>
+          <div class="expected-corners-divider">
+            <span>Total Pases</span>
+            <strong id="expected-passes-total"></strong>
+          </div>
+          <div class="expected-corners-box">
+            <span id="expected-passes-label-b">Pases B</span>
+            <strong id="expected-passes-val-b"></strong>
+          </div>
+        </div>
+        <div class="responsive-grid grid-1fr-1fr">
+          <div>
+            <h4>Precisión de Pases (%)</h4>
+            <table class="ou-table">
+              <thead>
+                <tr><th>Equipo</th><th>Precisión</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>A</td><td id="passes-accuracy-a">--%</td></tr>
+                <tr><td>B</td><td id="passes-accuracy-b">--%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB-TAB 3: TIMING (HT/FT) -->
+            <div id="sub-tab-content-times" class="market-subtab-content">
+              <div class="collapsible-card" id="times-prediction-card">
+                <div class="collapsible-header" onclick="window.toggleCardCollapse(this)">
+                  <h3>⏱️ Mercados por Tiempo y HT/FT</h3>
+                  <span class="collapse-icon">▲</span>
+                </div>
+                <div class="collapsible-content">
+                  <div class="responsive-grid grid-1fr-1fr">
+                    <div>
+                      <h4>Ganador Primer y Segundo Tiempo</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Opción</th><th>1T (%)</th><th>2T (%)</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td id="lbl-times-win-a">Equipo A</td><td style="font-weight:700;" id="prob-1t-win-a">--%</td><td style="font-weight:700;" id="prob-2t-win-a">--%</td></tr>
+                          <tr><td>Empate</td><td style="font-weight:700;" id="prob-1t-draw">--%</td><td style="font-weight:700;" id="prob-2t-draw">--%</td></tr>
+                          <tr><td id="lbl-times-win-b">Equipo B</td><td style="font-weight:700;" id="prob-1t-win-b">--%</td><td style="font-weight:700;" id="prob-2t-win-b">--%</td></tr>
+                        </tbody>
+                      </table>
+                      <h4 style="margin-top: 16px;">Over/Under 1T Goles</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
+                        </thead>
+                        <tbody id="ou-1t-tbody"></tbody>
+                      </table>
+                      <h4 style="margin-top: 16px;">Ambos Anotan (BTTS) por Tiempos</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Tiempo</th><th>Sí (%)</th><th>No (%)</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>1T</td><td style="font-weight:700;" id="prob-btts-1t-yes">--%</td><td style="font-weight:700;" id="prob-btts-1t-no">--%</td></tr>
+                          <tr><td>2T</td><td style="font-weight:700;" id="prob-btts-2t-yes">--%</td><td style="font-weight:700;" id="prob-btts-2t-no">--%</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div>
+                      <h4 style="margin-top: 16px;">Combinado Descanso / Final (HT/FT)</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>HT / FT</th><th>Probabilidad</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>1 / 1 (Ganador A / Ganador A)</td><td style="font-weight:700;" id="prob-htft-11">--%</td></tr>
+                          <tr><td>1 / X (Ganador A / Empate)</td><td style="font-weight:700;" id="prob-htft-1x">--%</td></tr>
+                          <tr><td>1 / 2 (Ganador A / Ganador B)</td><td style="font-weight:700;" id="prob-htft-12">--%</td></tr>
+                          <tr><td>X / 1 (Empate / Ganador A)</td><td style="font-weight:700;" id="prob-htft-x1">--%</td></tr>
+                          <tr><td>X / X (Empate / Empate)</td><td style="font-weight:700;" id="prob-htft-xx">--%</td></tr>
+                          <tr><td>X / 2 (Empate / Ganador B)</td><td style="font-weight:700;" id="prob-htft-x2">--%</td></tr>
+                          <tr><td>2 / 1 (Ganador B / Ganador A)</td><td style="font-weight:700;" id="prob-htft-21">--%</td></tr>
+                          <tr><td>2 / X (Ganador B / Empate)</td><td style="font-weight:700;" id="prob-htft-2x">--%</td></tr>
+                          <tr><td>2 / 2 (Ganador B / Ganador B)</td><td style="font-weight:700;" id="prob-htft-22">--%</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- SUB-TAB 3: TIMING (HT/FT) -->
-            <div id="sub-tab-content-times" class="market-subtab-content">
-              <div class="market-card">
-                <h3>Mercados por Tiempo y HT/FT</h3>
-                <div class="responsive-grid grid-1fr-1fr">
-                  <div>
-                    <h4>Ganador Primer y Segundo Tiempo</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Opción</th><th>1T (%)</th><th>2T (%)</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td id="lbl-times-win-a">Equipo A</td><td style="font-weight:700;" id="prob-1t-win-a">--%</td><td style="font-weight:700;" id="prob-2t-win-a">--%</td></tr>
-                        <tr><td>Empate</td><td style="font-weight:700;" id="prob-1t-draw">--%</td><td style="font-weight:700;" id="prob-2t-draw">--%</td></tr>
-                        <tr><td id="lbl-times-win-b">Equipo B</td><td style="font-weight:700;" id="prob-1t-win-b">--%</td><td style="font-weight:700;" id="prob-2t-win-b">--%</td></tr>
-                      </tbody>
-                    </table>
-                    <h4 style="margin-top: 16px;">Over/Under 1T Goles</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Línea</th><th>Over (%)</th><th>Under (%)</th></tr>
-                      </thead>
-                      <tbody id="ou-1t-tbody"></tbody>
-                    </table>
-                    <h4 style="margin-top: 16px;">Ambos Anotan (BTTS) por Tiempos</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Tiempo</th><th>Sí (%)</th><th>No (%)</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td>1T</td><td style="font-weight:700;" id="prob-btts-1t-yes">--%</td><td style="font-weight:700;" id="prob-btts-1t-no">--%</td></tr>
-                        <tr><td>2T</td><td style="font-weight:700;" id="prob-btts-2t-yes">--%</td><td style="font-weight:700;" id="prob-btts-2t-no">--%</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div>
-                    <h4 style="margin-top: 16px;">Combinado Descanso / Final (HT/FT)</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>HT / FT</th><th>Probabilidad</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td>1 / 1 (Ganador A / Ganador A)</td><td style="font-weight:700;" id="prob-htft-11">--%</td></tr>
-                        <tr><td>1 / X (Ganador A / Empate)</td><td style="font-weight:700;" id="prob-htft-1x">--%</td></tr>
-                        <tr><td>1 / 2 (Ganador A / Ganador B)</td><td style="font-weight:700;" id="prob-htft-12">--%</td></tr>
-                        <tr><td>X / 1 (Empate / Ganador A)</td><td style="font-weight:700;" id="prob-htft-x1">--%</td></tr>
-                        <tr><td>X / X (Empate / Empate)</td><td style="font-weight:700;" id="prob-htft-xx">--%</td></tr>
-                        <tr><td>X / 2 (Empate / Ganador B)</td><td style="font-weight:700;" id="prob-htft-x2">--%</td></tr>
-                        <tr><td>2 / 1 (Ganador B / Ganador A)</td><td style="font-weight:700;" id="prob-htft-21">--%</td></tr>
-                        <tr><td>2 / X (Ganador B / Empate)</td><td style="font-weight:700;" id="prob-htft-2x">--%</td></tr>
-                        <tr><td>2 / 2 (Ganador B / Ganador B)</td><td style="font-weight:700;" id="prob-htft-22">--%</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <!-- SUB-TAB 4: PLAYERS & SCORERS -->
             <div id="sub-tab-content-players" class="market-subtab-content">
-              <div class="market-card">
-                <h3>Goleadores y Creadores de Juego</h3>
-                <div class="responsive-grid grid-1fr-1fr">
-<div>
-                    <h4 id="lbl-scorers-team-a">Goleadores A</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Jugador</th><th>1° Gol</th><th>Anytime</th><th>2+ Goles</th></tr>
-                      </thead>
-                      <tbody id="scorers-team-a-tbody"></tbody>
-                    </table>
-                    
-                    <h4 style="margin-top: 16px;" id="lbl-assists-team-a">Asistencias A</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Jugador</th><th>Probabilidad</th></tr>
-                      </thead>
-                      <tbody id="assists-team-a-tbody"></tbody>
-                    </table>
-                  </div>
-                  <div>
-                    <h4 id="lbl-scorers-team-b">Goleadores B</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Jugador</th><th>1° Gol</th><th>Anytime</th><th>2+ Goles</th></tr>
-                      </thead>
-                      <tbody id="scorers-team-b-tbody"></tbody>
-                    </table>
-                    
-                    <h4 style="margin-top: 16px;" id="lbl-assists-team-b">Asistencias B</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Jugador</th><th>Probabilidad</th></tr>
-                      </thead>
-                      <tbody id="assists-team-b-tbody"></tbody>
-                    </table>
+              <div class="collapsible-card" id="players-prediction-card">
+                <div class="collapsible-header" onclick="window.toggleCardCollapse(this)">
+                  <h3>🏃 Goleadores y Creadores de Juego</h3>
+                  <span class="collapse-icon">▲</span>
+                </div>
+                <div class="collapsible-content">
+                  <div class="responsive-grid grid-1fr-1fr">
+                    <div>
+                      <h4 id="lbl-scorers-team-a">Goleadores A</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Jugador</th><th>1° Gol</th><th>Anytime</th><th>2+ Goles</th></tr>
+                        </thead>
+                        <tbody id="scorers-team-a-tbody"></tbody>
+                      </table>
+                      
+                      <h4 style="margin-top: 16px;" id="lbl-assists-team-a">Asistencias A</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Jugador</th><th>Probabilidad</th></tr>
+                        </thead>
+                        <tbody id="assists-team-a-tbody"></tbody>
+                      </table>
+                    </div>
+                    <div>
+                      <h4 id="lbl-scorers-team-b">Goleadores B</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Jugador</th><th>1° Gol</th><th>Anytime</th><th>2+ Goles</th></tr>
+                        </thead>
+                        <tbody id="scorers-team-b-tbody"></tbody>
+                      </table>
+                      
+                      <h4 style="margin-top: 16px;" id="lbl-assists-team-b">Asistencias B</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Jugador</th><th>Probabilidad</th></tr>
+                        </thead>
+                        <tbody id="assists-team-b-tbody"></tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
+
             <!-- SUB-TAB 5: SPECIALS & PENALTIES -->
             <div id="sub-tab-content-specials" class="market-subtab-content">
-              <div class="market-card">
-                <h3>Mercados Especiales y de Penales</h3>
-                <div class="responsive-grid grid-1fr-1fr">
-                  <div>
-                    <h4>Mercado de Penales</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Evento</th><th>Sí (%)</th><th>No (%)</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td>Penal Concedido</td><td style="font-weight:700;" id="prob-pen-conceded-yes">--%</td><td style="font-weight:700;" id="prob-pen-conceded-no">--%</td></tr>
-                        <tr><td>Penal Convertido</td><td style="font-weight:700;" id="prob-pen-scored-yes">--%</td><td style="font-weight:700;" id="prob-pen-scored-no">--%</td></tr>
-                        <tr><td>Penal Fallado/Parado</td><td style="font-weight:700;" id="prob-pen-missed-yes">--%</td><td style="font-weight:700;" id="prob-pen-missed-no">--%</td></tr>
-                      </tbody>
-                    </table>
-                    
-                    <h4 style="margin-top: 16px;">Estilo de Gol y Eventos de Partido</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Tipo de Jugada</th><th>Sí (%)</th><th>No (%)</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td>Gol de Cabeza</td><td style="font-weight:700;" id="prob-spec-header-yes">--%</td><td style="font-weight:700;" id="prob-spec-header-no">--%</td></tr>
-                        <tr><td>Gol de Falta Directa</td><td style="font-weight:700;" id="prob-spec-freekick-yes">--%</td><td style="font-weight:700;" id="prob-spec-freekick-no">--%</td></tr>
-                        <tr><td>Autogol (Own Goal)</td><td style="font-weight:700;" id="prob-spec-own-yes">--%</td><td style="font-weight:700;" id="prob-spec-own-no">--%</td></tr>
-                        <tr><td>Hat-Trick en Partido</td><td style="font-weight:700;" id="prob-spec-hattrick-yes">--%</td><td style="font-weight:700;" id="prob-spec-hattrick-no">--%</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div>
-                    <h4>Portería a Cero (Clean Sheets)</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Equipo</th><th>Clean Sheet (%)</th><th>Recibe Gol (%)</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td id="lbl-spec-clean-a">Equipo A</td><td style="font-weight:700;" id="prob-clean-sheet-a-yes">--%</td><td style="font-weight:700;" id="prob-clean-sheet-a-no">--%</td></tr>
-                        <tr><td id="lbl-spec-clean-b">Equipo B</td><td style="font-weight:700;" id="prob-clean-sheet-b-yes">--%</td><td style="font-weight:700;" id="prob-clean-sheet-b-no">--%</td></tr>
-                      </tbody>
-                    </table>
-                    
-                    <h4 style="margin-top: 16px;">Victoria sin Encajar (Win to Nil)</h4>
-                    <table class="ou-table">
-                      <thead>
-                        <tr><th>Equipo</th><th>Sí (%)</th><th>No (%)</th></tr>
-                      </thead>
-                      <tbody>
-                        <tr><td id="lbl-spec-wintonil-a">Equipo A</td><td style="font-weight:700;" id="prob-win-to-nil-a-yes">--%</td><td style="font-weight:700;" id="prob-win-to-nil-a-no">--%</td></tr>
-                        <tr><td id="lbl-spec-wintonil-b">Equipo B</td><td style="font-weight:700;" id="prob-win-to-nil-b-yes">--%</td><td style="font-weight:700;" id="prob-win-to-nil-b-no">--%</td></tr>
-                      </tbody>
-                    </table>
+              <div class="collapsible-card" id="specials-prediction-card">
+                <div class="collapsible-header" onclick="window.toggleCardCollapse(this)">
+                  <h3>⭐ Mercados Especiales y de Penales</h3>
+                  <span class="collapse-icon">▲</span>
+                </div>
+                <div class="collapsible-content">
+                  <div class="responsive-grid grid-1fr-1fr">
+                    <div>
+                      <h4>Mercado de Penales</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Evento</th><th>Sí (%)</th><th>No (%)</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>Penal Concedido</td><td style="font-weight:700;" id="prob-pen-conceded-yes">--%</td><td style="font-weight:700;" id="prob-pen-conceded-no">--%</td></tr>
+                          <tr><td>Penal Convertido</td><td style="font-weight:700;" id="prob-pen-scored-yes">--%</td><td style="font-weight:700;" id="prob-pen-scored-no">--%</td></tr>
+                          <tr><td>Penal Fallado/Parado</td><td style="font-weight:700;" id="prob-pen-missed-yes">--%</td><td style="font-weight:700;" id="prob-pen-missed-no">--%</td></tr>
+                        </tbody>
+                      </table>
+                      
+                      <h4 style="margin-top: 16px;">Estilo de Gol y Eventos de Partido</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Tipo de Jugada</th><th>Sí (%)</th><th>No (%)</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>Gol de Cabeza</td><td style="font-weight:700;" id="prob-spec-header-yes">--%</td><td style="font-weight:700;" id="prob-spec-header-no">--%</td></tr>
+                          <tr><td>Gol de Falta Directa</td><td style="font-weight:700;" id="prob-spec-freekick-yes">--%</td><td style="font-weight:700;" id="prob-spec-freekick-no">--%</td></tr>
+                          <tr><td>Autogol (Own Goal)</td><td style="font-weight:700;" id="prob-spec-own-yes">--%</td><td style="font-weight:700;" id="prob-spec-own-no">--%</td></tr>
+                          <tr><td>Hat-Trick en Partido</td><td style="font-weight:700;" id="prob-spec-hattrick-yes">--%</td><td style="font-weight:700;" id="prob-spec-hattrick-no">--%</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div>
+                      <h4>Portería a Cero (Clean Sheets)</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Equipo</th><th>Clean Sheet (%)</th><th>Recibe Gol (%)</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td id="lbl-spec-clean-a">Equipo A</td><td style="font-weight:700;" id="prob-clean-sheet-a-yes">--%</td><td style="font-weight:700;" id="prob-clean-sheet-a-no">--%</td></tr>
+                          <tr><td id="lbl-spec-clean-b">Equipo B</td><td style="font-weight:700;" id="prob-clean-sheet-b-yes">--%</td><td style="font-weight:700;" id="prob-clean-sheet-b-no">--%</td></tr>
+                        </tbody>
+                      </table>
+                      
+                      <h4 style="margin-top: 16px;">Victoria sin Encajar (Win to Nil)</h4>
+                      <table class="ou-table">
+                        <thead>
+                          <tr><th>Equipo</th><th>Sí (%)</th><th>No (%)</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr><td id="lbl-spec-wintonil-a">Equipo A</td><td style="font-weight:700;" id="prob-win-to-nil-a-yes">--%</td><td style="font-weight:700;" id="prob-win-to-nil-a-no">--%</td></tr>
+                          <tr><td id="lbl-spec-wintonil-b">Equipo B</td><td style="font-weight:700;" id="prob-win-to-nil-b-yes">--%</td><td style="font-weight:700;" id="prob-win-to-nil-b-no">--%</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
 
             <!-- SUB-TAB 6: KELLY CRITERION & VALUE BETS -->
             <div id="sub-tab-content-kelly" class="market-subtab-content">
@@ -1604,9 +1597,9 @@
                   📥 Exportar a CSV
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
+      </div> <!-- Fin de markets-subtabs-container -->
+          </div> <!-- Fin de markets-left-panel -->
+        </div> <!-- Fin de markets-main-grid -->
       </div>
 
       <!-- TAB 3: COMPARATIVA -->
@@ -2107,7 +2100,7 @@
             <div class="glass-card" style="padding: 20px;">
               <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--panel-border); padding-bottom: 8px; margin-bottom: 12px;">
                 <h3 style="font-size: 1.1rem; margin: 0; display: flex; align-items: center; gap: 6px;">📊 Seleccionar Logros <span id="bb-selected-count" style="font-size: 0.85rem; color: var(--color-primary); font-weight: bold; background: rgba(245, 158, 11, 0.15); padding: 2px 8px; border-radius: 12px;">(0)</span></h3>
-                <button onclick="window.clearAllBBLegs()" style="background: transparent; border: none; color: var(--color-text-secondary); cursor: pointer; font-size: 0.75rem; text-decoration: underline; padding: 2px 6px; font-weight: 500; hover: { color: white }">Limpiar todo</button>
+                <button onclick="window.clearAllBBLegs()" style="background: transparent; border: none; color: var(--color-text-secondary); cursor: pointer; font-size: 0.75rem; text-decoration: underline; padding: 2px 6px; font-weight: 500;">Limpiar todo</button>
               </div>
 
               <!-- BUSCADOR RÁPIDO DE MERCADOS -->
@@ -2116,107 +2109,12 @@
               </div>
 
               <div id="bb-market-selectors" style="display: flex; flex-direction: column; gap: 8px;">
-                
-                <!-- Accordion 1: Resultado Final -->
-                <div class="bb-accordion-item expanded" data-category="outcome" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
-                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
-                    <span style="display: flex; align-items: center; gap: 8px;">⚽ Resultado Final</span>
-                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▼</span>
-                  </button>
-                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px;">
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="win_a" class="custom-checkbox bb-checkbox"> <span class="bb-lbl-a">Victoria Local</span></label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="draw" class="custom-checkbox bb-checkbox"> Empate</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="win_b" class="custom-checkbox bb-checkbox"> <span class="bb-lbl-b">Victoria Visitante</span></label>
-                  </div>
-                </div>
-
-                <!-- Accordion 2: Ambos Anotan -->
-                <div class="bb-accordion-item" data-category="btts" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
-                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
-                    <span style="display: flex; align-items: center; gap: 8px;">🧤 Ambos Anotan</span>
-                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▶</span>
-                  </button>
-                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: none; flex-direction: column; gap: 8px;">
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="btts_yes" class="custom-checkbox bb-checkbox"> Sí (BTTS)</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="btts_no" class="custom-checkbox bb-checkbox"> No (BTTS)</label>
-                  </div>
-                </div>
-
-                <!-- Accordion 3: Doble Oportunidad -->
-                <div class="bb-accordion-item" data-category="doublechance" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
-                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
-                    <span style="display: flex; align-items: center; gap: 8px;">🛡️ Doble Oportunidad</span>
-                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▶</span>
-                  </button>
-                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: none; flex-direction: column; gap: 8px;">
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="double_chance_1X" class="custom-checkbox bb-checkbox"> 1X (Local o Empate)</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="double_chance_12" class="custom-checkbox bb-checkbox"> 12 (Cualquiera Gana)</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="double_chance_X2" class="custom-checkbox bb-checkbox"> X2 (Visitante o Empate)</label>
-                  </div>
-                </div>
-
-                <!-- Accordion 4: Goles Over/Under -->
-                <div class="bb-accordion-item" data-category="goals" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
-                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
-                    <span style="display: flex; align-items: center; gap: 8px;">🥅 Goles Over/Under</span>
-                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▶</span>
-                  </button>
-                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: none; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="over_0_5_goals" class="custom-checkbox bb-checkbox"> Over 0.5</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="under_0_5_goals" class="custom-checkbox bb-checkbox"> Under 0.5</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="over_1_5_goals" class="custom-checkbox bb-checkbox"> Over 1.5</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="under_1_5_goals" class="custom-checkbox bb-checkbox"> Under 1.5</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="over_2_5_goals" class="custom-checkbox bb-checkbox"> Over 2.5</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="under_2_5_goals" class="custom-checkbox bb-checkbox"> Under 2.5</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="over_3_5_goals" class="custom-checkbox bb-checkbox"> Over 3.5</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="under_3_5_goals" class="custom-checkbox bb-checkbox"> Under 3.5</label>
-                  </div>
-                </div>
-
-                <!-- Accordion 5: Córners -->
-                <div class="bb-accordion-item" data-category="corners" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
-                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
-                    <span style="display: flex; align-items: center; gap: 8px;">🚩 Córners</span>
-                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▶</span>
-                  </button>
-                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: none; flex-direction: column; gap: 8px;">
-                    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px;">
-                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_win_a" class="custom-checkbox bb-checkbox"> Más Córners Local</label>
-                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_draw" class="custom-checkbox bb-checkbox"> Empate Córners</label>
-                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_win_b" class="custom-checkbox bb-checkbox"> Más Córners Visitante</label>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 8px;">
-                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_over_7_5" class="custom-checkbox bb-checkbox"> Over 7.5</label>
-                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_under_7_5" class="custom-checkbox bb-checkbox"> Under 7.5</label>
-                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_over_8_5" class="custom-checkbox bb-checkbox"> Over 8.5</label>
-                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_under_8_5" class="custom-checkbox bb-checkbox"> Under 8.5</label>
-                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_over_9_5" class="custom-checkbox bb-checkbox"> Over 9.5</label>
-                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_under_9_5" class="custom-checkbox bb-checkbox"> Under 9.5</label>
-                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_over_10_5" class="custom-checkbox bb-checkbox"> Over 10.5</label>
-                      <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="corners_under_10_5" class="custom-checkbox bb-checkbox"> Under 10.5</label>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Accordion 6: Handicaps -->
-                <div class="bb-accordion-item" data-category="handicap" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01);">
-                  <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
-                    <span style="display: flex; align-items: center; gap: 8px;">📐 Handicaps</span>
-                    <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">▶</span>
-                  </button>
-                  <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: none; flex-direction: column; gap: 8px;">
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="handicap_minus_1_5_a" class="custom-checkbox bb-checkbox"> Local Handicap -1.5</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="handicap_plus_1_5_a" class="custom-checkbox bb-checkbox"> Local Handicap +1.5</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="handicap_minus_1_5_b" class="custom-checkbox bb-checkbox"> Visitante Handicap -1.5</label>
-                    <label class="bb-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--color-text-secondary); cursor: pointer;"><input type="checkbox" name="bb-leg" value="handicap_plus_1_5_b" class="custom-checkbox bb-checkbox"> Visitante Handicap +1.5</label>
-                  </div>
-                </div>
+                <!-- Accordions will be dynamically populated by updateBetBuilderSelectors() -->
+              </div>
             </div>
           </div>
-        </div>
-
-          <!-- COLUMNA 2 Y 3: PANEL ANALÍTICO COMBINADO (Pestaña 2 en Móvil) -->
-          <div id="bb-col-results" class="bb-col-results bb-card-summary bb-tab-hidden" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          
+          <div id="bb-col-results" class="bb-col-results bb-card-summary" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
             
             <!-- SEGMENTED NAVIGATION BAR -->
             <div class="bb-segment-nav" style="display: flex; gap: 10px; margin-bottom: 5px; overflow-x: auto; padding-bottom: 8px; border-bottom: 1px solid var(--panel-border);">
@@ -2705,16 +2603,15 @@
 
         </div>
       </div>
-
-      </div>
     </section>
   </main>
     
+  </div> <!-- Fin de app-container -->
+
     <!-- Footer -->
     <footer class="app-footer">
       <p>Diseño premium desarrollado para el análisis estadístico del Mundial 2026. Los cálculos de probabilidad de goles se basan en el método Dixon-Coles (1997).</p>
     </footer>
-  </div>
 
   <!-- Modal para Guardar Combinación Favorita -->
   <dialog id="bb-save-dialog" style="border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-radius: 12px; padding: 24px; color: white; width: 90%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);">
@@ -2737,6 +2634,6 @@
   <script src="sanitize.js"></script>
 
   <!-- Javascript Logic -->
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=3.0.8"></script>
 </body>
 </html>

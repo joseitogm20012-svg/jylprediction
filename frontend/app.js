@@ -271,96 +271,131 @@ const h2hModifierVal = document.getElementById("h2h-modifier-val");
    INITIALIZATION & DATA LOADING
    ========================================================================== */
 async function initializeApp() {
+  // 1. Cargar la configuración pública y los listeners de Auth primero, de forma aislada
   try {
     await loadPublicConfig();
+    initSupabaseAuth();
+  } catch (authErr) {
+    console.error("Error al inicializar Auth de Supabase:", authErr);
+  }
 
-    // 1. Fetch ratings from API
-    const res = await fetch("/api/teams");
-    const data = await res.json();
-    ratingsData = data.ratings;
-    transfermarktData = data.transfermarkt || {};
-    
-    document.getElementById("calibration-status").textContent = "API Python Activa";
-
-    // 2. Populate selectors
-    populateSelects();
-
-    // Initialize TomSelect for searchable dropdowns
-    try {
-      if (typeof TomSelect !== 'undefined') {
-        if (document.getElementById("select-team-a")) {
-          new TomSelect("#select-team-a", {
-            create: false,
-            sortField: { field: "text", direction: "asc" }
-          });
-        }
-        
-        if (document.getElementById("select-team-b")) {
-          new TomSelect("#select-team-b", {
-            create: false,
-            sortField: { field: "text", direction: "asc" }
-          });
-        }
-
-        if (document.getElementById("ai-team-a")) {
-          new TomSelect("#ai-team-a", {
-            create: false,
-            sortField: { field: "text", direction: "asc" }
-          });
-        }
-
-        if (document.getElementById("ai-team-b")) {
-          new TomSelect("#ai-team-b", {
-            create: false,
-            sortField: { field: "text", direction: "asc" }
-          });
-        }
-      } else {
-        console.warn("TomSelect no está definido. Cargando selectores normales.");
-      }
-    } catch (e) {
-      console.error("Error inicializando TomSelect:", e);
-    }
-
-    // 3. Bind UI listeners
+  // 2. Enlazar listeners de UI
+  try {
     bindListeners();
+  } catch (bindErr) {
+    console.error("Error al enlazar listeners de UI:", bindErr);
+  }
 
-    // 4. Load backtest metrics
-    loadBacktestMetrics();
-
-    // 4.5. Load Presets listeners
+  // 3. Inicializar preset listeners
+  try {
     initPresets();
     updateWeightsPreview();
+  } catch (presetsErr) {
+    console.error("Error inicializando presets:", presetsErr);
+  }
 
-    // 4.6. Initialize corners mode selector listener
-    const cornersModeSelect = document.getElementById('corners-mode-select');
-    if (cornersModeSelect) {
-      cornersModeSelect.addEventListener('change', () => {
-        if (lastSimulationResult) {
-          const nameAVal = TEAM_METADATA[selectedTeamA]?.name || selectedTeamA;
-          const nameBVal = TEAM_METADATA[selectedTeamB]?.name || selectedTeamB;
-          updateCornersAnalysis(lastSimulationResult, nameAVal, nameBVal);
-        }
-      });
-    }
-
-    // 5. Update UI for the initial match
-    updateMatchCard();
-
-    // 6. Init bet builder segments (hide non-summary)
-    document.querySelectorAll('#bb-col-results [id^="bb-container-"]').forEach(el => {
-      if (!el.classList.contains('bb-seg-summary')) el.style.display = 'none';
+  // 4. Inicializar selector de córners
+  const cornersModeSelect = document.getElementById('corners-mode-select');
+  if (cornersModeSelect) {
+    cornersModeSelect.addEventListener('change', () => {
+      if (lastSimulationResult) {
+        const nameAVal = TEAM_METADATA[selectedTeamA]?.name || selectedTeamA;
+        const nameBVal = TEAM_METADATA[selectedTeamB]?.name || selectedTeamB;
+        updateCornersAnalysis(lastSimulationResult, nameAVal, nameBVal);
+      }
     });
+  }
 
-    // 6.1. Initial segment button state
-    document.querySelectorAll('.bb-segment-btn').forEach(b => b.classList.toggle('active', b.dataset.segment === 'summary'));
+  // 5. Cargar datos de la API de equipos con reintentos
+  loadTeamsWithRetry();
+}
 
-    // 7. Ready (Wait for manual simulation)
+async function loadTeamsWithRetry(retries = 10, delay = 3000) {
+  const statusEl = document.getElementById("calibration-status");
+  if (statusEl) {
+    statusEl.textContent = "Conectando con API...";
+    statusEl.style.color = "var(--color-primary)";
+  }
 
-  } catch (error) {
-    console.error("Initialization error:", error);
-    document.getElementById("calibration-status").textContent = "Error de conexión API";
-    document.getElementById("calibration-status").style.color = "#ef4444";
+  for (let i = 0; i < retries; i++) {
+    try {
+      const res = await fetch("/api/teams");
+      if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+      const data = await res.json();
+      ratingsData = data.ratings;
+      transfermarktData = data.transfermarkt || {};
+
+      if (statusEl) {
+        statusEl.textContent = "API Python Activa";
+        statusEl.style.color = "#10B981";
+      }
+
+      // Populate selectors and initialize TomSelect
+      populateSelects();
+      
+      try {
+        if (typeof TomSelect !== 'undefined') {
+          if (document.getElementById("select-team-a")) {
+            new TomSelect("#select-team-a", {
+              create: false,
+              sortField: { field: "text", direction: "asc" }
+            });
+          }
+          if (document.getElementById("select-team-b")) {
+            new TomSelect("#select-team-b", {
+              create: false,
+              sortField: { field: "text", direction: "asc" }
+            });
+          }
+          if (document.getElementById("ai-team-a")) {
+            new TomSelect("#ai-team-a", {
+              create: false,
+              sortField: { field: "text", direction: "asc" }
+            });
+          }
+          if (document.getElementById("ai-team-b")) {
+            new TomSelect("#ai-team-b", {
+              create: false,
+              sortField: { field: "text", direction: "asc" }
+            });
+          }
+        } else {
+          console.warn("TomSelect no está definido. Cargando selectores normales.");
+        }
+      } catch (tsErr) {
+        console.error("Error inicializando TomSelect:", tsErr);
+      }
+
+      // Load backtest metrics
+      loadBacktestMetrics();
+
+      // Update UI for the initial match
+      updateMatchCard();
+
+      // Init bet builder segments (hide non-summary)
+      document.querySelectorAll('#bb-col-results [id^="bb-container-"]').forEach(el => {
+        if (!el.classList.contains('bb-seg-summary')) el.style.display = 'none';
+      });
+
+      // Initial segment button state
+      document.querySelectorAll('.bb-segment-btn').forEach(b => b.classList.toggle('active', b.dataset.segment === 'summary'));
+
+      return; // Éxito, salir
+    } catch (error) {
+      console.warn(`Intento ${i + 1}/${retries} de conexión falló:`, error);
+      if (statusEl) {
+        statusEl.textContent = `Despertando servidor (${i + 1}/${retries})...`;
+        statusEl.style.color = "#f59e0b";
+      }
+      if (i < retries - 1) {
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+    }
+  }
+
+  if (statusEl) {
+    statusEl.textContent = "Error de conexión API";
+    statusEl.style.color = "#ef4444";
   }
 }
 
@@ -779,8 +814,7 @@ function bindListeners() {
     });
   }
   
-  // Initialize Supabase User Authentication bindings (Login, Register, Session)
-  initSupabaseAuth();
+  // Supabase Auth is now initialized isolatedly in initializeApp()
 }
 
 function updateMatchCard(fullReload = true) {
@@ -877,6 +911,7 @@ function updateMatchCard(fullReload = true) {
    API DATA CALLS (HISTORY, H2H, PREDICT)
    ========================================================================== */
 async function loadRecentMatches(teamSlug, listElement, titleElement, defaultName) {
+  if (!listElement || !titleElement) return;
   const meta = TEAM_METADATA[teamSlug] || { name: defaultName, flag: "" };
   titleElement.textContent = `Partidos de ${meta.name}`;
   listElement.innerHTML = `<div class="loading-placeholder">Cargando partidos...</div>`;
@@ -1004,6 +1039,7 @@ async function updateTeamCardForm(teamSlug, side) {
 }
 
 async function loadH2HData() {
+  if (!h2hMatchList || !h2hWinsA || !h2hWinsB || !h2hDraws || !h2hLabelA || !h2hLabelB) return;
   h2hMatchList.innerHTML = `<div class="loading-placeholder">Cargando cara a cara...</div>`;
   
   try {
@@ -2249,9 +2285,9 @@ async function runPredictionFlow() {
     h2hWeight: parseFloat(weightH2hSlider.value),
     decayMonths: parseInt(decaySlider.value),
     numSims: parseInt(simsSlider.value),
-    oddsA: inputOddsA.value ? parseFloat(inputOddsA.value) : null,
-    oddsDraw: inputOddsDraw.value ? parseFloat(inputOddsDraw.value) : null,
-    oddsB: inputOddsB.value ? parseFloat(inputOddsB.value) : null,
+    oddsA: (inputOddsA && inputOddsA.value) ? parseFloat(inputOddsA.value) : null,
+    oddsDraw: (inputOddsDraw && inputOddsDraw.value) ? parseFloat(inputOddsDraw.value) : null,
+    oddsB: (inputOddsB && inputOddsB.value) ? parseFloat(inputOddsB.value) : null,
     strengthOverrideA: inputOverrideA.value ? parseFloat(inputOverrideA.value) : 1.0,
     strengthOverrideB: inputOverrideB.value ? parseFloat(inputOverrideB.value) : 1.0,
     altitude: inputAltitude.value ? parseInt(inputAltitude.value) : 0,
@@ -2386,22 +2422,29 @@ async function runPredictionFlow() {
     
     bttsYes.textContent = `${(data.goalsMarkets.btts.yes * 100).toFixed(1)}%`;
     bttsNo.textContent = `${(data.goalsMarkets.btts.no * 100).toFixed(1)}%`;
-    document.getElementById('in-btts-yes').dataset.prob = data.goalsMarkets.btts.yes;
-    document.getElementById('in-btts-no').dataset.prob = data.goalsMarkets.btts.no;
+    const inBttsYes = document.getElementById('in-btts-yes');
+    const inBttsNo = document.getElementById('in-btts-no');
+    if (inBttsYes) inBttsYes.dataset.prob = data.goalsMarkets.btts.yes;
+    if (inBttsNo) inBttsNo.dataset.prob = data.goalsMarkets.btts.no;
     
     dc1X.textContent = `${(data.goalsMarkets.doubleChance['1X'] * 100).toFixed(1)}%`;
     dc12.textContent = `${(data.goalsMarkets.doubleChance['12'] * 100).toFixed(1)}%`;
     dcX2.textContent = `${(data.goalsMarkets.doubleChance['X2'] * 100).toFixed(1)}%`;
-    document.getElementById('in-dc-1X').dataset.prob = data.goalsMarkets.doubleChance['1X'];
-    document.getElementById('in-dc-12').dataset.prob = data.goalsMarkets.doubleChance['12'];
-    document.getElementById('in-dc-X2').dataset.prob = data.goalsMarkets.doubleChance['X2'];
+    const inDc1X = document.getElementById('in-dc-1X');
+    const inDc12 = document.getElementById('in-dc-12');
+    const inDcX2 = document.getElementById('in-dc-X2');
+    if (inDc1X) inDc1X.dataset.prob = data.goalsMarkets.doubleChance['1X'];
+    if (inDc12) inDc12.dataset.prob = data.goalsMarkets.doubleChance['12'];
+    if (inDcX2) inDcX2.dataset.prob = data.goalsMarkets.doubleChance['X2'];
     
     labelDnb1.textContent = `${nameAVal.slice(0, 8)}:`;
     labelDnb2.textContent = `${nameBVal.slice(0, 8)}:`;
     dnb1.textContent = `${(data.goalsMarkets.dnb['1'] * 100).toFixed(1)}%`;
     dnb2.textContent = `${(data.goalsMarkets.dnb['2'] * 100).toFixed(1)}%`;
-    document.getElementById('in-dnb-1').dataset.prob = data.goalsMarkets.dnb['1'];
-    document.getElementById('in-dnb-2').dataset.prob = data.goalsMarkets.dnb['2'];
+    const inDnb1 = document.getElementById('in-dnb-1');
+    const inDnb2 = document.getElementById('in-dnb-2');
+    if (inDnb1) inDnb1.dataset.prob = data.goalsMarkets.dnb['1'];
+    if (inDnb2) inDnb2.dataset.prob = data.goalsMarkets.dnb['2'];
     
     ouGoalsTbody.innerHTML = "";
     data.goalsMarkets.overUnder.forEach(ou => {
@@ -2416,14 +2459,36 @@ async function runPredictionFlow() {
       if (inO) inO.dataset.prob = ou.over;
       if (inU) inU.dataset.prob = ou.under;
 
+      let cellOverAttrs = "";
+      let cellUnderAttrs = "";
+      let cellOverClass = "";
+      let cellUnderClass = "";
+      
+      if ([1.5, 2.5, 3.5].includes(ou.threshold)) {
+        const valOver = `over_${ou.threshold.toString().replace('.', '_')}`;
+        const valUnder = `under_${ou.threshold.toString().replace('.', '_')}`;
+        const activeClassOver = document.querySelector(`#bb-hidden-bridge-container input[name="bb-leg"][value="${valOver}"]`)?.checked ? 'active' : '';
+        const activeClassUnder = document.querySelector(`#bb-hidden-bridge-container input[name="bb-leg"][value="${valUnder}"]`)?.checked ? 'active' : '';
+        
+        cellOverClass = `selectable-market-card add-to-ticket-btn ${activeClassOver}`;
+        cellUnderClass = `selectable-market-card add-to-ticket-btn ${activeClassUnder}`;
+        cellOverAttrs = `data-bb-value="${valOver}" onclick="window.toggleTicketLeg('${valOver}', 'Goles: +${ou.threshold.toFixed(1)}', this)"`;
+        cellUnderAttrs = `data-bb-value="${valUnder}" onclick="window.toggleTicketLeg('${valUnder}', 'Goles: -${ou.threshold.toFixed(1)}', this)"`;
+      }
+
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td><strong>${ou.threshold.toFixed(1)} Goles</strong></td>
-        <td style="color: var(--color-team-b); font-weight: 700;">${(ou.over * 100).toFixed(1)}% <span id="ev-ou-goles-${tStr}-over" class="ev-mini"></span></td>
-        <td style="color: rgba(244, 63, 94, 0.8); font-weight: 700;">${(ou.under * 100).toFixed(1)}% <span id="ev-ou-goles-${tStr}-under" class="ev-mini"></span></td>
+        <td class="${cellOverClass}" ${cellOverAttrs} style="color: var(--color-team-b); font-weight: 700; text-align: center;">
+          <span>${(ou.over * 100).toFixed(1)}% <span id="ev-ou-goles-${tStr}-over" class="ev-mini"></span></span>
+        </td>
+        <td class="${cellUnderClass}" ${cellUnderAttrs} style="color: rgba(244, 63, 94, 0.8); font-weight: 700; text-align: center;">
+          <span>${(ou.under * 100).toFixed(1)}% <span id="ev-ou-goles-${tStr}-under" class="ev-mini"></span></span>
+        </td>
       `;
       ouGoalsTbody.appendChild(tr);
     });
+
 
     if (data.goalsMarkets.asianHandicap) {
       thAhA.textContent = "Sí (%)";
@@ -2514,14 +2579,31 @@ async function runPredictionFlow() {
         if (inYes) inYes.dataset.prob = row.probYes;
         if (inNo) inNo.dataset.prob = row.probNo;
 
+        let cellYesClass = "";
+        let cellYesAttrs = "";
+        let valYes = null;
+        if (row.idYes === "in-ah-p15-a") valYes = "handicap_plus_1_5_a";
+        if (row.idYes === "in-ah-m15-b") valYes = "handicap_minus_1_5_b";
+        
+        if (valYes) {
+          const activeClassYes = document.querySelector(`#bb-hidden-bridge-container input[name="bb-leg"][value="${valYes}"]`)?.checked ? 'active' : '';
+          cellYesClass = `selectable-market-card add-to-ticket-btn ${activeClassYes}`;
+          cellYesAttrs = `data-bb-value="${valYes}" onclick="window.toggleTicketLeg('${valYes}', 'Hándicap: ${row.label}', this)"`;
+        }
+
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td><strong>${row.label}</strong></td>
-          <td style="color: var(--color-team-b); font-weight: 700;">${(row.probYes * 100).toFixed(1)}% <span id="ev-ah-${row.tStrYes}" class="ev-mini"></span></td>
-          <td style="color: rgba(244, 63, 94, 0.8); font-weight: 700;">${(row.probNo * 100).toFixed(1)}% <span id="ev-ah-${row.tStrNo}" class="ev-mini"></span></td>
+          <td class="${cellYesClass}" ${cellYesAttrs} style="color: var(--color-team-b); font-weight: 700; text-align: center;">
+            <span>${(row.probYes * 100).toFixed(1)}% <span id="ev-ah-${row.tStrYes}" class="ev-mini"></span></span>
+          </td>
+          <td style="color: rgba(244, 63, 94, 0.8); font-weight: 700; text-align: center;">
+            <span>${(row.probNo * 100).toFixed(1)}% <span id="ev-ah-${row.tStrNo}" class="ev-mini"></span></span>
+          </td>
         `;
         ahTbody.appendChild(tr);
       });
+
     }
 
     // --- Render corners prediction (Block 2) ---
@@ -2546,23 +2628,48 @@ async function runPredictionFlow() {
       if (inO) inO.dataset.prob = ou.over;
       if (inU) inU.dataset.prob = ou.under;
 
+      let cellOverAttrs = "";
+      let cellUnderAttrs = "";
+      let cellOverClass = "";
+      let cellUnderClass = "";
+      
+      if ([7.5, 8.5, 9.5, 10.5].includes(ou.threshold)) {
+        const valOver = `corners_over_${ou.threshold.toString().replace('.', '_')}`;
+        const valUnder = `corners_under_${ou.threshold.toString().replace('.', '_')}`;
+        const activeClassOver = document.querySelector(`#bb-hidden-bridge-container input[name="bb-leg"][value="${valOver}"]`)?.checked ? 'active' : '';
+        const activeClassUnder = document.querySelector(`#bb-hidden-bridge-container input[name="bb-leg"][value="${valUnder}"]`)?.checked ? 'active' : '';
+        
+        cellOverClass = `selectable-market-card add-to-ticket-btn ${activeClassOver}`;
+        cellUnderClass = `selectable-market-card add-to-ticket-btn ${activeClassUnder}`;
+        cellOverAttrs = `data-bb-value="${valOver}" onclick="window.toggleTicketLeg('${valOver}', 'Córners: +${ou.threshold.toFixed(1)}', this)"`;
+        cellUnderAttrs = `data-bb-value="${valUnder}" onclick="window.toggleTicketLeg('${valUnder}', 'Córners: -${ou.threshold.toFixed(1)}', this)"`;
+      }
+
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td><strong>${ou.threshold.toFixed(1)} Córners</strong></td>
-        <td style="color: var(--color-team-b); font-weight: 700;">${(ou.over * 100).toFixed(1)}% <span id="ev-ou-corn-${tStr}-over" class="ev-mini"></span></td>
-        <td style="color: rgba(244, 63, 94, 0.8); font-weight: 700;">${(ou.under * 100).toFixed(1)}% <span id="ev-ou-corn-${tStr}-under" class="ev-mini"></span></td>
+        <td class="${cellOverClass}" ${cellOverAttrs} style="color: var(--color-team-b); font-weight: 700; text-align: center;">
+          <span>${(ou.over * 100).toFixed(1)}% <span id="ev-ou-corn-${tStr}-over" class="ev-mini"></span></span>
+        </td>
+        <td class="${cellUnderClass}" ${cellUnderAttrs} style="color: rgba(244, 63, 94, 0.8); font-weight: 700; text-align: center;">
+          <span>${(ou.under * 100).toFixed(1)}% <span id="ev-ou-corn-${tStr}-under" class="ev-mini"></span></span>
+        </td>
       `;
       ouCornersTbody.appendChild(tr);
     });
+
     
     labelMostCornersA.textContent = `${nameAVal.slice(0, 8)}:`;
     labelMostCornersB.textContent = `${nameBVal.slice(0, 8)}:`;
     probMostCornersA.textContent = `${(data.cornersPrediction.probMostA * 100).toFixed(1)}%`;
     probMostCornersDraw.textContent = `${(data.cornersPrediction.probMostDraw * 100).toFixed(1)}%`;
     probMostCornersB.textContent = `${(data.cornersPrediction.probMostB * 100).toFixed(1)}%`;
-    document.getElementById('in-most-corners-a').dataset.prob = data.cornersPrediction.probMostA;
-    document.getElementById('in-most-corners-draw').dataset.prob = data.cornersPrediction.probMostDraw;
-    document.getElementById('in-most-corners-b').dataset.prob = data.cornersPrediction.probMostB;
+    const inMostCornersA = document.getElementById('in-most-corners-a');
+    const inMostCornersDraw = document.getElementById('in-most-corners-draw');
+    const inMostCornersB = document.getElementById('in-most-corners-b');
+    if (inMostCornersA) inMostCornersA.dataset.prob = data.cornersPrediction.probMostA;
+    if (inMostCornersDraw) inMostCornersDraw.dataset.prob = data.cornersPrediction.probMostDraw;
+    if (inMostCornersB) inMostCornersB.dataset.prob = data.cornersPrediction.probMostB;
 
     // Render detailed corner analysis
     updateCornersAnalysis(data, nameAVal, nameBVal);
@@ -2570,21 +2677,27 @@ async function runPredictionFlow() {
     // Render Betting analysis (+EV)
     const ba = data.bettingAnalysis;
     if (ba.hasOdds) {
-      oddsHelperText.classList.add("hidden");
-      oddsAnalysisContainer.classList.remove("hidden");
+      if (oddsHelperText) oddsHelperText.classList.add("hidden");
+      if (oddsAnalysisContainer) oddsAnalysisContainer.classList.remove("hidden");
 
       const printEv = (evVal, element, statCard) => {
         const evPctStr = (evVal * 100).toFixed(1);
-        if (evVal > 0) {
-          element.textContent = `+${evPctStr}%`;
-          element.style.color = "var(--color-team-b)"; // Emerald
-          statCard.style.background = "rgba(16, 185, 129, 0.08)";
-          statCard.style.borderColor = "rgba(16, 185, 129, 0.15)";
-        } else {
-          element.textContent = `${evPctStr}%`;
-          element.style.color = "var(--color-text-secondary)";
-          statCard.style.background = "rgba(255, 255, 255, 0.01)";
-          statCard.style.borderColor = "var(--card-border-inner)";
+        if (element) {
+          if (evVal > 0) {
+            element.textContent = `+${evPctStr}%`;
+            element.style.color = "var(--color-team-b)"; // Emerald
+            if (statCard) {
+              statCard.style.background = "rgba(16, 185, 129, 0.08)";
+              statCard.style.borderColor = "rgba(16, 185, 129, 0.15)";
+            }
+          } else {
+            element.textContent = `${evPctStr}%`;
+            element.style.color = "var(--color-text-secondary)";
+            if (statCard) {
+              statCard.style.background = "rgba(255, 255, 255, 0.01)";
+              statCard.style.borderColor = "var(--card-border-inner)";
+            }
+          }
         }
       };
 
@@ -2605,21 +2718,23 @@ async function runPredictionFlow() {
       if (ba.valuableDraw) { hasValuable = true; valMatches.push("Empate"); }
       if (ba.valuableB) { hasValuable = true; valMatches.push(nameBVal); }
 
-      if (hasValuable) {
-        alertMsg = `🔥 VALOR DETECTADO EN: ${valMatches.join(" / ").toUpperCase()}`;
-        oddsAlertMessage.style.background = "rgba(16, 185, 129, 0.25)";
-        oddsAlertMessage.style.color = "#a7f3d0";
-        oddsAlertMessage.style.borderColor = "rgba(16, 185, 129, 0.4)";
-      } else {
-        oddsAlertMessage.style.background = "rgba(255, 255, 255, 0.05)";
-        oddsAlertMessage.style.color = "var(--color-text-secondary)";
-        oddsAlertMessage.style.borderColor = "var(--card-border-inner)";
+      if (oddsAlertMessage) {
+        if (hasValuable) {
+          alertMsg = `🔥 VALOR DETECTADO EN: ${valMatches.join(" / ").toUpperCase()}`;
+          oddsAlertMessage.style.background = "rgba(16, 185, 129, 0.25)";
+          oddsAlertMessage.style.color = "#a7f3d0";
+          oddsAlertMessage.style.borderColor = "rgba(16, 185, 129, 0.4)";
+        } else {
+          oddsAlertMessage.style.background = "rgba(255, 255, 255, 0.05)";
+          oddsAlertMessage.style.color = "var(--color-text-secondary)";
+          oddsAlertMessage.style.borderColor = "var(--card-border-inner)";
+        }
+        oddsAlertMessage.textContent = alertMsg;
       }
-      oddsAlertMessage.textContent = alertMsg;
 
     } else {
-      oddsHelperText.classList.remove("hidden");
-      oddsAnalysisContainer.classList.add("hidden");
+      if (oddsHelperText) oddsHelperText.classList.remove("hidden");
+      if (oddsAnalysisContainer) oddsAnalysisContainer.classList.add("hidden");
     }
 
     // Render score heatmap matrix
@@ -2642,17 +2757,18 @@ async function runPredictionFlow() {
     // Update analytical charts (including the radar chart)
     updateCharts(nameAVal, nameBVal, data.xgA, data.xgB, data.probWinA, data.probDraw, data.probWinB, data);
 
-    if (typeof window.runBetBuilderSimulation === 'function') {
-      window.runBetBuilderSimulation();
-    }
-    if (typeof window.updateBetBuilderLabels === 'function') {
-      window.updateBetBuilderLabels();
+    if (typeof window.renderBBTicket === 'function') {
+      window.renderBBTicket();
     }
     if (typeof updateBetBuilderAnalytics === 'function') {
       updateBetBuilderAnalytics(data);
     }
     if (typeof window.renderExtendedMarkets === 'function') {
       window.renderExtendedMarkets(data, nameAVal, nameBVal);
+    }
+    // Update Bet Builder selectors with live probabilities
+    if (typeof updateBetBuilderSelectors === 'function') {
+      updateBetBuilderSelectors(data);
     }
   } catch (error) {
     console.error("Prediction API error:", error);
@@ -4914,9 +5030,8 @@ window.toggleBBAccordion = function(btn) {
 
 // ── Clear all bet builder legs ──
 window.clearAllBBLegs = function() {
-  document.querySelectorAll('input[name="bb-leg"]').forEach(cb => cb.checked = false);
-  updateBBLegsCount();
-  window.runBetBuilderSimulation();
+  document.querySelectorAll('#bb-hidden-bridge-container input[name="bb-leg"]').forEach(cb => cb.checked = false);
+  window.renderBBTicket();
 };
 
 // ── Toggle alerts config fields ──
@@ -4928,15 +5043,17 @@ window.toggleAlertsState = function() {
 
 // ── Update legs counter ──
 function updateBBLegsCount() {
-  const count = document.querySelectorAll('input[name="bb-leg"]:checked').length;
-  const el = document.getElementById('bb-selected-count');
-  if (el) el.textContent = `(${count})`;
+  if (typeof window.renderBBTicket === 'function') {
+    window.renderBBTicket();
+  }
 }
 
 // ── Filter markets by search ──
-window.filterBBMarkets = function() {
-  const q = (document.getElementById('bb-market-search')?.value || '').toLowerCase().trim();
-  document.querySelectorAll('.bb-accordion-item').forEach(item => {
+window.filterBBMarkets = function(suffix = '') {
+  const searchInput = document.getElementById('bb-market-search' + suffix);
+  const q = (searchInput?.value || '').toLowerCase().trim();
+  const selectorsContainer = document.getElementById('bb-market-selectors' + suffix) || document;
+  selectorsContainer.querySelectorAll('.bb-accordion-item').forEach(item => {
     const text = item.textContent.toLowerCase();
     item.style.display = (!q || text.includes(q)) ? '' : 'none';
   });
@@ -4989,35 +5106,51 @@ window.switchBetBuilderTab = function(name) {
 // ── Update edge calculation ──
 window.updateBetBuilderEdge = function() {
   const combinedProbText = document.getElementById('bb-combined-prob-circle')?.textContent || '0.0%';
-  const marketOdds = parseFloat(document.getElementById('bb-market-odds')?.value) || 0;
+  const mainOddsInput = document.getElementById('bb-market-odds');
+  const subOddsInput = document.getElementById('bb-market-odds-subtab');
+  const marketOdds = parseFloat(mainOddsInput?.value || subOddsInput?.value) || 0;
   const combinedProb = parseFloat(combinedProbText) / 100;
+  
   if (!marketOdds || !combinedProb) {
-    ['bb-edge-value', 'bb-kelly-stake', 'bb-risk-level'].forEach(id => {
+    ['bb-edge-value', 'bb-kelly-stake', 'bb-risk-level', 'bb-edge-value-subtab', 'bb-kelly-stake-subtab', 'bb-risk-level-subtab'].forEach(id => {
       const el = document.getElementById(id);
-      if (el) el.textContent = id === 'bb-risk-level' ? 'Bajo' : '0.0%';
+      if (el) el.textContent = id.includes('risk') ? 'Bajo' : '0.0%';
     });
-    const badge = document.getElementById('bb-value-badge');
-    if (badge) badge.style.display = 'none';
+    ['bb-value-badge', 'bb-value-badge-subtab'].forEach(id => {
+      const badge = document.getElementById(id);
+      if (badge) badge.style.display = 'none';
+    });
     return;
   }
   const fairOdds = 1 / combinedProb;
   const edge = (marketOdds - fairOdds) / fairOdds * 100;
   const kelly = ((combinedProb * marketOdds - 1) / (marketOdds - 1)) * 100;
-  const edgeEl = document.getElementById('bb-edge-value');
-  const kellyEl = document.getElementById('bb-kelly-stake');
-  const riskEl = document.getElementById('bb-risk-level');
-  const badge = document.getElementById('bb-value-badge');
-  if (edgeEl) edgeEl.textContent = edge.toFixed(1) + '%';
-  if (kellyEl) kellyEl.textContent = Math.max(0, kelly).toFixed(1) + '%';
-  if (riskEl) {
-    const risk = Math.abs(kelly);
-    riskEl.textContent = risk < 5 ? 'Bajo' : risk < 15 ? 'Medio' : 'Alto';
-    riskEl.style.color = risk < 5 ? '#10B981' : risk < 15 ? '#F59E0B' : '#EF4444';
-  }
-  if (badge) {
-    badge.style.display = edge > 0 ? 'block' : 'none';
-    badge.textContent = edge > 0 ? '⚡ Value Bet Detectada' : '';
-  }
+  
+  ['bb-edge-value', 'bb-edge-value-subtab'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = edge.toFixed(1) + '%';
+  });
+  ['bb-kelly-stake', 'bb-kelly-stake-subtab'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = Math.max(0, kelly).toFixed(1) + '%';
+  });
+  
+  ['bb-risk-level', 'bb-risk-level-subtab'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      const risk = Math.abs(kelly);
+      el.textContent = risk < 5 ? 'Bajo' : risk < 15 ? 'Medio' : 'Alto';
+      el.style.color = risk < 5 ? '#10B981' : risk < 15 ? '#F59E0B' : '#EF4444';
+    }
+  });
+  
+  ['bb-value-badge', 'bb-value-badge-subtab'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.display = edge > 0 ? 'block' : 'none';
+      el.textContent = edge > 0 ? '⚡ Value Bet Detectada' : '';
+    }
+  });
 };
 
 // ── Update odds comparison table ──
@@ -5105,13 +5238,21 @@ function populateValidationTables(matches, legs) {
 
 // ── Run Bet Builder Simulation ──
 window.runBetBuilderSimulation = async function() {
-  const checkedLegs = Array.from(document.querySelectorAll('input[name="bb-leg"]:checked')).map(cb => cb.value);
+  const checkedLegs = Array.from(document.querySelectorAll('#bb-hidden-bridge-container input[name="bb-leg"]:checked')).map(cb => cb.value);
   const probCircle = document.getElementById('bb-combined-prob-circle');
+  const probCircleSubtab = document.getElementById('bb-combined-prob-circle-subtab');
   const fairOddsEl = document.getElementById('bb-fair-odds');
+  const fairOddsElSubtab = document.getElementById('bb-fair-odds-subtab');
+  const gaugePath = document.getElementById('bb-combined-prob-gauge-path');
+  const gaugePathSubtab = document.getElementById('bb-combined-prob-gauge-path-subtab');
   
   if (checkedLegs.length === 0) {
     if (probCircle) probCircle.textContent = '0.0%';
+    if (probCircleSubtab) probCircleSubtab.textContent = '0.0%';
     if (fairOddsEl) fairOddsEl.textContent = '1.00';
+    if (fairOddsElSubtab) fairOddsElSubtab.textContent = '1.00';
+    if (gaugePath) gaugePath.style.strokeDashoffset = '157';
+    if (gaugePathSubtab) gaugePathSubtab.style.strokeDashoffset = '157';
     window.updateBetBuilderEdge();
     window.updateOddsComparison();
     populateValidationTables({ directH2H: [], similarProfile: [] }, []);
@@ -5119,6 +5260,7 @@ window.runBetBuilderSimulation = async function() {
   }
   
   if (probCircle) probCircle.textContent = 'Simulando...';
+  if (probCircleSubtab) probCircleSubtab.textContent = 'Simulando...';
   
   const payload = {
     teamA: selectedTeamA,
@@ -5147,9 +5289,18 @@ window.runBetBuilderSimulation = async function() {
     
     const prob = (data.simulation.combinedProb * 100).toFixed(1);
     if (probCircle) probCircle.textContent = `${prob}%`;
+    if (probCircleSubtab) probCircleSubtab.textContent = `${prob}%`;
+    
+    // Calcular offset del velocímetro (el semicírculo mide 157)
+    const rawProb = data.simulation.combinedProb || 0.0;
+    const offset = 157 - (157 * rawProb);
+    if (gaugePath) gaugePath.style.strokeDashoffset = offset.toFixed(0);
+    if (gaugePathSubtab) gaugePathSubtab.style.strokeDashoffset = offset.toFixed(0);
     
     const fairOdds = 1 / data.simulation.combinedProb;
-    if (fairOddsEl) fairOddsEl.textContent = isFinite(fairOdds) ? fairOdds.toFixed(2) : '99.00';
+    const fairOddsStr = isFinite(fairOdds) ? fairOdds.toFixed(2) : '99.00';
+    if (fairOddsEl) fairOddsEl.textContent = fairOddsStr;
+    if (fairOddsElSubtab) fairOddsElSubtab.textContent = fairOddsStr;
     
     window.updateBetBuilderEdge();
     window.updateOddsComparison();
@@ -5157,6 +5308,7 @@ window.runBetBuilderSimulation = async function() {
   } catch (e) {
     console.error("Bet Builder simulation error:", e);
     if (probCircle) probCircle.textContent = 'Error';
+    if (probCircleSubtab) probCircleSubtab.textContent = 'Error';
   }
 };
 
@@ -5200,11 +5352,41 @@ window.updateBetBuilderLabels = function() {
   });
 })();
 
-// Wire up BB checkbox listener for leg count and trigger simulation
+// Wire up BB checkbox listener for leg count and trigger simulation with hot-sync
 document.addEventListener('change', function bbCheckChange(e) {
   if (e.target && e.target.matches('input[name="bb-leg"]')) {
+    const val = e.target.value;
+    const isChecked = e.target.checked;
+    
+    // Evitar bucle infinito de eventos cruzados
+    if (window._syncingBBLegs) return;
+    window._syncingBBLegs = true;
+    
+    // Sincronizar todos los checkboxes bb-leg con el mismo valor en todo el DOM
+    document.querySelectorAll(`input[name="bb-leg"][value="${val}"]`).forEach(cb => {
+      if (cb.checked !== isChecked) {
+        cb.checked = isChecked;
+        cb.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    });
+    
+    window._syncingBBLegs = false;
+    
     updateBBLegsCount();
     window.runBetBuilderSimulation();
+  }
+});
+
+// Sincronizador de cuotas manuales de la combinada en caliente
+document.addEventListener('input', function bbOddsInputSync(e) {
+  if (e.target && (e.target.id === 'bb-market-odds' || e.target.id === 'bb-market-odds-subtab')) {
+    const val = e.target.value;
+    const targetId = e.target.id === 'bb-market-odds' ? 'bb-market-odds-subtab' : 'bb-market-odds';
+    const targetInput = document.getElementById(targetId);
+    if (targetInput && targetInput.value !== val) {
+      targetInput.value = val;
+    }
+    window.updateBetBuilderEdge();
   }
 });
 
@@ -5222,6 +5404,16 @@ window.switchMarketSubTab = function(tabId) {
   
   var activeContent = document.getElementById('sub-tab-content-' + tabId);
   if (activeContent) activeContent.classList.add('active');
+  
+  // Agregar o remover clase bb-active para colapsar columna derecha y ensanchar Bet Builder
+  const mainGrid = document.querySelector('.markets-main-grid');
+  if (mainGrid) {
+    if (tabId === 'bb') {
+      mainGrid.classList.add('bb-active');
+    } else {
+      mainGrid.classList.remove('bb-active');
+    }
+  }
   
   if (tabId === 'kelly') {
     if (typeof calculateKellyResult === 'function') {
@@ -5342,7 +5534,23 @@ window.renderExtendedMarkets = function(data, nameA, nameB) {
   if (pMostShotsDraw) pMostShotsDraw.textContent = `${(em.shots.mostShots.draw * 100).toFixed(1)}%`;
   if (pMostShotsB) pMostShotsB.textContent = `${(em.shots.mostShots.teamB * 100).toFixed(1)}%`;
   
-  // 3. TIMES
+    // 2. PASSES
+    const expPassesA = document.querySelectorAll('[id="expected-passes-val-a"]');
+    const expPassesB = document.querySelectorAll('[id="expected-passes-val-b"]');
+    const expPassesTotal = document.querySelectorAll('[id="expected-passes-total"]');
+    expPassesA.forEach(el => el.textContent = em.passes.expectedA.toFixed(1));
+    expPassesB.forEach(el => el.textContent = em.passes.expectedB.toFixed(1));
+    expPassesTotal.forEach(el => el.textContent = em.passes.expectedTotal.toFixed(1));
+    const passesAccA = document.getElementById('passes-accuracy-a');
+    const passesAccB = document.getElementById('passes-accuracy-b');
+    if (passesAccA) passesAccA.textContent = `${(em.passes.accuracyA).toFixed(1)}%`;
+    if (passesAccB) passesAccB.textContent = `${(em.passes.accuracyB).toFixed(1)}%`;
+    // Update passes labels with team names
+    const lblPassesA = document.getElementById('expected-passes-label-a');
+    const lblPassesB = document.getElementById('expected-passes-label-b');
+    if (lblPassesA) lblPassesA.textContent = `${nameA.slice(0, 10)}:`;
+    if (lblPassesB) lblPassesB.textContent = `${nameB.slice(0, 10)}:`;
+    // 3. TIMES
   const lblTimesWinA = document.getElementById('lbl-times-win-a');
   const lblTimesWinB = document.getElementById('lbl-times-win-b');
   
@@ -5507,6 +5715,487 @@ window.renderExtendedMarkets = function(data, nameA, nameB) {
   if (nilBNo) nilBNo.textContent = `${(em.specials.winToNilB.no * 100).toFixed(1)}%`;
 };
 
+// ── Cache for user inputted odds to persist them across simulations ──
+window.userOddsCache = window.userOddsCache || {};
+
+// Helper to create a single row for a Bet Builder leg with EV calculation
+function createBBMarketRow(value, label, prob, isChecked) {
+  const probPct = (prob * 100).toFixed(1);
+  const probDecimal = prob.toFixed(4);
+  const savedOdds = window.userOddsCache[value] ? `value="${window.userOddsCache[value]}"` : '';
+  
+  // Calculate initial EV if odds are saved
+  let evHtml = '';
+  let evClass = 'bb-leg-edge ev-mini';
+  if (window.userOddsCache[value]) {
+    const ev = (prob * window.userOddsCache[value]) - 1;
+    const evPct = (ev * 100).toFixed(1);
+    if (ev > 0) {
+      evHtml = `+${evPct}% EV`;
+      evClass = 'bb-leg-edge ev-mini plus';
+    } else {
+      evHtml = `${evPct}% EV`;
+      evClass = 'bb-leg-edge ev-mini minus';
+    }
+  }
+
+  const evSpan = evHtml ? `<span class="${evClass}" style="flex-shrink:0;">${evHtml}</span>` : '';
+
+  return `
+    <div class="bb-market-row" data-val="${value}" style="display:flex;align-items:center;gap:8px;padding:6px 8px;">
+      <input type="checkbox" name="bb-leg" value="${value}" class="custom-checkbox bb-checkbox" ${isChecked ? 'checked' : ''} onchange="window.syncBBLeg('${value}', this.checked)" style="flex-shrink:0;">
+      <span class="bb-leg-label bb-leg-name" title="${label}" style="display:block !important;flex:1 1 auto !important;min-width:80px !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important;cursor:pointer;color:#c8cad0 !important;font-size:0.82rem;" onclick="window.triggerBBRowClick(this)">${label}</span>
+      <span class="bb-leg-prob" style="flex-shrink:0;">${probPct}%</span>
+      <input type="number" class="bb-leg-odds-input" placeholder="Cuota" step="0.01" min="1.01" ${savedOdds} oninput="window.calculateLegEdge(this, ${probDecimal})" style="flex-shrink:0;width:55px;">
+      ${evSpan}
+    </div>
+  `;
+}
+
+window.triggerBBRowClick = function(el) {
+  const row = el.closest('.bb-market-row');
+  if (!row) return;
+  const cb = row.querySelector('input[type="checkbox"]');
+  if (cb) {
+    cb.checked = !cb.checked;
+    cb.dispatchEvent(new Event('change'));
+  }
+};
+
+// ── Update Bet Builder Selectors with Live Probabilities ──
+function updateBetBuilderSelectors(data) {
+  if (!data || !data.extendedMarkets) return;
+  
+  const em = data.extendedMarkets;
+  const nameA = TEAM_METADATA[selectedTeamA]?.name || selectedTeamA;
+  const nameB = TEAM_METADATA[selectedTeamB]?.name || selectedTeamB;
+  const nameAShort = nameA.slice(0, 12);
+  const nameBShort = nameB.slice(0, 12);
+  
+  const container = document.getElementById('bb-market-selectors');
+  if (!container) return;
+  container.innerHTML = "";
+  
+  // Build accordion data structure dynamic lists
+  const accordions = [
+    {
+      id: 'outcome',
+      title: '⚽ Resultado Final',
+      icon: '⚽',
+      items: [
+        { value: 'win_a', label: `Victoria ${nameAShort}`, prob: data.probWinA },
+        { value: 'draw', label: 'Empate', prob: data.probDraw },
+        { value: 'win_b', label: `Victoria ${nameBShort}`, prob: data.probWinB }
+      ]
+    },
+    {
+      id: 'btts',
+      title: '🧤 Ambos Anotan',
+      icon: '🧤',
+      items: [
+        { value: 'btts_yes', label: 'Ambos Anotan: Sí', prob: data.goalsMarkets?.btts?.yes || 0 },
+        { value: 'btts_no', label: 'Ambos Anotan: No', prob: data.goalsMarkets?.btts?.no || 0 }
+      ]
+    },
+    {
+      id: 'doublechance',
+      title: '🛡️ Doble Oportunidad',
+      icon: '🛡️',
+      items: [
+        { value: 'double_chance_1X', label: `1X (${nameAShort} o Empate)`, prob: data.goalsMarkets?.doubleChance?.['1X'] || 0 },
+        { value: 'double_chance_12', label: '12 (Cualquiera Gana)', prob: data.goalsMarkets?.doubleChance?.['12'] || 0 },
+        { value: 'double_chance_X2', label: `X2 (${nameBShort} o Empate)`, prob: data.goalsMarkets?.doubleChance?.['X2'] || 0 }
+      ]
+    },
+    {
+      id: 'goals',
+      title: '🥅 Goles Over/Under',
+      icon: '🥅',
+      items: (() => {
+        const ou = data.goalsMarkets?.overUnder || [];
+        const items = [];
+        ou.forEach(o => {
+          items.push({ value: `over_${o.threshold.toString().replace('.', '_')}_goals`, label: `Over ${o.threshold.toFixed(1)} Goles`, prob: o.over });
+          items.push({ value: `under_${o.threshold.toString().replace('.', '_')}_goals`, label: `Under ${o.threshold.toFixed(1)} Goles`, prob: o.under });
+        });
+        return items;
+      })()
+    },
+    {
+      id: 'dnb',
+      title: '🛡️ Draw No Bet',
+      icon: '🛡️',
+      items: [
+        { value: 'dnb_a', label: `${nameAShort} DNB`, prob: data.goalsMarkets?.dnb?.['1'] || 0 },
+        { value: 'dnb_b', label: `${nameBShort} DNB`, prob: data.goalsMarkets?.dnb?.['2'] || 0 }
+      ]
+    },
+    {
+      id: 'handicap',
+      title: '📐 Handicaps Asiáticos',
+      icon: '📐',
+      items: [
+        { value: 'handicap_minus_1_5_a', label: `${nameAShort} -1.5`, prob: data.goalsMarkets?.asianHandicap?.['-1.5']?.teamA || 0 },
+        { value: 'handicap_plus_1_5_a', label: `${nameAShort} +1.5`, prob: data.goalsMarkets?.asianHandicap?.['+1.5']?.teamA || 0 },
+        { value: 'handicap_minus_1_5_b', label: `${nameBShort} -1.5`, prob: data.goalsMarkets?.asianHandicap?.['-1.5']?.teamB || 0 },
+        { value: 'handicap_plus_1_5_b', label: `${nameBShort} +1.5`, prob: data.goalsMarkets?.asianHandicap?.['+1.5']?.teamB || 0 }
+      ]
+    },
+    {
+      id: 'corners',
+      title: '🚩 Córners',
+      icon: '🚩',
+      items: (() => {
+        const list = [
+          { value: 'corners_win_a', label: `Más Córners ${nameAShort}`, prob: data.cornersPrediction?.probMostA || 0 },
+          { value: 'corners_draw', label: 'Empate Córners', prob: data.cornersPrediction?.probMostDraw || 0 },
+          { value: 'corners_win_b', label: `Más Córners ${nameBShort}`, prob: data.cornersPrediction?.probMostB || 0 }
+        ];
+        (data.cornersPrediction?.overUnder || []).forEach(o => {
+          list.push({ value: `corners_over_${o.threshold.toString().replace('.', '_')}`, label: `Over ${o.threshold.toFixed(1)} Córners`, prob: o.over });
+          list.push({ value: `corners_under_${o.threshold.toString().replace('.', '_')}`, label: `Under ${o.threshold.toFixed(1)} Córners`, prob: o.under });
+        });
+        return list;
+      })()
+    },
+    {
+      id: 'cards',
+      title: '🟨 Tarjetas',
+      icon: '🟨',
+      items: (() => {
+        const list = [];
+        (em.cards?.overUnder || []).forEach(o => {
+          list.push({ value: `cards_over_${o.threshold.toString().replace('.', '_')}`, label: `Over ${o.threshold.toFixed(1)} Tarjetas`, prob: o.over });
+          list.push({ value: `cards_under_${o.threshold.toString().replace('.', '_')}`, label: `Under ${o.threshold.toFixed(1)} Tarjetas`, prob: o.under });
+        });
+        list.push({ value: 'cards_red_yes', label: 'Tarjeta Roja Sí', prob: em.cards?.redCard?.yes || 0 });
+        list.push({ value: 'cards_red_no', label: 'Tarjeta Roja No', prob: em.cards?.redCard?.no || 0 });
+        return list;
+      })()
+    },
+    {
+      id: 'shots',
+      title: '🎯 Tiros',
+      icon: '🎯',
+      items: (() => {
+        const list = [];
+        (em.shots?.overUnderTotal || []).forEach(o => {
+          list.push({ value: `shots_over_${o.threshold.toString().replace('.', '_')}`, label: `Over ${o.threshold.toFixed(1)} Tiros`, prob: o.over });
+          list.push({ value: `shots_under_${o.threshold.toString().replace('.', '_')}`, label: `Under ${o.threshold.toFixed(1)} Tiros`, prob: o.under });
+        });
+        (em.shots?.overUnderOnTarget || []).forEach(o => {
+          list.push({ value: `shots_sot_over_${o.threshold.toString().replace('.', '_')}`, label: `Over ${o.threshold.toFixed(1)} Tiros a Puerta`, prob: o.over });
+          list.push({ value: `shots_sot_under_${o.threshold.toString().replace('.', '_')}`, label: `Under ${o.threshold.toFixed(1)} Tiros a Puerta`, prob: o.under });
+        });
+        list.push({ value: 'shots_most_a', label: `Más Tiros ${nameAShort}`, prob: em.shots?.mostShots?.teamA || 0 });
+        list.push({ value: 'shots_most_draw', label: 'Empate Tiros', prob: em.shots?.mostShots?.draw || 0 });
+        list.push({ value: 'shots_most_b', label: `Más Tiros ${nameBShort}`, prob: em.shots?.mostShots?.teamB || 0 });
+        return list;
+      })()
+    },
+    {
+      id: 'times',
+      title: '⏱️ Tiempos / HT-FT',
+      icon: '⏱️',
+      items: (() => {
+        const list = [
+          { value: 'ht_win_a', label: `1T Victoria ${nameAShort}`, prob: em.times?.winner1T?.['1'] || 0 },
+          { value: 'ht_draw', label: '1T Empate', prob: em.times?.winner1T?.['X'] || 0 },
+          { value: 'ht_win_b', label: `1T Victoria ${nameBShort}`, prob: em.times?.winner1T?.['2'] || 0 },
+          { value: '2t_win_a', label: `2T Victoria ${nameAShort}`, prob: em.times?.winner2T?.['1'] || 0 },
+          { value: '2t_draw', label: '2T Empate', prob: em.times?.winner2T?.['X'] || 0 },
+          { value: '2t_win_b', label: `2T Victoria ${nameBShort}`, prob: em.times?.winner2T?.['2'] || 0 }
+        ];
+        
+        const ou1t_05 = em.times?.overUnder1T?.find(o => o.threshold === 0.5);
+        if (ou1t_05) {
+          list.push({ value: 'times_1t_over_0_5', label: '1T Over 0.5 Goles', prob: ou1t_05.over });
+          list.push({ value: 'times_1t_under_0_5', label: '1T Under 0.5 Goles', prob: ou1t_05.under });
+        }
+        const ou1t_15 = em.times?.overUnder1T?.find(o => o.threshold === 1.5);
+        if (ou1t_15) {
+          list.push({ value: 'times_1t_over_1_5', label: '1T Over 1.5 Goles', prob: ou1t_15.over });
+          list.push({ value: 'times_1t_under_1_5', label: '1T Under 1.5 Goles', prob: ou1t_15.under });
+        }
+        
+        list.push({ value: 'times_btts_1t_yes', label: 'Ambos Anotan 1T Sí', prob: em.times?.btts1T?.yes || 0 });
+        list.push({ value: 'times_btts_1t_no', label: 'Ambos Anotan 1T No', prob: em.times?.btts1T?.no || 0 });
+        list.push({ value: 'times_btts_2t_yes', label: 'Ambos Anotan 2T Sí', prob: em.times?.btts2T?.yes || 0 });
+        list.push({ value: 'times_btts_2t_no', label: 'Ambos Anotan 2T No', prob: em.times?.btts2T?.no || 0 });
+        
+        const htftKeys = ['1_1','1_X','1_2','X_1','X_X','X_2','2_1','2_X','2_2'];
+        const htftLabels = ['1/1','1/X','1/2','X/1','X/X','X/2','2/1','2/X','2/2'];
+        htftKeys.forEach((k, idx) => {
+          list.push({ value: `times_htft_${k}`, label: `HT/FT Combinado: ${htftLabels[idx]}`, prob: em.times?.htft?.[k] || 0 });
+        });
+        return list;
+      })()
+    },
+    {
+      id: 'players',
+      title: '⚽ Jugadores y Goleadores',
+      icon: '⚽',
+      items: (() => {
+        const list = [];
+        
+        // Goleadores Equipo A
+        if (em.players?.anytimeScorerA) {
+          em.players.anytimeScorerA.slice(0, 5).forEach((p, idx) => {
+            const firstP = em.players.firstScorerA?.[idx]?.probability || 0.05;
+            const multiP = em.players.multiGoalsA?.[idx]?.probability || 0.05;
+            const displayName = p.name || "Jugador";
+            const sName = displayName.toString().replace(/ /g, "_");
+            list.push({ value: `player_anytime_${sName}`, label: `${displayName} (${nameAShort}) anota en cualquier momento`, prob: p.probability });
+            list.push({ value: `player_first_${sName}`, label: `${displayName} (${nameAShort}) marca el 1er gol`, prob: firstP });
+            list.push({ value: `player_multi_${sName}`, label: `${displayName} (${nameAShort}) marca 2+ goles`, prob: multiP });
+          });
+        }
+        
+        // Goleadores Equipo B
+        if (em.players?.anytimeScorerB) {
+          em.players.anytimeScorerB.slice(0, 5).forEach((p, idx) => {
+            const firstP = em.players.firstScorerB?.[idx]?.probability || 0.05;
+            const multiP = em.players.multiGoalsB?.[idx]?.probability || 0.05;
+            const displayName = p.name || "Jugador";
+            const sName = displayName.toString().replace(/ /g, "_");
+            list.push({ value: `player_anytime_${sName}`, label: `${displayName} (${nameBShort}) anota en cualquier momento`, prob: p.probability });
+            list.push({ value: `player_first_${sName}`, label: `${displayName} (${nameBShort}) marca el 1er gol`, prob: firstP });
+            list.push({ value: `player_multi_${sName}`, label: `${displayName} (${nameBShort}) marca 2+ goles`, prob: multiP });
+          });
+        }
+        
+        // Asistidores
+        if (em.players?.assistsA) {
+          em.players.assistsA.slice(0, 3).forEach(p => {
+            const displayName = p.name || "Jugador";
+            const sName = displayName.toString().replace(/ /g, "_");
+            list.push({ value: `player_assist_${sName}`, label: `${displayName} registra asistencia (${nameAShort})`, prob: p.probability });
+          });
+        }
+        if (em.players?.assistsB) {
+          em.players.assistsB.slice(0, 3).forEach(p => {
+            const displayName = p.name || "Jugador";
+            const sName = displayName.toString().replace(/ /g, "_");
+            list.push({ value: `player_assist_${sName}`, label: `${displayName} registra asistencia (${nameBShort})`, prob: p.probability });
+          });
+        }
+        
+        // Tarjetas de jugadores
+        if (em.cards?.bookingPlayersA) {
+          em.cards.bookingPlayersA.slice(0, 3).forEach(p => {
+            const displayName = p.player || p.name || "Jugador";
+            const sName = displayName.toString().replace(/ /g, "_");
+            list.push({ value: `player_card_${sName}`, label: `${displayName} será amonestado (${nameAShort})`, prob: p.probability });
+          });
+        }
+        if (em.cards?.bookingPlayersB) {
+          em.cards.bookingPlayersB.slice(0, 3).forEach(p => {
+            const displayName = p.player || p.name || "Jugador";
+            const sName = displayName.toString().replace(/ /g, "_");
+            list.push({ value: `player_card_${sName}`, label: `${displayName} será amonestado (${nameBShort})`, prob: p.probability });
+          });
+        }
+        
+        return list;
+      })()
+    },
+    {
+      id: 'penalties',
+      title: '⚽ Penalties',
+      icon: '⚽',
+      items: [
+        { value: 'pen_conceded_yes', label: 'Penal Concedido Sí', prob: em.penalties?.conceded?.yes || 0 },
+        { value: 'pen_conceded_no', label: 'Penal Concedido No', prob: em.penalties?.conceded?.no || 0 },
+        { value: 'pen_scored_yes', label: 'Penal Anotado Sí', prob: em.penalties?.scored?.yes || 0 },
+        { value: 'pen_scored_no', label: 'Penal Anotado No', prob: em.penalties?.scored?.no || 0 },
+        { value: 'pen_missed_yes', label: 'Penal Fallado Sí', prob: em.penalties?.missed?.yes || 0 },
+        { value: 'pen_missed_no', label: 'Penal Fallado No', prob: em.penalties?.missed?.no || 0 }
+      ]
+    },
+    {
+      id: 'specials',
+      title: '✨ Especiales',
+      icon: '✨',
+      items: [
+        { value: 'special_header_yes', label: 'Gol de Cabeza Sí', prob: em.specials?.headerGoal?.yes || 0 },
+        { value: 'special_header_no', label: 'Gol de Cabeza No', prob: em.specials?.headerGoal?.no || 0 },
+        { value: 'special_freekick_yes', label: 'Gol de Falta Directa Sí', prob: em.specials?.freekickGoal?.yes || 0 },
+        { value: 'special_freekick_no', label: 'Gol de Falta Directa No', prob: em.specials?.freekickGoal?.no || 0 },
+        { value: 'special_own_yes', label: 'Autogol Sí', prob: em.specials?.ownGoal?.yes || 0 },
+        { value: 'special_own_no', label: 'Autogol No', prob: em.specials?.ownGoal?.no || 0 },
+        { value: 'special_hattrick_yes', label: 'Hat-Trick Sí', prob: em.specials?.hatTrick?.yes || 0 },
+        { value: 'special_hattrick_no', label: 'Hat-Trick No', prob: em.specials?.hatTrick?.no || 0 },
+        { value: 'special_cleansheet_a_yes', label: `Portería a Cero ${nameAShort} Sí`, prob: em.specials?.cleanSheetA?.yes || 0 },
+        { value: 'special_cleansheet_a_no', label: `Portería a Cero ${nameAShort} No`, prob: em.specials?.cleanSheetA?.no || 0 },
+        { value: 'special_cleansheet_b_yes', label: `Portería a Cero ${nameBShort} Sí`, prob: em.specials?.cleanSheetB?.yes || 0 },
+        { value: 'special_cleansheet_b_no', label: `Portería a Cero ${nameBShort} No`, prob: em.specials?.cleanSheetB?.no || 0 },
+        { value: 'special_wintonil_a_yes', label: `${nameAShort} Gana sin Encajar Sí`, prob: em.specials?.winToNilA?.yes || 0 },
+        { value: 'special_wintonil_a_no', label: `${nameAShort} Gana sin Encajar No`, prob: em.specials?.winToNilA?.no || 0 },
+        { value: 'special_wintonil_b_yes', label: `${nameBShort} Gana sin Encajar Sí`, prob: em.specials?.winToNilB?.yes || 0 },
+        { value: 'special_wintonil_b_no', label: `${nameBShort} Gana sin Encajar No`, prob: em.specials?.winToNilB?.no || 0 }
+      ]
+    }
+  ];
+  
+  // Generate HTML for all accordions
+  let html = '';
+  accordions.forEach((acc, idx) => {
+    const isExpanded = idx === 0 ? 'expanded' : '';
+    const arrow = idx === 0 ? '▼' : '▶';
+    const contentDisplay = idx === 0 ? 'flex' : 'none';
+    
+    // Filter out items with prob <= 0
+    const validItems = acc.items.filter(item => item.prob && item.prob > 0);
+    if (validItems.length === 0) return;
+    
+    html += `
+      <div class="bb-accordion-item ${isExpanded}" data-category="${acc.id}" style="border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.01); margin-bottom: 8px;">
+        <button class="bb-accordion-header" onclick="window.toggleBBAccordion(this)" style="display: flex; justify-content: space-between; align-items: center; width: 100%; background: rgba(255,255,255,0.03); border: none; padding: 12px; color: white; cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: left; transition: background 0.2s;">
+          <span style="display: flex; align-items: center; gap: 8px;">${acc.icon} ${acc.title}</span>
+          <span class="bb-accordion-arrow" style="font-size: 0.7rem; transition: transform 0.2s; color: var(--color-text-secondary);">${arrow}</span>
+        </button>
+        <div class="bb-accordion-content" style="max-height: 400px; overflow-y: auto; padding: 12px; display: ${contentDisplay}; flex-direction: column; gap: 8px;">
+    `;
+    
+    validItems.forEach(item => {
+      const isChecked = !!document.querySelector(`#bb-hidden-bridge-container input[name="bb-leg"][value="${item.value}"]:checked`);
+      html += createBBMarketRow(item.value, item.label, item.prob, isChecked);
+    });
+    
+    html += `
+        </div>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+// Sincronizar checkboxes dinámicos del Bet Builder
+window.syncBBLeg = function(value, checked) {
+  const bridgeContainer = document.getElementById('bb-hidden-bridge-container');
+  if (!bridgeContainer) return;
+  
+  let hiddenInput = bridgeContainer.querySelector(`input[name="bb-leg"][value="${value}"]`);
+  if (checked) {
+    if (!hiddenInput) {
+      hiddenInput = document.createElement('input');
+      hiddenInput.type = 'checkbox';
+      hiddenInput.name = 'bb-leg';
+      hiddenInput.value = value;
+      hiddenInput.checked = true;
+      hiddenInput.style.display = 'none';
+      bridgeContainer.appendChild(hiddenInput);
+    } else {
+      hiddenInput.checked = true;
+    }
+  } else if (hiddenInput) {
+    hiddenInput.checked = false;
+    hiddenInput.remove();
+  }
+  
+  // Sincronizar estado visual de markets
+  syncLeftButtonState(value, checked);
+  
+  // Update selected count
+  updateBBSelectedCount();
+  
+  // Ejecutar simulación combinada
+  window.runBetBuilderSimulation();
+};
+
+// Calculate edge for a single leg
+window.calculateLegEdge = function(inputEl, prob) {
+  const odds = parseFloat(inputEl.value);
+  const row = inputEl.closest('.bb-market-row');
+  if (!row) return;
+  const value = row.dataset.val;
+  
+  if (odds > 1.0) {
+    window.userOddsCache[value] = odds;
+  } else {
+    delete window.userOddsCache[value];
+  }
+
+  const evSpan = row.querySelector('.bb-leg-edge');
+  if (!evSpan) return;
+  
+  if (!isNaN(prob) && !isNaN(odds) && odds > 1.0) {
+    const ev = (prob * odds) - 1;
+    const evPct = (ev * 100).toFixed(1);
+    if (ev > 0) {
+      evSpan.textContent = `+${evPct}% EV`;
+      evSpan.className = 'bb-leg-edge ev-mini plus';
+    } else {
+      evSpan.textContent = `${evPct}% EV`;
+      evSpan.className = 'bb-leg-edge ev-mini minus';
+    }
+  } else {
+    evSpan.textContent = '';
+    evSpan.className = 'bb-leg-edge ev-mini';
+  }
+};
+
+function updateBBSelectedCount() {
+  const countEl = document.getElementById('bb-selected-count');
+  if (countEl) {
+    const checked = document.querySelectorAll('#bb-hidden-bridge-container input[name="bb-leg"]:checked').length;
+    countEl.textContent = `(${checked})`;
+  }
+}
+
+// Filter markets by search input
+window.filterBBMarkets = function() {
+  const search = document.getElementById('bb-market-search').value.toLowerCase();
+  const items = document.querySelectorAll('#bb-market-selectors .bb-market-row');
+  items.forEach(item => {
+    const text = item.querySelector('.bb-leg-name').textContent.toLowerCase();
+    item.style.display = text.includes(search) ? 'flex' : 'none';
+  });
+  
+  // Show/hide accordions based on visible items
+  document.querySelectorAll('.bb-accordion-item').forEach(acc => {
+    const visibleItems = acc.querySelectorAll('.bb-market-row:not([style*="none"])').length;
+    acc.style.display = visibleItems > 0 ? 'block' : 'none';
+  });
+};
+
+window.clearAllBBLegs = function() {
+  document.querySelectorAll('#bb-market-selectors input[name="bb-leg"]').forEach(cb => {
+    cb.checked = false;
+  });
+  document.querySelectorAll('#bb-hidden-bridge-container input[name="bb-leg"]').forEach(cb => {
+    cb.checked = false;
+    cb.remove();
+  });
+  updateBBSelectedCount();
+  // Clear all EV displays
+  document.querySelectorAll('.ev-mini').forEach(el => {
+    el.textContent = '';
+    el.className = 'ev-mini';
+  });
+  document.querySelectorAll('.odds-compare-input').forEach(el => {
+    el.value = '';
+  });
+};
+
+// Toggle accordion
+window.toggleBBAccordion = function(btn) {
+  const item = btn.closest('.bb-accordion-item');
+  const content = item.querySelector('.bb-accordion-content');
+  const arrow = btn.querySelector('.bb-accordion-arrow');
+  
+  if (content.style.display === 'none' || content.style.display === '') {
+    content.style.display = 'flex';
+    arrow.style.transform = 'rotate(180deg)';
+    item.classList.add('expanded');
+  } else {
+    content.style.display = 'none';
+    arrow.style.transform = 'rotate(0deg)';
+    item.classList.remove('expanded');
+  }
+};
+
 // ── Kelly Criterion Calculator ──
 window.calculateKellyResult = function() {
   if (!lastSimulationResult || !lastSimulationResult.extendedMarkets) return;
@@ -5625,3 +6314,173 @@ window.exportPredictionReport = function() {
   link.click();
   document.body.removeChild(link);
 };
+
+// Map de nombres amigables de logros para mostrar en el Ticket
+const BB_LEG_LABELS = {
+  'win_a': 'Ganador Local',
+  'win_b': 'Ganador Visitante',
+  'draw': 'Empate',
+  'btts_yes': 'Ambos Anotan: Sí',
+  'btts_no': 'Ambos Anotan: No',
+  'dc_1X': 'Doble Oportunidad: 1X',
+  'dc_12': 'Doble Oportunidad: 12',
+  'dc_X2': 'Doble Oportunidad: X2',
+  'over_1_5': 'Goles: +1.5 Goles',
+  'over_2_5': 'Goles: +2.5 Goles',
+  'over_3_5': 'Goles: +3.5 Goles',
+  'under_1_5': 'Goles: -1.5 Goles',
+  'under_2_5': 'Goles: -2.5 Goles',
+  'under_3_5': 'Goles: -3.5 Goles',
+  'corners_over_7_5': 'Córners: +7.5 Córners',
+  'corners_over_8_5': 'Córners: +8.5 Córners',
+  'corners_over_9_5': 'Córners: +9.5 Córners',
+  'corners_over_10_5': 'Córners: +10.5 Córners',
+  'corners_under_7_5': 'Córners: -7.5 Córners',
+  'corners_under_8_5': 'Córners: -8.5 Córners',
+  'corners_under_9_5': 'Córners: -9.5 Córners',
+  'corners_under_10_5': 'Córners: -10.5 Córners',
+  'handicap_plus_1_5_a': 'Hándicap: Eq. A +1.5',
+  'handicap_minus_1_5_b': 'Hándicap: Eq. B -1.5',
+  'corners_win_a': 'Córners: Más Córners Local',
+  'corners_win_b': 'Córners: Más Córners Visitante',
+  'corners_draw': 'Córners: Empate Córners'
+};
+
+// Sincroniza dinámicamente el estado del botón en la UI izquierda
+function syncLeftButtonState(value, isChecked) {
+  const btns = document.querySelectorAll(`.add-to-ticket-btn[data-bb-value="${value}"]`);
+  btns.forEach(btn => {
+    if (isChecked) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+}
+
+
+// ── Toggle Ticket Leg ──
+window.toggleTicketLeg = function(value, label, btn) {
+  const bridgeContainer = document.getElementById('bb-hidden-bridge-container');
+  if (!bridgeContainer) return;
+
+  let cb = bridgeContainer.querySelector(`input[name="bb-leg"][value="${value}"]`);
+  if (!cb) {
+    cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.name = 'bb-leg';
+    cb.value = value;
+    cb.checked = false;
+    bridgeContainer.appendChild(cb);
+  }
+
+  cb.checked = !cb.checked;
+  
+  // Sincronizar el checkbox dinámico del Bet Builder si existe en el DOM
+  const selectorCb = document.querySelector(`#bb-market-selectors input[value="${value}"]`);
+  if (selectorCb) {
+    selectorCb.checked = cb.checked;
+  }
+  
+  syncLeftButtonState(value, cb.checked);
+  window.renderBBTicket();
+  
+  // Ejecutar simulación combinada automáticamente
+  window.runBetBuilderSimulation();
+};
+
+// ── Render BB Ticket ──
+window.renderBBTicket = function() {
+  const listContainer = document.getElementById('bb-ticket-legs-list');
+  const resultsArea = document.getElementById('bb-combined-results-area');
+  const resultsAreaSubtab = document.getElementById('bb-combined-results-area-subtab');
+  const countEl = document.getElementById('bb-selected-count');
+  const countElSubtab = document.getElementById('bb-selected-count-subtab');
+  
+  if (!listContainer) return;
+
+  const checkedLegs = Array.from(document.querySelectorAll('#bb-hidden-bridge-container input[name="bb-leg"]:checked'));
+  const count = checkedLegs.length;
+
+  if (countEl) countEl.textContent = `(${count})`;
+  if (countElSubtab) countElSubtab.textContent = `(${count})`;
+
+  // Sincronizar todos los botones del lado izquierdo para asegurarse de que reflejan el estado real
+  document.querySelectorAll('#bb-hidden-bridge-container input[name="bb-leg"]').forEach(cb => {
+    syncLeftButtonState(cb.value, cb.checked);
+  });
+
+  if (count === 0) {
+    listContainer.innerHTML = `
+      <div id="bb-ticket-placeholder" style="text-align: center; color: var(--color-text-muted); font-size: 0.72rem; padding: 15px 10px; border: 1px dashed rgba(255,255,255,0.06); border-radius: 8px;">
+        Haz clic en el icono "+" de cualquier logro en las tablas de la izquierda para agregarlo a tu boleta combinada.
+      </div>
+    `;
+    if (resultsArea) resultsArea.classList.add('hidden');
+    if (resultsAreaSubtab) resultsAreaSubtab.classList.add('hidden');
+    
+    // Resetear probabilidad combinada en la UI
+    const probCircle = document.getElementById('bb-combined-prob-circle');
+    const probCircleSubtab = document.getElementById('bb-combined-prob-circle-subtab');
+    const fairOddsEl = document.getElementById('bb-fair-odds');
+    const fairOddsElSubtab = document.getElementById('bb-fair-odds-subtab');
+    
+    if (probCircle) probCircle.textContent = '0.0%';
+    if (probCircleSubtab) probCircleSubtab.textContent = '0.0%';
+    if (fairOddsEl) fairOddsEl.textContent = '1.00';
+    if (fairOddsElSubtab) fairOddsElSubtab.textContent = '1.00';
+    
+    window.updateBetBuilderEdge();
+    window.updateOddsComparison();
+    populateValidationTables({ directH2H: [], similarProfile: [] }, []);
+    return;
+  }
+
+  if (resultsArea) resultsArea.classList.remove('hidden');
+  if (resultsAreaSubtab) resultsAreaSubtab.classList.remove('hidden');
+
+  // Obtener nombres de equipos dinámicos
+  const metaA = TEAM_METADATA[selectedTeamA] || { name: "Local" };
+  const metaB = TEAM_METADATA[selectedTeamB] || { name: "Visitante" };
+
+  listContainer.innerHTML = checkedLegs.map(cb => {
+    let cleanLabel = BB_LEG_LABELS[cb.value] || cb.value;
+    
+    // Traducir nombres dinámicos
+    cleanLabel = cleanLabel.replace('Local', metaA.name.slice(0, 10));
+    cleanLabel = cleanLabel.replace('Visitante', metaB.name.slice(0, 10));
+    cleanLabel = cleanLabel.replace('Eq. A', metaA.name.slice(0, 10));
+    cleanLabel = cleanLabel.replace('Eq. B', metaB.name.slice(0, 10));
+    cleanLabel = cleanLabel.replace(' A ', ` ${metaA.name.slice(0, 10)} `);
+    cleanLabel = cleanLabel.replace(' B ', ` ${metaB.name.slice(0, 10)} `);
+
+    return `
+      <div class="bb-ticket-leg-item">
+        <span class="bb-ticket-leg-text">${cleanLabel}</span>
+        <button class="bb-ticket-leg-remove-btn" onclick="window.toggleTicketLeg('${cb.value}', '', null)" title="Eliminar logro">✕</button>
+      </div>
+    `;
+  }).join('');
+
+  // Disparar la simulación combinada
+  window.runBetBuilderSimulation();
+};
+
+// ── Clear All Bet Builder Legs ──
+window.clearAllBBLegs = function() {
+  document.querySelectorAll('#bb-hidden-bridge-container input[name="bb-leg"]').forEach(cb => cb.checked = false);
+  window.renderBBTicket();
+};
+
+// ── Collapsible Cards Handler ──
+window.toggleCardCollapse = function(headerEl) {
+  const card = headerEl.closest('.collapsible-card');
+  if (card) {
+    card.classList.toggle('collapsed');
+    const icon = headerEl.querySelector('.collapse-icon');
+    if (icon) {
+      icon.textContent = card.classList.contains('collapsed') ? '▼' : '▲';
+    }
+  }
+};
+

@@ -940,6 +940,8 @@ def get_leaderboard():
     rankings = db.get_leaderboard_rankings()
     return {"status": "success", "leaderboard": rankings}
 
+
+
 # Mount static files (HTML, CSS, JS) at the end, so it doesn't mask API routes
 app.mount("/", StaticFiles(directory=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend"), html=True), name="static")
 

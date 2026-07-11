@@ -1942,6 +1942,20 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
         "shootingPlayersA": _top_players(team_a, "shooting", 10),
         "shootingPlayersB": _top_players(team_b, "shooting", 10)
     }
+    # ---- 2. PASSES (estimated or from data) ----
+    passes_a = entry_a.get("passes_per_90") or max(5.0, min(70.0, sh_a * 4))
+    passes_b = entry_b.get("passes_per_90") or max(5.0, min(70.0, sh_b * 4))
+    passes_completed_a = entry_a.get("passes_completed_per_90") or passes_a * 0.75
+    passes_completed_b = entry_b.get("passes_completed_per_90") or passes_b * 0.75
+    accuracy_a = passes_completed_a / passes_a if passes_a else 0.0
+    accuracy_b = passes_completed_b / passes_b if passes_b else 0.0
+    passes_markets = {
+        "expectedA": round(passes_a, 1),
+        "expectedB": round(passes_b, 1),
+        "expectedTotal": round(passes_a + passes_b, 1),
+        "accuracyA": round(accuracy_a * 100, 1),
+        "accuracyB": round(accuracy_b * 100, 1)
+    }
 
     # ---- B. LOAD GOALSCORER STATS (for TIMES, PLAYERS, PENALTIES, SPECIALS) ----
     _gs_data = {"goals_a":{},"goals_b":{},"total_a":0,"total_b":0,
@@ -2254,6 +2268,7 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
     extended_markets = {
         "cards": cards_markets,
         "shots": shots_markets,
+        "passes": passes_markets,
         "times": times_markets,
         "players": players_markets,
         "penalties": penalties_markets,
@@ -2292,6 +2307,8 @@ def run_betbuilder_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
     joint_probs = result.get("_joint_probs", {})
     sim_corners_a = result.get("_sim_corners_a", [])
     sim_corners_b = result.get("_sim_corners_b", [])
+    goals_markets = result.get("goalsMarkets", {})
+    extended_markets = result.get("extendedMarkets", {})
 
     # Goal leg predicates
     def _check_goals_leg(leg, a, b):
@@ -2334,10 +2351,174 @@ def run_betbuilder_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
         if leg == "corners_under_10_5": return total <= 10.5
         return None
 
+    # DNB leg lookup (probability-based, not Monte Carlo)
+    def _dnb_prob(leg):
+        dnb = goals_markets.get("dnb", {})
+        if leg == "dnb_1": return dnb.get("1", 0.5)
+        if leg == "dnb_2": return dnb.get("2", 0.5)
+        return None
+
+    # Extended markets lookup (probability-based)
+    def _extended_prob(leg):
+        cards = extended_markets.get("cards", {})
+        shots = extended_markets.get("shots", {})
+        times = extended_markets.get("times", {})
+        penalties = extended_markets.get("penalties", {})
+        specials = extended_markets.get("specials", {})
+        players = extended_markets.get("players", {})
+
+        # --- CARDS ---
+        if leg == "cards_over_3_5":
+            for ou in cards.get("overUnder", []):
+                if ou.get("threshold") == 3.5: return ou.get("over", 0.5)
+        if leg == "cards_under_3_5":
+            for ou in cards.get("overUnder", []):
+                if ou.get("threshold") == 3.5: return ou.get("under", 0.5)
+        if leg == "cards_over_4_5":
+            for ou in cards.get("overUnder", []):
+                if ou.get("threshold") == 4.5: return ou.get("over", 0.5)
+        if leg == "cards_under_4_5":
+            for ou in cards.get("overUnder", []):
+                if ou.get("threshold") == 4.5: return ou.get("under", 0.5)
+        if leg == "cards_over_5_5":
+            for ou in cards.get("overUnder", []):
+                if ou.get("threshold") == 5.5: return ou.get("over", 0.5)
+        if leg == "cards_under_5_5":
+            for ou in cards.get("overUnder", []):
+                if ou.get("threshold") == 5.5: return ou.get("under", 0.5)
+        if leg == "cards_red_yes": return cards.get("redCard", {}).get("yes", 0.05)
+        if leg == "cards_red_no": return cards.get("redCard", {}).get("no", 0.95)
+
+        # --- SHOTS ---
+        if leg == "shots_over_16_5":
+            for ou in shots.get("overUnderTotal", []):
+                if ou.get("threshold") == 16.5: return ou.get("over", 0.5)
+        if leg == "shots_under_16_5":
+            for ou in shots.get("overUnderTotal", []):
+                if ou.get("threshold") == 16.5: return ou.get("under", 0.5)
+        if leg == "shots_over_18_5":
+            for ou in shots.get("overUnderTotal", []):
+                if ou.get("threshold") == 18.5: return ou.get("over", 0.5)
+        if leg == "shots_under_18_5":
+            for ou in shots.get("overUnderTotal", []):
+                if ou.get("threshold") == 18.5: return ou.get("under", 0.5)
+        if leg == "shots_over_20_5":
+            for ou in shots.get("overUnderTotal", []):
+                if ou.get("threshold") == 20.5: return ou.get("over", 0.5)
+        if leg == "shots_under_20_5":
+            for ou in shots.get("overUnderTotal", []):
+                if ou.get("threshold") == 20.5: return ou.get("under", 0.5)
+        if leg == "shots_most_a": return shots.get("mostShots", {}).get("teamA", 0.4)
+        if leg == "shots_most_b": return shots.get("mostShots", {}).get("teamB", 0.4)
+        if leg == "shots_most_draw": return shots.get("mostShots", {}).get("draw", 0.2)
+        if leg == "shots_sot_over_4_5":
+            for ou in shots.get("overUnderOnTarget", []):
+                if ou.get("threshold") == 4.5: return ou.get("over", 0.5)
+        if leg == "shots_sot_under_4_5":
+            for ou in shots.get("overUnderOnTarget", []):
+                if ou.get("threshold") == 4.5: return ou.get("under", 0.5)
+        if leg == "shots_sot_over_5_5":
+            for ou in shots.get("overUnderOnTarget", []):
+                if ou.get("threshold") == 5.5: return ou.get("over", 0.5)
+        if leg == "shots_sot_under_5_5":
+            for ou in shots.get("overUnderOnTarget", []):
+                if ou.get("threshold") == 5.5: return ou.get("under", 0.5)
+
+        # --- TIMES ---
+        w1t = times.get("winner1T", {})
+        w2t = times.get("winner2T", {})
+        if leg == "times_1t_a": return w1t.get("1", 0.4)
+        if leg == "times_1t_draw": return w1t.get("X", 0.3)
+        if leg == "times_1t_b": return w1t.get("2", 0.3)
+        if leg == "times_2t_a": return w2t.get("1", 0.4)
+        if leg == "times_2t_draw": return w2t.get("X", 0.3)
+        if leg == "times_2t_b": return w2t.get("2", 0.3)
+        for ou in times.get("overUnder1T", []):
+            if leg == "times_1t_over_0_5" and ou.get("threshold") == 0.5: return ou.get("over", 0.5)
+            if leg == "times_1t_under_0_5" and ou.get("threshold") == 0.5: return ou.get("under", 0.5)
+            if leg == "times_1t_over_1_5" and ou.get("threshold") == 1.5: return ou.get("over", 0.5)
+            if leg == "times_1t_under_1_5" and ou.get("threshold") == 1.5: return ou.get("under", 0.5)
+        btts1 = times.get("btts1T", {})
+        btts2 = times.get("btts2T", {})
+        if leg == "times_btts_1t_yes": return btts1.get("yes", 0.3)
+        if leg == "times_btts_1t_no": return btts1.get("no", 0.7)
+        if leg == "times_btts_2t_yes": return btts2.get("yes", 0.4)
+        if leg == "times_btts_2t_no": return btts2.get("no", 0.6)
+        htft = times.get("htft", {})
+        if leg == "times_htft_1_1": return htft.get("1_1", 0.15)
+        if leg == "times_htft_1_X": return htft.get("1_X", 0.10)
+        if leg == "times_htft_1_2": return htft.get("1_2", 0.05)
+        if leg == "times_htft_X_1": return htft.get("X_1", 0.12)
+        if leg == "times_htft_X_X": return htft.get("X_X", 0.15)
+        if leg == "times_htft_X_2": return htft.get("X_2", 0.08)
+        if leg == "times_htft_2_1": return htft.get("2_1", 0.03)
+        if leg == "times_htft_2_X": return htft.get("2_X", 0.07)
+        if leg == "times_htft_2_2": return htft.get("2_2", 0.10)
+
+        # --- PENALTIES ---
+        pen = penalties if penalties else {}
+        if leg == "pen_conceded_yes": return pen.get("conceded", {}).get("yes", 0.15)
+        if leg == "pen_conceded_no": return pen.get("conceded", {}).get("no", 0.85)
+        if leg == "pen_scored_yes": return pen.get("scored", {}).get("yes", 0.12)
+        if leg == "pen_scored_no": return pen.get("scored", {}).get("no", 0.88)
+        if leg == "pen_missed_yes": return pen.get("missed", {}).get("yes", 0.03)
+        if leg == "pen_missed_no": return pen.get("missed", {}).get("no", 0.97)
+
+        # --- SPECIALS ---
+        sp = specials if specials else {}
+        if leg == "special_header_yes": return sp.get("headerGoal", {}).get("yes", 0.25)
+        if leg == "special_header_no": return sp.get("headerGoal", {}).get("no", 0.75)
+        if leg == "special_freekick_yes": return sp.get("freekickGoal", {}).get("yes", 0.08)
+        if leg == "special_freekick_no": return sp.get("freekickGoal", {}).get("no", 0.92)
+        if leg == "special_own_yes": return sp.get("ownGoal", {}).get("yes", 0.02)
+        if leg == "special_own_no": return sp.get("ownGoal", {}).get("no", 0.98)
+        if leg == "special_hattrick_yes": return sp.get("hatTrick", {}).get("yes", 0.05)
+        if leg == "special_hattrick_no": return sp.get("hatTrick", {}).get("no", 0.95)
+        if leg == "special_cleansheet_a_yes": return sp.get("cleanSheetA", {}).get("yes", 0.25)
+        if leg == "special_cleansheet_a_no": return sp.get("cleanSheetA", {}).get("no", 0.75)
+        if leg == "special_cleansheet_b_yes": return sp.get("cleanSheetB", {}).get("yes", 0.25)
+        if leg == "special_cleansheet_b_no": return sp.get("cleanSheetB", {}).get("no", 0.75)
+        if leg == "special_wintonil_a_yes": return sp.get("winToNilA", {}).get("yes", 0.15)
+        if leg == "special_wintonil_a_no": return sp.get("winToNilA", {}).get("no", 0.85)
+        if leg == "special_wintonil_b_yes": return sp.get("winToNilB", {}).get("yes", 0.15)
+        if leg == "special_wintonil_b_no": return sp.get("winToNilB", {}).get("no", 0.85)
+
+        # --- PLAYER MARKETS (individual player legs) ---
+        # Format: player_first_{name}, player_anytime_{name}, player_multi_{name}, player_assist_{name}, player_card_{name}
+        if leg.startswith("player_first_"):
+            player_name = leg.replace("player_first_", "")
+            for p in players.get("firstScorerA", []) + players.get("firstScorerB", []):
+                if p.get("name", "").lower().replace(" ", "_") == player_name.lower().replace(" ", "_"):
+                    return p.get("probability", 0.0)
+        if leg.startswith("player_anytime_"):
+            player_name = leg.replace("player_anytime_", "")
+            for p in players.get("anytimeScorerA", []) + players.get("anytimeScorerB", []):
+                if p.get("name", "").lower().replace(" ", "_") == player_name.lower().replace(" ", "_"):
+                    return p.get("probability", 0.0)
+        if leg.startswith("player_multi_"):
+            player_name = leg.replace("player_multi_", "")
+            for p in players.get("multiGoalsA", []) + players.get("multiGoalsB", []):
+                if p.get("name", "").lower().replace(" ", "_") == player_name.lower().replace(" ", "_"):
+                    return p.get("probability", 0.0)
+        if leg.startswith("player_assist_"):
+            player_name = leg.replace("player_assist_", "")
+            for p in players.get("assistsA", []) + players.get("assistsB", []):
+                if p.get("name", "").lower().replace(" ", "_") == player_name.lower().replace(" ", "_"):
+                    return p.get("probability", 0.0) if "probability" in p else (p.get("assists", 0) / 10.0)
+        if leg.startswith("player_card_"):
+            player_name = leg.replace("player_card_", "")
+            for p in cards.get("bookingPlayersA", []) + cards.get("bookingPlayersB", []):
+                if p.get("name", "").lower().replace(" ", "_") == player_name.lower().replace(" ", "_"):
+                    return p.get("probability", 0.0)
+
+        return None
+
     goal_legs = [l for l in legs if _check_goals_leg(l, 0, 0) is not None]
     corner_legs = [l for l in legs if _check_corners_leg(l, 0, 0) is not None]
+    dnb_legs = [l for l in legs if _dnb_prob(l) is not None]
+    extended_legs = [l for l in legs if _extended_prob(l) is not None]
 
-    # Combined probability for goals-based legs
+    # Combined probability for goals-based legs (Monte Carlo)
     goals_combined = 0.0
     if goal_legs:
         for (sa, sb), p in joint_probs.items():
@@ -2348,7 +2529,7 @@ def run_betbuilder_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
     else:
         goals_combined = 1.0
 
-    # Combined probability for corners-based legs
+    # Combined probability for corners-based legs (Monte Carlo)
     corners_combined = 1.0
     if corner_legs and sim_corners_a and sim_corners_b:
         n = len(sim_corners_a)
@@ -2358,11 +2539,40 @@ def run_betbuilder_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
                 hits += 1
         corners_combined = hits / n if n > 0 else 0.0
 
-    combined_prob = goals_combined * corners_combined
+    # Combined probability for DNB legs (direct probability)
+    dnb_combined = 1.0
+    for leg in dnb_legs:
+        dnb_combined *= _dnb_prob(leg)
+
+    # Combined probability for extended-market legs (direct probability)
+    extended_combined = 1.0
+    for leg in extended_legs:
+        extended_combined *= _extended_prob(leg)
+
+    combined_prob = goals_combined * corners_combined * dnb_combined * extended_combined
     if combined_prob < 0.0001:
         combined_prob = 0.0
 
     # Historical validation
+    def _can_check_from_score(leg):
+        if _check_goals_leg(leg, 0, 0) is not None:
+            return "goals"
+        if _check_corners_leg(leg, 0, 0) is not None:
+            return "corners"
+        if leg in ("dnb_1", "dnb_2"):
+            return "goals"
+        return None
+
+    def _check_any_leg(leg, a, b):
+        c = _check_goals_leg(leg, a, b)
+        if c is not None:
+            return c
+        if leg == "dnb_1":
+            return a > b
+        if leg == "dnb_2":
+            return b > a
+        return None
+
     direct_h2h = []
     similar_profile = []
     h2h_data = get_h2h_stats(team_a, team_b, matches)
@@ -2370,7 +2580,19 @@ def run_betbuilder_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
         for m in h2h_data["matches"]:
             ha = int(m.get("hg", 0))
             hb = int(m.get("ag", 0))
-            all_met = all(_check_goals_leg(leg, ha, hb) is not False and (_check_goals_leg(leg, ha, hb) is not None or _check_corners_leg(leg, 0, 0) is not None) for leg in legs)
+            checked_any = False
+            all_met = True
+            for leg in legs:
+                cat = _can_check_from_score(leg)
+                if cat is None:
+                    continue
+                checked_any = True
+                if cat == "goals":
+                    if not _check_any_leg(leg, ha, hb):
+                        all_met = False
+                        break
+            if not checked_any:
+                all_met = False
             direct_h2h.append({
                 "date": m.get("date", ""),
                 "homeName": m.get("home", m.get("homeSlug", team_a)),
@@ -2391,7 +2613,19 @@ def run_betbuilder_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
         if abs(h_elo - a_elo) - elo_diff <= 100:
             ha = int(m.get("hg", 0))
             hb = int(m.get("ag", 0))
-            all_met = all(_check_goals_leg(leg, ha, hb) is not False and (_check_goals_leg(leg, ha, hb) is not None or _check_corners_leg(leg, 0, 0) is not None) for leg in legs)
+            checked_any = False
+            all_met = True
+            for leg in legs:
+                cat = _can_check_from_score(leg)
+                if cat is None:
+                    continue
+                checked_any = True
+                if cat == "goals":
+                    if not _check_any_leg(leg, ha, hb):
+                        all_met = False
+                        break
+            if not checked_any:
+                all_met = False
             candidates.append({
                 "date": m.get("date", ""),
                 "homeName": m.get("home", m.get("homeSlug", "")),
