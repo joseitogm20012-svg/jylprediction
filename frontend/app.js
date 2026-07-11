@@ -6295,14 +6295,21 @@ window.exportPredictionReport = function() {
     csvContent += `Expectativa de Tiros,${nameB},${em.shots.expectedB}\n`;
     csvContent += `Expectativa de Tiros,Total,${em.shots.expectedTotal}\n`;
     csvContent += `Tiros a Puerta,${nameA},${em.shots.expectedOnTargetA}\n`;
-    csvContent += `Tiros a Puerta,${nameB},${em.shots.expectedOnTargetB}\n\n`;
-    
+    csvContent += `Tiros a Puerta,${nameB},${em.shots.expectedOnTargetB}\n`;
+    // Passes market data
+    csvContent += `Expectativa de Pases,${nameA},${em.passes.expectedA}\n`;
+    csvContent += `Expectativa de Pases,${nameB},${em.passes.expectedB}\n`;
+    csvContent += `Expectativa de Pases,Total,${em.passes.expectedTotal}\n`;
+    csvContent += `Precisión de Pases,${nameA},${em.passes.accuracyA}%\n`;
+    csvContent += `Precisión de Pases,${nameB},${em.passes.accuracyB}%\n`;
+
     csvContent += `Tiempos,Gana 1T ${nameA},${(em.times.winner1T['1'] * 100).toFixed(2)}%\n`;
     csvContent += `Tiempos,Empate 1T,${(em.times.winner1T['X'] * 100).toFixed(2)}%\n`;
     csvContent += `Tiempos,Gana 1T ${nameB},${(em.times.winner1T['2'] * 100).toFixed(2)}%\n`;
     csvContent += `Penales,Penal Concedido Sí,${(em.penalties.conceded.yes * 100).toFixed(2)}%\n`;
     csvContent += `Especiales,Clean Sheet ${nameA},${(em.specials.cleanSheetA.yes * 100).toFixed(2)}%\n`;
     csvContent += `Especiales,Clean Sheet ${nameB},${(em.specials.cleanSheetB.yes * 100).toFixed(2)}%\n`;
+
   }
   
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
