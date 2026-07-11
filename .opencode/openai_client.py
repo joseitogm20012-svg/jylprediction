@@ -16,7 +16,7 @@ _REASONING_COLOR = "\033[90m" if _USE_COLOR else ""
 _RESET_COLOR = "\033[0m" if _USE_COLOR else ""
 
 client = OpenAI(
-    base_url="https://integrate.api.nvidia.com/v1",
+    base_url="http://localhost:8080/v1",
     api_key=os.getenv("NVIDIA_API_KEY"),
 )
 
