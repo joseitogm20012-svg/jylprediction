@@ -1,15 +1,94 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.py[cod]
+
+# Environment
 .env
 .env.*
 .env.bak
 .env.backup
+
+# Node
 node_modules/
 dist/
+
+# OS
 .DS_Store
-vectorized (2).svg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific
 *.bak
 scratch/
 downloaded_files/
+vectorized (2).svg
+
+# Test outputs & temp files
+test_output/
+*.png
+*.pdf
+*.json
+!data/*.json
+!backend/requirements.txt
+!package.json
+!config.json
+!render.yaml
+!vercel.json
+!pytest.ini
+!opencode.json
+!skills-lock.json
+
+# Temporary scripts and debug files
+tmp*.py
+debug_*.py
+simple_*.py
+playwright_test.py
+find_section.py
+remove_sections*.py
+screenshot_changes.py
+generate_*.py
+catalogo_ui_jly_predictor.pdf
+section_*.txt
+new_section.txt
+old_section.txt
+stitch_prompt.json
+*_gen.json
+*_prompt.json
+*_res.json
+basic_test.py
+config.json
+out.txt
+
+# Logs
+logs/*.log
+scrapycoco/*.db-*
+
+# Rate limit proxy
+rate_limit_proxy/
+
+# TestSprite
+testsprite_tests/
+
+# Duplicados y no referenciados
+duplicados/
+no_referenciados/
+
+# Scrapers temp
+scrapycoco/test_*.py
+scrapycoco/models/credential.py
+scrapycoco/tests/
+
+# Agents
+.agents/
+.claude/
+.superpowers/
+
+# Docs
+docs/
