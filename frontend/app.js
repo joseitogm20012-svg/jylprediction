@@ -482,6 +482,13 @@ function bindListeners() {
           loadUserPresets();
         } else if (targetId === "tab-leaderboard") {
           loadLeaderboard();
+        } else if (targetId === "tab-betbuilder") {
+          if (lastSimulationResult && lastSimulationResult.extendedMarkets) {
+            if (typeof updateBetBuilderSelectors === 'function') updateBetBuilderSelectors(lastSimulationResult);
+            if (typeof updateBetBuilderAnalytics === 'function') updateBetBuilderAnalytics(lastSimulationResult);
+          } else if (selectedTeamA && selectedTeamB) {
+            runPredictionFlow();
+          }
         }
         const targetContent = document.getElementById(targetId);
         if (targetContent) {
@@ -858,13 +865,15 @@ function updateMatchCard(fullReload = true) {
   if (tmMgrA) tmMgrA.textContent = tmA.manager ? "DT: " + tmA.manager : "";
   if (tmMgrB) tmMgrB.textContent = tmB.manager ? "DT: " + tmB.manager : "";
 
+  if (oddsLabelA) oddsLabelA.textContent = `Cuota ${metaA.name.slice(0, 5)}.`;
+  if (oddsLabelB) oddsLabelB.textContent = `Cuota ${metaB.name.slice(0, 5)}.`;
+  if (evLabelA) evLabelA.textContent = `${metaA.name.slice(0, 5)}. EV%`;
+  if (evLabelB) evLabelB.textContent = `${metaB.name.slice(0, 5)}. EV%`;
+
   if (gaugeLabelA) gaugeLabelA.textContent = `Victoria ${metaA.name}`;
   if (gaugeLabelB) gaugeLabelB.textContent = `Victoria ${metaB.name}`;
-  
-  oddsLabelA.textContent = `Cuota ${metaA.name.slice(0, 5)}.`;
-  oddsLabelB.textContent = `Cuota ${metaB.name.slice(0, 5)}.`;
-  evLabelA.textContent = `${metaA.name.slice(0, 5)}. EV%`;
-  evLabelB.textContent = `${metaB.name.slice(0, 5)}. EV%`;
+
+
 
   // Update DNB placeholders
   const inDnb1 = document.getElementById("in-dnb-1");
@@ -5427,6 +5436,11 @@ window.renderExtendedMarkets = function(data, nameA, nameB) {
   const em = data.extendedMarkets;
   if (!em) return;
   
+  const nameASlug = selectedTeamA;
+  const nameBSlug = selectedTeamB;
+  const nameAShort = nameA ? nameA.slice(0, 12) : "";
+  const nameBShort = nameB ? nameB.slice(0, 12) : "";
+  
   // 1. CARDS
   const expCardsA = document.querySelectorAll('[id="expected-cards-val-a"]');
   const expCardsB = document.querySelectorAll('[id="expected-cards-val-b"]');
@@ -5602,7 +5616,66 @@ window.renderExtendedMarkets = function(data, nameA, nameB) {
     const el = document.getElementById(`prob-htft-${id}`);
     if (el) el.textContent = `${(em.times.htft[htftKeys[idx]] * 100).toFixed(1)}%`;
   });
-  
+
+  // GOALS TIMELINE CHART
+  let goalsTimelineChartInstance = null;
+  function renderGoalsTimelineChart(timeline, labelA, labelB) {
+    const canvas = document.getElementById('goals-timeline-chart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (goalsTimelineChartInstance) goalsTimelineChartInstance.destroy();
+    const isDark = document.body.classList.contains('dark-mode') || document.documentElement.getAttribute('data-theme') === 'dark';
+    const gridColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+    const textColor = isDark ? '#e0e0e0' : '#333';
+    goalsTimelineChartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: timeline.map(t => t.interval),
+        datasets: [
+          {
+            label: labelA,
+            data: timeline.map(t => t.expA),
+            backgroundColor: 'rgba(59, 130, 246, 0.7)',
+            borderColor: 'rgba(59, 130, 246, 1)',
+            borderWidth: 1
+          },
+          {
+            label: labelB,
+            data: timeline.map(t => t.expB),
+            backgroundColor: 'rgba(239, 68, 68, 0.7)',
+            borderColor: 'rgba(239, 68, 68, 1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { grid: { color: gridColor }, ticks: { color: textColor } },
+          y: {
+            grid: { color: gridColor },
+            ticks: { color: textColor, callback: v => v.toFixed(2) },
+            title: { display: true, text: 'Goles Esperados', color: textColor }
+          }
+        },
+        plugins: {
+          legend: { labels: { color: textColor } },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                const t = timeline[ctx.dataIndex];
+                const team = ctx.datasetIndex === 0 ? 'A' : 'B';
+                const pct = team === 'A' ? t.pctA : t.pctB;
+                return `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(2)} goles (${(pct * 100).toFixed(0)}%)`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
   // 4. PLAYERS
   const lblScorersA = document.getElementById('lbl-scorers-team-a');
   const lblScorersB = document.getElementById('lbl-scorers-team-b');
@@ -5650,7 +5723,39 @@ window.renderExtendedMarkets = function(data, nameA, nameB) {
   };
   renderAssistsTable('assists-team-a-tbody', em.players.assistsA);
   renderAssistsTable('assists-team-b-tbody', em.players.assistsB);
-  
+
+  // TOP SCORER destacado
+  const tsName = document.getElementById('top-scorer-name');
+  const tsTeam = document.getElementById('top-scorer-team');
+  const tsProb = document.getElementById('top-scorer-prob');
+  if (em.players.topScorer && em.players.topScorer.name) {
+    if (tsName) tsName.textContent = em.players.topScorer.name;
+    const teamLabel = em.players.topScorer.team === nameASlug ? nameA : (em.players.topScorer.team === nameBSlug ? nameB : em.players.topScorer.team);
+    if (tsTeam) tsTeam.textContent = teamLabel;
+    if (tsProb) tsProb.textContent = `${(em.players.topScorer.probability * 100).toFixed(1)}%`;
+  } else {
+    if (tsName) tsName.textContent = 'Sin datos';
+    if (tsProb) tsProb.textContent = '--';
+  }
+
+  // AVG FIRST EVENT
+  const afe = em.players.avgFirstEvent || {};
+  const elAfm = document.getElementById('avg-first-goal-match');
+  const elAfa = document.getElementById('avg-first-goal-a');
+  const elAfb = document.getElementById('avg-first-goal-b');
+  if (elAfm) elAfm.textContent = afe.firstGoalMatch != null ? `${afe.firstGoalMatch}'` : "--'";
+  if (elAfa) elAfa.textContent = afe.firstGoalA != null ? `${afe.firstGoalA}'` : "--'";
+  if (elAfb) elAfb.textContent = afe.firstGoalB != null ? `${afe.firstGoalB}'` : "--'";
+  const lblAfa = document.getElementById('lbl-avg-first-a');
+  const lblAfb = document.getElementById('lbl-avg-first-b');
+  if (lblAfa) lblAfa.textContent = nameAShort || 'Equipo A';
+  if (lblAfb) lblAfb.textContent = nameBShort || 'Equipo B';
+
+  // GOALS TIMELINE CHART
+  if (em.players.goalsTimeline && em.players.goalsTimeline.length > 0) {
+    renderGoalsTimelineChart(em.players.goalsTimeline, nameAShort || 'A', nameBShort || 'B');
+  }
+
   // 5. SPECIALS & PENALTIES
   const penConYes = document.getElementById('prob-pen-conceded-yes');
   const penConNo = document.getElementById('prob-pen-conceded-no');
@@ -5764,6 +5869,7 @@ window.triggerBBRowClick = function(el) {
 
 // ── Update Bet Builder Selectors with Live Probabilities ──
 function updateBetBuilderSelectors(data) {
+  console.log("DEBUG: updateBetBuilderSelectors called with data:", data);
   if (!data || !data.extendedMarkets) return;
   
   const em = data.extendedMarkets;
@@ -6039,7 +6145,9 @@ function updateBetBuilderSelectors(data) {
   
   // Generate HTML for all accordions
   let html = '';
+  console.log("DEBUG: Processing accordions loop. Container found:", !!container);
   accordions.forEach((acc, idx) => {
+    console.log(`DEBUG: Accordion ${acc.title} (${acc.id}) items:`, acc.items);
     const isExpanded = idx === 0 ? 'expanded' : '';
     const arrow = idx === 0 ? '▼' : '▶';
     const contentDisplay = idx === 0 ? 'flex' : 'none';
@@ -6068,7 +6176,13 @@ function updateBetBuilderSelectors(data) {
     `;
   });
   
-  container.innerHTML = html;
+  if (html.trim()) {
+    container.innerHTML = html;
+    const placeholder = document.getElementById('bb-markets-placeholder');
+    if (placeholder) placeholder.style.display = 'none';
+  } else {
+    container.innerHTML = `<div style="text-align: center; color: var(--color-text-muted); padding: 24px 12px; font-size: 0.85rem;"><p style="margin: 0; color: var(--color-text-secondary);">No hay mercados disponibles. Simula el partido primero.</p></div>`;
+  }
 }
 
 // Sincronizar checkboxes dinámicos del Bet Builder

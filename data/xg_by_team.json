@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-01T00:24:36.299024",
+  "last_updated": "2026-07-09T23:25:06.839449",
   "methodology": "xG calculado a partir de datos reales del Mundial en FBref (goles/90min + eficiencia de remate), mezclado con historial estimado. source='fbref_world_cup' indica datos reales de Copa del Mundo.",
   "fbref_teams_count": 58,
   "total_teams": 340,
@@ -71,7 +71,7 @@
       "xg_overall": 1.71,
       "xga_overall": 0.915,
       "shots_per_90": 13.818,
-      "crosses_per_90": 19.872,
+      "crosses_per_90": 22.0,
       "corners_for_per_90": 6.29,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -81,7 +81,8 @@
         "2026",
         "2022"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 110
     },
     "canada": {
       "xg_home": 0.957,
@@ -89,7 +90,7 @@
       "xg_overall": 0.886,
       "xga_overall": 1.298,
       "shots_per_90": 12.234,
-      "crosses_per_90": 21.243,
+      "crosses_per_90": 19.5,
       "corners_for_per_90": 6.327,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -99,7 +100,8 @@
         "2026",
         "2022"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 78
     },
     "uruguay": {
       "xg_home": 1.338,
@@ -107,7 +109,7 @@
       "xg_overall": 1.239,
       "xga_overall": 0.806,
       "shots_per_90": 17.608,
-      "crosses_per_90": 28.179,
+      "crosses_per_90": 22.0,
       "corners_for_per_90": 8.609,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -118,7 +120,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 88
     },
     "argentina": {
       "xg_home": 1.956,
@@ -126,7 +129,7 @@
       "xg_overall": 1.811,
       "xga_overall": 0.815,
       "shots_per_90": 11.965,
-      "crosses_per_90": 11.091,
+      "crosses_per_90": 12.38,
       "corners_for_per_90": 4.176,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -137,7 +140,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 99
     },
     "austria": {
       "xg_home": 1.752,
@@ -154,7 +158,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 17
     },
     "hungary": {
       "xg_overall": 1.376,
@@ -187,7 +192,7 @@
       "xg_overall": 0.933,
       "xga_overall": 1.054,
       "shots_per_90": 13.83,
-      "crosses_per_90": 16.53,
+      "crosses_per_90": 17.25,
       "corners_for_per_90": 5.598,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -198,7 +203,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 69
     },
     "france": {
       "xg_home": 2.047,
@@ -206,7 +212,7 @@
       "xg_overall": 1.895,
       "xga_overall": 0.921,
       "shots_per_90": 11.992,
-      "crosses_per_90": 13.277,
+      "crosses_per_90": 17.62,
       "corners_for_per_90": 4.634,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -217,7 +223,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 141
     },
     "switzerland": {
       "xg_home": 1.46,
@@ -225,7 +232,7 @@
       "xg_overall": 1.352,
       "xga_overall": 1.266,
       "shots_per_90": 17.25,
-      "crosses_per_90": 24.075,
+      "crosses_per_90": 17.4,
       "corners_for_per_90": 7.7,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -236,7 +243,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 87
     },
     "guernsey": {
       "xg_home": 0.787,
@@ -268,7 +276,7 @@
       "xg_overall": 1.516,
       "xga_overall": 1.281,
       "shots_per_90": 9.046,
-      "crosses_per_90": 17.506,
+      "crosses_per_90": 15.33,
       "corners_for_per_90": 5.052,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -278,7 +286,8 @@
         "2026",
         "2022"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 92
     },
     "guyana": {
       "xg_home": 0.5,
@@ -311,7 +320,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 8
     },
     "germany": {
       "xg_home": 3.366,
@@ -319,7 +329,7 @@
       "xg_overall": 3.117,
       "xga_overall": 1.138,
       "shots_per_90": 24.087,
-      "crosses_per_90": 21.953,
+      "crosses_per_90": 20.0,
       "corners_for_per_90": 8.33,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -330,7 +340,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 80
     },
     "sweden": {
       "xg_home": 2.725,
@@ -338,7 +349,7 @@
       "xg_overall": 2.523,
       "xga_overall": 0.913,
       "shots_per_90": 12.212,
-      "crosses_per_90": 12.945,
+      "crosses_per_90": 12.0,
       "corners_for_per_90": 4.6,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -348,7 +359,8 @@
         "2026",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 12
     },
     "norway": {
       "xg_home": 2.442,
@@ -365,7 +377,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 17
     },
     "denmark": {
       "xg_home": 0.752,
@@ -373,7 +386,7 @@
       "xg_overall": 0.696,
       "xga_overall": 0.99,
       "shots_per_90": 10.453,
-      "crosses_per_90": 17.896,
+      "crosses_per_90": 22.33,
       "corners_for_per_90": 5.353,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -383,7 +396,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 67
     },
     "italy": {
       "xg_home": 0.644,
@@ -464,7 +478,7 @@
       "xg_overall": 1.428,
       "xga_overall": 0.805,
       "shots_per_90": 16.406,
-      "crosses_per_90": 19.128,
+      "crosses_per_90": 20.33,
       "corners_for_per_90": 6.541,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -475,7 +489,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 122
     },
     "basque-country": {
       "xg_home": 0.783,
@@ -491,7 +506,7 @@
       "xg_overall": 1.341,
       "xga_overall": 1.422,
       "shots_per_90": 10.144,
-      "crosses_per_90": 17.124,
+      "crosses_per_90": 15.6,
       "corners_for_per_90": 5.144,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -502,7 +517,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 78
     },
     "paraguay": {
       "xg_home": 1.022,
@@ -519,7 +535,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 5
     },
     "romania": {
       "xg_home": 0.591,
@@ -551,7 +568,7 @@
       "xg_overall": 1.368,
       "xga_overall": 0.585,
       "shots_per_90": 18.828,
-      "crosses_per_90": 25.237,
+      "crosses_per_90": 21.0,
       "corners_for_per_90": 8.189,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -562,7 +579,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 105
     },
     "egypt": {
       "xg_home": 1.072,
@@ -570,7 +588,7 @@
       "xg_overall": 0.993,
       "xga_overall": 0.985,
       "shots_per_90": 12.293,
-      "crosses_per_90": 13.525,
+      "crosses_per_90": 13.0,
       "corners_for_per_90": 4.733,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -580,7 +598,8 @@
         "2026",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 13
     },
     "estonia": {
       "xg_home": 0.336,
@@ -612,7 +631,7 @@
       "xg_overall": 0.658,
       "xga_overall": 2.372,
       "shots_per_90": 6.022,
-      "crosses_per_90": 10.611,
+      "crosses_per_90": 7.0,
       "corners_for_per_90": 3.146,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -622,7 +641,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 21
     },
     "el-salvador": {
       "xg_home": 0.463,
@@ -646,7 +666,7 @@
       "xg_overall": 0.764,
       "xga_overall": 1.292,
       "shots_per_90": 8.731,
-      "crosses_per_90": 13.578,
+      "crosses_per_90": 13.0,
       "corners_for_per_90": 4.187,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -656,7 +676,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 52
     },
     "portugal": {
       "xg_home": 1.472,
@@ -664,7 +685,7 @@
       "xg_overall": 1.363,
       "xga_overall": 1.077,
       "shots_per_90": 10.402,
-      "crosses_per_90": 21.596,
+      "crosses_per_90": 20.83,
       "corners_for_per_90": 6.113,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -675,7 +696,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 125
     },
     "brittany": {
       "xg_home": 0.416,
@@ -700,7 +722,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 12
     },
     "australia": {
       "xg_home": 1.142,
@@ -708,7 +731,7 @@
       "xg_overall": 1.057,
       "xga_overall": 1.264,
       "shots_per_90": 8.323,
-      "crosses_per_90": 15.737,
+      "crosses_per_90": 13.6,
       "corners_for_per_90": 4.571,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -719,7 +742,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 68
     },
     "latvia": {
       "xg_home": 0.366,
@@ -751,7 +775,7 @@
       "xg_overall": 1.307,
       "xga_overall": 0.729,
       "shots_per_90": 14.947,
-      "crosses_per_90": 18.238,
+      "crosses_per_90": 22.75,
       "corners_for_per_90": 6.127,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -762,7 +786,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 91
     },
     "andalusia": {
       "xg_home": 0.563,
@@ -852,7 +877,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 23
     },
     "jamaica": {
       "xg_home": 0.478,
@@ -1048,7 +1074,7 @@
       "xg_overall": 1.911,
       "xga_overall": 0.877,
       "shots_per_90": 12.755,
-      "crosses_per_90": 15.137,
+      "crosses_per_90": 15.0,
       "corners_for_per_90": 5.14,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1058,7 +1084,8 @@
         "2026",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 15
     },
     "panama": {
       "xg_home": 0.492,
@@ -1066,7 +1093,7 @@
       "xg_overall": 0.456,
       "xga_overall": 1.613,
       "shots_per_90": 9.818,
-      "crosses_per_90": 17.192,
+      "crosses_per_90": 21.0,
       "corners_for_per_90": 5.107,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1076,7 +1103,8 @@
         "2026",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 21
     },
     "venezuela": {
       "xg_overall": 1.226,
@@ -1101,7 +1129,7 @@
       "xg_overall": 0.787,
       "xga_overall": 1.029,
       "shots_per_90": 10.928,
-      "crosses_per_90": 16.297,
+      "crosses_per_90": 17.75,
       "corners_for_per_90": 5.095,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1111,7 +1139,8 @@
         "2026",
         "2022"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 71
     },
     "saint-kitts-and-nevis": {
       "xg_home": 0.617,
@@ -1168,7 +1197,7 @@
       "xg_overall": 1.375,
       "xga_overall": 1.885,
       "shots_per_90": 11.193,
-      "crosses_per_90": 17.838,
+      "crosses_per_90": 20.75,
       "corners_for_per_90": 5.457,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1179,7 +1208,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 166
     },
     "lebanon": {
       "xg_home": 0.44,
@@ -1211,7 +1241,7 @@
       "xg_overall": 1.278,
       "xga_overall": 1.567,
       "shots_per_90": 12.333,
-      "crosses_per_90": 15.987,
+      "crosses_per_90": 16.75,
       "corners_for_per_90": 5.251,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1222,7 +1252,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 67
     },
     "mongolia": {
       "xg_home": 0.457,
@@ -1360,7 +1391,7 @@
       "xg_overall": 1.394,
       "xga_overall": 1.235,
       "shots_per_90": 13.11,
-      "crosses_per_90": 16.0,
+      "crosses_per_90": 20.8,
       "corners_for_per_90": 5.375,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1371,7 +1402,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 104
     },
     "vietnam": {
       "xg_home": 0.585,
@@ -1444,7 +1476,7 @@
       "xg_overall": 1.161,
       "xga_overall": 1.86,
       "shots_per_90": 10.956,
-      "crosses_per_90": 19.389,
+      "crosses_per_90": 18.67,
       "corners_for_per_90": 5.742,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1454,7 +1486,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 56
     },
     "taiwan": {
       "xg_home": 0.421,
@@ -1470,7 +1503,7 @@
       "xg_overall": 1.097,
       "xga_overall": 1.13,
       "shots_per_90": 8.153,
-      "crosses_per_90": 16.153,
+      "crosses_per_90": 16.25,
       "corners_for_per_90": 4.631,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1480,7 +1513,8 @@
         "2026",
         "2022"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 65
     },
     "myanmar": {
       "xg_home": 0.571,
@@ -1608,7 +1642,7 @@
       "xg_overall": 1.158,
       "xga_overall": 1.35,
       "shots_per_90": 9.333,
-      "crosses_per_90": 17.667,
+      "crosses_per_90": 17.67,
       "corners_for_per_90": 5.13,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1617,7 +1651,8 @@
       "seasons": [
         "2022"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 53
     },
     "kernow": {
       "xg_home": 0.593,
@@ -1713,7 +1748,7 @@
       "xg_overall": 0.913,
       "xga_overall": 2.119,
       "shots_per_90": 8.973,
-      "crosses_per_90": 15.493,
+      "crosses_per_90": 18.5,
       "corners_for_per_90": 4.622,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1724,7 +1759,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 74
     },
     "libya": {
       "xg_home": 0.524,
@@ -1748,7 +1784,7 @@
       "xg_overall": 0.952,
       "xga_overall": 0.942,
       "shots_per_90": 11.474,
-      "crosses_per_90": 14.606,
+      "crosses_per_90": 11.25,
       "corners_for_per_90": 4.83,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1759,7 +1795,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 90
     },
     "benin": {
       "xg_home": 0.415,
@@ -1784,7 +1821,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 4
     },
     "ivory-coast": {
       "xg_home": 1.27,
@@ -1867,7 +1905,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 13
     },
     "saint-vincent-and-the-grenadines": {
       "xg_home": 0.58,
@@ -1883,7 +1922,7 @@
       "xg_overall": 1.019,
       "xga_overall": 1.648,
       "shots_per_90": 9.595,
-      "crosses_per_90": 13.622,
+      "crosses_per_90": 16.0,
       "corners_for_per_90": 4.331,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -1894,7 +1933,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 80
     },
     "laos": {
       "xg_home": 0.373,
@@ -1959,7 +1999,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 8
     },
     "kuwait": {
       "xg_home": 0.501,
@@ -1984,7 +2025,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 15
     },
     "papua-new-guinea": {
       "xg_home": 0.542,
@@ -2016,7 +2058,7 @@
       "xg_overall": 0.894,
       "xga_overall": 1.685,
       "shots_per_90": 9.007,
-      "crosses_per_90": 11.64,
+      "crosses_per_90": 11.5,
       "corners_for_per_90": 3.827,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -2027,7 +2069,8 @@
         "2022",
         "2018"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 46
     },
     "bermuda": {
       "xg_home": 0.565,
@@ -2115,7 +2158,7 @@
       "xg_overall": 0.679,
       "xga_overall": 1.69,
       "shots_per_90": 6.847,
-      "crosses_per_90": 10.757,
+      "crosses_per_90": 12.5,
       "corners_for_per_90": 3.306,
       "corners_against_per_90": 4.5,
       "shots_blocked_per_90": null,
@@ -2125,7 +2168,8 @@
         "2026",
         "2022"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 50
     },
     "lesotho": {
       "xg_home": 0.251,
@@ -2550,7 +2594,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 13
     },
     "eritrea": {
       "xg_home": 0.17,
@@ -2599,7 +2644,8 @@
       "seasons": [
         "2026"
       ],
-      "source": "fbref_world_cup"
+      "source": "fbref_world_cup",
+      "crosses_for": 15
     },
     "bosnia-and-herzegovina": {
       "xg_home": 0.47,

@@ -553,6 +553,30 @@ select.custom-select:focus {
 }
 .odds-input-field[type=number] { -moz-appearance: textfield; }
 
+/* === 1X2 inline odds analysis panel === */
+.odds-stats-mini {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed var(--panel-border);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.78rem;
+}
+.odds-stats-row { display: flex; flex-direction: column; gap: 8px; }
+.odds-stats-cell { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.odds-stats-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+.odds-stats-values { font-family: var(--font-family-mono); color: var(--color-text-primary); }
+.odds-stats-values b { color: var(--color-primary); }
+.odds-stats-values .sep { color: var(--color-text-muted); }
+#odds-overround { font-family: var(--font-family-mono); color: var(--color-text-primary); }
+body.light-theme .odds-stats-mini { background: rgba(0, 0, 0, 0.02); }
+
 /* ==========================================================================
    CENTER PANEL & SIMULATION HEADER
    ========================================================================== */
@@ -2381,7 +2405,6 @@ body.light-theme .comp-bar-wrapper-right {
     width: 100%;
   }
 }
-}
 
 /* ==========================================================================
    SIMULATION BUTTON & FIRST TIME BANNER STYLES
@@ -3969,6 +3992,154 @@ body:not(.light-theme) .theme-light-only {
 }
 
 /* ==========================================================================
+   BET BUILDER PREMIUM MARKET ROW STYLES
+   ========================================================================== */
+
+.bb-market-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.bb-market-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(240, 179, 16, 0.15);
+}
+
+.bb-market-row .bb-checkbox-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.bb-market-row .custom-checkbox {
+  flex-shrink: 0;
+}
+
+.bb-market-row .bb-leg-label {
+  flex: 1;
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bb-market-row .bb-leg-prob {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: var(--font-family-mono);
+  color: var(--color-primary);
+  background: rgba(240, 179, 16, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  min-width: 55px;
+  text-align: center;
+}
+
+.bb-market-row .odds-compare-input {
+  flex-shrink: 0;
+  width: 70px !important;
+  padding: 4px 8px !important;
+  font-size: 0.75rem !important;
+  font-family: var(--font-family-mono) !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 6px !important;
+  color: white !important;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.bb-market-row .odds-compare-input:focus {
+  border-color: var(--color-primary) !important;
+  background: rgba(99, 102, 241, 0.15) !important;
+  box-shadow: 0 0 0 2px var(--color-primary-glow) !important;
+}
+
+.bb-market-row .odds-compare-input::placeholder {
+  color: rgba(255, 255, 255, 0.3) !important;
+  font-weight: 500;
+  font-size: 0.68rem;
+}
+
+.bb-market-row .ev-mini {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  font-weight: 800;
+  font-family: var(--font-family-mono);
+  min-width: 55px;
+  text-align: right;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.bb-market-row .ev-mini.ev-pos {
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.15);
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.bb-market-row .ev-mini.ev-neg {
+  color: var(--color-text-muted);
+}
+
+/* Light theme adjustments */
+body.light-theme .bb-market-row {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .bb-market-row:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(240, 179, 16, 0.2);
+}
+
+body.light-theme .bb-market-row .bb-leg-label {
+  color: var(--color-text-secondary);
+}
+
+body.light-theme .bb-market-row .bb-leg-prob {
+  color: var(--color-primary);
+  background: rgba(240, 179, 16, 0.1);
+}
+
+body.light-theme .bb-market-row .odds-compare-input {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #0F172A !important;
+}
+
+body.light-theme .bb-market-row .odds-compare-input:focus {
+  background: rgba(99, 102, 241, 0.1) !important;
+  border-color: var(--color-primary) !important;
+}
+
+body.light-theme .bb-market-row .odds-compare-input::placeholder {
+  color: rgba(0, 0, 0, 0.3) !important;
+}
+
+body.light-theme .bb-market-row .ev-mini {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+body.light-theme .bb-market-row .ev-mini.ev-pos {
+  background: rgba(16, 185, 129, 0.12);
+}
+
+/* ==========================================================================
    ADVANCED H2H CENTER - Premium Dashboard Styles
    ========================================================================== */
 
@@ -5212,6 +5383,8 @@ body.light-theme #tab-betbuilder [style*="color: #FFFFFF"] {
 }
 body.light-theme #tab-betbuilder [style*="background: rgba(0,0,0,"],
 body.light-theme #tab-betbuilder [style*="background: rgba(0,0,0,"] {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
 /* ═══ Comparar Equipos Modal ═══ */
 .cmp-overlay {
   position: fixed; inset: 0; z-index: 999999;
@@ -5671,3 +5844,258 @@ body.light-theme .market-subtab-btn.active {
   color: #fff;
   background: var(--color-primary-light, #2563EB);
 }
+
+/* ==========================================================================
+   MARKETS & CUOTAS — FULL WIDTH GRID SYSTEM
+   ========================================================================== */
+
+.markets-main-grid {
+  display: block;
+  width: 100%;
+}
+
+.markets-left-panel {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Collapsible Cards */
+.collapsible-card {
+  background: var(--color-bg-card, rgba(30, 41, 59, 0.4));
+  border: 1px solid var(--panel-border, rgba(255, 255, 255, 0.08));
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 20px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.collapsible-header {
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.01);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.2s;
+  user-select: none;
+}
+
+.collapsible-header:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.collapsible-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.collapse-icon {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary, #94a3b8);
+  transition: transform 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.collapsible-content {
+  padding: 24px;
+  transition: max-height 0.3s ease-out;
+  overflow: visible;
+}
+
+.collapsible-card.collapsed .collapsible-content {
+  display: none;
+}
+
+.collapsible-card.collapsed .collapse-icon {
+  transform: rotate(0deg);
+}
+
+/* Selectable Market Cards */
+.selectable-market-card {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  padding: 10px 14px !important;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.selectable-market-card:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(240, 179, 16, 0.3) !important;
+  transform: translateY(-1px);
+}
+
+.selectable-market-card.active {
+  background: rgba(240, 179, 16, 0.12) !important;
+  border-color: var(--color-primary, #f0b310) !important;
+  box-shadow: 0 0 12px rgba(240, 179, 16, 0.15);
+}
+
+.selectable-market-card.active span,
+.selectable-market-card.active strong {
+  color: var(--color-primary, #f0b310) !important;
+  text-shadow: 0 0 8px rgba(240, 179, 16, 0.2);
+}
+
+/* Light Theme overrides for collapsible cards */
+body.light-theme .collapsible-card {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+body.light-theme .collapsible-header {
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.005);
+}
+
+body.light-theme .collapsible-header:hover {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+body.light-theme .collapsible-header h3 {
+  color: #1e293b;
+}
+
+body.light-theme .selectable-market-card {
+  background: rgba(0, 0, 0, 0.015) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+body.light-theme .selectable-market-card:hover {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(240, 179, 16, 0.5) !important;
+}
+
+body.light-theme .selectable-market-card.active {
+  background: rgba(240, 179, 16, 0.08) !important;
+  border-color: var(--color-primary, #f0b310) !important;
+}
+
+/* ==========================================================================
+   DYNAMIC BET BUILDER SELECTION STYLES
+   ========================================================================== */
+.bb-market-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin-bottom: 6px;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+.bb-market-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.bb-leg-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+  min-width: 0;
+}
+.bb-leg-name,
+.bb-market-row .bb-leg-label,
+.bb-market-row .bb-leg-name {
+  font-size: 0.85rem !important;
+  color: #c8cad0 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1 !important;
+  min-width: 0 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.bb-market-row input[type="checkbox"]:checked ~ .bb-leg-info .bb-leg-name {
+  color: #ffffff;
+  font-weight: 600;
+}
+.bb-leg-prob {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  min-width: 55px;
+  text-align: right;
+}
+.bb-leg-odds-input {
+  width: 60px;
+  padding: 4px 6px;
+  font-size: 0.78rem;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s ease;
+}
+.bb-leg-odds-input:focus {
+  border-color: var(--color-primary);
+  background: rgba(0, 0, 0, 0.4);
+}
+.bb-leg-edge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-width: 50px;
+  text-align: right;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.bb-leg-edge.plus {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+.bb-leg-edge.minus {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
+
+body.light-theme .bb-market-row {
+  background: rgba(0, 0, 0, 0.01);
+  border-color: rgba(0, 0, 0, 0.04);
+}
+body.light-theme .bb-market-row:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+body.light-theme .bb-leg-name {
+  color: #475569;
+}
+body.light-theme .bb-market-row input[type="checkbox"]:checked ~ .bb-leg-info .bb-leg-name {
+  color: #0f172a;
+}
+body.light-theme .bb-leg-odds-input {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #0f172a;
+}
+
+
+

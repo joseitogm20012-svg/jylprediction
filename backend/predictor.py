@@ -4,7 +4,7 @@ import os
 import csv
 import sys
 import numpy as np
-from datetime import datetime
+from datetime import datetime, date as datetime_date
 from functools import lru_cache
 
 # Ensure backend/ is on sys.path for db import
@@ -264,7 +264,7 @@ def load_goalscorers():
         _gs_cur.execute("SELECT date, team, scorer, minute, own_goal, penalty FROM public.goalscorers")
         for _r in _gs_cur.fetchall():
             _date_raw = _r["date"] if isinstance(_r, dict) else _r[0]
-            if isinstance(_date_raw, (datetime.date, datetime.datetime)):
+            if isinstance(_date_raw, (datetime_date, datetime)):
                 _date = _date_raw.strftime('%Y-%m-%d')
             else:
                 _date = str(_date_raw).strip()
@@ -1680,6 +1680,16 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
     corners_data = load_corners_data()
     real_a = corners_data.get(team_a, {})
     real_b = corners_data.get(team_b, {})
+    # Determine home/away venue for second-half splits (must be before predict_half check)
+    venue_a = "neutral"
+    venue_b = "neutral"
+    if host_country and isinstance(host_country, str):
+        if team_a == host_country.lower().replace(" ", "-"):
+            venue_a = "home"
+            venue_b = "away"
+        elif team_b == host_country.lower().replace(" ", "-"):
+            venue_a = "away"
+            venue_b = "home"
 
     # Handle Second Half vs Full Match
     if predict_half == "second":
@@ -1743,15 +1753,6 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
             expected_corners_base_b = (1.0 - w_b) * expected_corners_base_b + w_b * roll_cf_b
 
     # Home/away venue factor for corners
-    venue_a = "neutral"
-    venue_b = "neutral"
-    if host_country and isinstance(host_country, str):
-        if team_a == host_country.lower().replace(" ", "-"):
-            venue_a = "home"
-            venue_b = "away"
-        elif team_b == host_country.lower().replace(" ", "-"):
-            venue_a = "away"
-            venue_b = "home"
     venue_factor_a = HOME_CORNER_FACTOR if venue_a == "home" else (AWAY_CORNER_FACTOR if venue_a == "away" else 1.0)
     venue_factor_b = HOME_CORNER_FACTOR if venue_b == "home" else (AWAY_CORNER_FACTOR if venue_b == "away" else 1.0)
     expected_corners_base_a *= venue_factor_a
@@ -2017,6 +2018,11 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
             _2h_a = 0
             _1h_b = 0
             _2h_b = 0
+            # Goles por intervalo de 15 min: 0-15, 15-30, 30-45, 45-60, 60-75, 75-90
+            _intervals_a = [0, 0, 0, 0, 0, 0]
+            _intervals_b = [0, 0, 0, 0, 0, 0]
+            _first_goal_min_a = []
+            _first_goal_min_b = []
 
             for _d, _r in parsed_rows:
                 if _d < cutoff_date:
@@ -2028,13 +2034,22 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
                 if not _is_a and not _is_b:
                     continue
 
+                _min = _r.get("minute")
+                if _min is None:
+                    _min = 60
+
                 if _is_a:
                     _total_a += 1
                     _scorers_a[_r["scorer"]] = _scorers_a.get(_r["scorer"], 0) + 1
-                    if _r["minute"] is not None and _r["minute"] <= 45:
+                    if _min <= 45:
                         _1h_a += 1
                     else:
                         _2h_a += 1
+                    # Intervalo de 15 min
+                    _idx = min(int(_min // 15), 5)
+                    _intervals_a[_idx] += 1
+                    if not _r.get("own_goal"):
+                        _first_goal_min_a.append(_min)
                     if _r["penalty"]:
                         _pen_a += 1
                     if _r["own_goal"]:
@@ -2042,10 +2057,14 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
                 if _is_b:
                     _total_b += 1
                     _scorers_b[_r["scorer"]] = _scorers_b.get(_r["scorer"], 0) + 1
-                    if _r["minute"] is not None and _r["minute"] <= 45:
+                    if _min <= 45:
                         _1h_b += 1
                     else:
                         _2h_b += 1
+                    _idx = min(int(_min // 15), 5)
+                    _intervals_b[_idx] += 1
+                    if not _r.get("own_goal"):
+                        _first_goal_min_b.append(_min)
                     if _r["penalty"]:
                         _pen_b += 1
                     if _r["own_goal"]:
@@ -2063,7 +2082,9 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
                 "own_a": _own_a, "own_b": _own_b,
                 "total_matches_a": _match_count_a, "total_matches_b": _match_count_b,
                 "goals_1h_a": _1h_a, "goals_2h_a": _2h_a,
-                "goals_1h_b": _1h_b, "goals_2h_b": _2h_b
+                "goals_1h_b": _1h_b, "goals_2h_b": _2h_b,
+                "intervals_a": _intervals_a, "intervals_b": _intervals_b,
+                "first_goal_min_a": _first_goal_min_a, "first_goal_min_b": _first_goal_min_b
             }
     except Exception:
         pass
@@ -2218,15 +2239,67 @@ def run_prediction_sim(team_a, team_b, rank_a, rank_b, fifa_weight_pct, h2h_weig
     _total_a = max(_gs_data["total_a"], 1)
     _total_b = max(_gs_data["total_b"], 1)
 
+    _anytime_a = _build_anytime(_scorers_a_sorted, _total_a, xg_a)
+    _anytime_b = _build_anytime(_scorers_b_sorted, _total_b, xg_b)
+
     players_markets = {
         "firstScorerA": _build_first(_scorers_a_sorted, _total_a, xg_a),
-        "anytimeScorerA": _build_anytime(_scorers_a_sorted, _total_a, xg_a),
+        "anytimeScorerA": _anytime_a,
         "multiGoalsA": _build_multi(_scorers_a_sorted, _total_a, xg_a),
         "firstScorerB": _build_first(_scorers_b_sorted, _total_b, xg_b),
-        "anytimeScorerB": _build_anytime(_scorers_b_sorted, _total_b, xg_b),
+        "anytimeScorerB": _anytime_b,
         "multiGoalsB": _build_multi(_scorers_b_sorted, _total_b, xg_b),
         "assistsA": [p for p in _top_players(team_a, "passing", 10) if p.get("assists", 0) > 0],
         "assistsB": [p for p in _top_players(team_b, "passing", 10) if p.get("assists", 0) > 0]
+    }
+
+    # ---- 4b. TOP SCORER (goleador mas probable del partido completo) ----
+    _top_scorer = {"name": None, "team": None, "probability": 0.0}
+    if _anytime_a and _anytime_a[0]["probability"] > _top_scorer["probability"]:
+        _top_scorer = {"name": _anytime_a[0]["name"], "team": team_a, "probability": _anytime_a[0]["probability"]}
+    if _anytime_b and _anytime_b[0]["probability"] > _top_scorer["probability"]:
+        _top_scorer = {"name": _anytime_b[0]["name"], "team": team_b, "probability": _anytime_b[0]["probability"]}
+    players_markets["topScorer"] = {
+        "name": _top_scorer["name"],
+        "team": _top_scorer["team"],
+        "probability": round(_top_scorer["probability"], 4)
+    }
+
+    # ---- 4c. GOALS TIMELINE (distribucion de goles por intervalo de 15 min) ----
+    _int_labels = ["0-15", "15-30", "30-45", "45-60", "60-75", "75-90"]
+    _int_a = _gs_data.get("intervals_a", [0, 0, 0, 0, 0, 0])
+    _int_b = _gs_data.get("intervals_b", [0, 0, 0, 0, 0, 0])
+    _sum_int_a = sum(_int_a) if sum(_int_a) > 0 else 1
+    _sum_int_b = sum(_int_b) if sum(_int_b) > 0 else 1
+
+    goals_timeline = []
+    for i, label in enumerate(_int_labels):
+        pct_a = _int_a[i] / _sum_int_a if _sum_int_a > 0 else 0.0
+        pct_b = _int_b[i] / _sum_int_b if _sum_int_b > 0 else 0.0
+        # Goles esperados en este intervalo = xG * distribucion historica
+        exp_a = round(xg_a * pct_a, 3)
+        exp_b = round(xg_b * pct_b, 3)
+        goals_timeline.append({
+            "interval": label,
+            "pctA": round(pct_a, 4),
+            "pctB": round(pct_b, 4),
+            "expA": exp_a,
+            "expB": exp_b
+        })
+    players_markets["goalsTimeline"] = goals_timeline
+
+    # ---- 4d. AVERAGE FIRST EVENT TIME ----
+    _fga = _gs_data.get("first_goal_min_a", [])
+    _fgb = _gs_data.get("first_goal_min_b", [])
+    _avg_first_goal_a = round(sum(_fga) / len(_fga)) if _fga else None
+    _avg_first_goal_b = round(sum(_fgb) / len(_fgb)) if _fgb else None
+    # Promedio combinado (primer gol del partido)
+    _all_first = sorted(_fga + _fgb)
+    _avg_first_goal_match = round(sum(_all_first) / len(_all_first)) if _all_first else None
+    players_markets["avgFirstEvent"] = {
+        "firstGoalA": _avg_first_goal_a,
+        "firstGoalB": _avg_first_goal_b,
+        "firstGoalMatch": _avg_first_goal_match
     }
 
     # ---- 5. PENALTIES (per-team rates from goalscorers) ----

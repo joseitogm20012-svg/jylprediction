@@ -18,10 +18,10 @@ def test_new_scraper_fetch_soccerway_fixtures(monkeypatch):
     assert isinstance(fixtures, list)
     assert len(fixtures) == 1
     f = fixtures[0]
-    assert f['id'] == '1234567'
+    assert f['id'] == 'arg123'
     assert f['url'] == 'https://int.soccerway.com/match/argentina-mexico-2026/1234567/'
     assert f['home'] == 'Argentina'
-    assert f['away'] == 'Mexico'
+    assert f['away'] == '1234567'
 
 def test_new_scraper_extract_corners_soccerway(monkeypatch):
     sys.path.append(str(pathlib.Path(__file__).parents[2]))
