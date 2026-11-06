@@ -89,39 +89,7 @@ app = FastAPI(
     version="2.0.0"
 )
 
-@app.get("/debug/imports")
-def debug_imports():
-    import sys
-    results = {"sys_path": sys.path[:5]}
-    try:
-        from routes.equipo_routes import router as equipo_router
-        results["equipo_router"] = [r.path for r in equipo_router.routes]
-    except Exception as e:
-        results["equipo_router_error"] = f"{type(e).__name__}: {e}"
-    try:
-        from controllers.equipo_controller import EquipoRepository
-        results["controllers"] = "ok"
-    except Exception as e:
-        results["controllers_error"] = f"{type(e).__name__}: {e}"
-    try:
-        from models.equipo import Equipo
-        results["models"] = "ok"
-    except Exception as e:
-        results["models_error"] = f"{type(e).__name__}: {e}"
-    return results
 
-@app.get("/debug/test-deploy")
-def debug_test_deploy():
-    return {"deploy": "2026-11-06-v2", "status": "ok"}
-
-@app.get("/debug/env")
-def debug_env():
-    import os
-    return {
-        "MONGODB_URI_set": bool(os.environ.get("MONGODB_URI")),
-        "MONGODB_URI_preview": os.environ.get("MONGODB_URI", "")[:50] if os.environ.get("MONGODB_URI") else None,
-        "MONGODB_DB": os.environ.get("MONGODB_DB"),
-    }
 
 # Security: Rate Limiting
 # Security: Rate Limiting
@@ -1002,10 +970,6 @@ def get_match_pronostic(team_a: str, team_b: str, authorization: Optional[str] =
 def get_leaderboard():
     rankings = db.get_leaderboard_rankings()
     return {"status": "success", "leaderboard": rankings}
-
-@app.get("/debug/routes")
-def debug_routes():
-    return {"status": "ok", "route_count": len(app.routes)}
 
 if equipo_router:
     app.include_router(equipo_router)
