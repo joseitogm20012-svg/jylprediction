@@ -111,3 +111,15 @@
 2026-07-03 15:05:38,795 kinnor SKIP no_corners_data (using fallback)
 2026-07-03 15:05:38,795 leinor SKIP no_corners_data (using fallback)
 2026-07-03 15:05:38,795 colnor SKIP no_corners_data (using fallback)
+2026-11-06 12:49:15,488 Starting hybrid corners scraper (update=False)
+2026-11-06 12:49:15,488 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-11-06 12:49:15,503 Fixtures retrieved: 2
+2026-11-06 12:49:15,503 arg100 SKIP no_corners_data (using fallback)
+2026-11-06 12:49:15,503 bra100 SKIP no_corners_data (using fallback)
+2026-11-06 12:49:15,503 Añadidos 2 partidos nuevos. Total: 2
+2026-11-06 12:49:15,503 Starting hybrid corners scraper (update=True)
+2026-11-06 12:49:15,503 Soccerway URL: https://int.soccerway.com/matches/2026/
+2026-11-06 12:49:16,498 Fixtures retrieved: 2
+2026-11-06 12:49:16,498 arg100 SKIP already_processed
+2026-11-06 12:49:16,498 bra100 SKIP no_corners_data (using fallback)
+2026-11-06 12:49:16,498 Añadidos 1 partidos nuevos. Total: 2
