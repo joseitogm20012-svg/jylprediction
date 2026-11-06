@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block contenido %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <h2 style="margin: 0;">{{ equipo.nombre }}</h2>
+        <div>
+            <a href="/gestion/equipos/{{ equipo.id }}/editar" class="btn btn-secondary">Editar</a>
+            <a href="/gestion/equipos/" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+
+    <div class="detail-grid">
+        <div class="detail-item">
+            <div class="detail-label">Confederación</div>
+            <div class="detail-value">{{ equipo.confederacion }}</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Ranking FIFA</div>
+            <div class="detail-value">{{ equipo.ranking_fifa }}</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Rating Elo</div>
+            <div class="detail-value">{{ equipo.rating_elo }}</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Escudo</div>
+            <div class="detail-value">
+                {% if equipo.escudo_url %}
+                <img src="{{ equipo.escudo_url }}" alt="Escudo" style="height: 32px; width: auto;">
+                {% else %}
+                <span style="color: #9ca3af;">—</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="detail-item" style="grid-column: 1 / -1;">
+            <div class="detail-label">Notas</div>
+            <div class="detail-value">{{ equipo.notas or "—" }}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

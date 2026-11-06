@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block contenido %}
+<div class="card" style="max-width: 500px; text-align: center; padding: 48px 24px;">
+    <h2 style="margin-top: 0; color: #991b1b;">Error</h2>
+    <p style="font-size: 1.125rem; color: #374151;">{{ mensaje }}</p>
+    <div style="margin-top: 24px;">
+        <a href="/gestion/equipos/" class="btn btn-primary">Volver a la lista</a>
+        <a href="/" class="btn btn-secondary" style="margin-left: 12px;">Ir al simulador</a>
+    </div>
+</div>
+{% endblock %}
