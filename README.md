@@ -262,3 +262,4 @@ El núcleo estadístico (Elo + Dixon-Coles + Poisson) se inspira en el modelo op
 **JLY Predictor** es una capa de producto propia: UI, auth, comunidad, admin y extensiones del modelo.
 
 Licencia: MIT — ver [LICENSE](./LICENSE).
+# force rebuild
