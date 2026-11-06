@@ -82,6 +82,10 @@ def debug_imports():
         results["models_error"] = f"{type(e).__name__}: {e}"
     return results
 
+@app.get("/debug/test-deploy")
+def debug_test_deploy():
+    return {"deploy": "2026-11-06-v2", "status": "ok"}
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
 TM_STATS_PATH = os.path.join(PROJECT_ROOT, "data", "transfermarkt_stats.json")
