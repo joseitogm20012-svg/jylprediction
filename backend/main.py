@@ -955,7 +955,7 @@ def get_leaderboard():
 
 @app.get("/debug/routes")
 def debug_routes():
-    return {"routes": [{"path": r.path, "name": r.name, "methods": list(r.methods)} for r in app.routes]}
+    return {"status": "ok", "route_count": len(app.routes)}
 
 if equipo_router:
     app.include_router(equipo_router)
