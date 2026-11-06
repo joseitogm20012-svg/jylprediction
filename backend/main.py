@@ -16,11 +16,13 @@ from slowapi.middleware import SlowAPIMiddleware
 
 # Asegurar que backend/ esté en sys.path para imports relativos
 _backend_dir = os.path.dirname(os.path.abspath(__file__))
-if _backend_dir not in sys.path:
-    sys.path.insert(0, _backend_dir)
+_project_root = os.path.dirname(_backend_dir)
+for p in (_backend_dir, _project_root):
+    if p not in sys.path:
+        sys.path.insert(0, p)
 
 # Cargar variables de entorno desde el archivo .env en la raíz
-env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+env_path = os.path.join(_project_root, ".env")
 if os.path.exists(env_path):
     with open(env_path, "r", encoding="utf-8") as f:
         for line in f:
@@ -51,7 +53,6 @@ try:
     print("SUCCESS: controllers.equipo_controller imported")
 except Exception as e:
     print(f"ERROR importing controllers: {type(e).__name__}: {e}")
-    traceback.print_exc()
 
 # Test models import
 try:
@@ -59,7 +60,6 @@ try:
     print("SUCCESS: models.equipo imported")
 except Exception as e:
     print(f"ERROR importing models: {type(e).__name__}: {e}")
-    traceback.print_exc()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
