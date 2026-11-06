@@ -40,10 +40,26 @@ try:
     from routes.equipo_routes import router as equipo_router
     print(f"SUCCESS: equipo_router imported, routes: {[r.path for r in equipo_router.routes]}")
 except Exception as e:
-    print(f"ERROR importing equipo_router: {e}")
+    print(f"ERROR importing equipo_router: {type(e).__name__}: {e}")
     import traceback
     traceback.print_exc()
     equipo_router = None
+
+# Also test controllers import directly
+try:
+    from controllers.equipo_controller import EquipoRepository
+    print("SUCCESS: controllers.equipo_controller imported")
+except Exception as e:
+    print(f"ERROR importing controllers: {type(e).__name__}: {e}")
+    traceback.print_exc()
+
+# Test models import
+try:
+    from models.equipo import Equipo
+    print("SUCCESS: models.equipo imported")
+except Exception as e:
+    print(f"ERROR importing models: {type(e).__name__}: {e}")
+    traceback.print_exc()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
