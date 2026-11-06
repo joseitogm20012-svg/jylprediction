@@ -114,6 +114,15 @@ def debug_imports():
 def debug_test_deploy():
     return {"deploy": "2026-11-06-v2", "status": "ok"}
 
+@app.get("/debug/env")
+def debug_env():
+    import os
+    return {
+        "MONGODB_URI_set": bool(os.environ.get("MONGODB_URI")),
+        "MONGODB_URI_preview": os.environ.get("MONGODB_URI", "")[:50] if os.environ.get("MONGODB_URI") else None,
+        "MONGODB_DB": os.environ.get("MONGODB_DB"),
+    }
+
 # Security: Rate Limiting
 # Security: Rate Limiting
 limiter = Limiter(key_func=get_remote_address, default_limits=["200/minute", "50/second"])
