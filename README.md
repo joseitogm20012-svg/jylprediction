@@ -215,6 +215,47 @@ python test_crud.py
 
 ---
 
+## Módulo de Gestión (MVC + MongoDB)
+
+Este módulo cumple el requisito del Proyecto 1 de **Programación III**: arquitectura MVC, base de datos NoSQL (MongoDB) y motor de plantillas Jinja2, con enrutamiento HTTP y CRUD completo desde la interfaz web.
+
+### Qué incluye
+
+- **Entidad:** `Equipo` (selección nacional) con `nombre`, `confederacion`, `ranking_fifa`, `rating_elo`, `escudo_url`, `notas`.
+- **Validaciones:** Pydantic v2 (longitudes, rangos, URL válida, unicidad de nombre case-insensitive).
+- **Arquitectura:** `backend/models/`, `backend/controllers/`, `backend/routes/`, `backend/views/` (plantillas Jinja2).
+- **CRUD web:** listar, crear, ver, editar, eliminar con mensajes de éxito/error claros.
+- **Manejo de errores:** 503 si Mongo no está configurado, 404 para IDs inválidos/inexistentes, 400 para datos inválidos.
+
+### Variables de entorno (añadir a `.env`)
+
+| Variable | Obligatoria | Uso |
+|----------|-------------|-----|
+| `MONGODB_URI` | Sí | URI de conexión a MongoDB Atlas (o local) |
+| `MONGODB_DB` | No (default `jly_predictor`) | Nombre de la base de datos |
+
+> **Nota para Render:** para que el módulo funcione en producción hay que crear el cluster de MongoDB Atlas (capa gratuita) y agregar `MONGODB_URI` y `MONGODB_DB` en **Render → Environment**, igual que las demás variables.
+
+### URL del módulo
+
+- Local: `http://localhost:3000/gestion/equipos/`
+- En producción: `https://tu-app.onrender.com/gestion/equipos/`
+
+### Cómo ejecutar los tests
+
+```bash
+python -m pytest tests/test_gestion_equipos.py -v
+```
+
+### Cómo ejecutar el seed (pobla 8 equipos de demo)
+
+```bash
+python scripts/seed_equipos.py
+# Salida esperada: "8 equipos insertados"
+```
+
+---
+
 ## Créditos
 
 El núcleo estadístico (Elo + Dixon-Coles + Poisson) se inspira en el modelo open source de [cup26matches.com](https://cup26matches.com).  

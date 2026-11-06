@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block contenido %}
+<div class="card" style="max-width: 600px;">
+    <h2 style="margin-top: 0;">{{ "Editar" if equipo else "Nuevo" }} equipo</h2>
+
+    {% if errores %}
+    <div class="error-list">
+        <strong>Errores en el formulario:</strong>
+        <ul>
+            {% for e in errores %}<li>{{ e }}</li>{% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form method="post" action="{{ accion }}">
+        <div class="form-group">
+            <label for="nombre">Nombre *</label>
+            <input type="text" id="nombre" name="nombre" required minlength="2" maxlength="60" value="{{ equipo.nombre if equipo else '' }}" placeholder="Ej. Argentina">
+        </div>
+
+        <div class="form-group">
+            <label for="confederacion">Confederación *</label>
+            <select id="confederacion" name="confederacion" required>
+                {% for conf in confederaciones %}
+                <option value="{{ conf }}" {% if equipo and equipo.confederacion == conf %}selected{% endif %}>{{ conf }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="ranking_fifa">Ranking FIFA *</label>
+            <input type="number" id="ranking_fifa" name="ranking_fifa" required min="1" max="211" value="{{ equipo.ranking_fifa if equipo else '' }}" placeholder="1–211">
+        </div>
+
+        <div class="form-group">
+            <label for="rating_elo">Rating Elo *</label>
+            <input type="number" id="rating_elo" name="rating_elo" required min="1000" max="2200" step="0.1" value="{{ equipo.rating_elo if equipo else '' }}" placeholder="1000–2200">
+        </div>
+
+        <div class="form-group">
+            <label for="escudo_url">URL del escudo</label>
+            <input type="url" id="escudo_url" name="escudo_url" maxlength="300" value="{{ equipo.escudo_url if equipo else '' }}" placeholder="https://...">
+        </div>
+
+        <div class="form-group">
+            <label for="notas">Notas</label>
+            <textarea id="notas" name="notas" maxlength="500" placeholder="Notas adicionales...">{{ equipo.notas if equipo else '' }}</textarea>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button type="submit" class="btn btn-primary">{{ "Actualizar" if equipo else "Crear" }}</button>
+            <a href="/gestion/equipos/" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

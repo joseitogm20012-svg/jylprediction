@@ -31,6 +31,7 @@ if os.path.exists(env_path):
 
 from predictor import load_data, run_prediction_sim, get_team_history, get_h2h_stats, compute_advanced_h2h, run_betbuilder_sim
 import db
+from routes.equipo_routes import router as equipo_router
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
@@ -941,6 +942,8 @@ def get_leaderboard():
     return {"status": "success", "leaderboard": rankings}
 
 
+
+app.include_router(equipo_router)
 
 # Mount static files (HTML, CSS, JS) at the end, so it doesn't mask API routes
 app.mount("/", StaticFiles(directory=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend"), html=True), name="static")

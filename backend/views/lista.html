@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block contenido %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h2 style="margin: 0;">Equipos registrados</h2>
+        <a href="/gestion/equipos/nuevo" class="btn btn-primary">+ Nuevo equipo</a>
+    </div>
+
+    {% if equipos %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Confederación</th>
+                <th>Ranking FIFA</th>
+                <th>Rating Elo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for eq in equipos %}
+            <tr>
+                <td>{{ eq.nombre }}</td>
+                <td>{{ eq.confederacion }}</td>
+                <td>{{ eq.ranking_fifa }}</td>
+                <td>{{ eq.rating_elo }}</td>
+                <td>
+                    <div class="actions">
+                        <a href="/gestion/equipos/{{ eq.id }}" class="btn btn-secondary">Ver</a>
+                        <a href="/gestion/equipos/{{ eq.id }}/editar" class="btn btn-secondary">Editar</a>
+                        <form class="inline" method="post" action="/gestion/equipos/{{ eq.id }}/eliminar" onsubmit="return confirm('¿Eliminar {{ eq.nombre }}?')">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty">
+        <p>No hay equipos registrados todavía.</p>
+        <a href="/gestion/equipos/nuevo" class="btn btn-primary" style="margin-top: 12px;">Crear el primero</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
