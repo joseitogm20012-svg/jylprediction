@@ -76,3 +76,27 @@ def test_modelo_rechaza_escudo_demasiado_largo():
     from models.equipo import Equipo
     with pytest.raises(pydantic.ValidationError):
         Equipo(**_datos_validos(escudo_url="https://" + "a" * 300 + ".com/x.png"))
+
+
+def test_modelo_rechaza_nombre_solo_espacios():
+    from models.equipo import Equipo
+    with pytest.raises(pydantic.ValidationError):
+        Equipo(**_datos_validos(nombre="   "))
+
+
+def test_modelo_rechaza_nombre_de_un_caracter_tras_recortar():
+    from models.equipo import Equipo
+    with pytest.raises(pydantic.ValidationError):
+        Equipo(**_datos_validos(nombre="  A  "))
+
+
+def test_modelo_acepta_nombre_de_60_caracteres_tras_recortar():
+    from models.equipo import Equipo
+    eq = Equipo(**_datos_validos(nombre="  " + "A" * 60 + "  "))
+    assert eq.nombre == "A" * 60
+
+
+def test_modelo_acepta_notas_de_500_caracteres_tras_recortar():
+    from models.equipo import Equipo
+    eq = Equipo(**_datos_validos(notas="  " + "x" * 500 + "  "))
+    assert eq.notas == "x" * 500
