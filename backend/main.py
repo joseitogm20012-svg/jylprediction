@@ -31,7 +31,19 @@ if os.path.exists(env_path):
 
 from predictor import load_data, run_prediction_sim, get_team_history, get_h2h_stats, compute_advanced_h2h, run_betbuilder_sim
 import db
-from routes.equipo_routes import router as equipo_router
+import sys
+print(f"DEBUG sys.path: {sys.path[:3]}")
+print(f"DEBUG cwd: {os.getcwd()}")
+print(f"DEBUG backend dir contents: {os.listdir(_backend_dir) if os.path.exists(_backend_dir) else 'NOT FOUND'}")
+
+try:
+    from routes.equipo_routes import router as equipo_router
+    print(f"SUCCESS: equipo_router imported, routes: {[r.path for r in equipo_router.routes]}")
+except Exception as e:
+    print(f"ERROR importing equipo_router: {e}")
+    import traceback
+    traceback.print_exc()
+    equipo_router = None
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
@@ -945,7 +957,10 @@ def get_leaderboard():
 def debug_routes():
     return {"routes": [{"path": r.path, "name": r.name, "methods": list(r.methods)} for r in app.routes]}
 
-app.include_router(equipo_router)
+if equipo_router:
+    app.include_router(equipo_router)
+else:
+    print("WARNING: equipo_router is None, not including")
 
 # Mount static files (HTML, CSS, JS) at the end, so it doesn't mask API routes
 app.mount("/", StaticFiles(directory=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend"), html=True), name="static")
