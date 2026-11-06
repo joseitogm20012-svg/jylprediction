@@ -263,3 +263,4 @@ El núcleo estadístico (Elo + Dixon-Coles + Poisson) se inspira en el modelo op
 
 Licencia: MIT — ver [LICENSE](./LICENSE).
 # force rebuild
+# rebuild
