@@ -61,31 +61,6 @@ try:
 except Exception as e:
     print(f"ERROR importing models: {type(e).__name__}: {e}")
 
-@app.get("/debug/imports")
-def debug_imports():
-    import sys
-    results = {"sys_path": sys.path[:5]}
-    try:
-        from routes.equipo_routes import router as equipo_router
-        results["equipo_router"] = [r.path for r in equipo_router.routes]
-    except Exception as e:
-        results["equipo_router_error"] = f"{type(e).__name__}: {e}"
-    try:
-        from controllers.equipo_controller import EquipoRepository
-        results["controllers"] = "ok"
-    except Exception as e:
-        results["controllers_error"] = f"{type(e).__name__}: {e}"
-    try:
-        from models.equipo import Equipo
-        results["models"] = "ok"
-    except Exception as e:
-        results["models_error"] = f"{type(e).__name__}: {e}"
-    return results
-
-@app.get("/debug/test-deploy")
-def debug_test_deploy():
-    return {"deploy": "2026-11-06-v2", "status": "ok"}
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
 TM_STATS_PATH = os.path.join(PROJECT_ROOT, "data", "transfermarkt_stats.json")
@@ -113,6 +88,31 @@ app = FastAPI(
     description="Backend en FastAPI para simulación de partidos de fútbol y análisis de valor de apuestas.",
     version="2.0.0"
 )
+
+@app.get("/debug/imports")
+def debug_imports():
+    import sys
+    results = {"sys_path": sys.path[:5]}
+    try:
+        from routes.equipo_routes import router as equipo_router
+        results["equipo_router"] = [r.path for r in equipo_router.routes]
+    except Exception as e:
+        results["equipo_router_error"] = f"{type(e).__name__}: {e}"
+    try:
+        from controllers.equipo_controller import EquipoRepository
+        results["controllers"] = "ok"
+    except Exception as e:
+        results["controllers_error"] = f"{type(e).__name__}: {e}"
+    try:
+        from models.equipo import Equipo
+        results["models"] = "ok"
+    except Exception as e:
+        results["models_error"] = f"{type(e).__name__}: {e}"
+    return results
+
+@app.get("/debug/test-deploy")
+def debug_test_deploy():
+    return {"deploy": "2026-11-06-v2", "status": "ok"}
 
 # Security: Rate Limiting
 # Security: Rate Limiting
