@@ -941,7 +941,9 @@ def get_leaderboard():
     rankings = db.get_leaderboard_rankings()
     return {"status": "success", "leaderboard": rankings}
 
-
+@app.get("/debug/routes")
+def debug_routes():
+    return {"routes": [{"path": r.path, "name": r.name, "methods": list(r.methods)} for r in app.routes]}
 
 app.include_router(equipo_router)
 
